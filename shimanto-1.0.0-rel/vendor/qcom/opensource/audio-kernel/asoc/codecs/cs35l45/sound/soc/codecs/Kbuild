@@ -1,0 +1,22 @@
+# add -Wall to try to catch everything we can.
+EXTRA_CFLAGS += -Wall
+ifneq ($(TOP), )
+LOCAL_DIR := $(TOP)/$(subst ../,,$(src))
+else ifneq ($(ANDROID_BUILD_TOP), )
+LOCAL_DIR := $(ANDROID_BUILD_TOP)/$(subst ../,,$(src))
+else
+$(warning "Can't find Android build top")
+endif
+
+ccflags-y := -I $(LOCAL_DIR)/../../../include
+ccflags-y += -I $(src)/../../../include
+
+cirrus_wm_adsp-objs = wm_adsp.o ../../../drivers/firmware/cirrus/cs_dsp.o
+obj-m += cirrus_wm_adsp.o
+cirrus_wm_adsp-y := $(cirrus_wm_adsp-objs)
+
+cirrus_cs35l45-objs = cs35l45.o cs35l45-tables.o cs35l45-i2c.o
+
+obj-m += cirrus_cs35l45.o
+cirrus_cs35l45-y := $(cirrus_cs35l45-objs)
+
