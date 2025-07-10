@@ -1,0 +1,40 @@
+#include "pm_defines.h"
+
+&access{
+  none = <>;
+  ssc = <>;
+  secpro = <>;
+  invalid = <>;
+  
+  aop = <
+      /*BUSID SLAVEID PERIPH OPERATION */
+      //BUSID_0 0 0x01 APPEND            /* example to add*/
+      //BUSID_0 0 0x06 REMOVE            /* example to remove*/
+      //BUSID_0 0 0x07 APPEND_WITH_IRQ   /* example to add with irq ownership*/  
+      >;
+  
+  adsp = <
+      /*BUSID SLAVEID PERIPH OPERATION */  
+      //PM_BUSID_0 1 0x89 APPEND_WITH_IRQ
+      >;
+  
+  apps = <
+      /*BUSID SLAVEID PERIPH OPERATION */  
+      //PM_BUSID_0 1 0x89 REMOVE            /* example to remove*/
+    >;
+  
+  tz = <
+      /*BUSID SLAVEID PERIPH OPERATION */  
+     >;
+  
+  mss = <
+      /*BUSID SLAVEID PERIPH OPERATION */  
+     >;
+
+  uefi = <
+      /*BUSID SLAVEID PERIPH OPERATION */  
+     >; 
+
+};
+
+

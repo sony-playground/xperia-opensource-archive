@@ -1,0 +1,1265 @@
+&tlmm {
+  qup_l0_13: qup_l0_13 {
+    mux = <0 1>;
+  };
+  qup_l1_13: qup_l1_13 {
+    mux = <1 1>;
+  };
+  qup_l3_13: qup_l3_13 {
+    mux = <2 1>;
+  };
+  qup_l4_12_cs: qup_l4_12_cs {
+    mux = <2 2>;
+  };
+  qup_l2_13: qup_l2_13 {
+    mux = <3 1>;
+  };
+  qup_l5_12_cs: qup_l5_12_cs {
+    mux = <3 2>;
+  };
+  dbg_bus_out_locb_7: dbg_bus_out_locb_7 {
+    mux = <3 3>;
+  };
+  qup_l0_0: qup_l0_0 {
+    mux = <4 1>;
+  };
+  dbg_bus_out_locb_31: dbg_bus_out_locb_31 {
+    mux = <4 2>;
+  };
+  qup_l1_0: qup_l1_0 {
+    mux = <5 1>;
+  };
+  dbg_bus_out_locb_30: dbg_bus_out_locb_30 {
+    mux = <5 2>;
+  };
+  qup_l2_0: qup_l2_0 {
+    mux = <6 1>;
+  };
+  qup_l4_6_cs: qup_l4_6_cs {
+    mux = <6 2>;
+  };
+  dbg_bus_out_locb_25: dbg_bus_out_locb_25 {
+    mux = <6 3>;
+  };
+  qup_l3_0: qup_l3_0 {
+    mux = <7 1>;
+  };
+  qup_l5_6_cs: qup_l5_6_cs {
+    mux = <7 2>;
+  };
+  dbg_bus_out_locb_24: dbg_bus_out_locb_24 {
+    mux = <7 3>;
+  };
+  qup_l0_1: qup_l0_1 {
+    mux = <8 1>;
+  };
+  dbg_bus_out_locb_27: dbg_bus_out_locb_27 {
+    mux = <8 2>;
+  };
+  qup_l1_1: qup_l1_1 {
+    mux = <9 1>;
+  };
+  dbg_bus_out_locb_26: dbg_bus_out_locb_26 {
+    mux = <9 2>;
+  };
+  qup_l2_1: qup_l2_1 {
+    mux = <10 1>;
+  };
+  qup_l6_6_cs: qup_l6_6_cs {
+    mux = <10 2>;
+  };
+  qup_l3_1: qup_l3_1 {
+    mux = <11 1>;
+  };
+  qup_l0_2: qup_l0_2 {
+    mux = <12 1>;
+  };
+  phase_flag_status_loc_20: phase_flag_status_loc_20 {
+    mux = <12 2>;
+  };
+  dbg_bus_out_loca_20: dbg_bus_out_loca_20 {
+    mux = <12 3>;
+  };
+  qup_l1_2: qup_l1_2 {
+    mux = <13 1>;
+  };
+  phase_flag_status_loc_31: phase_flag_status_loc_31 {
+    mux = <13 2>;
+  };
+  dbg_bus_out_loca_31: dbg_bus_out_loca_31 {
+    mux = <13 3>;
+  };
+  qup_l2_2: qup_l2_2 {
+    mux = <14 1>;
+  };
+  qdss_cti_trig0_out_mirb: qdss_cti_trig0_out_mirb {
+    mux = <14 2>;
+  };
+  dbg_out_clk: dbg_out_clk {
+    mux = <14 3>;
+  };
+  qup_l3_2: qup_l3_2 {
+    mux = <15 1>;
+  };
+  mdp_vsync_p_mirb: mdp_vsync_p_mirb {
+    mux = <15 2>;
+  };
+  qup_l0_3: qup_l0_3 {
+    mux = <16 1>;
+  };
+  phase_flag_status_loc_30: phase_flag_status_loc_30 {
+    mux = <16 2>;
+  };
+  dbg_bus_out_loca_30: dbg_bus_out_loca_30 {
+    mux = <16 3>;
+  };
+  qup_l1_3: qup_l1_3 {
+    mux = <17 1>;
+  };
+  phase_flag_status_loc_29: phase_flag_status_loc_29 {
+    mux = <17 2>;
+  };
+  dbg_bus_out_loca_29: dbg_bus_out_loca_29 {
+    mux = <17 3>;
+  };
+  qup_l2_3: qup_l2_3 {
+    mux = <18 1>;
+  };
+  qup_l3_3: qup_l3_3 {
+    mux = <19 1>;
+  };
+  qup_l0_4: qup_l0_4 {
+    mux = <20 1>;
+  };
+  gp_pdm_mirb_2: gp_pdm_mirb_2 {
+    mux = <20 2>;
+  };
+  qup_l1_4: qup_l1_4 {
+    mux = <21 1>;
+  };
+  gp_pdm_mirb_1: gp_pdm_mirb_1 {
+    mux = <21 2>;
+  };
+  qup_l2_4: qup_l2_4 {
+    mux = <22 1>;
+  };
+  gp_pdm_mirb_0: gp_pdm_mirb_0 {
+    mux = <22 2>;
+  };
+  qup_l3_4: qup_l3_4 {
+    mux = <23 1>;
+  };
+  qup_l0_5: qup_l0_5 {
+    mux = <24 1>;
+  };
+  qup_l1_5: qup_l1_5 {
+    mux = <25 1>;
+  };
+  dbg_bus_out_locb_23: dbg_bus_out_locb_23 {
+    mux = <25 2>;
+  };
+  qup_l2_5: qup_l2_5 {
+    mux = <26 1>;
+  };
+  mdp_vsync_s_mirb: mdp_vsync_s_mirb {
+    mux = <26 2>;
+  };
+  dbg_bus_out_locb_22: dbg_bus_out_locb_22 {
+    mux = <26 3>;
+  };
+  qup_l3_5: qup_l3_5 {
+    mux = <27 1>;
+  };
+  qdss_cti_trig1_out_mirb: qdss_cti_trig1_out_mirb {
+    mux = <27 2>;
+  };
+  dbg_bus_out_locb_29: dbg_bus_out_locb_29 {
+    mux = <27 3>;
+  };
+  qup_l0_6: qup_l0_6 {
+    mux = <28 1>;
+  };
+  phase_flag_status_loc_28: phase_flag_status_loc_28 {
+    mux = <28 2>;
+  };
+  dbg_bus_out_loca_28: dbg_bus_out_loca_28 {
+    mux = <28 3>;
+  };
+  qup_l1_6: qup_l1_6 {
+    mux = <29 1>;
+  };
+  phase_flag_status_loc_27: phase_flag_status_loc_27 {
+    mux = <29 2>;
+  };
+  dbg_bus_out_loca_27: dbg_bus_out_loca_27 {
+    mux = <29 3>;
+  };
+  qup_l2_6: qup_l2_6 {
+    mux = <30 1>;
+  };
+  phase_flag_status_loc_26: phase_flag_status_loc_26 {
+    mux = <30 2>;
+  };
+  dbg_bus_out_loca_26: dbg_bus_out_loca_26 {
+    mux = <30 3>;
+  };
+  qup_l3_6: qup_l3_6 {
+    mux = <31 1>;
+  };
+  phase_flag_status_loc_25: phase_flag_status_loc_25 {
+    mux = <31 2>;
+  };
+  dbg_bus_out_loca_25: dbg_bus_out_loca_25 {
+    mux = <31 3>;
+  };
+  qup_l0_7: qup_l0_7 {
+    mux = <32 1>;
+  };
+  phase_flag_status_loc_24: phase_flag_status_loc_24 {
+    mux = <32 2>;
+  };
+  dbg_bus_out_loca_24: dbg_bus_out_loca_24 {
+    mux = <32 3>;
+  };
+  qup_l1_7: qup_l1_7 {
+    mux = <33 1>;
+  };
+  phase_flag_status_loc_23: phase_flag_status_loc_23 {
+    mux = <33 2>;
+  };
+  dbg_bus_out_loca_23: dbg_bus_out_loca_23 {
+    mux = <33 3>;
+  };
+  qup_l2_7: qup_l2_7 {
+    mux = <34 1>;
+  };
+  phase_flag_status_loc_22: phase_flag_status_loc_22 {
+    mux = <34 2>;
+  };
+  dbg_bus_out_loca_22: dbg_bus_out_loca_22 {
+    mux = <34 3>;
+  };
+  qup_l3_7: qup_l3_7 {
+    mux = <35 1>;
+  };
+  phase_flag_status_loc_21: phase_flag_status_loc_21 {
+    mux = <35 2>;
+  };
+  dbg_bus_out_loca_21: dbg_bus_out_loca_21 {
+    mux = <35 3>;
+  };
+  qup_l0_8: qup_l0_8 {
+    mux = <36 1>;
+  };
+  ibi_i3c_qup8_sda: ibi_i3c_qup8_sda {
+    mux = <36 2>;
+  };
+  ddr_bist_fail: ddr_bist_fail {
+    mux = <36 3>;
+  };
+  qup_l1_8: qup_l1_8 {
+    mux = <37 1>;
+  };
+  ibi_i3c_qup8_scl: ibi_i3c_qup8_scl {
+    mux = <37 2>;
+  };
+  ddr_bist_start: ddr_bist_start {
+    mux = <37 3>;
+  };
+  qup_l2_8: qup_l2_8 {
+    mux = <38 1>;
+  };
+  qup_l3_8: qup_l3_8 {
+    mux = <39 1>;
+  };
+  usb2phy_ac_en2: usb2phy_ac_en2 {
+    mux = <39 2>;
+  };
+  qup_l0_9: qup_l0_9 {
+    mux = <40 1>;
+  };
+  ddr_bist_complete: ddr_bist_complete {
+    mux = <40 2>;
+  };
+  qup_l1_9: qup_l1_9 {
+    mux = <41 1>;
+  };
+  ddr_bist_stop: ddr_bist_stop {
+    mux = <41 2>;
+  };
+  qup_l2_9: qup_l2_9 {
+    mux = <42 1>;
+  };
+  qup_l6_12_cs: qup_l6_12_cs {
+    mux = <42 2>;
+  };
+  qup_l3_9: qup_l3_9 {
+    mux = <43 1>;
+  };
+  ddr_pxi3_test_tri_mirnat: ddr_pxi3_test_tri_mirnat {
+    mux = <43 2>;
+  };
+  qup_l0_10: qup_l0_10 {
+    mux = <44 1>;
+  };
+  qspi_data_0: qspi_data_0 {
+    mux = <44 2>;
+  };
+  sdc4_data_0: sdc4_data_0 {
+    mux = <44 3>;
+  };
+  ddr_pxi3_test_done_mirnat: ddr_pxi3_test_done_mirnat {
+    mux = <44 4>;
+  };
+  qup_l1_10: qup_l1_10 {
+    mux = <45 1>;
+  };
+  qspi_data_1: qspi_data_1 {
+    mux = <45 2>;
+  };
+  sdc4_data_1: sdc4_data_1 {
+    mux = <45 3>;
+  };
+  ddr_pxi2_test_tri_mirnat: ddr_pxi2_test_tri_mirnat {
+    mux = <45 4>;
+  };
+  qup_l2_10: qup_l2_10 {
+    mux = <46 1>;
+  };
+  qup_l3_10: qup_l3_10 {
+    mux = <47 1>;
+  };
+  qspi_cs_n_0: qspi_cs_n_0 {
+    mux = <47 2>;
+  };
+  ddr_pxi2_test_done_mirnat: ddr_pxi2_test_done_mirnat {
+    mux = <47 3>;
+  };
+  qup_l0_11: qup_l0_11 {
+    mux = <48 1>;
+  };
+  qspi_data_2: qspi_data_2 {
+    mux = <48 2>;
+  };
+  sdc4_data_2: sdc4_data_2 {
+    mux = <48 3>;
+  };
+  ddr_pxi1_test_tri_mirnat: ddr_pxi1_test_tri_mirnat {
+    mux = <48 4>;
+  };
+  qup_l1_11: qup_l1_11 {
+    mux = <49 1>;
+  };
+  qspi_data_3: qspi_data_3 {
+    mux = <49 2>;
+  };
+  sdc4_data_3: sdc4_data_3 {
+    mux = <49 3>;
+  };
+  ddr_pxi1_test_done_mirnat: ddr_pxi1_test_done_mirnat {
+    mux = <49 4>;
+  };
+  qup_l2_11: qup_l2_11 {
+    mux = <50 1>;
+  };
+  qspi_clk: qspi_clk {
+    mux = <50 2>;
+  };
+  sdc4_clk: sdc4_clk {
+    mux = <50 3>;
+  };
+  qup_l3_11: qup_l3_11 {
+    mux = <51 1>;
+  };
+  qspi_cs_n_1: qspi_cs_n_1 {
+    mux = <51 2>;
+  };
+  sdc4_cmd: sdc4_cmd {
+    mux = <51 3>;
+  };
+  ddr_pxi0_test_tri_mirnat: ddr_pxi0_test_tri_mirnat {
+    mux = <51 4>;
+  };
+  qup_l0_12: qup_l0_12 {
+    mux = <52 1>;
+  };
+  ddr_pxi0_test_done_mirnat: ddr_pxi0_test_done_mirnat {
+    mux = <52 2>;
+  };
+  qup_l1_12: qup_l1_12 {
+    mux = <53 1>;
+  };
+  gp_mn: gp_mn {
+    mux = <53 2>;
+  };
+  qup_l2_12: qup_l2_12 {
+    mux = <54 1>;
+  };
+  qup_l3_12: qup_l3_12 {
+    mux = <55 1>;
+  };
+  atest_usb0_testdataout0_mirnat_3: atest_usb0_testdataout0_mirnat_3 {
+    mux = <55 2>;
+  };
+  qup_l0_14: qup_l0_14 {
+    mux = <56 1>;
+  };
+  ibi_i3c_qup14_sda: ibi_i3c_qup14_sda {
+    mux = <56 2>;
+  };
+  qup_l1_14: qup_l1_14 {
+    mux = <57 1>;
+  };
+  ibi_i3c_qup14_scl: ibi_i3c_qup14_scl {
+    mux = <57 2>;
+  };
+  qup_l2_14: qup_l2_14 {
+    mux = <58 1>;
+  };
+  qup_l4_18_cs: qup_l4_18_cs {
+    mux = <58 2>;
+  };
+  qup_l3_14: qup_l3_14 {
+    mux = <59 1>;
+  };
+  qup_l5_18_cs: qup_l5_18_cs {
+    mux = <59 2>;
+  };
+  qup_l0_15: qup_l0_15 {
+    mux = <60 1>;
+  };
+  ibi_i3c_qup15_sda: ibi_i3c_qup15_sda {
+    mux = <60 2>;
+  };
+  qup_l1_15: qup_l1_15 {
+    mux = <61 1>;
+  };
+  ibi_i3c_qup15_scl: ibi_i3c_qup15_scl {
+    mux = <61 2>;
+  };
+  qup_l2_15: qup_l2_15 {
+    mux = <62 1>;
+  };
+  qup_l6_18_cs: qup_l6_18_cs {
+    mux = <62 2>;
+  };
+  qup_l3_15: qup_l3_15 {
+    mux = <63 1>;
+  };
+  qup_l4_19_cs: qup_l4_19_cs {
+    mux = <63 2>;
+  };
+  qup_l0_16: qup_l0_16 {
+    mux = <64 1>;
+  };
+  tb_trig_sdc2: tb_trig_sdc2 {
+    mux = <64 2>;
+  };
+  qup_l1_16: qup_l1_16 {
+    mux = <65 1>;
+  };
+  qup_l2_16: qup_l2_16 {
+    mux = <66 1>;
+  };
+  qup_l5_19_cs: qup_l5_19_cs {
+    mux = <66 2>;
+  };
+  qup_l3_16: qup_l3_16 {
+    mux = <67 1>;
+  };
+  qup_l6_19_cs: qup_l6_19_cs {
+    mux = <67 2>;
+  };
+  qup_l0_18: qup_l0_18 {
+    mux = <68 1>;
+  };
+  qup_l1_18: qup_l1_18 {
+    mux = <69 1>;
+  };
+  qup_l2_18: qup_l2_18 {
+    mux = <70 1>;
+  };
+  qup_l3_18: qup_l3_18 {
+    mux = <71 1>;
+  };
+  qup_l0_17: qup_l0_17 {
+    mux = <72 1>;
+  };
+  phase_flag_status_loc_19: phase_flag_status_loc_19 {
+    mux = <72 2>;
+  };
+  dbg_bus_out_loca_19: dbg_bus_out_loca_19 {
+    mux = <72 3>;
+  };
+  qup_l1_17: qup_l1_17 {
+    mux = <73 1>;
+  };
+  phase_flag_status_loc_18: phase_flag_status_loc_18 {
+    mux = <73 2>;
+  };
+  dbg_bus_out_loca_18: dbg_bus_out_loca_18 {
+    mux = <73 3>;
+  };
+  qup_l2_17: qup_l2_17 {
+    mux = <74 1>;
+  };
+  phase_flag_status_loc_17: phase_flag_status_loc_17 {
+    mux = <74 2>;
+  };
+  dbg_bus_out_loca_17: dbg_bus_out_loca_17 {
+    mux = <74 3>;
+  };
+  qup_l3_17: qup_l3_17 {
+    mux = <75 1>;
+  };
+  phase_flag_status_loc_16: phase_flag_status_loc_16 {
+    mux = <75 2>;
+  };
+  dbg_bus_out_loca_16: dbg_bus_out_loca_16 {
+    mux = <75 3>;
+  };
+  qup_l0_19: qup_l0_19 {
+    mux = <76 1>;
+  };
+  phase_flag_status_loc_15: phase_flag_status_loc_15 {
+    mux = <76 2>;
+  };
+  dbg_bus_out_loca_15: dbg_bus_out_loca_15 {
+    mux = <76 3>;
+  };
+  qup_l1_19: qup_l1_19 {
+    mux = <77 1>;
+  };
+  phase_flag_status_loc_14: phase_flag_status_loc_14 {
+    mux = <77 2>;
+  };
+  dbg_bus_out_loca_14: dbg_bus_out_loca_14 {
+    mux = <77 3>;
+  };
+  qup_l2_19: qup_l2_19 {
+    mux = <78 1>;
+  };
+  phase_flag_status_loc_13: phase_flag_status_loc_13 {
+    mux = <78 2>;
+  };
+  dbg_bus_out_loca_13: dbg_bus_out_loca_13 {
+    mux = <78 3>;
+  };
+  vsense_trigger_mirnat: vsense_trigger_mirnat {
+    mux = <78 4>;
+  };
+  qup_l3_19: qup_l3_19 {
+    mux = <79 1>;
+  };
+  phase_flag_status_loc_12: phase_flag_status_loc_12 {
+    mux = <79 2>;
+  };
+  dbg_bus_out_loca_12: dbg_bus_out_loca_12 {
+    mux = <79 3>;
+  };
+  usb2phy_ac_en1: usb2phy_ac_en1 {
+    mux = <80 1>;
+  };
+  jitter_bist_ref_clk: jitter_bist_ref_clk {
+    mux = <80 2>;
+  };
+  atest_usb1_atereset_mirnat: atest_usb1_atereset_mirnat {
+    mux = <80 3>;
+  };
+  usb_phy_ps: usb_phy_ps {
+    mux = <81 1>;
+  };
+  pll_bist_sync: pll_bist_sync {
+    mux = <81 2>;
+  };
+  pll_clk_aux: pll_clk_aux {
+    mux = <81 3>;
+  };
+  atest_usb0_atereset_mirnat: atest_usb0_atereset_mirnat {
+    mux = <81 4>;
+  };
+  mdp_vsync_p_mira: mdp_vsync_p_mira {
+    mux = <82 1>;
+  };
+  mdp_vsync_s_mira: mdp_vsync_s_mira {
+    mux = <83 1>;
+  };
+  dp_lcd_self_test: dp_lcd_self_test {
+    mux = <83 2>;
+  };
+  dbg_bus_out_locb_9: dbg_bus_out_locb_9 {
+    mux = <83 3>;
+  };
+  mdp_vsync_e: mdp_vsync_e {
+    mux = <84 1>;
+  };
+  vfr_0: vfr_0 {
+    mux = <84 2>;
+  };
+  dbg_bus_out_locb_8: dbg_bus_out_locb_8 {
+    mux = <84 3>;
+  };
+  atest_char_status_loc_2: atest_char_status_loc_2 {
+    mux = <85 1>;
+  };
+  mdp_vsync0_out: mdp_vsync0_out {
+    mux = <86 1>;
+  };
+  mdp_vsync1_out: mdp_vsync1_out {
+    mux = <86 2>;
+  };
+  atest_char_status_loc_1: atest_char_status_loc_1 {
+    mux = <86 3>;
+  };
+  dp_hot_plug_detect: dp_hot_plug_detect {
+    mux = <87 1>;
+  };
+  mdp_vsync2_out: mdp_vsync2_out {
+    mux = <87 2>;
+  };
+  mdp_vsync3_out: mdp_vsync3_out {
+    mux = <87 3>;
+  };
+  qdss_cti_trig0_in_mirb: qdss_cti_trig0_in_mirb {
+    mux = <87 4>;
+  };
+  atest_char_status_loc_0: atest_char_status_loc_0 {
+    mux = <87 5>;
+  };
+  qdss_cti_trig0_out_mira: qdss_cti_trig0_out_mira {
+    mux = <88 1>;
+  };
+  tsense_pwm1_out_mirnat: tsense_pwm1_out_mirnat {
+    mux = <88 2>;
+  };
+  tsense_pwm2_out_mirnat: tsense_pwm2_out_mirnat {
+    mux = <88 3>;
+  };
+  qdss_cti_trig1_out_mira: qdss_cti_trig1_out_mira {
+    mux = <89 1>;
+  };
+  vfr_1: vfr_1 {
+    mux = <90 1>;
+  };
+  qdss_cti_trig1_in_mira: qdss_cti_trig1_in_mira {
+    mux = <90 2>;
+  };
+  dbg_bus_out_locb_6: dbg_bus_out_locb_6 {
+    mux = <90 3>;
+  };
+  qdss_cti_trig0_in_mira: qdss_cti_trig0_in_mira {
+    mux = <91 1>;
+  };
+  qdss_cti_trig1_in_mirb: qdss_cti_trig1_in_mirb {
+    mux = <92 1>;
+  };
+  sd_write_protect: sd_write_protect {
+    mux = <93 1>;
+  };
+  dbg_bus_out_locb_10: dbg_bus_out_locb_10 {
+    mux = <93 2>;
+  };
+  pcie0_clkreqn: pcie0_clkreqn {
+    mux = <95 1>;
+  };
+  pcie1_clkreqn: pcie1_clkreqn {
+    mux = <98 1>;
+  };
+  tgu_ch0_trigout: tgu_ch0_trigout {
+    mux = <99 1>;
+  };
+  cam_mclk0: cam_mclk0 {
+    mux = <100 1>;
+  };
+  tgu_ch1_trigout: tgu_ch1_trigout {
+    mux = <100 2>;
+  };
+  qdss_gpio_tracedata_locb_0: qdss_gpio_tracedata_locb_0 {
+    mux = <100 3>;
+  };
+  cam_mclk1: cam_mclk1 {
+    mux = <101 1>;
+  };
+  tgu_ch2_trigout: tgu_ch2_trigout {
+    mux = <101 2>;
+  };
+  qdss_gpio_tracedata_locb_1: qdss_gpio_tracedata_locb_1 {
+    mux = <101 3>;
+  };
+  cam_mclk2: cam_mclk2 {
+    mux = <102 1>;
+  };
+  tgu_ch3_trigout: tgu_ch3_trigout {
+    mux = <102 2>;
+  };
+  qdss_gpio_tracedata_locb_2: qdss_gpio_tracedata_locb_2 {
+    mux = <102 3>;
+  };
+  cam_mclk3: cam_mclk3 {
+    mux = <103 1>;
+  };
+  phase_flag_status_loc_11: phase_flag_status_loc_11 {
+    mux = <103 2>;
+  };
+  dbg_bus_out_loca_11: dbg_bus_out_loca_11 {
+    mux = <103 3>;
+  };
+  qdss_gpio_tracedata_locb_3: qdss_gpio_tracedata_locb_3 {
+    mux = <103 4>;
+  };
+  cam_mclk4: cam_mclk4 {
+    mux = <104 1>;
+  };
+  phase_flag_status_loc_10: phase_flag_status_loc_10 {
+    mux = <104 2>;
+  };
+  dbg_bus_out_loca_10: dbg_bus_out_loca_10 {
+    mux = <104 3>;
+  };
+  qdss_gpio_tracedata_locb_4: qdss_gpio_tracedata_locb_4 {
+    mux = <104 4>;
+  };
+  cam_mclk5: cam_mclk5 {
+    mux = <105 1>;
+  };
+  phase_flag_status_loc_9: phase_flag_status_loc_9 {
+    mux = <105 2>;
+  };
+  dbg_bus_out_loca_9: dbg_bus_out_loca_9 {
+    mux = <105 3>;
+  };
+  qdss_gpio_tracedata_locb_5: qdss_gpio_tracedata_locb_5 {
+    mux = <105 4>;
+  };
+  cci_async_in0: cci_async_in0 {
+    mux = <106 1>;
+  };
+  phase_flag_status_loc_8: phase_flag_status_loc_8 {
+    mux = <106 2>;
+  };
+  dbg_bus_out_loca_8: dbg_bus_out_loca_8 {
+    mux = <106 3>;
+  };
+  qdss_gpio_tracedata_locb_6: qdss_gpio_tracedata_locb_6 {
+    mux = <106 4>;
+  };
+  cci_i2c_sda0: cci_i2c_sda0 {
+    mux = <107 1>;
+  };
+  phase_flag_status_loc_7: phase_flag_status_loc_7 {
+    mux = <107 2>;
+  };
+  dbg_bus_out_loca_7: dbg_bus_out_loca_7 {
+    mux = <107 3>;
+  };
+  qdss_gpio_tracedata_locb_7: qdss_gpio_tracedata_locb_7 {
+    mux = <107 4>;
+  };
+  cci_i2c_scl0: cci_i2c_scl0 {
+    mux = <108 1>;
+  };
+  phase_flag_status_loc_6: phase_flag_status_loc_6 {
+    mux = <108 2>;
+  };
+  dbg_bus_out_loca_6: dbg_bus_out_loca_6 {
+    mux = <108 3>;
+  };
+  qdss_gpio_tracedata_locb_8: qdss_gpio_tracedata_locb_8 {
+    mux = <108 4>;
+  };
+  cci_i2c_sda1: cci_i2c_sda1 {
+    mux = <109 1>;
+  };
+  phase_flag_status_loc_5: phase_flag_status_loc_5 {
+    mux = <109 2>;
+  };
+  dbg_bus_out_loca_5: dbg_bus_out_loca_5 {
+    mux = <109 3>;
+  };
+  qdss_gpio_traceclk_locb: qdss_gpio_traceclk_locb {
+    mux = <109 4>;
+  };
+  cci_i2c_scl1: cci_i2c_scl1 {
+    mux = <110 1>;
+  };
+  phase_flag_status_loc_4: phase_flag_status_loc_4 {
+    mux = <110 2>;
+  };
+  dbg_bus_out_loca_4: dbg_bus_out_loca_4 {
+    mux = <110 3>;
+  };
+  qdss_gpio_tracectl_locb: qdss_gpio_tracectl_locb {
+    mux = <110 4>;
+  };
+  cci_i2c_sda2: cci_i2c_sda2 {
+    mux = <111 1>;
+  };
+  phase_flag_status_loc_3: phase_flag_status_loc_3 {
+    mux = <111 2>;
+  };
+  dbg_bus_out_loca_3: dbg_bus_out_loca_3 {
+    mux = <111 3>;
+  };
+  qdss_gpio_tracedata_locb_9: qdss_gpio_tracedata_locb_9 {
+    mux = <111 4>;
+  };
+  cci_i2c_scl2: cci_i2c_scl2 {
+    mux = <112 1>;
+  };
+  phase_flag_status_loc_2: phase_flag_status_loc_2 {
+    mux = <112 2>;
+  };
+  dbg_bus_out_loca_2: dbg_bus_out_loca_2 {
+    mux = <112 3>;
+  };
+  qdss_gpio_tracedata_locb_10: qdss_gpio_tracedata_locb_10 {
+    mux = <112 4>;
+  };
+  cci_i2c_sda3: cci_i2c_sda3 {
+    mux = <113 1>;
+  };
+  phase_flag_status_loc_1: phase_flag_status_loc_1 {
+    mux = <113 2>;
+  };
+  dbg_bus_out_loca_1: dbg_bus_out_loca_1 {
+    mux = <113 3>;
+  };
+  qdss_gpio_tracedata_locb_11: qdss_gpio_tracedata_locb_11 {
+    mux = <113 4>;
+  };
+  cci_i2c_scl3: cci_i2c_scl3 {
+    mux = <114 1>;
+  };
+  phase_flag_status_loc_0: phase_flag_status_loc_0 {
+    mux = <114 2>;
+  };
+  dbg_bus_out_loca_0: dbg_bus_out_loca_0 {
+    mux = <114 3>;
+  };
+  qdss_gpio_tracedata_locb_12: qdss_gpio_tracedata_locb_12 {
+    mux = <114 4>;
+  };
+  cci_timer0: cci_timer0 {
+    mux = <115 1>;
+  };
+  gcc_gp1_clk_mirb: gcc_gp1_clk_mirb {
+    mux = <115 2>;
+  };
+  qdss_gpio_tracedata_locb_13: qdss_gpio_tracedata_locb_13 {
+    mux = <115 3>;
+  };
+  atest_char_status_loc_3: atest_char_status_loc_3 {
+    mux = <115 4>;
+  };
+  cci_timer1: cci_timer1 {
+    mux = <116 1>;
+  };
+  gcc_gp2_clk_mirb: gcc_gp2_clk_mirb {
+    mux = <116 2>;
+  };
+  qdss_gpio_tracedata_locb_14: qdss_gpio_tracedata_locb_14 {
+    mux = <116 3>;
+  };
+  cci_timer2: cci_timer2 {
+    mux = <117 1>;
+  };
+  gcc_gp3_clk_mirb: gcc_gp3_clk_mirb {
+    mux = <117 2>;
+  };
+  qdss_gpio_tracedata_locb_15: qdss_gpio_tracedata_locb_15 {
+    mux = <117 3>;
+  };
+  atest_char_start: atest_char_start {
+    mux = <117 4>;
+  };
+  cci_timer3: cci_timer3 {
+    mux = <118 1>;
+  };
+  cci_async_in1: cci_async_in1 {
+    mux = <118 2>;
+  };
+  cci_timer4: cci_timer4 {
+    mux = <119 1>;
+  };
+  cci_async_in2: cci_async_in2 {
+    mux = <119 2>;
+  };
+  dbg_bus_out_locb_28: dbg_bus_out_locb_28 {
+    mux = <119 3>;
+  };
+  mi2s2_sck: mi2s2_sck {
+    mux = <120 1>;
+  };
+  dbg_bus_out_locb_21: dbg_bus_out_locb_21 {
+    mux = <120 2>;
+  };
+  mi2s2_data0: mi2s2_data0 {
+    mux = <121 1>;
+  };
+  dbg_bus_out_locb_20: dbg_bus_out_locb_20 {
+    mux = <121 2>;
+  };
+  mi2s2_ws: mi2s2_ws {
+    mux = <122 1>;
+  };
+  dbg_bus_out_locb_19: dbg_bus_out_locb_19 {
+    mux = <122 2>;
+  };
+  pri_mi2s_mclk: pri_mi2s_mclk {
+    mux = <123 1>;
+  };
+  dbg_bus_out_locb_18: dbg_bus_out_locb_18 {
+    mux = <123 2>;
+  };
+  sec_mi2s_mclk: sec_mi2s_mclk {
+    mux = <124 1>;
+  };
+  audio_ref_clk: audio_ref_clk {
+    mux = <124 2>;
+  };
+  mi2s2_data1: mi2s2_data1 {
+    mux = <124 3>;
+  };
+  dbg_bus_out_locb_17: dbg_bus_out_locb_17 {
+    mux = <124 4>;
+  };
+  mi2s0_sck: mi2s0_sck {
+    mux = <125 1>;
+  };
+  dbg_bus_out_locb_16: dbg_bus_out_locb_16 {
+    mux = <125 2>;
+  };
+  mi2s0_data0: mi2s0_data0 {
+    mux = <126 1>;
+  };
+  gp_pdm_mira_0: gp_pdm_mira_0 {
+    mux = <126 2>;
+  };
+  dbg_bus_out_locb_15: dbg_bus_out_locb_15 {
+    mux = <126 3>;
+  };
+  mi2s0_data1: mi2s0_data1 {
+    mux = <127 1>;
+  };
+  gp_pdm_mira_1: gp_pdm_mira_1 {
+    mux = <127 2>;
+  };
+  dbg_bus_out_locb_14: dbg_bus_out_locb_14 {
+    mux = <127 3>;
+  };
+  mi2s0_ws: mi2s0_ws {
+    mux = <128 1>;
+  };
+  gp_pdm_mira_2: gp_pdm_mira_2 {
+    mux = <128 2>;
+  };
+  dbg_bus_out_locb_13: dbg_bus_out_locb_13 {
+    mux = <128 3>;
+  };
+  lpass_slimbus_clk: lpass_slimbus_clk {
+    mux = <129 1>;
+  };
+  mi2s1_sck: mi2s1_sck {
+    mux = <129 2>;
+  };
+  gcc_gp1_clk_mira: gcc_gp1_clk_mira {
+    mux = <129 3>;
+  };
+  lpass_slimbus_data0: lpass_slimbus_data0 {
+    mux = <130 1>;
+  };
+  mi2s1_data0: mi2s1_data0 {
+    mux = <130 2>;
+  };
+  gcc_gp2_clk_mira: gcc_gp2_clk_mira {
+    mux = <130 3>;
+  };
+  mi2s1_data1: mi2s1_data1 {
+    mux = <131 1>;
+  };
+  gcc_gp3_clk_mira: gcc_gp3_clk_mira {
+    mux = <131 2>;
+  };
+  dbg_bus_out_locb_12: dbg_bus_out_locb_12 {
+    mux = <131 3>;
+  };
+  mi2s1_ws: mi2s1_ws {
+    mux = <132 1>;
+  };
+  dbg_bus_out_locb_11: dbg_bus_out_locb_11 {
+    mux = <132 2>;
+  };
+  uim1_data: uim1_data {
+    mux = <133 1>;
+  };
+  uim1_clk: uim1_clk {
+    mux = <134 1>;
+  };
+  uim1_reset: uim1_reset {
+    mux = <135 1>;
+  };
+  uim1_present: uim1_present {
+    mux = <136 1>;
+  };
+  tb_trig_sdc4: tb_trig_sdc4 {
+    mux = <136 2>;
+  };
+  uim0_data: uim0_data {
+    mux = <137 1>;
+  };
+  uim0_clk: uim0_clk {
+    mux = <138 1>;
+  };
+  uim0_reset: uim0_reset {
+    mux = <139 1>;
+  };
+  uim0_present: uim0_present {
+    mux = <140 1>;
+  };
+  rffe0_clk: rffe0_clk {
+    mux = <141 1>;
+  };
+  mss_grfc0: mss_grfc0 {
+    mux = <141 2>;
+  };
+  rffe0_data: rffe0_data {
+    mux = <142 1>;
+  };
+  mss_grfc1: mss_grfc1 {
+    mux = <142 2>;
+  };
+  rffe1_clk: rffe1_clk {
+    mux = <143 1>;
+  };
+  mss_grfc2: mss_grfc2 {
+    mux = <143 2>;
+  };
+  rffe1_data: rffe1_data {
+    mux = <144 1>;
+  };
+  mss_grfc3: mss_grfc3 {
+    mux = <144 2>;
+  };
+  rffe2_clk: rffe2_clk {
+    mux = <145 1>;
+  };
+  mss_grfc4: mss_grfc4 {
+    mux = <145 2>;
+  };
+  rffe2_data: rffe2_data {
+    mux = <146 1>;
+  };
+  mss_grfc5: mss_grfc5 {
+    mux = <146 2>;
+  };
+  rffe3_clk: rffe3_clk {
+    mux = <147 1>;
+  };
+  mss_grfc6: mss_grfc6 {
+    mux = <147 2>;
+  };
+  rffe3_data: rffe3_data {
+    mux = <148 1>;
+  };
+  mss_grfc7: mss_grfc7 {
+    mux = <148 2>;
+  };
+  rffe4_clk: rffe4_clk {
+    mux = <149 1>;
+  };
+  mss_grfc8: mss_grfc8 {
+    mux = <149 2>;
+  };
+  rffe4_data: rffe4_data {
+    mux = <150 1>;
+  };
+  mss_grfc9: mss_grfc9 {
+    mux = <150 2>;
+  };
+  coex_uart1_rx: coex_uart1_rx {
+    mux = <151 1>;
+  };
+  atest_usb1_testdataout0_mirnat_3: atest_usb1_testdataout0_mirnat_3 {
+    mux = <151 2>;
+  };
+  coex_uart1_tx: coex_uart1_tx {
+    mux = <152 1>;
+  };
+  atest_usb1_testdataout0_mirnat_2: atest_usb1_testdataout0_mirnat_2 {
+    mux = <152 2>;
+  };
+  coex_uart2_rx: coex_uart2_rx {
+    mux = <153 1>;
+  };
+  mss_grfc10: mss_grfc10 {
+    mux = <153 2>;
+  };
+  atest_usb1_testdataout0_mirnat_1: atest_usb1_testdataout0_mirnat_1 {
+    mux = <153 3>;
+  };
+  coex_uart2_tx: coex_uart2_tx {
+    mux = <154 1>;
+  };
+  mss_grfc11: mss_grfc11 {
+    mux = <154 2>;
+  };
+  atest_usb1_testdataout0_mirnat_0: atest_usb1_testdataout0_mirnat_0 {
+    mux = <154 3>;
+  };
+  nav_gpio_0: nav_gpio_0 {
+    mux = <155 1>;
+  };
+  nav_gpio_1: nav_gpio_1 {
+    mux = <156 1>;
+  };
+  mss_grfc12: mss_grfc12 {
+    mux = <157 1>;
+  };
+  pa_indicator_1_or_2: pa_indicator_1_or_2 {
+    mux = <157 2>;
+  };
+  nav_gpio_2: nav_gpio_2 {
+    mux = <157 3>;
+  };
+  mss_grfc0_mira: mss_grfc0_mira {
+    mux = <158 1>;
+  };
+  atest_usb0_testdataout0_mirnat_2: atest_usb0_testdataout0_mirnat_2 {
+    mux = <158 2>;
+  };
+  qlink0_request: qlink0_request {
+    mux = <159 1>;
+  };
+  atest_usb0_testdataout0_mirnat_1: atest_usb0_testdataout0_mirnat_1 {
+    mux = <159 2>;
+  };
+  qlink0_enable: qlink0_enable {
+    mux = <160 1>;
+  };
+  qlink0_wmss_reset_n: qlink0_wmss_reset_n {
+    mux = <161 1>;
+  };
+  atest_usb0_testdataout0_mirnat_0: atest_usb0_testdataout0_mirnat_0 {
+    mux = <161 2>;
+  };
+  qlink1_request: qlink1_request {
+    mux = <162 1>;
+  };
+  qlink1_enable: qlink1_enable {
+    mux = <163 1>;
+  };
+  qlink1_wmss_reset_n: qlink1_wmss_reset_n {
+    mux = <164 1>;
+  };
+  sdc2_cdc_dtest_out_mirnat_1: sdc2_cdc_dtest_out_mirnat_1 {
+    mux = <164 2>;
+  };
+  qlink2_request: qlink2_request {
+    mux = <165 1>;
+  };
+  qlink2_enable: qlink2_enable {
+    mux = <166 1>;
+  };
+  qlink2_wmss_reset_n: qlink2_wmss_reset_n {
+    mux = <167 1>;
+  };
+  sdc2_cdc_dtest_out_mirnat_0: sdc2_cdc_dtest_out_mirnat_0 {
+    mux = <167 2>;
+  };
+  cmu_rng_entropy_test_out_3: cmu_rng_entropy_test_out_3 {
+    mux = <174 1>;
+  };
+  dbg_bus_out_locb_5: dbg_bus_out_locb_5 {
+    mux = <174 2>;
+  };
+  cmu_rng_entropy_test_out_2: cmu_rng_entropy_test_out_2 {
+    mux = <175 1>;
+  };
+  dbg_bus_out_locb_4: dbg_bus_out_locb_4 {
+    mux = <175 2>;
+  };
+  cmu_rng_entropy_test_out_1: cmu_rng_entropy_test_out_1 {
+    mux = <176 1>;
+  };
+  dbg_bus_out_locb_3: dbg_bus_out_locb_3 {
+    mux = <176 2>;
+  };
+  cmu_rng_entropy_test_out_0: cmu_rng_entropy_test_out_0 {
+    mux = <177 1>;
+  };
+  dbg_bus_out_locb_2: dbg_bus_out_locb_2 {
+    mux = <177 2>;
+  };
+  dbg_bus_out_locb_1: dbg_bus_out_locb_1 {
+    mux = <180 1>;
+  };
+  dbg_bus_out_locb_0: dbg_bus_out_locb_0 {
+    mux = <181 1>;
+  };
+  cri_trng_rosc_sync_test_out_0: cri_trng_rosc_sync_test_out_0 {
+    mux = <183 1>;
+  };
+  qdss_gpio_tracedata_loca_0: qdss_gpio_tracedata_loca_0 {
+    mux = <183 2>;
+  };
+  cri_trng_rosc_sync_test_out_1: cri_trng_rosc_sync_test_out_1 {
+    mux = <184 1>;
+  };
+  qdss_gpio_tracedata_loca_1: qdss_gpio_tracedata_loca_1 {
+    mux = <184 2>;
+  };
+  prng_rosc_test_out: prng_rosc_test_out {
+    mux = <185 1>;
+  };
+  qdss_gpio_tracedata_loca_2: qdss_gpio_tracedata_loca_2 {
+    mux = <185 2>;
+  };
+  cri_trng_rosc_test_out: cri_trng_rosc_test_out {
+    mux = <186 1>;
+  };
+  qdss_gpio_tracedata_loca_3: qdss_gpio_tracedata_loca_3 {
+    mux = <186 2>;
+  };
+  qdss_gpio_tracedata_loca_4: qdss_gpio_tracedata_loca_4 {
+    mux = <187 1>;
+  };
+  qdss_gpio_tracedata_loca_5: qdss_gpio_tracedata_loca_5 {
+    mux = <188 1>;
+  };
+  qdss_gpio_tracedata_loca_6: qdss_gpio_tracedata_loca_6 {
+    mux = <189 1>;
+  };
+  qdss_gpio_tracedata_loca_7: qdss_gpio_tracedata_loca_7 {
+    mux = <190 1>;
+  };
+  qdss_gpio_tracectl_loca: qdss_gpio_tracectl_loca {
+    mux = <191 1>;
+  };
+  qdss_gpio_traceclk_loca: qdss_gpio_traceclk_loca {
+    mux = <192 1>;
+  };
+  qdss_gpio_tracedata_loca_8: qdss_gpio_tracedata_loca_8 {
+    mux = <193 1>;
+  };
+  qdss_gpio_tracedata_loca_9: qdss_gpio_tracedata_loca_9 {
+    mux = <194 1>;
+  };
+  qdss_gpio_tracedata_loca_10: qdss_gpio_tracedata_loca_10 {
+    mux = <195 1>;
+  };
+  qdss_gpio_tracedata_loca_11: qdss_gpio_tracedata_loca_11 {
+    mux = <196 1>;
+  };
+  qdss_gpio_tracedata_loca_12: qdss_gpio_tracedata_loca_12 {
+    mux = <197 1>;
+  };
+  qdss_gpio_tracedata_loca_13: qdss_gpio_tracedata_loca_13 {
+    mux = <198 1>;
+  };
+  qdss_gpio_tracedata_loca_14: qdss_gpio_tracedata_loca_14 {
+    mux = <199 1>;
+  };
+  qdss_gpio_tracedata_loca_15: qdss_gpio_tracedata_loca_15 {
+    mux = <200 1>;
+  };
+};

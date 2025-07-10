@@ -1,0 +1,95 @@
+#/** @file UsbfnDxe.inf
+#  
+#  INF file for UsbfnDxe driver
+#  
+#**/
+//============================================================================
+/**
+  Copyright (c) 2011-2021 Qualcomm Technologies, Inc. All rights reserved.
+  Portions Copyright (c) 2007 - 2013 Intel Corporation. All rights reserved.<BR>
+  This program and the accompanying materials
+  are licensed and made available under the terms and conditions of the BSD License
+  which accompanies this distribution.  The full text of the license may be found at
+  http://opensource.org/licenses/bsd-license.php
+  
+  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+ */
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who      what, where, why
+# --------   ---      ----------------------------------------------------------
+# mm/dd/yy   name     change description
+# 04/08/21   pohanw  Move Find partition & Mount/unmount to USBMSD
+# 01/22/16   ck       Support on demand USBFn configuration
+# 12/05/14   ck       Remove banned APIs
+# 10/14/14   ck       Add state machine and remove globals
+# 10/25/13   vk       Remove warning as error
+# 06/24/11   cching   Add the support of UEFI USB Function Protocol
+# 05/11/11   sbryksin Added initial version of UsbFn
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = UsbMsdDxe
+  FILE_GUID                      = 5AF77F10-90DF-4E7E-8325-A17EC09D5443
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = UsbMsdDriverEntryPoint
+
+[Sources]
+  UsbMsd.c
+  UsbMsdScsi.c
+  UsbMsdSm.c
+  UsbMsdSmImpl.c
+  UsbMsdDesc.c
+  UsbMsdXfer.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  MdeModulePkg/MdeModulePkg.dec  
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  MemoryAllocationLib
+  BaseLib
+  UefiLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  DebugLib
+  QcomLib
+
+[Guids]
+  gEfiEmmcBootPartition1Guid                    #Used to find all the partition      
+  gEfiEmmcBootPartition2Guid                    #Used to find all the partition      
+  gEfiEmmcGppPartition1Guid                     #Used to find all the partition      
+  gEfiSdRemovableGuid                           #Used to find all the partition      
+  gEfiUfsLU0Guid                                #Used to find all the partition 
+  gEfiUfsLU1Guid                                #Used to find all the partition 
+  gEfiUfsLU2Guid                                #Used to find all the partition 
+  gEfiUfsLU3Guid                                #Used to find all the partition 
+  gEfiUfsLU4Guid                                #Used to find all the partition 
+  gEfiUfsLU5Guid                                #Used to find all the partition 
+  gEfiUfsLU6Guid                                #Used to find all the partition 
+  gEfiUfsLU7Guid                                #Used to find all the partition 
+  gEfiNvme0Guid                                 #Used to find all the partition
+  gInitUsbLoopbackControllerGuid
+  gEfiEventExitBootServicesGuid
+
+[Protocols]
+  gEfiUsbfnIoProtocolGuid                        ## Consumes  
+  gEfiUsbMsdPeripheralProtocolGuid               ## Produces
+  gEfiPartitionRecordGuid		                 ## Consumes  
+  gEfiSdccRpmbProtocolGuid                       ## Consumes  
+  gEfiEraseBlockProtocolGuid                     ## Consumes 
+  
+  
+[depex]  
+  TRUE
+
+
+

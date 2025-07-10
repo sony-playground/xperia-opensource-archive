@@ -1,0 +1,9 @@
+# ! ! ! ! NOTE : Only works for sector size 4096
+
+# Used to parse GPT table. Requires the whole gpt including headers and MBR.
+
+# Usage
+./gpt_parse partition-image-LUN0.bin
+
+# Compiling
+make

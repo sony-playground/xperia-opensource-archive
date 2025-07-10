@@ -1,0 +1,5 @@
+// platform-mtp.dtsi
+//
+// Provides platform-specific settings,
+// e.g. GPIOs
+#include "../SW/Core/SocInfra/Clock/clock.dtsi"

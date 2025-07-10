@@ -1,0 +1,68 @@
+#/** @file PmicDevprgLib.inf
+# 
+# PMIC Devprg Library for Clarence
+#
+# Copyright (c) 2022  Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+# when        who     		what, where, why
+# --------    ---     		----------------------------------------------------------
+# 12/20/22    udumpala    	Initial Revision
+#=============================================================================
+
+[Defines]
+  INF_VERSION       = 0x00010005
+  BASE_NAME         = PmicLoaderLib
+  FILE_GUID         = 47150F51-99D7-4863-8DDA-B402B84C600B
+  MODULE_TYPE       = BASE
+  VERSION_STRING    = 1.0
+  LIBRARY_CLASS     = PmicLoaderLib
+
+ 
+[Sources.common]
+  ../../../../../Library/PmicLib/framework/src/pm_loader_init.c
+  ../../../../../Library/PmicLib/framework/src/pm_config_sbl_common.c
+  ../../../../../Library/PmicLib/utils/src/pm_utils_loader.c
+  ../../../../../Library/PmicLib/utils/src/pm_dump_null.c
+  ../../../../../Library/PmicLib/utils/src/pm_dt_parser.c
+  ../../../../../Library/PmicLib/app/chg/src/pm_chg.c
+  ../../../../../Library/PmicLib/app/chg/src/pm_app_chg_null.c
+  ../../../../../Library/PmicLib/app/pon/src/pm_app_pon.c
+  ../../../../../Library/PmicLib/app/pon/src/pm_app_pon_log.c
+  ../../../../../Library/PmicLib/app/pon/src/pm_app_key_press.c
+  ../../../../../Library/PmicLib/app/rgb/src/pm_app_rgb.c
+  ../../../../../Library/PmicLib/app/vreg/src/pm_app_vreg.c
+  ../../../../../Library/PmicLib/app/wled/src/pm_app_wled.c
+  ../../../../../Library/PmicLib/app/haptics/src/pm_app_haptics.c
+  ../../../../../Library/PmicLib/framework/src/pm_config_sbl.c
+  ../../../../../Library/PmicLib/framework/src/pm_config_sbl_test.c
+  ../../../../../Library/PmicLib/framework/src/pm_sbl_smem.c
+  ../../../../../Library/PmicLib/target/clarence/system/src/pm_sbl_boot.c
+  ../../../../../Library/PmicLib/target/clarence/system/src/pm_sbl_boot_oem.c
+  ../../../../../Library/PmicLib/target/clarence/system/src/pm_pon_target.c
+  ../../../../../Library/PmicLib/target/clarence/system/src/pm_adc_config.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec 
+  QcomPkg/XBLLoaderApi.dec  
+  QcomPkg/SocPkg/Clarence/Library/PmicLib/PmicLib.dec
+  QcomPkg/SocPkg/Clarence/Library/PmicLib/loader/PmicDevprgLib.dec
+  QcomPkg/SocPkg/Library/WatchDogTimerLib/WatchDogTimerLib.dec
+
+[LibraryClasses]
+  PmicLib
+  TimetickLib
+  DebugLib
+  SPMILib
+  SPMILibDebugNull
+  DTBExtnLib 
+
+

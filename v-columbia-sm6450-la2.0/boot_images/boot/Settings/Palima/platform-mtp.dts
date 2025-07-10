@@ -1,0 +1,23 @@
+// platform-mtp.dts
+//
+// Container DTS file for specific hardware platform: Palima MTP
+
+/dts-v1/;
+
+/ {
+	compatible = "qcom,palima-mtp", "qcom,palima", "qcom,mtp";
+	model = "qcom,mtp";
+	
+	#address-cells = <2>;
+	#size-cells = <2>;
+
+	soc: soc {
+		#address-cells = <1>;
+		#size-cells = <1>;
+	};
+	sw: sw { };
+};
+
+#include "soc_pre-ddr.dtsi"             /* Common SoC Node Definitions */
+#include "soc.dtsi"                     /* Post-DDR SoC Node Definitions */
+#include "platform-mtp.dtsi"            /* Platform   Node Definitions */

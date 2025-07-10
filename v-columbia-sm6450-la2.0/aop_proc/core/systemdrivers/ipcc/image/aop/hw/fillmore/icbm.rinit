@@ -1,0 +1,22 @@
+#
+# ICB Configuration
+# Generated on cpaulo-linux1 using: 
+# python /local/mnt/workspace/tools/aoss_icb_gen.py -f Waipio_ICB_Config.xlsx
+#
+
+module : { name = LPASS_HOST_LINK_REGS, group = ICBM, import = arc_export }
+regs:
+  LPASS_REMAPPER_CFGd_INCOMING_START_ADDRESS[0] = 0xA0000
+  LPASS_REMAPPER_CFGd_INCOMING_START_ADDRESS[1] = 0xA8000
+  LPASS_REMAPPER_CFGd_INCOMING_START_ADDRESS[2] = 0xAC000
+  LPASS_REMAPPER_CFGd_OUTGOING_AOSS_BASE_ADDRESS[0] = 0x03D13000
+  LPASS_REMAPPER_CFGd_OUTGOING_AOSS_BASE_ADDRESS[1] = 0x03E10000
+  LPASS_REMAPPER_CFGd_OUTGOING_AOSS_BASE_ADDRESS[2] = 0x251000
+  LPASS_REMAPPER_CFGd[0] = 0x1
+  LPASS_REMAPPER_CFGd[1] = 0x3
+  LPASS_REMAPPER_CFGd[2] = 0x3
+  LPASS_CLK_GATING_CTRL = 0x1
+
+module : { name = SSC_HOST_LINK_REGS, group = ICBM, import = arc_export }
+regs:
+

@@ -1,0 +1,449 @@
+#===========================================================================
+#                               wlan_pdc.rinit
+#
+#  DESCRIPTION:
+#    This file contains init values for WLAN PDC
+#
+#    Settings are obtained from TCS contents sheet maintained by Architecture
+#    team alongwith collaboration from SW and HW teams. 
+#
+#
+#  Copyright (c) 2020 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+#--------------------------------------------------------------------------
+# Common vars
+#--------------------------------------------------------------------------
+vars:
+    vrm_vol_offset = 0x0
+    vrm_en_offset = 0x4
+    vrm_mode_offset = 0x8
+    ret_mode = 3
+	lpm_mode = 4
+    auto_mode = 6
+	bypass_mode = 2
+	pwm_mode = 7
+    disable = 0
+	npm_mode = 7
+    enable = 1
+	CPR_VOLTAGE_MODE_RETENTION = 1
+    CPR_VOLTAGE_MODE_SVS = 7
+
+#---------------------------------------------------------------------------
+# WLAN_MOSELLE based settings
+#---------------------------------------------------------------------------
+module: { name = RPMH_PDC_WLAN_RF_WLAN_RF_PDC, group = WLAN_MOSELLE }
+regs:
+# Sleep Set 0
+	
+	TCSt_CMDn_ADDR[0, 0] = 0: { cmd_db_addr("vrm.wlan", vrm_vol_offset)}
+	TCSt_CMDn_DATA[0, 0] = disable
+	TCSt_CMDn_MSGID[0, 0] = {0, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[0, 1] = 0 : { cmd_db_addr("rfclka5", vrm_en_offset)}
+    TCSt_CMDn_DATA[0, 1] = disable
+    TCSt_CMDn_MSGID[0, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 2] = 0 : { cmd_db_addr("smpb7", vrm_vol_offset)}
+    TCSt_CMDn_DATA[0, 2] = 616     # 0.616v
+    TCSt_CMDn_MSGID[0, 2] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 3] = 0 : { cmd_db_addr("smpb7", vrm_mode_offset)}
+    TCSt_CMDn_DATA[0, 3] = ret_mode
+    TCSt_CMDn_MSGID[0, 3] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[0, 4] = 0 : { cmd_db_addr("smpe8", vrm_vol_offset)}
+    TCSt_CMDn_DATA[0, 4] = 1824     # 1.824v
+    TCSt_CMDn_MSGID[0, 4] = {0, 1} # {fnf, write}
+
+    #enable
+    TCSt_CMD_ENABLE[0] = 0x1F
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[0] = 0x0             # Dont serialize
+
+
+# Sleep Set 1
+	TCSt_CMDn_ADDR[1, 0] = 0 : { cmd_db_addr("smpe8", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 0] = npm_mode
+    TCSt_CMDn_MSGID[1, 0] = {0, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[1, 1] = 0 : { cmd_db_addr("ldob21", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 1] = lpm_mode
+    TCSt_CMDn_MSGID[1, 1] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[1, 2] = 0 : { cmd_db_addr("smpb8", vrm_vol_offset)}
+    TCSt_CMDn_DATA[1, 2] = 1256    # 1.256V
+    TCSt_CMDn_MSGID[1, 2] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[1, 3] = 0 : { cmd_db_addr("smpb8", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 3] = ret_mode
+    TCSt_CMDn_MSGID[1, 3] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[1, 4] = 0 : { cmd_db_addr("ldoe5", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 4] = lpm_mode
+    TCSt_CMDn_MSGID[1, 4] = {0, 1} # {fnf, write}
+
+    #enable
+    TCSt_CMD_ENABLE[1] = 0x1F
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[1] = 0x0             # Dont serialize
+	
+# Sleep Set 2
+	TCSt_CMDn_ADDR[2, 0] = 0 : { cmd_db_addr("bobe1", vrm_mode_offset)}
+    TCSt_CMDn_DATA[2, 0] = bypass_mode
+    TCSt_CMDn_MSGID[2, 0] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[2, 1] = 0 : { cmd_db_addr("smpb9", vrm_mode_offset)}
+    TCSt_CMDn_DATA[2, 1] = ret_mode
+    TCSt_CMDn_MSGID[2, 1] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[2, 2] = 0 : { cmd_db_addr("smpb9", vrm_en_offset)}
+    TCSt_CMDn_DATA[2, 2] = disable
+    TCSt_CMDn_MSGID[2, 2] = {0, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[2, 3] = 0 : { cmd_db_addr("cx.lvl")}
+    TCSt_CMDn_DATA[2, 3] = 0
+    TCSt_CMDn_MSGID[2, 3] = {0, 1} # {fnf, write}
+	
+	#enable
+    TCSt_CMD_ENABLE[2] = 0xF
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[2] = 0x0             # Dont serialize
+
+	
+##############################################################################	
+	
+# Wake Set 4
+	
+	TCSt_CMDn_ADDR[4, 0] = 0 : { cmd_db_addr("vrm.wlan", vrm_vol_offset)}
+    TCSt_CMDn_DATA[4, 0] = enable
+    TCSt_CMDn_MSGID[4, 0] = {1, 1} # {rr, write}
+	
+    TCSt_CMDn_ADDR[4, 1] = 0 : { cmd_db_addr("rfclka5", vrm_en_offset)}
+    TCSt_CMDn_DATA[4, 1] = enable
+    TCSt_CMDn_MSGID[4, 1] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[4, 2] = 0 : { cmd_db_addr("smpb7", vrm_vol_offset)}
+    TCSt_CMDn_DATA[4, 2] = 1012     #1.012v
+    TCSt_CMDn_MSGID[4, 2] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[4, 3] = 0 : { cmd_db_addr("smpb7", vrm_mode_offset)}
+    TCSt_CMDn_DATA[4, 3] = auto_mode
+    TCSt_CMDn_MSGID[4, 3] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[4, 4] = 0 : { cmd_db_addr("smpe8", vrm_vol_offset)}
+    TCSt_CMDn_DATA[4, 4] = 1900    #1.9v
+    TCSt_CMDn_MSGID[4, 4] = {1, 1} # {rr, write}
+
+    #enable
+    TCSt_CMD_ENABLE[4] = 0x1F 
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[4] = 0x0             # Dont serialize
+
+
+# Wake Set 5
+	TCSt_CMDn_ADDR[5, 0] = 0 : { cmd_db_addr("smpe8", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 0] = npm_mode
+    TCSt_CMDn_MSGID[5, 0] = {1, 1} # {rr, write}
+	
+    TCSt_CMDn_ADDR[5, 1] = 0 : { cmd_db_addr("ldob21", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 1] = npm_mode
+    TCSt_CMDn_MSGID[5, 1] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[5, 2] = 0 : { cmd_db_addr("smpb8", vrm_vol_offset)}
+    TCSt_CMDn_DATA[5, 2] = 1352    #1.352v
+    TCSt_CMDn_MSGID[5, 2] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[5, 3] = 0 : { cmd_db_addr("smpb8", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 3] = auto_mode
+    TCSt_CMDn_MSGID[5, 3] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[5, 4] = 0 : { cmd_db_addr("ldoe5", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 4] = npm_mode
+    TCSt_CMDn_MSGID[5, 4] = {1, 1} # {rr, write}
+
+    #enable
+    TCSt_CMD_ENABLE[5] = 0x1F
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[5] = 0x0             # Dont serialize
+
+# Wake Set 6
+    TCSt_CMDn_ADDR[6, 0] = 0 : { cmd_db_addr("bobe1", vrm_mode_offset)}
+    TCSt_CMDn_DATA[6, 0] = auto_mode
+    TCSt_CMDn_MSGID[6, 0] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[6, 1] = 0 : { cmd_db_addr("smpb9", vrm_mode_offset)}
+    TCSt_CMDn_DATA[6, 1] = pwm_mode
+    TCSt_CMDn_MSGID[6, 1] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[6, 2] = 0 : { cmd_db_addr("smpb9", vrm_en_offset)}
+    TCSt_CMDn_DATA[6, 2] = enable
+    TCSt_CMDn_MSGID[6, 2] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[6, 3] = 0 : { cmd_db_addr("cx.lvl")}
+    TCSt_CMDn_DATA[6, 3] = 1
+    TCSt_CMDn_MSGID[6, 3] = {1, 1} # {fnf, write}
+	
+	#enable
+    TCSt_CMD_ENABLE[6] = 0xF
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[6] = 0x0             # Dont serialize
+	
+	##
+    # From PDC HPG:
+    # For Kona, dual-edge interrupts handling has changed. When the irq is configed
+    # as dual edge, each input will generate a clk cycle at interrupt pdc in 
+    # passthrough mode.
+    # To detect, sleep and wake signal on SW_CTRL (from Kona->hastings), pdc must therefore 
+    # config two irqs for rising and falling edge
+    # Rising edge (posedege starts the up seq) Falling edge (negedge) starts down
+    ##
+    #irq config
+    IRQ_i_CFG_DRVd[0,0] = 0x6 #Rising edge
+    IRQ_i_CFG_DRVd[0,1] = 0x5 #Falling edge
+    IRQ_ENABLE_BANK = 0x3
+
+#---------------------------------------------------------------------------
+# CHEROKEE based settings
+#---------------------------------------------------------------------------	
+module: { name = RPMH_PDC_WLAN_RF_WLAN_RF_PDC, group = ADRASTEA_CHEROKEE }
+regs:
+# Sleep Set 0
+	
+	TCSt_CMDn_ADDR[0, 0] = 0: { cmd_db_addr("lnbclka3", vrm_en_offset)}
+	TCSt_CMDn_DATA[0, 0] = disable
+	TCSt_CMDn_MSGID[0, 0] = {0, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[0, 1] = 0 : { cmd_db_addr("rfclka5", vrm_en_offset)}
+    TCSt_CMDn_DATA[0, 1] = disable
+    TCSt_CMDn_MSGID[0, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 2] = 0 : { cmd_db_addr("bobe1", vrm_mode_offset)}
+    TCSt_CMDn_DATA[0, 2] =  bypass_mode   
+    TCSt_CMDn_MSGID[0, 2] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 3] = 0 : { cmd_db_addr("ldoe1", vrm_mode_offset)}
+    TCSt_CMDn_DATA[0, 3] = lpm_mode
+    TCSt_CMDn_MSGID[0, 3] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[0, 4] = 0 : { cmd_db_addr("ldoe10", vrm_mode_offset)}
+    TCSt_CMDn_DATA[0, 4] = lpm_mode
+    TCSt_CMDn_MSGID[0, 4] = {0, 1} # {fnf, write}
+
+    #enable
+    TCSt_CMD_ENABLE[0] = 0x1F
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[0] = 0x0             # Dont serialize
+
+
+# Sleep Set 1
+	TCSt_CMDn_ADDR[1, 0] = 0 : { cmd_db_addr("ldoe11", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 0] = lpm_mode
+    TCSt_CMDn_MSGID[1, 0] = {0, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[1, 1] = 0 : { cmd_db_addr("ldob14", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 1] =lpm_mode
+    TCSt_CMDn_MSGID[1, 1] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[1, 2] = 0 : { cmd_db_addr("ldob14", vrm_vol_offset)}
+    TCSt_CMDn_DATA[1, 2] = 1200     # 1.2v
+    TCSt_CMDn_MSGID[1, 2] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[1, 3] = 0 : { cmd_db_addr("ldoe5", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 3] = lpm_mode    
+    TCSt_CMDn_MSGID[1, 3] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[1, 4] = 0 : { cmd_db_addr("smpe8", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 4] = npm_mode
+    TCSt_CMDn_MSGID[1, 4] = {0, 1} # {fnf, write}
+
+    #enable
+    TCSt_CMD_ENABLE[1] = 0x1F
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[1] = 0x0             # Dont serialize
+	
+# Sleep Set 2
+
+    TCSt_CMDn_ADDR[2, 0] = 0 : { cmd_db_addr("smpb8", vrm_mode_offset)}
+    TCSt_CMDn_DATA[2, 0] = ret_mode
+    TCSt_CMDn_MSGID[2, 0] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[2, 1] = 0 : { cmd_db_addr("cx.lvl")}
+    TCSt_CMDn_DATA[2, 1] = 0
+    TCSt_CMDn_MSGID[2, 1] = {0, 1} # {fnf, write}
+	
+	#enable
+    TCSt_CMD_ENABLE[2] = 0x3
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[2] = 0x0             # Dont serialize
+
+	
+##############################################################################	
+	
+# Wake Set 4
+	
+	TCSt_CMDn_ADDR[4, 0] = 0: { cmd_db_addr("lnbclka3", vrm_en_offset)}
+	TCSt_CMDn_DATA[4, 0] = enable
+	TCSt_CMDn_MSGID[4, 0] = {1, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[4, 1] = 0 : { cmd_db_addr("rfclka5", vrm_en_offset)}
+    TCSt_CMDn_DATA[4, 1] = enable
+    TCSt_CMDn_MSGID[4, 1] = {1, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[4, 2] = 0 : { cmd_db_addr("bobe1", vrm_mode_offset)}
+    TCSt_CMDn_DATA[4, 2] = auto_mode
+    TCSt_CMDn_MSGID[4, 2] = {1, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[4, 3] = 0 : { cmd_db_addr("ldoe1", vrm_mode_offset)}
+    TCSt_CMDn_DATA[4, 3] = npm_mode
+    TCSt_CMDn_MSGID[4, 3] = {1, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[4, 4] = 0 : { cmd_db_addr("ldoe10", vrm_mode_offset)}
+    TCSt_CMDn_DATA[4, 4] = npm_mode
+    TCSt_CMDn_MSGID[4, 4] = {1, 1} # {fnf, write}
+
+    #enable
+    TCSt_CMD_ENABLE[4] = 0x1F
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[4] = 0x0             # Dont serialize
+
+
+
+# Wake Set 5
+	TCSt_CMDn_ADDR[5, 0] = 0 : { cmd_db_addr("ldoe11", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 0] = npm_mode
+    TCSt_CMDn_MSGID[5, 0] = {1, 1} # {rr, write}
+	
+    TCSt_CMDn_ADDR[5, 1] = 0 : { cmd_db_addr("ldob14", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 1] = npm_mode
+    TCSt_CMDn_MSGID[5, 1] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[5, 2] = 0 : { cmd_db_addr("ldob14", vrm_vol_offset)}
+    TCSt_CMDn_DATA[5, 2] = 1300    #1.3v
+    TCSt_CMDn_MSGID[5, 2] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[5, 3] = 0 : { cmd_db_addr("ldoe5", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 3] = auto_mode
+    TCSt_CMDn_MSGID[5, 3] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[5, 4] = 0 : { cmd_db_addr("smpe8", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 4] = npm_mode
+    TCSt_CMDn_MSGID[5, 4] = {1, 1} # {rr, write}
+
+    #enable
+    TCSt_CMD_ENABLE[5] = 0x1F
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[5] = 0x0             # Dont serialize
+
+# Wake Set 6
+    TCSt_CMDn_ADDR[6, 0] = 0 : { cmd_db_addr("smpb8", vrm_mode_offset)}
+    TCSt_CMDn_DATA[6, 0] = auto_mode
+    TCSt_CMDn_MSGID[6, 0] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[6, 1] = 0 : { cmd_db_addr("cx.lvl")}
+    TCSt_CMDn_DATA[6, 1] = 1
+    TCSt_CMDn_MSGID[6, 1] = {1, 1} # {fnf, write}
+	
+	#enable
+    TCSt_CMD_ENABLE[6] = 0x3
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[6] = 0x0             # Dont serialize
+
+    ##
+    # From PDC HPG:
+    # For Kona, dual-edge interrupts handling has changed. When the irq is configed
+    # as dual edge, each input will generate a clk cycle at interrupt pdc in 
+    # passthrough mode.
+    # To detect, sleep and wake signal on SW_CTRL (from Kona->hastings), pdc must therefore 
+    # config two irqs for rising and falling edge
+    # Rising edge (posedege starts the up seq) Falling edge (negedge) starts down
+    ##
+    #irq config
+    IRQ_i_CFG_DRVd[0,0] = 0x6 #Rising edge
+    IRQ_i_CFG_DRVd[0,1] = 0x5 #Falling edge
+    IRQ_ENABLE_BANK = 0x3
+
+#---------------------------------------------------------------------------
+# ADRESTEA based settings
+#---------------------------------------------------------------------------	
+module: { name = RPMH_PDC_WLAN_BB_WLAN_BB_PDC, group = ADRASTEA_CHEROKEE, import = [arc_export] }
+regs:
+# Sleep Set 0
+	
+	TCSt_CMDn_ADDR[0, 0] = 0: { cmd_db_addr("mx.lvl") }
+	TCSt_CMDn_DATA[0, 0] = MX_HLVL_RET
+	TCSt_CMDn_MSGID[0, 0] = {0, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[0, 1] = 0 : { cmd_db_addr("smpb7", vrm_mode_offset)}
+    TCSt_CMDn_DATA[0, 1] = ret_mode
+    TCSt_CMDn_MSGID[0, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 2] = 0 : { cmd_db_addr("ldob11", vrm_vol_offset)}
+    TCSt_CMDn_DATA[0, 2] = 0 : { wlan_volt (CPR_VOLTAGE_MODE_RETENTION) }   
+    TCSt_CMDn_MSGID[0, 2] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 3] = 0 : { cmd_db_addr("ldob11", vrm_mode_offset)}
+    TCSt_CMDn_DATA[0, 3] = ret_mode
+    TCSt_CMDn_MSGID[0, 3] = {0, 1} # {fnf, write}
+	
+    #enable
+    TCSt_CMD_ENABLE[0] = 0xF
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[0] = 0x0             # Dont serialize
+
+	
+##############################################################################	
+	
+# Wake Set 4
+	
+	TCSt_CMDn_ADDR[4, 0] = 0: { cmd_db_addr("mx.lvl") }
+	TCSt_CMDn_DATA[4, 0] = MX_MOL_HLVL
+	TCSt_CMDn_MSGID[4, 0] = {1, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[4, 1] = 0 : { cmd_db_addr("smpb7", vrm_mode_offset)}
+    TCSt_CMDn_DATA[4, 1] = auto_mode
+    TCSt_CMDn_MSGID[4, 1] = {1, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[4, 2] = 0 : { cmd_db_addr("ldob11", vrm_vol_offset)}
+    TCSt_CMDn_DATA[4, 2] = 0: { wlan_volt (CPR_VOLTAGE_MODE_SVS) }
+    TCSt_CMDn_MSGID[4, 2] = {1, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[4, 3] = 0 : { cmd_db_addr("ldob11", vrm_mode_offset)}
+    TCSt_CMDn_DATA[4, 3] = npm_mode
+    TCSt_CMDn_MSGID[4, 3] = {1, 1} # {fnf, write}
+	
+    #enable
+    TCSt_CMD_ENABLE[4] = 0xF
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[4] = 0x0             # Dont serialize
+
+
+    ##
+    # From PDC HPG:
+    # For Kona, dual-edge interrupts handling has changed. When the irq is configed
+    # as dual edge, each input will generate a clk cycle at interrupt pdc in 
+    # passthrough mode.
+    # To detect, sleep and wake signal on SW_CTRL (from Kona->hastings), pdc must therefore 
+    # config two irqs for rising and falling edge
+    # Rising edge (posedege starts the up seq) Falling edge (negedge) starts down
+    ##
+    #irq config
+    IRQ_i_CFG_DRVd[0,0] = 0x6 #Rising edge
+    IRQ_i_CFG_DRVd[0,1] = 0x5 #Falling edge
+    IRQ_ENABLE_BANK = 0x3

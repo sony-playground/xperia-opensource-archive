@@ -1,0 +1,40 @@
+#===============================================================================
+#
+# SYSDBG Libs
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2009-2014,2016-2017 by QUALCOMM Technologies, Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/4.0/aop_proc/core/systemdebug/build/SConscript#1 $
+#  $DateTime: 2021/01/19 09:37:15 $
+#  $Author: pwbldsvc $
+#  $Change: 28307306 $
+#                      EDIT HISTORY FOR FILE
+#
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+#
+#===============================================================================
+import os
+Import('env')
+
+#-------------------------------------------------------------------------------
+# Convert warnings to errors 
+#-------------------------------------------------------------------------------
+env.Append(CFLAGS = "-W ")
+env.Append(CFLAGS = ' -Wno-unused-function')
+
+#-------------------------------------------------------------------------------
+# Load sub scripts
+#-------------------------------------------------------------------------------
+env.LoadSoftwareUnits()
+env.LoadImageUnits()

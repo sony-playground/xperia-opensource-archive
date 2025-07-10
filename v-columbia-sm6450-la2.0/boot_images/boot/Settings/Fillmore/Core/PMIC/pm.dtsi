@@ -1,0 +1,227 @@
+#include "pm_defines.h"
+
+&pm{   
+
+  pon {
+    compatible = "qcom,pm-pon";  
+          
+    pshold {
+      enable = <PM_TRUE>;
+      reset-type = <PM_HARD_RESET>;
+    };
+    
+    smpl {
+      enable = <PM_TRUE>;
+      smpl-delay = <800>;
+    };
+    
+    s2-kpdpwr {
+      enable = <PM_TRUE>;
+      reset-type = <PM_WARM_RESET>;           
+      s1-ms = <10256>;
+      s2-ms = <2000>;
+    };  
+    
+    s2-kpdpwr-resin {
+      enable = <PM_TRUE>;
+      reset-type = <PM_HARD_RESET>;
+      s1-ms = <10256>;
+      s2-ms = <2000>;
+    };
+    
+    s2-resin {
+      enable = <PM_FALSE>;
+      reset-type = <PM_HARD_RESET>;
+      s1-ms = <10256>;
+      s2-ms = <2000>;
+    };
+    
+    s3-reset {
+      enable = <PM_FALSE>;
+      s3-src = <PM_PON_RESET_SOURCE_KPDPWR>;
+      timer-value-ms = <16000>;
+    };  
+    
+    uvlo-config {                  
+      config-value = </*PMIC_INDEX, uvlo_thresh, uvlo_hyst, uvlo_enable*/ 
+                     // PMIC_A 100 200 PM_ON  /* reference entry*/
+                     // PMIC_B 100 200 PM_OFF /* reference entry*/
+                    >;
+    };
+
+    ovlo-config {                  
+      config-value = </*PMIC_INDEX, ovlo_thresh, ovlo_hyst, ovlo_enable*/ 
+                     // PMIC_A 100 200 PM_ON  /* reference entry*/
+                     // PMIC_B 100 200 PM_OFF /* reference entry*/
+                    >;
+    };
+          
+    long-pwrkey-dbnc-chk {
+      dbnc-time-ms = <200>;
+      chk-at = <2>;
+    };
+  };
+  
+  
+  display {
+    compatible = "qcom,pm-display";
+    
+    // You can define siwre-map here. Or set a-swire-sel and e-swire-sel respectively.
+    // If you want to set a-swire-sel and e-swire-sel manually, you need to remove swire-map or assign invalid value to it at first.
+    // e.g.: 
+    // swire-map = <MAP_INVALID>;  // This line can also be removed in this case
+    // a-swire-sel = <ASWIRE_MAP_SEL_0>;
+    // e-swire-sel = <ESWIRE_MAP_SEL_0>;
+    swire-map = <MAP_C>;
+    apply-default-volt = <PM_FALSE>;
+    default-elvss = <(-4000)>;
+    default-elvdd = <4600>;
+    default-oledb = <6400>;
+  };
+  
+  haptics { 
+    compatible = "qcom,pm-haptics";
+    ext-boost-vdd = <1>;
+    vmax-hdrm = <0xA>;
+    vmax-mv = <1400>;
+    tlra-ol = <0x0477>;
+    autores-cfg = <1>;
+    vbatt-min = <0>;			/* mV, 0 = always enabled */
+    boost-cfg-bob = <0>;                /* 0/1 , 0=HBST cfg, 1=BOB cfg*/
+  };
+  
+  charger {
+    parallel-charger = <PM_TRUE>;
+    charger-pmic-index = <PMIC_I>;
+
+    loader-dbc-threshold = <3000>;
+    skip-loader-dbc = <PM_DISABLE>;
+
+    core-dbc-threshold = <3300>;
+    skip-core-dbc = <PM_DISABLE>;
+
+    uv-oc-1s-threshold = <2400>; // 1s battery UV/OC threshold for whole pack
+    uv-oc-2s-threshold = <3000>; // 2s battery UV/OC threshold for one cell
+
+    apply-ichg-fs = <PM_ENABLE>;
+    // 0: 10A
+    // 1: 20A
+    ichg-fs = <0>;
+
+    // 0: No Mid
+    // 1: 1 Mid
+    // 2: 2 Mid
+    batt-2s-option = <1>; 
+
+    // In the uint of Celcius
+    too-hot-afp-threshold = <72>;
+    apply-too-hot-afp = <PM_ENABLE>;
+
+    // In the uint of Celcius
+    too-cold-afp-threshold = <(-15)>;
+    apply-too-cold-afp = <PM_ENABLE>;
+
+    apply-boot-wo-batt = <PM_ENABLE>;
+    boot-wo-batt = <PM_ON>;
+    icl-boot-wo-batt = <1000>;
+    
+    apply-float-voltage = <PM_DISABLE>;
+    float-voltage-mv = <4350>;
+
+    apply-pre-charge-current = <PM_DISABLE>;
+    pre-charge-ma = <200>;
+
+    apply-fast-charge-current = <PM_DISABLE>;
+    fast-charge-ma = <1000>;
+
+    apply-icl = <PM_DISABLE>;
+    icl-ma = <2000>;
+    
+    apply-float-charger-icl = <PM_DISABLE>;
+    float-charger-icl-ma = <1000>;
+
+    apply-vsysmin = <PM_DISABLE>;
+    vsysmin = <3200>;
+ 
+    usb-suspend = <PM_OFF>;
+
+    wls-usb-prior-swap = <PM_INPUT_PRIORITY_WLS>;
+    batt-detect-src = <PM_BMD_SRC_ID>;
+
+    max-dbg-board-id = <11000>;
+    min-dbg-board-id = <3000>;
+
+    detect-jig-by-therm = <PM_DISABLE>;
+    max-therm = <780>;
+    min-therm = <80>;
+    jig-icl-ma = <1500>;
+    
+    // This delay is in the unit of ms.
+    uvp-recover-delay = <300>;
+
+    ignore-temp-in-dbc = <PM_DISABLE>;
+
+    batt-therm-pull-up = <PM_THERM_PULL_UP_100K>;
+
+    // Enable ext sense will set IBAT_SENSE_OPTION to EXT_ONLY
+    ibat-via-ext-sense = <PM_DISABLE>;
+    // this option only takes effect if ibat_via_ext_sense is enabled
+    // 1x: 5 mOhm external R-sense. Default ext sns bit weight.
+    // 2x: 1 mOhm external R-sense with 2 mOhm ADC configuration
+    // 2.5x: 2 mOhm external R-sense with 5 mOhm ADC configuration
+    ext-rsns-adc-scale = <PM_EXT_RSNS_SCALE_1x>;
+
+    // VBAT threshold to allow RTC power on to HLOS
+    // Assign a high threshold will equivalently disable this feature.
+    vbat-thd-rtc-pon = <3600>;
+
+    vsys-min-recover-mv = <4600>;
+    vflt-recover-mv = <4500>;
+  };
+
+  camera {
+    compatible = "qcom,pm-camera";  
+
+    // Set the value to <0xFFFF 0xFFFF> will disable PM8010 programming
+     rst-gpio = <0xFFFF 0xFFFF>;
+    leica2-1-gpio = <0x2 0x8A>;  //PMIC-C  & PID of GPIO 
+    leica2-2-gpio = <0x2 0x8B>;
+  };
+
+  sw-config {
+    compatible = "qcom,pm-sw";  
+    
+    // verbose: Set to TRUE will output verbose PON reason into uart log.
+    //          Set to 2 will output verbose PON reason and raw data into uart log
+    // By default setting to FALSE to avoid impacting boot performance
+    verbose = <PM_FALSE>;
+    driver-post-init = < 
+      // PM_CLK_ENABLE               PM_BUSID_0   PMIC_A  PM_CLK_RF_1  PM_TRUE 
+      // PM_SMPS_SET_VOLT            PM_BUSID_0   PMIC_B  PM_SMPS_1    1200 
+      // PM_SMPS_SET_AHC             PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_FALSE 
+      // PM_SMPS_SET_AHC_HR          PM_BUSID_0   PMIC_C  PM_SMPS_1    0x6E
+      // PM_LDO_SET_AHC              PM_BUSID_0   PMIC_B  PM_LDO_1     PM_FALSE
+      // PM_LDO_SET_VOLT             PM_BUSID_0   PMIC_B  PM_LDO_1     1200
+      // PM_LDO_SET_MODE             PM_BUSID_0   PMIC_B  PM_LDO_1     PM_SW_MODE_NPM        
+      // PM_SMPS_SET_MODE            PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_SW_MODE_NPM       
+      // PM_SMPS_SET_PD_CTRL         PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_TRUE    
+      // PM_SMPS_SET_PIN_CTRL        PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_TRUE   
+      // PM_SMPS_SET_OCP_BROADCAST   PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_TRUE
+      // PM_LDO_SET_PD_CTRL          PM_BUSID_0   PMIC_B  PM_LDO_1     PM_TRUE   
+      // PM_LDO_SET_PIN_CTRL         PM_BUSID_0   PMIC_B  PM_LDO_1     PM_TRUE  
+      // PM_LDO_SET_OCP_BROADCAST    PM_BUSID_0   PMIC_B  PM_LDO_1     PM_TRUE
+      // PM_CLK_DRV_STR              PM_BUSID_0   PMIC_A  PM_CLK_RF_1  3
+      // PM_SMPS_SET_ENABLE          PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_TRUE    
+      // PM_LDO_SET_ENABLE           PM_BUSID_0   PMIC_B  PM_LDO_1     PM_TRUE 
+      // PM_SPMI_CLK_DATA_CFG        PM_BUSID_0   PMIC_A  0x2          0x2              /*BUS_ID, PMIC_ID, CLK buff Config, DATA buff Config*/
+      
+      /*Delay*/
+      PM_DELAY(10)         
+    > ; 
+
+    apply-rsns-trim = <PM_FALSE>;
+    rsns-trim-value = <0>;
+  };
+
+};
+

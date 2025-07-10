@@ -1,0 +1,82 @@
+
+/dts-v1/;
+
+/ {
+    level1 {
+        tboolean = <1>;
+        fboolean = <0>;
+        u64-list = /bits/ 64 <0xFFFFFFFF 0xAAAAAAAA>;
+        u32-list = <1 2 3 4 5 6 7 8>;
+        string = "hello world";
+        byte-list = [0123456789ABCDEF];
+
+        level2 {
+            u32 = <0xFFFF>;
+            u32-list = <0x0 0xFF 0xAAAA 0x5555>;
+            u16 = /bits/ 16 <0x1234>;
+            u16-list = /bits/ 16 <5566 4578 3333 2222>;
+            byte = /bits/ 8 <0xA5>;
+            byte-list = [00 11 22 33 44 55 66 77 88 99 AA BB CC DD EE FF];
+
+            level3 {
+                empty;
+                u64 = /bits/ 64 <0xFFFF>;
+                u64-list = /bits/ 64 <0x0 0xFFFFFFFF 0xA0B0C0D0 0xE0F0F0F0>;
+
+                level4 {
+                    string = "I am a string";
+                    string-list = "I", "am", "a", "stringlist";
+                };
+            };
+        };
+    };
+    soc: soc { };
+    sw: sw { };
+};
+
+&soc {
+	#address-cells = < 0x1 >;
+	#size-cells = < 0x1 >;
+
+	pic_3: pic@100 {
+		reg = < 0x100 0x20 >;
+		interrupt-controller;
+	};
+	uart: uart {
+		alt-interrupt-parent = < &{/soc/pic@100} >;
+		interrupt-parent = < &pic_3 >;
+		interrupt-parent-path =  &pic_3 ;
+	};
+
+	uart1: uart@1000 {
+		compatible = "qcom,uart";
+		reg = < 0x1000 0x20 0x10000 0x100 0x18000 0x100 >;
+		reg-names = "base", "rx", "tx";
+		alt-interrupt-parent = < &{/soc/pic@100} >;
+		interrupt-parent = < &pic_3 >;
+		interrupt-parent-path =  &pic_3 ;
+	};
+
+	uart2: uart@2000 {
+		compatible = "qcom,uart";
+		reg = < 0x2000 0x20 >;
+		alt-interrupt-parent = < &{/soc/pic@100} >;
+		interrupt-parent = < &pic_3 >;
+		interrupt-parent-path =  &pic_3 ;
+	};
+
+	uart3: uart@3000 {
+		compatible = "qcom,uart";
+		reg = < 0x3000 0x20 >;
+		alt-interrupt-parent = < &{/soc/pic@100} >;
+		interrupt-parent = < &pic_3 >;
+		interrupt-parent-path =  &pic_3 ;
+	};
+};
+
+&sw {
+        boot {
+                /*        debug  trace  verbose */
+                config = <0x0000 0x0000 0x0001>;
+        };
+};

@@ -1,0 +1,144 @@
+#/** @file UCLib_core.inf
+#  
+#  
+#   Copyright (c) 2021-2022 Qualcomm Technologies, Inc.  All Rights
+#   Reserved. Qualcomm Technologies Proprietary and Confidential.
+#  
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 10/05/2020  jp      Initial version 
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = UCLib
+  FILE_GUID                      = 57e53726-e87d-4827-be79-1d7a5725059b
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = UCLib
+
+DEFINE BUILDPATH = ../../../SecPkg/Library/UCLib/release/uclib
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS = -DTARGET_UEFI
+  GCC:*_*_*_CC_FLAGS = -DTARGET_UEFI
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DTARGET_UEFI
+
+[Sources.common]
+  ../UCLib/clk_A/ucenv_clk_table.h
+  ../UCLib/xbl_core/ucenv_xbl_core.c
+
+[Sources.AARCH64]
+#****** THIS FILE IS AUTO-GENERATED ....\UCLib\release\uclib\build\arm_xblcore\sources_aarch64_armv8_2.cfg, PLEASE DO NOT MODIFY ******#
+#common_dependencies
+$(BUILDPATH)/env/uclib_env.c
+$(BUILDPATH)/util/util_blkbuf.c
+$(BUILDPATH)/util/util.c
+$(BUILDPATH)/cfg/arm_xblcore/cfg64_armv8_2.c
+
+#hash_dependencies
+$(BUILDPATH)/crypto/hash/uclib_hash.c
+$(BUILDPATH)/engine/hash/sha1/sha1_sw.c
+$(BUILDPATH)/engine/hash/sha1/sha1_armv8.c
+# $(BUILDPATH)/engine/hash/asm/armv8/sha1_sw_64.s
+$(BUILDPATH)/engine/hash/asm/armv8/sha1_armv8_asm.s
+$(BUILDPATH)/engine/hash/sha_hw_cmn.c
+$(BUILDPATH)/engine/hash/sha_bam_cmn.c
+$(BUILDPATH)/engine/hash/sha1/sha1_bam.c
+$(BUILDPATH)/engine/hash/sha2-256/sha2256_sw.c
+$(BUILDPATH)/engine/hash/sha2-256/sha2256_armv8.c
+# $(BUILDPATH)/engine/hash/asm/armv8/sha2256_sw_asm.s
+$(BUILDPATH)/engine/hash/asm/armv8/sha2256_armv8_asm.s
+$(BUILDPATH)/engine/hash/sha2-256/sha2256_bam.c
+$(BUILDPATH)/engine/hash/sha2-384/sha2384_sw.c
+$(BUILDPATH)/engine/hash/sha2-384/sha2384_bam.c
+$(BUILDPATH)/engine/hash/sha2512_sw_cmn.c
+$(BUILDPATH)/engine/hash/sha2-512/sha2512_sw.c
+$(BUILDPATH)/engine/hash/sha2-512/sha2512_bam.c
+$(BUILDPATH)/engine/hash/sm3/sm3_sw.c
+
+
+#cipher_dependencies
+$(BUILDPATH)/crypto/cipher/uclib_cipher.c
+$(BUILDPATH)/engine/cipher/cipher_cmn.c
+$(BUILDPATH)/engine/cipher/cipher_util.c
+$(BUILDPATH)/engine/cipher/sw/aes/aes_sw_cmn.c
+$(BUILDPATH)/engine/cipher/sw/cipher_cmn_sw.c
+$(BUILDPATH)/engine/cipher/sw/aes/ecb/aes_ecb_sw.c
+$(BUILDPATH)/engine/cipher/hw/ce5x/cipher_cmn_hw.c
+$(BUILDPATH)/engine/cipher/hw/ce5x/cipher_cmn_bam.c
+$(BUILDPATH)/engine/cipher/sw/aes/ecb/aes_ecb_armv8.c
+$(BUILDPATH)/engine/cipher/sw/aes/asm/armv8/aes-64.S
+$(BUILDPATH)/engine/cipher/sw/aes/cbc/aes_cbc_cts_sw.c
+$(BUILDPATH)/engine/cipher/sw/aes/cbc/aes_cbc_cts_armv8.c
+$(BUILDPATH)/engine/cipher/sw/aes/ctr/aes_ctr_sw.c
+$(BUILDPATH)/engine/cipher/sw/aes/ctr/aes_ctr_armv8.c
+$(BUILDPATH)/engine/cipher/sw/aes/gcm/gcm_sw.c
+$(BUILDPATH)/engine/cipher/sw/aes/gcm/aes_gcm_sw.c
+$(BUILDPATH)/engine/cipher/sw/aes/gcm/gf128mul.c
+$(BUILDPATH)/external/openssl/crypto/armcap.c
+$(BUILDPATH)/engine/cipher/sw/aes/gcm/armv8/aes_gcm_armv8.c
+$(BUILDPATH)/external/openssl/crypto/modes/gcm128.c
+$(BUILDPATH)/external/openssl/crypto/modes/ghashv8-armx.S
+$(BUILDPATH)/engine/cipher/sw/sm4/sm4_ecb_sw.c
+$(BUILDPATH)/engine/cipher/sw/sm4/sm4_sw_cmn.c
+$(BUILDPATH)/engine/cipher/sw/sm4/sm4_cbc_sw.c
+$(BUILDPATH)/engine/cipher/sw/sm4/sm4_ctr_sw.c
+
+
+#kdf_dependencies
+
+#mac_dependencies
+$(BUILDPATH)/crypto/mac/uclib_mac.c
+$(BUILDPATH)/engine/mac/hmac/hmac_sw.c
+$(BUILDPATH)/engine/mac/hmac/hmac_ce.c
+
+#pkey_dependencies
+
+#rand_dependencies
+$(BUILDPATH)/crypto/rand/uclib_rand.c
+$(BUILDPATH)/engine/rand/rand_hw.c
+
+#HW engine dependencies
+$(BUILDPATH)/engine/hal/ce_hal.c
+$(BUILDPATH)/engine/hal/ce_bam.c
+
+[Packages]
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/QcomSdkPkg.dec 
+  SecPkg/Library/UCLib/UCLib_inner.dec
+ 
+[LibraryClasses]
+  BaseLib
+  ArmLib
+  DebugLib
+  NpaApiLib
+  ICBArbLib
+  BamLib
+  CacheMaintenanceLib
+  MemoryAllocationLib
+
+[Protocols]
+  gEfiClockProtocolGuid
+
+[Guids]
+
+[Pcd]
+
+[Depex]
+

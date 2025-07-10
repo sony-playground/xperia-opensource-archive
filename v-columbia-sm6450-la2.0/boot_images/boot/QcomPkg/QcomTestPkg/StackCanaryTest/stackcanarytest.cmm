@@ -1,0 +1,51 @@
+;============================================================================
+;  Name:
+;    stackcanarytest.cmm
+;
+;  Description:
+;   Display stack canary value 
+;
+; Copyright (c) 2016 Qualcomm Technologies, Inc.
+; All Rights Reserved. 
+; Qualcomm Technologies Proprietary and Confidential.
+;
+;----------------------------------------------------------------------------
+;============================================================================
+;
+;                        EDIT HISTORY FOR MODULE
+;
+;
+;
+;   when        who     what, where, why
+;  ----------   ---     -----------------------------------------------------
+;  2016-05-10   vk      Initial version
+;============================================================================;
+
+;============================================================================;
+; Entry point
+;============================================================================;
+ENTRY &FileName
+
+if ("&FileName"=="")
+(
+  &TempFile=OS.TMPFILE()
+  &TempFile="&TempFile.txt"
+  print "&TempFile"
+  &FileName= "&TempFile"
+)
+
+printer.open &FileName
+
+wp.symbol __stack_chk_guard
+
+printer.close
+
+edit &FileName
+
+os python print_canary.py  &FileName
+pwd
+
+wait 5.s
+
+do canary_values.cmm
+

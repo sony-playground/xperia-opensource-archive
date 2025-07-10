@@ -1,0 +1,1350 @@
+;***************************************************************************
+; cpr_dump.cmm
+;
+; Script to dump CPR data
+;
+; Copyright 2017
+;***************************************************************************
+
+
+; variable command line args
+entry %line &args
+
+GLOBAL &op_file &op_fmt &op_area &op_cmd
+GLOBAL &ip_data
+
+; command line arg parser
+&args_lwr=string.lwr("&args")
+&ip_data="&args_lwr"
+&op_file=string.scanandextract("&args_lwr", "op=", "stdout") ; Can be case-sens
+
+&op_area="cprf"
+&op_cmd=""
+
+gosub def_reg_syms
+gosub cl_args_update
+gosub cpr_dump_entry
+gosub close_op_file &op_file
+enddo 0
+
+;---------------------------------------------------------------------------
+; print_help
+;
+; Sub to print help, usage info and exit.
+;
+;---------------------------------------------------------------------------
+
+print_help:
+    &op_cmd ""
+    &op_cmd ""
+    &op_cmd "--------------- CPR DEBUG HELP --------------"
+    &op_cmd "USAGE: cpr_debug.cmm"
+    &op_cmd "USAGE: cpr_debug.cmm -h"
+    &op_cmd "USAGE: cpr_debug.cmm -f"
+    &op_cmd "USAGE: cpr_debug.cmm cx mx ebi"
+    &op_cmd "USAGE: cpr_debug.cmm cx mx ebi lcx lmx mss gfx"
+    &op_cmd "USAGE: cpr_debug.cmm cx mx ebi lcx lmx mss gfx -f"
+    &op_cmd "---------------------------------------------"
+    &op_cmd ""
+    &op_cmd ""
+    &op_cmd ""
+    enddo 0
+
+;---------------------------------------------------------------------------
+; print_cprf_defult
+;
+; This is a sub that prints all the default cprf settings common to all the
+; rails.
+;---------------------------------------------------------------------------
+
+print_cprf_default:
+    &cpr_ver=data.long(CPRF_HW_VERSION)
+    &ma=v.value(CPRF_VER_MAJ(&cpr_ver))
+    &mi=v.value(CPRF_VER_MIN(&cpr_ver))
+    &st=v.value(CPRF_VER_STEP(&cpr_ver))
+    &op_cmd "CPRF Version: " FORMAT.DECIMAL(0, &ma) ":" \
+        FORMAT.DECIMAL(0, &mi) ":" FORMAT.DECIMAL(0, &st)
+
+    &cpr_aoss_settings=data.long(CPRF_AOSS_SETTINGS)
+    &sid=v.value(CPRF_SID(&cpr_aoss_settings))
+    &drvid=v.value(CPRF_DRVID(&cpr_aoss_settings))
+    &addr=v.value(CPRF_ADDR(&cpr_aoss_settings))
+    &op_cmd "CPRF AOSS Settings:" \
+        " SID = " FORMAT.DECIMAL(0, &sid) \
+        " DRV ID = " FORMAT.DECIMAL(0, &drvid) \
+        " ADDRESS = " FORMAT.DECIMAL(0, &addr)
+
+    &cpr_cxo_on=data.long(CPRF_CXO_ON_SETTINGS)
+    &xo_ol_on=v.value(CPRF_CXO_OL_ON(&cpr_cxo_on))
+    &op_cmd "CPRF CXO ON @ OL : " FORMAT.DECIMAL(0, &xo_ol_on)
+    &op_cmd ""
+    &op_cmd ""
+    &op_cmd ""
+    return
+
+;-------------------------------------------------------------------------------
+; cpr_add_rail
+;
+; Appends the input cprf-rail-id to cprf req list.
+;-------------------------------------------------------------------------------
+cpr_add_rail:
+    entry &id
+
+    &iter=0
+    WHILE (&iter<&cprf_count)
+    (
+        IF v.value(\cpr_req_rail[&iter])==-1
+        (
+            ; Found an empty slot - add entry and return
+            v.a \cpr_req_rail[&iter]=&id
+            return
+        )
+        &iter=&iter+1
+    )
+
+    &op_cmd "Requested CPRF&(id) caused overlow. Skipping..."
+    return
+
+;---------------------------------------------------------------------------
+; print_cprf_data
+;
+; This is a sub that prints the cprf/c data for a give cprf_id. 
+;
+;---------------------------------------------------------------------------
+
+print_cprf_data:
+    entry &cprf_idx
+    &op_cmd "----------------------------------------"
+    &op_cmd "Dumping CPR regs for Rail: " v.str(\cprf_map[&cprf_idx])
+    &op_cmd "----------------------------------------"
+    
+    &op_cmd ""
+    &addr=CPRF_ENABLE+0x1000*&cprf_idx
+    &val=d.long(&addr)
+    &en=v.value(CPRF_EN(&val))
+    &op_cmd "CPRF_EN: " FORMAT.DECIMAL(0, &en)
+
+    &op_cmd ""
+    &addr=CPRF_CTRL+0x1000*&cprf_idx
+    &val=d.long(&addr)
+    &vol_vote_en=v.value(CPRF_VOLTAGE_VOTE_EN(&val))
+    &clk_mgt_en=v.value(CPRF_CLOCK_MGMT_EN(&val))
+    &ctrl_inter_en=v.value(CPRF_CTRL_INTR_EN(&val))
+    &op_cmd "CPRF_VOLTAGE_VOTE_EN: " FORMAT.DECIMAL(0, &vol_vote_en)
+    &op_cmd "CPRF_CLOCK_MGMT_EN: " FORMAT.DECIMAL(0, &clk_mgt_en)
+    &op_cmd "CPRF_CTRL_INTR_EN: " FORMAT.DECIMAL(0, &ctrl_inter_en)
+    
+    &op_cmd ""
+    &addr=CPRF_VRM_SETTINGS+0x1000*&cprf_idx
+    &val=d.long(&addr)
+    &vol_addr_off=v.value(CPRF_VOLTAGE_ADDRESS_OFFSET(&val))
+    &task_type=v.value(CPRF_TASK_TYPE(&val))
+    &res_id=v.value(CPRF_RESOURCE_ID(&val))
+    &op_cmd "CPRF_VOLTAGE_ADDRESS_OFFSET: 0x" &vol_addr_off
+    &op_cmd "CPRF_TASK_TYPE: " FORMAT.DECIMAL(0, &task_type)
+    &op_cmd "CPRF_RESOURCE_ID: " FORMAT.DECIMAL(0, &res_id)
+
+    &op_cmd ""
+    &addr=CPRF_VALUES+0x1000*&cprf_idx
+    &val=d.long(&addr)
+    &err_st=v.value(CPRF_ERROR_STEPS(&val))
+    &cur_ol=v.value(CPRF_CUR_OL(&val))
+    &tent_vol=v.value(CPRF_TENT_VOL(&val))
+    &op_cmd "CURR OPERATING LEVEL: " FORMAT.DECIMAL(0, &cur_ol)
+
+    &addr=CPRF_VALUES_1+0x1000*&cprf_idx
+    &val=d.long(&addr)
+    &cur_vol=v.value(CPRF_CURRENT_VOL(&val))
+    &vol_vote=v.value(CPRF_VOL_VOTE(&val))
+    &op_cmd "CURR VOLTAGE LEVEL: " FORMAT.DECIMAL(0, &cur_vol) "mv"
+    &op_cmd "VOLTAGE VOTE: " FORMAT.DECIMAL(0, &vol_vote) "mv"
+
+    &op_cmd ""
+    &m_iter=0
+    WHILE (&m_iter<&mode_count)
+    (
+        &addr=CPRF_VALUES_4+0x1000*&cprf_idx+0x4*&m_iter
+        &val=d.long(&addr)
+        &ol_count=v.value(CPRF_OL_COUNT(&val))
+        &addr=CPRF_VALUES_5+0x1000*&cprf_idx+0x4*&m_iter
+        &val=d.long(&addr)
+        &down=v.value(CPRF_DOWN_COUNT(&val))
+        &up=v.value(CPRF_UP_COUNT(&val))
+        &op_cmd "Mode: " FORMAT.DECIMAL(0, &m_iter) \
+                " Count: " FORMAT.DECIMAL(0, &ol_count) \
+                " Up Count: " FORMAT.DECIMAL(0, &up) \
+                " Down Count: " FORMAT.DECIMAL(0, &down)
+        &m_iter=&m_iter+1
+    )
+
+    &op_cmd ""
+    IF v.value(\cprc_base[&cprf_idx])!=0x0
+    (
+        &addr=EZAXI:0x0
+        &addr=&addr+v.value(\cprc_base[&cprf_idx])+CPRC_FSM_CTL_OFFSET
+        &val=d.long(&addr)
+        &loop_en=v.value(CPRC_LOOP_EN(&val))
+        &op_cmd "Closed Loop Enabled: " FORMAT.DECIMAL(0, &loop_en)
+    )
+    ELSE
+    (
+        &op_cmd "Closed Loop Enabled: 0"
+    )
+
+    &op_cmd ""
+    &m_iter=0
+    WHILE (&m_iter<&mode_count)
+    (
+        &addr=CPRF_VOLTAGE_LIMITS+0x1000*&cprf_idx+0x4*&m_iter
+        &val=d.long(&addr)
+        &vmax=v.value(CPRF_VMAX(&val))
+        &vmin=v.value(CPRF_VMIN(&val))
+        &addr=CPRF_SAFE_VOLTAGE+0x1000*&cprf_idx+0x4*&m_iter
+        &val=d.long(&addr)
+        &vsafe=v.value(CPRF_VSAFE(&val))
+        &op_cmd "Mode: " FORMAT.DECIMAL(0, &m_iter) \
+                " Ceiling: " FORMAT.DECIMAL(0, &vmax) "mv" \
+                " Floor: " FORMAT.DECIMAL(0, &vmin) "mv" \
+                " Safe Vol: " FORMAT.DECIMAL(0, &vsafe) "mv"
+
+        IF v.value(\cprc_base[&cprf_idx])!=0x0
+        (
+            &t_iter=0
+            WHILE (&t_iter<&target_count)
+            (
+                &addr=EZAXI:0x0
+                &addr=&addr+v.value(\cprc_base[&cprf_idx])+CPRC_TARGET_OFFSET
+                &addr=&addr+CPRC_TARGET_SIZE*&t_iter
+                &addr=&addr+0x40*&m_iter
+                &val=d.long(&addr)
+                &tgt=v.value(CPRC_TARGET(&val))
+                IF ((v.value(&tgt)!=0x0)&&(v.value(&tgt)!=0xfff))
+                (
+                    &op_cmd \
+                    " Target(" FORMAT.DECIMAL(0, &t_iter) \
+                    "): " FORMAT.DECIMAL(0, &tgt)
+                )
+                &t_iter=&t_iter+1
+            )
+        )
+        
+        &m_iter=&m_iter+1
+    )
+    &op_cmd ""
+    &op_cmd ""
+    return
+
+;---------------------------------------------------------------------------
+; cpr_dump_entry
+;
+; This is a main entry point - all subsequent functions are dispatched from 
+; here.
+;---------------------------------------------------------------------------
+
+cpr_dump_entry:
+   gosub print_cprf_default
+    &iter=0
+    WHILE (&iter<&cprf_count)
+    (
+        &req_cprf_id=v.value(\cpr_req_rail[&iter])
+        IF (&req_cprf_id!=-1)
+        (
+            gosub print_cprf_data &req_cprf_id
+        )
+        &iter=&iter+1
+    )
+    return
+
+decode_targ_volt:
+    entry &input
+    &sign=(&input&0x10)>>0x4
+    &step=(&input&0xf)
+    IF &sign==0x1
+    (
+        &sign="-"
+    )
+    ELSE
+    (
+        &sign="+"
+    )
+    return "&sign&step"
+
+decode_targ_volt_offset:
+    entry &input
+    &sign=(&input&0x8)>>0x3
+    &step=(&input&0x7)
+    IF &sign==0x1
+    (
+        &sign="-"
+    )
+    ELSE
+    (
+        &sign="+"
+    )
+    return "&sign&step"
+
+;---------------------------------------------------------------------------
+; cpr_fuse_dump
+;
+; @brief Dump CPR Fuse Data.
+;---------------------------------------------------------------------------
+
+cpr_fuse_dump:
+    &SECURITY_CONTROL_BASE=0x00780000
+    &op_cmd "----------------------------------------"
+    &op_cmd "CPR FUSE DATA: BASE: 0x" &SECURITY_CONTROL_BASE
+    &op_cmd "----------------------------------------"
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780130)
+    &op_cmd  "QFPROM_RAW_PTE_ROW0_LSB (BASE+0x134) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xe0000000)>>0x1d
+    &op_cmd  %CONT "    [31:29]  SPEED_BIN                      = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780134)
+    &op_cmd  "QFPROM_RAW_PTE_ROW0_MSB (BASE+0x134) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xe0000000)>>0x1d
+    &op_cmd  %CONT "    [31: 29]  CX_RET_FUSE                   = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780148)
+    &op_cmd  "QFPROM_RAW_PTE_ROW3_LSB (BASE+0x148) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xe0000)>>0x11
+    &op_cmd  %CONT "    [31: 0]  MX_RET_FUSE                    = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x7801e8)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW0_LSB (BASE+0x1e8) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1000)>>0xc
+    &op_cmd  %CONT "    [   12]  TURING_Q6SS1_HVX_LDO_ENABLE    = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf80)>>0x7
+    &op_cmd  %CONT "    [11: 7]  TURING_Q6SS1_LDO_VREF_TRIM     = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x40)>>0x6
+    &op_cmd  %CONT "    [    6]  TURING_Q6SS1_LDO_ENABLE        = " &fld_val
+    if &fld_val==0x0
+    (
+       &op_cmd  %CONT " (DISABLE)"
+    )
+    if &fld_val==0x1
+    (
+       &op_cmd  %CONT " (ENABLE)"
+    )
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3e)>>0x1
+    &op_cmd  %CONT "    [ 5: 1]  MSS_Q6SS0_LDO_VREF_TRIM        = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1)>>0x0
+    &op_cmd  %CONT "    [    0]  MSS_Q6SS0_LDO_ENABLE           = " &fld_val
+    if &fld_val==0x0
+    (
+       &op_cmd  %CONT " (DISABLE)"
+    )
+    if &fld_val==0x1
+    (
+       &op_cmd  %CONT " (ENABLE)"
+    )
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x7801f8)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW2_LSB (BASE+0x1f8) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf0000000)>>0x1c
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [31:28]  CPR0_TARG_VOLT_OFFSET_SVS      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf000000)>>0x18
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [27:24]  CPR0_TARG_VOLT_OFFSET_NOM      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf00000)>>0x14
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [23:20]  CPR0_TARG_VOLT_OFFSET_TUR      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf8000)>>0xf
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [19:15]  CPR0_TARG_VOLT_SVS2            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7c00)>>0xa
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [14:10]  CPR0_TARG_VOLT_SVS             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3e0)>>0x5
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [ 9: 5]  CPR0_TARG_VOLT_NOM             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1f)>>0x0
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [ 4: 0]  CPR0_TARG_VOLT_TUR             = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x7801fc)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW2_MSB (BASE+0x1fc) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf8000000)>>0x1b
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [31:27]  CPR1_TARG_VOLT_SVS2            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7c00000)>>0x16
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [26:22]  CPR1_TARG_VOLT_SVS             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3e0000)>>0x11
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [21:17]  CPR1_TARG_VOLT_NOM             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1f000)>>0xc
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [16:12]  CPR1_TARG_VOLT_TUR             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xff0)>>0x4
+    &op_cmd  %CONT "    [11: 4]  CPR0_AGING                     = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf)>>0x0
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [ 3: 0]  CPR0_TARG_VOLT_OFFSET_SVS2     = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780200)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW3_LSB (BASE+0x200) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xe0000000)>>0x1d
+    &op_cmd  %CONT "    [31:29]  CPR2_TARG_VOLT_NOM_2_0         = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1f000000)>>0x18
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [28:24]  CPR2_TARG_VOLT_TUR             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xff0000)>>0x10
+    &op_cmd  %CONT "    [23:16]  CPR1_AGING                     = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf000)>>0xc
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [15:12]  CPR1_TARG_VOLT_OFFSET_SVS2     = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf00)>>0x8
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [11: 8]  CPR1_TARG_VOLT_OFFSET_SVS      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf0)>>0x4
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [ 7: 4]  CPR1_TARG_VOLT_OFFSET_NOM      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf)>>0x0
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [ 3: 0]  CPR1_TARG_VOLT_OFFSET_TUR      = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780204)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW3_MSB (BASE+0x204) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf0000000)>>0x1c
+    &op_cmd  %CONT "    [31:28]  CPR2_AGING_3_0                 = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf000000)>>0x18
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [27:24]  CPR2_TARG_VOLT_OFFSET_SVS2     = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf00000)>>0x14
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [23:20]  CPR2_TARG_VOLT_OFFSET_SVS      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf0000)>>0x10
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [19:16]  CPR2_TARG_VOLT_OFFSET_NOM      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf000)>>0xc
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [15:12]  CPR2_TARG_VOLT_OFFSET_TUR      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf80)>>0x7
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [11: 7]  CPR2_TARG_VOLT_SVS2            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7c)>>0x2
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [ 6: 2]  CPR2_TARG_VOLT_SVS             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3)>>0x0
+    &op_cmd  %CONT "    [ 1: 0]  CPR2_TARG_VOLT_NOM_4_3         = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780208)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW4_LSB (BASE+0x208) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xe0000000)>>0x1d 
+    &op_cmd  %CONT "    [31:29]  CPR4_TARG_VOLT_NOM_2_0         = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1f000000)>>0x18
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [28:24]  CPR4_TARG_VOLT_TUR             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf80000)>>0x13
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [23:19]  CPR3_TARG_VOLT_SVS2            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7c000)>>0xe
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [18:14]  CPR3_TARG_VOLT_SVS             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3e00)>>0x9
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [13: 9]  CPR3_TARG_VOLT_TUR             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1f0)>>0x4
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [ 8: 4]  CPR3_TARG_VOLT_NOM             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf)>>0x0
+    &op_cmd  %CONT "    [ 3: 0]  CPR2_AGING_7_4                 = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x78020c)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW4_MSB (BASE+0x20c) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf8000000)>>0x1b
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [31:27]  CPR5_TARG_VOLT_SVS             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7c00000)>>0x16
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [26:22]  CPR5_TARG_VOLT_TUR             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3e0000)>>0x11
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [21:17]  CPR5_TARG_VOLT_NOM             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1f000)>>0xc
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [16:12]  CPR4_TARG_VOLT_OFFSET_NOM      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf80)>>0x7
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [11: 7]  CPR4_TARG_VOLT_OFFSET_TUR      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7c)>>0x2
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [ 6: 2]  CPR4_TARG_VOLT_SVS             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3)>>0x0
+    &op_cmd  %CONT "    [ 1: 0]  CPR4_TARG_VOLT_NOM_4_3         = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780210)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW5_LSB (BASE+0x210) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xc0000000)>>0x1e
+    &op_cmd  %CONT "    [31:30]  CPR8_LDO_TARG_VOLT_OFFSET_SVS_1_0 = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3e000000)>>0x19
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [29:25]  CPR7_LDO_TARG_VOLT_OFFSET_SVS2 = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1f00000)>>0x14
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [24:20]  CPR7_LDO_TARG_VOLT_OFFSET_SVS  = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf8000)>>0xf
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [19:15]  CPR6_TARG_VOLT_SVS2            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7c00)>>0xa
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [14:10]  CPR6_TARG_VOLT_SVS             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3e0)>>0x5
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [ 9: 5]  CPR6_TARG_VOLT_NOM             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1f)>>0x0
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [ 4: 0]  CPR6_TARG_VOLT_TUR             = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780214)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW5_MSB (BASE+0x214) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xc0000000)>>0x1e
+    &op_cmd  %CONT "    [31:30]  CPR10_TARG_VOLT_NOM_1_0        = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3f000000)>>0x18
+    &op_cmd  %CONT "    [29:24]  CPR10_TARG_VOLT_TUR            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf00000)>>0x14
+    &op_cmd  %CONT "    [23:20]  CPR10_SVS2_ROSEL               = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf0000)>>0x10
+    &op_cmd  %CONT "    [19:16]  CPR10_SVS_ROSEL                = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf000)>>0xc
+    &op_cmd  %CONT "    [15:12]  CPR10_NOMINAL_ROSEL            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf00)>>0x8
+    &op_cmd  %CONT "    [11: 8]  CPR10_TURBO_ROSEL              = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf8)>>0x3
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [ 7: 3]  CPR8_LDO_TARG_VOLT_OFFSET_SVS2 = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7)>>0x0
+    &op_cmd  %CONT "    [ 2: 0]  CPR8_LDO_TARG_VOLT_OFFSET_SVS_4_2 = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780218)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW6_LSB (BASE+0x218) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf0000000)>>0x1c
+    &op_cmd  %CONT "    [31:28]  CPR10_NOMINAL_QUOT_VMIN_3_0    = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xfff0000)>>0x10
+    &op_cmd  %CONT "    [27:16]  CPR10_TURBO_QUOT_VMIN          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xfc00)>>0xa
+    &op_cmd  %CONT "    [15:10]  CPR10_TARG_VOLT_SVS2           = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3f0)>>0x4
+    &op_cmd  %CONT "    [ 9: 4]  CPR10_TARG_VOLT_SVS            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf)>>0x0
+    &op_cmd  %CONT "    [ 3: 0]  CPR10_TARG_VOLT_NOM_5_2        = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x78021c)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW6_MSB (BASE+0x21c) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xfff00000)>>0x14
+    &op_cmd  %CONT "    [31:20]  CPR10_SVS2_QUOT_VMIN           = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xfff00)>>0x8
+    &op_cmd  %CONT "    [19: 8]  CPR10_SVS_QUOT_VMIN            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xff)>>0x0
+    &op_cmd  %CONT "    [ 7: 0]  CPR10_NOMINAL_QUOT_VMIN_11_4   = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780220)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW7_LSB (BASE+0x220) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xe0000000)>>0x1d
+    &op_cmd  %CONT "    [31:29]  CPR11_TARG_VOLT_TUR_2_0        = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1fe00000)>>0x15
+    &op_cmd  %CONT "    [28:21]  CPR10_AGING                    = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1fc000)>>0xe
+    &op_cmd  %CONT "    [20:14]  CPR10_QUOT_OFFSET_SVS          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3f80)>>0x7
+    &op_cmd  %CONT "    [13: 7]  CPR10_QUOT_OFFSET_NOM          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7f)>>0x0
+    &op_cmd  %CONT "    [ 6: 0]  CPR10_QUOT_OFFSET_TUR          = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780224)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW7_MSB (BASE+0x224) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xffe00000)>>0x15
+    &op_cmd  %CONT "    [31:21]  CPR11_TURBO_QUOT_VMIN_10_0     = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1f8000)>>0xf
+    &op_cmd  %CONT "    [20:15]  CPR11_TARG_VOLT_SVS2           = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7e00)>>0x9
+    &op_cmd  %CONT "    [14: 9]  CPR11_TARG_VOLT_SVS            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1f8)>>0x3
+    &op_cmd  %CONT "    [ 8: 3]  CPR11_TARG_VOLT_NOM            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7)>>0x0
+    &op_cmd  %CONT "    [ 2: 0]  CPR11_TARG_VOLT_TUR_5_3        = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780228)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW8_LSB (BASE+0x228) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xfe000000)>>0x19
+    &op_cmd  %CONT "    [31:25]  CPR11_SVS2_QUOT_VMIN_6_0       = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1ffe000)>>0xd
+    &op_cmd  %CONT "    [24:13]  CPR11_SVS_QUOT_VMIN            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1ffe)>>0x1
+    &op_cmd  %CONT "    [12: 1]  CPR11_NOMINAL_QUOT_VMIN        = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1)>>0x0
+    &op_cmd  %CONT "    [    0]  CPR11_TURBO_QUOT_VMIN_11       = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x78022c)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW8_MSB (BASE+0x22c) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xc0000000)>>0x1e
+    &op_cmd  %CONT "    [31:30]  CPR12_TURBO_ROSEL_1_0          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3c000000)>>0x1a
+    &op_cmd  %CONT "    [29:26]  CPR12_BOOST_ROSEL              = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3f80000)>>0x13
+    &op_cmd  %CONT "    [25:19]  CPR11_QUOT_OFFSET_SVS          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7f000)>>0xc
+    &op_cmd  %CONT "    [18:12]  CPR11_QUOT_OFFSET_NOM          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xfe0)>>0x5
+    &op_cmd  %CONT "    [11: 5]  CPR11_QUOT_OFFSET_TUR          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1f)>>0x0
+    &op_cmd  %CONT "    [ 4: 0]  CPR11_SVS2_QUOT_VMIN_11_7      = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780230)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW9_LSB (BASE+0x230) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf0000000)>>0x1c
+    &op_cmd  %CONT "    [31:28]  CPR12_TARG_VOLT_SVS_3_0        = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xfc00000)>>0x16
+    &op_cmd  %CONT "    [27:22]  CPR12_TARG_VOLT_NOM            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3f0000)>>0x10
+    &op_cmd  %CONT "    [21:16]  CPR12_TARG_VOLT_TUR            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xfc00)>>0xa
+    &op_cmd  %CONT "    [15:10]  CPR12_TARG_VOLT_BOOST          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3c0)>>0x6
+    &op_cmd  %CONT "    [ 9: 6]  CPR12_SVS_ROSEL                = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3c)>>0x2
+    &op_cmd  %CONT "    [ 5: 2]  CPR12_NOMINAL_ROSEL            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3)>>0x0
+    &op_cmd  %CONT "    [ 1: 0]  CPR12_TURBO_ROSEL_3_2          = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780234)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW9_MSB (BASE+0x234) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xfc000000)>>0x1a
+    &op_cmd  %CONT "    [31:26]  CPR12_NOMINAL_QUOT_VMIN_5_0    = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3ffc000)>>0xe
+    &op_cmd  %CONT "    [25:14]  CPR12_TURBO_QUOT_VMIN          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3ffc)>>0x2
+    &op_cmd  %CONT "    [13: 2]  CPR12_BOOST_QUOT_VMIN          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3)>>0x0
+    &op_cmd  %CONT "    [ 1: 0]  CPR12_TARG_VOLT_SVS_5_4        = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780238)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW10_LSB (BASE+0x238) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xfe000000)>>0x19
+    &op_cmd  %CONT "    [31:25]  CPR12_QUOT_OFFSET_TUR          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1fc0000)>>0x12
+    &op_cmd  %CONT "    [24:18]  CPR12_QUOT_OFFSET_BOOST        = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3ffc0)>>0x6
+    &op_cmd  %CONT "    [17: 6]  CPR12_SVS_QUOT_VMIN            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x3f)>>0x0
+    &op_cmd  %CONT "    [ 5: 0]  CPR12_NOMINAL_QUOT_VMIN_11_6   = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x78023c)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW10_MSB (BASE+0x23c) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xc0000000)>>0x1e
+    &op_cmd  %CONT "    [31:30]  CPR_LDO_RC_1_0                 = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x38000000)>>0x1b
+    &op_cmd  %CONT "    [29:27]  CPR_SSC_CX_MODE_DISABLE        = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7000000)>>0x18
+    &op_cmd  %CONT "    [26:24]  CPR_DDR_MODE_DISABLE           = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xe00000)>>0x15
+    &op_cmd  %CONT "    [23:21]  CPR_GFX_MODE_DISABLE           = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1c0000)>>0x12
+    &op_cmd  %CONT "    [20:18]  CPR_MSS_MODE_DISABLE           = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x38000)>>0xf
+    &op_cmd  %CONT "    [17:15]  CPR_CX_MODE_DISABLE            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7f80)>>0x7
+    &op_cmd  %CONT "    [14: 7]  CPR12_AGING                    = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7f)>>0x0
+    &op_cmd  %CONT "    [ 6: 0]  CPR12_QUOT_OFFSET_NOM          = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780240)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW11_LSB (BASE+0x240) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x80000000)>>0x1f
+    &op_cmd  %CONT "    [   31]  CPR1_TARG_VOLT_OFFSET_MSVS_0   = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x78000000)>>0x1b
+    gosub decode_targ_volt_offset &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [30:27]  CPR0_TARG_VOLT_OFFSET_MSVS     = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7fffffe)>>0x1
+    &op_cmd  %CONT "    [26: 1]  CPR_RESERVED                   = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1)>>0x0
+    &op_cmd  %CONT "    [    0]  CPR_LDO_RC_2                   = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780244)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW11_MSB (BASE+0x244) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf0000000)>>0x1c
+    &op_cmd  %CONT "    [31:28]  RSVD0                          = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf800000)>>0x17
+    gosub decode_targ_volt &fld_val
+    entry &fld_val
+    &op_cmd  %CONT "    [27:23]  CPR9_TARG_VOLT_NOM             = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7f8000)>>0xf
+    &op_cmd  %CONT "    [22:15]  AON_AGING                      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7800)>>0xb
+    &op_cmd  %CONT "    [14:11]  CPR2_TARG_VOLT_OFFSET_NOMP     = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x780)>>0x7
+    &op_cmd  %CONT "    [10: 7]  CPR2_TARG_VOLT_OFFSET_SUT      = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x78)>>0x3
+    &op_cmd  %CONT "    [ 6: 3]  CPR2_TARG_VOLT_OFFSET_MSVS     = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7)>>0x0
+    &op_cmd  %CONT "    [ 2: 0]  CPR1_TARG_VOLT_OFFSET_MSVS_3_1 = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780248)
+    &op_cmd  "QFPROM_RAW_CALIB_ROW12_LSB (BASE+0x248) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf0000000)>>0x1c
+    &op_cmd  %CONT "    [31:28]  ISENSE_PMOS_COMP               = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xe000000)>>0x19
+    &op_cmd  %CONT "    [27:25]  SPARE1                         = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1fe0000)>>0x11
+    &op_cmd  %CONT "    [24:17]  SRAM_AGING_SENSOR_1            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1fe00)>>0x9
+    &op_cmd  %CONT "    [16: 9]  SRAM_AGING_SENSOR_0            = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x1c0)>>0x6
+    &op_cmd  %CONT "    [ 8: 6]  SPARE0                         = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x38)>>0x3
+    &op_cmd  %CONT "    [ 5: 3]  CPR_LOCAL_RC                   = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x7)>>0x0
+    &op_cmd  %CONT "    [ 2: 0]  CPR_GLOBAL_RC                  = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+    &reg_val=DATA.LONG(0x780320)
+    &op_cmd  "QFPROM_RAW_QC_SPARE_REG16_LSB (BASE+0x320) = 0x" &reg_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0xf)>>0x0
+    &op_cmd  %CONT "    [3: 0]  AON_STEP_SIZE                   = " &fld_val
+    &op_cmd  ""
+    &fld_val=(&reg_val&0x10)>>0x4
+    &op_cmd  %CONT "    [   4]  AON_STEP_SIGN                   = " &fld_val
+    &op_cmd  ""
+    &op_cmd  ""
+
+    &cpr_ver=data.long(CPR_RC)
+    &grc=0.
+    &lrc=0.
+    IF v.value(&cpr_ver)!=0x0
+    (
+        &grc=v.value(CPR_GLOBAL_RC(&cpr_ver))
+        &lrc=v.value(CPR_LOCAL_RC(&cpr_ver))
+    )
+    &op_cmd "---------------------------------------"
+    &op_cmd ""
+    return
+
+;-------------------------------------------------------------------------------
+; string_token
+;
+; @brief Return the token within an input string delimated by a given delimiter.
+;
+; @param ip_str: String to get token from
+; @param delim: Delimiter to use for tokenizing
+; @param start_pos: Index (0 based) in the ip string from which start 
+;                   extracting token
+;
+; @return
+;   token_len: Length of extracted token - >=0 if found else -1
+;   token: Actual extracted token, valid only when token_len >= 0
+;-------------------------------------------------------------------------------
+string_next_token:
+    entry &ip_str &delim &start_pos
+    LOCAL &token &index &token_len
+
+    &index=STRING.SCAN(&ip_str, &delim, &start_pos)
+    IF &index!=-1
+    (
+        &token_len=&index-&start_pos
+    )
+    ELSE
+    (
+        &token_len=STRING.LEN(&ip_str)
+        IF &token_len<=&start_pos
+        (
+            ; we reached to end of string
+            &token_len=-1
+        )
+        ELSE
+        (
+            &token_len=&token_len-&start_pos
+        )
+    )
+    IF &token_len!=-1
+    (
+        ; Valid token is available
+        &token=STRING.MID(&ip_str,&start_pos, &token_len)
+    )
+
+    return &token_len &token
+    
+;-------------------------------------------------------------------------------
+; get_cprf_index
+;
+; @brief Iterates over CPRF Map array to see if an input rail exists
+;
+; @param rail_name: rail name to search for
+;
+; @return index of first occurance of string in the input array (>=0) if 
+;         present, else -1
+;-------------------------------------------------------------------------------
+get_cprf_index:
+    entry &rail_name
+
+    &iter=0
+    WHILE (&iter<&cprf_count)
+    (
+        IF V.STR(\cprf_map[&iter])==&rail_name
+        (
+            return &iter
+        )
+        &iter=&iter+1
+    )
+    return -1
+
+;---------------------------------------------------------------------------
+; cl_args_update 
+;
+; @brief Setup o/p area and process input data.
+;---------------------------------------------------------------------------
+cl_args_update:
+    if "&op_file"=="stdout"
+    (
+        &area_name="&op_area"
+        &area_cols=200.
+        &area_rows=2048.
+
+        gosub op_area_exists &area_name
+        entry &area_exists
+
+        if &area_exists==0
+        (
+            ; Output area does not exist - try creating it
+            gosub op_area_create &area_name &area_cols &area_rows
+            entry &area_err
+            
+            if &area_err!=0
+            (
+                area.select      ; Generic display area
+                print "CPR SCRIPT ERR: Failed to create Output Area. " \
+                      "Close one or more areas."
+                enddo 1
+            )
+        )
+
+        area.select &area_name
+        area.clear &area_name
+        area.view &area_name
+        
+        &op_file="stdout"
+        &op_cmd="print"
+    )
+    else
+    (
+        if os.dir("&op_file")
+        (
+            ; op_file is a directory - create a file with default name
+            &last_char = string.char("&op_file", string.len("&op_file")-1)
+            if ("&last_char"!="\")||("&last_char"!="/")
+            (
+                if os.version(0)==0x0X
+                (
+                    ; Windows OS
+                    &op_file="&(op_file)\cpr_dump.txt"
+                )
+                else
+                (
+                    ; *nix OS
+                    &op_file="&(op_file)/cpr_dump.txt"
+                )
+            )
+        )
+        open #1 "&op_file" /create
+        &op_cmd="write #1"
+    )
+
+    &got_rails=0
+    ; Processing input
+    &start_pos=0
+    &loop=1
+    WHILE (&loop==1)
+    (
+        gosub string_next_token "&ip_data" " " &start_pos
+        entry &token_len &data
+        IF (&token_len==-1)
+        (
+            &loop=0
+        )
+        ELSE
+        (
+            IF ("&data"=="-h")||("&data"=="help")
+            (
+                gosub print_help
+            )
+            IF ("&data"=="-f")
+            (
+                gosub cpr_fuse_dump
+                continue
+            )
+
+            ; Got a token - potential rail
+            gosub get_cprf_index "&data"
+            entry &cprf_id
+            IF (&cprf_id>=&cprf_count)
+            (
+                &op_cmd "ERROR: Got a bad cprf_id:&cprf_id for Rail:&data"
+                return
+            )
+            IF (&cprf_id!=-1)
+            (
+                &got_rails=1
+                gosub cpr_add_rail &cprf_id
+            )
+        )
+        &start_pos=&start_pos+&token_len+1
+    )
+
+    IF (&got_rails==0)
+    (
+        &iter=0
+        WHILE (&iter<&cprf_count)
+        (
+            gosub cpr_add_rail &iter
+            &iter=&iter+1
+        )
+    )
+    return
+
+close_op_file:
+    entry &opf
+    
+    if "&opf"!="stdout"
+    (
+        close #1        ; ID must match with file opening ID
+    )
+    else
+    (
+        area.select     ; Generic output area
+    )
+    return
+
+
+;---------------------------------------------------------------------------
+; op_area_exists 
+;
+; @brief Checks if the area by the given name exists
+;
+; @note 
+; OP Window management - keep related functions together
+;
+; @param area_name: Name of the area we are looking for
+;---------------------------------------------------------------------------
+op_area_exists:
+    entry &area_name
+    local &exists
+
+    &exists=1
+
+    ON ERROR gosub
+    (
+        &exists=0
+
+		; dummy print to handle warning message
+		print " "
+
+        return
+    )
+
+    ; Try selecting input area - if it does not exist error handler
+    ; defined above in 'ON ERROR' will be called
+    area.select &area_name
+
+    return &exists
+
+;---------------------------------------------------------------------------
+; op_area_create
+;
+; @brief Function to create an area by given name. It is a best effort case
+;        (read note for more details).
+;
+; @note 
+; T32 has a limitation on how many concurrent areas can be created/
+; opened (~10). If script(s) ran previously have exhausted this limit
+; attempt to create a separate output area will fail. 
+;
+; One of the ways to handle this is to use 'area.reset' but that impacts all
+; open areas. And it may not be desirable to clear output from previously
+; ran script(s).
+;
+; This script reuses the area if it already exists (i.e. when this script
+; is run multiple times on a target w/o closing T32).
+;
+; @param area_name: Name of the output area to be created.
+; @param cols: Width of the output area.
+; @param rows: Length of the output area.
+;
+; @return 0 if op area creation is successful else non-zero.
+;---------------------------------------------------------------------------
+op_area_create:
+    entry &area_name &cols &rows
+    local &err_code
+
+    &err_code=0
+
+    ON ERROR gosub
+    (
+        &err_code=1
+        return
+    )
+
+    area.create &area_name &cols &rows
+
+    return &err_code
+
+;-------------------------------------------------------------------------------
+; def_reg_syms
+;
+; This function declares the register symbols that are mapped to addresses.
+; This function must be called before dumping registers.
+;-------------------------------------------------------------------------------
+def_reg_syms:
+    entry &mode
+
+    ;CPR Fuse Info
+    y.create.l CPR_RC 0x780248
+    y.create.macro CPR_GLOBAL_RC(val) ((val)&0x7)
+    y.create.macro CPR_LOCAL_RC(val) ((val)>>3.)
+
+    ; CPRF Base address and default regs.
+    y.create.l CPRF_HW_VERSION EZAXI:0x0C200000
+    y.create.macro CPRF_VER_MAJ(val) ((val)>>28.)
+    y.create.macro CPRF_VER_MIN(val) ((val)>>16.&0xfff)
+    y.create.macro CPRF_VER_STEP(val) ((val)&0xffff)
+
+    y.create.l CPRF_AOSS_SETTINGS EZAXI:0x0C200004
+    y.create.macro CPRF_SID(val) ((val)>>13.)
+    y.create.macro CPRF_DRVID(val) ((val)>>8.&0x1f)
+    y.create.macro CPRF_ADDR(val) ((val)&0xff)
+
+    y.create.l CPRF_CXO_ON_SETTINGS EZAXI:0x0C200024
+    y.create.macro CPRF_CXO_OL_ON(val) ((val)&0x1f)
+
+    y.create.l CPRF_CTRL EZAXI:0x0C201004
+    y.create.macro CPRF_VOLTAGE_VOTE_EN(val) ((val)&0x1)
+    y.create.macro CPRF_CLOCK_MGMT_EN(val) ((val)>>1.&0x1)
+    y.create.macro CPRF_CTRL_INTR_EN(val) ((val)>>2.&0x1)
+
+    y.create.l CPRF_VRM_SETTINGS EZAXI:0x0C201008
+    y.create.macro CPRF_VOLTAGE_ADDRESS_OFFSET(val) ((val)>>13.)
+    y.create.macro CPRF_TASK_TYPE(val) ((val)>>8.&0x1f)
+    y.create.macro CPRF_RESOURCE_ID(val) ((val)&0xff)
+    
+    y.create.l CPRF_VOLTAGE_LIMITS EZAXI:0x0C20100C
+    y.create.macro CPRF_VMAX(val) ((val)>>16.)
+    y.create.macro CPRF_VMIN(val) ((val)&0xfff)
+   
+    y.create.l CPRF_SAFE_VOLTAGE EZAXI:0x0C20108C
+    y.create.macro CPRF_VSAFE(val) ((val)&0xfff)
+
+    y.create.l CPRF_ENABLE EZAXI:0x0C201118
+    y.create.macro CPRF_EN(val) ((val)&0x1)
+
+    y.create.l CPRF_VALUES EZAXI:0x0C201230
+    y.create.macro CPRF_ERROR_STEPS(val) ((val)>>21.)
+    y.create.macro CPRF_CUR_OL(val) ((val)>>16.&0x1f)
+    y.create.macro CPRF_TENT_VOL(val) ((val)&0xfff)
+
+    y.create.l CPRF_VALUES_1 EZAXI:0x0C201244
+    y.create.macro CPRF_CURRENT_VOL(val) ((val)>>16.)
+    y.create.macro CPRF_VOL_VOTE(val) ((val)&0xfff)
+
+    y.create.l CPRF_VALUES_4 EZAXI:0x0C2013D0
+    y.create.macro CPRF_OL_COUNT(val) ((val)&0xff)
+
+    y.create.l CPRF_VALUES_5 EZAXI:0x0C201450
+    y.create.macro CPRF_DOWN_COUNT(val) ((val)>>16.&0xff)
+    y.create.macro CPRF_UP_COUNT(val) ((val)&0xff)
+
+    y.create.l CPRC_FSM_CTL_OFFSET 0x4
+    y.create.macro CPRC_LOOP_EN(val) ((val)&0x1)
+
+    y.create.l CPRC_TARGET_OFFSET 0x840
+    y.create.l CPRC_TARGET_SIZE 0x4
+    y.create.macro CPRC_TARGET(val) ((val)&0xfff)
+
+    y.create.macro TARG_VOLT(val) ((val)&0xf)
+    y.create.macro TARG_VOLT_SIGN(val) ((val)>>4.)
+
+    y.create.macro TARG_VOLT_OFFSET(val) ((val)&0x7)
+    y.create.macro TARG_VOLT_OFFSET_SIGN(val) ((val)>>3.)
+
+    y.create.l QFPROM_RAW_CALIB_ROW2_LSB 0x007801F8
+    y.create.macro CX_TVO_SVS(val) (((val)>>28.)&0xf)
+    y.create.macro CX_TVO_NOM(val) (((val)>>24.)&0xf)
+    y.create.macro CX_TVO_TUR(val) (((val)>>20.)&0xf)
+    y.create.macro CX_TV_MIN_SVS(val) (((val)>>15.)&0x1f)
+    y.create.macro CX_TV_LOW_SVS(val) (((val)>>15.)&0x1f)
+    y.create.macro CX_TV_SVS(val) (((val)>>10.)&0x1f)
+    y.create.macro CX_TV_SVS_L1(val) (((val)>>10.)&0x1f)
+    y.create.macro CX_TV_NOM(val) (((val)>>5.)&0x1f)
+    y.create.macro CX_TV_TUR(val) ((val)&0x1f)
+
+    y.create.l QFPROM_RAW_CALIB_ROW2_MSB 0x007801FC
+    y.create.macro CX_TVO_SVS2(val) ((val)&0xf)
+
+    y.create.l QFPROM_RAW_CALIB_ROW4_LSB 0x00780208
+    y.create.macro MX_TV_TUR(val) (((val)>>24.)&0x1f)
+    y.create.macro MX_TV_NOM_0_2(val) (((val)>>29.)&0x7)
+
+    y.create.l QFPROM_RAW_CALIB_ROW4_MSB 0x0078020C
+    y.create.macro MX_TV_NOM_3_4(val) ((val)&0x3)
+    y.create.macro MX_TVO_NOM(val) (((val)>>12.)&0xf)
+    y.create.macro MX_TVO_TUR(val) (((val)>>7.)&0xf)
+
+    y.create.done
+
+    ; CPR instantiation configuration
+    GLOBAL &cprf_count
+    &cprf_count=8.
+
+    GLOBAL &cprc_count
+    &cprc_count=8.
+
+    GLOBAL &mode_count
+    &mode_count=16.
+
+    GLOBAL &target_count
+    &target_count=16.
+
+    V.NEWGLOBAL char[&cprf_count][16.] \cprf_map
+    v.a \cprf_map[0]="cx"
+    v.a \cprf_map[1]="mx"
+    v.a \cprf_map[2]="ebi"
+    v.a \cprf_map[3]="lcx"
+    v.a \cprf_map[4]="lmx"
+    v.a \cprf_map[5]="gfx"
+    v.a \cprf_map[6]="mss"
+    v.a \cprf_map[7]="mm"
+
+    V.NEWGLOBAL long[&cprc_count] \cprc_base
+    v.a \cprc_base[0]=0x00628000
+    v.a \cprc_base[1]=0x0062C000
+    v.a \cprc_base[2]=0x0
+    v.a \cprc_base[3]=0x033B0000
+    v.a \cprc_base[4]=0x0
+    v.a \cprc_base[5]=0x02C9A000
+    v.a \cprc_base[6]=0x0
+    v.a \cprc_base[7]=0x00630000
+
+    V.NEWGLOBAL int[&cprf_count] \cpr_req_rail
+    &iter=0
+    WHILE (&iter<&cprf_count)
+    (
+        v.a \cpr_req_rail[&iter]=-1
+        &iter=&iter+1
+    )
+
+    return
+
+;-------------------------------------------------------------------------------
+; read_data
+;
+; This function is a wrapper for data.long.
+; converts every address to EZAXI: before using data.long.
+;-------------------------------------------------------------------------------
+read_data:
+    entry &addr
+    &myaddr=EZAXI:0x0
+    &myaddr=&myaddr+&addr
+    &op_cmd "addr: " + &addr + " myaddr: " + &myaddr
+    &var=data.long(&myaddr)
+    return &var

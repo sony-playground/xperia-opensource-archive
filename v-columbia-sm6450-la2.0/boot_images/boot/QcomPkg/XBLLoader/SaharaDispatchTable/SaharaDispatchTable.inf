@@ -1,0 +1,40 @@
+#/** @file SaharaDispatchTable.inf
+#
+#  SaharaDispatchTable
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 05/20/20   rhy      Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SaharaDispatchTableLib
+  FILE_GUID                      = E9A2CCA5-B01B-462B-A7F9-F6A2CB39ED02
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SaharaDispatchTableLib
+
+[Sources.common]
+  boot_sahara_dispatch_tbl.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+
+[LibraryClasses]
+  ConfigContextLib
+  MuslLib
+  BootStatisticsLib

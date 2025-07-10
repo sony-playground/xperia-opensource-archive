@@ -1,0 +1,31 @@
+#===============================================================================
+#
+# IPCC INC PATHs
+#
+# GENERAL DESCRIPTION
+#    IPCC Restricted INC PATHs
+#
+# Copyright (c) 2019 by Qualcomm Technologies Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/4.0/aop_proc/core/systemdrivers/ipcc/build/ipcc.api#1 $
+#  $DateTime: 2021/01/19 09:37:15 $
+#  $Author: pwbldsvc $
+#  $Change: 28307306 $
+#===============================================================================
+
+Import('env')
+import os
+
+#-------------------------------------------------------------------------------
+# Publish Restricted APIs
+# These are accessible just inside CoreBSP
+#-------------------------------------------------------------------------------
+
+env.PublishRestrictedApi('IPCC_RESTRICTED', [
+  "${INC_ROOT}/core/systemdrivers/ipcc/api",
+])
+

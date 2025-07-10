@@ -1,0 +1,36 @@
+/**
+
+This is the configuration file for PIL Proxy Vote
+
+Copyright (c) 2021 Qualcomm Technologies, Inc.
+All Rights Reserved.
+Confidential and Proprietary - Qualcomm Technologies, Inc.
+
+**/
+
+#include "../../Include/pil_proxy_vote_defines.h"
+
+&pil_proxy_vote {
+
+  pil_proxy_vote_1 {
+    subsys_id                = <TZ_PIL_AUTH_QDSP6_PROC>;
+    client_name              = "PIL_ADSP";
+    rail_names               = "/vcs/vdd_lpi_mx", "/vcs/vdd_lpi_cx";
+    rail_voltage_levels      = <RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM>;
+  };
+  
+  pil_proxy_vote_4 {
+    subsys_id                = <TZ_PIL_AUTH_MODEM_SW_PROC>;
+    client_name              = "PIL_MODEM";
+    rail_names               = "/vcs/vdd_mx", "/vcs/vdd_cx";
+    rail_voltage_levels      = <RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM>;
+  };
+  
+  pil_proxy_vote_6 {
+    subsys_id                = <TZ_PIL_AUTH_WLAN_PROC>;
+    client_name              = "PIL_WPSS";
+    rail_names               = "/vcs/vdd_mx", "/vcs/vdd_cx";
+    rail_voltage_levels      = <RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM>;
+  };
+  
+};

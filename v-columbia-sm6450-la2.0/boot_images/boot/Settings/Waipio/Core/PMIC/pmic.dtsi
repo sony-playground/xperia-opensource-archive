@@ -1,0 +1,11 @@
+&sw {
+	pmic {
+		pm: pm { };
+		arb: arb { };
+		adc: adc { };
+	};
+};
+
+#include "pm.dtsi"
+#include "arb.dtsi"
+#include "adc.dtsi"

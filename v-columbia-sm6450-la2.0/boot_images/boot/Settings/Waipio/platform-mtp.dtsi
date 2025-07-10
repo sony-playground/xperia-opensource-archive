@@ -1,0 +1,4 @@
+// platform-mtp.dtsi
+//
+// Provides platform-specific settings,
+// e.g. GPIOs

@@ -1,0 +1,68 @@
+#/** @file ICBDxe.inf
+#
+#  Component description file for ICB DXE driver module
+#
+#  Copyright (c) 2020 Qualcomm Technologies Inc. All rights reserved.
+#
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/15/20   sds     Created.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ICBDxe
+  FILE_GUID                      = 5824F9DE-17D2-4B1F-A5FE-5EB77FA53093
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = ICBDxeEntryPoint
+
+
+[Sources.common]
+  ICBDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  DALModEnvLib
+  DALFwkLib
+  DALConfigLib
+  BaseLib
+  UefiLib
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  CacheMaintenanceLib
+  ULogApiLib
+  NpaApiLib
+  MuslLib
+  QdssLib
+  ICBArbLib
+  CoreInitTargetLib
+  BusyWaitLib
+
+[Guids]
+  gEfiEventICBPostInitGuid
+
+[Protocols]
+  gEfiICBProtocolGuid
+
+[Depex]
+  gEfiDalSysProtocolGuid
+  AND
+  gEfiChipInfoProtocolGuid
+

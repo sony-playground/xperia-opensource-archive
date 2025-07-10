@@ -1,0 +1,49 @@
+#/** @EnterpriseMgtLib.inf
+#  
+#  Build file for the EnterpriseMgtLib library.
+#  
+#  Copyright (c) 2020, Qualcomm Technologies Inc. All rights reserved.
+#  
+#**/
+
+#==============================================================================
+# $Header:  $
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     --------------------------------------------------------
+# 02/21/2020   hh      Initial version.
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = EnterpriseMgtLib
+  FILE_GUID                      = 29A66D17-B888-4CE7-A680-FEB4B9ABE1D2
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = EnterpriseMgtLib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -O0 -fno-inline
+
+[Sources.common]
+  EnterpriseMgtLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  
+[LibraryClasses]
+  UefiRuntimeServicesTableLib
+  MemoryAllocationLib
+  QcomLib
+  BaseLib
+  DebugLib
+  
+[Protocols]
+  gEfiVariableServicesProtocolGuid
+  
+[Depex]
+  gEfiVariableServicesProtocolGuid

@@ -1,0 +1,10 @@
+start_loader
+sc modtst fota:normal
+sr out1
+sh check.sh out1
+sc modtst fota:wrongcert
+sr out2
+sh check.sh out2
+sc modtst fota:wronghash
+sr out3
+sh check.sh out3

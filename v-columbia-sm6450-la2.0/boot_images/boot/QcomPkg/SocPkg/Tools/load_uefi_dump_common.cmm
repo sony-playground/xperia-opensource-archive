@@ -1,0 +1,262 @@
+;============================================================================
+;  Name:
+;    load_uefi_dump.cmm
+;
+;  Description:
+;     Load UEFI crashdumps to T32 simulator
+;
+; Copyright (c) 2016,2018-2021 Qualcomm Technologies Incorporated.
+; All Rights Reserved.
+; Qualcomm Technologies Confidential and Proprietary
+;
+;----------------------------------------------------------------------------
+;============================================================================
+;
+;                        EDIT HISTORY FOR MODULE
+
+;
+;when         who     what, where, why
+;----------   ---     ----------------------------------------------------------
+;2021-04-27   am      Added check for uefi_image_magic
+;2020-09-15   am      Added support for invoking scandump parser tool in meta
+;2020-09-15   am      Added check for ScanDump magic for all cores
+;2018-11-26   yg      Add NOLOAD arg
+;2018-07-13   ai      Support for restoring registers from SDI CPU ctxt
+;2016-10-14   ai      Initial Version
+;============================================================================;
+
+&DBI_SHARED_IMEM_COOKIE_OFFSET=0x10
+&UEFI_IMAGE_MAGIC_OFFSET=0x4C
+
+;ARGS:
+;DumpPath|NOLOAD - Location of the dump, or NOLOAD to just load CPU context after dump and symbols are loaded
+;TargetCmmPath - Location of symbol_load.cmm
+;CoreNum - OPTIONAL. Default=0
+
+ENTRY &DumpPath &TargetCmmPath &CoreNum
+  ; Sanity check - no argument
+  if (("&DumpPath"=="")||("&TargetCmmPath"==""))
+  (
+    DIALOG.OK "Argument required!" "load_uefi_dump.cmm <DumpPath|NOLOAD> <TargetCmmPath> [<CoreNum>]"
+    END
+  )
+
+  ; Default CoreNum=0 if not passed in by caller
+  if ("&CoreNum"=="")
+  (
+    &CoreNum=0
+  )
+
+  if ("&DumpPath"!="NOLOAD")
+  (
+    ; Sanity check - incorrect argument
+    &LoadCmmPath="&DumpPath/load.cmm"
+    if (OS.ACCESS("&LoadCmmPath", "r")!=TRUE())
+    (
+      DIALOG.OK "&DumpPath" "does not contain load.cmm!"
+      END
+    )
+
+    ; Load Dump and UEFI symbols
+    IF !SYSTEM.UP()
+    (
+      SYStem.Up
+    )
+    CD.DO &LoadCmmPath
+    CD.DO &TargetCmmPath/symbol_load.cmm
+  )
+
+  ; Check if crash occurred in UEFI or not
+  &UefiMagicAddr=&gSharedImemAddress+&UEFI_IMAGE_MAGIC_OFFSET
+  &UefiMagicAddr=DATA.LONG(D:&UefiMagicAddr)
+  if (&UefiMagicAddr!=0x75656669)
+  (
+    print "UEFI Image magic not set. Exiting!"
+    ENDDO
+  )
+
+  ; Determine the architecture
+  &State=r(CPSR)
+  &arch="aarch64" ; default to AARCH64
+  ;Bit[4] of CPSR is AARCH state  
+  &State=(&State&0x10)>>4
+  if (&State==1)
+    &arch="aarch32"
+  else 
+    &arch="aarch64"
+  
+  ; Locate the ScanDump context
+  &DbiBaseAddr=&gSharedImemAddress+&DBI_SHARED_IMEM_COOKIE_OFFSET
+  &DbiBaseAddr=DATA.QUAD(D:&DbiBaseAddr)
+  &DbiBaseAddr=&DbiBaseAddr+VAR.SIZEOF(DUMP_TABLE_TYPE)
+  
+  ; Extract the scandump entry index from AppDumpTable
+  &ScanDumpIndex=-1
+  &LoopIndex=0
+  while (&LoopIndex<22) ;NUM_OF_APPS_DUMP_ENTRY
+  (
+    &TempAddr=VAR.ADDRESS(((DUMP_TABLE_TYPE*)&DbiBaseAddr)->Entries[&LoopIndex].id)
+    &Id=DATA.LONG(&TempAddr)
+    if (&Id==0x130) ;MSM_DATA_APPS_SCANDUMP
+      &ScanDumpIndex=&LoopIndex
+    &LoopIndex=&LoopIndex+1
+  )
+  
+  &ValidScanDumpCoreMask=0
+  
+  ; Process ScanDump entries only if the entry is found in the AppDumpTable
+  if (&ScanDumpIndex!=-1)
+  (
+    &DbiBaseAddr=VAR.ADDRESS(((DUMP_TABLE_TYPE*)&DbiBaseAddr)->Entries[&ScanDumpIndex].start_addr)
+    &DbiBaseAddr=DATA.QUAD(&DbiBaseAddr)
+    &CoreCount=0
+    print "------------------------------------"
+    print "ScanDump entry magic status per core"
+    print "------------------------------------"
+    print "Core : Status"
+    while (&CoreCount<8)
+    (
+      &ScanDumpMagicAddr=VAR.ADDRESS(((DUMP_DATA_TYPE_TABLE*)&DbiBaseAddr)->DumpDataType[&CoreCount].header.magic)
+      &ScanDumpMagic=DATA.LONG(&ScanDumpMagicAddr)
+      if (&ScanDumpMagic==0x42445953) ;DUMP_MAGIC_NUMBER
+      (
+        print "&CoreCount    " "1"
+        &ValidScanDumpCoreMask=&ValidScanDumpCoreMask|(1<<&CoreCount)
+      )
+      else
+        print "&CoreCount    " "0"
+      &CoreCount=&CoreCount+1
+    ) 
+  )
+  else
+  (
+    print "ScanDump entry not found in AppDumpTable"
+  )
+
+  ; Locate CPU context
+  &DbiBaseAddr=&gSharedImemAddress+&DBI_SHARED_IMEM_COOKIE_OFFSET
+  &DbiBaseAddr=DATA.QUAD(D:&DbiBaseAddr)
+  &DbiBaseAddr=&DbiBaseAddr+VAR.SIZEOF(DUMP_TABLE_TYPE)
+  &DbiBaseAddr=VAR.ADDRESS(((DUMP_TABLE_TYPE*)&DbiBaseAddr)->Entries[0].start_addr)
+  &DbiBaseAddr=DATA.QUAD(&DbiBaseAddr)
+  &CPUDumpMagicAddr=VAR.ADDRESS(((DUMP_DATA_TYPE_TABLE*)&DbiBaseAddr)->DumpDataType[&CoreNum].header.magic)
+  &CPUDumpMagic=DATA.LONG(&CPUDumpMagicAddr)
+  if (&CPUDumpMagic!=0x42445953) ;DUMP_MAGIC_NUMBER
+  (
+    ; Check if the scandump is valid for this core, if yes, call the scandumpparser.py 
+    ; and run the cmm output generated to fill in the register values
+    print "CPU register dump magic is invalid, calling scandump parser tool!"
+    
+    if (&ScanDumpIndex==-1)
+    (
+      print "ScanDump entry not found in AppDumpTable. Exiting!"
+      ENDDO
+    )
+    
+    if ((&ValidScanDumpCoreMask&(1<<&CoreNum))==0)
+    (
+      print "ScanDump magic is invalid for &CoreNum. Exiting the script!"
+      cd &TargetCmmPath
+      ENDDO 
+    )
+    
+    ; Locate the ScanDump context
+    &ScanDumpBaseAddr=&gSharedImemAddress+&DBI_SHARED_IMEM_COOKIE_OFFSET
+    &ScanDumpBaseAddr=DATA.QUAD(D:&ScanDumpBaseAddr)
+    &ScanDumpBaseAddr=&ScanDumpBaseAddr+VAR.SIZEOF(DUMP_TABLE_TYPE)
+    &ScanDumpBaseAddr=VAR.ADDRESS(((DUMP_TABLE_TYPE*)&ScanDumpBaseAddr)->Entries[&ScanDumpIndex].start_addr)
+    &ScanDumpBaseAddr=DATA.QUAD(&ScanDumpBaseAddr)
+    
+    ; Extract the start address and length of the scandump region for core X
+    &ScanDumpCoreXStartAddr=VAR.ADDRESS(((DUMP_DATA_TYPE_TABLE*)&ScanDumpBaseAddr)->DumpDataType[&CoreNum].start_addr)
+    &ScanDumpCoreXStartAddr=DATA.QUAD(&ScanDumpCoreXStartAddr)
+    &ScanDumpCoreXlen=VAR.ADDRESS(((DUMP_DATA_TYPE_TABLE*)&ScanDumpBaseAddr)->DumpDataType[&CoreNum].len)
+    &ScanDumpCoreXlen=DATA.QUAD(&ScanDumpCoreXlen)
+    
+    ; Utility to create input/output files for parser to operate
+    ; Send in the scandump region for core X
+    &TempFile=OS.TMPFILE()
+    &TempFile="&TempFile"+"core&CoreNum.bin"
+    &INFileName="&TempFile"
+    &TempFile=OS.TMPFILE()
+    &TempFile="&TempFile"+"output_core&CoreNum"
+    &OUTFileName="&TempFile"
+    DATA.SAVE.BINARY &INFileName &ScanDumpCoreXStartAddr++&ScanDumpCoreXlen
+    
+    if ("&METASCRIPTSDIR"=="")
+    (
+      print "Meta script directory not found. Exiting!"
+      cd &TargetCmmPath
+      ENDDO
+    )
+    if (!(OS.FILE("&METASCRIPTSDIR/../scandump/scandumpwrapper.py")))
+    (
+      print "scandumpwrapper.py not found in meta. Exiting!"
+      cd &TargetCmmPath
+      ENDDO
+    )
+
+    ; Call the parser script
+    OS.Window python &METASCRIPTSDIR/../scandump/scandumpwrapper.py -d &INFileName -o &OUTFileName -f &arch
+
+    ; Run the output cmm generated by ScanDump parser and exit
+    DO &OUTFileName.cmm
+    cd &TargetCmmPath
+    ENDDO
+  )
+
+  &DbiBaseAddr=VAR.ADDRESS(((DUMP_DATA_TYPE_TABLE*)&DbiBaseAddr)->DumpDataType[&CoreNum].start_addr)
+  &DbiBaseAddr=DATA.QUAD(&DbiBaseAddr)
+
+  ; EL1h
+  R.S M 0x05
+
+  ; nsec
+  R.S NS 1
+
+  ; Restore CPU context
+  R.S   X0        DATA.QUAD(NSD:(&DbiBaseAddr+0x10))
+  R.S   X1        DATA.QUAD(NSD:(&DbiBaseAddr+0x18))
+  R.S   X2        DATA.QUAD(NSD:(&DbiBaseAddr+0x20))
+  R.S   X3        DATA.QUAD(NSD:(&DbiBaseAddr+0x28))
+  R.S   X4        DATA.QUAD(NSD:(&DbiBaseAddr+0x30))
+  R.S   X5        DATA.QUAD(NSD:(&DbiBaseAddr+0x38))
+  R.S   X6        DATA.QUAD(NSD:(&DbiBaseAddr+0x40))
+  R.S   X7        DATA.QUAD(NSD:(&DbiBaseAddr+0x48))
+  R.S   X8        DATA.QUAD(NSD:(&DbiBaseAddr+0x50))
+  R.S   X9        DATA.QUAD(NSD:(&DbiBaseAddr+0x58))
+  R.S   X10       DATA.QUAD(NSD:(&DbiBaseAddr+0x60))
+  R.S   X11       DATA.QUAD(NSD:(&DbiBaseAddr+0x68))
+  R.S   X12       DATA.QUAD(NSD:(&DbiBaseAddr+0x70))
+  R.S   X13       DATA.QUAD(NSD:(&DbiBaseAddr+0x78))
+  R.S   X14       DATA.QUAD(NSD:(&DbiBaseAddr+0x80))
+  R.S   X15       DATA.QUAD(NSD:(&DbiBaseAddr+0x88))
+  R.S   X16       DATA.QUAD(NSD:(&DbiBaseAddr+0x90))
+  R.S   X17       DATA.QUAD(NSD:(&DbiBaseAddr+0x98))
+  R.S   X18       DATA.QUAD(NSD:(&DbiBaseAddr+0xA0))
+  R.S   X19       DATA.QUAD(NSD:(&DbiBaseAddr+0xA8))
+  R.S   X20       DATA.QUAD(NSD:(&DbiBaseAddr+0xB0))
+  R.S   X21       DATA.QUAD(NSD:(&DbiBaseAddr+0xB8))
+  R.S   X22       DATA.QUAD(NSD:(&DbiBaseAddr+0xC0))
+  R.S   X23       DATA.QUAD(NSD:(&DbiBaseAddr+0xC8))
+  R.S   X24       DATA.QUAD(NSD:(&DbiBaseAddr+0xD0))
+  R.S   X25       DATA.QUAD(NSD:(&DbiBaseAddr+0xD8))
+  R.S   X26       DATA.QUAD(NSD:(&DbiBaseAddr+0xE0))
+  R.S   X27       DATA.QUAD(NSD:(&DbiBaseAddr+0xE8))
+  R.S   X28       DATA.QUAD(NSD:(&DbiBaseAddr+0xF0))
+  R.S   X29       DATA.QUAD(NSD:(&DbiBaseAddr+0xF8))
+  R.S   X30       DATA.QUAD(NSD:(&DbiBaseAddr+0x100))
+  R.S   PC        DATA.QUAD(NSD:(&DbiBaseAddr+0x108))
+  R.S   SP_EL3    DATA.QUAD(NSD:(&DbiBaseAddr+0x118))
+  R.S   ELR_EL3   DATA.QUAD(NSD:(&DbiBaseAddr+0x120))
+  R.S   SPSR_EL3  DATA.QUAD(NSD:(&DbiBaseAddr+0x128))
+  R.S   SP_EL2    DATA.QUAD(NSD:(&DbiBaseAddr+0x130))
+  R.S   ELR_EL2   DATA.QUAD(NSD:(&DbiBaseAddr+0x138))
+  R.S   SPSR_EL2  DATA.QUAD(NSD:(&DbiBaseAddr+0x140))
+  R.S   SP_EL1    DATA.QUAD(NSD:(&DbiBaseAddr+0x148))
+  R.S   ELR_EL1   DATA.QUAD(NSD:(&DbiBaseAddr+0x150))
+  R.S   SPSR_EL1  DATA.QUAD(NSD:(&DbiBaseAddr+0x158))
+  R.S   SP_EL0    DATA.QUAD(NSD:(&DbiBaseAddr+0x160))
+
+  cd &TargetCmmPath
+

@@ -1,0 +1,7 @@
+start_loader
+fc SAKE-Authenticate:challenge -f size 12
+fd challenge -f size -s OKAY
+sh send_challenge.sh challenge resp
+fc download:%resp -f out2 12
+fu resp -s OKAY
+fc SAKE-Authenticate:response -s OKAY

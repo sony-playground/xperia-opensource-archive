@@ -1,0 +1,35 @@
+#/** @file XcfgRamLib.inf
+#
+#  XBLConfig Ram interface Lib
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 10/16/20   rama    Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = XcfgRamLib
+  FILE_GUID                      = 266AA5E7-73CB-45F6-BB27-567F602CD56B
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = XcfgRamLib
+
+[Sources.common]
+  XcfgRamLib.c
+  XcfgUtils.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+

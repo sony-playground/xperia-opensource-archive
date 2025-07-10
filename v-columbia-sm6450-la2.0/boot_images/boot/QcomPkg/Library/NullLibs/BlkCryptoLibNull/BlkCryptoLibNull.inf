@@ -1,0 +1,37 @@
+#/** @file BlkCryptoLibNull.inf
+#
+#  Null Blk crypto lib for non tested targets
+#
+#  Copyright (c) 2021  Qualcomm Technologies, Inc . All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 04/28/21   gk      Initial revision.
+#
+#==============================================================================
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BlkCryptoLibNull
+  FILE_GUID                      = 8767AB4B-F2BA-4461-9932-62DEC406F1E3
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BlkCryptoLib
+
+[Sources]
+  BlkCryptoLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec  
+
+[LibraryClasses]
+  DebugLib

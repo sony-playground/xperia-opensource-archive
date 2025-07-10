@@ -1,0 +1,72 @@
+;============================================================================
+;  Name:
+;    log_save.cmm
+;
+;  Description:
+;     Save UEFI Debug Logs
+;
+; Copyright (c) 2018-2020 Qualcomm Technologies, Inc.  All 
+; Rights Reserved. Qualcomm Technologies Proprietary and 
+; Confidential. 
+;
+;----------------------------------------------------------------------------
+;============================================================================
+;
+;                        EDIT HISTORY FOR MODULE
+;
+;
+;
+;  when         who     what, where, why
+; ----------    ---     ----------------------------------------------------------
+; 2020-11-05    kpa     pass gUefiRamEntryAddr as a parameter
+; 2018-10-22    kpa     Fix duplicate toolbars buttons on multiple script invoke 
+; 2018-06-12    kpa     Initial Version
+;============================================================================;
+
+area.clear
+area.reset
+area.create Logs 1000. 8192.
+area.select Logs
+area.view Logs
+
+global &DebugScriptsDir
+
+ENTRY &LogFileName
+
+  IF ("&DebugScriptsDir"=="")
+  (
+    local &CwDir
+    &CwDir=os.ppd()
+
+    &DebugScriptsDir="&CwDir"
+    print "Error!! DebugScriptsDir not Set, using current folder &CwDir"
+  )
+
+  print "Build Target Dir: &DebugScriptsDir"
+
+  IF "&LogFileName"==""
+  (
+    print "Warn:  syntax log_save.cmm <LogFileName> !"
+    print "LogFileName missing. using default c:\temp\log.txt"
+    &LogFileName="c:\temp\log.txt"
+    IF os.file("&LogFileName")
+    (
+      print "Error : LogFileName c:\temp\log.txt exists. cannot be used"
+      end
+    )
+  )
+
+  ; Set target specific image address and offsets
+  IF !os.file("&DebugScriptsDir/configure_target.cmm")
+  (
+    print "Error:  &DebugScriptsDir/configure_target.cmm missing !"
+    end
+  )
+  ELSE
+  (
+    do &DebugScriptsDir/configure_target.cmm
+  )
+
+  ; Call the actual script
+  cd.do &DebugScriptsDir/../../Tools/log_save_common.cmm &LogFileName &gUefiRamEntryAddr &gInfoBlkPtrOffset
+

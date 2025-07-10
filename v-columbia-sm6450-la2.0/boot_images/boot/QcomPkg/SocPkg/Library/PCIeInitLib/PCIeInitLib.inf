@@ -1,0 +1,43 @@
+#/** @file PCIeInit Loader Lib.inf
+#
+#  PCIeInit Loader Lib
+#  
+#  Copyright (c) 2021 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 07/20/20   vk      Initial Revision
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PCIeInitLib
+  FILE_GUID                      = 8D57B758-DF73-42E8-856C-5842C7585FF0
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PCIeInitLib
+
+[Sources]
+  boot_pcie_init.c
+  
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Werror 
+ 
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+ 
+
+
+

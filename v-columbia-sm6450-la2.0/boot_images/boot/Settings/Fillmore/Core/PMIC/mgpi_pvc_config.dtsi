@@ -1,0 +1,37 @@
+#include "pm_defines.h"
+
+&pvc{
+  compatible = "qcom,arb_pvc";
+  mgpi-addr{
+    pvc-port-id = <MGPI_PVC_PORT>;
+    spmi-priority = <SPMI_ACCESS_PRIORITY_LOW>;
+    addr-cfg = <
+      0x2 0xC546 /* MGPI0, UICC1, L5C */
+      0x0 0x5A49 /* MGPI1, NFC, LNBBCLK2 */
+      0x0 0x0    /* MGPI2, Spare */
+      0x0 0x0    /* MGPI3, HST_SW_CTRL */
+      0x2 0xC946 /* MGPI4, SD card, default disabled unless for QRD */
+      0x2 0xC446 /* MGPI5, UICC0, L4C */
+      0x1 0xC444 /* MGPI6, AOP PDC TRIGGER, L4B RM/NPM control*/
+      0x0 0x0    /* MGPI7, EUD */
+	  > ;
+  };
+};
+
+
+&mgpi{
+  compatible = "qcom, arb_mgpi";
+  
+  port-cfg = <  
+ /* MGPIPortId  PVCPortId  +veEdgeEnable +veEdgePvcPortAddIndex -veEdgeData -veEdgeEnable -veEdgePvcPortAddIndex -veEdgeData MUXSelFlag MUXSelValue */    
+    0 MGPI_PVC_PORT PM_FALSE 0 0    PM_TRUE  0 0 PM_TRUE  0 /* UICC1 port0 */  
+    1 MGPI_PVC_PORT PM_TRUE  1 0x80 PM_TRUE  1 0 PM_TRUE  0 /* NFC port1 */    
+    2 MGPI_PVC_PORT PM_FALSE 2 0x0  PM_FALSE 2 0 PM_FALSE 0 /* Spare port2 */    
+    3 MGPI_PVC_PORT PM_FALSE 3 0x0  PM_FALSE 3 0 PM_FALSE 0 /* HST_SW_CTRL */    
+    4 MGPI_PVC_PORT PM_FALSE 4 0    PM_FALSE 4 0 PM_TRUE  1 /* SD Card Removal port4 */    
+    5 MGPI_PVC_PORT PM_FALSE 5 0    PM_TRUE  5 0 PM_FALSE 0 /* UICC0 port5 */	
+	6 MGPI_PVC_PORT PM_TRUE  6 0x3  PM_TRUE  6 0x7 PM_TRUE 0 /*AOP PDC */
+	7 MGPI_PVC_PORT PM_FALSE 7 0x1  PM_TRUE  7 0 PM_FALSE 0 /*EUD */
+    >;
+};
+

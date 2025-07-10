@@ -1,0 +1,6 @@
+&soc {
+	quantum {
+		compatible = "qcom,quantum";
+		enter_quantum = <0>;
+	};
+};

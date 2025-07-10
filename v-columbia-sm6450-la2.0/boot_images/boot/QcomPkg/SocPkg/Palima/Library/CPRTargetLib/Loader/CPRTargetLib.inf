@@ -1,0 +1,22 @@
+#/** @file CPRTargetLib.inf
+#  
+#  Build file for the CPR Target Library.
+#  
+#  Copyright (c) 2019-2022 Qualcomm Technologies, Inc.  All Rights Reserved. 
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CPRTargetLib
+  FILE_GUID                      = d94c8cc2-a3e4-432a-b665-8ed779fb3b97
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 3.0
+  LIBRARY_CLASS                  = CPRTargetLib
+
+[Binaries.Arm]
+  PE32|CPRTargetLib.lib
+
+[Binaries.AARCH64]
+  PE32|CPRTargetLib.lib

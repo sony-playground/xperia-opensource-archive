@@ -1,0 +1,53 @@
+#/** @file SdccRamDumpTargetLib.inf
+#  
+#  SDCC BSP Target specific INF file
+#  
+#  Copyright (c) 2016-2020, 2021, 2023 Qualcomm Technologies, Inc. All Rights Reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+# 2023-03-01   ss      Added SDCC_RAMDUMP flag for Ram Dump path
+# 2018-07-13   jt      Add PmicLoaderLib
+# 2018-01-25   vk      Remove ArmLib
+# 2016-12-08   jt      Update source file
+# 2016-01-18   jt      Initial version. Branched from 8996 XBL
+#
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SdccRamDumpTargetLib
+  FILE_GUID                      = 1B2395EE-1557-4542-A3FD-E31188A81668
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SdccTargetLib 
+
+[Sources.common]
+  SdccLoaderBspLib.c
+  
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Wno-unused-function -DSDCC_TARGET_RAMDUMP_IMAGE
+  
+[BuildOptions.ARM]
+  RVCT:*_*_*_CC_FLAGS = --diag_suppress=177 -DSDCC_TARGET_RAMDUMP_IMAGE
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  ArmLib
+  CacheMaintenanceLib
+  SdccClockLib
+  PmicLoaderLib

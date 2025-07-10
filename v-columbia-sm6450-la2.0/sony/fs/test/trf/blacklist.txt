@@ -1,0 +1,4 @@
+reboot_1
+reboot_bl_1
+getvar_ufs-info_1
+getvar_emmc-info_1

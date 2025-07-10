@@ -1,0 +1,16 @@
+/**
+This is the settings file for Quantum drivers
+
+Copyright (c) 2022 Qualcomm Technologies, Inc.
+All Rights Reserved.
+Confidential and Proprietary - Qualcomm Technologies, Inc.
+**/
+&soc {
+	quantum {
+		//ssr: ssr { };
+		cpucplog: cpucplog { };
+	};
+};
+
+//#include "ssr.dtsi"
+#include "cpucplog.dtsi"

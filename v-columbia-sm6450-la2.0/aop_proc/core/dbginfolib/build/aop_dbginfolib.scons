@@ -1,0 +1,45 @@
+#===========================================================================
+# dbginfolib build script
+#
+# Copyright (c) 2021 by Qualcomm Technologies, Incorporated
+# All Rights Reserved
+# Qualcomm Proprietary/GTDR
+#===========================================================================
+
+Import('env')
+import os
+
+env = env.Clone()
+
+SRCPATH = '../src'
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+# Required CORE APIs
+CBSP_API = [
+    'SYSTEMDRIVERS',
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+
+env.PublishProtectedApi('DBGINFOLIB', [
+    '${BUILD_ROOT}/core/dbginfolib/api',
+    '${BUILD_ROOT}/core/dbginfolib/inc',
+    '${BUILD_ROOT}/core/dbginfolib/inc/wildcat'
+])
+
+env.RequireProtectedApi(['DBGINFOLIB'])
+
+env.Append(CFLAGS = '${ARMCC_STDC99_CMD}')
+env.Append(CFLAGS = '-DDBGIL_DEFAULT_SUBSYSTEM_FOR_IMAGE=DBGIL_SUBSYS_AOP')
+
+# Sources
+DBGINFOLIB_SOURCES = [
+    '${BUILDPATH}/dbgil_hwio.c',
+    '${BUILDPATH}/dbginfolib.c',
+    '${BUILDPATH}/dbginfolib_extended.c',
+]
+
+# Add sources to compile
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/dbginfolib', DBGINFOLIB_SOURCES)

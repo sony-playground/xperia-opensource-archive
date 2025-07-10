@@ -1,0 +1,4 @@
+pushd %~dp0
+ python phy_cov.py -i waipio_xbl_usb_dp.txt -o waipio_xbl_usb_dp -pr="HWIO_USB3_DP_PHY" -po="ADDR" -s=0 -c=0 
+popd
+pause

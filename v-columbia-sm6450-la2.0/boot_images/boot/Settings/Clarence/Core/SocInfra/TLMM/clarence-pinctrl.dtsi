@@ -1,0 +1,1155 @@
+#include "gpio-dt.h"
+
+&tlmm {
+#if 0
+  qup1_se0_l0: qup1_se0_l0 {
+    mux = <0 1>;
+  };
+  ibi_i3c_qup1_se0_sda: ibi_i3c_qup1_se0_sda {
+    mux = <0 2>;
+  };
+  cmu_rng_entropy_test_out_3: cmu_rng_entropy_test_out_3 {
+    mux = <0 3>;
+  };
+  qdss_gpio_tracedata_locb_0: qdss_gpio_tracedata_locb_0 {
+    mux = <0 4>;
+  };
+  qup1_se0_l1: qup1_se0_l1 {
+    mux = <1 1>;
+  };
+  ibi_i3c_qup1_se0_scl: ibi_i3c_qup1_se0_scl {
+    mux = <1 2>;
+  };
+  cmu_rng_entropy_test_out_2: cmu_rng_entropy_test_out_2 {
+    mux = <1 3>;
+  };
+  qdss_gpio_tracedata_locb_1: qdss_gpio_tracedata_locb_1 {
+    mux = <1 4>;
+  };
+  qup1_se0_l2: qup1_se0_l2 {
+    mux = <2 1>;
+  };
+  qup1_se0_l3: qup1_se0_l3 {
+    mux = <3 1>;
+  };
+  gcc_gp3_clk_mira: gcc_gp3_clk_mira {
+    mux = <3 2>;
+  };
+  cmu_rng_entropy_test_out_1: cmu_rng_entropy_test_out_1 {
+    mux = <3 3>;
+  };
+  qdss_gpio_tracedata_locb_3: qdss_gpio_tracedata_locb_3 {
+    mux = <3 4>;
+  };
+  qup0_se0_l0: qup0_se0_l0 {
+    mux = <4 1>;
+  };
+  ibi_i3c_qup0_se0_sda: ibi_i3c_qup0_se0_sda {
+    mux = <4 2>;
+  };
+  qdss_gpio_tracectl_locb: qdss_gpio_tracectl_locb {
+    mux = <4 3>;
+  };
+  qup0_se0_l1: qup0_se0_l1 {
+    mux = <5 1>;
+  };
+  ibi_i3c_qup0_se0_scl: ibi_i3c_qup0_se0_scl {
+    mux = <5 2>;
+  };
+  qdss_gpio_traceclk_locb: qdss_gpio_traceclk_locb {
+    mux = <5 3>;
+  };
+  qup0_se4_l2: qup0_se4_l2 {
+    mux = <6 1>;
+  };
+  qdss_cti_trig1_in_mira: qdss_cti_trig1_in_mira {
+    mux = <6 2>;
+  };
+  qup0_se4_l3: qup0_se4_l3 {
+    mux = <7 1>;
+  };
+  dbg_bus_out_loca_2: dbg_bus_out_loca_2 {
+    mux = <7 2>;
+  };
+  phase_flag_status_loc_2: phase_flag_status_loc_2 {
+    mux = <7 3>;
+  };
+  qdss_gpio_tracedata_locb_10: qdss_gpio_tracedata_locb_10 {
+    mux = <7 4>;
+  };
+  qup0_se4_l0_mira: qup0_se4_l0_mira {
+    mux = <8 1>;
+  };
+  dbg_bus_out_loca_3: dbg_bus_out_loca_3 {
+    mux = <8 2>;
+  };
+  phase_flag_status_loc_3: phase_flag_status_loc_3 {
+    mux = <8 3>;
+  };
+  qdss_gpio_tracedata_locb_11: qdss_gpio_tracedata_locb_11 {
+    mux = <8 4>;
+  };
+  qup0_se4_l1_mira: qup0_se4_l1_mira {
+    mux = <9 1>;
+  };
+  dbg_bus_out_loca_4: dbg_bus_out_loca_4 {
+    mux = <9 2>;
+  };
+  phase_flag_status_loc_4: phase_flag_status_loc_4 {
+    mux = <9 3>;
+  };
+  qdss_gpio_tracedata_locb_12: qdss_gpio_tracedata_locb_12 {
+    mux = <9 4>;
+  };
+  qup0_se1_l0: qup0_se1_l0 {
+    mux = <10 1>;
+  };
+  dbg_bus_out_locb_12: dbg_bus_out_locb_12 {
+    mux = <10 2>;
+  };
+  atest_usb0_testdataout0_mirnat_0: atest_usb0_testdataout0_mirnat_0 {
+    mux = <10 3>;
+  };
+  qup0_se1_l1: qup0_se1_l1 {
+    mux = <11 1>;
+  };
+  dbg_bus_out_loca_5: dbg_bus_out_loca_5 {
+    mux = <11 2>;
+  };
+  phase_flag_status_loc_5: phase_flag_status_loc_5 {
+    mux = <11 3>;
+  };
+  qup0_se1_l2: qup0_se1_l2 {
+    mux = <12 1>;
+  };
+  dbg_bus_out_locb_13: dbg_bus_out_locb_13 {
+    mux = <12 2>;
+  };
+  qup0_se1_l3: qup0_se1_l3 {
+    mux = <13 1>;
+  };
+  dbg_bus_out_loca_6: dbg_bus_out_loca_6 {
+    mux = <13 2>;
+  };
+  phase_flag_status_loc_6: phase_flag_status_loc_6 {
+    mux = <13 3>;
+  };
+  qup0_se2_l0: qup0_se2_l0 {
+    mux = <14 1>;
+  };
+  dbg_bus_out_loca_7: dbg_bus_out_loca_7 {
+    mux = <14 2>;
+  };
+  phase_flag_status_loc_7: phase_flag_status_loc_7 {
+    mux = <14 3>;
+  };
+  gp_pdm_mira_0: gp_pdm_mira_0 {
+    mux = <14 4>;
+  };
+  qdss_gpio_tracedata_locb_13: qdss_gpio_tracedata_locb_13 {
+    mux = <14 5>;
+  };
+  qup0_se2_l1: qup0_se2_l1 {
+    mux = <15 1>;
+  };
+  dbg_bus_out_loca_8: dbg_bus_out_loca_8 {
+    mux = <15 2>;
+  };
+  phase_flag_status_loc_8: phase_flag_status_loc_8 {
+    mux = <15 3>;
+  };
+  gp_pdm_mira_1: gp_pdm_mira_1 {
+    mux = <15 4>;
+  };
+  qdss_gpio_tracedata_locb_14: qdss_gpio_tracedata_locb_14 {
+    mux = <15 5>;
+  };
+  qup0_se2_l2: qup0_se2_l2 {
+    mux = <16 1>;
+  };
+  dbg_bus_out_locb_14: dbg_bus_out_locb_14 {
+    mux = <16 2>;
+  };
+  qup0_se2_l3: qup0_se2_l3 {
+    mux = <17 1>;
+  };
+  dbg_bus_out_loca_9: dbg_bus_out_loca_9 {
+    mux = <17 2>;
+  };
+  phase_flag_status_loc_9: phase_flag_status_loc_9 {
+    mux = <17 3>;
+  };
+  gp_pdm_mira_2: gp_pdm_mira_2 {
+    mux = <17 4>;
+  };
+  qdss_gpio_tracedata_locb_15: qdss_gpio_tracedata_locb_15 {
+    mux = <17 5>;
+  };
+  qup0_se3_l0: qup0_se3_l0 {
+    mux = <18 1>;
+  };
+  dbg_bus_out_loca_10: dbg_bus_out_loca_10 {
+    mux = <18 2>;
+  };
+  phase_flag_status_loc_10: phase_flag_status_loc_10 {
+    mux = <18 3>;
+  };
+  gp_mn: gp_mn {
+    mux = <18 4>;
+  };
+  qup0_se3_l1: qup0_se3_l1 {
+    mux = <19 1>;
+  };
+  vfr_0_mira: vfr_0_mira {
+    mux = <19 2>;
+  };
+  dbg_bus_out_loca_11: dbg_bus_out_loca_11 {
+    mux = <19 3>;
+  };
+  phase_flag_status_loc_11: phase_flag_status_loc_11 {
+    mux = <19 4>;
+  };
+  qup0_se3_l2: qup0_se3_l2 {
+    mux = <20 1>;
+  };
+  tgu_ch0_trigout: tgu_ch0_trigout {
+    mux = <20 2>;
+  };
+  qup0_se3_l3: qup0_se3_l3 {
+    mux = <21 1>;
+  };
+  dbg_bus_out_loca_12: dbg_bus_out_loca_12 {
+    mux = <21 2>;
+  };
+  phase_flag_status_loc_12: phase_flag_status_loc_12 {
+    mux = <21 3>;
+  };
+  tgu_ch1_trigout: tgu_ch1_trigout {
+    mux = <21 4>;
+  };
+  qup1_se2_l2: qup1_se2_l2 {
+    mux = <22 1>;
+  };
+  mdp_vsync_s_mira: mdp_vsync_s_mira {
+    mux = <22 2>;
+  };
+  mdp_vsync2_out: mdp_vsync2_out {
+    mux = <22 3>;
+  };
+  mdp_vsync3_out: mdp_vsync3_out {
+    mux = <22 4>;
+  };
+  tgu_ch2_trigout: tgu_ch2_trigout {
+    mux = <22 5>;
+  };
+  qup1_se2_l3: qup1_se2_l3 {
+    mux = <23 1>;
+  };
+  tgu_ch3_trigout: tgu_ch3_trigout {
+    mux = <23 2>;
+  };
+  qdss_gpio_tracedata_locb_2: qdss_gpio_tracedata_locb_2 {
+    mux = <23 3>;
+  };
+  qup1_se3_l0: qup1_se3_l0 {
+    mux = <24 1>;
+  };
+  dbg_bus_out_loca_13: dbg_bus_out_loca_13 {
+    mux = <24 2>;
+  };
+  phase_flag_status_loc_13: phase_flag_status_loc_13 {
+    mux = <24 3>;
+  };
+  qup1_se3_l1: qup1_se3_l1 {
+    mux = <25 1>;
+  };
+  dbg_bus_out_loca_14: dbg_bus_out_loca_14 {
+    mux = <25 2>;
+  };
+  phase_flag_status_loc_14: phase_flag_status_loc_14 {
+    mux = <25 3>;
+  };
+  qup1_se1_l2: qup1_se1_l2 {
+    mux = <26 1>;
+  };
+  mdp_vsync_e_mirb: mdp_vsync_e_mirb {
+    mux = <26 2>;
+  };
+  qup0_se4_l0_mirb: qup0_se4_l0_mirb {
+    mux = <26 3>;
+  };
+  qdss_cti_trig0_out_mira: qdss_cti_trig0_out_mira {
+    mux = <26 4>;
+  };
+  qup1_se1_l3: qup1_se1_l3 {
+    mux = <27 1>;
+  };
+  qup0_se4_l1_mirb: qup0_se4_l1_mirb {
+    mux = <27 2>;
+  };
+  qdss_cti_trig1_out_mira: qdss_cti_trig1_out_mira {
+    mux = <27 3>;
+  };
+  cmu_rng_entropy_test_out_0: cmu_rng_entropy_test_out_0 {
+    mux = <28 1>;
+  };
+  ddr_bist_fail: ddr_bist_fail {
+    mux = <29 1>;
+  };
+  mdp_vsync_s_mirb: mdp_vsync_s_mirb {
+    mux = <30 1>;
+  };
+  gcc_gp2_clk_mira: gcc_gp2_clk_mira {
+    mux = <30 2>;
+  };
+  ddr_bist_start: ddr_bist_start {
+    mux = <30 3>;
+  };
+  qup1_se2_l0: qup1_se2_l0 {
+    mux = <31 1>;
+  };
+  dbg_bus_out_loca_0: dbg_bus_out_loca_0 {
+    mux = <31 2>;
+  };
+  phase_flag_status_loc_0: phase_flag_status_loc_0 {
+    mux = <31 3>;
+  };
+  ddr_bist_stop: ddr_bist_stop {
+    mux = <31 4>;
+  };
+  qdss_gpio_tracedata_locb_4: qdss_gpio_tracedata_locb_4 {
+    mux = <31 5>;
+  };
+  qup1_se2_l1: qup1_se2_l1 {
+    mux = <32 1>;
+  };
+  dbg_bus_out_loca_1: dbg_bus_out_loca_1 {
+    mux = <32 2>;
+  };
+  phase_flag_status_loc_1: phase_flag_status_loc_1 {
+    mux = <32 3>;
+  };
+  ddr_bist_complete: ddr_bist_complete {
+    mux = <32 4>;
+  };
+  qdss_gpio_tracedata_locb_5: qdss_gpio_tracedata_locb_5 {
+    mux = <32 5>;
+  };
+  dbg_bus_out_loca_15: dbg_bus_out_loca_15 {
+    mux = <33 1>;
+  };
+  phase_flag_status_loc_15: phase_flag_status_loc_15 {
+    mux = <33 2>;
+  };
+  qdss_gpio_tracedata_locb_7: qdss_gpio_tracedata_locb_7 {
+    mux = <33 3>;
+  };
+  qup0_se0_l2: qup0_se0_l2 {
+    mux = <34 1>;
+  };
+  qup0_se4_l4: qup0_se4_l4 {
+    mux = <34 2>;
+  };
+  mdp_vsync_e_mira: mdp_vsync_e_mira {
+    mux = <34 3>;
+  };
+  qup0_se0_l3: qup0_se0_l3 {
+    mux = <35 1>;
+  };
+  dbg_bus_out_loca_16: dbg_bus_out_loca_16 {
+    mux = <35 2>;
+  };
+  phase_flag_status_loc_16: phase_flag_status_loc_16 {
+    mux = <35 3>;
+  };
+  qdss_gpio_tracedata_locb_8: qdss_gpio_tracedata_locb_8 {
+    mux = <35 4>;
+  };
+  cam_mclk0: cam_mclk0 {
+    mux = <36 1>;
+  };
+  prng_rosc_test_out_3: prng_rosc_test_out_3 {
+    mux = <36 2>;
+  };
+  qdss_gpio_tracedata_loca_4: qdss_gpio_tracedata_loca_4 {
+    mux = <36 3>;
+  };
+  cam_mclk1: cam_mclk1 {
+    mux = <37 1>;
+  };
+  gcc_gp1_clk_mira: gcc_gp1_clk_mira {
+    mux = <37 2>;
+  };
+  prng_rosc_test_out_0: prng_rosc_test_out_0 {
+    mux = <37 3>;
+  };
+  qdss_gpio_tracedata_loca_5: qdss_gpio_tracedata_loca_5 {
+    mux = <37 4>;
+  };
+  cam_mclk2: cam_mclk2 {
+    mux = <38 1>;
+  };
+  prng_rosc_test_out_1: prng_rosc_test_out_1 {
+    mux = <38 2>;
+  };
+  qdss_gpio_tracedata_loca_6: qdss_gpio_tracedata_loca_6 {
+    mux = <38 3>;
+  };
+  cam_mclk3: cam_mclk3 {
+    mux = <39 1>;
+  };
+  prng_rosc_test_out_2: prng_rosc_test_out_2 {
+    mux = <39 2>;
+  };
+  qdss_gpio_tracedata_loca_7: qdss_gpio_tracedata_loca_7 {
+    mux = <39 3>;
+  };
+  cci_timer0: cci_timer0 {
+    mux = <40 1>;
+  };
+  cci_async_in0: cci_async_in0 {
+    mux = <40 2>;
+  };
+  cri_trng_rosc_sync_test_out_0: cri_trng_rosc_sync_test_out_0 {
+    mux = <40 3>;
+  };
+  qdss_gpio_traceclk_loca: qdss_gpio_traceclk_loca {
+    mux = <40 4>;
+  };
+  cci_timer1: cci_timer1 {
+    mux = <41 1>;
+  };
+  cri_trng_rosc_sync_test_out_1: cri_trng_rosc_sync_test_out_1 {
+    mux = <41 2>;
+  };
+  qdss_gpio_tracectl_loca: qdss_gpio_tracectl_loca {
+    mux = <41 3>;
+  };
+  cci_timer2: cci_timer2 {
+    mux = <42 1>;
+  };
+  cri_trng_rosc_test_out: cri_trng_rosc_test_out {
+    mux = <42 2>;
+  };
+  qdss_gpio_tracedata_loca_8: qdss_gpio_tracedata_loca_8 {
+    mux = <42 3>;
+  };
+  cci_timer3: cci_timer3 {
+    mux = <43 1>;
+  };
+  qup1_se4_l3: qup1_se4_l3 {
+    mux = <43 2>;
+  };
+  qdss_gpio_tracedata_loca_9: qdss_gpio_tracedata_loca_9 {
+    mux = <43 3>;
+  };
+  cci_i2c_sda0: cci_i2c_sda0 {
+    mux = <44 1>;
+  };
+  qdss_gpio_tracedata_loca_10: qdss_gpio_tracedata_loca_10 {
+    mux = <44 2>;
+  };
+  cci_i2c_scl0: cci_i2c_scl0 {
+    mux = <45 1>;
+  };
+  qdss_gpio_tracedata_loca_11: qdss_gpio_tracedata_loca_11 {
+    mux = <45 2>;
+  };
+  cci_i2c_sda1: cci_i2c_sda1 {
+    mux = <46 1>;
+  };
+  qdss_gpio_tracedata_loca_12: qdss_gpio_tracedata_loca_12 {
+    mux = <46 2>;
+  };
+  cci_i2c_scl1: cci_i2c_scl1 {
+    mux = <47 1>;
+  };
+  qdss_gpio_tracedata_loca_13: qdss_gpio_tracedata_loca_13 {
+    mux = <47 2>;
+  };
+  cci_i2c_sda2: cci_i2c_sda2 {
+    mux = <48 1>;
+  };
+  qup1_se4_l2: qup1_se4_l2 {
+    mux = <48 2>;
+  };
+  gcc_gp1_clk_mirb: gcc_gp1_clk_mirb {
+    mux = <48 3>;
+  };
+  cci_i2c_scl2: cci_i2c_scl2 {
+    mux = <49 1>;
+  };
+  qup1_se4_l4: qup1_se4_l4 {
+    mux = <49 2>;
+  };
+  gcc_gp2_clk_mirb: gcc_gp2_clk_mirb {
+    mux = <49 3>;
+  };
+  qdss_gpio_tracedata_loca_15: qdss_gpio_tracedata_loca_15 {
+    mux = <49 4>;
+  };
+  qup1_se1_l0: qup1_se1_l0 {
+    mux = <50 1>;
+  };
+  qup1_se3_l3: qup1_se3_l3 {
+    mux = <50 2>;
+  };
+  dbg_bus_out_locb_5: dbg_bus_out_locb_5 {
+    mux = <50 3>;
+  };
+  gcc_gp3_clk_mirb: gcc_gp3_clk_mirb {
+    mux = <50 4>;
+  };
+  qup1_se1_l1: qup1_se1_l1 {
+    mux = <51 1>;
+  };
+  qup1_se3_l2: qup1_se3_l2 {
+    mux = <51 2>;
+  };
+  dbg_bus_out_locb_6: dbg_bus_out_locb_6 {
+    mux = <51 3>;
+  };
+  tb_trig_sdc2: tb_trig_sdc2 {
+    mux = <51 4>;
+  };
+  dbg_bus_out_locb_7: dbg_bus_out_locb_7 {
+    mux = <52 1>;
+  };
+  dbg_bus_out_locb_8: dbg_bus_out_locb_8 {
+    mux = <53 1>;
+  };
+  coex_uart1_rx: coex_uart1_rx {
+    mux = <54 1>;
+  };
+  dbg_bus_out_locb_9: dbg_bus_out_locb_9 {
+    mux = <54 2>;
+  };
+  gp_pdm_mirb_0: gp_pdm_mirb_0 {
+    mux = <54 3>;
+  };
+  coex_uart1_tx: coex_uart1_tx {
+    mux = <55 1>;
+  };
+  dbg_bus_out_locb_10: dbg_bus_out_locb_10 {
+    mux = <55 2>;
+  };
+  gp_pdm_mirb_1: gp_pdm_mirb_1 {
+    mux = <55 3>;
+  };
+  dbg_bus_out_locb_11: dbg_bus_out_locb_11 {
+    mux = <56 1>;
+  };
+  gp_pdm_mirb_2: gp_pdm_mirb_2 {
+    mux = <56 2>;
+  };
+  tmess_prng_rosc_test_out_0: tmess_prng_rosc_test_out_0 {
+    mux = <57 1>;
+  };
+  qdss_cti_trig1_in_mirb: qdss_cti_trig1_in_mirb {
+    mux = <57 2>;
+  };
+  tmess_prng_rosc_test_out_1: tmess_prng_rosc_test_out_1 {
+    mux = <58 1>;
+  };
+  qdss_cti_trig1_out_mirb: qdss_cti_trig1_out_mirb {
+    mux = <58 2>;
+  };
+  tmess_prng_rosc_test_out_2: tmess_prng_rosc_test_out_2 {
+    mux = <59 1>;
+  };
+  qdss_gpio_tracedata_locb_6: qdss_gpio_tracedata_locb_6 {
+    mux = <59 2>;
+  };
+  tmess_prng_rosc_test_out_3: tmess_prng_rosc_test_out_3 {
+    mux = <60 1>;
+  };
+  qdss_cti_trig0_in_mira: qdss_cti_trig0_in_mira {
+    mux = <60 2>;
+  };
+  dbg_bus_out_loca_18: dbg_bus_out_loca_18 {
+    mux = <61 1>;
+  };
+  phase_flag_status_loc_18: phase_flag_status_loc_18 {
+    mux = <61 2>;
+  };
+  qdss_gpio_tracedata_locb_9: qdss_gpio_tracedata_locb_9 {
+    mux = <62 1>;
+  };
+  uim0_data: uim0_data {
+    mux = <63 1>;
+  };
+  dbg_bus_out_locb_15: dbg_bus_out_locb_15 {
+    mux = <63 2>;
+  };
+  uim0_clk: uim0_clk {
+    mux = <64 1>;
+  };
+  dbg_bus_out_locb_16: dbg_bus_out_locb_16 {
+    mux = <64 2>;
+  };
+  uim0_reset: uim0_reset {
+    mux = <65 1>;
+  };
+  dbg_bus_out_locb_17: dbg_bus_out_locb_17 {
+    mux = <65 2>;
+  };
+  uim0_present: uim0_present {
+    mux = <66 1>;
+  };
+  dbg_bus_out_locb_18: dbg_bus_out_locb_18 {
+    mux = <66 2>;
+  };
+  uim1_data: uim1_data {
+    mux = <67 1>;
+  };
+  dbg_bus_out_locb_19: dbg_bus_out_locb_19 {
+    mux = <67 2>;
+  };
+  uim1_clk: uim1_clk {
+    mux = <68 1>;
+  };
+  dbg_bus_out_locb_20: dbg_bus_out_locb_20 {
+    mux = <68 2>;
+  };
+  uim1_reset: uim1_reset {
+    mux = <69 1>;
+  };
+  dbg_bus_out_locb_21: dbg_bus_out_locb_21 {
+    mux = <69 2>;
+  };
+  uim1_present: uim1_present {
+    mux = <70 1>;
+  };
+  dbg_bus_out_locb_22: dbg_bus_out_locb_22 {
+    mux = <70 2>;
+  };
+  rffe0_clk: rffe0_clk {
+    mux = <71 1>;
+  };
+  grfc0: grfc0 {
+    mux = <71 2>;
+  };
+  dbg_bus_out_locb_24: dbg_bus_out_locb_24 {
+    mux = <71 3>;
+  };
+  audio_ref_clk: audio_ref_clk {
+    mux = <71 4>;
+  };
+  rffe0_data: rffe0_data {
+    mux = <72 1>;
+  };
+  grfc1: grfc1 {
+    mux = <72 2>;
+  };
+  dbg_bus_out_loca_22: dbg_bus_out_loca_22 {
+    mux = <72 3>;
+  };
+  phase_flag_status_loc_22: phase_flag_status_loc_22 {
+    mux = <72 4>;
+  };
+  rffe1_clk: rffe1_clk {
+    mux = <73 1>;
+  };
+  grfc2: grfc2 {
+    mux = <73 2>;
+  };
+  dbg_bus_out_locb_25: dbg_bus_out_locb_25 {
+    mux = <73 3>;
+  };
+  pll_bist_sync: pll_bist_sync {
+    mux = <73 4>;
+  };
+  rffe1_data: rffe1_data {
+    mux = <74 1>;
+  };
+  grfc3: grfc3 {
+    mux = <74 2>;
+  };
+  dbg_bus_out_locb_26: dbg_bus_out_locb_26 {
+    mux = <74 3>;
+  };
+  sdc2_cdc_dtest_out_mirnat_1: sdc2_cdc_dtest_out_mirnat_1 {
+    mux = <74 4>;
+  };
+  rffe2_clk: rffe2_clk {
+    mux = <75 1>;
+  };
+  grfc4: grfc4 {
+    mux = <75 2>;
+  };
+  dbg_bus_out_locb_27: dbg_bus_out_locb_27 {
+    mux = <75 3>;
+  };
+  vsense_trigger_mirnat: vsense_trigger_mirnat {
+    mux = <75 4>;
+  };
+  atest_usb0_atereset_mirnat: atest_usb0_atereset_mirnat {
+    mux = <75 5>;
+  };
+  rffe2_data: rffe2_data {
+    mux = <76 1>;
+  };
+  grfc5: grfc5 {
+    mux = <76 2>;
+  };
+  dbg_bus_out_locb_28: dbg_bus_out_locb_28 {
+    mux = <76 3>;
+  };
+  sdc2_cdc_dtest_out_mirnat_0: sdc2_cdc_dtest_out_mirnat_0 {
+    mux = <76 4>;
+  };
+  rffe3_clk: rffe3_clk {
+    mux = <77 1>;
+  };
+  grfc6: grfc6 {
+    mux = <77 2>;
+  };
+  dbg_bus_out_locb_29: dbg_bus_out_locb_29 {
+    mux = <77 3>;
+  };
+  rffe3_data: rffe3_data {
+    mux = <78 1>;
+  };
+  grfc7: grfc7 {
+    mux = <78 2>;
+  };
+  dbg_bus_out_locb_30: dbg_bus_out_locb_30 {
+    mux = <78 3>;
+  };
+  atest_usb0_testdataout0_mirnat_1: atest_usb0_testdataout0_mirnat_1 {
+    mux = <78 4>;
+  };
+  rffe4_clk: rffe4_clk {
+    mux = <79 1>;
+  };
+  grfc8: grfc8 {
+    mux = <79 2>;
+  };
+  dbg_bus_out_locb_31: dbg_bus_out_locb_31 {
+    mux = <79 3>;
+  };
+  wlan1_adc_dtest_out_mirnat_0: wlan1_adc_dtest_out_mirnat_0 {
+    mux = <79 4>;
+  };
+  atest_usb0_testdataout0_mirnat_2: atest_usb0_testdataout0_mirnat_2 {
+    mux = <79 5>;
+  };
+  rffe4_data: rffe4_data {
+    mux = <80 1>;
+  };
+  grfc9: grfc9 {
+    mux = <80 2>;
+  };
+  dbg_out_clk: dbg_out_clk {
+    mux = <80 3>;
+  };
+  wlan1_adc_dtest_out_mirnat_1: wlan1_adc_dtest_out_mirnat_1 {
+    mux = <80 4>;
+  };
+  atest_usb0_testdataout0_mirnat_3: atest_usb0_testdataout0_mirnat_3 {
+    mux = <80 5>;
+  };
+  grfc12: grfc12 {
+    mux = <81 1>;
+  };
+  nav_gpio2: nav_gpio2 {
+    mux = <81 2>;
+  };
+  grfc0_mira: grfc0_mira {
+    mux = <82 1>;
+  };
+  dbg_bus_out_loca_19: dbg_bus_out_loca_19 {
+    mux = <82 2>;
+  };
+  phase_flag_status_loc_19: phase_flag_status_loc_19 {
+    mux = <82 3>;
+  };
+  nav_gpio0: nav_gpio0 {
+    mux = <83 1>;
+  };
+  dbg_bus_out_locb_0: dbg_bus_out_locb_0 {
+    mux = <83 2>;
+  };
+  nav_gpio1: nav_gpio1 {
+    mux = <84 1>;
+  };
+  vfr_1: vfr_1 {
+    mux = <84 2>;
+  };
+  dbg_bus_out_locb_1: dbg_bus_out_locb_1 {
+    mux = <84 3>;
+  };
+  grfc10: grfc10 {
+    mux = <85 1>;
+  };
+  dbg_bus_out_locb_2: dbg_bus_out_locb_2 {
+    mux = <85 2>;
+  };
+  grfc11: grfc11 {
+    mux = <86 1>;
+  };
+  dbg_bus_out_locb_3: dbg_bus_out_locb_3 {
+    mux = <86 2>;
+  };
+  qlink0_request: qlink0_request {
+    mux = <87 1>;
+  };
+  dbg_bus_out_locb_4: dbg_bus_out_locb_4 {
+    mux = <87 2>;
+  };
+  qlink0_enable: qlink0_enable {
+    mux = <88 1>;
+  };
+  qlink0_wmss_reset_n: qlink0_wmss_reset_n {
+    mux = <89 1>;
+  };
+  qup1_se4_l1: qup1_se4_l1 {
+    mux = <90 1>;
+  };
+  jitter_bist_ref_clk: jitter_bist_ref_clk {
+    mux = <90 2>;
+  };
+  ddr_pxi0_test_tri_mirnat: ddr_pxi0_test_tri_mirnat {
+    mux = <90 3>;
+  };
+  qup1_se4_l0: qup1_se4_l0 {
+    mux = <91 1>;
+  };
+  dbg_bus_out_loca_20: dbg_bus_out_loca_20 {
+    mux = <91 2>;
+  };
+  phase_flag_status_loc_20: phase_flag_status_loc_20 {
+    mux = <91 3>;
+  };
+  mdp_vsync_p_mira: mdp_vsync_p_mira {
+    mux = <93 1>;
+  };
+  mdp_vsync0_out: mdp_vsync0_out {
+    mux = <93 2>;
+  };
+  mdp_vsync1_out: mdp_vsync1_out {
+    mux = <93 3>;
+  };
+  usb0_phy_ps: usb0_phy_ps {
+    mux = <94 1>;
+  };
+  dbg_bus_out_locb_23: dbg_bus_out_locb_23 {
+    mux = <94 2>;
+  };
+  dbg_bus_out_loca_23: dbg_bus_out_loca_23 {
+    mux = <95 1>;
+  };
+  phase_flag_status_loc_23: phase_flag_status_loc_23 {
+    mux = <95 2>;
+  };
+  atest_char_start: atest_char_start {
+    mux = <95 3>;
+  };
+  mdp_vsync_p_mirb: mdp_vsync_p_mirb {
+    mux = <97 1>;
+  };
+  dbg_bus_out_loca_24: dbg_bus_out_loca_24 {
+    mux = <97 2>;
+  };
+  phase_flag_status_loc_24: phase_flag_status_loc_24 {
+    mux = <97 3>;
+  };
+  atest_char_status_loc_0: atest_char_status_loc_0 {
+    mux = <97 4>;
+  };
+  dbg_bus_out_loca_25: dbg_bus_out_loca_25 {
+    mux = <98 1>;
+  };
+  phase_flag_status_loc_25: phase_flag_status_loc_25 {
+    mux = <98 2>;
+  };
+  atest_char_status_loc_1: atest_char_status_loc_1 {
+    mux = <98 3>;
+  };
+  usb0_hs_ac_en: usb0_hs_ac_en {
+    mux = <99 1>;
+  };
+  dbg_bus_out_loca_26: dbg_bus_out_loca_26 {
+    mux = <99 2>;
+  };
+  phase_flag_status_loc_26: phase_flag_status_loc_26 {
+    mux = <99 3>;
+  };
+  atest_char_status_loc_2: atest_char_status_loc_2 {
+    mux = <99 4>;
+  };
+  vfr_0_mirb: vfr_0_mirb {
+    mux = <100 1>;
+  };
+  dbg_bus_out_loca_27: dbg_bus_out_loca_27 {
+    mux = <100 2>;
+  };
+  phase_flag_status_loc_27: phase_flag_status_loc_27 {
+    mux = <100 3>;
+  };
+  atest_char_status_loc_3: atest_char_status_loc_3 {
+    mux = <100 4>;
+  };
+  sd_write_protect: sd_write_protect {
+    mux = <102 1>;
+  };
+  dbg_bus_out_loca_28: dbg_bus_out_loca_28 {
+    mux = <105 1>;
+  };
+  phase_flag_status_loc_28: phase_flag_status_loc_28 {
+    mux = <105 2>;
+  };
+  host2wlan_sol: host2wlan_sol {
+    mux = <106 1>;
+  };
+  pcie0_clk_req_n: pcie0_clk_req_n {
+    mux = <107 1>;
+  };
+  pll_clk_aux: pll_clk_aux {
+    mux = <108 1>;
+  };
+  qdss_cti_trig0_in_mirb: qdss_cti_trig0_in_mirb {
+    mux = <113 1>;
+  };
+  qdss_cti_trig0_out_mirb: qdss_cti_trig0_out_mirb {
+    mux = <114 1>;
+  };
+  dbg_bus_out_loca_29: dbg_bus_out_loca_29 {
+    mux = <115 1>;
+  };
+  phase_flag_status_loc_29: phase_flag_status_loc_29 {
+    mux = <115 2>;
+  };
+  dbg_bus_out_loca_30: dbg_bus_out_loca_30 {
+    mux = <116 1>;
+  };
+  phase_flag_status_loc_30: phase_flag_status_loc_30 {
+    mux = <116 2>;
+  };
+  dbg_bus_out_loca_31: dbg_bus_out_loca_31 {
+    mux = <117 1>;
+  };
+  phase_flag_status_loc_31: phase_flag_status_loc_31 {
+    mux = <117 2>;
+  };
+  qdss_gpio_tracedata_loca_14: qdss_gpio_tracedata_loca_14 {
+    mux = <118 1>;
+  };
+  sdc1_cdc_dtest_out_mirnat_0: sdc1_cdc_dtest_out_mirnat_0 {
+    mux = <118 2>;
+  };
+  ddr_pxi1_test_tri_mirnat: ddr_pxi1_test_tri_mirnat {
+    mux = <118 3>;
+  };
+  qdss_gpio_tracedata_loca_2: qdss_gpio_tracedata_loca_2 {
+    mux = <121 1>;
+  };
+  qdss_gpio_tracedata_loca_3: qdss_gpio_tracedata_loca_3 {
+    mux = <122 1>;
+  };
+  sdc1_cdc_dtest_out_mirnat_1: sdc1_cdc_dtest_out_mirnat_1 {
+    mux = <122 2>;
+  };
+  ddr_pxi1_test_done_mirnat: ddr_pxi1_test_done_mirnat {
+    mux = <122 3>;
+  };
+  qdss_gpio_tracedata_loca_0: qdss_gpio_tracedata_loca_0 {
+    mux = <126 1>;
+  };
+  qdss_gpio_tracedata_loca_1: qdss_gpio_tracedata_loca_1 {
+    mux = <127 1>;
+  };
+  ddr_pxi0_test_done_mirnat: ddr_pxi0_test_done_mirnat {
+    mux = <127 2>;
+  };
+  tb_trig_sdc1: tb_trig_sdc1 {
+    mux = <128 1>;
+  };
+  dbg_bus_out_loca_21: dbg_bus_out_loca_21 {
+    mux = <133 1>;
+  };
+  phase_flag_status_loc_21: phase_flag_status_loc_21 {
+    mux = <133 2>;
+  };
+  tsense_pwm1_out_mirnat: tsense_pwm1_out_mirnat {
+    mux = <134 1>;
+  };
+  tsense_pwm2_out_mirnat: tsense_pwm2_out_mirnat {
+    mux = <134 2>;
+  };
+  dbg_bus_out_loca_17: dbg_bus_out_loca_17 {
+    mux = <135 1>;
+  };
+  phase_flag_status_loc_17: phase_flag_status_loc_17 {
+    mux = <135 2>;
+  };
+#endif
+};
+
+&tlmm {
+  qcom,sleep-config   =  <
+(GPIO_OUTPUT  | GPIO_PULL_UP      | GPIO_OUT_HIGH   | GPIO_PRG_YES) /* PIN 0 */
+(GPIO_OUTPUT  | GPIO_PULL_UP      | GPIO_OUT_HIGH   | GPIO_PRG_YES) /* PIN 1 */
+(GPIO_OUTPUT  | GPIO_PULL_UP      | GPIO_OUT_HIGH   | GPIO_PRG_YES) /* PIN 2 */
+(GPIO_OUTPUT  | GPIO_PULL_UP      | GPIO_OUT_HIGH   | GPIO_PRG_YES) /* PIN 3 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 4 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 5 */
+(GPIO_OUTPUT  | GPIO_PULL_UP      | GPIO_OUT_HIGH   | GPIO_PRG_YES) /* PIN 6 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 7 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 8 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 9 */
+
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 10 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 11 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 12 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 13 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 14 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 15 */
+(GPIO_OUTPUT  | GPIO_PULL_UP      | GPIO_OUT_HIGH   | GPIO_PRG_YES) /* PIN 16 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 17 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 18 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 19 */
+    
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 20 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 21 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 22 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 23 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 24 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 25 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 26 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 27 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 28 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 29 */
+    
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 30 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 31 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 32 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 33 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 34 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 35 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 36 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 37 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 38 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 39 */
+    
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 40 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 41 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 42 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 43 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES)  /* PIN 44 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES)  /* PIN 45 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES)  /* PIN 46 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES)  /* PIN 47 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES)  /* PIN 48 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES)  /* PIN 49 */
+    
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 50 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 51 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 52 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 53 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 54 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 55 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 56 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 57 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 58 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 59 */ 
+    
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 60 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 61 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 62 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 63 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 64 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 65 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 66 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 67 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 68 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 69 */
+    
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 70 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 71 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 72 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 73 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 74 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 75 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 76 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 77 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 78 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 79 */
+    
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 80 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 81 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 82 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 83 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 84 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 85 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 86 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 87 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 88 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 89 */
+    
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 90 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 91 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 92 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 93 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 94 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 95 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 96 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 97 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 98 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 99 */
+    
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 100 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_YES) /* PIN 101 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 102 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 103 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 104 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 105 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 106 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 107 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 108 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 109 */
+    
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 110 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 111 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 112 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 113 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 114 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 115 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 116 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 117 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 118 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 119 */
+    
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 120 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 121 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 122 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 123 */
+(GPIO_INPUT   | GPIO_KEEPER       | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 124 */
+(GPIO_INPUT   | GPIO_KEEPER       | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 125 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 126 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 127 */
+(GPIO_INPUT   | GPIO_KEEPER       | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 128 */
+(GPIO_INPUT   | GPIO_KEEPER       | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 129 */
+    
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 130 */
+(GPIO_INPUT   | GPIO_NO_PULL      | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 131 */
+(GPIO_OUTPUT  | GPIO_PULL_UP      | GPIO_OUT_HIGH   | GPIO_PRG_NO)  /* PIN 132 */
+(GPIO_INPUT   | GPIO_PULL_DOWN    | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 133 */
+(GPIO_INPUT   | GPIO_KEEPER       | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 134 */
+(GPIO_INPUT   | GPIO_KEEPER       | GPIO_OUT_LOW    | GPIO_PRG_NO)  /* PIN 135 */
+  >;
+};
+
+/*
+ * NOTE: Use qcom,active-config only when qcom,sleep-config is not matching with
+ * default config. This is to allow configuration where SW is not accessible.
+ * Format <pin_number GPIO_CFG_EX(DIR, PULL, DRIVE_STRENGTH, FUNC_SEL, OUTPUT_VALUE)>
+ */
+&tlmm {
+  /* Example format */
+  /*
+  qcom,active-config   =
+  < 81 GPIO_CFG_EX(GPIO_CFG_OUT, GPIO_CFG_PU, GPIO_CFG_DRIVE_16MA, 1, 1)>;
+  */
+};
+

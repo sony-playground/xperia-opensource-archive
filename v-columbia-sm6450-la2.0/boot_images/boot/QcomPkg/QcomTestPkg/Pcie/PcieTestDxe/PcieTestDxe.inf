@@ -1,0 +1,58 @@
+#/** @file PcieTestDxe.inf
+#
+#  Pcie Dxe Driver inf file.
+#
+#  Copyright (c) 2020 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ----------------------------------------------------------
+# 04/13/2020   yg      Initial Revision
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PcieTestDxe
+  FILE_GUID                      = 8D9611A9-EFE9-4386-99DB-2B7D310939F4
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = QcPcieDxeEntryPoint
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[Sources]
+  PcieTestDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/QcomTestPkg/QcomTestPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+  PcieRpLib
+
+[Protocols]
+  gEfiQcPcieDxeProtocolGuid
+  gEfiPciIoProtocolGuid
+
+[Depex]
+  TRUE
+

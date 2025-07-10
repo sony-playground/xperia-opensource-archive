@@ -1,0 +1,61 @@
+#
+# Copyright (c) 2016, Sony Mobile Communications Inc. All rights reserved
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = XBootTestLib
+  FILE_GUID                      = 71de009f-dfc7-4faa-a374-d68d4b4ca660
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 0.1
+  LIBRARY_CLASS                  = XBootTestLib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DCFG_ENABLE_FCS_LOG -DCFG_ENABLE_FCS_LOG_WRN -Dfcslog=XDEBUG
+
+[Sources]
+  main/test/boot/app/uefi/XBootTest.c
+  main/test/boot/app/uefi/gen_tests.c
+  main/test/boot/app/uefi/dut_normal.c
+  main/test/boot/framework/iterator.c
+  main/test/boot/framework/integration_main.c
+  main/test/boot/integration/uefi/integration_uefi.c
+  main/test/boot/module_test/mt_xb_charger.c
+  main/test/boot/module_test/mt_xb_common.c
+  main/test/boot/module_test/mt_xb_delay_normal.c
+  main/test/boot/module_test/mt_xb_factmode_xfl.c
+  main/test/boot/module_test/mt_xb_force_reset.c
+  main/test/boot/module_test/mt_xb_force_shutdown.c
+  main/test/boot/module_test/mt_xb_normal.c
+  main/test/boot/module_test/mt_xb_qcfb.c
+  main/test/boot/module_test/mt_xb_shortpress.c
+  main/test/boot/module_test/mt_xb_watchdog.c
+  main/test/boot/module_test/mt_xb_xfl.c
+  main/test/boot/module_test/mt_xb_empty_ks_usb_no.c
+  main/test/boot/module_test/mt_xb_empty_ks_usb_yes.c
+  main/test/boot/module_test/mt_xb_empty_hwc_usb_no.c
+  main/test/boot/module_test/mt_xb_empty_hwc_usb_yes.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SomcPkg/SomcPkg.dec
+  QcomModulePkg/QcomModulePkg.dec
+  StdLib/StdLib.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+
+[Guids]
+  gEfiKeystorePartitionGuid
+  gEfiKeystoreBakPartitionGuid
+
+[Protocols]
+  gQcomQseecomProtocolGuid
+  gEfiQcomVerifiedBootProtocolGuid
+  gEfiEraseBlockProtocolGuid
+
+[LibraryClasses]
+  XBootLib
+  XBootGlueLib
+  XLibC
+  XOemCertLib
+  XBootPALApiLib
+  TaApiLib

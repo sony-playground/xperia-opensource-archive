@@ -1,0 +1,154 @@
+===========================================================================================================================================================
+1. Protocol versioning guidelines
+===========================================================================================================================================================
+1.Increment the protocol version in the protocol header, if a new protocol API is added in the protocol structure. Protocol version defined 
+in the protocol header is always the latest version.
+
+2. Always add new protocol API at the end of the PROTOCOL structure.
+
+3. If a new protocol API is added in protocol structure, then add a comment informing which protocol version has the API implemented.
+/* Added in protocol version x.x */
+
+For example in EFIDDRGetConfig.h header:
+
+#define PROTOCOL_VERSION 0x0000000000060000/*Version 6*/
+
+struct _EFI_DDRGETINFO_PROTOCOL {
+   UINT64                                Revision;
+   EFI_DDRGETINFO_GETDDRDETAILS          GetDDRDetails;
+   EFI_DDRGETINFO_GETDDRFREQTABLE        GetDDRFreqTable;
+   EFI_DDRGETINFO_GETDDRFREQ             GetDDRFreq;
+   EFI_DDRGETINFO_SETDDRFREQ             SetDDRFreq;
+   EFI_DDRGETINFO_GETDDRMAXENABLEDFREQ   GetDDRMaxEnabledFreq;
+   EFI_DDRGETINFO_SETMAXNOMINALDDRFREQ   SetMaxNominalDDRFreq;        // Added in Version 4
+   EFI_DDRGETINFO_SETLOWESTDDRFREQ       SetLowestDDRFreq;            // Added in Version 4
+   EFI_DDRGETINFO_GETDDRMAPPEDREGIONS    GetDDRMappedRegions;         // Added in Version 5
+   EFI_DDRGETINFO_GETSHUBFREQTABLE       GetSHUBFreqTable;           /* Added in Version 6 */
+   EFI_DDRGETINFO_SETSHUBFREQ            SetSHUBFreq;                /* Added in Version 6 */
+   EFI_DDRGETINFO_MEASURESHUBFREQ        MeasureSHUBFreq;            /* Added in Version 6 */   
+   EFI_DDRGETINFO_GETXBL2QUANTUM_SMEM_DATA  GetXbl2QuantumSmemData;  /* Added in Version 6 */
+};
+
+4. Protocol version that is defined in the DXE is “protocol version of the implemented API’s” in that particular BOOT build.
+
+If DXE has protocol version X API’s implemented and available, then define the protocol version in DXE as version X.
+
+For example:
+
+If a particular protocol API is in version 5 as declared in the protocol header, and if the implementation of that API is available on 
+a particular boot build then DXE must define the protocol version >= 5.
+
+if a particular protocol API is in version 6 as declared in the protocol header, and if the implementation of the API is not supposed to 
+be available on a particular boot build then DXE protocol version must be <=5
+
+For example:
+
+In core.boot.5.1, DDRInfoDxe.c (/core.boot.5.1/QcomPkg/Drivers/DDRInfoDxe/DDRInfoDxe.c) => protocol API supported is till version 5.
+
+#define EFI_DDRGETINFO_PROTOCOL_REVISION_V5 0x0000000000050000
+STATIC EFI_DDRGETINFO_PROTOCOL DDRGetInfoProtocol =
+{
+  EFI_DDRGETINFO_PROTOCOL_REVISION_V5,
+  EFI_GetDDRDetails,
+  EFI_GetDDRFreqTable,
+  EFI_GetDDRFreq,
+  EFI_SetDDRFreq,
+  EFI_GetDDRMaxEnabledFreq,
+  EFI_SetMaxNominalDDRFreq,
+  EFI_SetLowestDDRFreq,
+  EFI_GetDDRMappedRegions
+};
+
+In this example: Protocol header has latest version 6, but DXE has APIs supported till version 5. In a boot build with this DXE, 
+if SDK app try to call the version 6 API (SetShubFreq), then the APP will crash - since DXE doesn’t have the implementation supported.
+
+In core.boot.6.0, DDRInfoDxe.c ((/core.boot.6.0/QcomPkg/Drivers/DDRInfoDxe/DDRInfoDxe.c) => protocol API supported is till version 6.
+
+#define EFI_DDRGETINFO_PROTOCOL_REVISION_V6 0x0000000000060000
+STATIC EFI_DDRGETINFO_PROTOCOL DDRGetInfoProtocol =
+{
+  EFI_DDRGETINFO_PROTOCOL_REVISION_V6,
+  EFI_GetDDRDetails,
+  EFI_GetDDRFreqTable,
+  EFI_GetDDRFreq,
+  EFI_SetDDRFreq,
+  EFI_GetDDRMaxEnabledFreq,
+  EFI_SetMaxNominalDDRFreq,
+  EFI_SetLowestDDRFreq,
+  EFI_GetDDRMappedRegions,
+  EFI_GetSHUBFreqTable,
+  EFI_SetSHUBFreq,
+  EFI_MeasureSHUBFreq,
+  EFI_GetXbl2QuantumSmemData,
+};
+
+In this example: Protocol header has latest version 6 and DXE also has APIs supported till version 6. In a boot build with this DXE, 
+if SDK app try to call the version 6 API (SetShubFreq), then the APP will work since DXE has the version 6 API’s implemented.
+
+5. SDK application should query the protocol revision and then call the API’s as declared in the protocol header. 
+Protocol Revision returned to the SDK app is same as the PROTOCOL version defined in the DXE.
+
+Code snippet
+=============
+
+1.	Get the protocol revision.
+2.	If Protocol revision >= 5
+                         Call GetDDRMappedRegions;
+3.	If Protocol revision > = 6
+                         Call SetSHUBFreq;
+
+As an application developer, if you read the protocol version as 5 and then try to call a version 6 protocol API (Example: SetSHUBFreq), 
+then the APP will crash as the installed version in the DXE is version 5.
+
+===========================================================================================================================================================
+2. Adding Quantum Logs For PW-Gating
+=============================================================================================================================================================
+1. App in Quantum SDK can follow this format:
+
+#include <Library/QuantumLog.h>
+
+STATIC
+EFI_STATUS
+ExampleAppStartFunc (VOID)
+{
+	 EFI_STATUS                  Status = EFI_NOT_FOUND;
+	 //rest of your implementation...
+	 
+	 return Status;
+}
+
+EFI_STATUS EFIAPI
+ExampleAppInitialize(
+  IN EFI_HANDLE         ImageHandle,
+  IN EFI_SYSTEM_TABLE   *EFI_SYSTEM_TABLE
+  )
+{
+  EFI_STATUS  Status;
+  DEBUG((EFI_D_ERROR, "ExampleApp: ExampleAppInitialize(): I'm in ExmpleApp Init Function!\r\n"));
+
+  Status = ExampleAppStartFunc();
+
+  if (Status == EFI_SUCCESS)
+    DEBUG((EFI_D_ERROR, QUANTUM_APP_PASSED)); //Passed Quantum Log
+
+  else
+	DEBUG((EFI_D_ERROR, QUANTUM_APP_FAILED)); //Failed Quantum Log
+
+  DEBUG((EFI_D_ERROR, QUANTUM_APP_END));      //End of The App Quantum Log
+  
+  return EFI_SUCCESS;
+}
+
+In the above code snippet we have "ExampleAppInitialize" as App's entry function where it has "ExampleAppStartFunc" which has your app's implementation and returns
+"Status" which gets checked in ExampleAppInitialize and prints results as :
+
+Result/State     QuantumLog Macro     Description 
+------------     ----------------     -----------
+Pass             QUANTUM_APP_PASSED    App Passed
+Fail             QUANTUM_APP_FAILED    App Failed
+End              QUANTUM_APP_END       App Ended
+
+
+
+
+

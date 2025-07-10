@@ -1,0 +1,30 @@
+#===============================================================================
+#
+# DDR driver inc path
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2020,2022 by QUALCOMM Technologies, Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/dev/aop.ho/4.0/vboddire.aop.ho.4.0.hotproc_changes/aop_proc/core/settings/power/ddr_settings/build/ddr_settings.api#1 $
+#  $DateTime: 2022/07/05 00:24:50 $
+#  $Author: vboddire $
+#  $Change: 38236254 $
+#===============================================================================
+Import('env')
+
+env = env.Clone()
+
+#-------------------------------------------------------------------------------
+# Publish Public APIs
+# these are accecible internal or external to CoreBSP
+#-------------------------------------------------------------------------------
+env.PublishPublicApi('AOP_SETTINGS', [
+     "${INC_ROOT}/core/settings/power/prochot_settings/interface",
+  ])
+env.LoadAPIUnits()

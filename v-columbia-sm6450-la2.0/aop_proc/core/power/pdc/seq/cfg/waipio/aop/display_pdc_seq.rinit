@@ -1,0 +1,50 @@
+#===========================================================================
+#                               display_pdc.rinit
+#
+#  DESCRIPTION:
+#    This file contains init values for DISPLAY PDC
+#
+#    Settings are obtained from TCS contents sheet maintained by 
+#    Architecture team alongwith collaboration from SW and HW teams.
+#
+#  Copyright (c) 2019 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+#--------------------------------------------------------------------------
+# Common vars
+#--------------------------------------------------------------------------
+vars:
+
+module: { name = RPMH_PDC_DISPLAY_DISPLAY_PDC, group = PDC_SEQ}
+    
+regs:
+    
+  SEQ_MEM = [
+  #CX_COL_AOSS:
+  0xbe80a1e1 ,  #0x000: 0xe1      WAIT1     rx_fifo_empty
+                #0x001: 0xa1      SET1      pdc_mode_control
+                #0x002: 0x80      SET0      timer_match_valid
+                #0x003: 0xbe      SET1      seq_tcs_1_start
+  0xa4a2a3fe ,  #0x004: 0xfe      WAIT1     tcs_1_seq_cmp
+                #0x005: 0xa3      SET1      cx_collapse_req
+                #0x006: 0xa2      SET1      soc_sleep_req
+                #0x007: 0xa4      SET1      dbg_resource_rel_req
+  0x8285e0a5 ,  #0x008: 0xa5      SET1      wfi_profiling_unit_3
+                #0x009: 0xe0      WAIT1     sequence_resume
+                #0x00a: 0x85      SET0      wfi_profiling_unit_3
+                #0x00b: 0x82      SET0      soc_sleep_req
+  0xe384e283 ,  #0x00c: 0x83      SET0      cx_collapse_req
+                #0x00d: 0xe2      WAIT1     soc_sleep_unlock
+                #0x00e: 0x84      SET0      dbg_resource_rel_req
+                #0x00f: 0xe3      WAIT1     cx_collapse_unlock
+  0x8180fdbd ,  #0x010: 0xbd      SET1      seq_tcs_2_start
+                #0x011: 0xfd      WAIT1     tcs_2_seq_cmp
+                #0x012: 0x80      SET0      timer_match_valid
+                #0x013: 0x81      SET0      pdc_mode_control
+  0x00000020 ,  #0x014: 0x20      RETURN
+                #0x015: 0x00
+                #0x016: 0x00
+                #0x017: 0x00  
+]

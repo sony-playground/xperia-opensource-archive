@@ -1,0 +1,47 @@
+#/**
+# @file MhiDeviceLib.inf
+#
+# Copyright (c) 2020 Qualcomm Technologies, Inc.
+# All Rights Reserved.
+# Confidential and Proprietary - Qualcomm Technologies, Inc.
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MhiDeviceLib
+  FILE_GUID                      = D0A0543B-496B-1B47-7C00-7A847374C6C5
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MhiDeviceLib
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Werror -DMHI_OSAL_MSG_LEVEL=MSG_MEDIUM -DIPA_DMA_LEGACY_MODE -DNOINTERRUPTS -DMHI_BOOT -DMHI_DMA -DMHI_HOST_REVD_COMPATIBLE -DMHI_FATAL_ON_SYSERR -DMHI_DEVICEWAKE_DB -DMHI_PM_DEVICE_WAKE_DB_NUM=127 -DMHI_PM_DEVICE_WAKE_DB_MASK=0x80000000 -DM3_WAKE_THRESHOLD=5 -DMHI_DEBUG
+
+[Sources.common]
+  mhi.c
+  mhi_boot.c
+  mhi_core.c
+  mhi_hwacc.c
+  mhi_link.c
+  mhi_mmio.c
+  mhi_osal.c
+  mhi_pm.c
+  mhi_ring.c
+  mhi_sm.c
+  mhi_tgt.c
+  mhi_util.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/Library/MhiDeviceLib/MhiDeviceLibPkg.dec
+  QcomPkg/SocPkg/Library/PcieEndpointLib/PcieEndpointLibPkg.dec
+
+[LibraryClasses]
+  CacheMaintenanceLib
+  MhiDeviceTargetLib
+  PcieEndpointLib
+

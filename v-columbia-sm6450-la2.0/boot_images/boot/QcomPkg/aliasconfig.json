@@ -1,0 +1,182 @@
+{
+  # Development build clean Waipio
+  "wdevclean" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Waipio,QcomToolsPkg", "-C", "XBL_CORE", "--build_flags", "cleanall"],
+  
+  # Development build clean Kailua
+  "kdevclean" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua,QcomToolsPkg", "-C", "XBL_CORE", "--build_flags", "cleanall"],
+  
+  # Development build clean Lassen
+  "ldevclean" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen,QcomToolsPkg", "-C", "XBL_CORE", "--build_flags", "cleanall"],
+   
+  # Development build clean Fillmore
+  "fdevclean" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Fillmore,QcomToolsPkg", "-C", "XBL_CORE", "--build_flags", "cleanall"],
+  
+  # Development build clean Netrani
+  "ndevclean" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Netrani,QcomToolsPkg", "-C", "XBL_CORE", "--build_flags", "cleanall"],
+
+  # Development build clean Clarence
+  "cdevclean" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Clarence,QcomToolsPkg", "-C", "XBL_CORE", "--build_flags", "cleanall"],
+
+  # Development build for testing
+  "abl" : ["--variant", "LAA", "-r", "DEBUG", "-t", "QcomModulePkg"],
+
+  #Test Pkg
+  "tests" : ["--variant", "LAA", "-r", "DEBUG", "-t", "QcomToolsPkg,QcomTestPkg"],
+
+  #SOC tests
+  "soctests" : ["--variant", "LAA", "-r", "DEBUG", "-t", "QcomToolsPkg,QcomSocPlatTestPkg"],
+
+  #Tools Pkg
+  "tools" : ["--variant", "LAA", "-r", "DEBUG", "-t", "QcomToolsPkg"],
+
+  # Build Waipio LAA, Debug
+  "wai" : ["-r", "DEBUG", "-t", "Waipio"],
+
+  # Build Waipio LAA, Debug, UEFI only
+  "wud" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Waipio", "-i", "UEFI"],
+
+  # Build Waipio LAA, Release, UEFI only
+  "wur" : ["--variant", "LAA", "-t", "Waipio", "-i", "UEFI"],
+  
+  # Build Kailua LAA, Release and Debug
+  "kl" : ["--variant", "LAA", "-t", "Kailua,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Kailua LAA, Debug
+  "kld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua"],
+  
+  # Build Kailua LAA, Release
+  "klr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Kailua"],
+  
+  # Build Kailua LAA, Debug include tools and test
+  "kttld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Kailua LAA, Release include tools and test
+  "kttlr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Kailua,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Kailua LAA, Debug, RAM dump only
+  "klddump" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua", "-C", "XBL_RAMDUMP"],
+
+  # Build Kailua LAA, Debug, Loader only
+  "kldl" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua", "-C", "XBL_LOADER"],
+  
+  # Build Olympic LAA, Debug, DevPrgDDR only
+  "kldprg" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua", "-C", "DEVPRG_DDR"],
+  
+  # Build Kailua LE, Debug, DevPrgLite only
+  "kldlite" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua", "-C", "DEVPRG_LITE"],
+  
+  # Build Kailua LE, Debug, XBL core
+  "kldc" : ["-t", "Olympic,QcomToolsPkg", "--variant", "LAA", "-r", "DEBUG",  "-C", "XBL_CORE"],
+  
+  # Build Kailua LE, Release, XBL core
+  "klrc" : ["-t", "Kailua,QcomToolsPkg", "--variant", "LAA", "-r", "RELEASE",  "-C", "XBL_CORE"],
+  
+  # Build Kailua LAA, Debug, UEFI only
+  "kldu" : ["-t", "Kailua,QcomToolsPkg", "--variant", "LAA", "-r", "DEBUG", "-i", "UEFI"],
+  
+  # Build Kailua LE, Release, UEFI only
+  "klru" : ["-t", "Kailua,QcomToolsPkg", "--variant", "LAA", "-r", "RELEASE", "-i", "UEFI"],
+
+  # Build Lassen LE, Release and Debug
+  "ll" : ["--variant", "LAA", "-t", "Lassen,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Lassen LE, Debug
+  "lld" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen"],
+  
+  # Build Lassen LE, Release
+  "llr" : ["--variant", "LE", "-r", "RELEASE", "-t", "Lassen"],
+  
+  # Build Lassen LE, Debug include tools and test
+  "lttld" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Lassen LE, Release include tools and test
+  "lttlr" : ["--variant", "LE", "-r", "RELEASE", "-t", "Lassen,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Lassen LE, Debug, RAM dump only
+  "llddump" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen", "-C", "XBL_RAMDUMP"],
+
+  # Build Lassen LE, Debug, Loader only
+  "lldl" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen", "-C", "XBL_LOADER"],
+  
+  # Build Lassen, Debug, DevPrgDDR only
+  "lldprg" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen", "-C", "DEVPRG_DDR"],
+  
+  # Build Lassen LE, Debug, DevPrgLite only
+  "lldlite" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen", "-C", "DEVPRG_LITE"],
+  
+  # Build Lassen LE, Debug, XBL core
+  "lldc" : ["-t", "Lassen,QcomToolsPkg", "--variant", "LE", "-r", "DEBUG",  "-C", "XBL_CORE"],
+  
+  # Build Lassen LE, Release, XBL core
+  "llrc" : ["-t", "Lassen,QcomToolsPkg", "--variant", "LE", "-r", "RELEASE",  "-C", "XBL_CORE"],
+  
+  # Build Lassen LE, Debug, UEFI only
+  "lldu" : ["-t", "Lassen,QcomToolsPkg", "--variant", "LE", "-r", "DEBUG", "-i", "UEFI"],
+  
+  # Build Lassen LE, Release, UEFI only
+  "llru" : ["-t", "Lassen,QcomToolsPkg", "--variant", "LE", "-r", "RELEASE", "-i", "UEFI"],
+  
+  # Build Fillmore LAA, Release and Debug
+  "fl" : ["--variant", "LAA", "-t", "Fillmore,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Fillmore LAA, Debug
+  "fld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Fillmore"],
+  
+  # Build Fillmore LAA, Release
+  "flr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Fillmore"],
+  
+  # Build Fillmore LAA, Debug include tools and test
+  "fttld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Fillmore,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Fillmore LAA, Release include tools and test
+  "fttlr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Fillmore,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Fillmore LAA, Debug, RAM dump only
+  "flddump" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Fillmore", "-C", "XBL_RAMDUMP"],
+
+  # Build Fillmore LAA, Debug, Loader only
+  "fldl" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Fillmore", "-C", "XBL_LOADER"],
+
+  # Build Netrani LAA, Release and Debug
+  "nl" : ["--variant", "LAA", "-t", "Netrani,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Netrani LAA, Debug
+  "nld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Netrani"],
+  
+  # Build Netrani LAA, Release
+  "nlr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Netrani"],
+  
+  # Build Netrani LAA, Debug include tools and test
+  "nttld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Netrani,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Netrani LAA, Release include tools and test
+  "nttlr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Netrani,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Netrani LAA, Debug, RAM dump only
+  "nlddump" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Netrani", "-C", "XBL_RAMDUMP"],
+
+  # Build Netrani LAA, Debug, Loader only
+  "nldl" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Netrani", "-C", "XBL_LOADER"],
+
+  # Build Clarence LAA, Release and Debug
+  "cl" : ["--variant", "LAA", "-t", "Clarence,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Clarence LAA, Debug
+  "cld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Clarence"],
+  
+  # Build Clarence LAA, Release
+  "clr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Clarence"],
+  
+  # Build Clarence LAA, Debug include tools and test
+  "cttld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Clarence,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Clarence LAA, Release include tools and test
+  "cttlr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Clarence,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Clarence LAA, Debug, RAM dump only
+  "clddump" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Clarence", "-C", "XBL_RAMDUMP"],
+
+  # Build Clarence LAA, Debug, Loader only
+  "cldl" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Clarence", "-C", "XBL_LOADER"]
+  
+}

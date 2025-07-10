@@ -1,0 +1,24 @@
+// soc_pre-ddr.dtsi
+//
+// Provides Common SoC settings for Fillmore
+
+// Nothing should be in this file except #include statements
+
+/ {
+	storage: storage { };
+};
+
+&sw { 
+	pmic: pmic { };
+};
+
+#include "Core/Boot/ddr_common.dtsi"
+#include "Core/Boot/ddr_target.dtsi"
+#include "../SW/Core/Boot/boot.dtsi"	/* Boot SW configuration settings */
+#include "Core/PMIC/pmic.dtsi"
+#include "Core/SocInfra/PlatformInfo/PlatformInfo.dtsi"
+#include "Core/PMIC/adc.dtsi"
+#include "Core/SocInfra/TLMM/tlmm.dtsi"
+#include "Core/Storage/UFS/ufs.dtsi"
+#include "Core/SSG/seclib.dtsi"
+#include "Core/Buses/I2C/i2c.dtsi"

@@ -1,0 +1,20 @@
+#===============================================================================
+#
+# test driver Scons
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2020,2022 by QUALCOMM Technologies, Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+Import('env')
+env = env.Clone()
+
+SETTINGS_XML_SOURCES = [
+        '${BUILD_ROOT}/core/settings/power/prochot_settings/config/prochot_settings.xml',
+      ]
+
+env.AddDevCfgInfo(['CORE_AOP'], {'xml_files': SETTINGS_XML_SOURCES})

@@ -1,0 +1,43 @@
+;============================================================================
+;  Name:
+;    set_abl_pkg_path.cmm
+;
+;  Description:
+;    Set ABL path for UEFI T32 scripts
+;
+; Copyright (c) 2020 Qualcomm Technologies Incorporated.
+; All Rights Reserved.
+; Qualcomm Technologies Confidential and Proprietary
+;
+;----------------------------------------------------------------------------
+
+
+;&adevPkg="\\jshriram-linux\workspace\jshriram\lahaina\adev"
+;&adevBinToSrcRelPath="obj/ABL_OBJ"
+
+LOCAL &pth
+LOCAL &name
+LOCAL &pkgname
+LOCAL &relpathname
+LOCAL &tempfile
+
+&pth=OS.PPD()
+&pth="&pth/../../../"
+&pth=OS.FILE.REALPATH("&pth")
+&pth=STRING.CUT("&pth", -1)
+&name=OS.FILE.NAME("&pth")
+
+&pkgname="&name"+"Pkg"
+&relpathname="&name"+"BinToSrcRelPath"
+
+&tmpfile=OS.TMPFILE()+".cmm"
+OPEN #1 &tmpfile /Create
+WRITE #1 "GLOBAL &" "&pkgname"
+WRITE #1 "GLOBAL &" "&relpathname"
+WRITE #1 "&" "&pkgname" "=""" "&pth" """ "
+WRITE #1 "&" "&relpathname" "=""" "obj/ABL_OBJ" """ "
+CLOSE #1
+
+DO &tmpfile
+RM &tmpfile
+

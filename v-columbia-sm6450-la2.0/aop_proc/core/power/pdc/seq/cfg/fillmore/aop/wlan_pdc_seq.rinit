@@ -1,0 +1,60 @@
+#===========================================================================
+#                             wlan_pdc_seq.rinit
+#
+#  DESCRIPTION:
+#    This file contains init WLAN PDC sequences.
+#
+#    These sequences are obtained from github
+#
+#  Copyright (c) 2021 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+module : { name = RPMH_PDC_WLAN_RF_WLAN_RF_PDC, group = PDC_SEQ }
+regs:
+    SEQ_MEM_m = [
+#WLAN_PWR_UP:
+  0xbbe2a2a1,  #0x000: 0xa1   SET1      pdc_mode_control
+               #0x001: 0xa2   SET1      soc_sleep_req
+               #0x002: 0xe2   WAIT1     soc_sleep_unlock
+               #0x003: 0xbb   SET1      seq_tcs_4_start
+  0xb9fabafb,  #0x004: 0xfb   WAIT1     tcs_4_seq_cmp
+               #0x005: 0xba   SET1      seq_tcs_5_start
+               #0x006: 0xfa   WAIT1     tcs_5_seq_cmp
+               #0x007: 0xb9   SET1      seq_tcs_6_start
+  0x82f8b8f9,  #0x008: 0xf9   WAIT1     tcs_6_seq_cmp
+               #0x009: 0xb8   SET1      seq_tcs_7_start
+               #0x00a: 0xf8   WAIT1     tcs_7_seq_cmp
+               #0x00b: 0x82   SET0      soc_sleep_req
+  0xa6a58aaa,  #0x00c: 0xaa   SET1      addl_seq_pwr_ctrl_0_clr_sw_ctrl_pos_edge_detect_intr
+               #0x00d: 0x8a   SET0      addl_seq_pwr_ctrl_0_clr_sw_ctrl_pos_edge_detect_intr
+               #0x00e: 0xa5   SET1      wfi_profiling_unit_3
+               #0x00f: 0xa6   SET1      generic_profiling_unit_5
+  0xbfe2a2e0,  #0x010: 0xe0   WAIT1     sequence_resume
+               #0x011: 0xa2   SET1      soc_sleep_req
+               #0x012: 0xe2   WAIT1     soc_sleep_unlock
+               #0x013: 0xbf   SET1      seq_tcs_0_start
+  0xbdfebeff,  #0x014: 0xff   WAIT1     tcs_0_seq_cmp
+               #0x015: 0xbe   SET1      seq_tcs_1_start
+               #0x016: 0xfe   WAIT1     tcs_1_seq_cmp
+               #0x017: 0xbd   SET1      seq_tcs_2_start
+  0x82fcbcfd,  #0x018: 0xfd   WAIT1     tcs_2_seq_cmp
+               #0x019: 0xbc   SET1      seq_tcs_3_start
+               #0x01a: 0xfc   WAIT1     tcs_3_seq_cmp
+               #0x01b: 0x82   SET0      soc_sleep_req
+  0x00208bab   #0x01c: 0xab   SET1      addl_seq_pwr_ctrl_1_clr_sw_ctrl_neg_edge_detect_intr
+               #0x01d: 0x8b   SET0      addl_seq_pwr_ctrl_1_clr_sw_ctrl_neg_edge_detect_intr
+               #0x01e: 0x20   RETURN
+               #0x01f: 0x00
+
+    ]
+
+module: { name = RPMH_PDC_WLAN_RF_WLAN_RF_PDC, group = WLAN_PDC_EN }
+regs:
+	PROFILING_UNITpf_EN[0] = 0x1
+    PROFILING_UNITpf_EN[1] = 0x1
+    PROFILING_UNITpf_EN[2] = 0x1
+    PROFILING_UNITpf_EN[3] = 0x1
+    PROFILING_UNITpf_EN[4] = 0x1
+    ENABLE_PDC = 0x1

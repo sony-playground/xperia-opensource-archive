@@ -1,0 +1,5 @@
+&adc {
+	vadc: vadc { };
+};
+
+#include "netrani-vadc.dtsi"

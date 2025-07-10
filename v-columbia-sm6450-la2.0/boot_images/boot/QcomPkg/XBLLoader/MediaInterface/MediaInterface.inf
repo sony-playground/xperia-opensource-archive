@@ -1,0 +1,46 @@
+#/** @file MediaInterface.inf
+#
+#  MediaInterfaceLib
+#  
+#  Copyright (c) 2019-2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 05/13/20   ck      Added EepromDevLib
+# 04/06/20   ck      Added PageDevLib
+# 03/16/20   ck      Added FlashlessSaharaLib
+# 09/29/19   digants  Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MediaInterfaceLib
+  FILE_GUID                      = BD4CC3FB-4872-DDC9-2CE9-AF999D7B9264
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MediaInterfaceLib
+
+[Sources.common]
+  boot_media_interface.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+
+[LibraryClasses]
+  ConfigContextLib
+  MuslLib
+  BlockDevLib
+  EepromDevLib
+  PageDevLib
+  FlashlessSaharaLib

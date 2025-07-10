@@ -1,0 +1,50 @@
+#/** @file EUDTargetLib.inf
+#
+#  EUD Lib
+#  
+#  Copyright (c) 2017-2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+# when       who       what, where, why
+# --------   ---       ----------------------------------------------------------
+# 07/15/20   amcheriy  Initial revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = EUDTargetLib
+  FILE_GUID                      = e5ebe0bf-ea0b-41c7-9942-29c9f22fffa6
+  MODULE_TYPE                    = SEC
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = EUDTargetLib
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS = -DBUILD_BOOT_CHAIN
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DBUILD_BOOT_CHAIN -DUSE_LOADER_UTIL
+
+  
+[Sources]
+  eud_config.c
+  eud_target.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  
+[LibraryClasses]
+  MuslLib
+  ServicesUtilsLib
+  
+
+

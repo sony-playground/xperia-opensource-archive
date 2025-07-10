@@ -1,0 +1,37 @@
+#/** @file PlatformInfoRamDump.inf
+#  
+#  Component description file for PlatformInfo driver module
+#  
+#  Copyright (c) 2021  Qualcomm Technologies Inc. All rights reserved.
+#
+#  
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PlatformInfoLoaderLib
+  FILE_GUID                      = 5f026986-b08e-4595-b9fb-2c3bbb519f25
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PlatformInfoLoaderLib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror
+
+[Sources.common]
+  PlatformInfo.c
+  PlatformInfoFwk.c
+  PlatformInfoCore.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+
+[LibraryClasses]
+  BaseLib
+  ChipInfoDalFwkLib
+

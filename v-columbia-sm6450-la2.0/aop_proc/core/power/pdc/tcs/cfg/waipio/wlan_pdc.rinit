@@ -1,0 +1,253 @@
+#===========================================================================
+#                               wlan_pdc.rinit
+#
+#  DESCRIPTION:
+#    This file contains init values for WLAN PDC
+#
+#    Settings are obtained from TCS contents sheet maintained by Architecture
+#    team alongwith collaboration from SW and HW teams. 
+#
+#
+#  Copyright (c) 2020 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+#--------------------------------------------------------------------------
+# Common vars
+#--------------------------------------------------------------------------
+vars:
+    vrm_vol_offset = 0x0
+    vrm_en_offset = 0x4
+    vrm_mode_offset = 0x8
+    ret_mode = 3
+    auto_mode = 6
+    disable = 0
+    enable = 1
+
+module: { name = RPMH_PDC_WLAN_RF_WLAN_RF_PDC, group = WLAN_PDC_TCS }
+regs:
+# Sleep Set 0
+    TCSt_CMDn_ADDR[0, 0] = 0: { cmd_db_addr("vrm.wlan", vrm_vol_offset)}
+	TCSt_CMDn_DATA[0, 0] = disable
+	TCSt_CMDn_MSGID[0, 0] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[0, 1] = 0 : { cmd_db_addr("smpb11", vrm_vol_offset)}
+    TCSt_CMDn_DATA[0, 1] = 615 	   # 0.615v
+    TCSt_CMDn_MSGID[0, 1] = {0, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[0, 2] = 0 : { cmd_db_addr("smpb11", vrm_mode_offset)}
+    TCSt_CMDn_DATA[0, 2] = ret_mode
+    TCSt_CMDn_MSGID[0, 2] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 3] = 0 : { cmd_db_addr("smpe2", vrm_vol_offset)}
+    TCSt_CMDn_DATA[0, 3] = 515 #.515v
+    TCSt_CMDn_MSGID[0, 3] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 4] = 0 : { cmd_db_addr("smpe2", vrm_mode_offset)}
+    TCSt_CMDn_DATA[0, 4] = ret_mode
+    TCSt_CMDn_MSGID[0, 4] = {0, 1} # {fnf, write}
+
+    #enable
+    TCSt_CMD_ENABLE[0] = 0x1F
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[0] = 0x0             # Dont serialize
+
+
+# Sleep Set 1
+	TCSt_CMDn_ADDR[1, 0] = 0 : { cmd_db_addr("smpb10", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 0] = ret_mode
+    TCSt_CMDn_MSGID[1, 0] = {0, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[1, 1] = 0 : { cmd_db_addr("smpb12", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 1] = ret_mode
+    TCSt_CMDn_MSGID[1, 1] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[1, 2] = 0 : { cmd_db_addr("smpb12", vrm_vol_offset)}
+    TCSt_CMDn_DATA[1, 2] = 945  
+    TCSt_CMDn_MSGID[1, 2] = {0, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[1, 3] = 0 : { cmd_db_addr("smpc1", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 3] = ret_mode
+    TCSt_CMDn_MSGID[1, 3] = {0, 1} # {fnf, write}
+	
+	TCSt_CMDn_ADDR[1, 4] = 0 : { cmd_db_addr("smpc1", vrm_vol_offset)}
+    TCSt_CMDn_DATA[1, 4] = 1825
+    TCSt_CMDn_MSGID[1, 4] = {0, 1} # {fnf, write}
+
+    #enable
+    TCSt_CMD_ENABLE[1] = 0x1F
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[1] = 0x0             # Dont serialize
+	
+# Sleep Set 2
+	TCSt_CMDn_ADDR[2, 0] = 0 : { cmd_db_addr("rfclka3", vrm_en_offset)}
+    TCSt_CMDn_DATA[2, 0] = disable
+    TCSt_CMDn_MSGID[2, 0] = {0, 1} # {fnf, write}
+	
+    TCSt_CMDn_ADDR[2, 1] = 0 : { cmd_db_addr("smpe3", vrm_mode_offset)}
+    TCSt_CMDn_DATA[2, 1] = ret_mode
+    TCSt_CMDn_MSGID[2, 1] = {0, 1} # {fnf, write}
+
+	TCSt_CMDn_ADDR[2, 2] = 0 : { cmd_db_addr("smpe3", vrm_en_offset)}
+    TCSt_CMDn_DATA[2, 2] = disable
+    TCSt_CMDn_MSGID[2, 2] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[2, 3] = 0 : { cmd_db_addr("ldoe7", vrm_mode_offset)}
+    TCSt_CMDn_DATA[2, 3] = ret_mode
+    TCSt_CMDn_MSGID[2, 3] = {0, 1} # {fnf, write}
+
+	#enable
+    TCSt_CMD_ENABLE[2] = 0xF
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[2] = 0x0             # Dont serialize
+	
+##############################################################################	
+	
+# Wake Set 4
+    TCSt_CMDn_ADDR[4, 0] = 0: { cmd_db_addr("vrm.wlan", vrm_vol_offset)}
+	TCSt_CMDn_DATA[4, 0] = enable
+	TCSt_CMDn_MSGID[4, 0] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[4, 1] = 0 : { cmd_db_addr("smpb11", vrm_vol_offset)}
+    TCSt_CMDn_DATA[4, 1] = 966 	   #0.966v
+    TCSt_CMDn_MSGID[4, 1] = {1, 1} # {rr, write}
+	
+    TCSt_CMDn_ADDR[4, 2] = 0 : { cmd_db_addr("smpb11", vrm_mode_offset)}
+    TCSt_CMDn_DATA[4, 2] = auto_mode
+    TCSt_CMDn_MSGID[4, 2] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[4, 3] = 0 : { cmd_db_addr("smpe2", vrm_vol_offset)}
+    TCSt_CMDn_DATA[4, 3] = 1012 #1.012
+    TCSt_CMDn_MSGID[4, 3] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[4, 4] = 0 : { cmd_db_addr("smpe2", vrm_mode_offset)}
+    TCSt_CMDn_DATA[4, 4] = auto_mode
+    TCSt_CMDn_MSGID[4, 4] = {1, 1} # {rr, write}
+
+    #enable
+    TCSt_CMD_ENABLE[4] = 0x1F
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[4] = 0x0             # Dont serialize
+
+
+# Wake Set 5
+	TCSt_CMDn_ADDR[5, 0] = 0 : { cmd_db_addr("smpb10", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 0] = auto_mode
+    TCSt_CMDn_MSGID[5, 0] = {1, 1} # {rr, write}
+	
+    TCSt_CMDn_ADDR[5, 1] = 0 : { cmd_db_addr("smpb12", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 1] = auto_mode
+    TCSt_CMDn_MSGID[5, 1] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[5, 2] = 0 : { cmd_db_addr("smpb12", vrm_vol_offset)}
+    TCSt_CMDn_DATA[5, 2] = 1350
+    TCSt_CMDn_MSGID[5, 2] = {1, 1} # {rr, write}
+	
+    TCSt_CMDn_ADDR[5, 3] = 0 : { cmd_db_addr("smpc1", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 3] = auto_mode
+    TCSt_CMDn_MSGID[5, 3] = {1, 1} # {rr, write}
+	
+	TCSt_CMDn_ADDR[5, 4] = 0 : { cmd_db_addr("smpc1", vrm_vol_offset)}
+    TCSt_CMDn_DATA[5, 4] = 1900
+    TCSt_CMDn_MSGID[5, 4] = {1, 1} # {rr, write}
+
+    #enable
+    TCSt_CMD_ENABLE[5] = 0x1F
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[5] = 0x0             # Dont serialize
+
+# Wake Set 6
+    TCSt_CMDn_ADDR[6, 0] = 0 : { cmd_db_addr("rfclka3", vrm_en_offset)}
+    TCSt_CMDn_DATA[6, 0] = enable
+    TCSt_CMDn_MSGID[6, 0] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[6, 1] = 0 : { cmd_db_addr("smpe3", vrm_mode_offset)}
+    TCSt_CMDn_DATA[6, 1] = auto_mode
+    TCSt_CMDn_MSGID[6, 1] = {1, 1} # {rr, write}
+
+	TCSt_CMDn_ADDR[6, 2] = 0 : { cmd_db_addr("smpe3", vrm_en_offset)}
+    TCSt_CMDn_DATA[6, 2] = disable
+    TCSt_CMDn_MSGID[6, 2] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[6, 3] = 0 : { cmd_db_addr("ldoe7", vrm_mode_offset)}
+    TCSt_CMDn_DATA[6, 3] = auto_mode
+    TCSt_CMDn_MSGID[6, 3] = {1, 1} # {rr, write}
+	
+	#enable
+    TCSt_CMD_ENABLE[6] = 0xF
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[6] = 0x0             # Dont serialize
+
+    ##
+    # From PDC HPG:
+    # For Kona, dual-edge interrupts handling has changed. When the irq is configed
+    # as dual edge, each input will generate a clk cycle at interrupt pdc in 
+    # passthrough mode.
+    # To detect, sleep and wake signal on SW_CTRL (from Kona->hastings), pdc must therefore 
+    # config two irqs for rising and falling edge
+    # Rising edge (posedege starts the up seq) Falling edge (negedge) starts down
+    ##
+    #irq config
+    IRQ_i_CFG_DRVd[0,0] = 0x6 #Rising edge
+    IRQ_i_CFG_DRVd[0,1] = 0x5 #Falling edge
+    IRQ_ENABLE_BANK = 0x3
+
+module: { name = RPMH_PDC_WLAN_BB_WLAN_BB_PDC, group = WLAN_PDC_TCS }
+regs:
+# Sleep Set 0
+    TCSt_CMDn_ADDR[0, 0] = 0: { cmd_db_addr("smpe3", vrm_mode_offset)}
+	TCSt_CMDn_DATA[0, 0] = ret_mode
+	TCSt_CMDn_MSGID[0, 0] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 1] = 0: { cmd_db_addr("smpe3", vrm_vol_offset)}
+	TCSt_CMDn_DATA[0, 1] = 420 #0.420mV
+	TCSt_CMDn_MSGID[0, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 2] = 0: { cmd_db_addr("smpe2", vrm_vol_offset)}
+	TCSt_CMDn_DATA[0, 2] = 512 #0.512mV
+	TCSt_CMDn_MSGID[0, 2] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 3] = 0: { cmd_db_addr("smpe2", vrm_mode_offset)}
+	TCSt_CMDn_DATA[0, 3] = ret_mode
+	TCSt_CMDn_MSGID[0, 3] = {0, 1} # {fnf, write}
+
+    #enable
+    TCSt_CMD_ENABLE[0] = 0xF
+	
+    # Wait for completion mask
+    WAIT_FOR_CMPL[0] = 0x0             # Dont serialize
+
+# Wake Set 4
+    TCSt_CMDn_ADDR[4, 0] = 0: { cmd_db_addr("smpe3", vrm_mode_offset)}
+	TCSt_CMDn_DATA[4, 0] = auto_mode
+	TCSt_CMDn_MSGID[4, 0] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[4, 1] = 0: { cmd_db_addr("smpe3", vrm_vol_offset)}
+	TCSt_CMDn_DATA[4, 1] = 940 #0.940mV
+	TCSt_CMDn_MSGID[4, 1] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[4, 2] = 0: { cmd_db_addr("smpe2", vrm_vol_offset)}
+	TCSt_CMDn_DATA[4, 2] = 976 #0.976mV
+	TCSt_CMDn_MSGID[4, 2] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[4, 3] = 0: { cmd_db_addr("smpe2", vrm_mode_offset)}
+	TCSt_CMDn_DATA[4, 3] = auto_mode
+	TCSt_CMDn_MSGID[4, 3] = {1, 1} # {rr, write}
+
+    #enable
+    TCSt_CMD_ENABLE[4] = 0xF
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[4] = 0x0             # Dont serialize
+
+    #irq config
+    IRQ_i_CFG_DRVd[0,0] = 0x6 #Rising edge
+    IRQ_i_CFG_DRVd[0,1] = 0x5 #Falling edge
+    IRQ_ENABLE_BANK = 0x3

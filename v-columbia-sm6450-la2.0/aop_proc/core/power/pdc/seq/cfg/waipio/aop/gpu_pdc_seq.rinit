@@ -1,0 +1,38 @@
+#===========================================================================
+#                             gpu_pdc_seq.rinit
+#
+#  DESCRIPTION:
+#    This file contains init GPU PDC sequences.
+#
+#    These sequences are obtained from github as of 10/25
+#
+#  Copyright (c) 2019 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+module : { name = RPMH_PDC_GPU_GPU_PDC, group = PDC_SEQ }
+regs:
+    SEQ_MEM_m = [
+    #CX_COL_AOSS:
+      0xfebea1e1 ,  #0x000: 0xe1      WAIT1     rx_fifo_empty
+                    #0x001: 0xa1      SET1      pdc_mode_control
+                    #0x002: 0xbe      SET1      seq_tcs_1_start
+                    #0x003: 0xfe      WAIT1     tcs_1_seq_cmp
+      0xa5a4a3a2 ,  #0x004: 0xa2      SET1      soc_sleep_req
+                    #0x005: 0xa3      SET1      cx_collapse_req
+                    #0x006: 0xa4      SET1      dbg_resource_rel_req
+                    #0x007: 0xa5      SET1      wfi_profiling_unit_3
+      0x838285e0 ,  #0x008: 0xe0      WAIT1     sequence_resume
+                    #0x009: 0x85      SET0      wfi_profiling_unit_3
+                    #0x00a: 0x82      SET0      soc_sleep_req
+                    #0x00b: 0x83      SET0      cx_collapse_req
+      0xbce384e2 ,  #0x00c: 0xe2      WAIT1     soc_sleep_unlock
+                    #0x00d: 0x84      SET0      dbg_resource_rel_req
+                    #0x00e: 0xe3      WAIT1     cx_collapse_unlock
+                    #0x00f: 0xbc      SET1      seq_tcs_3_start
+      0x002081fc ,  #0x010: 0xfc      WAIT1     tcs_3_seq_cmp
+                    #0x011: 0x81      SET0      pdc_mode_control
+                    #0x012: 0x20      RETURN
+                    #0x013: 0x00    
+    ]

@@ -1,0 +1,36 @@
+Prerequisites
+-------------
+
+Install Sphinx, and the PlantUML extension, using pip (or any other
+preferred means of installation):
+
+  $ pip install --user Sphinx
+  $ pip install --user sphinxcontrib-plantuml
+  $ pip install --user sphinx-rtd-theme
+
+In order to generate PDF files, the 'texlive-full' Ubuntu package is
+the easiest way to install the necessary tools:
+
+  $ apt-get install texlive-full
+  $ apt-get install graphviz
+
+The PlantUML Java application, which can be used to embed UML diagrams
+directly into documents, can be found at http://plantuml.com/. The
+Sphinx configuration assumes that the 'plantuml' command can be found
+in your $PATH. This can be achieved by downloading the plantuml.jar
+file to some directory, and adding the following script named <plantuml>
+somewhere in the $PATH (or in a new directory, which is later added to
+$PATH in .bashrc):
+
+  #!/bin/sh -e
+  java -jar /path/to/plantuml.jar "$@"
+
+
+Building output documents
+-------------------------
+
+To build PDF documents, the 'gen.sh' script can be used:
+
+  $ ./gen.sh
+
+This will create PDF files in the '_build/*/latex' subdirectories.

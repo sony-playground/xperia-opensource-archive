@@ -1,0 +1,48 @@
+#/** @file 
+#                    StackCanaryBaseLibCore.inf
+#
+#
+# Copyright (c) 2015-2016, 2020 Qualcomm Technologies, Inc. All rights reserved.
+#
+#  
+#**/
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 04/13/20   cm      Support 32 bit ARM
+# 07/06/16   vk      Initial version.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = StackCanaryBaseLib
+  FILE_GUID                      = 2de551bd-533a-4374-8ba4-c041ea0dc34f
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = StackCanaryBaseLib
+
+[Sources]
+  StackCanaryCommon.c
+  StackCanaryCore.c
+
+[Sources.AARCH64]
+  ModuleEntryPoint.asm | RVCT
+  ModuleEntryPointCore.S | GCC
+
+[Sources.ARM]
+  ARM/ModuleEntryPoint.asm | RVCT
+  ARM/ModuleEntryPointCore.S | GCC
+
+[LibraryClasses]
+  RandomStackCanaryLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  ArmPkg/ArmPkg.dec
+

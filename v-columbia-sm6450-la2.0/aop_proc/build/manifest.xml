@@ -1,0 +1,10 @@
+<config>
+  <image_tree>
+    <name>AOP.HO.4.0</name>
+    <build_id>AOP.HO.4.0-00571-WAIPIO_E-1</build_id>
+    <branch_point_revision>None</branch_point_revision>
+    <revision>00571</revision>
+    <spin>1</spin>
+    <client>WAIPIO_E</client>
+  </image_tree>
+</config>

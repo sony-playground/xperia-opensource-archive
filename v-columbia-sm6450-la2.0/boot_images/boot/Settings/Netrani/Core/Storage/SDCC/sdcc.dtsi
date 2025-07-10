@@ -1,0 +1,63 @@
+// Core/Storage/SDCC/sdcc.dtsi
+// core storage HW settings
+
+#include "sdcc_defines.h" 
+
+&soc {
+   storage {
+	  #address-cells = <1>;
+	  #size-cells = <1>;
+	  
+      sdcc1: sdc0@0x07C4000 {
+         compatible = "qc,sdcc1";
+         reg = <0x07C4000 0x00001000>;
+
+	     EnableLogging = /bits/ 8 <0>; 
+
+             DriveStrength = <0x1FDB 0x35>;  
+	     MaxSpeedMode = /bits/ 8 <SDCC_HS400_MODE>; 
+
+	  HsrSettings {
+	      DDRConfig = <0x80040868>; 
+	      DLLUserCtrl = <0x2C010800>;
+		  
+		  HS400 {
+		    DLLconfig = <0x000F642C>;
+			DLLConfig2 = <0xA001>;
+			DLLConfig3 = <0x01>;
+			DLLTestCtrl = <0x1400000>;
+			};
+			
+		  HS200 {
+		    DLLconfig = <0x0007642C>;
+			DLLConfig2 = <0xA000>;
+			DLLConfig3 = <0x10>;
+			DLLTestCtrl = <0x1800000>;
+			};		
+		    
+	     };
+      };
+	  
+	  
+      sdcc2: sdc1@8804000 {
+         compatible = "qc,sdcc2";
+         reg = <0x8804000 0x00001000>;
+
+	     EnableLogging = /bits/ 8 <0>; 
+
+	     DriveStrength = <0x1FFF>; 
+	     MaxSpeedMode = /bits/ 8 <SDCC_SDR104_MODE>; 
+
+	     HsrSettings {
+	        DLLConfig = <0x7642C>;
+			DLLConfig2 = <0xA800>;
+	        DLLConfig3 = <0x10>;
+	        DLLTestCtrl = <0x1800000>; 
+	        DDRConfig = <0x80040868>; 
+	        DLLUserCtrl = <0x2C010800>;
+			
+	     };
+      };
+   };
+};
+

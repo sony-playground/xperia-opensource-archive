@@ -1,0 +1,74 @@
+#===============================================================================
+#
+# System Drivers Libs
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2011 - 2018 by Qualcomm Technologies, Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/4.0/aop_proc/core/pmic/build/pmic.scons#14 $
+#  $DateTime: 2022/05/24 00:08:28 $
+#  $Author: pwbldsvc $
+#  $Change: 37378620 $
+#                      EDIT HISTORY FOR FILE
+#
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 02/01/22   rr      Added macro for Waipo 'WAIPIO_TARGET_CONFIG'
+# 04/11/22   rr      Added macro for Palima 'PALIMA_TARGET_CONFIG'
+#===============================================================================
+Import('env')
+
+env = env.Clone()
+
+#-------------------------------------------------------------------------------
+# Convert warnings to errors in all system drivers components
+#-------------------------------------------------------------------------------
+
+#env.Append(CFLAGS = "-Werror ")
+
+#-------------------------------------------------------------------------------
+# Compile for Init files for different targets.
+#-------------------------------------------------------------------------------
+
+if env['MSM_ID'] in ['8250', '8350','waipio','fillmore','kailua','aurora','lassen','netrani','clarence','halliday']:
+	env.Append(PM_MLONG_CFLAG = "TRUE")
+else:
+	env.Append(PM_MLONG_CFLAG = "FALSE")
+
+if env['MSM_ID'] == 'waipio':
+    if env['CHIPSET_PMIC'] == 'waipio':
+        env.Append(CPPDEFINES = 'WAIPIO_TARGET_CONFIG')
+    elif env['CHIPSET_PMIC'] == 'palima':
+        env.Append(CPPDEFINES = 'PALIMA_TARGET_CONFIG')
+#-------------------------------------------------------------------------------
+# Publish set of protected APIs (Accessible only in PMIC)
+#-------------------------------------------------------------------------------
+
+env.PublishProtectedApi('PMIC', [
+    "${INC_ROOT}/core/pmic/pm/inc",
+    "${INC_ROOT}/core/pmic/vrm/inc",
+])
+
+#-------------------------------------------------------------------------------
+# Load sub scripts
+#-------------------------------------------------------------------------------
+
+env.LoadSoftwareUnits()
+
+if 'USES_QDSS_SWE' in env:
+    QDSS_IMG = ['QDSS_EN_IMG']
+    pmic_events = [
+      ['PMIC_EVENT_VRM_ERROR=513',  'PMIC VRM error: log_event = %d, result = %d, rsrc_info = %d, data = %d'],
+      ['PMIC_EVENT_LAST=599', 'PMIC last event placeholder']
+    ]
+env.AddSWEInfo(QDSS_IMG, pmic_events)
+

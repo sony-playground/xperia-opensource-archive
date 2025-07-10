@@ -1,0 +1,31 @@
+;============================================================================
+;  Name:
+;    set_COMMON_pkg_paths.cmm
+;
+;  Description:
+;    Set COMMON paths for UEFI T32 scripts
+;
+; Copyright (c) 2020 Qualcomm Technologies Incorporated.
+; All Rights Reserved.
+; Qualcomm Technologies Confidential and Proprietary
+;
+;----------------------------------------------------------------------------
+
+GLOBAL &QcomToolsPkg
+GLOBAL &QcomTools32Pkg
+GLOBAL &QcomTestPkg
+GLOBAL &QcomTest32Pkg
+GLOBAL &QuestPkg
+GLOBAL &CatePkg
+
+&QcomToolsPkg=OS.PPD()
+&QcomToolsPkg="&QcomToolsPkg/../../../../"
+&QcomToolsPkg=OS.FILE.REALPATH("&QcomToolsPkg")
+&QcomToolsPkg=STRING.CUT("&QcomToolsPkg", -1)
+
+&QcomTestPkg="&QcomToolsPkg"
+&QcomTools32Pkg="&QcomToolsPkg"
+&QcomTest32Pkg="&QcomToolsPkg"
+&QuestPkg="&QcomToolsPkg"
+&CatePkg="&QcomToolsPkg"
+

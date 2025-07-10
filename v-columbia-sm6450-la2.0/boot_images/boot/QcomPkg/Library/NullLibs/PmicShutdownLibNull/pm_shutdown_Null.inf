@@ -1,0 +1,45 @@
+#/** @file PmicBoottimeLib.inf
+# 
+# PMIC boot time Library for Msm8996
+#
+#  Copyright (c) 2015, 2020  Qualcomm Technologies, Inc.  All Rights Reserved. 
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when        who     what, where, why
+# --------    ---     ----------------------------------------------------------
+# 06/19/20    rama    Removed SPMILib from libraryClasses
+# 09/16/15    al      Porting latest shutdown library
+#
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION       = 0x00010005
+  BASE_NAME         = PmicShutdownLibBoot
+  FILE_GUID         = 6B4C0FB4-4F8B-4e2b-940A-5D38C83FF39E
+  MODULE_TYPE       = BASE
+  VERSION_STRING    = 1.0
+  LIBRARY_CLASS     = PmicShutdownLibBoot
+
+[Sources.common]
+  pm_shutdown.c
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  TimerLib
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  
+
+[Depex]
+  TRUE

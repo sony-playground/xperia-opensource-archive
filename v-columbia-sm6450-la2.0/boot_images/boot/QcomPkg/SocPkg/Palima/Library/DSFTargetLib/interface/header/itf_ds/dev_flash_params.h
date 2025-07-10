@@ -1,0 +1,48 @@
+#ifndef __DEV_FLASH_PARAMS_H__
+#define __DEV_FLASH_PARAMS_H__
+
+/*=============================================================================
+
+                                DDR device Flash PARAMETERS
+                                Header File
+GENERAL DESCRIPTION
+This file defines the DDR parameters stored in DDR Flash partition
+=============================================================================*/
+/*******************************************************************************
+ QUALCOMM Proprietary Design Data
+ Copyright (c) 2013-2018,2021 Qualcomm Technologies Incorporated.
+ All rights reserved.
+ ******************************************************************************/
+/*==============================================================================
+$Header: //components/rel/core.boot/6.0/QcomPkg/SocPkg/Palima/Library/DSFTargetLib/interface/header/itf_ds/dev_flash_params.h#1 $
+$DateTime: 2021/09/12 20:53:48 $
+$Author: pwbldsvc $
+================================================================================*/
+/*==========================================================================
+                               INCLUDE FILES
+===========================================================================*/
+#include "HALcomdef.h"
+/*==============================================================================
+                                  TYPES & DEFINES
+==============================================================================*/
+
+#define TRAINING_DATA_SIZE_IN_BYTES (256 * (84 + 16))
+#define TRAINING_DATA_SIZE_IN_BYTES_FACTORY (256 * 2)
+
+/******************************************************/
+/*** DDR Parameter partition datastructure ***/
+/******************************************************/
+
+struct ddr_params_partition
+{
+    uint32 magic_number;
+    uint32 version;
+    uint32 training_data_size;
+    uint32 training_log_size;
+    uint32 checksum;
+    uint32 checksum_factory_data;
+    
+    uint8 training_data[TRAINING_DATA_SIZE_IN_BYTES]; // training data which can be cleared to force retraining for new DSF versions
+    uint8 training_data_factory[TRAINING_DATA_SIZE_IN_BYTES_FACTORY]; // training data which must be retained to permit OTA DSF updates
+};
+#endif /* __DEV_FLASH_PARAMS_H__ */

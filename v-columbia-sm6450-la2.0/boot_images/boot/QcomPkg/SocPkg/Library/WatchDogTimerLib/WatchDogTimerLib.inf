@@ -1,0 +1,39 @@
+#@file  
+#      WatchDogTimerLib.inf
+#
+#
+#   Copyright (c) 2020  Qualcomm Technologies, Inc. All rights reserved.
+#   Qualcomm Technologies Proprietary and Confidential.
+#
+
+#=============================================================================
+#                              EDIT HISTORY
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+
+#
+# when       who      what, where, why
+# --------   ---      --------------------------------------------------------
+# 12/23/20   ds       Initial revision
+#=============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = WatchDogTimerLib
+  FILE_GUID                      = 3B8D42EC-4534-44F4-9ED4-921B01423BC5
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = WatchDogTimerLib
+
+[Sources.common]
+  WatchDogTimerLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/Library/WatchDogTimerLib/WatchDogTimerLib.dec
+
+[LibraryClasses]
+  ArmLib

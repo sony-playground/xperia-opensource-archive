@@ -1,0 +1,545 @@
+/*! \file pm_sbl_boot.c
+*  \n
+*  \brief This file contains PMIC device initialization function where initial PMIC
+*  \n SBL settings are configured through the PDM auto-generated code.
+*  \n
+*  \n &copy; Copyright 2013-2023 Qualcomm Technologies Inc, All Rights Reserved
+*/
+/* =======================================================================
+Edit History
+This section contains comments describing changes made to this file.
+Notice that changes are listed in reverse chronological order.
+
+
+$Header: //components/dev/core.boot/6.0/aravapal.core.boot.6.0.tip_dev/QcomPkg/Library/PmicLib/target/netrani/system/src/pm_sbl_boot.c#1 $
+$Author: aravapal $
+$DateTime: 2022/04/30 21:50:34 $
+when       who     what, where, why
+--------   ---     ----------------------------------------------------------
+06/10/21   pxm     move dp toggle inside charger applicable condition.
+08/07/19   yps     Free pmic config buffer after pmic initialization
+05/07/18   pxm     Remove pm_config_wlan_active_and_retention_level and auto power on check on PM855B
+06/05/17   aab     Updated pm_config_wlan_active_and_retention_level() 
+12/05/17   aab     Added support to log number of SPMI transaction
+11/19/17   aab     Updated check to support RUMI with out PMIC.      
+07/21/17   czq     Use Spare reg PON_PERPH_RB_SPARE instead of PON_DVDD_RB_SPARE
+07/10/17   sv      Updated auto power on check API.
+05/15/17   aab     Updated pm_sbl_chg_init() to call updated temp monitoring function
+02/17/17   pxm     Called function to check if auto power on. 
+01/11/17   pxm     add support for PBS triggered AFP
+12/27/16   al      Porting fix to set LDO5 voltage with micro volt's.  
+10/21/16   akm     Added pm_get_pon_reason_history, pm_pbs_header_info_init in pm_sbl_pre_config
+10/07/16   aab     Call pm_sbl_config_skin_temp_threshold() for targets that require charging
+09/13/16   aab     Updated logging text 
+08/25/16   pxm     Config skin temperature threshold for all target
+07/31/16   aab     Added num spmi transaction conditional logging
+07/14/16   aab     Updated to support target with out PMI8998
+06/02/16   aab     Updated pm_device_programmer_init()
+03/23/16   aab     Updated pm_config_ssc_active_and_retention_level()
+02/18/16   aab     Updated pm_sbl_chg_init()
+02/18/16   aab     Added pm_system_init()
+02/18/16   aab     Renamed pm_set_ssc_active_and_retention_levels_mv()  to pm_config_ssc_active_and_retention_level() 
+02/05/16   aab     Added pm_set_ssc_active_and_retention_levels_mv()
+01/25/16   aab     Updated pm_device_init() and pm_sbl_chg_init()to support RUMI targets with out PMIC 
+12/22/15   aab     Added Support for PMI8998 SBL Charging
+12/10/15   aab     Added Cx/Mx pvs_retention_data[]  
+12/04/15   aab     Updated to support msm8998
+10/14/15   aab     Branch from 8996 target
+========================================================================== */
+/*===========================================================================
+
+                     INCLUDE FILES 
+
+===========================================================================*/
+#include "pm_err_flags.h"
+#include "pm_boot.h"
+#include "pm_ldo.h"
+#include "pm_sbl_boot.h"
+#include "pm_device.h"
+#include "pm_config_sbl.h"
+#include "pm_config_sbl_test.h"
+#include "pm_pbs_info.h"
+#include "pm_target_information.h"
+#include "pm_sbl_boot_target.h"
+#include "pm_log_utils.h"
+#include "pm_pbs.h"
+#include "DALDeviceId.h"
+#include "DDIPlatformInfo.h"
+#include "DDIChipInfo.h"
+#include "pmio_pon.h"
+#include "CoreVerify.h"
+#include "railway.h"
+#include "SpmiBus.h"
+#include "pm_chg.h"
+#include "pm_app_chg.h"
+#include "GPIO.h"
+#include "pm_dt_parser.h"
+#include "qusb_ldr_utils.h"
+#include "boot_reset_if.h" 
+
+#define SDAM48_MEM24_USB_PON_TRIG_PID   0x9F58  
+#define SDAM48_MEM25_USB_PON_TRIG_SID   0x9F59  
+#define SDAM01_DETECTED_PMICS_1		0x7047
+#define SDAM01_DETECTED_PMICS_2		0x7048
+#define RTC_ALARM_DATA				    0x6240
+#define RTC_ALARM_DATA_SIZE				4
+#define DISABLE_RTC_ALARM        		0x00
+#define DISABLE_RTC_ALARM_ADDR        	0x6246
+#define CLEAR_RTC_ALARM          		0x01
+#define CLEAR_RTC_ALARM_ADDR          	0x6248
+/*===========================================================================
+
+                     PROTOTYPES 
+
+===========================================================================*/
+static pm_err_flag_type pm_sbl_pre_config(void);
+static pm_err_flag_type pm_sbl_target_detect(void);
+static pm_err_flag_type pm_config_wlan_active_and_retention_level(void);
+static pm_err_flag_type pm_sbl_no_battery_boot_config(void);
+static pm_err_flag_type pm_leica2_sid_programming (void);
+
+/*===========================================================================
+
+                        GLOBALS and TYPE DEFINITIONS 
+
+===========================================================================*/
+boolean pm_ram_image_loaded_flag = FALSE;
+static pm_sbl_specific_data_type *sbl_param_ptr = NULL;
+
+extern pm_err_flag_type 
+pm_update_charger_pmic_index(void);
+
+#define SLAVE_CHARGER_NOT_PRESENT 0x0
+#define SLAVE_CHARGER_PRESENT     0x1
+#define SPMI_SLAVE_ID_REG 0x6f1
+
+#define SDAM_PMIC       PMIC_A
+#define SDAM_FLAG_ADDR  0x7072
+
+#define PM_LEICA_GPIO_DISABLE     0xffff
+
+#define PRIMARY_BUS 0
+#define SDAM_46_MEM_126 0x9DBE
+#define BOB_CFG  0x1
+#define HBST_CFG 0x0
+
+/*===========================================================================
+
+                        FUNCTION DEFINITIONS 
+
+===========================================================================*/
+static pm_err_flag_type 
+pm_device_auto_boot_check(void) 
+{
+  pm_err_flag_type err_flag = PM_ERR_FLAG_SUCCESS; 
+  uint8 pon_trig_pmic_expected = PMIC_B, pon_trig_pmic_configured = 0;
+  uint8 pon_trig_sdam_table[3][8] = {
+								{0x1C, 0x3, 0x4, 0x4, 0x0, 0x4, 0x0, 0x0}, // PM7325B/PM8350B PON SYSOK
+								{0x73, 0x8, 0x4, 0x4, 0x0, 0x4, 0x0, 0x0}, // PM7250B PON SYSOK
+								{0x8C, 0x1, 0x0, 0x0, 0x1, 0x1, 0x0, 0x0}, // NO-PMIC CBLPWR_N
+							   };
+  pm_pon_reason_type pon_reason = {0}; 
+  uint8 rtc_data[4]={0};
+  //Fix for Automatic-PON due to RTC ALARM
+  err_flag |= pm_comm_read_byte_array(PMIC_A, RTC_ALARM_DATA, RTC_ALARM_DATA_SIZE, rtc_data);
+  err_flag |= pm_pon_get_pon_reason(PMIC_A, &pon_reason); 
+  err_flag |= pm_comm_write_byte(PMIC_A_SLAVEID_PRIM, 0x7071, 0x0);//clear sdam flag
+  if( err_flag != PM_ERR_FLAG_SUCCESS ) 
+  { 
+    return err_flag; 
+  }
+  
+  if (pon_reason.rtc && !rtc_data)
+  {
+    err_flag |= pm_comm_write_byte(PMIC_A, DISABLE_RTC_ALARM_ADDR, DISABLE_RTC_ALARM); //disable rtc alarm for xvdd
+    err_flag |= pm_comm_write_byte(PMIC_A, CLEAR_RTC_ALARM_ADDR, CLEAR_RTC_ALARM); //clear rtc alarm for RTC power on
+    pm_log_message("Shutting down due to RTC silicon HW Bug, unexpected wakeup");
+    boot_hw_powerdown();//shutdown
+  }
+  
+  // Fix for Incorrect/NO PMI detection HW-BUG and Unexpected wakeup
+  pm_log_message("Verifying PON-Trigger specific configurations & current PON-Trigger");
+  if(pm_get_pmic_model(PMIC_C) != PMIC_IS_UNKNOWN) //PMIC detected at SID=3
+  {
+	if(pm_get_pmic_model(PMIC_C) == PMIC_IS_PM7250B) 
+	{ // Sequence is important for below transactions to change SIDs
+	  err_flag |= pm_comm_write_byte(0x2, 0x651, 0x9); 
+	  err_flag |= pm_comm_write_byte(0x2, 0x650, 0x8);
+	  //leica2 fix
+	  err_flag |= pm_comm_write_byte(0xC, 0x6F1, 0x44);
+	  pon_trig_pmic_expected = PMIC_I; 
+	}
+	else
+	{
+	  pon_trig_pmic_expected = PMIC_C;	
+	}
+  }
+  else if(pm_get_pmic_model(PMIC_I) == PMIC_IS_PM7250B) 
+  {
+    pon_trig_pmic_expected = PMIC_I;
+  }
+  
+  // Read SDAM048.MEM_025 (SID), PON Trigger SID configured
+  err_flag |= pm_comm_read_byte(PMIC_A_SLAVEID_PRIM, SDAM48_MEM25_USB_PON_TRIG_SID, &pon_trig_pmic_configured); 
+  
+  if(pon_trig_pmic_configured != pon_trig_pmic_expected)
+  { //Enters here if mis-configurations detected
+    pm_log_message("Detected PON-Trigger specific misconfigurations. Rectifying critical settings");
+	if(pon_trig_pmic_expected == PMIC_C)
+	{
+	  pm_comm_write_byte_array(PMIC_A_SLAVEID_PRIM, SDAM48_MEM24_USB_PON_TRIG_PID, 8, pon_trig_sdam_table[0]);
+	  pm_comm_write_byte_mask(PMIC_A_SLAVEID_PRIM, SDAM01_DETECTED_PMICS_1, 0x8, 0x8); 
+	  pm_comm_write_byte_mask(PMIC_A_SLAVEID_PRIM, SDAM01_DETECTED_PMICS_2, 0x3, 0x0); 
+	}
+	else if(pon_trig_pmic_expected == PMIC_I)
+	{
+	  pm_comm_write_byte_array(PMIC_A_SLAVEID_PRIM, SDAM48_MEM24_USB_PON_TRIG_PID, 8, pon_trig_sdam_table[1]);
+	  pm_comm_write_byte_mask(PMIC_A_SLAVEID_PRIM, SDAM01_DETECTED_PMICS_1, 0xC, 0x0); 
+	  pm_comm_write_byte_mask(PMIC_A_SLAVEID_PRIM, SDAM01_DETECTED_PMICS_2, 0x3, 0x3);
+      
+	  pm_comm_write_byte_mask(PMIC_A_SLAVEID_PRIM, SDAM01_DETECTED_PMICS_1, 0x10, 0x0); //clear bit4 of SDAM01_DETECTED_PMICS_1
+	  pm_comm_write_byte_mask(PMIC_A_SLAVEID_PRIM, SDAM01_DETECTED_PMICS_2, 0x10, 0x1); //set bit4 of SDAM01_DETECTED_PMICS_2
+	  
+	}
+	else if(pon_trig_pmic_expected == PMIC_B)
+	{
+	  pm_comm_write_byte_array(PMIC_A_SLAVEID_PRIM, SDAM48_MEM24_USB_PON_TRIG_PID, 8, pon_trig_sdam_table[2]);
+  	  pm_comm_write_byte_mask(PMIC_A_SLAVEID_PRIM, SDAM01_DETECTED_PMICS_1, 0x8, 0x0); 
+	  pm_comm_write_byte_mask(PMIC_A_SLAVEID_PRIM, SDAM01_DETECTED_PMICS_2, 0x3, 0x0); 
+	}
+	
+	if(pon_trig_pmic_configured == PMIC_B)
+	{ //Clear GPIO5B configs done for false NO-PMI detection
+	  err_flag |= pm_comm_write_byte(0x1, 0x8FDA, 0x0f); //Perf reset of GPIO, follow all Resets
+	  err_flag |= pm_comm_write_byte(0x1, 0x8F14, 0x1); //clear pending interrupts
+	  err_flag |= pm_comm_write_byte(0x1, 0x8F16, 0x1); //Disable interrupts
+	}
+	
+	// if only CBLPWR_N PON detected due to false NO-PMI 
+    if(pon_reason.cblpwr && !(pon_reason.rtc | pon_reason.hard_reset | pon_reason.kpdpwr | pon_reason.usb_chg | pon_reason.smpl | pon_reason.dc_chg | pon_reason.pon1))
+	{ // Under Misconfigs detected section, 'CBLPWR_N-Only' is always Invalid
+      pm_log_message("Detected Invalid PON-Trigger = CBLPWR_N (only). Initiating Shutdown");
+      boot_hw_powerdown();//shutdown
+	}
+	else
+	{ // PON-Trigger is something valid & needs the system to boot-up (eventually).
+	  err_flag |= pm_comm_write_byte(PMIC_A_SLAVEID_PRIM, 0x7071, 0x1);
+	  pm_log_message("PON-Trigger is something invalid");
+	  pm_log_message("Initiating hard reset");
+	  boot_hw_reset(BOOT_HARD_RESET_TYPE);
+	}
+  }
+  else
+  {
+    pm_log_message("All PON-Trigger specific configs verified. Proceeding to BOOT");
+  }
+  return err_flag;
+}
+
+pm_err_flag_type 
+pm_device_init ( void )
+{
+  static pm_err_flag_type err_flag = PM_ERR_FLAG_SUCCESS;
+  uint32 initial_num_spmi_transn = pm_get_num_spmi_transaction(0);
+
+  pm_target_information_init();
+  
+  err_flag |= pm_device_setup();
+  
+  err_flag |= pm_target_specific_device_setup();
+
+  if( (pm_is_target_pre_silicon() == TRUE) && (pm_is_pmic_present(PMIC_A) == FALSE) )
+  {
+    pm_log_message("Bootup: No PMIC on RUMI Target");
+    return err_flag = PM_ERR_FLAG_SUCCESS;
+  }
+  
+  pm_comm_info_init();
+
+  err_flag |= pm_device_pre_init();
+
+  err_flag |= pm_pon_init();
+
+  err_flag |= pm_pbs_info_rom_init();  
+
+  err_flag |= pm_sbl_pre_config(); 
+
+  err_flag |= pm_sbl_config(); 
+  
+  //psi20 WA- write SDAM_REG_INT_CHECKUP_PROBE_EN_SID_7_0 0x6- fixed in psi21
+  err_flag |= pm_comm_write_byte(0x0, 0x9EB0, 0x6);
+  
+  if (err_flag == PM_ERR_FLAG_SUCCESS)
+  {
+    pm_ram_image_loaded_flag = TRUE;
+  }
+
+  err_flag |= pm_device_auto_boot_check(); // Shutdown/HR the device in case of unexpected PON trigger
+  
+  err_flag |= pm_sbl_config_test(); /* SBL Configuration validation, only executes complete code if spare reg 0x88F bit 0 is set*/
+
+  err_flag |= pm_pbs_info_ram_init();  /* Read PBS INFO for the pmic ram devices */
+
+  err_flag |= pm_pbs_ram_version_validation_test(); /* PBS RAM Version validation, only executes complete code if spare reg 0x88F bit 0 is set*/
+
+  err_flag |= pm_device_post_init(); 
+
+  //Write to Spare bit for pm_device_init_status
+  if(err_flag == PM_ERR_FLAG_SUCCESS)
+  {
+    err_flag = pm_comm_write_byte_mask( PMIC_A_SLAVEID_PRIM, 
+                                       PMIO_PON_PBS_PERPH_RB_SPARE_ADDR, 
+                              PON_PERPH_RB_SPARE_DEVICE_INIT_MASK,
+                              PON_PERPH_RB_SPARE_DEVICE_INIT_MASK ); 
+  }
+
+  pm_log_message("Device Init # SPMI Transn: %d", 
+                  pm_get_num_spmi_transaction(initial_num_spmi_transn));
+              
+  return err_flag; 
+}
+
+
+
+pm_err_flag_type
+pm_sbl_chg_init (void)
+{
+  pm_err_flag_type err_flag = PM_ERR_FLAG_SUCCESS;
+  uint32 initial_num_spmi_transn = 0;
+  boolean applicable = FALSE;
+
+  err_flag |= pm_sbl_is_charging_applicable(&applicable);
+  if (TRUE == applicable)
+  {
+    err_flag |= pm_sbl_chg_pre_init();
+
+    err_flag |= pm_app_chg_init();
+
+    //Handle Usb charger and dp toggle for CDP
+    qusb_ldr_utils_handle_charger();
+
+    err_flag |= pm_app_chg_dead_battery_charging();
+
+    err_flag |= pm_sbl_chg_post_init();
+  }
+
+  pm_log_message("CHG Init # SPMI Transn: %d", pm_get_num_spmi_transaction(initial_num_spmi_transn));
+
+  return err_flag;
+}
+
+pm_err_flag_type
+pm_infra_init (void)
+{
+  pm_err_flag_type err_flag = PM_ERR_FLAG_SUCCESS;
+
+  if( (pm_is_target_pre_silicon() == TRUE) && (pm_is_pmic_present(PMIC_A) == FALSE) )
+  {
+    pm_log_message("Bootup: No PMIC on RUMI Target");
+    return err_flag = PM_ERR_FLAG_SUCCESS;
+  }
+
+  err_flag |= pm_device_setup();
+  pm_target_information_init();
+  pm_comm_info_init();
+  if (PM_IMG_DEVPROG != pm_get_img_type())
+  {
+    err_flag |= pm_update_charger_pmic_index();
+  }
+  err_flag |= pm_pon_init();
+
+  return err_flag;
+}
+
+
+
+static pm_err_flag_type
+pm_sbl_pre_config(void)
+{
+  pm_err_flag_type err_flag = PM_ERR_FLAG_SUCCESS;
+  pm_dt_haptics_config *haptics_dt_config = NULL;
+  uint32 data = 0;
+
+  if (sbl_param_ptr == NULL)
+  {
+     sbl_param_ptr = (pm_sbl_specific_data_type*)pm_target_information_get_specific_info(PM_PROP_SBL_SPECIFIC_DATA);
+  }
+  CORE_VERIFY_PTR(sbl_param_ptr);
+
+  err_flag |= pm_log_pon_reasons();
+
+  err_flag |= pm_sbl_target_detect();
+  
+  haptics_dt_config = (pm_dt_haptics_config*)pm_dt_get_node(PMIC_DT_NODE_PM_HAPTICS);
+  
+  CORE_VERIFY_PTR(haptics_dt_config);
+ 
+  data = haptics_dt_config->boost_cfg_bob ? BOB_CFG : HBST_CFG ;
+  
+  err_flag |= pm_comm_write_byte_ex(PRIMARY_BUS, SDAM_PMIC, SDAM_46_MEM_126, data);
+  
+  return err_flag;
+}
+
+
+pm_err_flag_type
+pm_sbl_target_detect(void) /* SBL Target detect */
+{
+   static pm_err_flag_type err_flag = PM_ERR_FLAG_SUCCESS; 
+
+   return err_flag;
+}
+
+
+pm_err_flag_type 
+pm_system_init(void)
+{
+  pm_err_flag_type err_flag = PM_ERR_FLAG_SUCCESS;
+
+  //change the RF CLK5 EDGE 4X to 1X for Clarence QRD WCN CLK 2419.2MHz spur issue
+  if(DALPLATFORMINFO_TYPE_QRD == DalPlatformInfo_Platform())
+  {
+    err_flag = pm_comm_write_byte_mask(PMIC_A, 0x5843, 0x3, 0);
+  }
+
+  return err_flag;
+}
+
+pm_err_flag_type
+pm_target_specific_device_setup(void)
+{
+  pm_err_flag_type err_flag = PM_ERR_FLAG_SUCCESS;
+  
+  err_flag |= pm_version_deinit();
+  
+  // PSI will read the flag to determine if need to configure slave charger related.
+  //err_flag |= pm_target_setup_parallel_charger();
+  
+  //Leica2 camera PMICs supported only on i2c
+  //pm_leica2_sid_programming ();
+
+  err_flag |= pm_version_detect();
+
+  return err_flag;
+}
+
+pm_err_flag_type 
+pm_sbl_is_charging_applicable(boolean* applicable)
+{
+  pm_err_flag_type err_flag = PM_ERR_FLAG_SUCCESS;
+  DalPlatformInfoPlatformType platform_type = DALPLATFORMINFO_TYPE_UNKNOWN;
+  pm_model_type pmic_model = PMIC_IS_UNKNOWN;
+  uint32 device_index_charger = PMIC_INDEX_MAX;  
+  *applicable = FALSE;
+  
+  err_flag |= pm_chg_get_primary_charger_pmic_index(&device_index_charger);
+
+  if (pm_is_target_pre_silicon() == TRUE)
+  {
+    pm_log_message("Pre-SIL. No CHG Support");
+    return PM_ERR_FLAG_SUCCESS; 
+  }
+
+  platform_type = DalPlatformInfo_Platform();
+  pmic_model = pm_get_pmic_model(device_index_charger);
+  if( ((platform_type == DALPLATFORMINFO_TYPE_MTP)
+    || (platform_type == DALPLATFORMINFO_TYPE_FLUID)
+    || (platform_type == DALPLATFORMINFO_TYPE_LIQUID)
+    || (platform_type == DALPLATFORMINFO_TYPE_QRD)
+	|| (platform_type == DALPLATFORMINFO_TYPE_IDP)
+    || (platform_type == DALPLATFORMINFO_TYPE_HDK)) &&
+       ((pmic_model == PMIC_IS_PM7250B) || (pmic_model == PMIC_IS_PMI632)))
+  {
+	 pm_log_message("Charging applicable is true");
+    *applicable = TRUE;
+  }
+
+  return err_flag;
+}
+
+/*static pm_err_flag_type
+pm_leica2_sid_programming (void)
+{
+  pm_err_flag_type err_flag   = PM_ERR_FLAG_SUCCESS;
+  pm_err_flag_type err_gpio   = PM_ERR_FLAG_FAILURE;
+
+  GPIOClientHandleType GPIOHandle;
+  GPIOResult bGPIOResult;
+  GPIOKeyType GPIOKey_LEA = 0, GPIOKey_LEB = 0;
+  GPIOConfigType GPIOConfig;
+
+  pm_dt_camera_config *camera_dt = (pm_dt_camera_config*)pm_dt_get_node(PMIC_DT_NODE_PM_CAMERA);
+
+  if (camera_dt->reset_gpio[0] == PM_LEICA_GPIO_DISABLE && camera_dt->reset_gpio[1] == PM_LEICA_GPIO_DISABLE) {
+	 // Leica GPIOs not in use
+	 return err_flag;
+  }
+
+  if (GPIO_SUCCESS != GPIO_Attach(GPIO_DEVICE_TLMM, &GPIOHandle)) {
+    return err_gpio;
+  }
+ 
+  // Register the pin of interest
+  bGPIOResult = GPIO_RegisterPinExplicit(GPIOHandle, camera_dt->reset_gpio[0], 
+                                         GPIO_ACCESS_SHARED, &GPIOKey_LEA);
+  if (bGPIOResult != GPIO_SUCCESS) { 
+    return err_gpio; 
+  }
+
+  if (camera_dt->reset_gpio[1] != PM_LEICA_GPIO_DISABLE) {
+    bGPIOResult = GPIO_RegisterPinExplicit(GPIOHandle, camera_dt->reset_gpio[1], 
+     												  GPIO_ACCESS_SHARED, &GPIOKey_LEB);
+    if (bGPIOResult != GPIO_SUCCESS) { 
+      return err_gpio; 
+    }
+  }
+
+  // Setup the enable pin to output
+  GPIOConfig.func = 0;
+  GPIOConfig.dir = GPIO_OUT;
+  GPIOConfig.pull = GPIO_NP;
+  GPIOConfig.drive = 1;    // 0.01mA, rounded up to 2mA
+  GPIOConfig.unused = 0;  //KW Error Fix
+
+  bGPIOResult = GPIO_ConfigPin(GPIOHandle, GPIOKey_LEA, GPIOConfig);
+  if (bGPIOResult != GPIO_SUCCESS) { 
+    return err_gpio; 
+  }
+
+  bGPIOResult = GPIO_WritePin(GPIOHandle, GPIOKey_LEA, GPIO_HIGH);
+  if (bGPIOResult != GPIO_SUCCESS) { 
+    return err_gpio; 
+  }
+
+  if (camera_dt->reset_gpio[1] != PM_LEICA_GPIO_DISABLE) {
+    bGPIOResult = GPIO_ConfigPin(GPIOHandle, GPIOKey_LEB, GPIOConfig);
+    if (bGPIOResult != GPIO_SUCCESS) { 
+      return err_gpio; 
+    }
+   
+    bGPIOResult = GPIO_WritePin(GPIOHandle, GPIOKey_LEB, GPIO_LOW);
+    if (bGPIOResult != GPIO_SUCCESS) { 
+      return err_gpio; 
+    }
+  }
+
+  // Add here delay if needed
+  busywait(120);
+
+  // First Leica set to SID of 0xC
+  err_flag |= pm_comm_write_byte_ex(0, 0xc, SPMI_SLAVE_ID_REG, 0xC);
+
+  // Second Leica set to SID of 0xD
+  if (camera_dt->reset_gpio[1] != PM_LEICA_GPIO_DISABLE) {
+    bGPIOResult = GPIO_WritePin(GPIOHandle, GPIOKey_LEB, GPIO_HIGH);
+    if (bGPIOResult != GPIO_SUCCESS) { 
+      return err_gpio; 
+    }
+    busywait(120);
+   
+    err_flag |= pm_comm_write_byte_ex(0, 0xc, SPMI_SLAVE_ID_REG, 0xD);
+  }
+
+  return err_flag;
+}
+*/

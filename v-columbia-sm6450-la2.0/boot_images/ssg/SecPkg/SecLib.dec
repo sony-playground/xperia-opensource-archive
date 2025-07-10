@@ -1,0 +1,21 @@
+#/* ====================================================================
+# * Copyright (c) 2020-2021 Qualcomm Technologies, Inc.
+# * All Rights Reserved.
+# * Confidential and Proprietary - Qualcomm Technologies, Inc.
+# * ====================================================================
+#*/
+
+
+#/**
+# *  @file SecLib.dec
+# *  @brief Build Packaging format for SecLib. Packages headers used by external libs
+# */
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = SecLib
+  PACKAGE_GUID                   = 09ef9c48-4433-442a-ac72-5e5d2d2ef641
+  PACKAGE_VERSION                = 0.1
+
+[Includes.common]
+  SecPkg/Include/api

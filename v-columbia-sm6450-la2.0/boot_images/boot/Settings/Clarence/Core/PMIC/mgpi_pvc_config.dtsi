@@ -1,0 +1,36 @@
+#include "pm_defines.h"
+
+&pvc{
+  compatible = "qcom,arb_pvc";
+  mgpi-addr{
+    pvc-port-id = <MGPI_PVC_PORT>;
+    spmi-priority = <SPMI_ACCESS_PRIORITY_LOW>;
+    addr-cfg = <
+      0x1 0xDB46 /* MGPI0, UICC1, L27B */
+      0x0 0x5A49 /* MGPI1, NFC, LNBBCLK2 */
+      0x0 0x0    /* MGPI2, WCSS PWR REQ, PBS trigger */
+      0x0 0x0    /* MGPI3, HST SW CTRL */
+      0x0 0x0    /* MGPI4, NA */
+      0x1 0xDA46 /* MGPI5, UICC0, L26B */
+      0x1 0xC844 /* MGPI6, AOP PDC TRIGGER, L8B RM/NPM control VDD_LPI_MX*/
+      0x0 0x0    /* MGPI7, EUD */
+	  > ;
+  };
+};
+
+
+&mgpi{
+  compatible = "qcom, arb_mgpi";
+  
+  port-cfg = <  /* MGPIPortId  PVCPortId  +veEdgeEnable +veEdgePvcPortAddIndex -veEdgeData -veEdgeEnable -veEdgePvcPortAddIndex -veEdgeData MUXSelFlag MUXSelValue */    
+    0 MGPI_PVC_PORT PM_FALSE 0 0    PM_TRUE  0 0 PM_TRUE  0 /* UICC1 port0 */  
+    1 MGPI_PVC_PORT PM_TRUE  1 0x80 PM_TRUE  1 0 PM_TRUE  0 /* NFC port1 */    
+    2 MGPI_PVC_PORT PM_FALSE 2 0x0  PM_FALSE 2 0 PM_FALSE 0 /* WCSS PWR REQ */    
+    3 MGPI_PVC_PORT PM_FALSE 3 0x0  PM_FALSE 3 0 PM_FALSE 0 /* HST SW CTRL */    
+    4 MGPI_PVC_PORT PM_FALSE 4 0    PM_FALSE 4 0 PM_FALSE  0 /* NA */    
+    5 MGPI_PVC_PORT PM_FALSE 5 0    PM_TRUE  5 0 PM_FALSE 0 /* UICC0 port5 */
+    6 MGPI_PVC_PORT PM_TRUE  6 0x3  PM_TRUE  6 0x7 PM_TRUE 0 /*AOP PDC */
+    7 MGPI_PVC_PORT PM_FALSE 7 0x1  PM_TRUE  7 0 PM_FALSE 0 /*EUD */
+    >;
+};
+

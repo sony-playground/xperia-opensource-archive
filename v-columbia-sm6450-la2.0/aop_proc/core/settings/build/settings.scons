@@ -1,0 +1,65 @@
+#===============================================================================
+#
+# settings Scons
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2020 by QUALCOMM Technologies, Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/4.0/aop_proc/core/settings/build/settings.scons#10 $
+#  $DateTime: 2022/05/22 01:47:14 $
+#  $Author: pwbldsvc $
+#  $Change: 37337813 $
+#                      EDIT HISTORY FOR FILE
+#
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+#
+#===============================================================================
+Import('env')
+env = env.Clone()
+
+if env['MSM_ID'] not in ['waipio','fillmore','kailua','aurora','lassen','netrani','clarence','halliday']: #Enable list
+  Return()
+
+# Sources
+SETTINGS_SRCS = [
+    '${BUILD_ROOT}/core/settings/src/aop_settings.c',
+]
+
+# APIs
+CBSP_API = [
+    'DAL',
+    'POWER',
+    'POWER_UTILS',
+    'SERVICES',
+    'DEBUGTRACE',
+    'SYSTEMDRIVERS',
+    'PMIC',
+    'KERNEL',
+    'UNPA',
+    'MPROC',
+    'DDR_MGR',
+    'PWR_UTILS',
+    'AOP_SETTINGS',
+    'PMIC_SETTINGS'
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+
+# Add sources to compile
+if env['MSM_ID'] in ['waipio']:
+    env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${CHIPSET_PMIC}/settings', SETTINGS_SRCS)
+else:
+    env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/settings', SETTINGS_SRCS)
+env.LoadSoftwareUnits() 

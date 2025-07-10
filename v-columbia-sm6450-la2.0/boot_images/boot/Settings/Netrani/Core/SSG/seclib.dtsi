@@ -1,0 +1,16 @@
+
+&soc {
+        seclib {
+                pimem {
+                        /* Default value of PIMEM max storage is 64MB.
+                           Minimum and maximum acceptable values of PIMEM storage
+                           are 5MB and 64MB respectively. The minimum value is to
+                           accomodate 5MB of QTEE space. Rest of the memory could
+                           be used for secure apps. Note that secure app region
+                           size still needs to be specified in oem_config.xml for
+                           QTEE image. */
+                        pimem_max_storage_size = <0x1700000>;
+                };
+	};
+};
+

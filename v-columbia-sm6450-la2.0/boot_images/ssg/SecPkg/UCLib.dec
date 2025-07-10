@@ -1,0 +1,21 @@
+#/* ====================================================================
+# * Copyright (c) 2021 Qualcomm Technologies, Inc.
+# * All Rights Reserved.
+# * Confidential and Proprietary - Qualcomm Technologies, Inc.
+# * ====================================================================
+#*/
+
+#/** @file UCLib.dec
+# Include Section - list of Include Paths that are provided by this package.
+# Modified from SecPkg\Library\UCLib\release\uclib\build\uclib.api
+#**/
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = UCLib
+  PACKAGE_GUID                   = D302EE68-0524-4632-921F-1395BAB5E416
+  PACKAGE_VERSION                = 0.1
+
+[Includes.common]
+  SecPkg/Library/UCLib/xbl_core
+  SecPkg/Library/UCLib/release/api/uclib

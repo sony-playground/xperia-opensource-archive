@@ -1,0 +1,5 @@
+c download:00006000
+b ufs_gpt_0
+c Repartition:0
+c Get-partition-list
+w

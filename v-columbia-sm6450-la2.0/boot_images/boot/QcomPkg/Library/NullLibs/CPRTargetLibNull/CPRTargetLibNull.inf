@@ -1,0 +1,36 @@
+#/** @file CPRTargetLibNull.inf
+#
+#  Null CPR Target lib if CPR Target lib is not available
+#
+#  Copyright (c) 2020, Qualcomm Technologies, Inc . All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 02/18/20   ck      Initial revision
+#
+#==============================================================================
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CPRTargetLibNull
+  FILE_GUID                      = C9164FC5-6457-4046-A55F-E6AC34BDC3FA
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CPRTargetLib
+
+[Sources]
+  CPRTargetLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec  
+
+[LibraryClasses]

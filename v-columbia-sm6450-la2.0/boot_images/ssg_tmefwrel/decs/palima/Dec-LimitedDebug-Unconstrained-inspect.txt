@@ -1,0 +1,44 @@
+OEM DEC:
+{
+    "EntitlementCertificate": {
+        "CertificateVersion": 1,
+        "KeyIdentifier": "QTI_ENTITLEMENT_ROOT_KID",
+        "AlgorithmIdentifier": "ECDSA_P521_SHA512",
+        "Entitlements": {
+            "DebugEntitlement": {
+                "InstanceVersion": "0x00000001",
+                "AuthorizedDebugVector": "0x00000440a8aa9a000000000000000000",
+                "InstantiationConstraints": [
+                    "IS_FINGERPRINT_BOUND"
+                ],
+                "ChipConstraints": {
+                    "SocHardwareVersion": "0xa008ffff",
+                    "SocLifeCycleState": [
+                        "OPERATIONAL_EXT",
+                        "OPERATIONAL_INT"
+                    ]
+                }
+            }
+        },
+        "Signature": "0x000000f19991b2a4420981624d6f8c78fe72cd296b235fc2e1624ff63e26436b276cb5ba2589f29db4c49931b6c1f18849283df1bb12d53084e6a288b97f8e024e83b658000001979917d998ab1171115bf759a6584e56279cd8860d1f8b58a3bc03a14ca2476658c57b5efc1871e250f6e9ba9332854ea405bbfcb095b374914cd22b85d89e099b"
+    }
+}
+
+The Debug Options authorized by the DEC:
+Value: 0x00000440a8aa9a000000000000000000
+| Bit  | ID                      | Description                                                    |
+|------|-------------------------|----------------------------------------------------------------|
+| 18   | SHRM_NIDEN              | Enable SHRM_NIDEN (SHRM Non-Invasive Debug).                   |
+| 30   | APPS_NIDEN              | Enable APPS_NIDEN (APPS Non-Secure Non-Invasive Debug).        |
+| 35   | SSC_NIDEN               | Enable SSC_NIDEN (SSC/SLPI/Sensors Non-Invasive Debug).        |
+| 37   | TITAN_NIDEN             | Enable TITAN_NIDEN (TITAN/Camera Non-Invasive Debug).          |
+| 39   | LPASS_NIDEN             | Enable LPASS_NIDEN (LPASS/ADSP/Audio Non-Invasive Debug).      |
+| 41   | TURING_NIDEN            | Enable TURING_NIDEN (TURING/CDSP/Compute Non-Invasive Debug).  |
+| 43   | IRIS_NIDEN              | Enable IRIS_NIDEN (IRIS/Video Non-Invasive Debug).             |
+| 45   | MDSS_NIDEN              | Enable MDSS_NIDEN (MDSS/Display Non-Invasive Debug).           |
+| 47   | DDRSS_NIDEN             | Enable DDRSS_NIDEN (DDRSS Non-Invasive Debug).                 |
+| 49   | GPU_NIDEN               | Enable GPU_NIDEN (GPU Non-Invasive Debug).                     |
+| 51   | DAP_NIDEN               | Enable DAP_NIDEN (DAP Non-Invasive Debug).                     |
+| 52   | APPS_SCANDUMP_REENABLE  | Enable APPS_SCANDUMP_REENABLE feature.                         |
+| 55   | DCC_DISABLE_REENABLE    | Enable DCC_DISABLE_REENABLE feature.                           |
+

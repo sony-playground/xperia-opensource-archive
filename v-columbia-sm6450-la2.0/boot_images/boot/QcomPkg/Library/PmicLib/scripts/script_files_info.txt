@@ -1,0 +1,2 @@
+Note:
+All supported scripts Glue build (which is part of Meta) and can be found under:  ...\common\Core\tools\tools\systemdrivers\pmic\

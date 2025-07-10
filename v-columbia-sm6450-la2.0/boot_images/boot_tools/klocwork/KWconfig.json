@@ -1,0 +1,25 @@
+{   
+    "target": [
+        {
+            "Name": "Waipio",
+            "KW_Server": "18",
+            "KW_Project": "CRM_BOOT_MXF_2_0_WAIPIO"
+
+        },
+        {
+            "Name": "Makena",
+            "KW_Server": "12",
+            "KW_Project": "PW_BOOT_MXF_1_1_MAKENA"
+        },
+        {
+            "Name": "Olympic",
+            "KW_Server": "12",
+            "KW_Project": "PW_BOOT_MXF_1_1_OLYMPIC"
+        },
+        {
+            "Name": "Lahaina",
+            "KW_Server":  "13",
+            "KW_Project": "CRM_BOOT_MXF_1_0_LAHAINA"
+        }       
+    ]
+}

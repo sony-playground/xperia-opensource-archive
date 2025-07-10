@@ -1,0 +1,44 @@
+&soc {
+ PlatformInfo {
+  PlatformInfo = [
+    /*
+     * PlatformInfo Version
+     */
+    03
+
+    /*
+     * Platform type
+     * Eg: 8 - MTP
+     *     1 - CDP
+     */
+    08
+    
+    /*
+     * Major HW Version
+     */ 
+    01
+
+    /*
+     * Minor HW Version
+     */
+    00
+    
+    /*
+     * Subtype
+     */
+    00
+
+    /*
+     * Number of key-value pairs
+     */
+    00
+
+    /*
+     * Key-value pairs
+     * Eg: FUSION, SLT, etc
+     */
+    // 00 00
+    // 00 00
+  ];
+ };
+};

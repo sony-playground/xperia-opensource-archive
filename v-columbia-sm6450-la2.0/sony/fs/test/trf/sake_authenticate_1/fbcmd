@@ -1,0 +1,4 @@
+c SAKE-Authenticate:challenge
+c download:00000020
+b response
+c SAKE-Authenticate:response

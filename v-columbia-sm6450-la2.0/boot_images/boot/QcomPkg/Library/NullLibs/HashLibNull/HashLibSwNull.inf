@@ -1,0 +1,43 @@
+#/** @file HashLibSwNull.inf
+#
+#   Null HashLib if HashLib is not available
+#
+#   Copyright (c) 2015, 2016, 2020, 2021 Qualcomm Technologies, Inc.  All Rights
+#   Reserved. Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 06/20/16   kpa     Updated to include dependent null libs
+# 12/18/15   wg      Updated directory location for 8998
+# 05/08/15   plc     Created.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = HashLib
+  FILE_GUID                      = 6B6CC574-AA58-4256-8249-662E8CAC9398
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = HashLib
+
+[Sources.common]
+  HashLibSwNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomSdkPkg/SdkLoader.dec
+  QcomPkg/XBLLoaderApi.dec
+
+[LibraryClasses]
+  DebugLib

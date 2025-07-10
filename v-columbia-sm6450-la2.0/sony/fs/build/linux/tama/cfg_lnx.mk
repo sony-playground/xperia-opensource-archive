@@ -1,0 +1,10 @@
+ifndef XFL_BUILD_NUMBER
+  XFL_BUILD_NUMBER := $(shell echo $${USER:0:8}).$(shell date +%Y%m%d.%H%M%S)
+endif
+
+CFG_STUB_QSEE := n
+CFG_ANDROID := n
+EXTRA_CPPFLAGS += \
+-DCFG_USB3 -DCFG_ENABLE_FCS_LOG
+EXTRA_CPPFLAGS += \
+-DBUILD_NUMBER=\"$(XFL_BUILD_NUMBER)\"

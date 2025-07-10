@@ -1,0 +1,48 @@
+#/** @file SPMILibDebugNull.inf
+#  
+#  SPMI Debug Library INF file
+#  
+#  Copyright (c) 2021 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#  $Header: $
+#  $DateTime: 2011/01/26 16:45:04 $
+#  $Author: coresvc $
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 01/11/21   rh      Initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SPMILibDebugNull
+  FILE_GUID                      = 3bd7544d-dc43-4a64-8992-53b74dc54b86
+  MODULE_TYPE                    = BASE 
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SPMILibDebugNull
+
+[Sources.common]
+  SPMILibDebugNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+
+[Pcd.common]
+  gQcomTokenSpaceGuid.SPMIBasePhysical0
+  gQcomTokenSpaceGuid.SPMIBasePhysical1
+  gQcomTokenSpaceGuid.SPMIMemoryMapSize
+  gQcomTokenSpaceGuid.SPMIOwner
+

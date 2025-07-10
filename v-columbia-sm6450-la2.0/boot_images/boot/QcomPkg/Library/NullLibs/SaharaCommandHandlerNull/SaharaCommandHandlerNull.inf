@@ -1,0 +1,37 @@
+#/** @file SaharaCommandHandlerNull.inf
+#
+#  SaharaCommandHandlerNull
+#  
+#  Copyright (c) 2020-2021 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 08/12/21   ck      Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SaharaCommandHandlerLib
+  FILE_GUID                      = E9A2CCA5-B01B-462B-A7F9-F6A2CB39ED02
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SaharaCommandHandlerLib
+
+
+[Sources.common]
+  boot_sahara_command_handler_tbl_null.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+

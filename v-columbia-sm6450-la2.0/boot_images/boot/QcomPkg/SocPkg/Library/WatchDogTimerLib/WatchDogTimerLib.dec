@@ -1,0 +1,29 @@
+#/** @file WatchDogTimerLib.dec
+# WatchDogTimerLib.
+#
+# Copyright (c) 2020 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+#
+#==============================================================================
+#                              EDIT HISTORY
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 12/23/20   ds      Initial version
+#==============================================================================
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = WatchDogTimerLib
+  PACKAGE_GUID                   = d1bf1e58-47be-4726-82ac-7d09fd2af7bd
+  PACKAGE_VERSION                = 1.0
+
+################################################################################
+#
+# Include Section - list of Include Paths that are provided by this package.
+#                   Comments are used for Keywords and Module Types.
+#
+################################################################################
+[Includes.common]
+  .

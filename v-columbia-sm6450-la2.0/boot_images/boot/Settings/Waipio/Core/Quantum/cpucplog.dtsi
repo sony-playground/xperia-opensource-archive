@@ -1,0 +1,16 @@
+/**
+This is the settings file for cpucp logging driver
+
+Copyright (c) 2022 Qualcomm Technologies, Inc.
+All Rights Reserved.
+Confidential and Proprietary - Qualcomm Technologies, Inc.
+**/
+#include <ssr_defines.h>
+
+&cpucplog {   
+   interrupt = <94 INTR_CONFIG_LEVEL_TRIGGER>;
+   intr_status = <0x17d9130c 0x8>;
+   intr_clear = <0x17d91308 0x8>;
+   log_buffer = <0x17D09C00 0x17D09E00>;
+   log_buffer_size = <0x200 0x200>;
+};

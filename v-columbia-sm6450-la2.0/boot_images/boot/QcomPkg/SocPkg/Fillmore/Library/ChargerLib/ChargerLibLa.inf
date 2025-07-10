@@ -1,0 +1,89 @@
+#/** @file ChargerLibLA.inf
+#
+#  Contains Charger related Qualcomm library functions.
+#
+#  Copyright (c) 2021, Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 12/16/21   faizali  Initial version
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ChargerLib
+  FILE_GUID                      = 8063398B-0F06-45E6-9549-4523B4FFA938
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ChargerLib
+
+#
+#  VALID_ARCHITECTURES           = ARM AARCH64
+#
+
+[Sources]
+  ../../../../Library/ChargerLib/ChargerLibCommon.c
+  ../../../../Library/ChargerLib/target/wapio/ChargerLibTarget.c
+
+#[BuildOptions.AARCH64]
+# GCC:*_*_*_CC_FLAGS = -O0
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  UefiLib
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  BaseLib
+  PcdLib
+  QcomLib
+  ULogApiLib
+  QcomUtilsLib
+  #SleepLib
+  FuseControlLib
+  ParserLib
+  SerialPortLib
+  BMPLib
+  PrintLib
+
+[Guids]
+  gEfiFileSystemInfoGuid
+  gEfiFileInfoGuid
+
+[Protocols]
+  gQcomPmicVersionProtocolGuid
+  gQcomPmicSchgProtocolGuid
+  gQcomPmicFgProtocolGuid
+  gEfiAdcProtocolGuid
+  gQcomPmicPwrOnProtocolGuid
+  gEfiVariableServicesProtocolGuid        ## CONSUMES
+  gEfiTsensProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+  gQcomPmicUsbProtocolGuid
+  gQcomPmicRtcProtocolGuid
+  gEfiUsbfnChgSrvProtocolGuid
+  gQcomPmicRgbLedProtocolGuid
+  gEfiUsbInitProtocolGuid
+  gQcomDisplayUtilsProtocolGuid
+  gpmicGlinkProtocolGuid
+  gEfiPilProtocolGuid
+  gChargerExProtocolGuid
+  gQcomUsbPwrCtrlProtocolGuid
+  gQcomPmicPonProtocolGuid
+  gQcomPmicSdamProtocolGuid
+
+[Depex]
+  TRUE

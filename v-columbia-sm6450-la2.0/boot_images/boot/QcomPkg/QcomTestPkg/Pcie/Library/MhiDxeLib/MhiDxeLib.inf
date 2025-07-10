@@ -1,0 +1,66 @@
+#/** @file MhiDxeLib.inf
+#
+#  MHI Dxe Driver wrapper library inf file.
+#
+#  Copyright (c) 2021 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ----------------------------------------------------------
+# 05/21/21     nr      Initial Revision
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MhiDxeLib
+  FILE_GUID                      = 5B42F78D-DF4E-4918-8F81-B17B6045D7C5
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  CONSTRUCTOR                    = MhiDxeLibConstructor
+  LIBRARY_CLASS                  = MhiDxeLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[Sources]
+  MhiDxeLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/QcomTestPkg/QcomTestPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  DxeServicesTableLib
+  MemoryAllocationLib
+  NpaApiLib
+  DALModEnvLib
+
+[Guids]
+
+[Protocols]
+  gEfiQcMhiDxeProtocolGuid
+  gEfiQcPcieDxeProtocolGuid
+  gEfiClockProtocolGuid
+  gEfiChipInfoProtocolGuid
+  gQcomPmicDriverTestProtocolGuid
+  gEfiTLMMProtocolGuid
+  gEfiHalIommuProtocolGuid
+
+[Depex]
+  TRUE

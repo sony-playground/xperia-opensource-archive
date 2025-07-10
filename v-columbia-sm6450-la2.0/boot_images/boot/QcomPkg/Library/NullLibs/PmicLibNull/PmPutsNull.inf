@@ -1,0 +1,36 @@
+#/** @file Pmputs.inf
+#  
+#  PMIC puts INF file
+#  
+#  Copyright (c) 2021 Qualcomm Technologies, Inc.  All Rights Reserved. 
+#  Qualcomm Technologies Proprietary and Confidential.
+#  
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# --------     ---     ----------------------------------------------------------
+# 08/09/21     wdn      Move to Library, rename to "puts" from "puts"
+# 07/12/21     wdn      Created file
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                 = 0x00010005
+  BASE_NAME                   = PmPutsNull
+  FILE_GUID                   = dd01f468-7160-46b7-bc9f-1fde0e043fdd
+  MODULE_TYPE                 = BASE
+  VERSION_STRING              = 1.0
+  LIBRARY_CLASS               = pm_puts
+
+[Sources.common]
+  PmPutsNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/Library/PmicLib/PmicCoreLib.dec

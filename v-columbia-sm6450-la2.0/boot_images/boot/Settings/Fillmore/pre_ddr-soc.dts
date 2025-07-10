@@ -1,0 +1,22 @@
+// pre_ddr-soc.dts
+//
+// Container DTS file for specific hardware platform: Fillmore SoC
+
+/dts-v1/;
+
+/ {
+	compatible = "qcom,fillmore";
+	model = "qcom,fillmore";
+
+	#address-cells = <2>;
+	#size-cells = <2>;
+
+	soc: soc {
+		#address-cells = <1>;
+		#size-cells = <1>;
+	};
+
+	sw: sw { };
+};
+
+#include "soc_pre-ddr.dtsi"                     /* Common SoC Node Definitions */

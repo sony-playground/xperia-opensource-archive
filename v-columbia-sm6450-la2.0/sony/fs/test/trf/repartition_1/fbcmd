@@ -1,0 +1,4 @@
+c download:00006000
+b ufs_gpt_5
+c Repartition:5
+w

@@ -1,0 +1,512 @@
+/*==============================================================================
+
+FILE:      icbcfg_data.c
+
+DESCRIPTION: This file implements the ICB Configuration driver.
+
+PUBLIC CLASSES:  Not Applicable
+
+INITIALIZATION AND SEQUENCING REQUIREMENTS:  N/A
+
+Edit History
+
+$Header: //components/rel/core.boot/6.0/QcomPkg/SocPkg/Fillmore/Settings/ICB/loader/icbcfg_data.c#10 $
+$DateTime: 2022/08/19 04:41:56 $
+$Author: pwbldsvc $
+$Change: 39167902 $
+
+When        Who    What, where, why
+----------  ---    -----------------------------------------------------------
+2020/05/15  sds    Created
+
+                Copyright (c) 2020 Qualcomm Technologies, Inc.
+                             All Rights Reserved.
+                          QUALCOMM Proprietary/GTDR
+==============================================================================*/
+#include "icbcfg_hwio.h"
+#include "../../../../../Library/ICBLib/icbcfgi.h"
+#include "../../../Library/ICBTargetLib/icbcfg_hwio_target.h"
+
+/*---------------------------------------------------------------------------*/
+/*          Macro and constant definitions                                   */
+/*---------------------------------------------------------------------------*/
+//#define ARRAY_SIZE(arr) (sizeof(arr)/sizeof((arr)[0]))
+
+/*============================================================================
+                        DEVICE CONFIG PROPERTY DATA
+============================================================================*/
+
+/*---------------------------------------------------------------------------*/
+/*          Properties data for device ID  = "icbcfg/boot"                   */
+/*---------------------------------------------------------------------------*/
+
+/* ICBcfg Boot Configuration Data*/
+
+/*---------------------------------------------------------------------------*/
+/* FILLMORE v1                                                                 */
+/*---------------------------------------------------------------------------*/
+
+/*---------------------------------------------------------------------------*/
+/* Init Config Segments                                                      */
+/*---------------------------------------------------------------------------*/
+icbcfg_data_type icbcfg_qm_cfg_data_fillmore_v1[] =
+{
+  /* Enable QM core cgc */
+  ICBCFG_HWIO_DW(QM_CORE_CLK_CGC_CNTRL, 0x1),
+
+  /* Stall timers */
+  ICBCFG_HWIO_DW(QM_PRE_STALL_TIMEOUT_CNT_URG_0, 0x60),
+  ICBCFG_HWIO_DW(QM_PRE_STALL_TIMEOUT_CNT_URG_1, 0x27),
+  ICBCFG_HWIO_DW(QM_PRE_STALL_TIMEOUT_CNT_URG_2, 0x27),
+  ICBCFG_HWIO_DW(QM_PRE_STALL_TIMEOUT_CNT_URG_3, 0x27),
+  ICBCFG_HWIO_DW(QM_POST_STALL_TIMEOUT_CNT_URG_0, 0x60),
+  ICBCFG_HWIO_DW(QM_POST_STALL_TIMEOUT_CNT_URG_1, 0x27),
+  ICBCFG_HWIO_DW(QM_POST_STALL_TIMEOUT_CNT_URG_2, 0x27),
+  ICBCFG_HWIO_DW(QM_POST_STALL_TIMEOUT_CNT_URG_3, 0x27),
+  ICBCFG_HWIO_DW(QM_POST_STALL_WDW_OVERLAP_CNTL, 0x1),
+  ICBCFG_HWIO_DW(QM_SMMU_INV_PRE_STALL_TIMEOUT_CNT_URG_0, 0x780),
+  ICBCFG_HWIO_DW(QM_SMMU_INV_PRE_STALL_TIMEOUT_CNT_URG_1, 0x300),
+  ICBCFG_HWIO_DW(QM_SMMU_INV_PRE_STALL_TIMEOUT_CNT_URG_2, 0x300),
+  ICBCFG_HWIO_DW(QM_SMMU_INV_PRE_STALL_TIMEOUT_CNT_URG_3, 0x300),
+  ICBCFG_HWIO_DW(QM_SMMU_INV_POST_STALL_TIMEOUT_CNT_URG_0, 0x0),
+  ICBCFG_HWIO_DW(QM_SMMU_INV_POST_STALL_TIMEOUT_CNT_URG_1, 0x0),
+  ICBCFG_HWIO_DW(QM_SMMU_INV_POST_STALL_TIMEOUT_CNT_URG_2, 0x0),
+  ICBCFG_HWIO_DW(QM_SMMU_INV_POST_STALL_TIMEOUT_CNT_URG_3, 0x0),
+  ICBCFG_HWIO_DW(QM_SMMU_INV_POST_STALL_WDW_OVERLAP_CNTL, 0x1),
+
+  /* SAFE client overrides */
+  ICBCFG_HWIO_DW(QM_DSP_SAFE_MASK_CNTRL, 0x3),
+  ICBCFG_HWIO_DW(QM_SAFE_OVERRIDE_VALUE, 0x8),
+  ICBCFG_HWIO_DW(QM_SAFE_OVERRIDE_EN,    0x8),
+
+  /* Titan-RT throttle client */
+  ICBCFG_HWIO_DW(QM_CLNT_0_DANGER_AGGR_CNTRL, 0x0),
+  ICBCFG_HWIO_DW(QM_CLNT_0_DANGER_AGGR_MODEM_CNTRL, 0x0),
+  ICBCFG_HWIO_DW(QM_CLNT_0_THROTTLE_LEVEL_OUTPUT_EN, 0x1), //change
+
+ /* Titan-NRT throttle client */
+  ICBCFG_HWIO_DW(QM_CLNT_1_DANGER_AGGR_CNTRL, 0x3),
+  ICBCFG_HWIO_DW(QM_CLNT_1_DANGER_AGGR_MODEM_CNTRL, 0x0),
+  ICBCFG_HWIOI_DW(QM_CLNT_1_THROTTLE_LEVEL_QOS_n, 4, 0xEE000004),
+  ICBCFG_HWIOI_DW(QM_CLNT_1_THROTTLE_LEVEL_QOS_n, 6, 0xEE000006),
+  ICBCFG_HWIO_DW(QM_CLNT_1_THROTTLE_LEVEL_OUTPUT_EN, 0x1),
+
+  /* NPU throttle client */
+  ICBCFG_HWIO_DW(QM_CLNT_2_DANGER_AGGR_CNTRL, 0x3),
+  ICBCFG_HWIO_DW(QM_CLNT_2_DANGER_AGGR_MODEM_CNTRL, 0x0),
+  //ICBCFG_HWIOI_DW(QM_CLNT_2_THROTTLE_LEVEL_QOS_n, 3, 0xEE000003),
+  ICBCFG_HWIOI_DW(QM_CLNT_2_THROTTLE_LEVEL_QOS_n, 4, 0xEE000004),
+  ICBCFG_HWIOI_DW(QM_CLNT_2_THROTTLE_LEVEL_QOS_n, 6, 0xEE000006),
+  ICBCFG_HWIOI_DW(QM_CLNT_2_THROTTLE_LEVEL_QOS_n, 7, 0x0), //chnaged
+  ICBCFG_HWIO_DW(QM_CLNT_2_THROTTLE_LEVEL_OUTPUT_EN, 0x1),
+
+  /* PCIe throttle client */
+  ICBCFG_HWIO_DW(QM_CLNT_3_DANGER_AGGR_CNTRL, 0x3),
+  ICBCFG_HWIO_DW(QM_CLNT_3_DANGER_AGGR_MODEM_CNTRL, 0x0),
+  ICBCFG_HWIOI_DW(QM_CLNT_3_THROTTLE_LEVEL_QOS_n, 4, 0xEE000004),
+  ICBCFG_HWIOI_DW(QM_CLNT_3_THROTTLE_LEVEL_QOS_n, 6, 0xEE000006),
+  ICBCFG_HWIO_DW(QM_CLNT_3_THROTTLE_LEVEL_OUTPUT_EN, 0x0),
+
+  /* SNOC throttle client */
+  ICBCFG_HWIO_DW(QM_CLNT_4_DANGER_AGGR_CNTRL, 0x3),
+  ICBCFG_HWIO_DW(QM_CLNT_4_DANGER_AGGR_MODEM_CNTRL, 0x0),
+  ICBCFG_HWIOI_DW(QM_CLNT_4_THROTTLE_LEVEL_QOS_n, 4, 0xEE000004),
+  ICBCFG_HWIOI_DW(QM_CLNT_4_THROTTLE_LEVEL_QOS_n, 6, 0xEE000006),
+  ICBCFG_HWIO_DW(QM_CLNT_4_THROTTLE_LEVEL_OUTPUT_EN, 0x1),
+
+  /* DPU-NRT throttle client */
+  ICBCFG_HWIO_DW(QM_CLNT_5_DANGER_AGGR_CNTRL, 0x3),
+  ICBCFG_HWIO_DW(QM_CLNT_5_DANGER_AGGR_MODEM_CNTRL, 0x0),
+  ICBCFG_HWIOI_DW(QM_CLNT_5_THROTTLE_LEVEL_QOS_n, 4, 0xEE000004),
+  ICBCFG_HWIOI_DW(QM_CLNT_5_THROTTLE_LEVEL_QOS_n, 6, 0xEE000006),
+  ICBCFG_HWIO_DW(QM_CLNT_5_THROTTLE_LEVEL_OUTPUT_EN, 0x1),
+
+  /* IRIS-VCODEC throttle client */
+  ICBCFG_HWIO_DW(QM_CLNT_6_DANGER_AGGR_CNTRL, 0x3),
+  ICBCFG_HWIO_DW(QM_CLNT_6_DANGER_AGGR_MODEM_CNTRL, 0x0),
+  ICBCFG_HWIOI_DW(QM_CLNT_6_THROTTLE_LEVEL_QOS_n, 4, 0xEE000004),
+  ICBCFG_HWIOI_DW(QM_CLNT_6_THROTTLE_LEVEL_QOS_n, 6, 0xEE000006),
+  ICBCFG_HWIO_DW(QM_CLNT_6_THROTTLE_LEVEL_OUTPUT_EN, 0x1),
+
+  /* IRIS-CVP throttle client */
+  ICBCFG_HWIO_DW(QM_CLNT_7_DANGER_AGGR_CNTRL, 0x3),
+  ICBCFG_HWIO_DW(QM_CLNT_7_DANGER_AGGR_MODEM_CNTRL, 0x0),
+  ICBCFG_HWIOI_DW(QM_CLNT_7_THROTTLE_LEVEL_QOS_n, 4, 0xEE000004),
+  ICBCFG_HWIOI_DW(QM_CLNT_7_THROTTLE_LEVEL_QOS_n, 6, 0xEE000006),
+  ICBCFG_HWIO_DW(QM_CLNT_7_THROTTLE_LEVEL_OUTPUT_EN, 0x1),
+
+  /* GPU throttle client */
+  ICBCFG_HWIO_DW(QM_CLNT_8_DANGER_AGGR_CNTRL, 0x3),
+  ICBCFG_HWIO_DW(QM_CLNT_8_DANGER_AGGR_MODEM_CNTRL, 0x1),
+  ICBCFG_HWIOI_DW(QM_CLNT_8_THROTTLE_LEVEL_QOS_n, 2, 0xEE000002),
+  ICBCFG_HWIOI_DW(QM_CLNT_8_THROTTLE_LEVEL_QOS_n, 3, 0xEE000003),
+  ICBCFG_HWIOI_DW(QM_CLNT_8_THROTTLE_LEVEL_QOS_n, 4, 0xEE000004),
+  ICBCFG_HWIOI_DW(QM_CLNT_8_THROTTLE_LEVEL_QOS_n, 6, 0xEE000006),
+  ICBCFG_HWIOI_DW(QM_CLNT_8_THROTTLE_LEVEL_QOS_n, 7, 0xAA000000),
+  ICBCFG_HWIO_DW(QM_CLNT_8_THROTTLE_LEVEL_OUTPUT_EN, 0x3),
+
+  /* CPU throttle client */
+  ICBCFG_HWIO_DW(QM_CLNT_9_DANGER_AGGR_CNTRL, 0x3),
+  ICBCFG_HWIO_DW(QM_CLNT_9_DANGER_AGGR_MODEM_CNTRL, 0x1),
+  ICBCFG_HWIOI_DW(QM_CLNT_9_THROTTLE_LEVEL_QOS_n, 2, 0xEE000002),
+  ICBCFG_HWIOI_DW(QM_CLNT_9_THROTTLE_LEVEL_QOS_n, 3, 0xEE000003),
+  ICBCFG_HWIOI_DW(QM_CLNT_9_THROTTLE_LEVEL_QOS_n, 4, 0xEE000004),
+  ICBCFG_HWIOI_DW(QM_CLNT_9_THROTTLE_LEVEL_QOS_n, 6, 0xEE000006),
+  ICBCFG_HWIOI_DW(QM_CLNT_9_THROTTLE_LEVEL_QOS_n, 7, 0xAA000000),
+  ICBCFG_HWIO_DW(QM_CLNT_9_THROTTLE_LEVEL_OUTPUT_EN, 0x1),
+
+  /* CDSP throttle client */
+  ICBCFG_HWIO_DW(QM_DSP_DANGER_AGGR_CNTRL, 0x3),
+  ICBCFG_HWIO_DW(QM_DSP_DANGER_AGGR_MODEM_CNTRL, 0x1),
+  ICBCFG_HWIO_DW(QM_DSP_PRIORITY_MODE_SEL, 0x1),
+  ICBCFG_HWIO_DW(QM_DSP_SYSTEM_DANGER_AGGR_MODEM_CNTRL, 0x0),
+  ICBCFG_HWIO_DW(QM_DSP_SYSTEM_DANGER_OUTPUT_EN, 0x1),
+  ICBCFG_HWIOI_DW(QM_CLNT_10_THROTTLE_LEVEL_QOS_n, 2, 0xEE000002),
+  ICBCFG_HWIOI_DW(QM_CLNT_10_THROTTLE_LEVEL_QOS_n, 3, 0xEE000003),
+  ICBCFG_HWIOI_DW(QM_CLNT_10_THROTTLE_LEVEL_QOS_n, 4, 0xEE000004),
+  ICBCFG_HWIOI_DW(QM_CLNT_10_THROTTLE_LEVEL_QOS_n, 6, 0xEE000006),
+  ICBCFG_HWIOI_DW(QM_CLNT_10_THROTTLE_LEVEL_QOS_n, 7, 0xAA000000),
+  ICBCFG_HWIO_DW(QM_CLNT_10_THROTTLE_LEVEL_OUTPUT_EN, 0x3),
+
+  /* Throttle level generation */
+  ICBCFG_HWIO_DW(QM_THROTTLE_LEVEL_LEGACY_SELECT, 0x0),
+  ICBCFG_HWIOI_DW(QM_THROTTLE_LEVEL_QOS_n, 7, 0x7FC),
+  ICBCFG_HWIO_DW(QM_THROTTLE_LEVEL_SU_CFG, 0x7F),
+  ICBCFG_HWIOF_READ_DW(MCCC_CLK_PERIOD,PERIOD),
+  ICBCFG_HWIOF_WRITE_DW(QM_PERIOD_BUS_CFG,PERIOD_BUS_SW),
+  ICBCFG_HWIOF_DW(QM_PERIOD_BUS_CFG, PERIOD_BUS_LOAD_SW, 0x1),
+  ICBCFG_HWIOF_DW(QM_PERIOD_BUS_CFG, PERIOD_BUS_SW_OVERRIDE, 0x0),
+  ICBCFG_HWIOI_DW(QOS_FREQ_BAND_BNDRY_n, 0, 0x97B),
+  ICBCFG_HWIOI_DW(QOS_FREQ_BAND_BNDRY_n, 1, 0x0),
+  ICBCFG_HWIOI_DW(QOS_FREQ_BAND_BNDRY_n, 2, 0x0),
+  ICBCFG_HWIO_DW(QM_AGGR_SAFE_OVERRIDE_CNTRL, 0x1),
+  ICBCFG_HWIO_DW(QM_AGGR_SAFE_TL_V2_OVERRIDE_CNTRL, 0x0),
+  ICBCFG_HWIO_DW(QM_DANGER_SAFE_CNTRL,0x1),
+
+  /* AP throttles and shapers */
+  ICBCFG_HWIOF_DW(APP_BWMON_THROTTLE_0_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(APP_BWMON_THROTTLE_0_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(APP_BWMON_THROTTLE_0_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(APP_BWMON_THROTTLE_0_THRESHOLD_02, 0x03E80032),
+  ICBCFG_HWIO_DW(APP_BWMON_THROTTLE_0_THRESHOLD_01, 0x0032FFFF),
+  ICBCFG_HWIO_DW(APP_BWMON_THROTTLE_0_THRESHOLD_00, 0x00000032),
+  ICBCFG_HWIOF_DW(APP_BWMON_THROTTLE_0_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(APP_BWMON_THROTTLE_0_CNTRL, 0xDC01),
+
+  ICBCFG_HWIOF_DW(APP_BWMON_THROTTLE_1_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(APP_BWMON_THROTTLE_1_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(APP_BWMON_THROTTLE_1_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(APP_BWMON_THROTTLE_1_THRESHOLD_02, 0x03E80032),
+  ICBCFG_HWIO_DW(APP_BWMON_THROTTLE_1_THRESHOLD_01, 0x0032FFFF),
+  ICBCFG_HWIO_DW(APP_BWMON_THROTTLE_1_THRESHOLD_00, 0x00000032),
+  ICBCFG_HWIOF_DW(APP_BWMON_THROTTLE_1_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(APP_BWMON_THROTTLE_1_CNTRL, 0xDC01),
+
+  /* GPU throttles and shapers */
+  ICBCFG_HWIOF_DW(GPU_BWMON_THROTTLE_0_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(GPU_BWMON_THROTTLE_0_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(GPU_BWMON_THROTTLE_0_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(GPU_BWMON_THROTTLE_0_THRESHOLD_02, 0x03E80032),
+  ICBCFG_HWIO_DW(GPU_BWMON_THROTTLE_0_THRESHOLD_01, 0x0000FFFF),
+  ICBCFG_HWIO_DW(GPU_BWMON_THROTTLE_0_THRESHOLD_00, 0x0000FFFF),
+  ICBCFG_HWIOF_DW(GPU_BWMON_THROTTLE_0_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(GPU_BWMON_THROTTLE_0_CNTRL, 0x5C01),
+
+  ICBCFG_HWIOF_DW(GPU_BWMON_THROTTLE_1_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(GPU_BWMON_THROTTLE_1_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(GPU_BWMON_THROTTLE_1_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(GPU_BWMON_THROTTLE_1_THRESHOLD_02, 0x03E80032),
+  ICBCFG_HWIO_DW(GPU_BWMON_THROTTLE_1_THRESHOLD_01, 0x0000FFFF),
+  ICBCFG_HWIO_DW(GPU_BWMON_THROTTLE_1_THRESHOLD_00, 0x0000FFFF),
+  ICBCFG_HWIOF_DW(GPU_BWMON_THROTTLE_1_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(GPU_BWMON_THROTTLE_1_CNTRL, 0x5C01),
+
+  /* CDSP throttles and shapers */
+  ICBCFG_HWIOF_DW(CDSP_BWMON_THROTTLE_0_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(CDSP_BWMON_THROTTLE_0_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(CDSP_BWMON_THROTTLE_0_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(CDSP_BWMON_THROTTLE_0_THRESHOLD_02, 0x03E80032),
+  ICBCFG_HWIO_DW(CDSP_BWMON_THROTTLE_0_THRESHOLD_01, 0x0000FFFF),
+  ICBCFG_HWIO_DW(CDSP_BWMON_THROTTLE_0_THRESHOLD_00, 0x0000FFFF),
+  ICBCFG_HWIOF_DW(CDSP_BWMON_THROTTLE_0_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(CDSP_BWMON_THROTTLE_0_CNTRL, 0x5C01),
+
+  ICBCFG_HWIOF_DW(CDSP_BWMON_THROTTLE_1_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(CDSP_BWMON_THROTTLE_1_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(CDSP_BWMON_THROTTLE_1_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(CDSP_BWMON_THROTTLE_1_THRESHOLD_02, 0x03E80032),
+  ICBCFG_HWIO_DW(CDSP_BWMON_THROTTLE_1_THRESHOLD_01, 0x0000FFFF),
+  ICBCFG_HWIO_DW(CDSP_BWMON_THROTTLE_1_THRESHOLD_00, 0x0000FFFF),
+  ICBCFG_HWIOF_DW(CDSP_BWMON_THROTTLE_1_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(CDSP_BWMON_THROTTLE_1_CNTRL, 0x5C01),
+  
+  ICBCFG_HWIOF_DW(NSP_HCP_THROTTLE_THROTTLE_0_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(NSP_HCP_THROTTLE_THROTTLE_0_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(NSP_HCP_THROTTLE_THROTTLE_0_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(NSP_HCP_THROTTLE_THROTTLE_0_THRESHOLD_02, 0x03E80032),
+  ICBCFG_HWIO_DW(NSP_HCP_THROTTLE_THROTTLE_0_THRESHOLD_01, 0x0000FFFF),
+  ICBCFG_HWIO_DW(NSP_HCP_THROTTLE_THROTTLE_0_THRESHOLD_00, 0x0000FFFF),
+  ICBCFG_HWIOF_DW(NSP_HCP_THROTTLE_THROTTLE_0_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(NSP_HCP_THROTTLE_THROTTLE_0_CNTRL, 0x5C01),
+
+  /* SNOC throttle and shaper */
+  ICBCFG_HWIOF_DW(SNOC_THROTTLE_THROTTLE_0_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(SNOC_THROTTLE_THROTTLE_0_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(SNOC_THROTTLE_THROTTLE_0_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(SNOC_THROTTLE_THROTTLE_0_THRESHOLD_02, 0xFFFFFFFF),
+  ICBCFG_HWIO_DW(SNOC_THROTTLE_THROTTLE_0_THRESHOLD_01, 0x0000FFFF),
+  ICBCFG_HWIO_DW(SNOC_THROTTLE_THROTTLE_0_THRESHOLD_00, 0x0000FFFF),
+  ICBCFG_HWIOF_DW(SNOC_THROTTLE_THROTTLE_0_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(SNOC_THROTTLE_THROTTLE_0_CNTRL, 0x5001),
+
+
+  /* LPASS throttle and shaper */
+#if 0
+  ICBCFG_HWIOF_DW(GCC_QMIP_LPASS_TBU_AHB_CBCR, CLK_ENABLE, 0x1),
+  ICBCFG_WAIT_HWIOF_DW(GCC_QMIP_LPASS_TBU_AHB_CBCR, CLK_OFF, 0x0),
+  ICBCFG_HWIOF_DW(LPASS_THROTTLE_THROTTLE_0_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(LPASS_THROTTLE_THROTTLE_0_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(LPASS_THROTTLE_THROTTLE_0_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(LPASS_THROTTLE_THROTTLE_0_THRESHOLD_02, 0xFFFFFFFF),
+  ICBCFG_HWIO_DW(LPASS_THROTTLE_THROTTLE_0_THRESHOLD_01, 0x0000FFFF),
+  ICBCFG_HWIO_DW(LPASS_THROTTLE_THROTTLE_0_THRESHOLD_00, 0x0000FFFF),
+  ICBCFG_HWIOF_DW(LPASS_THROTTLE_THROTTLE_0_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(LPASS_THROTTLE_THROTTLE_0_CNTRL, 0x5001),
+  ICBCFG_HWIOF_DW(GCC_QMIP_LPASS_TBU_AHB_CBCR, CLK_ENABLE, 0x0),
+#endif
+  /* WPSS throttle and shaper */
+  /*
+  ICBCFG_HWIOF_DW(GCC_WPSS_THROTTLE_AHB_CBCR, CLK_ENABLE, 0x1),
+  ICBCFG_WAIT_HWIOF_DW(GCC_WPSS_THROTTLE_AHB_CBCR, CLK_OFF, 0x0),
+  ICBCFG_HWIOF_DW(WLAN_Q6_THROTTLE_THROTTLE_0_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(WLAN_Q6_THROTTLE_THROTTLE_0_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(WLAN_Q6_THROTTLE_THROTTLE_0_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(WLAN_Q6_THROTTLE_THROTTLE_0_THRESHOLD_02, 0xFFFFFFFF),
+  ICBCFG_HWIO_DW(WLAN_Q6_THROTTLE_THROTTLE_0_THRESHOLD_01, 0x0000FFFF),
+  ICBCFG_HWIO_DW(WLAN_Q6_THROTTLE_THROTTLE_0_THRESHOLD_00, 0x0000FFFF),
+  ICBCFG_HWIOF_DW(WLAN_Q6_THROTTLE_THROTTLE_0_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(WLAN_Q6_THROTTLE_THROTTLE_0_CNTRL, 0x5001),
+  ICBCFG_HWIOF_DW(GCC_WPSS_THROTTLE_AHB_CBCR, CLK_ENABLE, 0x0),*/
+
+   /* ANOC throttle and shaper */
+  ICBCFG_HWIOF_DW(ANOC_THROTTLE_THROTTLE_0_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(ANOC_THROTTLE_THROTTLE_0_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(ANOC_THROTTLE_THROTTLE_0_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(ANOC_THROTTLE_THROTTLE_0_THRESHOLD_02, 0xFFFFFFFF),
+  ICBCFG_HWIO_DW(ANOC_THROTTLE_THROTTLE_0_THRESHOLD_01, 0x0000FFFF),
+  ICBCFG_HWIO_DW(ANOC_THROTTLE_THROTTLE_0_THRESHOLD_00, 0x0000FFFF),
+  ICBCFG_HWIOF_DW(ANOC_THROTTLE_THROTTLE_0_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(ANOC_THROTTLE_THROTTLE_0_CNTRL, 0x5001),
+
+  ICBCFG_HWIOF_DW(ANOC_THROTTLE_THROTTLE_1_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(ANOC_THROTTLE_THROTTLE_1_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(ANOC_THROTTLE_THROTTLE_1_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(ANOC_THROTTLE_THROTTLE_1_THRESHOLD_02, 0xFFFFFFFF),
+  ICBCFG_HWIO_DW(ANOC_THROTTLE_THROTTLE_1_THRESHOLD_01, 0x0000FFFF),
+  ICBCFG_HWIO_DW(ANOC_THROTTLE_THROTTLE_1_THRESHOLD_00, 0x0000FFFF),
+  ICBCFG_HWIOF_DW(ANOC_THROTTLE_THROTTLE_1_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(ANOC_THROTTLE_THROTTLE_1_CNTRL, 0x5001),
+
+  /* GPU TCU throttle and shaper */
+  ICBCFG_HWIOF_DW(GCC_QMIP_GPU_AHB_CBCR, CLK_ENABLE, 0x1),
+  ICBCFG_WAIT_HWIOF_DW(GCC_QMIP_GPU_AHB_CBCR, CLK_OFF, 0x0),
+  ICBCFG_HWIOF_DW(GPU_TCU_THROTTLE_THROTTLE_0_CGC_CNTRL, THROTTLE_CGC_EN, 0x1),
+  ICBCFG_HWIOF_DW(GPU_TCU_THROTTLE_THROTTLE_0_GRANT_PERIOD, GRANT_PERIOD, 0x3e8),
+  ICBCFG_HWIO_DW(GPU_TCU_THROTTLE_THROTTLE_0_THRESHOLD_03, 0xFFFF),
+  ICBCFG_HWIO_DW(GPU_TCU_THROTTLE_THROTTLE_0_THRESHOLD_02, 0xFFFFFFFF),
+  ICBCFG_HWIO_DW(GPU_TCU_THROTTLE_THROTTLE_0_THRESHOLD_01, 0x0000FFFF),
+  ICBCFG_HWIO_DW(GPU_TCU_THROTTLE_THROTTLE_0_THRESHOLD_00, 0x0000FFFF),
+  ICBCFG_HWIOF_DW(GPU_TCU_THROTTLE_THROTTLE_0_PEAK_ACCUM_CREDIT, PEAK_ACCUM_CREDIT, 0x100),
+  ICBCFG_HWIO_DW(GPU_TCU_THROTTLE_THROTTLE_0_CNTRL, 0x5001),
+  ICBCFG_HWIOF_DW(GCC_QMIP_GPU_AHB_CBCR, CLK_ENABLE, 0x0),
+};
+
+icbcfg_prop_seg_type icbcfg_qm_cfg_seg_fillmore_v1 = 
+{
+  /* Length of the config  data array */
+  ARRAY_SIZE(icbcfg_qm_cfg_data_fillmore_v1),
+  /* Pointer to config data array */ 
+  icbcfg_qm_cfg_data_fillmore_v1                                    
+};
+
+/*---------------------------------------------------------------------------*/
+/* Init Config Segment list                                                  */
+/*---------------------------------------------------------------------------*/
+icbcfg_prop_seg_type *icbcfg_boot_segs_fillmore_v1[] =
+{
+  &icbcfg_qm_cfg_seg_fillmore_v1,
+};
+
+icbcfg_prop_type icbcfg_boot_prop_fillmore_v1 =
+{
+  /* Length of the config  data array */
+  ARRAY_SIZE(icbcfg_boot_segs_fillmore_v1),
+  /* Pointer to config data array */
+  icbcfg_boot_segs_fillmore_v1
+};
+
+/*---------------------------------------------------------------------------*/
+/* PostInit Config Segments                                                  */
+/*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*/
+/* GEMNOC Config Segment                                                     */
+/*---------------------------------------------------------------------------*/
+icbcfg_data_type icbcfg_gemnoc_cfg_data_fillmore_v1[] =
+{
+  /* Modem Victim mode */
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_FEAC_TCM0_CFG,          0x0007C000),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_FEAC_TCM0_MASK_CFG,     0x00001F80),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_FEAC_TCM_ADDR_BASE_CFG, 0x0080002B),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_FEAC_VICTIM_ZONE1_CFG0, 0xFF004500),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_FEAC_VICTIM_ZONE1_CFG1, 0x00000080),
+
+  /* SCID overrides */
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_TRP_RWE_OVERRIDE_CFG0,                0x00000020),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_TRP_RD_NOALLOC_ON_MISS_OVERRIDE_CFG0, 0x00002800),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_TRP_WR_NOALLOC_ON_MISS_OVERRIDE_CFG0, 0x00400100),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ANDLLCC_TRP_SCID_WRSC_EN,                    0x00000000),
+
+  /* TRP Algorithm */
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_TRP_ALGO_CFG0, 0x00100000),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_TRP_ALGO_CFG1, 0x0080002A),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_TRP_ALGO_CFG5, 0x20000000),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_TRP_ALGO_CFG6, 0x00000082),
+
+  /* LLCC TAG sequence */
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ORLLCC_TRP_NC_AS_C_OVERRIDE_CFG,  0xFFFFFFFF),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ANDLLCC_TRP_C_AS_NC_OVERRIDE_CFG, 0x00000000),
+  
+  /* SCID overrides */
+  ICBCFG_HWIO_DW(GEM_NOC_ALM_GPU_TCU_DYNATTR_CACHEINDEXVAL_LOW,   0x0000000B),
+  ICBCFG_HWIO_DW(GEM_NOC_ALM_GPU_TCU_DYNATTR_MAINCTL_LOW,         0x00100000),
+  ICBCFG_HWIO_DW(GEM_NOC_ALM_SYS_TCU_DYNATTR_CACHEINDEXVAL_LOW,   0x0000000D),
+  ICBCFG_HWIO_DW(GEM_NOC_ALM_SYS_TCU_DYNATTR_MAINCTL_LOW,         0x00100000),
+  
+  /* MISC GEMNOC HSR */
+  ICBCFG_HWIO_DW(GEM_NOC_PAYLOAD_RED_SYS_CSRUNIT_T2P_LOW,         0x00000000),
+  ICBCFG_HWIO_DW(GEM_NOC_RDHINT_SELECT_SBM_FLAGOUTSET0_LOW,         0x00000005),
+  ICBCFG_HWIO_DW(GEM_NOC_QNM_PCIE_QOSGEN_MAINCTL_LOW,         0x00020028),
+  
+  /* Q6 NOC misc settings */
+  ICBCFG_HWIO_DW(Q6_NOC_QXM_WLAN_Q6_DYNATTR_MAINCTL_LOW,	0x00000010),
+  ICBCFG_HWIO_DW(Q6_NOC_QNM_MDSP_Q6_DYNATTR_MAINCTL_LOW,	0x00000010),
+  
+  /*GPU shape settings */
+  ICBCFG_HWIO_DW(GEM_NOC_QNM_GPU0_QOSGEN_MAINCTL_LOW, 0x600002),
+  ICBCFG_HWIO_DW(GEM_NOC_QNM_GPU1_QOSGEN_MAINCTL_LOW, 0x600002),
+  ICBCFG_HWIO_DW(GEM_NOC_QNM_GPU0_QOSGEN_SHAPING_LOW, 0x1F1F1F1F),
+  ICBCFG_HWIO_DW(GEM_NOC_QNM_GPU1_QOSGEN_SHAPING_LOW, 0x1F1F1F1F),
+  ICBCFG_HWIO_DW(GEM_NOC_QNM_GPU0_QOSGEN_SHAPING_HIGH, 0x1F1F1F1F),
+  ICBCFG_HWIO_DW(GEM_NOC_QNM_GPU1_QOSGEN_SHAPING_HIGH, 0x1F1F1F1F),
+};
+
+icbcfg_prop_seg_type icbcfg_gemnoc_cfg_seg_fillmore_v1 =
+{
+  /* Length of the config  data array */
+  ARRAY_SIZE(icbcfg_gemnoc_cfg_data_fillmore_v1),
+  /* Pointer to config data array */
+  icbcfg_gemnoc_cfg_data_fillmore_v1
+};
+
+/*---------------------------------------------------------------------------*/
+/* LLCC Config Segment                                                       */
+/*---------------------------------------------------------------------------*/
+icbcfg_data_type icbcfg_llcc_cfg_data_fillmore_v1[] =
+{
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ANDLLCC_BEAC0_LLCC_BEAC_HMSSSELFAUTH_LOCK, 0x1),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ANDLLCC_BEAC0_LLCC_BEAC_HPROTNS_LOCK,      0x1),
+  ICBCFG_HWIO_DW(LLCC_BROADCAST_ANDLLCC_BEAC0_LLCC_BEAC_HSECUREPROC_LOCK,  0x1),
+};
+
+icbcfg_prop_seg_type icbcfg_llcc_cfg_seg_fillmore_v1 =
+{
+  /* Length of the config  data array */
+  ARRAY_SIZE(icbcfg_llcc_cfg_data_fillmore_v1),
+  /* Pointer to config data array */
+  icbcfg_llcc_cfg_data_fillmore_v1
+};
+
+/*---------------------------------------------------------------------------*/
+/* LLCC Config Segment                                                       */
+/*---------------------------------------------------------------------------*/
+icbcfg_data_type icbcfg_wa_data_fillmore_v1[] =
+{
+  ICBCFG_DEFAULT()
+};
+
+icbcfg_prop_seg_type icbcfg_wa_seg_fillmore_v1 =
+{
+  /* Length of the config  data array */
+  ARRAY_SIZE(icbcfg_wa_data_fillmore_v1),
+  /* Pointer to config data array */
+  icbcfg_wa_data_fillmore_v1
+};
+
+/*---------------------------------------------------------------------------*/
+/* PostInit Config Segment list                                              */
+/*---------------------------------------------------------------------------*/
+icbcfg_prop_seg_type *icbcfg_post_boot_segs_fillmore_v1[] =
+{
+  &icbcfg_gemnoc_cfg_seg_fillmore_v1,
+  &icbcfg_llcc_cfg_seg_fillmore_v1,
+  &icbcfg_wa_seg_fillmore_v1,
+};
+
+icbcfg_prop_type icbcfg_post_prop_fillmore_v1 =
+{
+  /* Length of the config  data array */
+  ARRAY_SIZE(icbcfg_post_boot_segs_fillmore_v1),
+  /* Pointer to config data array */
+  icbcfg_post_boot_segs_fillmore_v1
+};
+
+icbcfg_mem_region_type map_ddr_regions_fillmore_v1[] =
+{
+  { 0x080000000ULL, 0x100000000ULL },
+  { 0x800000000ULL, 0x1000000000ULL },
+};
+
+/* Translation block base addresses. */
+uint8 *trans_bases_fillmore_v1[] =
+{
+  (uint8 *)HWIO_ADDR(LLCC0_LLCC_BEAC0_LLCC_BEAC_ADDR_TRANSLATOR_CFG),
+  (uint8 *)HWIO_ADDR(LLCC1_LLCC_BEAC0_LLCC_BEAC_ADDR_TRANSLATOR_CFG),
+};
+
+icbcfg_device_config_type fillmore_v1 =
+{
+  /* Chip version information for this device data. */
+  CHIPINFO_FAMILY_FILLMORE,      /**< Chip family */
+  false,                       /**< Exact match for version? */
+  0,                           /**< Chip version */
+
+  /* Device information. */
+  ARRAY_SIZE(map_ddr_regions_fillmore_v1), /**< Number of regions in the DDR map */
+  map_ddr_regions_fillmore_v1,             /**< Array of mappable DDR regions */
+  6,                                     /**< Number of mapping segments. */
+  2,                                     /**< Number of channels. */
+  36,                                    /**< Address width in bits. */
+  ICBCFG_ADDR_TRANS_LLCC,                /**< Address translator hardware type. */
+  trans_bases_fillmore_v1,                 /**< Translation block base addresses. */
+
+  /* Prop lists. */
+  &icbcfg_boot_prop_fillmore_v1,           /**< Init time prop list. */
+  &icbcfg_post_prop_fillmore_v1,           /**< Post-init time prop list. */
+};
+
+/*---------------------------------------------------------------------------*/
+/* TARGET LIST                                                               */
+/*---------------------------------------------------------------------------*/
+icbcfg_device_config_type *configs_fillmore[] =
+{
+  &fillmore_v1,
+};
+
+/*---------------------------------------------------------------------------*/
+/* EXPORTED TARGET DEFINITION                                                */
+/*---------------------------------------------------------------------------*/
+icbcfg_info_type icbcfg_info =
+{
+  ARRAY_SIZE(configs_fillmore),
+  configs_fillmore,
+};

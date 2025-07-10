@@ -1,0 +1,17 @@
+/**
+
+This is the configuration file for PIL 
+
+Copyright (c) 2021 Qualcomm Technologies, Inc.
+All Rights Reserved.
+Confidential and Proprietary - Qualcomm Technologies, Inc.
+
+**/
+
+&soc {
+  pil {
+    pil_proxy_vote: pil_proxy_vote { };
+  };
+};
+
+#include "pil_proxy_vote.dtsi"

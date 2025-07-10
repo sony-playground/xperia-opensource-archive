@@ -1,0 +1,72 @@
+SonyMobileSigning { iso(1) identified-organization(3) dod(6) internet(1)
+                    private(4) enterprise(1) 48533 1 3 1 }
+
+DEFINITIONS EXPLICIT TAGS ::= BEGIN
+  -- Security and Enterprise base OID arc
+  id-secent OBJECT IDENTIFIER ::=
+            { iso(1) identified-organization(3) dod(6) internet(1)
+              private(4) enterprise(1) 48533 1 }
+
+  -- Certificate extension OIDs
+  id-ce OBJECT IDENTIFIER ::= { id-secent 1 }
+  id-ce-keyUsage OBJECT IDENTIFIER ::= { id-ce 1 }
+  id-ce-deviceBinding OBJECT IDENTIFIER ::= { id-ce 2 }
+
+  KeyUsage ::= SEQUENCE SIZE (1..MAX) OF Purpose
+
+  Purpose ::= CHOICE {
+    flash       ImageName,
+    boot    [0] BootImage,
+    config  [1] ConfigurationItem
+  }
+
+  ImageName ::= UTF8String
+
+  BootImage ::= ENUMERATED {
+    normal,
+    fota,
+    ramdumper,
+    service
+  }
+
+  ConfigurationItem ::= ENUMERATED {
+    simlock,
+    hwconfig,
+    keystore
+  }
+
+  DeviceBinding ::= Binding
+
+  Binding ::= CHOICE {
+    imei         IMEI,
+    deviceId     DeviceId,
+    deviceIdList DeviceIdList
+  }
+
+  IMEI ::= UTF8String
+
+  DeviceId ::= OCTET STRING
+
+  DeviceIdList ::= SEQUENCE SIZE (2) OF DeviceId
+
+  -- CMS attribute OIDs
+  id-cmsAttrs OBJECT IDENTIFIER ::= { id-secent 2 }
+  id-signatureUsage OBJECT IDENTIFIER ::= { id-cmsAttrs 3 }
+
+  SignatureUsage ::= SEQUENCE {
+    purpose     Purpose,
+    binding     Binding OPTIONAL,
+    rollback    INTEGER OPTIONAL
+  }
+
+  id-bindingMask OBJECT IDENTIFIER ::= { id-cmsAttrs 4 }
+
+  BindingMask ::= OCTET STRING (SIZE(32))
+
+  id-simlockProtection OBJECT IDENTIFIER ::= { id-cmsAttrs 5 }
+
+  SimlockProtection ::= SEQUENCE {
+    start     INTEGER,
+    length    INTEGER
+  }
+END

@@ -1,0 +1,3 @@
+start_loader
+fc getvar:Device-id -f out 12
+sh check.sh out

@@ -1,0 +1,39 @@
+#/** @file BootHashBuffer.inf
+#
+#  Hash APIs for XBL
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who      what, where, why
+# --------   ---      ---------------------------------------------------------
+# 05/10/20   ds       move to edk2 arm mmu/cache lib
+# 03/30/20   rama     Initial revision.
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BootHashBuffer
+  FILE_GUID                      = 3E703A1E-8236-45E9-AB91-3F311D2E3ABA
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BootHashBuffer
+
+[Sources.common]
+  boot_hash_buffer.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+
+[LibraryClasses]
+  ConfigContextLib
+  

@@ -1,0 +1,31 @@
+/**
+This is the settings file for BAM
+
+Copyright (c) 2021 Qualcomm Technologies, Inc.
+All Rights Reserved.
+Confidential and Proprietary - Qualcomm Technologies, Inc.
+*/
+
+#include "bam_cmn_defines.h"
+
+&soc {
+  bam_config {
+    bam_pa             = /bits/ 64 <BAM_BASE_ADDRESS>;
+    options            = <BAM_TGT_CMD_UL_CHCK>;
+    cfg_bits           = <BAM_CNFG_BITS_VAL>;
+    /* the sizes of the node and bam_target_config_type struct in c need to be considered when use fdt_get_prop_values_size_of_node() */
+    ee                 = /bits/ 8 <0>;
+    /* sec_config is not used and default value is NULL: 64 for 64 bit target and 32 for 32 bit target */
+    sec_config         = /bits/ 64 <0>;
+    size               = <BAM_MAX_MMAP>;
+  };
+  
+  bam_config_dummy {
+    bam_pa             = /bits/ 64 <BAM_TGT_CFG_LAST>;
+    options            = <0>;
+    cfg_bits           = <0>;
+    ee                 = /bits/ 8 <0>;
+    sec_config         = /bits/ 64 <0>;
+    size               = <0>;
+  };
+};

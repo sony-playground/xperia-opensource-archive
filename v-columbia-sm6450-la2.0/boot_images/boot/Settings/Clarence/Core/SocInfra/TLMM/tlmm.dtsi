@@ -1,0 +1,9 @@
+&soc {
+  tlmm: pinctrl@f100000 {
+      compatible = "qcom,clarence-pinctrl";
+      reg = <0xf100000 0x100000>;
+      ngpios = <136>;
+      width = <0x1000>;
+      id = <0x0>;
+  };
+};

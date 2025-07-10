@@ -1,0 +1,40 @@
+#/** @file CoreInitTargetLib.inf
+#
+#  CoreInit Target Lib
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#
+#==========================================================================
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ----------------------------------------------------------
+# 2020/03/27   sds     Initial revision.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CoreInitTargetLib
+  FILE_GUID                      = AF8659ED-4F51-4B47-A43A-DB525374E07C
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CoreInitTargetLib
+
+[Sources]
+  coreinit.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec  
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+
+[LibraryClasses]
+  NpaApiLib

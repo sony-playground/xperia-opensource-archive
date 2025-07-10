@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+  <!-- yoshino_cdb -->
+  <package-group name="yoshino_cdb" revision="XFL-MSM8998-N-35">
+    <package name="fw-xfl-yoshino-cdb"/>
+  </package-group>
+  <package-group name="yoshino_cdb_rf" revision="XFL-MSM8998-N-35">
+    <package name="fw-xfl-yoshino-cdb-rf"/>
+  </package-group>
+  <package-group name="maple" revision="XFL-MSM8998-N-45">
+    <package name="fw-xfl-maple"/>
+  </package-group>
+  <package-group name="maple_dsds" revision="XFL-MSM8998-N-45">
+    <package name="fw-xfl-maple-dsds"/>
+  </package-group>
+  <package-group name="poplar" revision="XFL-MSM8998-N-45">
+    <package name="fw-xfl-poplar"/>
+  </package-group>
+  <package-group name="poplar_dsds" revision="XFL-MSM8998-N-45">
+    <package name="fw-xfl-poplar-dsds"/>
+  </package-group>
+  <package-group name="lilac" revision="XFL-MSM8998-N-45">
+    <package name="fw-xfl-lilac"/>
+  </package-group>
+  <package-group name="tama_cdb" revision="XFL-SDM845-O-21">
+    <package name="fw-xfl-tama-cdb"/>
+  </package-group>
+  <package-group name="nile" revision="XFL-SDM630-109">
+    <package name="fw-xfl-nile"/>
+  </package-group>
+  <package-group name="akari" revision="XFL-SDM845-O-21">
+    <package name="fw-xfl-akari"/>
+  </package-group>
+  <package-group name="apollo" revision="XFL-SDM845-O-21">
+    <package name="fw-xfl-apollo"/>
+  </package-group>
+  <package-group name="aurora" revision="XFL-SDM845-O-21">
+    <package name="fw-xfl-aurora"/>
+  </package-group>
+  <package-group name="akatsuki" revision="XFL-SDM845-O-21">
+    <package name="fw-xfl-akatsuki"/>
+  </package-group>
+  <package-group name="kumano_cdb" revision="XFL-SM8150-P-16">
+    <package name="fw-xfl-kumano-cdb"/>
+  </package-group>
+  <package-group name="dragon" revision="XFL-MT6762-13">
+    <package name="fw-xfl-dragon"/>
+  </package-group>
+  <package-group name="kumano_plus_cdb" revision="XFL-SDX50M-SM8150-12">
+    <package name="fw-xfl-kumano-plus-cdb"/>
+  </package-group>
+  <package-group name="griffin" revision="XFL-SM8150-P-16">
+    <package name="fw-xfl-griffin"/>
+  </package-group>
+  <package-group name="sphinx" revision="XFL-SDX50M-SM8150-12">
+    <package name="fw-xfl-sphinx"/>
+  </package-group>
+  <package-group name="horus" revision="XFL-SDX50M-SM8150-12">
+    <package name="fw-xfl-horus"/>
+  </package-group>
+  <package-group name="pdx201" revision="XFL-SEINE-SM6125-9">
+    <package name="fw-xfl-pdx201"/>
+  </package-group>
+  <package-group name="sm34" revision="XFL-MT6762-102">
+    <package name="fw-xfl-sm34"/>
+  </package-group>
+  <package-group name="pdx203" revision="XFL-EDO-SM8250-16">
+    <package name="fw-xfl-pdx203"/>
+  </package-group>
+  <package-group name="sm35" revision="XFL-MT6765-205">
+    <package name="fw-xfl-sm35"/>
+  </package-group>
+</packages>

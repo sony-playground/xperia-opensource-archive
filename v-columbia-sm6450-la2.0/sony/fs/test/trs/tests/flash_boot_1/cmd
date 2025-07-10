@@ -1,0 +1,7 @@
+sh setup.sh
+run authenticate_1
+fc getvar:version -s OKAY0.4
+fc download:00001000 -s DATA00001000
+fu dump1 -s OKAY
+fc flash:boot_a -s OKAY
+sh check.sh

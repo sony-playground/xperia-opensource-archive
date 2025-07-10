@@ -1,0 +1,4 @@
+run authenticate_1
+fc Read-partition:frp -s DATA00080000
+fd out -n 524288 -s OKAY
+sh check.sh out

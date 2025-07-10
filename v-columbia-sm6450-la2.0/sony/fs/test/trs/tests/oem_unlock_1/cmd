@@ -1,0 +1,4 @@
+start_loader
+# requires IMEI set to 00000000 (00000000000000 ascii)
+fc oem unlock 758E6C504FB2D439 -s OKAY
+sh final.sh

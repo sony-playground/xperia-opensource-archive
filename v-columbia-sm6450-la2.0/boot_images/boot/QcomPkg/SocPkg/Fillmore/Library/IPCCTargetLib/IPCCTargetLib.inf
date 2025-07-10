@@ -1,0 +1,49 @@
+#/** @file IPCCTargetLib.inf
+#  
+#  Qualcomm IPCC Library
+#  
+#  Copyright (c) 2020,  Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 04/23/2020 cpaulo  Initial revision.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = IPCCTargetLib
+  FILE_GUID                      = 9637A8DC-D32E-444F-9E63-7402E6C585FE
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = IPCCTargetLib
+
+[Sources.common]
+  IPCCBSP.c
+  QcomPkg/Library/IPCCLib/api/IPCC_Info.h
+  QcomPkg/Library/IPCCLib/inc/IPCC_Internal.h
+  QcomPkg/Library/IPCCLib/inc/IPCC_Tx.h
+  QcomPkg/Library/IPCCLib/inc/IPCC_Log.h
+  QcomPkg/Library/IPCCLib/inc/IPCC_Legacy.h
+  QcomPkg/Library/IPCCLib/inc/IPCC_OS.h
+  QcomPkg/Library/IPCCLib/inc/IPCC_Rx.h
+  QcomPkg/Library/IPCCLib/inc/IPCC_Image.h
+  QcomPkg/Library/IPCCLib/inc/IPCC_InfoInternal.h
+  QcomPkg/Library/IPCCLib/inc/IPCCHWIO.h
+
+[Packages]
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+
+[LibraryClasses]
+  IPCCLib
+

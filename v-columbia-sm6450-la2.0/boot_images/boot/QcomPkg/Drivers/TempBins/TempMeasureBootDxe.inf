@@ -1,0 +1,20 @@
+#/** @file            MeasureBootDxe.inf
+# 
+#    Contains Qualcomm MeasureBoot driver.
+# 
+#    Copyright (c) 2020 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MeasureBootDxe
+  FILE_GUID                      = 252CCE76-28E9-4B57-B91F-57770847B47B
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = MeasureBootDxeInitialize
+
+[Binaries]
+   PE32|MeasureBootDxe.efi
+   

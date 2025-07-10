@@ -1,0 +1,8 @@
+&arb {
+   access: access { };
+   mgpi: mgpi { };
+   pvc: pvc { };
+};
+
+#include "mgpi_pvc_config.dtsi"
+#include "access.dtsi"

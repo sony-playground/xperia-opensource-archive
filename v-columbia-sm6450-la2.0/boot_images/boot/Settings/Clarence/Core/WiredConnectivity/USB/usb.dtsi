@@ -1,0 +1,241 @@
+/** USB SW Device Tree for Netrani_1.0.
+*
+* USB phy registers HW settings.
+*
+* Copyright (c) 2022 Qualcomm Technologies, Inc.
+* All Rights Reserved.
+* Confidential and Proprietary - Qualcomm Technologies, Inc.
+*
+*
+*/
+
+
+#include "HalusbHWIO_settings.h"
+
+&soc {
+    usb0 {
+    compatible = "qcom,usb";
+
+
+        //============================================================================
+        // QUSB High-Speed Primary PHY Configuration 
+        //============================================================================
+
+        hs_phy_cfg {
+            table = <
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB2PHY_USB_PHY_PARAMETER_OVERRIDE_X0_ADDR  0x83  // 4  power reset 0x61-> overide to 63
+                    HWIO_USB2PHY_USB_PHY_PARAMETER_OVERRIDE_X1_ADDR  0xC8  // 5  
+                    HWIO_USB2PHY_USB_PHY_PARAMETER_OVERRIDE_X2_ADDR  0x16  // 6  
+                    HWIO_USB2PHY_USB_PHY_PARAMETER_OVERRIDE_X3_ADDR  0x03  // 7  
+                   //--------------------------------------------------------------------------------------
+                    >;
+        }; // hs_phy_cfg
+
+
+        //============================================================================
+        // QUSB Super-Speed Primary PHY Configuration 
+        //============================================================================
+        //#9/21/2020	Lahaina & Waipio USB3 Gen2 PHY Configuration
+        //#V1.10	Lahaina & Waipio USB3 Gen2 PHY Configuration - Power Up
+
+        ss_phy_cfg {
+            table = <
+                    HWIO_USB3_DP_PHY_USB3_DP_COM_POWER_DOWN_CTRL_ADDR                            0x01  // 0  
+                    HWIO_USB3_DP_PHY_USB3_PCS_POWER_DOWN_CONTROL_ADDR                            0x01  // 1  
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_SSC_EN_CENTER_ADDR                         0x01  // 2  
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_SSC_PER1_ADDR                              0x31  // 3 
+                    //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_SSC_PER2_ADDR                              0x01  // 4  
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_SSC_STEP_SIZE1_MODE0_ADDR                  0xDE  // 5  
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_SSC_STEP_SIZE2_MODE0_ADDR                  0x07  // 6  
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_SSC_STEP_SIZE1_MODE1_ADDR                  0xDE  // 7  
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_SSC_STEP_SIZE2_MODE1_ADDR                  0x07  // 8  
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_SYSCLK_BUF_ENABLE_ADDR                     0x0A  // 9  
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_CMN_IPTRIM_ADDR                            0x20  // 10 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_CP_CTRL_MODE0_ADDR                         0x06  // 11 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_CP_CTRL_MODE1_ADDR                         0x06  // 12 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_PLL_RCTRL_MODE0_ADDR                       0x16  // 13 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_PLL_RCTRL_MODE1_ADDR                       0x16  // 14 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_PLL_CCTRL_MODE0_ADDR                       0x36  // 15 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_PLL_CCTRL_MODE1_ADDR                       0x36  // 16 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_SYSCLK_EN_SEL_ADDR                         0x1A  // 17 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_LOCK_CMP_EN_ADDR                           0x04  // 18 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_LOCK_CMP1_MODE0_ADDR                       0x14  // 19 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_LOCK_CMP2_MODE0_ADDR                       0x34  // 20 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_LOCK_CMP1_MODE1_ADDR                       0x34  // 21 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_LOCK_CMP2_MODE1_ADDR                       0x82  // 22 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_DEC_START_MODE0_ADDR                       0x82  // 23 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_DEC_START_MODE1_ADDR                       0x82  // 24 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_DIV_FRAC_START1_MODE0_ADDR                 0xAB  // 25 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_DIV_FRAC_START2_MODE0_ADDR                 0xEA  // 26 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_DIV_FRAC_START3_MODE0_ADDR                 0x02  // 27 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_DIV_FRAC_START1_MODE1_ADDR                 0xAB  // 28 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_DIV_FRAC_START2_MODE1_ADDR                 0xEA  // 29 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_DIV_FRAC_START3_MODE1_ADDR                 0x02  // 30 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_VCO_TUNE_MAP_ADDR                          0x02  // 31 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_VCO_TUNE1_MODE0_ADDR                       0x24  // 32 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_VCO_TUNE1_MODE1_ADDR                       0x24  // 33 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_VCO_TUNE2_MODE1_ADDR                       0x02  // 34 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_HSCLK_SEL_ADDR                             0x01  // 35 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_CORECLK_DIV_MODE1_ADDR                     0x08  // 36 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_BIN_VCOCAL_CMP_CODE1_MODE0_ADDR            0xCA  // 37 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_BIN_VCOCAL_CMP_CODE2_MODE0_ADDR            0x1E  // 38 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_BIN_VCOCAL_CMP_CODE1_MODE1_ADDR            0xCA  // 39 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_BIN_VCOCAL_CMP_CODE2_MODE1_ADDR            0x1E  // 40 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_COM_BIN_VCOCAL_HSCLK_SEL_ADDR                  0x11  // 41 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXA_RES_CODE_LANE_TX_ADDR                      0x00  // 42 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXA_RES_CODE_LANE_RX_ADDR                      0x00  // 43 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXA_RES_CODE_LANE_OFFSET_TX_ADDR               0x16  // 44 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXA_RES_CODE_LANE_OFFSET_RX_ADDR               0x0E  // 45 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXA_LANE_MODE_1_ADDR                           0x35  // 46 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXA_LANE_MODE_3_ADDR                           0x3F  // 47 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXA_LANE_MODE_4_ADDR                           0x7F  // 48 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXA_LANE_MODE_5_ADDR                           0x3F  // 49 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXA_RCV_DETECT_LVL_2_ADDR                      0x12  // 50 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXA_PI_QEC_CTRL_ADDR                           0x21  // 51 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_UCDR_FO_GAIN_ADDR                          0x09  // 52 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_UCDR_SO_GAIN_ADDR                          0x04  // 53 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_UCDR_FASTLOCK_FO_GAIN_ADDR                 0x2F  // 54 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_UCDR_SO_SATURATION_AND_ENABLE_ADDR         0x7F  // 55 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_UCDR_FASTLOCK_COUNT_LOW_ADDR               0xFF  // 56 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_UCDR_FASTLOCK_COUNT_HIGH_ADDR              0x0F  // 57 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_UCDR_PI_CONTROLS_ADDR                      0x99  // 58 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_UCDR_SB2_THRESH1_ADDR                      0x08  // 59 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_UCDR_SB2_THRESH2_ADDR                      0x08  // 60 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_UCDR_SB2_GAIN1_ADDR                        0x00  // 61 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_UCDR_SB2_GAIN2_ADDR                        0x04  // 62 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_VGA_CAL_CNTRL1_ADDR                        0x54  // 63 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_VGA_CAL_CNTRL2_ADDR                        0x0F  // 64 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_EQU_ADAPTOR_CNTRL2_ADDR                 0x0F  // 65 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_EQU_ADAPTOR_CNTRL3_ADDR                 0x4A  // 66 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_EQU_ADAPTOR_CNTRL4_ADDR                 0x0A  // 67 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_IDAC_TSETTLE_LOW_ADDR                   0xC0  // 68 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_IDAC_TSETTLE_HIGH_ADDR                  0x00  // 69 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_EQ_OFFSET_ADAPTOR_CNTRL1_ADDR           0x47  // 70 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_SIGDET_CNTRL_ADDR                          0x04  // 71 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_SIGDET_DEGLITCH_CNTRL_ADDR                 0x0E  // 72 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_MODE_00_LOW_ADDR                        0xBB  // 73 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_MODE_00_HIGH_ADDR                       0x7B  // 74 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_MODE_00_HIGH2_ADDR                      0xBB  // 75 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_MODE_00_HIGH3_ADDR                      0x3D  // 76 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_MODE_00_HIGH4_ADDR                      0xDB  // 77 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_MODE_01_LOW_ADDR                        0x64  // 78 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_MODE_01_HIGH_ADDR                       0x24  // 79 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_MODE_01_HIGH2_ADDR                      0xD2  // 80 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_MODE_01_HIGH3_ADDR                      0x13  // 81 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_RX_MODE_01_HIGH4_ADDR                      0xA9  // 82 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_DFE_EN_TIMER_ADDR                          0x04  // 83 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_DFE_CTLE_POST_CAL_OFFSET_ADDR              0x38  // 84 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_AUX_DATA_TCOARSE_TFINE_ADDR                0xA0  // 85 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_DCC_CTRL1_ADDR                             0x0C  // 86 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_GM_CAL_ADDR                                0x00  // 87 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXA_VTH_CODE_ADDR                              0x10  // 88 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXB_RES_CODE_LANE_TX_ADDR                      0x00  // 89 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXB_RES_CODE_LANE_RX_ADDR                      0x00  // 90 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXB_RES_CODE_LANE_OFFSET_TX_ADDR               0x16  // 91 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXB_RES_CODE_LANE_OFFSET_RX_ADDR               0x0E  // 92 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXB_LANE_MODE_1_ADDR                           0x35  // 93 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXB_LANE_MODE_3_ADDR                           0x3F  // 94 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXB_LANE_MODE_4_ADDR                           0x7F  // 95 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXB_LANE_MODE_5_ADDR                           0x3F  // 96 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXB_RCV_DETECT_LVL_2_ADDR                      0x12  // 97 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_TXB_PI_QEC_CTRL_ADDR                           0x21  // 98 
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_UCDR_FO_GAIN_ADDR                          0x09  // 99 
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_UCDR_SO_GAIN_ADDR                          0x04  // 100
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_UCDR_FASTLOCK_FO_GAIN_ADDR                 0x2F  // 101
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_UCDR_SO_SATURATION_AND_ENABLE_ADDR         0x7F  // 102
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_UCDR_FASTLOCK_COUNT_LOW_ADDR               0xFF  // 103
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_UCDR_FASTLOCK_COUNT_HIGH_ADDR              0x0F  // 104
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_UCDR_PI_CONTROLS_ADDR                      0x99  // 105
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_UCDR_SB2_THRESH1_ADDR                      0x08  // 106
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_UCDR_SB2_THRESH2_ADDR                      0x08  // 107
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_UCDR_SB2_GAIN1_ADDR                        0x00  // 108
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_UCDR_SB2_GAIN2_ADDR                        0x04  // 109
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_VGA_CAL_CNTRL1_ADDR                        0x54  // 110
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_VGA_CAL_CNTRL2_ADDR                        0x0F  // 111
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_EQU_ADAPTOR_CNTRL2_ADDR                 0x0F  // 112
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_EQU_ADAPTOR_CNTRL3_ADDR                 0x4A  // 113
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_EQU_ADAPTOR_CNTRL4_ADDR                 0x0A  // 114
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_IDAC_TSETTLE_LOW_ADDR                   0xC0  // 115
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_IDAC_TSETTLE_HIGH_ADDR                  0x00  // 116
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_EQ_OFFSET_ADAPTOR_CNTRL1_ADDR           0x47  // 117
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_SIGDET_CNTRL_ADDR                          0x04  // 118
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_SIGDET_DEGLITCH_CNTRL_ADDR                 0x0E  // 119
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_MODE_00_LOW_ADDR                        0xBB  // 120
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_MODE_00_HIGH_ADDR                       0x7B  // 121
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_MODE_00_HIGH2_ADDR                      0xBB  // 122
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_MODE_00_HIGH3_ADDR                      0x3C  // 123
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_MODE_00_HIGH4_ADDR                      0xDB  // 124
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_MODE_01_LOW_ADDR                        0x64  // 125
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_MODE_01_HIGH_ADDR                       0x24  // 126
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_MODE_01_HIGH2_ADDR                      0xD2  // 127
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_MODE_01_HIGH3_ADDR                      0x13  // 128
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_RX_MODE_01_HIGH4_ADDR                      0xA9  // 129
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_DFE_EN_TIMER_ADDR                          0x04  // 130
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_DFE_CTLE_POST_CAL_OFFSET_ADDR              0x38  // 131
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_AUX_DATA_TCOARSE_TFINE_ADDR                0xA0  // 132
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_DCC_CTRL1_ADDR                             0x0C  // 133
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_GM_CAL_ADDR                                0x00  // 134
+                    HWIO_USB3_DP_PHY_USB3_PCS_USB3_RCVR_DTCT_DLY_U3_L_ADDR                       0x40  // 135
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_PCS_USB3_RCVR_DTCT_DLY_U3_H_ADDR                       0x00  // 136
+                    HWIO_USB3_DP_PHY_USB3_PCS_RCVR_DTCT_DLY_P1U2_L_ADDR                          0xE7  // 137
+                    HWIO_USB3_DP_PHY_USB3_PCS_RCVR_DTCT_DLY_P1U2_H_ADDR                          0x03  // 138
+                    HWIO_USB3_DP_PHY_USB3_QSERDES_RXB_VTH_CODE_ADDR                              0x10  // 139
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_PCS_LOCK_DETECT_CONFIG1_ADDR                           0xC4  // 140
+                    HWIO_USB3_DP_PHY_USB3_PCS_LOCK_DETECT_CONFIG2_ADDR                           0x89  // 141
+                    HWIO_USB3_DP_PHY_USB3_PCS_LOCK_DETECT_CONFIG3_ADDR                           0x20  // 142
+                    HWIO_USB3_DP_PHY_USB3_PCS_LOCK_DETECT_CONFIG6_ADDR                           0x13  // 143
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_PCS_REFGEN_REQ_CONFIG1_ADDR                            0x21  // 144
+                    HWIO_USB3_DP_PHY_USB3_PCS_RX_SIGDET_LVL_ADDR                                 0xAA  // 145
+                    HWIO_USB3_DP_PHY_USB3_PCS_CDR_RESET_TIME_ADDR                                0x0A  // 146
+                    HWIO_USB3_DP_PHY_USB3_PCS_ALIGN_DETECT_CONFIG1_ADDR                          0x88  // 147
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_PCS_ALIGN_DETECT_CONFIG2_ADDR                          0x13  // 148
+                    HWIO_USB3_DP_PHY_USB3_PCS_PCS_TX_RX_CONFIG_ADDR                              0x0C  // 149
+                    HWIO_USB3_DP_PHY_USB3_PCS_EQ_CONFIG1_ADDR                                    0x4B  // 150
+                    HWIO_USB3_DP_PHY_USB3_PCS_EQ_CONFIG5_ADDR                                    0x10  // 151
+                   //--------------------------------------------------------------------------------------
+                    HWIO_USB3_DP_PHY_USB3_PCS_USB3_LFPS_DET_HIGH_COUNT_VAL_ADDR                  0xF8  // 152
+                    HWIO_USB3_DP_PHY_USB3_PCS_USB3_RXEQTRAINING_DFE_TIME_S2_ADDR                 0x07  // 153
+                    QUSB_HWIO_ADDR_END                                                           0x00  // 154
+                    >;
+        }; // ss_phy_cfg
+    }; // usb0
+}; // soc
+

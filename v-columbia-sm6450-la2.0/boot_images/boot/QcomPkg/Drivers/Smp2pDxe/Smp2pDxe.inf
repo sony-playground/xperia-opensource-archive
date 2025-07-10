@@ -1,0 +1,44 @@
+#/** @file Smp2pDxe.inf
+#  
+#  DXE driver for Smp2p
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 02/09/20   ar     Updated FILE_GUID
+# 02/09/20   ar      Created DXE driver for Smp2p driver
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Smp2pDxe
+  FILE_GUID                      = 23f4e10e-3050-4073-b94c-b80d7ebc959e
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = Smp2pEntryPoint
+
+[Sources.common]
+  smp2p_dxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  Smp2pLib
+
+[Protocols]
+  gEfiSMP2PProtocolGuid    
+
+[Depex] 
+  TRUE

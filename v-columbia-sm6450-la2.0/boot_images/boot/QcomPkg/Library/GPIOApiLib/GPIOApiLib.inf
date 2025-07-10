@@ -1,0 +1,28 @@
+##/** @file GPIOApiLib.inf
+#
+#  Wrapper Library for GPIO common interface (GPIO.h).
+#
+#  Copyright (c) 2021,  Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GPIOApiLib
+  FILE_GUID                      = 0AC724D1-B4E1-4DF1-B505-E10B4B04C4B8
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = GPIOApiLib
+
+[Sources.common]
+  GPIOApi.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+
+[Protocols]
+  gEfiGPIOProtocolGuid
+

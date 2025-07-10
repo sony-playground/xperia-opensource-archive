@@ -1,0 +1,28 @@
+{
+	"CFGL": {
+		"major_version" : 2,
+		"minor_version" : 0,
+		"file1": {
+			"file_name" : "/boot/QcomPkg/SocPkg/Waipio/Settings/DSF/release/target/Waipio/A001_8_0100_1_dcb.bin",
+			"config_name": "/A001_8_0100_1_dcb.bin",
+			"attributes": "0"
+		},
+		"file2": {
+			"file_name" : "/boot/QcomPkg/SocPkg/Waipio/Settings/DSF/release/target/Waipio/A001_8_0200_1_dcb.bin",
+			"config_name": "/A001_8_0200_1_dcb.bin",
+			"attributes": "0"
+		},
+		"file3" : {
+			"file_name" : "/boot/QcomPkg/SocPkg/Waipio/Settings/CPR/cpr_voltage_plan_waipio.bin",
+			"config_name": "/cpr.bin",
+			"attributes": "0"
+		},
+		"file4": {
+			"file_name" : "/Build/WaipioLAA/DTC/pre_ddr-soc.dtb",
+			"chipinfo"     : "0x007401c901000000",	
+			"config_name": "/pre_ddr-soc.dtb",
+			"attributes": "0"
+		}
+
+	}
+}

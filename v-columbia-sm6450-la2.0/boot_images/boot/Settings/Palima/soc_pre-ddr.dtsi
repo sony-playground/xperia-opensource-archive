@@ -1,0 +1,18 @@
+// soc_pre-ddr.dtsi
+//
+// Provides Common SoC settings for Palima
+
+// This file should only contain #include statements
+
+/ {
+	storage: storage { };
+};
+
+#include "Core/Boot/ddr_common.dtsi"
+#include "Core/Boot/ddr_target.dtsi"
+#include "../SW/Core/Boot/boot.dtsi"	/* Boot SW configuration settings */
+#include "Core/PMIC/pmic.dtsi"
+#include "Core/SocInfra/PlatformInfo/PlatformInfo.dtsi"
+#include "Core/SocInfra/TLMM/tlmm.dtsi"
+#include "Core/Storage/UFS/ufs.dtsi"
+#include "Core/Buses/I2C/i2c.dtsi"

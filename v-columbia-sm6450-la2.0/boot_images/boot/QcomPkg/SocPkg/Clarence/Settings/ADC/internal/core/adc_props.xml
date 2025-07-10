@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<driver name="NULL">
+  <global_def>
+    <var_seq name="AdcStructIncFile" type="DALPROP_DATA_TYPE_STRUCT_INC_FILE">
+      ./../ADC/internal/AdcInternalSettings.c
+     </var_seq>
+  </global_def>
+  <device name="/core/pmic/adc">
+    <props name="ADC_BSP" type="DALPROP_ATTR_TYPE_STRUCT_PTR">
+      AdcBsp_PMK8350_PM8350B
+    </props>
+    <props name="ADC_BSP_PMK8350_PM8350_PM8350B" type="DALPROP_ATTR_TYPE_STRUCT_PTR">
+      AdcBsp_PMK8350_PM8350_PM8350B
+    </props>
+	<props name="ADC_BSP_PMK8350_PM8350_PM7250B" type="DALPROP_ATTR_TYPE_STRUCT_PTR">
+      AdcBsp_PMK8350_PM8350_PM7250B
+    </props>
+	<props name="ADC_BSP_PMI632" type="DALPROP_ATTR_TYPE_STRUCT_PTR">
+      AdcBsp_PMI632
+    </props>
+  </device>
+</driver>
+

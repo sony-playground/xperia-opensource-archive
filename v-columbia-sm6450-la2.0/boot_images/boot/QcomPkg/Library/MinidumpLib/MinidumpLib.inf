@@ -1,0 +1,54 @@
+#/** @file Minidump.inf
+#
+# Minidump Lib
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 02/12/21   vk      Move boot_minidump to lib
+# 03/30/20   aus     Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MinidumpLib
+  FILE_GUID                      = 75D4C9D7-6911-448E-B756-0A75F7324687
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MinidumpLib
+
+[Sources.common]
+  boot_minidump.c
+  MinidumpLib.c
+  MinidumpLibExt.c  
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -DBOOT_PBL_H=\"pbl_sbl_shared.h\"
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec  
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomPkg/SocPkg/Library/BootPblSharedDataLib/BootPblSharedDataLib.dec
+  SecPkg/DbgInfoLib.dec
+
+[LibraryClasses]
+  MuslLib
+  BaseLib
+  SmemLib
+  CryptoRDILib
+
+
+

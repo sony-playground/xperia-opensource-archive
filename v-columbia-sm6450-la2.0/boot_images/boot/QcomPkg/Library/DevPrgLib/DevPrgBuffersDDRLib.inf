@@ -1,0 +1,36 @@
+#/** @file DevPrgDLib.inf
+#
+#  DevPrgD Lib.
+#
+#  Copyright (c) 2020-2021 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when        who  what, where, why
+# ----------  ---  ----------------------------------------------------------
+# 2021-06-08  wek  Update image ID for VIP due to TME.
+# 2020-11-30  wek  Initial revision.
+#
+#==============================================================================
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DevPrgBufferseDDRLib
+  FILE_GUID                      = 315A1E32-453D-4160-AAC8-178105D350E9
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DevPrgDLib
+
+[Sources]
+  devprgb_buffers_ddr.c
+  devprgb_buffers_lite.c
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror -DUSE_LOADER_UTILS -DFIREHOSE_LITE_CHANNEL_BUFFER_SIZE=4096 -DFIREHOSE_DDR_CHANNEL_BUFFER_SIZE=1048576 -DVIP_SW_ID=26
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec

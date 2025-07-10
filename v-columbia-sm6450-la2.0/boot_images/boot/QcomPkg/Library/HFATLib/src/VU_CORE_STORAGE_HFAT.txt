@@ -1,0 +1,2 @@
+VU_CORE_STORAGE_HFAT.02.00.20
+ + Changes to compile in UEFI (for XBL) + Modify _f_memcpy() in hfat_common.c, to support word aligned copy. 

@@ -1,0 +1,52 @@
+#/** @file RawFsSimpleFsDxe.inf
+#
+#  Simple FS Wrapper for Raw File System Protocol.
+#
+#  Copyright (c) 2020, Qualcomm Technologies Inc. All rights reserved.
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ----------------------------------------------------------
+# 2020/02/13   dm      Initial version
+#
+#==============================================================================
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RawFsSimpleFs
+  FILE_GUID                      = 34780aec-77ad-4fde-9d90-12de7613cdec
+  MODULE_TYPE                    = UEFI_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = RawFsSimpleFsDriverEntryPoint
+
+[Sources]
+  RawFsSimpleFs.c
+  RawFsSimpleFs.h
+  RawFsSimpleFsUtil.c
+  RawFsSimpleFsUtil.h
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  MemoryAllocationLib
+  UefiDriverEntryPoint
+  QcomLib
+  BootConfigLib
+
+[Guids]
+ gEfiPartitionTypeGuid
+ gEfiSpiNor0Guid
+ gEfiUfsLU4Guid
+
+[Protocols]
+  gEfiSimpleFileSystemProtocolGuid              ## PRODUCES
+  gEfiRawFileSystemProtocolGuid	                ## CONSUMES

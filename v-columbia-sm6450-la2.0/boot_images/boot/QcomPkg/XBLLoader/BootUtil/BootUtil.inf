@@ -1,0 +1,39 @@
+#/** @file BootUtil.inf
+#
+#  XBL Loader
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 07/02/20   ram     Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BootUtilLib
+  FILE_GUID                      = 62243AAB-B973-42BB-BEE0-9B13853FB1C4
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BootUtilLib
+
+[Sources.common]
+  boot_util.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  MuslLib
+

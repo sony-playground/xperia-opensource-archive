@@ -1,0 +1,3634 @@
+##########################################################################
+##
+## Copyright (c) 2023 Qualcomm Technologies, Inc.
+## All Rights Reserved.
+## QUALCOMM Proprietary and Confidential.
+##
+## THIS IS AUTO-GENERATED CPR RINIT CONFIG FILE FOR fillmore.
+##
+## Date: Thu Oct 26 14:16:31 2023
+##
+###########################################################################
+
+##Default CPRF Settings for RPMH_CPRF and each CPRF instance.
+##Module
+module: { name = RPMH_CPRF_CPRF, group = cpr , min_ver = 1.0, max_ver = 1.9}
+vars:
+regs:
+
+AOSS_SETTINGS = 0x9300
+CXO_ON_SETTINGS = 0x1
+CLOCK_MGMT_ENABLE = 0x0
+CPRFm_DELAY_CPRC = 0xb
+CPRFm_CAP_STEP_SETTINGS_n = 0x11
+CPRFm_TIMEOUT = 0x4B001
+CPRFm_CTRL =  0x1EB9
+CPRFm_INITIAL_SETTINGS = 0x20
+CPRF_DEBUG_BUS_CTRL_0=0x71024
+CPRF_DEBUG_CTRL=0x6
+
+
+module: { name = RPMH_CPRF_CPRF, group = cpr, min_ver = 2.0}
+vars:
+regs:
+
+AOSS_SETTINGS = 0x9300
+CXO_ON_SETTINGS = 0x1
+CLOCK_MGMT_ENABLE = 0x0
+CPRFm_DELAY_CPRC = 0xb
+CPRFm_CAP_STEP_SETTINGS_n = 0x11
+CPRFm_STEP_SETTINGS = 0x25
+CPRFm_TIMEOUT = 0x4B001
+CPRFm_CTRL = 0x1eb9
+CPRFm_INITIAL_SETTINGS = 0x20
+CPRF_DEBUG_BUS_CTRL_0=0x71024
+CPRF_DEBUG_CTRL=0x6
+
+#Initialize CPRF regs for VDDA_1.0_1.255
+
+module: { name = RPMH_CPRF_CPRF , group = cprv1 }
+regs:
+
+CPRFm_STEP_SETTINGS[2] =
+{
+    .STEP = 4,
+    .TOLERANCE = 1,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 1] = 352
+
+CPRFm_VOLTAGE_LIMITS_n[2, 1] = 
+{
+    .VMAX = 352,
+    .VMIN = 352,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 2] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 2] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 3] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 3] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 4] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 4] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 5] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 5] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 6] = 952
+
+CPRFm_VOLTAGE_LIMITS_n[2, 6] = 
+{
+    .VMAX = 952,
+    .VMIN = 700,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 7] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 7] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 8] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 8] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 9] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 9] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 10] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 10] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 11] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 11] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 12] = 952
+
+CPRFm_VOLTAGE_LIMITS_n[2, 12] = 
+{
+    .VMAX = 952,
+    .VMIN = 892,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 13] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 13] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 14] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 14] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[2, 15] = 0
+
+CPRFm_VOLTAGE_LIMITS_n[2, 15] = 
+{
+    .VMAX = 0,
+    .VMIN = 0,
+}
+
+
+CPRFm_ON_SETTINGS[2] =
+{
+    .OL_ON_VOTE = 1,
+    .OL_ON = 2,
+}
+
+
+#Initialize CPRF regs for MX_1.0_1.255
+
+module: { name = RPMH_CPRF_CPRF , group = cprv1 }
+regs:
+
+CPRFm_STEP_SETTINGS[1] =
+{
+    .STEP = 4,
+    .TOLERANCE = 1,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 1] = 568
+
+CPRFm_VOLTAGE_LIMITS_n[1, 1] = 
+{
+    .VMAX = 568,
+    .VMIN = 500,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 2] = 752
+
+CPRFm_VOLTAGE_LIMITS_n[1, 2] = 
+{
+    .VMAX = 752,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 3] = 752
+
+CPRFm_VOLTAGE_LIMITS_n[1, 3] = 
+{
+    .VMAX = 752,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 4] = 752
+
+CPRFm_VOLTAGE_LIMITS_n[1, 4] = 
+{
+    .VMAX = 752,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 5] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[1, 5] = 
+{
+    .VMAX = 924,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 6] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[1, 6] = 
+{
+    .VMAX = 924,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 7] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[1, 7] = 
+{
+    .VMAX = 924,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 8] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[1, 8] = 
+{
+    .VMAX = 924,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 9] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[1, 9] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 10] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[1, 10] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 11] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[1, 11] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 12] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[1, 12] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 13] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[1, 13] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 14] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[1, 14] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[1, 15] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[1, 15] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_ON_SETTINGS[1] =
+{
+    .OL_ON_VOTE = 1,
+    .OL_ON = 2,
+}
+
+
+#Initialize CPRF regs for CX_1.0_1.255
+
+module: { name = RPMH_CPRF_CPRF , group = cprv1 }
+regs:
+
+CPRFm_STEP_SETTINGS[0] =
+{
+    .STEP = 4,
+    .TOLERANCE = 1,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 1] = 352
+
+CPRFm_VOLTAGE_LIMITS_n[0, 1] = 
+{
+    .VMAX = 352,
+    .VMIN = 352,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 2] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 2] = 
+{
+    .VMAX = 984,
+    .VMIN = 516,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 3] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 3] = 
+{
+    .VMAX = 984,
+    .VMIN = 552,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 4] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 4] = 
+{
+    .VMAX = 984,
+    .VMIN = 600,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 5] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 5] = 
+{
+    .VMAX = 984,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 6] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 6] = 
+{
+    .VMAX = 984,
+    .VMIN = 716,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 7] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 7] = 
+{
+    .VMAX = 984,
+    .VMIN = 768,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 8] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 8] = 
+{
+    .VMAX = 984,
+    .VMIN = 768,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 9] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 9] = 
+{
+    .VMAX = 984,
+    .VMIN = 768,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 10] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 10] = 
+{
+    .VMAX = 984,
+    .VMIN = 768,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 11] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 11] = 
+{
+    .VMAX = 984,
+    .VMIN = 768,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 12] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 12] = 
+{
+    .VMAX = 984,
+    .VMIN = 768,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 13] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 13] = 
+{
+    .VMAX = 984,
+    .VMIN = 768,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 14] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 14] = 
+{
+    .VMAX = 984,
+    .VMIN = 768,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[0, 15] = 984
+
+CPRFm_VOLTAGE_LIMITS_n[0, 15] = 
+{
+    .VMAX = 984,
+    .VMIN = 768,
+}
+
+
+CPRFm_ON_SETTINGS[0] =
+{
+    .OL_ON_VOTE = 1,
+    .OL_ON = 2,
+}
+
+
+#Initialize CPRF regs for MM_1.0_1.255
+
+module: { name = RPMH_CPRF_CPRF , group = cprv1 }
+regs:
+
+CPRFm_STEP_SETTINGS[7] =
+{
+    .STEP = 4,
+    .TOLERANCE = 1,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 1] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 1] = 
+{
+    .VMAX = 824,
+    .VMIN = 516,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 2] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 2] = 
+{
+    .VMAX = 824,
+    .VMIN = 552,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 3] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 3] = 
+{
+    .VMAX = 824,
+    .VMIN = 600,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 4] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 4] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 5] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 5] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 6] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 6] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 7] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 7] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 8] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 8] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 9] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 9] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 10] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 10] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 11] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 11] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 12] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 12] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 13] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 13] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 14] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 14] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[7, 15] = 824
+
+CPRFm_VOLTAGE_LIMITS_n[7, 15] = 
+{
+    .VMAX = 824,
+    .VMIN = 656,
+}
+
+
+CPRFm_ON_SETTINGS[7] =
+{
+    .OL_ON_VOTE = 1,
+    .OL_ON = 1,
+}
+
+
+#Initialize CPRF regs for GFX_1.0_1.255
+
+module: { name = RPMH_CPRF_CPRF , group = cprv1 }
+regs:
+
+CPRFm_STEP_SETTINGS[5] =
+{
+    .STEP = 4,
+    .TOLERANCE = 1,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 1] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 1] = 
+{
+    .VMAX = 940,
+    .VMIN = 516,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 2] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 2] = 
+{
+    .VMAX = 940,
+    .VMIN = 516,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 3] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 3] = 
+{
+    .VMAX = 940,
+    .VMIN = 552,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 4] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 4] = 
+{
+    .VMAX = 940,
+    .VMIN = 600,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 5] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 5] = 
+{
+    .VMAX = 940,
+    .VMIN = 624,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 6] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 6] = 
+{
+    .VMAX = 940,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 7] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 7] = 
+{
+    .VMAX = 940,
+    .VMIN = 696,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 8] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 8] = 
+{
+    .VMAX = 940,
+    .VMIN = 696,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 9] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 9] = 
+{
+    .VMAX = 940,
+    .VMIN = 696,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 10] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 10] = 
+{
+    .VMAX = 940,
+    .VMIN = 696,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 11] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 11] = 
+{
+    .VMAX = 940,
+    .VMIN = 696,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 12] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 12] = 
+{
+    .VMAX = 940,
+    .VMIN = 696,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 13] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 13] = 
+{
+    .VMAX = 940,
+    .VMIN = 696,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 14] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 14] = 
+{
+    .VMAX = 940,
+    .VMIN = 696,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[5, 15] = 940
+
+CPRFm_VOLTAGE_LIMITS_n[5, 15] = 
+{
+    .VMAX = 940,
+    .VMIN = 696,
+}
+
+
+CPRFm_ON_SETTINGS[5] =
+{
+    .OL_ON_VOTE = 1,
+    .OL_ON = 1,
+}
+
+
+#Initialize CPRF regs for LPI_MX_1.0_1.255
+
+module: { name = RPMH_CPRF_CPRF , group = cprv1 }
+regs:
+
+CPRFm_STEP_SETTINGS[4] =
+{
+    .STEP = 8,
+    .TOLERANCE = 1,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 1] = 568
+
+CPRFm_VOLTAGE_LIMITS_n[4, 1] = 
+{
+    .VMAX = 568,
+    .VMIN = 500,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 2] = 752
+
+CPRFm_VOLTAGE_LIMITS_n[4, 2] = 
+{
+    .VMAX = 752,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 3] = 752
+
+CPRFm_VOLTAGE_LIMITS_n[4, 3] = 
+{
+    .VMAX = 752,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 4] = 752
+
+CPRFm_VOLTAGE_LIMITS_n[4, 4] = 
+{
+    .VMAX = 752,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 5] = 920
+
+CPRFm_VOLTAGE_LIMITS_n[4, 5] = 
+{
+    .VMAX = 920,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 6] = 920
+
+CPRFm_VOLTAGE_LIMITS_n[4, 6] = 
+{
+    .VMAX = 920,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 7] = 920
+
+CPRFm_VOLTAGE_LIMITS_n[4, 7] = 
+{
+    .VMAX = 920,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 8] = 920
+
+CPRFm_VOLTAGE_LIMITS_n[4, 8] = 
+{
+    .VMAX = 920,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 9] = 920
+
+CPRFm_VOLTAGE_LIMITS_n[4, 9] = 
+{
+    .VMAX = 920,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 10] = 920
+
+CPRFm_VOLTAGE_LIMITS_n[4, 10] = 
+{
+    .VMAX = 920,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 11] = 920
+
+CPRFm_VOLTAGE_LIMITS_n[4, 11] = 
+{
+    .VMAX = 920,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 12] = 920
+
+CPRFm_VOLTAGE_LIMITS_n[4, 12] = 
+{
+    .VMAX = 920,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 13] = 920
+
+CPRFm_VOLTAGE_LIMITS_n[4, 13] = 
+{
+    .VMAX = 920,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 14] = 920
+
+CPRFm_VOLTAGE_LIMITS_n[4, 14] = 
+{
+    .VMAX = 920,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[4, 15] = 920
+
+CPRFm_VOLTAGE_LIMITS_n[4, 15] = 
+{
+    .VMAX = 920,
+    .VMIN = 800,
+}
+
+
+CPRFm_ON_SETTINGS[4] =
+{
+    .OL_ON_VOTE = 1,
+    .OL_ON = 2,
+}
+
+
+#Initialize CPRF regs for LPI_CX_1.0_1.255
+
+module: { name = RPMH_CPRF_CPRF , group = cprv1 }
+regs:
+
+CPRFm_STEP_SETTINGS[3] =
+{
+    .STEP = 8,
+    .TOLERANCE = 1,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 1] = 352
+
+CPRFm_VOLTAGE_LIMITS_n[3, 1] = 
+{
+    .VMAX = 352,
+    .VMIN = 352,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 2] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 2] = 
+{
+    .VMAX = 904,
+    .VMIN = 520,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 3] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 3] = 
+{
+    .VMAX = 904,
+    .VMIN = 520,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 4] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 4] = 
+{
+    .VMAX = 904,
+    .VMIN = 552,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 5] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 5] = 
+{
+    .VMAX = 904,
+    .VMIN = 600,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 6] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 6] = 
+{
+    .VMAX = 904,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 7] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 7] = 
+{
+    .VMAX = 904,
+    .VMIN = 720,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 8] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 8] = 
+{
+    .VMAX = 904,
+    .VMIN = 720,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 9] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 9] = 
+{
+    .VMAX = 904,
+    .VMIN = 720,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 10] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 10] = 
+{
+    .VMAX = 904,
+    .VMIN = 720,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 11] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 11] = 
+{
+    .VMAX = 904,
+    .VMIN = 720,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 12] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 12] = 
+{
+    .VMAX = 904,
+    .VMIN = 720,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 13] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 13] = 
+{
+    .VMAX = 904,
+    .VMIN = 720,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 14] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 14] = 
+{
+    .VMAX = 904,
+    .VMIN = 720,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[3, 15] = 904
+
+CPRFm_VOLTAGE_LIMITS_n[3, 15] = 
+{
+    .VMAX = 904,
+    .VMIN = 720,
+}
+
+
+CPRFm_ON_SETTINGS[3] =
+{
+    .OL_ON_VOTE = 1,
+    .OL_ON = 2,
+}
+
+
+#Initialize CPRF regs for MSS_1.0_1.255
+
+module: { name = RPMH_CPRF_CPRF , group = cprv1 }
+regs:
+
+CPRFm_STEP_SETTINGS[6] =
+{
+    .STEP = 4,
+    .TOLERANCE = 1,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 1] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 1] = 
+{
+    .VMAX = 924,
+    .VMIN = 516,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 2] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 2] = 
+{
+    .VMAX = 924,
+    .VMIN = 516,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 3] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 3] = 
+{
+    .VMAX = 924,
+    .VMIN = 552,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 4] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 4] = 
+{
+    .VMAX = 924,
+    .VMIN = 600,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 5] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 5] = 
+{
+    .VMAX = 924,
+    .VMIN = 656,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 6] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 6] = 
+{
+    .VMAX = 924,
+    .VMIN = 696,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 7] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 7] = 
+{
+    .VMAX = 924,
+    .VMIN = 716,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 8] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 8] = 
+{
+    .VMAX = 924,
+    .VMIN = 716,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 9] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 9] = 
+{
+    .VMAX = 924,
+    .VMIN = 716,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 10] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 10] = 
+{
+    .VMAX = 924,
+    .VMIN = 716,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 11] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 11] = 
+{
+    .VMAX = 924,
+    .VMIN = 716,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 12] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 12] = 
+{
+    .VMAX = 924,
+    .VMIN = 716,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 13] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 13] = 
+{
+    .VMAX = 924,
+    .VMIN = 716,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 14] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 14] = 
+{
+    .VMAX = 924,
+    .VMIN = 716,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[6, 15] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[6, 15] = 
+{
+    .VMAX = 924,
+    .VMIN = 716,
+}
+
+
+CPRFm_ON_SETTINGS[6] =
+{
+    .OL_ON_VOTE = 1,
+    .OL_ON = 1,
+}
+
+
+#Initialize CPRF regs for MXC_1.0_1.255
+
+module: { name = RPMH_CPRF_CPRF , group = cprv1 }
+regs:
+
+CPRFm_STEP_SETTINGS[8] =
+{
+    .STEP = 4,
+    .TOLERANCE = 1,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 1] = 568
+
+CPRFm_VOLTAGE_LIMITS_n[8, 1] = 
+{
+    .VMAX = 568,
+    .VMIN = 500,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 2] = 752
+
+CPRFm_VOLTAGE_LIMITS_n[8, 2] = 
+{
+    .VMAX = 752,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 3] = 752
+
+CPRFm_VOLTAGE_LIMITS_n[8, 3] = 
+{
+    .VMAX = 752,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 4] = 752
+
+CPRFm_VOLTAGE_LIMITS_n[8, 4] = 
+{
+    .VMAX = 752,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 5] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[8, 5] = 
+{
+    .VMAX = 924,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 6] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[8, 6] = 
+{
+    .VMAX = 924,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 7] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[8, 7] = 
+{
+    .VMAX = 924,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 8] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[8, 8] = 
+{
+    .VMAX = 924,
+    .VMIN = 752,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 9] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[8, 9] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 10] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[8, 10] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 11] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[8, 11] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 12] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[8, 12] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 13] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[8, 13] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 14] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[8, 14] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_SAFE_VOLTAGE_n[8, 15] = 924
+
+CPRFm_VOLTAGE_LIMITS_n[8, 15] = 
+{
+    .VMAX = 924,
+    .VMIN = 800,
+}
+
+
+CPRFm_ON_SETTINGS[8] =
+{
+    .OL_ON_VOTE = 1,
+    .OL_ON = 2,
+}
+
+
+#Initialize CPRC regs for MX_1.0_1.255
+
+module: { name = MX_CPR3 , group = cprv1 }
+regs:
+
+FSM_CTL = 
+{
+    .COUNT_REPEAT = 20,
+    .COUNT_MODE   = 0,
+    .IDLE_CLOCKS  = 15,
+}
+
+TIMER_AUTO_CONT =
+{
+    .AUTO_CONT_INTERVAL = 96000,
+}
+
+TIMER_CLAMP =
+{
+    .CLAMP_TIMER_INTERVAL = 0,
+}
+
+STEP_QUOT_INIT =
+{
+    .STEP_QUOT_INIT_MAX = 13,
+    .STEP_QUOT_INIT_MIN = 7,
+}
+
+THRESHOLD_t =
+{
+    .UP_THRESHOLD = 2,
+    .DN_THRESHOLD = 2,
+    .CONSECUTIVE_UP = 0,
+    .CONSECUTIVE_DN = 0,
+}
+
+MISC_REGISTER =
+{
+    .TEMP_SENSOR_ID_END = 0,
+    .TEMP_SENSOR_ID_START = 0,
+    .STEP_QUOT_INIT_PER_RO = 0,
+    .RESET_STEP_QUOT_LOOP_EN = 1,
+    .CPRF_INTERFACE_ENABLE = 1,
+    .CPR_GCNT_PER_MODE_EN = 1,
+    .CPRF_SETTLE_TIMER_DOWN_EN = 1
+}
+
+CPRF_DN_TIMER =
+{
+    .TIMER_INTERVAL = 9616,
+}
+
+MARGIN_TEMP_POINT0N1 =
+{
+   .POINT1 = 0,
+   .POINT0 = 0,
+}
+
+MARGIN_TEMP_POINT2 =
+{
+   .POINT2 = 0,
+}
+
+IRQ_EN_t[0] = 11
+
+
+SENSOR_THREAD_n[0] = 0
+
+
+SENSOR_THREAD_n[1] = 0
+
+
+SENSOR_THREAD_n[2] = 0
+
+
+SENSOR_THREAD_n[3] = 0
+
+
+SENSOR_THREAD_n[4] = 0
+
+
+SENSOR_THREAD_n[5] = 0
+
+
+SENSOR_THREAD_n[6] = 0
+
+
+SENSOR_THREAD_n[7] = 0
+
+
+SENSOR_THREAD_n[8] = 0
+
+
+SENSOR_THREAD_n[9] = 0
+
+
+SENSOR_THREAD_n[10] = 0
+
+
+SENSOR_THREAD_n[11] = 0
+
+
+SENSOR_THREAD_n[12] = 0
+
+
+SENSOR_THREAD_n[15] = 0
+
+
+SENSOR_THREAD_n[16] = 0
+
+
+SENSOR_THREAD_n[17] = 0
+
+
+SENSOR_THREAD_n[18] = 0
+
+
+SENSOR_THREAD_n[19] = 0
+
+
+SENSOR_THREAD_n[20] = 0
+
+
+MASK_THREAD_t[0] = 0x0
+
+
+SENSOR_BYPASS_WRITEn[0] = 4292894720
+
+
+SENSOR_BYPASS_WRITEn[1] = 262143
+
+
+SENSOR_MASK_WRITEn[0] = 4292894720
+
+
+SENSOR_MASK_WRITEn[1] = 262143
+
+
+CPR_TARGET0_0_m[5] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 755,
+}
+
+
+CPR_TARGET1_0_m[5] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 928,
+}
+
+
+CPR_TARGET4_0_m[5] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 526,
+}
+
+
+CPR_TARGET5_0_m[5] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 666,
+}
+
+
+CPR_TARGET7_0_m[5] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 768,
+}
+
+
+CPR_TARGET0_0_m[6] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 755,
+}
+
+
+CPR_TARGET1_0_m[6] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 928,
+}
+
+
+CPR_TARGET4_0_m[6] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 526,
+}
+
+
+CPR_TARGET5_0_m[6] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 666,
+}
+
+
+CPR_TARGET7_0_m[6] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 768,
+}
+
+
+CPR_TARGET0_0_m[7] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 893,
+}
+
+
+CPR_TARGET1_0_m[7] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1097,
+}
+
+
+CPR_TARGET4_0_m[7] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 630,
+}
+
+
+CPR_TARGET5_0_m[7] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 793,
+}
+
+
+CPR_TARGET7_0_m[7] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 920,
+}
+
+
+CPR_TARGET0_0_m[8] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 1050,
+}
+
+
+CPR_TARGET1_0_m[8] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1251,
+}
+
+
+CPR_TARGET4_0_m[8] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 750,
+}
+
+
+CPR_TARGET5_0_m[8] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 915,
+}
+
+
+CPR_TARGET7_0_m[8] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 1065,
+}
+
+
+CPR_TARGET0_0_m[9] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 1151,
+}
+
+
+CPR_TARGET1_0_m[9] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1350,
+}
+
+
+CPR_TARGET4_0_m[9] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 829,
+}
+
+
+CPR_TARGET5_0_m[9] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 995,
+}
+
+
+CPR_TARGET7_0_m[9] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 1160,
+}
+
+
+CPR_TARGET0_0_m[10] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 1151,
+}
+
+
+CPR_TARGET1_0_m[10] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1350,
+}
+
+
+CPR_TARGET4_0_m[10] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 829,
+}
+
+
+CPR_TARGET5_0_m[10] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 995,
+}
+
+
+CPR_TARGET7_0_m[10] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 1160,
+}
+
+
+CPR_TARGET0_0_m[11] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 1151,
+}
+
+
+CPR_TARGET1_0_m[11] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1350,
+}
+
+
+CPR_TARGET4_0_m[11] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 829,
+}
+
+
+CPR_TARGET5_0_m[11] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 995,
+}
+
+
+CPR_TARGET7_0_m[11] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 1160,
+}
+
+
+CPR_TARGET0_0_m[0] =
+{
+    .MODE_GCNT0 = 0,
+    .TARGET0 = 4095,
+}
+
+
+CPR_TARGET1_0_m[0] =
+{
+    .MODE_GCNT1 = 0,
+    .TARGET1 = 4095,
+}
+
+
+CPR_TARGET2_0_m[0] =
+{
+    .MODE_GCNT2 = 0,
+    .TARGET2 = 4095,
+}
+
+
+CPR_TARGET3_0_m[0] =
+{
+    .MODE_GCNT3 = 0,
+    .TARGET3 = 4095,
+}
+
+
+CPR_TARGET4_0_m[0] =
+{
+    .MODE_GCNT4 = 0,
+    .TARGET4 = 4095,
+}
+
+
+CPR_TARGET5_0_m[0] =
+{
+    .MODE_GCNT5 = 0,
+    .TARGET5 = 4095,
+}
+
+
+CPR_TARGET6_0_m[0] =
+{
+    .MODE_GCNT6 = 0,
+    .TARGET6 = 4095,
+}
+
+
+CPR_TARGET7_0_m[0] =
+{
+    .MODE_GCNT7 = 0,
+    .TARGET7 = 4095,
+}
+
+
+CPR_TARGET8_0_m[0] =
+{
+    .MODE_GCNT8 = 0,
+    .TARGET8 = 4095,
+}
+
+
+CPR_TARGET9_0_m[0] =
+{
+    .MODE_GCNT9 = 0,
+    .TARGET9 = 4095,
+}
+
+
+CPR_TARGET10_0_m[0] =
+{
+    .MODE_GCNT10 = 0,
+    .TARGET10 = 4095,
+}
+
+
+CPR_TARGET11_0_m[0] =
+{
+    .MODE_GCNT11 = 0,
+    .TARGET11 = 4095,
+}
+
+
+CPR_TARGET12_0_m[0] =
+{
+    .MODE_GCNT12 = 0,
+    .TARGET12 = 4095,
+}
+
+
+CPR_TARGET13_0_m[0] =
+{
+    .MODE_GCNT13 = 0,
+    .TARGET13 = 4095,
+}
+
+
+CPR_TARGET14_0_m[0] =
+{
+    .MODE_GCNT14 = 0,
+    .TARGET14 = 4095,
+}
+
+
+CPR_TARGET15_0_m[0] =
+{
+    .MODE_GCNT15 = 0,
+    .TARGET15 = 4095,
+}
+
+
+MX_CPR_GCNT0 = 19
+MX_CPR_GCNT1 = 19
+MX_CPR_GCNT2 = 19
+MX_CPR_GCNT3 = 19
+MX_CPR_GCNT4 = 19
+MX_CPR_GCNT5 = 19
+MX_CPR_GCNT6 = 19
+MX_CPR_GCNT7 = 19
+MX_CPR_GCNT8 = 19
+MX_CPR_GCNT9 = 19
+MX_CPR_GCNT10 = 19
+MX_CPR_GCNT11 = 19
+MX_CPR_GCNT12 = 19
+MX_CPR_GCNT13 = 19
+MX_CPR_GCNT14 = 19
+MX_CPR_GCNT15 = 19
+
+
+#Initialize CPRC regs for CX_1.0_1.255
+
+module: { name = CX_CPR3 , group = cprv1 }
+regs:
+
+FSM_CTL = 
+{
+    .COUNT_REPEAT = 20,
+    .COUNT_MODE   = 0,
+    .IDLE_CLOCKS  = 15,
+}
+
+TIMER_AUTO_CONT =
+{
+    .AUTO_CONT_INTERVAL = 96000,
+}
+
+TIMER_CLAMP =
+{
+    .CLAMP_TIMER_INTERVAL = 0,
+}
+
+STEP_QUOT_INIT =
+{
+    .STEP_QUOT_INIT_MAX = 12,
+    .STEP_QUOT_INIT_MIN = 8,
+}
+
+THRESHOLD_t =
+{
+    .UP_THRESHOLD = 2,
+    .DN_THRESHOLD = 2,
+    .CONSECUTIVE_UP = 0,
+    .CONSECUTIVE_DN = 0,
+}
+
+MISC_REGISTER =
+{
+    .TEMP_SENSOR_ID_END = 24,
+    .TEMP_SENSOR_ID_START = 23,
+    .STEP_QUOT_INIT_PER_RO = 0,
+    .RESET_STEP_QUOT_LOOP_EN = 1,
+    .CPRF_INTERFACE_ENABLE = 1,
+    .CPR_GCNT_PER_MODE_EN = 1,
+    .CPRF_SETTLE_TIMER_DOWN_EN = 1
+}
+
+CPRF_DN_TIMER =
+{
+    .TIMER_INTERVAL = 9616,
+}
+
+MARGIN_TEMP_POINT0N1 =
+{
+   .POINT1 = 0,
+   .POINT0 = 0,
+}
+
+MARGIN_TEMP_POINT2 =
+{
+   .POINT2 = 0,
+}
+
+IRQ_EN_t[0] = 11
+
+
+SENSOR_THREAD_n[0] = 0
+
+
+SENSOR_THREAD_n[1] = 0
+
+
+SENSOR_THREAD_n[2] = 0
+
+
+SENSOR_THREAD_n[3] = 0
+
+
+SENSOR_THREAD_n[4] = 0
+
+
+SENSOR_THREAD_n[5] = 0
+
+
+SENSOR_THREAD_n[6] = 0
+
+
+SENSOR_THREAD_n[7] = 0
+
+
+SENSOR_THREAD_n[8] = 0
+
+
+SENSOR_THREAD_n[9] = 0
+
+
+SENSOR_THREAD_n[10] = 0
+
+
+SENSOR_THREAD_n[11] = 0
+
+
+SENSOR_THREAD_n[12] = 0
+
+
+SENSOR_THREAD_n[13] = 0
+
+
+SENSOR_THREAD_n[14] = 0
+
+
+SENSOR_THREAD_n[15] = 0
+
+
+SENSOR_THREAD_n[16] = 0
+
+
+SENSOR_THREAD_n[17] = 0
+
+
+SENSOR_THREAD_n[18] = 0
+
+
+SENSOR_THREAD_n[19] = 0
+
+
+SENSOR_THREAD_n[20] = 0
+
+
+SENSOR_THREAD_n[21] = 0
+
+
+SENSOR_THREAD_n[22] = 0
+
+
+SENSOR_THREAD_n[23] = 0
+
+
+SENSOR_THREAD_n[24] = 0
+
+
+SENSOR_THREAD_n[25] = 0
+
+
+SENSOR_THREAD_n[26] = 0
+
+
+SENSOR_THREAD_n[27] = 0
+
+
+SENSOR_THREAD_n[28] = 0
+
+
+SENSOR_THREAD_n[29] = 0
+
+
+SENSOR_THREAD_n[30] = 0
+
+
+SENSOR_THREAD_n[31] = 0
+
+
+SENSOR_THREAD_n[32] = 0
+
+
+SENSOR_THREAD_n[33] = 0
+
+
+SENSOR_THREAD_n[34] = 0
+
+
+SENSOR_THREAD_n[35] = 0
+
+
+SENSOR_THREAD_n[36] = 0
+
+
+SENSOR_THREAD_n[37] = 0
+
+
+SENSOR_THREAD_n[38] = 0
+
+
+SENSOR_THREAD_n[39] = 0
+
+
+SENSOR_THREAD_n[40] = 0
+
+
+SENSOR_THREAD_n[41] = 0
+
+
+SENSOR_THREAD_n[42] = 0
+
+
+SENSOR_THREAD_n[43] = 0
+
+
+SENSOR_THREAD_n[44] = 0
+
+
+SENSOR_THREAD_n[45] = 0
+
+
+SENSOR_THREAD_n[46] = 0
+
+
+SENSOR_THREAD_n[47] = 0
+
+
+SENSOR_THREAD_n[48] = 0
+
+
+SENSOR_THREAD_n[49] = 0
+
+
+SENSOR_THREAD_n[50] = 0
+
+
+SENSOR_THREAD_n[51] = 0
+
+
+SENSOR_THREAD_n[52] = 0
+
+
+SENSOR_THREAD_n[53] = 0
+
+
+MASK_THREAD_t[0] = 0x0
+
+
+SENSOR_MASK_WRITEn[0] = 2148216883
+
+
+SENSOR_MASK_WRITEn[1] = 0
+
+
+CPR_TARGET8_0_m[2] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 305,
+}
+
+
+CPR_TARGET9_0_m[2] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 312,
+}
+
+
+CPR_TARGET10_0_m[2] =
+{
+    .MODE_GCNT10 = 19,
+    .TARGET10 = 169,
+}
+
+
+CPR_TARGET12_0_m[2] =
+{
+    .MODE_GCNT12 = 19,
+    .TARGET12 = 172,
+}
+
+
+CPR_TARGET15_0_m[2] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 390,
+}
+
+
+CPR_TARGET8_0_m[2] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 305,
+}
+
+
+CPR_TARGET9_0_m[2] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 312,
+}
+
+
+CPR_TARGET10_0_m[2] =
+{
+    .MODE_GCNT10 = 19,
+    .TARGET10 = 169,
+}
+
+
+CPR_TARGET12_0_m[2] =
+{
+    .MODE_GCNT12 = 19,
+    .TARGET12 = 172,
+}
+
+
+CPR_TARGET15_0_m[2] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 390,
+}
+
+
+CPR_TARGET8_0_m[3] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 454,
+}
+
+
+CPR_TARGET9_0_m[3] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 462,
+}
+
+
+CPR_TARGET10_0_m[3] =
+{
+    .MODE_GCNT10 = 19,
+    .TARGET10 = 299,
+}
+
+
+CPR_TARGET12_0_m[3] =
+{
+    .MODE_GCNT12 = 19,
+    .TARGET12 = 303,
+}
+
+
+CPR_TARGET15_0_m[3] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 555,
+}
+
+
+CPR_TARGET8_0_m[3] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 454,
+}
+
+
+CPR_TARGET9_0_m[3] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 462,
+}
+
+
+CPR_TARGET10_0_m[3] =
+{
+    .MODE_GCNT10 = 19,
+    .TARGET10 = 299,
+}
+
+
+CPR_TARGET12_0_m[3] =
+{
+    .MODE_GCNT12 = 19,
+    .TARGET12 = 303,
+}
+
+
+CPR_TARGET15_0_m[3] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 555,
+}
+
+
+CPR_TARGET8_0_m[4] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 553,
+}
+
+
+CPR_TARGET9_0_m[4] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 564,
+}
+
+
+CPR_TARGET10_0_m[4] =
+{
+    .MODE_GCNT10 = 19,
+    .TARGET10 = 394,
+}
+
+
+CPR_TARGET12_0_m[4] =
+{
+    .MODE_GCNT12 = 19,
+    .TARGET12 = 389,
+}
+
+
+CPR_TARGET15_0_m[4] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 655,
+}
+
+
+CPR_TARGET8_0_m[4] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 553,
+}
+
+
+CPR_TARGET9_0_m[4] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 564,
+}
+
+
+CPR_TARGET10_0_m[4] =
+{
+    .MODE_GCNT10 = 19,
+    .TARGET10 = 394,
+}
+
+
+CPR_TARGET12_0_m[4] =
+{
+    .MODE_GCNT12 = 19,
+    .TARGET12 = 389,
+}
+
+
+CPR_TARGET15_0_m[4] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 655,
+}
+
+
+CPR_TARGET2_0_m[5] =
+{
+    .MODE_GCNT2 = 19,
+    .TARGET2 = 901,
+}
+
+
+CPR_TARGET8_0_m[5] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 695,
+}
+
+
+CPR_TARGET9_0_m[5] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 709,
+}
+
+
+CPR_TARGET10_0_m[5] =
+{
+    .MODE_GCNT10 = 19,
+    .TARGET10 = 530,
+}
+
+
+CPR_TARGET12_0_m[5] =
+{
+    .MODE_GCNT12 = 19,
+    .TARGET12 = 541,
+}
+
+
+CPR_TARGET15_0_m[5] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 814,
+}
+
+
+CPR_TARGET15_0_m[5] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 814,
+}
+
+
+CPR_TARGET1_0_m[6] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1244,
+}
+
+
+CPR_TARGET2_0_m[6] =
+{
+    .MODE_GCNT2 = 19,
+    .TARGET2 = 1070,
+}
+
+
+CPR_TARGET8_0_m[6] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 836,
+}
+
+
+CPR_TARGET9_0_m[6] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 850,
+}
+
+
+CPR_TARGET15_0_m[6] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 981,
+}
+
+
+CPR_TARGET15_0_m[6] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 981,
+}
+
+
+CPR_TARGET1_0_m[7] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1379,
+}
+
+
+CPR_TARGET2_0_m[7] =
+{
+    .MODE_GCNT2 = 19,
+    .TARGET2 = 1217,
+}
+
+
+CPR_TARGET8_0_m[7] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 957,
+}
+
+
+CPR_TARGET9_0_m[7] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 973,
+}
+
+
+CPR_TARGET15_0_m[7] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 1126,
+}
+
+
+CPR_TARGET15_0_m[7] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 1126,
+}
+
+
+CPR_TARGET1_0_m[8] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1379,
+}
+
+
+CPR_TARGET2_0_m[8] =
+{
+    .MODE_GCNT2 = 19,
+    .TARGET2 = 1217,
+}
+
+
+CPR_TARGET8_0_m[8] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 957,
+}
+
+
+CPR_TARGET9_0_m[8] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 973,
+}
+
+
+CPR_TARGET15_0_m[8] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 1126,
+}
+
+
+CPR_TARGET15_0_m[8] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 1126,
+}
+
+
+CPR_TARGET0_0_m[0] =
+{
+    .MODE_GCNT0 = 0,
+    .TARGET0 = 4095,
+}
+
+
+CPR_TARGET1_0_m[0] =
+{
+    .MODE_GCNT1 = 0,
+    .TARGET1 = 4095,
+}
+
+
+CPR_TARGET2_0_m[0] =
+{
+    .MODE_GCNT2 = 0,
+    .TARGET2 = 4095,
+}
+
+
+CPR_TARGET3_0_m[0] =
+{
+    .MODE_GCNT3 = 0,
+    .TARGET3 = 4095,
+}
+
+
+CPR_TARGET4_0_m[0] =
+{
+    .MODE_GCNT4 = 0,
+    .TARGET4 = 4095,
+}
+
+
+CPR_TARGET5_0_m[0] =
+{
+    .MODE_GCNT5 = 0,
+    .TARGET5 = 4095,
+}
+
+
+CPR_TARGET6_0_m[0] =
+{
+    .MODE_GCNT6 = 0,
+    .TARGET6 = 4095,
+}
+
+
+CPR_TARGET7_0_m[0] =
+{
+    .MODE_GCNT7 = 0,
+    .TARGET7 = 4095,
+}
+
+
+CPR_TARGET8_0_m[0] =
+{
+    .MODE_GCNT8 = 0,
+    .TARGET8 = 4095,
+}
+
+
+CPR_TARGET9_0_m[0] =
+{
+    .MODE_GCNT9 = 0,
+    .TARGET9 = 4095,
+}
+
+
+CPR_TARGET10_0_m[0] =
+{
+    .MODE_GCNT10 = 0,
+    .TARGET10 = 4095,
+}
+
+
+CPR_TARGET11_0_m[0] =
+{
+    .MODE_GCNT11 = 0,
+    .TARGET11 = 4095,
+}
+
+
+CPR_TARGET12_0_m[0] =
+{
+    .MODE_GCNT12 = 0,
+    .TARGET12 = 4095,
+}
+
+
+CPR_TARGET13_0_m[0] =
+{
+    .MODE_GCNT13 = 0,
+    .TARGET13 = 4095,
+}
+
+
+CPR_TARGET14_0_m[0] =
+{
+    .MODE_GCNT14 = 0,
+    .TARGET14 = 4095,
+}
+
+
+CPR_TARGET15_0_m[0] =
+{
+    .MODE_GCNT15 = 0,
+    .TARGET15 = 4095,
+}
+
+
+CX_CPR_GCNT0 = 19
+CX_CPR_GCNT1 = 19
+CX_CPR_GCNT2 = 19
+CX_CPR_GCNT3 = 19
+CX_CPR_GCNT4 = 19
+CX_CPR_GCNT5 = 19
+CX_CPR_GCNT6 = 19
+CX_CPR_GCNT7 = 19
+CX_CPR_GCNT8 = 19
+CX_CPR_GCNT9 = 19
+CX_CPR_GCNT10 = 19
+CX_CPR_GCNT11 = 19
+CX_CPR_GCNT12 = 19
+CX_CPR_GCNT13 = 19
+CX_CPR_GCNT14 = 19
+CX_CPR_GCNT15 = 19
+
+
+#Initialize CPRC regs for LPI_CX_1.0_1.255
+
+module: { name = LPASS_CPR3 , group = cprv1 }
+regs:
+
+FSM_CTL = 
+{
+    .COUNT_REPEAT = 20,
+    .COUNT_MODE   = 0,
+    .IDLE_CLOCKS  = 15,
+}
+
+TIMER_AUTO_CONT =
+{
+    .AUTO_CONT_INTERVAL = 96000,
+}
+
+TIMER_CLAMP =
+{
+    .CLAMP_TIMER_INTERVAL = 0,
+}
+
+STEP_QUOT_INIT =
+{
+    .STEP_QUOT_INIT_MAX = 13,
+    .STEP_QUOT_INIT_MIN = 8,
+}
+
+THRESHOLD_t =
+{
+    .UP_THRESHOLD = 2,
+    .DN_THRESHOLD = 2,
+    .CONSECUTIVE_UP = 0,
+    .CONSECUTIVE_DN = 0,
+}
+
+MISC_REGISTER =
+{
+    .TEMP_SENSOR_ID_END = 0,
+    .TEMP_SENSOR_ID_START = 0,
+    .STEP_QUOT_INIT_PER_RO = 0,
+    .RESET_STEP_QUOT_LOOP_EN = 1,
+    .CPRF_INTERFACE_ENABLE = 1,
+    .CPR_GCNT_PER_MODE_EN = 1,
+    .CPRF_SETTLE_TIMER_DOWN_EN = 1
+}
+
+CPRF_DN_TIMER =
+{
+    .TIMER_INTERVAL = 9616,
+}
+
+MARGIN_TEMP_POINT0N1 =
+{
+   .POINT1 = 0,
+   .POINT0 = 0,
+}
+
+MARGIN_TEMP_POINT2 =
+{
+   .POINT2 = 0,
+}
+
+IRQ_EN_t[0] = 11
+
+
+SENSOR_THREAD_n[3] = 0
+
+
+SENSOR_THREAD_n[4] = 0
+
+
+SENSOR_THREAD_n[5] = 0
+
+
+MASK_THREAD_t[0] = 0x0
+
+
+SENSOR_MASK_WRITEn[0] = 7
+
+
+CPR_TARGET2_0_m[2] =
+{
+    .MODE_GCNT2 = 19,
+    .TARGET2 = 441,
+}
+
+
+CPR_TARGET3_0_m[2] =
+{
+    .MODE_GCNT3 = 19,
+    .TARGET3 = 466,
+}
+
+
+CPR_TARGET8_0_m[2] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 275,
+}
+
+
+CPR_TARGET9_0_m[2] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 286,
+}
+
+
+CPR_TARGET2_0_m[3] =
+{
+    .MODE_GCNT2 = 19,
+    .TARGET2 = 479,
+}
+
+
+CPR_TARGET3_0_m[3] =
+{
+    .MODE_GCNT3 = 19,
+    .TARGET3 = 503,
+}
+
+
+CPR_TARGET8_0_m[3] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 305,
+}
+
+
+CPR_TARGET9_0_m[3] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 312,
+}
+
+
+CPR_TARGET2_0_m[4] =
+{
+    .MODE_GCNT2 = 19,
+    .TARGET2 = 644,
+}
+
+
+CPR_TARGET3_0_m[4] =
+{
+    .MODE_GCNT3 = 19,
+    .TARGET3 = 665,
+}
+
+
+CPR_TARGET8_0_m[4] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 454,
+}
+
+
+CPR_TARGET9_0_m[4] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 462,
+}
+
+
+CPR_TARGET15_0_m[4] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 555,
+}
+
+
+CPR_TARGET2_0_m[5] =
+{
+    .MODE_GCNT2 = 19,
+    .TARGET2 = 754,
+}
+
+
+CPR_TARGET3_0_m[5] =
+{
+    .MODE_GCNT3 = 19,
+    .TARGET3 = 772,
+}
+
+
+CPR_TARGET8_0_m[5] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 553,
+}
+
+
+CPR_TARGET9_0_m[5] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 564,
+}
+
+
+CPR_TARGET15_0_m[5] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 655,
+}
+
+
+CPR_TARGET2_0_m[6] =
+{
+    .MODE_GCNT2 = 19,
+    .TARGET2 = 901,
+}
+
+
+CPR_TARGET3_0_m[6] =
+{
+    .MODE_GCNT3 = 19,
+    .TARGET3 = 925,
+}
+
+
+CPR_TARGET8_0_m[6] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 695,
+}
+
+
+CPR_TARGET9_0_m[6] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 709,
+}
+
+
+CPR_TARGET15_0_m[6] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 814,
+}
+
+
+CPR_TARGET2_0_m[7] =
+{
+    .MODE_GCNT2 = 19,
+    .TARGET2 = 1070,
+}
+
+
+CPR_TARGET3_0_m[7] =
+{
+    .MODE_GCNT3 = 19,
+    .TARGET3 = 1086,
+}
+
+
+CPR_TARGET8_0_m[7] =
+{
+    .MODE_GCNT8 = 19,
+    .TARGET8 = 836,
+}
+
+
+CPR_TARGET9_0_m[7] =
+{
+    .MODE_GCNT9 = 19,
+    .TARGET9 = 850,
+}
+
+
+CPR_TARGET15_0_m[7] =
+{
+    .MODE_GCNT15 = 19,
+    .TARGET15 = 981,
+}
+
+
+CPR_TARGET0_0_m[0] =
+{
+    .MODE_GCNT0 = 0,
+    .TARGET0 = 4095,
+}
+
+
+CPR_TARGET1_0_m[0] =
+{
+    .MODE_GCNT1 = 0,
+    .TARGET1 = 4095,
+}
+
+
+CPR_TARGET2_0_m[0] =
+{
+    .MODE_GCNT2 = 0,
+    .TARGET2 = 4095,
+}
+
+
+CPR_TARGET3_0_m[0] =
+{
+    .MODE_GCNT3 = 0,
+    .TARGET3 = 4095,
+}
+
+
+CPR_TARGET4_0_m[0] =
+{
+    .MODE_GCNT4 = 0,
+    .TARGET4 = 4095,
+}
+
+
+CPR_TARGET5_0_m[0] =
+{
+    .MODE_GCNT5 = 0,
+    .TARGET5 = 4095,
+}
+
+
+CPR_TARGET6_0_m[0] =
+{
+    .MODE_GCNT6 = 0,
+    .TARGET6 = 4095,
+}
+
+
+CPR_TARGET7_0_m[0] =
+{
+    .MODE_GCNT7 = 0,
+    .TARGET7 = 4095,
+}
+
+
+CPR_TARGET8_0_m[0] =
+{
+    .MODE_GCNT8 = 0,
+    .TARGET8 = 4095,
+}
+
+
+CPR_TARGET9_0_m[0] =
+{
+    .MODE_GCNT9 = 0,
+    .TARGET9 = 4095,
+}
+
+
+CPR_TARGET10_0_m[0] =
+{
+    .MODE_GCNT10 = 0,
+    .TARGET10 = 4095,
+}
+
+
+CPR_TARGET11_0_m[0] =
+{
+    .MODE_GCNT11 = 0,
+    .TARGET11 = 4095,
+}
+
+
+CPR_TARGET12_0_m[0] =
+{
+    .MODE_GCNT12 = 0,
+    .TARGET12 = 4095,
+}
+
+
+CPR_TARGET13_0_m[0] =
+{
+    .MODE_GCNT13 = 0,
+    .TARGET13 = 4095,
+}
+
+
+CPR_TARGET14_0_m[0] =
+{
+    .MODE_GCNT14 = 0,
+    .TARGET14 = 4095,
+}
+
+
+CPR_TARGET15_0_m[0] =
+{
+    .MODE_GCNT15 = 0,
+    .TARGET15 = 4095,
+}
+
+
+LPASS_CPR_GCNT0 = 19
+LPASS_CPR_GCNT1 = 19
+LPASS_CPR_GCNT2 = 19
+LPASS_CPR_GCNT3 = 19
+LPASS_CPR_GCNT4 = 19
+LPASS_CPR_GCNT5 = 19
+LPASS_CPR_GCNT6 = 19
+LPASS_CPR_GCNT7 = 19
+LPASS_CPR_GCNT8 = 19
+LPASS_CPR_GCNT9 = 19
+LPASS_CPR_GCNT10 = 19
+LPASS_CPR_GCNT11 = 19
+LPASS_CPR_GCNT12 = 19
+LPASS_CPR_GCNT13 = 19
+LPASS_CPR_GCNT14 = 19
+LPASS_CPR_GCNT15 = 19
+
+
+#Initialize CPRC regs for MXC_1.0_1.255
+
+module: { name = MXC_CPR3 , group = cprv1 }
+regs:
+
+FSM_CTL = 
+{
+    .COUNT_REPEAT = 20,
+    .COUNT_MODE   = 0,
+    .IDLE_CLOCKS  = 15,
+}
+
+TIMER_AUTO_CONT =
+{
+    .AUTO_CONT_INTERVAL = 96000,
+}
+
+TIMER_CLAMP =
+{
+    .CLAMP_TIMER_INTERVAL = 0,
+}
+
+STEP_QUOT_INIT =
+{
+    .STEP_QUOT_INIT_MAX = 13,
+    .STEP_QUOT_INIT_MIN = 7,
+}
+
+THRESHOLD_t =
+{
+    .UP_THRESHOLD = 2,
+    .DN_THRESHOLD = 2,
+    .CONSECUTIVE_UP = 0,
+    .CONSECUTIVE_DN = 0,
+}
+
+MISC_REGISTER =
+{
+    .TEMP_SENSOR_ID_END = 0,
+    .TEMP_SENSOR_ID_START = 0,
+    .STEP_QUOT_INIT_PER_RO = 0,
+    .RESET_STEP_QUOT_LOOP_EN = 1,
+    .CPRF_INTERFACE_ENABLE = 1,
+    .CPR_GCNT_PER_MODE_EN = 1,
+    .CPRF_SETTLE_TIMER_DOWN_EN = 1
+}
+
+CPRF_DN_TIMER =
+{
+    .TIMER_INTERVAL = 9616,
+}
+
+MARGIN_TEMP_POINT0N1 =
+{
+   .POINT1 = 0,
+   .POINT0 = 0,
+}
+
+MARGIN_TEMP_POINT2 =
+{
+   .POINT2 = 0,
+}
+
+IRQ_EN_t[0] = 11
+
+
+SENSOR_THREAD_n[0] = 0
+
+
+SENSOR_THREAD_n[1] = 0
+
+
+SENSOR_THREAD_n[2] = 0
+
+
+SENSOR_THREAD_n[3] = 0
+
+
+SENSOR_THREAD_n[4] = 0
+
+
+SENSOR_THREAD_n[5] = 0
+
+
+SENSOR_THREAD_n[6] = 0
+
+
+SENSOR_THREAD_n[7] = 0
+
+
+SENSOR_THREAD_n[8] = 0
+
+
+SENSOR_THREAD_n[9] = 0
+
+
+SENSOR_THREAD_n[10] = 0
+
+
+SENSOR_THREAD_n[11] = 0
+
+
+SENSOR_THREAD_n[12] = 0
+
+
+SENSOR_THREAD_n[13] = 0
+
+
+SENSOR_THREAD_n[14] = 0
+
+
+SENSOR_THREAD_n[15] = 0
+
+
+SENSOR_THREAD_n[16] = 0
+
+
+SENSOR_THREAD_n[17] = 0
+
+
+SENSOR_THREAD_n[18] = 0
+
+
+SENSOR_THREAD_n[19] = 0
+
+
+SENSOR_THREAD_n[20] = 0
+
+
+SENSOR_THREAD_n[21] = 0
+
+
+SENSOR_THREAD_n[22] = 0
+
+
+SENSOR_THREAD_n[23] = 0
+
+
+SENSOR_THREAD_n[24] = 0
+
+
+SENSOR_THREAD_n[25] = 0
+
+
+SENSOR_THREAD_n[26] = 0
+
+
+SENSOR_THREAD_n[27] = 0
+
+
+SENSOR_THREAD_n[28] = 0
+
+
+MASK_THREAD_t[0] = 0x0
+
+
+CPR_TARGET0_0_m[5] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 755,
+}
+
+
+CPR_TARGET1_0_m[5] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 928,
+}
+
+
+CPR_TARGET4_0_m[5] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 526,
+}
+
+
+CPR_TARGET5_0_m[5] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 666,
+}
+
+
+CPR_TARGET7_0_m[5] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 768,
+}
+
+
+CPR_TARGET0_0_m[6] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 755,
+}
+
+
+CPR_TARGET1_0_m[6] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 928,
+}
+
+
+CPR_TARGET4_0_m[6] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 526,
+}
+
+
+CPR_TARGET5_0_m[6] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 666,
+}
+
+
+CPR_TARGET7_0_m[6] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 768,
+}
+
+
+CPR_TARGET0_0_m[7] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 893,
+}
+
+
+CPR_TARGET1_0_m[7] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1097,
+}
+
+
+CPR_TARGET4_0_m[7] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 630,
+}
+
+
+CPR_TARGET5_0_m[7] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 793,
+}
+
+
+CPR_TARGET7_0_m[7] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 920,
+}
+
+
+CPR_TARGET0_0_m[8] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 1050,
+}
+
+
+CPR_TARGET1_0_m[8] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1251,
+}
+
+
+CPR_TARGET4_0_m[8] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 750,
+}
+
+
+CPR_TARGET5_0_m[8] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 915,
+}
+
+
+CPR_TARGET7_0_m[8] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 1065,
+}
+
+
+CPR_TARGET0_0_m[9] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 1151,
+}
+
+
+CPR_TARGET1_0_m[9] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1350,
+}
+
+
+CPR_TARGET4_0_m[9] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 829,
+}
+
+
+CPR_TARGET5_0_m[9] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 995,
+}
+
+
+CPR_TARGET7_0_m[9] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 1160,
+}
+
+
+CPR_TARGET0_0_m[10] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 1151,
+}
+
+
+CPR_TARGET1_0_m[10] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1350,
+}
+
+
+CPR_TARGET4_0_m[10] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 829,
+}
+
+
+CPR_TARGET5_0_m[10] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 995,
+}
+
+
+CPR_TARGET7_0_m[10] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 1160,
+}
+
+
+CPR_TARGET0_0_m[11] =
+{
+    .MODE_GCNT0 = 19,
+    .TARGET0 = 1151,
+}
+
+
+CPR_TARGET1_0_m[11] =
+{
+    .MODE_GCNT1 = 19,
+    .TARGET1 = 1350,
+}
+
+
+CPR_TARGET4_0_m[11] =
+{
+    .MODE_GCNT4 = 19,
+    .TARGET4 = 829,
+}
+
+
+CPR_TARGET5_0_m[11] =
+{
+    .MODE_GCNT5 = 19,
+    .TARGET5 = 995,
+}
+
+
+CPR_TARGET7_0_m[11] =
+{
+    .MODE_GCNT7 = 19,
+    .TARGET7 = 1160,
+}
+
+
+CPR_TARGET0_0_m[0] =
+{
+    .MODE_GCNT0 = 0,
+    .TARGET0 = 4095,
+}
+
+
+CPR_TARGET1_0_m[0] =
+{
+    .MODE_GCNT1 = 0,
+    .TARGET1 = 4095,
+}
+
+
+CPR_TARGET2_0_m[0] =
+{
+    .MODE_GCNT2 = 0,
+    .TARGET2 = 4095,
+}
+
+
+CPR_TARGET3_0_m[0] =
+{
+    .MODE_GCNT3 = 0,
+    .TARGET3 = 4095,
+}
+
+
+CPR_TARGET4_0_m[0] =
+{
+    .MODE_GCNT4 = 0,
+    .TARGET4 = 4095,
+}
+
+
+CPR_TARGET5_0_m[0] =
+{
+    .MODE_GCNT5 = 0,
+    .TARGET5 = 4095,
+}
+
+
+CPR_TARGET6_0_m[0] =
+{
+    .MODE_GCNT6 = 0,
+    .TARGET6 = 4095,
+}
+
+
+CPR_TARGET7_0_m[0] =
+{
+    .MODE_GCNT7 = 0,
+    .TARGET7 = 4095,
+}
+
+
+CPR_TARGET8_0_m[0] =
+{
+    .MODE_GCNT8 = 0,
+    .TARGET8 = 4095,
+}
+
+
+CPR_TARGET9_0_m[0] =
+{
+    .MODE_GCNT9 = 0,
+    .TARGET9 = 4095,
+}
+
+
+CPR_TARGET10_0_m[0] =
+{
+    .MODE_GCNT10 = 0,
+    .TARGET10 = 4095,
+}
+
+
+CPR_TARGET11_0_m[0] =
+{
+    .MODE_GCNT11 = 0,
+    .TARGET11 = 4095,
+}
+
+
+CPR_TARGET12_0_m[0] =
+{
+    .MODE_GCNT12 = 0,
+    .TARGET12 = 4095,
+}
+
+
+CPR_TARGET13_0_m[0] =
+{
+    .MODE_GCNT13 = 0,
+    .TARGET13 = 4095,
+}
+
+
+CPR_TARGET14_0_m[0] =
+{
+    .MODE_GCNT14 = 0,
+    .TARGET14 = 4095,
+}
+
+
+CPR_TARGET15_0_m[0] =
+{
+    .MODE_GCNT15 = 0,
+    .TARGET15 = 4095,
+}
+
+
+MXC_CPR_GCNT0 = 19
+MXC_CPR_GCNT1 = 19
+MXC_CPR_GCNT2 = 19
+MXC_CPR_GCNT3 = 19
+MXC_CPR_GCNT4 = 19
+MXC_CPR_GCNT5 = 19
+MXC_CPR_GCNT6 = 19
+MXC_CPR_GCNT7 = 19
+MXC_CPR_GCNT8 = 19
+MXC_CPR_GCNT9 = 19
+MXC_CPR_GCNT10 = 19
+MXC_CPR_GCNT11 = 19
+MXC_CPR_GCNT12 = 19
+MXC_CPR_GCNT13 = 19
+MXC_CPR_GCNT14 = 19
+MXC_CPR_GCNT15 = 19
+

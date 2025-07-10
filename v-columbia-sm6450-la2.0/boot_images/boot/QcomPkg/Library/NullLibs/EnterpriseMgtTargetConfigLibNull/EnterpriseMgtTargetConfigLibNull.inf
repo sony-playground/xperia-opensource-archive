@@ -1,0 +1,44 @@
+#/** @EnterpriseMgtTargetConfigLibNull.inf
+#  
+#  Build file for the EnterpriseMgtTargetConfigLibNull library.
+#  
+#  Copyright (c) 2020, Qualcomm Technologies Inc. All rights reserved.
+#  
+#**/
+
+#==============================================================================
+# $Header:  $
+#                              EDIT HISTORY
+#
+#
+# when          who     what, where, why
+# ----------    ---    --------------------------------------------------------
+# 02/21/2020     hh    Initial version.
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = EnterpriseMgtTargetConfigLib
+  FILE_GUID                      = D684B3C0-D3E1-454C-9DD8-E96F58519FEB
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = EnterpriseMgtTargetConfigLib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -O0 -fno-inline
+
+[Sources.common]
+  EnterpriseMgtTargetConfigLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  
+[LibraryClasses]
+  UefiRuntimeServicesTableLib
+  
+[Protocols]
+    
+[Depex]
+  

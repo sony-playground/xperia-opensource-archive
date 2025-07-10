@@ -1,0 +1,16 @@
+{% extends "!layout.html" %}
+
+{%- block sidebartitle %}
+    {{ super() }}
+
+    {% if branches %}
+        <li style="color:white;"> Available versions:</li>
+    {% endif %}
+        {%- for doc_branches in branches %}
+            {% if doc_branches == "master" %}
+                <li><a style="color:white;" href="{{ fcs_url_root }}index.html">{{ doc_branches }} (latest)</a></li>
+            {% else %}
+                <li><a style="color:white;" href="{{ fcs_url_root + doc_branches }}/index.html">{{ doc_branches }}</a></li>
+            {% endif %}
+        {%- endfor %}
+{% endblock %}

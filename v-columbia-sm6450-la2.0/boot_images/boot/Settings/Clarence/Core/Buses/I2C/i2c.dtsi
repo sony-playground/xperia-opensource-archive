@@ -1,0 +1,324 @@
+/**
+
+This is the settings file for I2c
+
+Copyright (c) 2022 Qualcomm Technologies, Inc.
+All Rights Reserved.
+Confidential and Proprietary - Qualcomm Technologies, Inc.
+*/
+
+#include <i2c_defines.h>
+
+&soc {
+ i2c {
+  i2c_common_clocks_str_0_handle:i2c_common_clocks_str_0 {
+    clocks = "gcc_qupv3_wrap0_core_clk", "gcc_qupv3_wrap0_core_2x_clk",
+             "gcc_qupv3_wrap_0_m_ahb_clk", "gcc_qupv3_wrap_0_s_ahb_clk";
+  };
+  i2c_common_clocks_str_1_handle:i2c_common_clocks_str_1 {
+    clocks = "gcc_qupv3_wrap1_core_clk", "gcc_qupv3_wrap1_core_2x_clk",
+             "gcc_qupv3_wrap_1_m_ahb_clk", "gcc_qupv3_wrap_1_s_ahb_clk";
+  };
+  
+  clock_config {
+      clock_config_0 {
+        se_clock_frequency_khz =<19200>;
+        bus_speed_khz = <100>;
+        clk_div = /bits/ 8 <7>;
+        t_cycle = /bits/ 8 <26>;
+        t_high = /bits/ 8 <10>;
+        t_low = /bits/ 8 <11>;
+      };
+      clock_config_1 {
+          se_clock_frequency_khz =<19200>;
+          bus_speed_khz = <400>;
+          clk_div = /bits/ 8 <2>;
+          t_cycle = /bits/ 8 <24>;
+          t_high = /bits/ 8 <7>;
+          t_low = /bits/ 8 <10>;
+      };
+      clock_config_2 {
+          se_clock_frequency_khz =<19200>;
+          bus_speed_khz = <1000>;
+          clk_div = /bits/ 8 <1>;
+          t_cycle = /bits/ 8 <18>;
+          t_high = /bits/ 8 <3>;
+          t_low = /bits/ 8 <9>;
+      };
+      clock_config_3 {
+          se_clock_frequency_khz =<100000>;
+          bus_speed_khz = <8000>;
+          clk_div = /bits/ 8 <2>;
+          t_cycle = /bits/ 8 <0>;
+          t_high = /bits/ 8 <3>;
+          t_low = /bits/ 8 <5>;
+      };
+      clock_config_4 {
+          se_clock_frequency_khz =<120000>;
+          bus_speed_khz = <12500>;
+          clk_div = /bits/ 8 <1>;
+          t_cycle = /bits/ 8 <0>;
+          t_high = /bits/ 8 <8>;
+          t_low = /bits/ 8 <6>;
+      };
+      clock_config_5 {
+          se_clock_frequency_khz =<0>;
+          bus_speed_khz = <0>;
+          clk_div = /bits/ 8 <0>;
+          t_cycle = /bits/ 8 <0>;
+          t_high = /bits/ 8 <0>;
+          t_low = /bits/ 8 <0>;
+      };
+    };
+  
+#ifdef ENABLE_QUP_00
+  i2c_device_config_1 {
+    core_base_addr              = <QUPV3_0_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_0_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00080000>;
+    qupv3_instance              = /bits/ 8 <QUP_0>;
+    core_index                  = /bits/ 8 <1>;
+    se_index                    = /bits/ 8 <0>;
+    gpi_index                   = /bits/ 8 <0>;
+    core_irq                    = <0>;
+    polled_mode                 = <TRUE>;
+    min_data_length_for_dma     = <0>;
+    
+    scl_encoding                = <TOP_QUP_00_SCL>;
+    sda_encoding                = <TOP_QUP_00_SDA>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    common_clocks               = <&i2c_common_clocks_str_0_handle>;
+    se_clock                    = "gcc_qupv3_wrap0_s0_clk";
+  };
+#endif
+#ifdef ENABLE_QUP_01
+  i2c_device_config_2 {
+    core_base_addr              = <QUPV3_0_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_0_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00084000>;
+    qupv3_instance              = /bits/ 8 <QUP_0>;
+    core_index                  = /bits/ 8 <2>;
+    se_index                    = /bits/ 8 <1>;
+    gpi_index                   = /bits/ 8 <1>;
+    core_irq                    = <0>;
+    polled_mode                 = <1>;
+    min_data_length_for_dma     = <0>;
+    
+    scl_encoding                = <TOP_QUP_01_SCL>;
+    sda_encoding                = <TOP_QUP_01_SDA>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    common_clocks               = <&i2c_common_clocks_str_0_handle>;
+    se_clock                    = "gcc_qupv3_wrap0_s1_clk";
+
+  };
+#endif
+#ifdef ENABLE_QUP_02
+  i2c_device_config_3 {
+    core_base_addr              = <QUPV3_0_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_0_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00088000>;
+    qupv3_instance              = /bits/ 8 <QUP_0>;
+    core_index                  = /bits/ 8 <3>;
+    se_index                    = /bits/ 8 <2>;
+    gpi_index                   = /bits/ 8 <2>;
+    core_irq                    = <0>;
+    polled_mode                 = <1>;
+    min_data_length_for_dma     = <0>;
+    
+    scl_encoding                = <TOP_QUP_02_SCL>;
+    sda_encoding                = <TOP_QUP_02_SDA>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    common_clocks               = <&i2c_common_clocks_str_0_handle>;
+    se_clock                    = "gcc_qupv3_wrap0_s2_clk";
+
+  };
+#endif
+#ifdef ENABLE_QUP_03
+  i2c_device_config_4 {
+    core_base_addr              = <QUPV3_0_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_0_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x0008C000>;
+    qupv3_instance              = /bits/ 8 <QUP_0>;
+    core_index                  = /bits/ 8 <4>;
+    se_index                    = /bits/ 8 <3>;
+    gpi_index                   = /bits/ 8 <3>;
+    core_irq                    = <0>;
+    polled_mode                 = <1>;
+    min_data_length_for_dma     = <0>;
+    
+    scl_encoding                = <TOP_QUP_03_SCL>;
+    sda_encoding                = <TOP_QUP_03_SDA>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    common_clocks               = <&i2c_common_clocks_str_0_handle>;
+    se_clock                    = "gcc_qupv3_wrap0_s3_clk";
+
+  };
+#endif
+#ifdef ENABLE_QUP_04
+  i2c_device_config_5 {
+    core_base_addr              = <QUPV3_0_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_0_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00090000>;
+    qupv3_instance              = /bits/ 8 <QUP_0>;
+    core_index                  = /bits/ 8 <5>;
+    se_index                    = /bits/ 8 <4>;
+    gpi_index                   = /bits/ 8 <4>;
+    core_irq                    = <0>;
+    polled_mode                 = <1>;
+    min_data_length_for_dma     = <0>;
+    
+    scl_encoding                = <TOP_QUP_04_SCL>;
+    sda_encoding                = <TOP_QUP_04_SDA>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    common_clocks               = <&i2c_common_clocks_str_0_handle>;
+    se_clock                    = "gcc_qupv3_wrap0_s4_clk";
+
+  };
+#endif
+
+#ifdef ENABLE_QUP_05
+  i2c_device_config_6 {
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00080000>;
+    qupv3_instance              = /bits/ 8 <QUP_1>;
+    core_index                  = /bits/ 8 <6>;
+    se_index                    = /bits/ 8 <0>;
+    gpi_index                   = /bits/ 8 <5>;
+    core_irq                    = <0>;
+    polled_mode                 = <1>;
+    min_data_length_for_dma     = <0>;
+    
+    scl_encoding                = <TOP_QUP_05_SCL>;
+    sda_encoding                = <TOP_QUP_05_SDA>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    common_clocks               = <&i2c_common_clocks_str_1_handle>;
+    se_clock                    = "gcc_qupv3_wrap1_s0_clk";
+  };
+#endif
+#ifdef ENABLE_QUP_06
+  i2c_device_config_7 {
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00084000>;
+    qupv3_instance              = /bits/ 8 <QUP_1>;
+    core_index                  = /bits/ 8 <7>;
+    se_index                    = /bits/ 8 <1>;
+    gpi_index                   = /bits/ 8 <6>;
+    core_irq                    = <0>;
+    polled_mode                 = <1>;
+    min_data_length_for_dma     = <0>;
+    
+    scl_encoding                = <TOP_QUP_06_SCL>;
+    sda_encoding                = <TOP_QUP_06_SDA>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    common_clocks               = <&i2c_common_clocks_str_1_handle>;
+    se_clock                    = "gcc_qupv3_wrap1_s1_clk";
+
+  };
+#endif
+#ifdef ENABLE_QUP_07
+  i2c_device_config_8 {
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00088000>;
+    qupv3_instance              = /bits/ 8 <QUP_1>;
+    core_index                  = /bits/ 8 <8>;
+    se_index                    = /bits/ 8 <2>;
+    gpi_index                   = /bits/ 8 <7>;
+    core_irq                    = <0>;
+    polled_mode                 = <1>;
+    min_data_length_for_dma     = <0>;
+    
+    scl_encoding                = <TOP_QUP_07_SCL>;
+    sda_encoding                = <TOP_QUP_07_SDA>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    common_clocks               = <&i2c_common_clocks_str_1_handle>;
+    se_clock                    = "gcc_qupv3_wrap1_s2_clk";
+
+  };
+#endif
+#ifdef ENABLE_QUP_08
+  i2c_device_config_9 {
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x0008C000>;
+    qupv3_instance              = /bits/ 8 <QUP_1>;
+    core_index                  = /bits/ 8 <9>;
+    se_index                    = /bits/ 8 <3>;
+    gpi_index                   = /bits/ 8 <8>;
+    core_irq                    = <0>;
+    polled_mode                 = <1>;
+    min_data_length_for_dma     = <0>;
+    
+    scl_encoding                = <TOP_QUP_08_SCL>;
+    sda_encoding                = <TOP_QUP_08_SDA>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    common_clocks               = <&i2c_common_clocks_str_1_handle>;
+    se_clock                    = "gcc_qupv3_wrap1_s3_clk";
+
+  };
+#endif
+#ifdef ENABLE_QUP_09
+  i2c_device_config_10 {
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00090000>;
+    qupv3_instance              = /bits/ 8 <QUP_1>;
+    core_index                  = /bits/ 8 <10>;
+    se_index                    = /bits/ 8 <4>;
+    gpi_index                   = /bits/ 8 <9>;
+    core_irq                    = <0>;
+    polled_mode                 = <1>;
+    min_data_length_for_dma     = <0>;
+    
+    scl_encoding                = <TOP_QUP_09_SCL>;
+    sda_encoding                = <TOP_QUP_09_SDA>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    common_clocks               = <&i2c_common_clocks_str_1_handle>;
+    se_clock                    = "gcc_qupv3_wrap1_s4_clk";
+
+  };
+#endif
+ };
+};

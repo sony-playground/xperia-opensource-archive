@@ -1,0 +1,5 @@
+module: { name = CX_CPR3 , group = cprwa , min_ver = 1.0, max_ver = 1.9 }
+regs:
+
+module: { name = CX_CPR3 , group = cprwa , min_ver = 2.0, max_ver = 2.9 }
+regs:

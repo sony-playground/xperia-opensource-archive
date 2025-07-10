@@ -1,0 +1,29 @@
+{
+	"CFGL": {
+		"major_version" : 2,
+		"minor_version" : 0,
+		"file1": {
+			"file_name" : "/boot/QcomPkg/SocPkg/Palima/Settings/DSF/release/target/Palima/A008_8_0100_1_dcb.bin",
+			"config_name": "/A008_8_0100_1_dcb.bin",
+			"attributes": "0"
+		},
+		"file2": {
+			"file_name" : "/boot/QcomPkg/SocPkg/Palima/Settings/CPR/cpr_voltage_plan_palima.bin",
+			"config_name": "/cpr.bin",
+			"attributes": "0"
+		},
+		"file3": {
+			"file_name" : "/Build/PalimaLAA/DTC/pre_ddr-soc.dtb",
+			"chipinfo"     : "0x0082021201000000",	
+			"config_name": "/pre_ddr-soc.dtb",
+			"attributes": "0"
+		},
+		"file4": {
+			"file_name" : "/Build/PalimaLAA/DTC/platform-mtp.dtb",
+			"chipinfo"     : "0x0082021201000000",
+			"platforminfo" : "0x0800010000000000",
+			"config_name": "/platform.dtb",
+			"attributes": "0"
+		}
+	}
+}

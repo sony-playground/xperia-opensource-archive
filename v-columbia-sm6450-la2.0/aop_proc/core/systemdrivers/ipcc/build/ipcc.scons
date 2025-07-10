@@ -1,0 +1,318 @@
+#=============================================================================
+# IPC CONTROLLER LIBRARY
+#
+#=============================================================================
+# $Header: //components/rel/aop.ho/4.0/aop_proc/core/systemdrivers/ipcc/build/ipcc.scons#12 $
+#=============================================================================
+#  Copyright (c) 2021 Qualcomm Technologies, Inc.
+#  All Rights Reserved.
+#  Confidential and Proprietary - Qualcomm Technologies, Inc.
+#=============================================================================
+
+import os
+Import('env')
+env = env.Clone()
+
+#-----------------------------------------------------------------------------
+# Define paths
+#-----------------------------------------------------------------------------
+
+SRCPATH = "${BUILD_ROOT}/core/systemdrivers/ipcc"
+
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0) 
+
+#-------------------------------------------------------------------------------
+# Internal depends within CoreBSP
+#-------------------------------------------------------------------------------
+
+CBSP_API = [
+   'SERVICES',
+   'SYSTEMDRIVERS',
+   'IPCC_RESTRICTED',
+   'DEBUGTOOLS',
+   'HAL',
+   'DAL',
+   'PRODUCTS',
+   'IPCC_DEVCFG_INTERFACE',
+   'POWER',
+
+   # Must be last due to comdef.h issues
+   'KERNEL'
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+
+SSG_API = [
+    'SECUREMSM',
+    'QSEE',
+    'SSG',
+    'MINK',
+    'SSGPLATFORM',
+    'TZCHIPSET'
+]
+env.RequirePublicApi(SSG_API, area = 'ssg')
+
+if env.IsTargetEnable('CORE_SLPI_SDC'):
+  env.PublishPrivateApi("SYSTEMDRIVERS_IPCC", [
+   	   "${INC_ROOT}/sdc_core/systemdrivers/ipcc/src",
+   	   "${INC_ROOT}/sdc_core/systemdrivers/ipcc/inc",
+   	])
+else:
+  env.PublishPrivateApi("SYSTEMDRIVERS_IPCC", [
+ 	   "${INC_ROOT}/core/systemdrivers/ipcc/src",
+ 	   "${INC_ROOT}/core/systemdrivers/ipcc/inc",
+ 	])
+ 	 
+#-------------------------------------------------------------------------------
+# Define sources
+#-------------------------------------------------------------------------------
+
+IPCC_SOURCES = [
+   '${BUILDPATH}/src/IPCC.c',
+   '${BUILDPATH}/src/IPCCLegacy.c',
+   '${BUILDPATH}/src/IPCCRx.c',
+   '${BUILDPATH}/src/IPCCTx.c',
+   '${BUILDPATH}/src/IPCCInfo.c',
+   '${BUILDPATH}/image/IPCCImage.c',
+]
+
+IPCC_ISLAND_SOURCES = [
+   '${BUILDPATH}/src/IPCCIsland.c',
+   '${BUILDPATH}/src/IPCCLegacyIsland.c',
+]
+
+IPCC_MODE_STUB_SOURCES = [
+   '${BUILDPATH}/src/IPCC.c',
+   '${BUILDPATH}/src/IPCCIsland.c',
+   '${BUILDPATH}/src/IPCCLegacy.c',
+   '${BUILDPATH}/src/IPCCLegacyIsland.c',
+   '${BUILDPATH}/src/IPCCInfo.c',
+   '${BUILDPATH}/image/IPCCImage.c',
+   '${BUILDPATH}/src/IPCCRxTxStubs.c',
+]
+
+IPCC_TEST_SOURCES = [
+   '${BUILDPATH}/test/IPCC_TestClient.c',
+   '${BUILDPATH}/test/IPCC_TestClientLog.c',
+]
+
+IPCC_IMAGE_SOURCES = []
+IPCC_Q6_IMAGE_SOURCES = []
+IPCC_MPSS_IMAGE_SOURCES = []
+IPCC_TZ_IMAGE_SOURCES = []
+IPCC_AOP_IMAGE_SOURCES = []
+IPCC_SDC_IMAGE_SOURCES = []
+
+# Check if config data available for chipset and image, if not, use default/stub
+ipcc_image = 'default'
+
+# Define IPCC HW supported targets
+IPCC_AOP_SUPPORTED_TARGETS = ['waipio', 'fillmore', 'kailua','aurora','lassen','netrani','clarence','halliday']
+
+IPCC_MODE_ONLY_TARGETS = ['waipio', 'fillmore', 'kailua','aurora','lassen','netrani','clarence','halliday']
+
+##################
+# Q6 Image
+##################
+if 'PROC' in env and env['PROC'].upper() == 'QDSP6':
+  ipcc_image = env['IMAGE']
+  IPCC_Q6_IMAGE_SOURCES.extend(IPCC_SOURCES)
+  IPCC_Q6_IMAGE_SOURCES.append('${BUILDPATH}/image/q6/IPCCImage_Q6.c')
+  IPCC_ISLAND_SOURCES.append('${BUILDPATH}/src/q6/IPCC_LogQ6.c')
+  IPCC_Q6_IMAGE_SOURCES.append('${BUILDPATH}/src/q6/IPCC_OSQ6.c')
+  IPCC_ISLAND_SOURCES.append('${BUILDPATH}/src/q6/IPCC_OSQ6Island.c')
+  ipcc_config_path = os.path.join(os.getcwd(), '..', 'image', ipcc_image, 'hw', env['CHIPSET'])
+  if os.path.exists(ipcc_config_path):
+    IPCC_ISLAND_SOURCES.append('${BUILDPATH}/image/${IMAGE}/hw/${CHIPSET}/IPCCBSP.c')
+  else:
+    IPCC_Q6_IMAGE_SOURCES.append('${BUILDPATH}/image/default/IPCCBSPStub.c')
+
+##################
+# MPSS Image
+##################
+ipcc_image = 'mpss'
+IPCC_MPSS_IMAGE_SOURCES.extend(IPCC_SOURCES)
+IPCC_MPSS_IMAGE_SOURCES.extend(IPCC_ISLAND_SOURCES)
+IPCC_MPSS_IMAGE_SOURCES.append('${BUILDPATH}/image/q6/IPCCImage_Q6.c')
+IPCC_MPSS_IMAGE_SOURCES.append('${BUILDPATH}/src/q6/IPCC_LogQ6.c')
+IPCC_MPSS_IMAGE_SOURCES.append('${BUILDPATH}/src/q6/IPCC_OSQ6.c')
+ipcc_config_path = os.path.join(os.getcwd(), '..', 'image', ipcc_image, 'hw', env['CHIPSET'])
+if os.path.exists(ipcc_config_path):
+  IPCC_MPSS_IMAGE_SOURCES.append('${BUILDPATH}/image/mpss/hw/${CHIPSET}/IPCCBSP.c')
+else:
+  IPCC_MPSS_IMAGE_SOURCES.append('${BUILDPATH}/image/default/IPCCBSPStub.c')
+
+##################
+# TZ Image
+##################
+IPCC_TZ_IMAGE_SOURCES.extend(IPCC_SOURCES)
+IPCC_TZ_IMAGE_SOURCES.extend(IPCC_ISLAND_SOURCES)
+IPCC_TZ_IMAGE_SOURCES.append('${BUILDPATH}/image/tz/IPCCImage_TZ.c')
+IPCC_TZ_IMAGE_SOURCES.append('${BUILDPATH}/src/tz/IPCC_LogTZ.c')
+IPCC_TZ_IMAGE_SOURCES.append('${BUILDPATH}/src/tz/IPCC_OSTZ.c')
+ipcc_config_path = os.path.join(os.getcwd(), '..', 'image', 'tz', 'hw', env['CHIPSET'])
+if os.path.exists(ipcc_config_path):
+  IPCC_TZ_IMAGE_SOURCES.append('${BUILDPATH}/image/tz/hw/${CHIPSET}/IPCCBSP.c')
+else:
+  IPCC_TZ_IMAGE_SOURCES.append('${BUILDPATH}/image/default/IPCCBSPStub.c')
+
+##################
+# AOP Image
+##################
+if 'CHIPSET' in env and env['CHIPSET'].lower() in IPCC_AOP_SUPPORTED_TARGETS:
+    ipcc_image = 'aop'
+    env.Append(CPPDEFINES = ["IPCC_DISABLE_LOG"])
+    if 'CHIPSET' in env and env['CHIPSET'].lower() not in IPCC_MODE_ONLY_TARGETS:
+        env.Append(CPPDEFINES = ["IPCC_LEGACY_MODE"])
+    IPCC_AOP_IMAGE_SOURCES.extend(IPCC_SOURCES)
+    IPCC_AOP_IMAGE_SOURCES.extend(IPCC_ISLAND_SOURCES)
+    IPCC_AOP_IMAGE_SOURCES.append('${BUILDPATH}/image/aop/IPCCImage_AOP.c')
+    IPCC_AOP_IMAGE_SOURCES.append('${BUILDPATH}/src/aop/IPCC_LogAOP.c')
+    IPCC_AOP_IMAGE_SOURCES.append('${BUILDPATH}/src/aop/IPCC_OSAOP.c')
+    IPCC_AOP_IMAGE_SOURCES.append('${BUILDPATH}/image/aop/hw/${CHIPSET}/IPCCBSP.c')
+    #-------------------------------------------------------------------------------
+    # Settings files for R-init builder
+    #-------------------------------------------------------------------------------
+    if 'USES_RINIT_PARSER' in env and env['CHIPSET'] != 'stubs':
+        env.AddRinitInfo('CORE_AOP', 
+          {'files' : '${BUILD_ROOT}/core/systemdrivers/ipcc/image/aop/hw/${CHIPSET}/'})
+
+else:
+    ipcc_image = 'aop'
+    env.Append(CPPDEFINES = ["IPCC_LEGACY_MODE"])
+    env.Append(CPPDEFINES = ["IPCC_DISABLE_LOG"])
+    IPCC_AOP_IMAGE_SOURCES.extend(IPCC_MODE_STUB_SOURCES)
+    IPCC_AOP_IMAGE_SOURCES.append('${BUILDPATH}/image/aop/IPCCImage_AOP.c')
+    IPCC_AOP_IMAGE_SOURCES.append('${BUILDPATH}/src/aop/IPCC_LogAOP.c')
+    IPCC_AOP_IMAGE_SOURCES.append('${BUILDPATH}/src/aop/IPCC_OSAOP.c')
+    #ipcc_config_path = os.path.join(os.getcwd(), '..', 'image', ipcc_image, 'hw', env['CHIPSET'])
+    #if os.path.exists(ipcc_config_path):
+    IPCC_AOP_IMAGE_SOURCES.append('${BUILDPATH}/image/aop/hw/${CHIPSET}/IPCCBSP.c')
+    #else:
+      #IPCC_AOP_IMAGE_SOURCES.append('${BUILDPATH}/image/default/IPCCBSPStub.c')
+
+##################
+# SDC Image
+##################
+ipcc_image = 'sdc'
+IPCC_SDC_IMAGE_SOURCES.extend(IPCC_SOURCES)
+IPCC_SDC_IMAGE_SOURCES.extend(IPCC_ISLAND_SOURCES)
+IPCC_SDC_IMAGE_SOURCES.append('${BUILDPATH}/image/aop/IPCCImage_AOP.c')
+IPCC_SDC_IMAGE_SOURCES.append('${BUILDPATH}/src/sdc/IPCC_LogSDC.c')
+IPCC_SDC_IMAGE_SOURCES.append('${BUILDPATH}/src/sdc/IPCC_OSSDC.c')
+ipcc_config_path = os.path.join(os.getcwd(), '..', 'image', ipcc_image, 'hw', env['CHIPSET'])
+if os.path.exists(ipcc_config_path):
+  IPCC_SDC_IMAGE_SOURCES.append('${BUILDPATH}/image/sdc/hw/${CHIPSET}/IPCCBSP.c')
+else:
+  IPCC_SDC_IMAGE_SOURCES.append('${BUILDPATH}/image/default/IPCCBSPStub.c')
+
+#-------------------------------------------------------------------------------
+# Add Libraries to image
+#-------------------------------------------------------------------------------
+
+IPCC_Q6_IMAGES = ['CORE_Q6_ROOT', 'CORE_SLPI_USER', 'CORE_SSC_ADSP_USER']
+IPCC_Q6_TEST_IMAGES = ['CORE_Q6_ROOT']
+IPCC_MPSS_IMAGES = ['CORE_MODEM']
+IPCC_TZ_IMAGES = ['TZOS_IMAGE', 'TZBSPTEST_IMAGE']
+IPCC_AOP_IMAGES = ['CORE_AOP']
+IPCC_SDC_IMAGES = ['CORE_SLPI_SDC']
+
+##################
+# Q6 Image
+##################
+ipcc_lib = env.AddLibrary(IPCC_Q6_IMAGES,'${BUILDPATH}/IPCCQ6', IPCC_Q6_IMAGE_SOURCES)
+ipcc_island_lib = env.AddLibrary(IPCC_Q6_IMAGES,'${BUILDPATH}/IPCCQ6Island', IPCC_ISLAND_SOURCES)
+
+if 'USES_MEMSEG' in env:
+    env.TagLibraryForMemorySegment( IPCC_Q6_IMAGES, 'common', ipcc_island_lib )
+elif 'USES_ISLAND' in env:
+    env.AddIslandLibrary( IPCC_Q6_IMAGES, ipcc_island_lib )
+
+##################
+# MPSS Image
+##################
+ipcc_lib = env.AddLibrary(IPCC_MPSS_IMAGES,'${BUILDPATH}/IPCCMPSS', IPCC_MPSS_IMAGE_SOURCES)
+
+if 'USES_MEMSEG' in env:
+    env.TagLibraryForMemorySegment( IPCC_MPSS_IMAGES, 'common', ipcc_lib )
+elif 'USES_ISLAND' in env:
+    env.AddIslandLibrary( IPCC_MPSS_IMAGES, ipcc_lib )
+
+##################
+# TZ Image
+##################
+ipcc_tz_lib = env.AddBinaryLibrary(IPCC_TZ_IMAGES, '${BUILDPATH}/IPCCTZ', IPCC_TZ_IMAGE_SOURCES)
+
+if 'IPCC_TEST' in env:
+    env.Append(CCFLAGS = " -DIPCC_TEST_AUTOSTART")
+    env.AddBinaryLibrary(IPCC_TZ_IMAGES, '${BUILDPATH}/IPCCTZTest', IPCC_TEST_SOURCES)
+    env.AddLibrary(IPCC_MPSS_IMAGES,'${BUILDPATH}/IPCCMPSS_Test', IPCC_TEST_SOURCES)
+
+# Enable IPC Test by default.  Only enable autostart if flag is defined
+env.Append(CPPDEFINES = ["IPCC_TEST_TIMER_DURATION=500"])
+env.AddLibrary(IPCC_Q6_TEST_IMAGES,'${BUILDPATH}/IPCC_Test', IPCC_TEST_SOURCES)
+
+
+##################
+# AOP Image
+##################
+env.AddBinaryObject(IPCC_AOP_IMAGES, IPCC_AOP_IMAGE_SOURCES)
+
+##################
+# SDC Image
+##################
+env.AddObject(IPCC_SDC_IMAGES, IPCC_SDC_IMAGE_SOURCES)
+if 'IPCC_TEST' in env:
+    env.AddObject(IPCC_SDC_IMAGES, IPCC_TEST_SOURCES)
+
+
+#-------------------------------------------------------------------------------
+# RCInit Dependencies
+#-------------------------------------------------------------------------------
+if 'USES_RCINIT' in env:
+  RCINIT_IMG = IPCC_Q6_IMAGES + IPCC_TZ_IMAGES + IPCC_SDC_IMAGES + IPCC_MPSS_IMAGES
+  env.AddRCInitFunc(       
+  RCINIT_IMG,              
+  {
+    'sequence_group'             : 'RCINIT_GROUP_0',       # required
+    'init_name'                  : 'IPCC',                 # required
+    'init_function'              : 'IPCC_Init',            # required
+    'dependencies'               : ['dalsys']              # Required for Interrupts
+  })
+
+if 'USES_RCINIT' in env:
+  RCINIT_IMG = IPCC_Q6_TEST_IMAGES + IPCC_TZ_IMAGES + IPCC_SDC_IMAGES + IPCC_MPSS_IMAGES
+  env.AddRCInitFunc(       
+  RCINIT_IMG,              
+  {
+    'sequence_group'             : 'RCINIT_GROUP_1',       # required
+    'init_name'                  : 'IPCCTest',             # required
+    'init_function'              : 'IPCC_Test',            # required
+    'dependencies'               : ['dalsys', 'IPCC', 'timer_init']      # Required for Interrupts
+  })
+
+#-------------------------------------------------------------------------------
+# Pack out files
+#-------------------------------------------------------------------------------
+
+ALL_IMAGE_FILES = env.FindFiles(
+  ['*'],
+  '../image')
+SHARED_SUBIMAGE_FILES_Q6 = env.FindFiles(
+  ['IPCCImage_Q6.c'],
+  '../image/q6')
+SHARED_SUBIMAGE_FILES_TZ = env.FindFiles(
+  ['IPCCImage_TZ.c'],
+  '../image/tz')
+SHARED_SUBIMAGE_FILES_AOP = env.FindFiles(
+  ['IPCCImage_AOP.c'],
+  '../image/aop')
+SHARED_IMAGE_FILES = env.FindFiles(
+  ['IPCCImage.c'],
+  '../image')
+MY_IMAGE_FILES = env.FindFiles(
+  ['*'],
+  '../image/${IMAGE}/hw/${CHIPSET}')
+PACK_IMAGE_FILES = list(set(ALL_IMAGE_FILES) - set(SHARED_IMAGE_FILES) - set(MY_IMAGE_FILES) - set(SHARED_SUBIMAGE_FILES_Q6) - set(SHARED_SUBIMAGE_FILES_TZ) - set(SHARED_SUBIMAGE_FILES_AOP))
+env.CleanPack(IPCC_Q6_IMAGES + IPCC_TZ_IMAGES + IPCC_AOP_IMAGES, PACK_IMAGE_FILES)

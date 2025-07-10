@@ -1,0 +1,37 @@
+PHDRS
+{
+  AOPSS_DEVCFG_DATA PT_LOAD;
+  AOPSS_DEVCFG_CODE PT_LOAD;
+}
+SECTIONS
+{
+   AOPSS_DEVCFG_DATA_TOP 0x80880000:
+  {
+    *(aop_devcfg_top_sec)
+  } : AOPSS_DEVCFG_DATA
+  AOPSS_DEVCFG_DATA_REST:
+  {
+    *(.data .data*)
+    *(.bss .bss*)
+    *(pm_ddr_reclaim_pool)
+    *(pm_dram_reclaim_pool)
+    KEEP(*\devcfg_main.o(.data*))
+  } : AOPSS_DEVCFG_DATA
+  . = ALIGN(0x1000);
+  AOPSS_DEVCFG_CODE_ALL :
+  {
+    *(InRoot$$Sections .text .text*)
+    *(.rodata .rodata*)
+  } : AOPSS_DEVCFG_CODE
+  __aop_devcfg_size_left = 0x808A0000 - .;
+  AOPSS_DEVCFG_CODE_ZI:
+  {
+    . = . + __aop_devcfg_size_left;
+  } : AOPSS_DEVCFG_CODE
+  /DISCARD/ :
+  {
+    * (.ARM.extab*)
+    * (.ARM.exid*)
+    * (.got)
+  }
+}

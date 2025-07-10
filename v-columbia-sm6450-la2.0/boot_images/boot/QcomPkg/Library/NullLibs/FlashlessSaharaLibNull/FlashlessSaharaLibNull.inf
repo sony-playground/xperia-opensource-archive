@@ -1,0 +1,35 @@
+#/** @file FlashlessSaharaLibNull.inf
+#
+#  Null Flashless Sahara lib if Flashless Sahara lib is not available
+#
+#  Copyright (c) 2020, Qualcomm Technologies, Inc . All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/16/20   ck      Initial revision
+#
+#==============================================================================
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FlashlessSaharaLibNull
+  FILE_GUID                      = AE1C173C-0474-4376-BAFC-23494BF81F63
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = FlashlessSaharaLib
+
+[Sources]
+  FlashlessSaharaLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomSdkPkg/SdkLoader.dec
+  QcomPkg/XBLLoaderApi.dec  
+
+[LibraryClasses]
