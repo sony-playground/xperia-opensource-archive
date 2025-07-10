@@ -1,0 +1,13 @@
+
+prebuilt_etc {
+    name: "config.xml",
+    recovery_available: true,
+    src: "columbia/root/systemdumper_config.xml",
+}
+
+prebuilt_etc {
+    name: "target.xml",
+    recovery_available: true,
+    src: "columbia/root/systemdumper_target.xml",
+}
+

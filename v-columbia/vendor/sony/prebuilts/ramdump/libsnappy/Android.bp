@@ -1,0 +1,9 @@
+// Copyright 2023 Sony Corporation
+// All rights, including trade secret rights, reserved.
+
+cc_prebuilt_library_shared {
+    name: "libsnappy",
+    recovery_available: true,
+    srcs: ["libsnappy.so"],
+}
+

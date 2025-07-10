@@ -1,0 +1,14 @@
+
+prebuilt_etc {
+    name: "init.recovery.ramdump.rc",
+    recovery_available: true,
+    src: "init.recovery.ramdump.rc",
+    sub_dir: "init/",
+}
+
+prebuilt_etc {
+    name: "init.system_dumper.sh",
+    recovery_available: true,
+    src: "init.system_dumper.sh",
+}
+

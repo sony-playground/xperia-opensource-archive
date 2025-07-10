@@ -1,0 +1,27 @@
+//
+// Copyright (c) 2021 Sony Corporation
+// All rights, including trade secret rights, reserved.
+//
+
+cc_library_headers {
+    name: "libramdumputils_system_headers",
+    recovery_available: true,
+
+    export_include_dirs: ["include"],
+}
+
+cc_prebuilt_library_shared {
+
+    name: "libramdumputils_system",
+    recovery_available: true,
+    srcs: ["libramdumputils_system.so",],
+
+    shared_libs: [
+        "libz",
+        "libtlcore",
+        "libdumpframework_system",
+    ],
+    header_libs: ["libramdumputils_system_headers"],
+
+    export_header_lib_headers: ["libramdumputils_system_headers"],
+}

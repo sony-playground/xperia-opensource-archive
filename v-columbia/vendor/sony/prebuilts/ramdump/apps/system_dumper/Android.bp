@@ -1,0 +1,27 @@
+//
+// Copyright (c) 2021 Sony Corporation
+// All rights, including trade secret rights, reserved.
+//
+
+cc_prebuilt_binary {
+
+    name: "system_dumper",
+    owner: "somc",
+    recovery_available: true,
+    srcs: ["system_dumper"],
+    shared_libs: [
+        "libc",
+        "libz",
+        "libtlcore",
+        "libsnappy",
+        "libdumpframework_system",
+        "libramdumputils_system",
+    ],
+
+    required: [
+        "config.xml.recovery",
+        "target.xml.recovery",
+        "init.recovery.ramdump.rc.recovery",
+        "init.system_dumper.sh.recovery",
+    ],
+}

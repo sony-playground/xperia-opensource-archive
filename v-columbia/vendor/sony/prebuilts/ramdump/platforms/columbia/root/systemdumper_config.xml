@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ramdump_config>
+	<!-- Please consult Ramdump Dev team before adding any extra information-->
+	<!-- mounts-> Specify the mount information. Optional for ssr_dumper, app_dumper
+		name: mount partition name
+		ondemand(optional) = Value can be "1".
+			"true" means the parition needs to be mounted if required
+		prompt(Optional)= Value can be "1".Currently Needed for external
+			usbstorage.
+			Prompt UI for the partition if mount source not present.
+		source: mount source type.
+		mnt_path: mount path means the target where source needs to be mounted
+		mnt_flags: mount flags value. It is a 32 bit mask value.
+			Specify the standard mount flags value specified in kernel
+			source tree path : kernel/include/linux/fs.h such as
+			Mount flag	Value		Meaning
+			MS_RDONLY	1		Mount read-only
+			MS_NOSUID	2		Ignore suid and sgid bits
+			MS_NODEV	4		Disallow access to device special files
+			MS_NOEXEC	8		Disallow program execution
+			etc.
+
+			If mnt_flags is specify as 0 i.e.no bit set it will be mounted as rw.
+
+		For detailed meaning of mount flags refer man page for mount system call.
+		Syntax:
+		<mount name="XXXX" ondemand="YYYY" prompt="ZZZZ">
+			<source>AAAAAA</source>
+			<mnt_path>BBBBBB</mnt_path>
+			<mnt_flags>CCCCC</mnt_flags>
+		</mount>
+	-->
+	<mounts>
+		<mount name="rdlog">
+			<source>/dev/block/bootdevice/by-name/rdlog</source>
+			<mnt_path>/rdlog</mnt_path>
+			<mnt_flags>0</mnt_flags>
+		</mount>
+		<mount name="persist">
+			<source>/dev/block/bootdevice/by-name/persist</source>
+			<mnt_path>/persist</mnt_path>
+			<mnt_flags>1</mnt_flags>
+		</mount>
+		<mount name="vendor_a" ondemand="1">
+			<source>/dev/block/bootdevice/by-name/vendor_a</source>
+			<mnt_path>/vendor_root</mnt_path>
+			<mnt_flags>1</mnt_flags>
+		</mount>
+		<mount name="vendor_b" ondemand="1">
+			<source>/dev/block/bootdevice/by-name/vendor_b</source>
+			<mnt_path>/vendor_root</mnt_path>
+			<mnt_flags>1</mnt_flags>
+		</mount>
+		<mount name="ext_sdcard" prompt="1">
+			<source>/dev/block/mmcblk1p1</source>
+			<mnt_path>/sdcard1</mnt_path>
+			<mnt_flags>0</mnt_flags>
+		</mount>
+
+		<mount name="idd" ondemand="1">
+			<source>/dev/block/bootdevice/by-name/diag</source>
+			<mnt_path>/idd</mnt_path>
+			<mnt_flags>0</mnt_flags>
+		</mount>
+	</mounts>
+	<!-- dump_configs: Specify the Dump Configurations
+		tlcore: Specify the dump configs for full tlcore
+		Syntax:
+			<tlcore>
+				<destinations>
+					.....
+				</destinations>
+				<min_free_space>.....MB</min_free_space>
+				<filename_format>....-%Y%m%d-%H%M%S/tlcore</filename_format>
+			</tlcore>
+		partial_tlcore: Specify the dump configs for partial tlcore
+		Syntax:
+			<partial_tlcore>
+				<destinations>
+					....
+				</destinations>
+				<min_free_space>....MB</min_free_space>
+				<filename_format>...._%02d</filename_format>
+				<max_file_count>....</max_file_count>
+			</partial_tlcore>
+
+		filename_format: format of filename which will be appended to
+				destination path.
+		Syntax:
+			Refer above <tlcore> and <partial tlcore> element.
+
+		max_file_count: count for max number of partial tlcore in
+			crash directory.Files are managed in round robin
+			following naming convention <%02> increments 00 to
+			(max_file_count - 1).Currently supported for partial
+			tlcore element.
+		Syntax:
+			Refer above <tlcore> and <partial tlcore> element.
+
+		destinations: Crash directory where dump needs to be saved.
+		priority: indicates the destination priority.
+			Value can be : 0, 1, 2 ... ) 0 means highest priority
+		mount_name: mount name as specified for mounts elements
+			Optional for ssr_dumperapp and app_dumper.
+		path: Crashdirectory Path
+		Syntax:
+			<destinatons>
+				<destination priority="Value">
+					<mount_name>AAAAA</mount_name>
+					<path>BBBBBB</path>
+				</destination>
+			</destinations>
+
+		min_free_space: Minimum free space required for dump to begin
+		Syntax:
+			<min_free_space>valueMB</min_free_space>
+
+		scn_dumper_config: Section dumper configuration
+		thread_num: Number of Threads.
+		segment_block_size: Segment block size in bytes.
+		Syntax:
+		<scn_dumper_config>
+			<thread_num>VALUE</thread_num>
+			<segment_block_size>VALUE</segment_block_size>
+		</scn_dumper_config>
+	-->
+	<dump_configs>
+		<tlcore>
+			<destinations>
+				<destination priority="0">
+					<mount_name>rdlog</mount_name>
+					<path>/rdlog/crashdump</path>
+				</destination>
+				<destination priority="1">
+					<mount_name>ext_sdcard</mount_name>
+					<path>/sdcard1/CrashDump</path>
+				</destination>
+			</destinations>
+
+			<min_free_space>5120MB</min_free_space>
+
+			<filename_format>crash-system-%Y%m%d-%H%M%S/tlcore</filename_format>
+		</tlcore>
+
+		<partial_tlcore>
+			<destinations>
+				<destination priority="0">
+					<mount_name>rdlog</mount_name>
+					<path>/rdlog/crashdump/crashdata</path>
+				</destination>
+				<destination priority="1">
+					<mount_name>idd</mount_name>
+					<path>/idd/crashdata</path>
+				</destination>
+			</destinations>
+
+			<min_free_space>1MB</min_free_space>
+
+			<filename_format>tlcore_system_%02d</filename_format>
+
+			<max_file_count>10</max_file_count>
+		</partial_tlcore>
+
+		<scn_dumper_config>
+			<thread_num>2</thread_num>
+			<segment_block_size>128</segment_block_size>
+		</scn_dumper_config>
+	</dump_configs>
+</ramdump_config>

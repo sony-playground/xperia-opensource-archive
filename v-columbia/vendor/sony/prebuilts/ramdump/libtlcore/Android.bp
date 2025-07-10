@@ -1,0 +1,24 @@
+cc_prebuilt_library_shared {
+    name: "libtlcore",
+    recovery_available: true,
+    shared_libs: [
+        "liblog",
+    ],
+
+    srcs: ["libtlcore.so"],
+    header_libs: [
+        "libtlcore_headers",
+    ],
+    export_header_lib_headers: [
+        "libtlcore_headers",
+    ],
+}
+
+cc_library_headers {
+    name: "libtlcore_headers",
+    recovery_available: true,
+    export_include_dirs: [
+        "include",
+    ],
+}
+

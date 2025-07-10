@@ -1,0 +1,72 @@
+//
+// Copyright (c) 2021 Sony Corporation
+// All rights, including trade secret rights, reserved.
+//
+
+
+subdirs = ["*"]
+
+bootstrap_go_package {
+    name: "soong-somc_platform_flag_default",
+    pkgPath: "android/somc/platform/flag/default",
+    deps: [
+        "soong",
+        "soong-android",
+        "soong-cc"
+    ],
+    srcs: [
+        "somc_platform_flag_default.go"
+    ],
+    pluginFor: ["soong_build"]
+}
+
+cc_library_headers {
+    name: "libdumpframework_system_headers",
+    recovery_available: true,
+    export_include_dirs: [
+        "include",
+    ],
+}
+
+
+somc_platform_flag_default {
+   name:"dump_framework_flags",
+   cflags: [
+        "-DRAMDUMP_MODE",
+        "-DCONFIG_GRAPHICS",
+        "-DCONFIG_LED",
+        "-DBUILD_ID=\"6.0.X.0.1\"",
+        "-DSTATIC_LIBXML=1",
+    ],
+}
+
+
+cc_prebuilt_library_shared {
+
+    name: "libdumpframework_system",
+    recovery_available: true,
+    defaults: [ "dump_framework_flags" ],
+    srcs: ["libdumpframework_system.so",],
+    allow_undefined_symbols: true,
+
+    static_libs: [
+        "libxml2_ndk",
+    ],
+    shared_libs: [
+        "libc",
+        "libcutils",
+        "libselinux",
+        "liblog",
+        "libbase",
+        "libz",
+        "libminui",
+        "libtlcore",
+        "libsnappy",
+    ],
+
+
+    header_libs: ["libdumpframework_system_headers"],
+
+    export_header_lib_headers: ["libdumpframework_system_headers"],
+}
+

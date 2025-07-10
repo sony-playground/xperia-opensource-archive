@@ -1,0 +1,292 @@
+#!/usr/bin/perl
+
+# <README>
+# To use this script, you need to install following perl library.
+# sudo apt-get install libparallel-forkmanager-perl
+# or
+# sudo cpan Parallel::ForkManager
+
+use strict;
+use warnings;
+use Carp;
+use Cwd qw/getcwd/;
+use Data::Dumper;
+use File::Path qw/rmtree/;
+use Getopt::Long qw/GetOptions/;
+use Pod::Usage;
+use Parallel::ForkManager;
+
+my $EXPECTED_DEBIAN_PACKAGE_NUM = 3;
+my $DIR_RAMDUMP_XML = 'vendor/semc/build/ramdump-packages/package-files/';
+my $RAMDUMP_XML = 'ramdump.xml';
+
+my $arg;
+if (
+    @ARGV < 1
+    or !GetOptions(
+        'label=s'        => \$arg->{label},
+        'all'          => \$arg->{all},
+        'build'          => \$arg->{build},
+        'upload'          => \$arg->{upload},
+        'xml'          => \$arg->{xml},
+        'help'         => \$arg->{help},
+    )
+  )
+{
+    $arg->{help} = 1;
+}
+
+if ($arg->{all}) {
+    $arg->{build}  = 1;
+    $arg->{upload}   = 1;
+    $arg->{xml}   = 1;
+}
+
+if ($arg->{help}) {
+    pod2usage(
+        {
+            -verbose  => -99,
+            -sections => "NAME|VERSION|SYNOPSIS|DESCRIPTION|",
+        }
+    );
+    exit(0);
+}
+
+if (! $arg->{label}) {
+    warn 'Argument error. Please give software label as argument\n';
+    exit(1);
+}
+$ENV{BUILD_ID} = $arg->{label};
+
+chdir(getcwd());
+
+my $setup_string = slurp_file('./setup.sh');
+if ($setup_string =~ /PRODUCT_LIST \s* = \s* \( \s* ( [^\)]+ ) \)/xms) {
+    my @product_list = split(/\s+/, $1);
+
+    if ($arg->{build}) {
+        # cleanup out directory
+        if (-d 'out') {
+            print "Delete out directory for clean build.\n";
+            rmtree 'out';
+        }
+        if (! multi_build(\@product_list)) {
+            print "ERROR: Something is wrong during build.\n";
+            exit(1);
+        }
+    }
+
+    if ($arg->{upload}) {
+        print "upload debian package to repository\n";
+        foreach my $product (@product_list) {
+            my @deb_list = glob("out/target/product/$product/deb/*.deb");
+            foreach my $deb (@deb_list) {
+                my $quoted_label = quotemeta(${arg}->{label});
+                if ($deb =~ /$quoted_label/) {
+                    print "Executing 'repository addpackage $deb'\n";
+                    if ( system("repository addpackage $deb") != 0 ) {
+                        print "ERROR: repository addpackage $deb for $product failed.\n";
+                        exit(1);
+                    }
+                }
+            }
+        }
+    }
+
+    if ($arg->{xml}) {
+        if (! update_xml_and_commit(${arg}->{label}) ) {
+            print "ERROR: commit of ramdump.xml failed.\n";
+            exit(1);
+        }
+    }
+}
+else {
+    print 'ERROR: setup.sh is not found.';
+    exit(1);
+}
+print 'deliver_ramdump completed.\n';
+exit(0);
+
+sub build {
+    my $product= shift;
+    $ENV{TARGET_PRODUCT} = $product;
+    print "$$:Executing 'make ramdump' for $product\n";
+    if ( system('make ramdump') != 0 ) {
+        warn "$$:make ramdump for '$product' failed.";
+        return;
+    }
+    print "$$:Executing 'make deb' for $product\n";
+    # system doesn't return due to some issue in make deb. So use backtick.
+    print `make deb`;
+    if ( ($? >> 8) != 0 ) {
+        warn "$$:make deb for '$product' failed.";
+        return;
+    }
+    my @deb_list = glob("out/target/product/$product/deb/*.deb");
+    if (scalar(@deb_list) != $EXPECTED_DEBIAN_PACKAGE_NUM) {
+        warn "$$:Expected debian package is not found.";
+        return;
+    }
+    return 1;
+}
+
+sub multi_build {
+    my $produt_list_ref = shift;
+    my $result_of_build;
+
+    # patch kernel
+    if ( system('make kernel_patching') != 0 ) {
+        warn "make kernel_patching failed.";
+        return;
+    }
+    if ( system('make exfat_module_patching') != 0 ) {
+        warn "make exfat_module_patching failed.";
+        return;
+    }
+
+    my $product_of_pid;
+    my $pm = Parallel::ForkManager->new(scalar(@$produt_list_ref));
+    $pm->run_on_start(
+        sub {
+            my ( $pid, $product ) = @_;
+            print "pid:$pid started for $product\n";
+            $product_of_pid->{$pid} = $product;
+        }
+    );
+    $pm->run_on_finish(
+        sub {
+            my ( $pid, $exit_status ) = @_;
+            $result_of_build += $exit_status;
+            print "pid:$pid for $product_of_pid->{$pid} exited with $exit_status\n";
+        }
+    );
+    foreach my $product (@$produt_list_ref) {
+        $pm->start($product) and next;
+        if (!build( $product) ) {
+            $pm->finish(1);
+        }
+        else {
+            $pm->finish;
+        }
+    }
+    $pm->wait_all_children;
+    # check errors
+    if ($result_of_build > 0) {
+        warn "Build error found.";
+        return;
+    }
+    return 1;
+}
+
+sub update_xml_and_commit {
+    my $label = shift;
+
+    # modify ramdump.xml
+    my $xml = slurp_file("$DIR_RAMDUMP_XML$RAMDUMP_XML");
+    $xml =~ s/revision\s*=\s*"[^"]+"/revision="$label"/g;
+    print $xml;
+    open my $fh, '>', "$DIR_RAMDUMP_XML$RAMDUMP_XML" or return;
+    print $fh $xml or return;
+    close $fh;
+
+    # create commit
+    my $commit_msg = "ramdump: update ramdump and ssr packages to $label";
+    my $work_dir = getcwd();
+    chdir($DIR_RAMDUMP_XML) or return;
+    my $time = time;
+
+    print `git branch deliver_ramdump_$time`;
+    if ( ($? >> 8) != 0 ) {
+        warn "git branch deliver_ramdump_$time failed.";
+        return;
+    }
+    print `git checkout deliver_ramdump_$time`;
+    if ( ($? >> 8) != 0 ) {
+        warn "git checkout deliver_ramdump_$time failed.";
+        return;
+    }    print `git add $RAMDUMP_XML`;
+    print `git commit -m "$commit_msg"`;
+    if ( ($? >> 8) != 0 ) {
+        warn "git commit -m \"$commit_msg\" failed.";
+        return;
+    }
+
+    # upload commit
+    my $email = join('', `git config --global user.email`);
+    my $ssh_name;
+    if ( $email =~ /([^@]+)@/ ) {
+        $ssh_name = $1;
+    }
+    else {
+        warn "failed to get information from git config --global user.email";
+        return;
+    }
+
+    my $remote_branches = join('', `git branch -r`);
+    my $target_branch;
+    if ($remote_branches =~ /-> origin\/(\S+)/ ) {
+        $target_branch = $1;
+    }
+    else {
+        warn "failed to get information from git branch -r";
+        return;
+    }
+    my $push_cmd = "git push ssh://$ssh_name\@review.sonyericsson.net:29418/platform/vendor/semc/build/ramdump-packages HEAD:refs/for/$target_branch";
+
+    print `$push_cmd`;
+    if ( ($? >> 8) != 0 ) {
+        warn "$push_cmd failed.";
+        return;
+    }
+
+    chdir($work_dir) or return;
+    return 1;
+}
+
+sub slurp_file {
+    my $file = shift;
+    unless ( -f $file ) {
+        croak "$file doesn't exist";
+    }
+    open my $fh, '<', $file or croak "Failed to read '$file'";
+    my $tmp = do { local $/; <$fh> };
+    close $fh;
+    return $tmp;
+}
+
+=pod
+
+=head1 NAME
+
+deliver_ramdump -- delivery helper script for ramdump
+
+=head1 VERSION
+
+0.0.2
+
+=head1 SYNOPSIS
+
+deliver_ramdump [option] or [option=<val>] ...
+
+Options:
+
+    -h, --help               Show this message.
+    -l=<val>, --label=<val>  Specify software label for build.
+    -b, --build              Perform build and create debian package for all products.
+    -u, --upload_deb         Upload debian packages to C2D.
+    -x, --xml                Modify ramdump.xml, create commit and upload to gerrit.
+    -a, --all                Same as combination of -b, -u and -x.
+
+=head1 DESCRIPTION
+
+This script needs to be executed under a root of ramdump source tree.
+And following commands need to be executed in advance.
+
+  $ . setup.sh <any product>
+
+Sample command below automatically build and uploads debian packages for all products.
+Also, modify ramdump.xml, create commit and upload commit to gerrit.
+
+  $ deliver_ramdump l=2.0.A.0.X -a
+
+=cut

@@ -1,0 +1,5 @@
+on init
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    wait /dev/block/bootdevice/by-name/rdlog
+    exec u:r:system_dumper:s0 -- /system/bin/sh /system/etc/init.system_dumper.sh

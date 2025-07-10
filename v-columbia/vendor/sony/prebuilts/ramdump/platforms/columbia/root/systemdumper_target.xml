@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ramdump_target>
+	<!-- Please consult Ramdump Dev team before adding any extra information-->
+	<!-- Note:
+		ramdump_target contains two elements memdesc and section
+		memdesc: If memory information is available dynamically through
+			memory descriptors
+		section: If no memory descriptors are available , then the static
+			dump information can be specified through this element.
+			If some memory information is not available though memdesc
+			then that also can be specified in section element.
+			If any section needs to be dumped from the file path
+			then that information needs to be specified in section
+			element.
+			If some area in section needs to be marked as dummy then
+			that needs to be specified in the section element.
+
+		Make sure that the memory information obtained from memdesc should not
+			overlap with static information mentioned in section.
+		The section element mentioned should contain split data.
+	-->
+	<!-- mem_desc-> Memory descriptors information
+		path: Path to memory descriptors containing Dump information in the
+			following format: phys_addr:dump_addr:size:name:core_name
+		config: Configuration for memory information
+		name: name can be "default" or any other platform section name.
+			If the name is set as "default" means use the given
+			configuration for all memory descriptor information.
+			If the name is set as some particular section name
+			then use the given configuration for that section name
+			in memory descriptor.
+		scn_type(Mandatory): Section Type. Value can be ->
+			TLCORE_SECTION_TYPE_BIN or TLCORE_SECTION_TYPE_BIN.
+		scn_attribute(Mandatory): Bitmask element.Value can be ->
+			TLCORE_SECTION_ATTRIBUTE_VENDOR,
+			TLCORE_SECTION_ATTRIBUTE_REPORT
+		scn_data_type(Mandatory): Section data type.Value can be->
+			TLCORE_DATA_TYPE_SNAPPY, TLCORE_DATA_TYPE_RAW,
+			TLCORE_DATA_TYPE_ZLIB, TLCORE_DATA_TYPE_ZLIB_RAW,
+			TLCORE_DATA_TYPE_DUMMY
+		scn_data_format(Mandatory):Section data format. Value can be->
+			TLCORE_DATA_FORMAT_SEGMENT, TLCORE_DATA_FORMAT_STRAIGHT
+		For detailed information about above values refer tlcore.h file
+			of libtlcore
+		Syntax:
+		<mem_desc path="AAAAA">
+			<config id="default">
+				<scn_type>XXXXX</scn_type>
+				<scn_attribute>
+					<bitmask>YYYYYY</bitmask>
+					....
+				</scn_attribute>
+				<scn_data_type>AAAAAAAA</scn_data_type>
+				<scn_data_fmt>BBBBBBBB</scn_data_fmt>
+			</config>
+		</mem_desc>
+	-->
+
+	<mem_desc path="/proc/mem_desc">
+		<config name="default">
+			<scn_type>TLCORE_SECTION_TYPE_BIN</scn_type>
+			<scn_attribute>
+				<bitmask>TLCORE_SECTION_ATTRIBUTE_VENDOR</bitmask>
+			</scn_attribute>
+			<scn_data_type>TLCORE_DATA_TYPE_SNAPPY</scn_data_type>
+			<scn_data_fmt>TLCORE_DATA_FORMAT_SEGMENT</scn_data_fmt>
+		</config>
+
+		<config name="OCIMEM.BIN">
+			<scn_type>TLCORE_SECTION_TYPE_BIN</scn_type>
+			<scn_attribute>
+				<bitmask>TLCORE_SECTION_ATTRIBUTE_VENDOR</bitmask>
+			</scn_attribute>
+			<scn_data_type>TLCORE_DATA_TYPE_ZLIB</scn_data_type>
+			<scn_data_fmt>TLCORE_DATA_FORMAT_STRAIGHT</scn_data_fmt>
+		</config>
+
+		<config name="PMIC_PON.BIN">
+			<scn_type>TLCORE_SECTION_TYPE_BIN</scn_type>
+			<scn_attribute>
+				<bitmask>TLCORE_SECTION_ATTRIBUTE_REPORT</bitmask>
+				<bitmask>TLCORE_SECTION_ATTRIBUTE_VENDOR</bitmask>
+			</scn_attribute>
+			<scn_data_type>TLCORE_DATA_TYPE_ZLIB</scn_data_type>
+			<scn_data_fmt>TLCORE_DATA_FORMAT_STRAIGHT</scn_data_fmt>
+		</config>
+
+		<config name="RST_STAT.BIN">
+			<scn_type>TLCORE_SECTION_TYPE_BIN</scn_type>
+			<scn_attribute>
+				<bitmask>TLCORE_SECTION_ATTRIBUTE_REPORT</bitmask>
+				<bitmask>TLCORE_SECTION_ATTRIBUTE_VENDOR</bitmask>
+			</scn_attribute>
+			<scn_data_type>TLCORE_DATA_TYPE_ZLIB</scn_data_type>
+			<scn_data_fmt>TLCORE_DATA_FORMAT_STRAIGHT</scn_data_fmt>
+		</config>
+	</mem_desc>
+
+	<!-- section -> Section Information needs to be dumped
+		src(Mandatory):Indicates Data needs to be dumped from memory
+				or file or executable.
+				Value can be-> "memory" or "file" or
+								"executable"
+
+		scn_type(Mandatory): Refer memdesc information described above
+		scn_attribute(Mandatory): Refer memdesc information described
+					above
+		scn_data_type(Mandatory): Refer memdesc information described above
+		scn_data_fmt(Mandatory): Refer memdesc information described above
+		phys_addr, dump_addr, size(Optional): Should be set when src
+			attribute value is "memory". Indicates Physical address,
+			dump address and size of the section(8 Byte Hex Value)
+		path(Optional): Should be set when src attribute value is
+			"file". File path from where data needs to be dumped
+		command(Optional): Should be set when src attribute value is
+			"executable". Command specify the executable command.
+			Currently supported standard output write to the section.
+		name(Mandatory): Name of the section
+		core_name: core name of section if any.
+		Syntax:
+		<section src="memory">
+			<scn_type>AAAAAA</scn_type>
+			<scn_attribute>
+				<bitmask>BBBBBB</bitmask>
+				......
+			</scn_attribute>
+			<scn_data_type>XXXXXXX</scn_data_type>
+			<scn_data_fmt>YYYYYYY</scn_data_fmt>
+			<phys_addr>CCCCCC</phys_addr>
+			<dump_addr>DDDDDD</dump_addr>
+			<size>EEEEEEE</size>
+			<name>WWWWWW</name>
+			<core_name>YYYYYY</core_name>
+		</section>
+					or
+		<section src="file">
+			<scn_type>AAAAAA</scn_type>
+			<scn_attribute>
+				<bitmask>BBBBB</bitmask>
+				.....
+			</scn_attribute>
+			<scn_data_type>XXXXXX</scn_data_type>
+			<scn_data_fmt>YYYYYYY</scn_data_fmt>
+			<name>WWWWWWW</name>
+			<path>YYYYYYY</path>
+		</section>
+					or
+		<section src="executable">
+			<scn_type>AAAAAA</scn_type>
+			<scn_attribute>
+				<bitmask>BBBBB</bitmask>
+				.....
+			</scn_attribute>
+			<scn_data_type>XXXXXX</scn_data_type>
+			<scn_data_fmt>YYYYYYY</scn_data_fmt>
+			<name>WWWWWWW</name>
+			<command>YYYYYYY</command>
+		</section>
+		Note:
+		If some area in section needs to be marked as Dummy then Syntax:
+		<section src="memory">
+			<scn_data_type>TLCORE_DATA_TYPE_DUMMY</scn_data_type>
+			<phys_addr>XXXXXX</phys_addr>
+			<size>YYYYYY</size>
+		</section>
+	-->
+	<section src="file">
+		<scn_type>TLCORE_SECTION_TYPE_TEXT</scn_type>
+		<scn_attribute>
+			<bitmask>TLCORE_SECTION_ATTRIBUTE_REPORT</bitmask>
+		</scn_attribute>
+		<scn_data_type>TLCORE_DATA_TYPE_ZLIB</scn_data_type>
+		<scn_data_fmt>TLCORE_DATA_FORMAT_STRAIGHT</scn_data_fmt>
+		<name>kernel.log</name>
+		<path>/sys/fs/pstore/console-ramoops-0</path>
+	</section>
+	<section src="file">
+		<scn_type>TLCORE_SECTION_TYPE_TEXT</scn_type>
+		<scn_attribute>
+			<bitmask>TLCORE_SECTION_ATTRIBUTE_REPORT</bitmask>
+		</scn_attribute>
+		<scn_data_type>TLCORE_DATA_TYPE_ZLIB</scn_data_type>
+		<scn_data_fmt>TLCORE_DATA_FORMAT_STRAIGHT</scn_data_fmt>
+		<name>cmdline.log</name>
+		<path>/proc/cmdline</path>
+	</section>
+	<section src="file">
+		<scn_type>TLCORE_SECTION_TYPE_BIN</scn_type>
+		<scn_attribute>
+			<bitmask>TLCORE_SECTION_ATTRIBUTE_REPORT</bitmask>
+		</scn_attribute>
+		<scn_data_type>TLCORE_DATA_TYPE_ZLIB</scn_data_type>
+		<scn_data_fmt>TLCORE_DATA_FORMAT_STRAIGHT</scn_data_fmt>
+		<name>cpu_regs.bin</name>
+		<path>/proc/last_logs/cpu_regs</path>
+	</section>
+	<section src="file">
+		<scn_type>TLCORE_SECTION_TYPE_TEXT</scn_type>
+		<scn_attribute>
+			<bitmask>TLCORE_SECTION_ATTRIBUTE_REPORT</bitmask>
+		</scn_attribute>
+		<scn_data_type>TLCORE_DATA_TYPE_ZLIB</scn_data_type>
+		<scn_data_fmt>TLCORE_DATA_FORMAT_STRAIGHT</scn_data_fmt>
+		<name>tzbsp.log</name>
+		<path>/proc/tzdbg/last_log</path>
+	</section>
+	<section src="file">
+		<scn_type>TLCORE_SECTION_TYPE_BIN</scn_type>
+		<scn_data_type>TLCORE_DATA_TYPE_ZLIB</scn_data_type>
+		<scn_data_fmt>TLCORE_DATA_FORMAT_STRAIGHT</scn_data_fmt>
+		<name>TA.img</name>
+		<path>/dev/block/bootdevice/by-name/TA</path>
+	</section>
+	<section src="file">
+		<scn_type>TLCORE_SECTION_TYPE_TEXT</scn_type>
+		<scn_attribute>
+			<bitmask>TLCORE_SECTION_ATTRIBUTE_REPORT</bitmask>
+		</scn_attribute>
+		<scn_data_type>TLCORE_DATA_TYPE_ZLIB</scn_data_type>
+		<scn_data_fmt>TLCORE_DATA_FORMAT_STRAIGHT</scn_data_fmt>
+		<name>boot_xblramdump.log</name>
+		<path>/proc/last_logs/sbl1_ddr_logs</path>
+	</section>
+
+</ramdump_target>
