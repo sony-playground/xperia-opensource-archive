@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-only
 /*
  * Copyright (c) 2017-2021, The Linux Foundation. All rights reserved.
- * Copyright (c) 2022-2023, Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022-2024, Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include <linux/init.h>
@@ -633,8 +633,12 @@ static void cam_res_mgr_gpio_free(struct device *dev, uint gpio)
 			pctrl_idx =
 				cam_res_mgr_util_get_idx_from_shared_pctrl_gpio(
 					gpio);
-			cam_res_mgr_shared_pinctrl_select_state(
-				pctrl_idx, false);
+			if (pctrl_idx >= 0) {
+				cam_res_mgr_shared_pinctrl_select_state(
+					pctrl_idx, false);
+			} else {
+				CAM_ERR(CAM_RES, "invalid pinctrl idx: %d", pctrl_idx);
+			}
 		}
 
 		CAM_DBG(CAM_RES, "freeing gpio: %u", gpio);
