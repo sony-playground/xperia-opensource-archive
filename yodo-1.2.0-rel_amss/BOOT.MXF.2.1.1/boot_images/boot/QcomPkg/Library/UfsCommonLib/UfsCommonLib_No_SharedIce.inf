@@ -1,0 +1,62 @@
+#/** @file UFSCommonLib_No_SharedIce.inf
+#  
+#  UFSCommonLib_No_SharedIce INF file
+#  
+#  Copyright (c) 2022 Qualcomm Technologies, Inc.  
+#  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who   what, where, why
+# ----------   ---   ---------------------------------------------------------
+# 06-07-2022   jt    Add core only compile flag 
+# 05-18-2022   sa    Initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = UFSCommonLib_No_SharedIce
+  FILE_GUID                      = C657E7A0-DB4F-48B7-9AE4-75C7B5801BE1
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = UFSCommonLib_No_SharedIce
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DFEATURE_NO_SHARED_ICE -DFEATURE_CORE_ONLY
+
+
+[Sources.common]
+  ufs_api.c
+  ufs_memory.c
+  ufs_core.c
+  ufs_utp_core.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/Library/UfsCommonLib/UfsCommonLib.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  IoLib
+  ArmLib
+  CacheMaintenanceLib
+  TimerLib    
+  PcdLib
+  UfsTargetUefiLib
+  StorageProfileLib
+
+[FixedPcd]
+  gQcomTokenSpaceGuid.PcdBuildType
+

@@ -1,0 +1,121 @@
+//////////////////////////////////////////////////////////
+The Problem 
+//////////////////////////////////////////////////////////
+The current way to put the device in mass storage mode only
+mounts partitions in the User partition. With the BDS menu 
+going away, another method was needed to put the device into 
+mass storage mode for easy flashing/retrieving
+data. 
+
+//////////////////////////////////////////////////////////
+Solution
+//////////////////////////////////////////////////////////
+The new Application can mount all hardware and software partitions on the device. It can 
+also mount the Rpmb Partition as a read only device, and data can be easily read off of 
+this partition without launching any additional apps.
+
+//////////////////////////////////////////////////////////
+Usage
+//////////////////////////////////////////////////////////
+To Run the App:
+  To start the app and run the user Interface:
+  cd to correct fv
+  start usbfnMsdapp  
+
+  A User will Pop up display all Partitions. Use the following commands to
+  navigate and select partitions to be mounted
+
+  User Interface Commands
+    Command             KeyBoard Key        Fluid Device       Liquid Device
+    -----------------------------------------------------------------------------
+    Up                  Up Arrow            Vol+               Vol+
+    Down                Down Arrow          Vol-               Vol-
+    Select              Enter               Camera             Unlock Rotate 
+    Jump Up             Left/PgUp           Camera&Vol+        Home
+    Jump Down           Right/PgDown        
+    Jump To Mount       Backspace           Camera&Vol-        RotateLock&Vol-
+    Clear Selection     c
+    Mount Selected      m
+    Exit                Any Other Key       Power              Power/RotateLoc&Vol+
+
+  After Selecting Partitions to be mounted, the selection will be saved after a reboot.
+
+  If using command line to launch the app from EBL:
+    To start the app and directly mount previously saved mounts:
+    start usbfnmsdapp  -m
+
+    To start the app and mount specific drives from EBL:
+    start usbfnmsdapp  "-m <name1> <name2>"
+    ex:
+    start usbfnmsdapp  "-m rpmb boot1"
+    start usbfnmsdapp  "-m rpmb"       //mounts just one
+    **Names are not case sensitive. Extra arguments will be ignored.
+    **Quotes necessary in EBL
+
+//////////////////////////////////////////////////////////
+Known Issues
+//////////////////////////////////////////////////////////
+  For page up/down to work in through UART,
+  you must Must map page up and page down to:
+  PgUp   = \033\133\110 
+  PgDown = \033\133\107
+
+  When Ram Loading the UEFI image, the mounting is not reliable and the partitions
+  may not show up on the PC.
+  
+  To add another root/hardware partition, change
+    #define NUM_ROOT_PARTITIONS
+    STATIC CHAR8 CONST  RootPartitionNames[NUM_ROOT_PARTITIONS][PARTITION_NAME_LENGTH] =
+    STATIC EFI_GUID* RootPartitionGuids[NUM_ROOT_PARTITIONS] =
+
+//////////////////////////////////////////////////////////
+Dependencies
+//////////////////////////////////////////////////////////
+  Since the Rpmb_Init function is no longer being supported, the storage team provided 
+  a function (RPMBReadData) that reads from the rpmb without going through the TZ, and
+  extracts the data. A build that supports this function is needed.
+
+  For the 8974 and 8916, UsbFnDxe must be uncommented out in the .fdf
+  
+  The Timer that runs QueryUSBEvent is removed from UsbfnDxe, and is User driven now.
+
+/* Design Specifics */
+
+The Program Executes in the following fashion:
+  
+  1.Finds and saves previously mounted drives into the Selection Variable.
+  2.Finds all partitions using their corresponding guids (except for RPMB**). 
+    Everything is stored in an array of Partition objects, which contain the
+    corresponding Blkio handle and name of Partition. The Array is not dynamically
+    allocated, MAX_NUM_PARTITIONS defines the maximum partitions supported.
+    2.1 All Software partitions are found the  EFI_PARTITION_ENTRYprotocol returned 
+      by the gEfiPartitionRecordGuid;
+    
+  3.Process Command Line arguments if necessary. Will skip 4. if -m is entered.
+  4.Run The User interface. If a user chooses a Partition, it is saved in the Selection
+    Variable. This Loops until the user chooses to quit or mount the selected partitions
+    The Selected partitions are saved, pending a proper reboot
+  5.Mount Partitions if User Specified. This uses EFI_USB_MSD_PERIPHERAL_PROTOCOL
+    to assign the appropriate BlockIO Handle to the LUN(s). The QueryUSBEvent is run in  
+    a tight loop, until a key is pressed. Once a key is pressed, the Partitions are unmounted
+    and the app returns to 4.
+    
+   
+   ** A local blkio instance is dedicated to handling the RPMB Partition.
+      The RPMB is read and stored in a buffer. The blkio Instance will allow reads
+      from this buffer, but no writes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

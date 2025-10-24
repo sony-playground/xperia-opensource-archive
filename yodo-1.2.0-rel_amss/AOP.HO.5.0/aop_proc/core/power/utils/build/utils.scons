@@ -1,0 +1,189 @@
+#===========================================================================
+# Power Utils builds script
+#
+# Copyright (c) 2016 by Qualcomm Technologies, Incorporated
+# All Rights Reserved
+# Qualcomm Proprietary/GTDR
+#===========================================================================
+
+Import('env')
+
+env = env.Clone()
+
+SRCPATH = '../src'
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+env.Append(CFLAGS = '${ARMCC_STDC99_CMD}')
+
+# APIs
+CBSP_API = [
+    'DAL',
+    'POWER',
+    'SERVICES',
+    'DEBUGTRACE',
+    'SYSTEMDRIVERS',
+    'KERNEL',
+    'SLEEP',
+    'PDC',
+    'MPROC',
+    'UNPA',
+    'PMIC_COMM',
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+
+if env['MSM_ID'] == '55':
+   env.Append(CPPDEFINES = 'SDX55_STUBS')
+elif env['MSM_ID'] == '8250':
+   env.Append(CPPDEFINES = 'SM8250_TARGET_CONFIG')
+   #env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+elif env['MSM_ID'] == '8350':
+   env.Append(CPPDEFINES = 'SM8350_TARGET_CONFIG')
+elif env['MSM_ID'] == 'makena':
+   env.Append(CPPDEFINES = 'MAKENA_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'MAKENA_STUBS')
+elif env['MSM_ID'] == 'Saipan':
+   env.Append(CPPDEFINES = 'Saipan_TARGET_CONFIG')
+elif env['MSM_ID'] == 'Chitwan':
+   env.Append(CPPDEFINES = 'Chitwan_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'Chitwan_STUBS')
+elif env['MSM_ID'] == 'Olympic':
+   env.Append(CPPDEFINES = 'Olympic_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'Olympic_STUBS')
+elif env['MSM_ID'] == 'waipio':
+   env.Append(CPPDEFINES = 'waipio_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'WAIPIO_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'waipio_STUBS')
+elif env['MSM_ID'] == 'kailua':
+   env.Append(CPPDEFINES = 'KAILUA_TARGET_CONFIG')
+#   env.Append(CPPDEFINES = 'KAILUA_STUBS')
+elif env['MSM_ID'] == 'pinnacle':
+   env.Append(CPPDEFINES = 'PINNACLE_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'PINNACLE_STUBS')
+elif env['MSM_ID'] == 'kuno':
+   env.Append(CPPDEFINES = 'KUNO_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'KUNO_STUBS')
+elif env['MSM_ID'] == 'kapiti':
+   env.Append(CPPDEFINES = 'KAPITI_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'KAPITI_STUBS')
+elif env['MSM_ID'] == 'makenaau':                        #MAKENAAU_TODO: Remove these stubs
+   env.Append(CPPDEFINES = 'MAKENA_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'MAKENA_STUBS')
+elif env['MSM_ID'] == 'fillmore':
+   env.Append(CPPDEFINES = 'fillmore_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'FILLMORE_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'fillmore_STUBS')
+elif env['MSM_ID'] == 'aurora':
+   env.Append(CPPDEFINES = 'aurora_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'AURORA_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'AURORA_STUBS')
+elif env['MSM_ID'] == 'lassen':
+   env.Append(CPPDEFINES = 'lassen_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'LASSEN_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'LASSEN_STUBS')
+elif env['MSM_ID'] == 'netrani':
+   env.Append(CPPDEFINES = 'NETRANI_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'NETRANI_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'NETRANI_STUBS')
+elif env['MSM_ID'] == 'hamoa':
+   env.Append(CPPDEFINES = 'HAMOA_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'HAMOA_STUBS')
+elif env['MSM_ID'] == 'lanai':
+   env.Append(CPPDEFINES = 'RISCV_TARGET')
+   env.Append(CPPDEFINES = 'LANAI_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'LANAI_STUBS')
+
+#STUB CHECK
+'''
+#todo: enable once external build pick correct config
+if not env.PathExists('${BUILD_ROOT}/core/power/utils/src/${MSM_ID}'):
+  env.PrintWarning('STUB config for PWR_UTILS !!')
+  env['MSM_ID'] = 'STUB'
+  env.Append(CPPDEFINES = 'PWR_UTILS_STUBS')
+'''
+
+# for advanced MMU capable targets for memory offloading
+if env['MSM_ID'] in ['kailua', 'waipio','kapiti', 'hamoa','pinnacle','kuno']:
+  env.Append(CPPDEFINES = 'DDR_OFFLOADED_INIT')
+
+#env.Append(CPPDEFINES = 'ATS_DEBUG')
+
+env.PublishPrivateApi('PWR_UTILS', [ 
+'${BUILD_ROOT}/core/power/utils/inc',
+'${BUILD_ROOT}/core/power/utils/inc/${MSM_ID}',   
+])
+
+
+# Sources
+PWR_UTILS_SOURCES = [
+  '${BUILDPATH}/pwr_utils_lvl.c',
+  '${BUILDPATH}/debug.c',
+  '${BUILDPATH}/${MSM_ID}/msg_ram_sections.c',
+  '${BUILDPATH}/json_parser.c',
+  '${BUILDPATH}/aop_services.c',
+  '${BUILDPATH}/${MSM_ID}/target_aop_services.c',
+  '${BUILDPATH}/${MSM_ID}/target_aop_qdss.c',
+  '${BUILDPATH}/drv_lookup.c',
+  '${BUILDPATH}/${MSM_ID}/rpmh_arc_mol.c',
+  '${BUILDPATH}/aop_sw_prof_fw.c',
+  '${BUILDPATH}/aop_adb_debug.c',
+  '${BUILDPATH}/aop_timer_service.c',
+]
+
+#Features
+LPM_DEBUG_FEATURE = [
+  '${BUILDPATH}/${MSM_ID}/lpm_violators.c',
+  ]
+
+ARC_RUNTIME_INFO_FEATURE = [
+  '${BUILDPATH}/${MSM_ID}/target_arc_runtime_statis.c',
+  ]
+
+PWR_UTILS_INIT_SOURCES = [
+    '${BUILDPATH}/init/aop_services_init.c',
+    '${BUILDPATH}/${MSM_ID}/target_services_init.c',
+    '${BUILDPATH}/msg_ram_layout.c',
+  ]
+
+if env['MSM_ID'] in ['kapiti', 'waipio', 'kailua', 'hamoa']:
+  PWR_UTILS_INIT_SOURCES = PWR_UTILS_INIT_SOURCES + ['${BUILDPATH}/${MSM_ID}/mode_disablement.c']
+
+if env['MSM_ID'] in ['waipio','kapiti','kailua','hamoa']: 
+  env.Append(CPPDEFINES = 'DEBUG_LPM_VIOLATORS') #for common files
+  PWR_UTILS_SOURCES = PWR_UTILS_SOURCES + LPM_DEBUG_FEATURE
+
+if env['MSM_ID'] in ['lanai']:
+  PWR_UTILS_SOURCES = PWR_UTILS_SOURCES + ARC_RUNTIME_INFO_FEATURE
+
+#if env['MSM_ID'] in ['lanai']:
+#  env.Append(CPPDEFINES = 'GPIO_MARKER_FEATURE')
+
+if env['MSM_ID'] in ['855']:
+  PWR_UTILS_SOURCES = PWR_UTILS_SOURCES + ['${BUILDPATH}/${MSM_ID}/chip_version_support.c']  #generates v1/v2 offsets for vts
+
+# Add sources to compile
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/pwr_utils', PWR_UTILS_SOURCES)
+
+env2 = env.Clone() #clone for init sources
+if env2['MSM_ID'] not in ['lanai']:
+  env2.Append(CCFLAGS    = ' -mlong-calls')
+env2.AddLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/pwr_utils_init', PWR_UTILS_INIT_SOURCES)
+
+#-------------------------------------------------------------------------------
+# QDSS SW Events
+#-------------------------------------------------------------------------------
+if 'USES_QDSS_SWE' in env:
+    QDSS_IMG = ['QDSS_EN_IMG']
+    events = [
+             ['RAMDUMP_FATAL_ERROR=383', 'fatal_error... DDR_On:%d ...init RAM DUMP'],
+             ['AOP_NOT_ABLE_TO_TURNON_DDR=911', 'AOP tried to turned DDR ON, but failed'],
+             ['AOP_ATTEMPT_TO_READ=912', 'AOP attempt to read DDR on NS-Wdog'],
+             ['AOP_DDR_READ_OK=913', 'Read value 0x(%X)'],
+             ['AOP_DDR_READ_NO_OK=914', 'Read not OK. Read value 0x(%X)'],
+             ]
+    env.AddSWEInfo(QDSS_IMG, events)
+
+#Load extra
+env.LoadSoftwareUnits()		   

@@ -1,0 +1,36 @@
+#/** @file UartSettingsLibNull.inf
+#
+#  Null Uart Settings lib if Uart Settings lib is not available
+#
+#  Copyright (c) 2020, Qualcomm Technologies, Inc . All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 02/10/20   ck      Initial revision
+#
+#==============================================================================
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RailwayTargetLibNull
+  FILE_GUID                      = 32CB90FB-24EE-460E-81B1-371771ACFA4D
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = RailwayTargetLib
+
+[Sources]
+  RailwayTargetLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec  
+
+[LibraryClasses]

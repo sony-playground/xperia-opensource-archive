@@ -1,0 +1,240 @@
+#===============================================================================
+#                Copyright 2016-2019 Qualcomm Technologies, Inc.
+#                         All Rights Reserved.
+#          Proprietary and Confidential - Qualcomm Technologies, Inc
+#===============================================================================
+# DDR_MGR_L4 Libs
+#if env['MSM_ID'] == '8250': 
+#  env['MSM_ID'] = '8350'
+#-------------------------------------------------------------------------------
+Import('env')
+env = env.Clone()
+
+#SDM855au_CHANGES
+if env['MSM_ID'] in ['855au']:
+   env['MSM_ID'] = '855'
+#if env['MSM_ID'] == '8250': 
+  #env['MSM_ID'] = '8350'
+if env['MSM_ID'] == '8350': 
+  env['MSM_ID'] = 'Lahaina'
+
+#-------------------------------------------------------------------------------
+# Source PATH
+#-------------------------------------------------------------------------------
+SRCPATH = "${BUILD_ROOT}/core/power/ddr_mgr"
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+# Always false for targets in this warehouse. Left as information for reader
+ddraux_does_voltage = False
+
+
+if env['MSM_ID'] == 'waipio':
+   env.Append(CPPDEFINES = 'WAIPIO_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'WAIPIO_STUBS')
+   env.Append(CPPDEFINES = 'PASR_SUPPORTED')
+   env.Append(CPPDEFINES = 'DDR_REGIONS_SUPPORTED')
+   env.Append(CPPDEFINES = 'VRM_SOC_PROXY_TARGET')
+   env.Append(CPPDEFINES = 'HARDENED_DDR_AUX')
+   #env.Append(CPPDEFINES = 'LOCAL_PMIC_CFG') #TODO: Remove when it pmic config settings matches waipio pwr grid
+   env.Append(CPPDEFINES = 'BCM_MC0_VOTES_DATA')
+   env.Append(CPPDEFINES = 'QCTDD07781568')
+elif env['MSM_ID'] == 'kailua':
+   env.Append(CPPDEFINES = 'KAILUA_TARGET_CONFIG')
+#   env.Append(CPPDEFINES = 'KAILUA_STUBS')
+   env.Append(CPPDEFINES = 'PASR_SUPPORTED')
+   env.Append(CPPDEFINES = 'DDR_REGIONS_SUPPORTED')
+   env.Append(CPPDEFINES = 'VRM_SOC_PROXY_TARGET')
+   env.Append(CPPDEFINES = 'HARDENED_DDR_AUX')
+   env.Append(CPPDEFINES = 'BCM_MC0_VOTES_DATA')
+#   env.Append(CPPDEFINES = 'LOCAL_PMIC_CFG') #TODO: Remove when it pmic config settings matches kailua pwr grid
+elif env['MSM_ID'] == 'pinnacle':
+   env.Append(CPPDEFINES = 'PINNACLE_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'PINNACLE_STUBS')
+   env.Append(CPPDEFINES = 'PASR_SUPPORTED')
+   env.Append(CPPDEFINES = 'VRM_SOC_PROXY_TARGET')
+   env.Append(CPPDEFINES = 'HARDENED_DDR_AUX')
+   #env.Append(CPPDEFINES = 'LOCAL_PMIC_CFG') #TODO: Remove when it pmic config settings matches pinnacle pwr grid
+elif env['MSM_ID'] == 'kuno':
+   env.Append(CPPDEFINES = 'KUNO_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'KUNO_STUBS')
+   env.Append(CPPDEFINES = 'PASR_SUPPORTED')
+   env.Append(CPPDEFINES = 'VRM_SOC_PROXY_TARGET')
+   env.Append(CPPDEFINES = 'HARDENED_DDR_AUX')
+   env.Append(CPPDEFINES = 'LOCAL_PMIC_CFG') #TODO: Remove when it pmic config settings matches kuno pwr grid
+elif env['MSM_ID'] == 'kapiti':
+   env.Append(CPPDEFINES = 'KAPITI_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'KAPITI_STUBS')
+   env.Append(CPPDEFINES = 'PASR_SUPPORTED') 
+   #env.Append(CPPDEFINES = 'DDR_REGIONS_SUPPORTED')#kapiti_todo
+   env.Append(CPPDEFINES = 'VRM_SOC_PROXY_TARGET')
+   env.Append(CPPDEFINES = 'HARDENED_DDR_AUX')
+   env.Append(CPPDEFINES = 'LOCAL_PMIC_CFG') #kapiti_todo: Remove when it pmic config settings matches kapiti pwr grid
+elif env['MSM_ID'] == 'lassen':
+   env.Append(CPPDEFINES = 'LASSEN_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'LASSEN_STUBS')
+   env.Append(CPPDEFINES = 'DDR_REGIONS_SUPPORTED') #LASSEN_TODO
+   env.Append(CPPDEFINES = 'PASR_SUPPORTED') #LASSEN_TODO
+   #env.Append(CPPDEFINES = 'BCM_MC0_VOTES_DATA') #AURORA_TODO
+   env.Append(CPPDEFINES = 'VRM_SOC_PROXY_TARGET')
+   env.Append(CPPDEFINES = 'HARDENED_DDR_AUX')
+   env.Append(CPPDEFINES = 'WAIPIO_TARGET_CONFIG') #LASSEN_TODO
+   env.Append(CPPDEFINES = 'WAIPIO_STUBS') #LASSEN_TODO
+   env.Append(CPPDEFINES = 'LOCAL_PMIC_CFG') #TODO: Remove when it pmic config settings matches lassen pwr grid
+elif env['MSM_ID'] == 'lanai':
+   env.Append(CPPDEFINES = 'LANAI_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'RISCV_TARGET')
+   env.Append(CPPDEFINES = 'LANAI_STUBS')
+   env.Append(CPPDEFINES = 'PASR_SUPPORTED')
+   env.Append(CPPDEFINES = 'VRM_SOC_PROXY_TARGET')
+   env.Append(CPPDEFINES = 'HARDENED_DDR_AUX')
+   env.Append(CPPDEFINES = 'BCM_MC0_VOTES_DATA')
+   #env.Append(CPPDEFINES = 'LOCAL_PMIC_CFG') #TODO: Remove when it pmic config settings matches lanai pwr grid
+   env.Append(CPPDEFINES = 'SVE_NEEDS') #TODO: Remove when it pmic config settings matches lanai pwr grid
+elif env['MSM_ID'] == 'hamoa':
+   env.Append(CPPDEFINES = 'HAMOA_TARGET_CONFIG')
+   #env.Append(CPPDEFINES = 'HAMOA_STUBS')
+   env.Append(CPPDEFINES = 'PASR_SUPPORTED')
+   env.Append(CPPDEFINES = 'VRM_SOC_PROXY_TARGET')
+   env.Append(CPPDEFINES = 'HARDENED_DDR_AUX')
+   #env.Append(CPPDEFINES = 'LOCAL_PMIC_CFG') #TODO: Remove when it pmic config settings matches hamoa pwr grid
+   
+#-------------------------------------------------------------------------------
+# External depends within CoreBSP
+#-------------------------------------------------------------------------------
+env.RequireExternalApi([
+])
+
+#-------------------------------------------------------------------------------
+# Internal depends within CoreBSP
+#-------------------------------------------------------------------------------
+CBSP_API = [
+   'DAL',
+   'DEBUGTOOLS',
+   'DEBUGTRACE',
+   'SERVICES',
+   'SYSTEMDRIVERS',
+   'PRODUCTS',
+   'POWER',
+   'PMIC',
+   'MPROC',
+   'RPMh',
+   'DDR_MGR',
+   'AOP_SETTINGS',
+   # needs to be last also contains wrong comdef.h
+   'KERNEL',
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+
+#-------------------------------------------------------------------------------
+# Sources, libraries
+#-------------------------------------------------------------------------------
+#common files
+DDR_MGR_C_SOURCES = [
+  '${BUILDPATH}/src/workaround_log.c',
+  ]
+
+DDR_MGR_INIT_SOURCES = [
+  '${BUILDPATH}/src/ddr_smem.c',
+]
+
+if env['MSM_ID'] not in ['waipio','fillmore','kailua','aurora','lassen','netrani', 'lanai','kapiti', 'hamoa','pinnacle','kuno']:
+  DDR_MGR_C_SOURCES += ['${BUILDPATH}/src/ddr_mgr.c',
+                        '${BUILDPATH}/src/target/${MSM_ID}/ddr_mgr_utils.c',]  
+  DDR_MGR_INIT_SOURCES += ['${BUILDPATH}/src/init/ddr_mgr_init.c',]
+else:
+  #if ddr mgr is hardened
+  DDR_MGR_C_SOURCES += ['${BUILDPATH}/src/ddr_mgr_hardened.c',]
+  DDR_MGR_INIT_SOURCES += ['${BUILDPATH}/src/target/${MSM_ID}/ddr_mgr_tcs_config.c',
+                           '${BUILDPATH}/src/target/${MSM_ID}/ddr_mgr_utils.c',
+                           '${BUILDPATH}/src/init/ddr_mgr_hardened_init.c']
+
+# Add the GDSC workaround to targets that need it
+if env['MSM_ID'] in []:
+   DDR_MGR_C_SOURCES.append('${BUILDPATH}/src/gdsc_workaround.c')
+
+# Add the WLAN WA to targets that need it
+if env['MSM_ID'] in []:
+   DDR_MGR_C_SOURCES.append('${BUILDPATH}/src/wlan_workaround.c')
+
+DDR_MGR_ARCH_SOURCES = [
+]
+
+DDR_MGR_ENTRY_SOURCES = [
+]
+
+# Add init sources as well
+env2 = env.Clone() #clone for init sources
+if env2['MSM_ID'] not in ['lanai']:
+  env2.Append(CCFLAGS    = ' -mlong-calls')
+env2.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/ddr_mgr_init', DDR_MGR_INIT_SOURCES)
+
+
+#-------------------------------------------------------------------------------
+# QDSS SW Events
+#-------------------------------------------------------------------------------
+if 'USES_QDSS_SWE' in env:
+   QDSS_IMG = ['QDSS_EN_IMG']
+   events = [['ddr_rail_change_handler=300',    'rail_change_handler (arc: %d) (event: %d) (needs: %d) (seq_lvl: %d)'],
+             ['ddr_arc_continue_processing',    'arc_continue_processing (arc: %d) (seq_lvl: %d)'],
+             ['ddr_arc_unblock_powerstate_arc', 'arc_unblock_powerstate_prework (arc: %d)'],
+             ['ddr_arc_unblock_rm_prework',     'arc_unblock_rm_prework (arc: %d) (seq_lvl: %d)'],
+             ['ddr_voltage_sequence_done',      'voltage sequence done (arc: %d) (cur_lvl: %d) (seq_lvl: %d)'],
+             ['ddr_Running_Voltage_Seq',        'running voltage seq (idx: %d) (mask: 0x%x)'],
+             ['ddr_NOT_Running_Voltage_Seq',    'not running voltage seq (mx_pend: %d) (cx_pend: %d) (vdda_pend: %d)'],
+             ['ddr_FREQ_FSM_PROCESS_DONE',      'freq_fsm process done (next_mc: %d) (next_shub: %d) (next_state: %d)'],
+             ['ddr_Starting_Frequency_Seq',     'starting fequency seq (next_mc: %d) (next_shub: %d) (start_addr: 0x%x)'],
+             ['ddr_Frequency_Seq_complete',     'frequency seq complete (curr_mc: %d) (curr_shub: %d)'],
+             ['ddr_Flush_readdata_complete',    'llc flush readdata complete (mask: 0x%x)'],
+             ['ddr_Event_during_LLC_Flush',     'event during llc flush  (event: %d) (next: %d) (status: %d) (mask: 0x%x)'],
+             ['ddr_MAIN_LOOP_PROCESSING',       'main loop processing (signals: 0x%x)'],
+             ['ddr_DDR_MGR_ISR_FUNC',           'ddr_mgr_isr_func isr (irq: %d) (signals 0x%x)'],
+             ['ddr_GET_AOP_NEEDS',              'get_aop_needs           (arc: %d), (result: %d)'],
+             ['ddr_ARC_SEND_VOTE',              'arc_send_vote           (arc: %d), (client: %d), (level: %d)'],
+             ['ddr_INVALID_CX_VOLTAGE_SEQ',     'invalid cx voltage seq  (desired seq lvl: %d), (cx_lvl: %d)'],
+             ['ddr_VOLTAGE_DEPENDENCY_READY',   'voltage_dependency_ready (voltage_arc_status[0]: %d), (voltage_arc_status[1]: %d), (voltage_arc_status[2]: %d), (ret_val %d)'],
+             ['ddr_UNBLOCK_BCM_MC',             'unblock_bcm_mc          (current_mc_cp: %d), (ddr_bcm_mc_level: %d), (ddr_reg_mc_level: %d)'],
+             ['ddr_UNBLOCK_BCM_SHUB',           'unblock_bcm_shub        (current_shub_cp: %d), (ddr_bcm_mc_level: %d), (ddr_reg_mc_level: %d)'],
+             ['ddr_UNBLOCK_POWERSTATE_ARC',     'unblock_powerstate_arc  (current_mc_cp: %d), (ddr_rm_ack_lvl: %d), (ddr_arc_level: %d)'],
+             ['ddr_CMD_DB_MEM_TEST',            'cmd_db_memory_test      (current_mc_cp: %d), (current_shub_cp: %d)'],
+             ['ddr_CMD_DB_MEM_TEST_FAIL',       'cmd_db_memory_test_fail      (current_mc_cp: %d), (current_shub_cp: %d)'],
+             ['ddr_CMD_DB_MEM_TEST_PASS',       'cmd_db_memory_test_pass      (current_mc_cp: %d), (current_shub_cp: %d)'],
+             ['ddr_SERVICE_FAL_TCS2',           'service_fal: tcs2 used  %d'],
+             ['ddr_SERVICE_PASR_TCS',           'service_pasr: pasr tcs used  %d'],
+             ['ddr_READDATA_TCS0_INUSE',        'readdata: tcs 0 in use  %d'],
+             ['ddr_FLUSHENTRY_TCS0_INUSE',      'flush_entry: tcs0 used  %d'],
+             ['ddr_FLUSHEXIT_TCS1_INUSE',       'flush_exit: tcs1 used   %d'],
+             ['ddr_BADRETVAL_MSG_RAM_ADDR',     'bad retval: msg_ram_get_smem_addr %d'],
+             ['ddr_SMEM_TABLE_RETURNS',         'smem_table returns (version: major: %d, minor: %d)'],
+             ['ddr_LOCAL_SWITCH_LOG_INDEX',     'local_switch_log_index  (local switch log index: %d), (index: %d), (freq_switch: %d)'],
+             ['ddr_freq_needs',                 'frequency resource state (pmic pending: %d), (mx: 0x%x), (cx: 0x%x) (vdda: 0x%x)'],
+             ['ddr_below_mol_cleared',          'below mol agg cleared by solving (resource : %d), (status : 0x%x)'],
+             ['ddr_below_mol_not_cleared',      'below mol agg not cleared by solving (resource : %d), (status : 0x%x)'],
+             ['DDRAUX_CLKPLAN_BRANCH',          'DDR_AUX Debug (GCC_CLKPLAN: %X) (SEQ_BRANCH_EVENT: %X)'],
+             ['DDRAUX_SEQUENCER_STATUS',        'DDR_AUX Debug (SEQn_STAT: %X) (SEQn_CFG: %X) (Instruction: %X) (Elapsed: %d)'],
+             ['TCS_BUSY_AT_ERROR',              'TCS %d BUSY (RSI_TCSm_STAT: %X) (RSI_TCSm_CMD0: %X) (RSI_TCSm_CMD1: %X)'],
+             ['INVESTIGATE_SHRM_FREQUENCY',     'SHRM did not respond to Frequency Cmd (TCS: %d) (RSI_TCSm_STAT: %X) (elapsed: %d)'],
+             ['INVESTIGATE_SHRM_VOLTAGE',       'SHRM did not respond to Voltage Cmd (TCS: %d) (RSI_TCSm_STAT: %X) (elapsed: %d)'],
+             ['INVESTIGATE_SHRM_FLUSH',         'SHRM did not respond to Flush Related cmd (RSI_TCSm_STAT: %X) (elapsed: %d)'],
+             ['SHRM_STATUS_AT_TIMEOUT',         'SHRM status (SPROC_STATUS: %X) (APB_DEBUG_STATUS: %X)'], 
+             ['INVALID_PASR_ADDR',              'Invalid address from Apps ( addr_lo: %d, addr_hi: %d)'],              
+             ['ddr_WLAN', 'apply_wlan_wa (current cx: %d) (target cx: %d), (wcssaon_config: 0x%x)'],
+             ['ddr_SMEM_BADRETVAL',             'bad retval from get_ddr_smem_struct Major:%d Minor:%d ID:%d Size:%d'],
+             ['INVESTIGATE_SHRM_PASR',          'SHRM did not respond to PASR Related cmd (RSI_TCSm_STAT: %X) (elapsed: %d)'],
+             ['ARC_STATUS_AT_TIMEOUT',          'ARC status (CX: %X) (MX: %X (VDDA: %X)) (XO: %X)'],
+             ['VOLTAGE_TCS_BUSY_AT_ERROR',      'TCS %d BUSY, VOLTAGE CMD %d, value: %X'],
+             ['VOLTAGE_TCS_STAT_AT_ERR',        'TCS %d BUSY, STAT_0: %X, STAT_1: %X, STAT_2: %X'],
+             ['AOP_PLL_LOCK_STATUS',            '(AOSS_CC_PLL0_MODE: %X), (AOSS_CC_PLL1_MODE: %X)'],
+             ['AOP_DUMP_GCNTR',                 '(GCNTR HI: %X), (GCNTR LO: %X)'],
+             ['ddr_log_event_last=360',         'placeholder for last ddr_mgr_event'],
+            ]
+   env.AddSWEInfo(QDSS_IMG, events)
+
+# Adding settings files to R-init builder
+if 'USES_RINIT_PARSER' in env:
+    env.AddRinitInfo('CORE_AOP', 
+                     {'files' : '${BUILD_ROOT}/core/power/ddr_mgr/src/target/${MSM_ID}'})
+
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/ddr_mgr_arc', DDR_MGR_C_SOURCES)

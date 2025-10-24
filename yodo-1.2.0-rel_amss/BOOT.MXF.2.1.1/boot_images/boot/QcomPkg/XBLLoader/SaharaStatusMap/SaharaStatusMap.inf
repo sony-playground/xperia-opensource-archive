@@ -1,0 +1,36 @@
+#/** @file SaharaStatusMap.inf
+#
+#  SaharaStatusMap
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 11/09/20   rhy     Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SaharaStatusMapLib
+  FILE_GUID                      = E9A2CCA5-B01B-462B-A7F9-F6A2CB39ED02
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SaharaStatusMapLib
+
+[Sources.common]
+  boot_sahara_status_map.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/LoaderFramework/LoaderFrameworkApi.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+

@@ -1,0 +1,598 @@
+entry &smem_base &cpr_cfg_base &smem_bin_path
+
+area.create "CPR_SMEM" 1000. 1000.
+area.select "CPR_SMEM"
+area.view   "CPR_SMEM"
+
+setup.Var %decimal.off %hex.off
+
+if "&smem_bin_path"!=""
+(
+    d.load.binary &smem_bin_path &smem_base /noclear
+)
+
+&indent="  "
+&indent2="      "
+&indent3="          "
+&indent4="              "
+&indent5="                  "
+&indent6="                      "
+&indent7="                          "
+&indent8="                              "
+&indent9="                                  "
+
+&addr=&cpr_cfg_base
+
+gosub printSmemHdr &addr
+
+&railCount=v.value(((cpr_smem_hdr*)&addr)->railCount)
+
+&addr=&addr+v.sizeof(cpr_smem_hdr)
+
+&idx=0
+while &idx<&railCount
+(
+    print %attr 2 "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"
+    gosub printSmemRailHdr &idx &addr
+	
+	&hasVPdata=v.value(((cpr_smem_rail_hdr*)&addr)->hasVPdata)
+	&railDataSize=v.value(((cpr_smem_rail_hdr*)&addr)->size)
+	&modeStateCount=v.value(((cpr_smem_rail_hdr*)&addr)->modeStateCount)
+	&addr=&addr+v.sizeof(cpr_smem_rail_hdr)
+
+	if &hasVPdata==1
+	(
+	    gosub print_cpr_settings &addr
+        &modeStateCount=0
+	)
+
+    &j=0
+    while &j<&modeStateCount
+    (
+        gosub printCprSmemModeState &j &addr
+
+        &targetsCount=v.value(((cpr_smem_mode_state*)&addr)->targetsCount)
+        &submodesCount=v.value(((cpr_smem_mode_state*)&addr)->submodesCount)
+
+        &addr=&addr+v.sizeof(cpr_smem_mode_state)
+
+        &k=0
+        while &k<&targetsCount
+        (
+            gosub printQuotient &k &addr
+
+            &addr=&addr+v.sizeof(cpr_quotient)
+            &k=&k+1
+        )
+
+        &k=0
+        while &k<&submodesCount
+        (
+            gosub printSubmodeSettings &k &addr
+
+            &addr=&addr+v.sizeof(cpr_submode_settings)
+            &k=&k+1
+        )
+
+        print
+        &j=&j+1
+    )
+
+    &idx=&idx+1
+)
+
+end
+
+printSmemHdr:
+    entry &addr
+    print "[&addr] cpr_smem_hdr : "
+    print %cont v.string(*(cpr_smem_hdr*)&addr)
+    return
+
+printSmemRailHdr:
+    entry &i &addr
+    print "[&addr] cpr_smem_rail_hdr[&i] : "
+    print %cont "(size = "+format.decimal(0,v.value(((cpr_smem_rail_hdr*)&addr)->size))
+    print %cont %attr 0x20 ", id = "+v.string((cpr_domain_id)((cpr_smem_rail_hdr*)&addr)->id)
+    print %cont %attr 0x28 ", controlMode = "+v.string((cpr_control_mode)((cpr_smem_rail_hdr*)&addr)->controlMode)
+    print %cont ", marginAdjustments = "+v.string(((cpr_smem_rail_hdr*)&addr)->marginAdjustments)
+    print %cont ", decodedFuseAging = "+format.decimal(0,v.value(((cpr_smem_rail_hdr*)&addr)->decodedFuseAging ))
+    print %cont ", hasVPdata = "+format.decimal(0,v.value(((cpr_smem_rail_hdr*)&addr)->hasVPdata ))
+    print %cont ", activeVoltageMode = "+v.string((cpr_voltage_mode)((cpr_smem_rail_hdr*)&addr)->activeVoltageMode)
+    print %cont ", modeStateCount = "+format.decimal(0,v.value(((cpr_smem_rail_hdr*)&addr)->modeStateCount   ))+")"
+    return
+
+print_cpr_settings:
+    entry &addr
+    print "&indent"+"[&addr] cpr_smem_settings : "
+    print "&indent2"+"railsCount = "+format.decimal(0,v.value(((cpr_smem_settings*)&addr)->railsCount))
+    print "&indent2"+"enablementsCount = "+format.decimal(0,v.value(((cpr_smem_settings*)&addr)->enablementsCount))
+    print "&indent2"+"controllersCount = "+format.decimal(0,v.value(((cpr_smem_settings*)&addr)->controllersCount))
+
+    &railsCount=v.value(((cpr_smem_settings*)&addr)->railsCount)
+    &enablementsCount=v.value(((cpr_smem_settings*)&addr)->enablementsCount)
+    &controllersCount=v.value(((cpr_smem_settings*)&addr)->controllersCount)
+
+    &t_railsCount=0
+    while &t_railsCount<&railsCount
+    (
+        &addr=&addr+v.sizeof(cpr_smem_settings)
+        gosub print_cpr_versioned_voltage_plan &addr &t_railsCount
+        &t_railsCount=&t_railsCount+1
+    )
+
+    &t_controllersCount=0
+    while &t_controllersCount<&controllersCount
+    (
+        gosub print_cpr_hal_controller &addr &t_controllersCount
+        &t_controllersCount=&t_controllersCount+1
+    )
+
+    &t_railsCount=0
+    while &t_railsCount<&railsCount
+    (
+        gosub print_cpr_rail &addr &t_railsCount
+        &t_railsCount=&t_railsCount+1
+    )
+
+    &t_enablementsCount=0
+    while &t_enablementsCount<&enablementsCount
+    (
+        gosub print_cpr_enablement &addr &t_enablementsCount
+        &t_enablementsCount=&t_enablementsCount+1
+    )
+
+    print "&indent2"
+    print "&indent2"+"[&addr] cpr_smem_misc_cfg:"
+    &cprRevRawFuseCount=v.value(((cpr_smem_misc_cfg *)&addr)->cprRev.count)
+    &addr=&addr+v.sizeof(cpr_smem_misc_cfg)
+    gosub print_raw_fuse &addr &cprRevRawFuseCount
+
+    print ""
+    print "&indent2"+"[&addr] after reading out Settings"
+    return
+
+print_cpr_rail:
+    entry &addr &t_railsCount
+    print "&indent2"
+    &cprRailAddr=&addr
+    print "&indent2"+"[&addr] cpr_smem_rail[&t_railsCount]: "
+    print %cont v.string((cpr_domain_id)((cpr_smem_rail*)&addr)->id)
+    print %cont ", railIdx = "+format.decimal(0, v.value(((cpr_smem_rail*)&addr)->railIdx))
+    &settleModesCount=v.value(((cpr_smem_rail*)&addr)->settleModesCount)
+    print %cont ", settleModesCount = "+format.decimal(0, &settleModesCount)
+    
+    &addr=&addr+v.sizeof(cpr_smem_rail)
+    print %attr 0x28 %cont ", name="+v.string((char[50.])*(&addr))
+    &addr=&addr+0x32
+
+    print %cont ", interruptId = "+format.decimal(0, v.value(((cpr_smem_rail*)&cprRailAddr)->interruptId))
+    &t_settleModesCount=0
+    print "&indent3"+"Settled Modes: "
+    while &t_settleModesCount<&settleModesCount
+    (
+        print %cont v.string((cpr_voltage_mode)((uint32*)*(&addr)))+", "
+        &addr=&addr+v.sizeof(uint32)
+        &t_settleModesCount=&t_settleModesCount+1
+    )
+    return
+
+print_cpr_enablement:
+    entry &addr &t_enablementsCount
+    &cprEnablementAddr=&addr
+    print "&indent2"
+    print "&indent2"+"[&addr] cpr_smem_enablement[&t_enablementsCount]: "
+    print %cont v.string((cpr_domain_id)((cpr_smem_enablement*)&addr)->id)
+    print %cont ", "+v.string((cpr_init_funcs_id)((cpr_smem_enablement*)&addr)->funcId)
+    print %cont ", stepSize = "+format.decimal(0, v.value(((cpr_smem_enablement*)&addr)->stepSize))
+    print %cont ", fuseMultiplier = "+format.decimal(0, v.value(((cpr_smem_enablement*)&addr)->fuseMultiplier))
+    &revCount=v.value(((cpr_smem_enablement*)&addr)->railCPRRevFuse.count)
+    &addr=&addr+v.sizeof(cpr_smem_enablement)
+    gosub print_cpr_version &addr
+    if &revCount!=0x0
+    (
+        print "&indent4"+"[&addr] railCPRRevFuse: "
+        gosub print_raw_fuse &addr &revCount
+    )
+    &t_thermalAdjustmentCount=0
+    &thermalAdjustmentCount=4
+    print "&indent3"+"thermalAdjustment["
+    while (&t_thermalAdjustmentCount<&thermalAdjustmentCount)
+    (
+        print %cont format.decimal(0, v.value(((cpr_smem_enablement*)&cprEnablementAddr)->thermalAdjustment[&t_thermalAdjustmentCount]))+", "
+        &t_thermalAdjustmentCount=&t_thermalAdjustmentCount+1
+    )
+    print %cont "]"
+    return
+
+print_cpr_hal_controller:
+    entry &addr &t_controllersCount
+    print "&indent2"+"[&addr] cpr_smem_hal_controller[&t_controllersCount]: "
+    print "&indent3"+"base = 0x"+format.HEX(0,v.value(((cpr_smem_hal_controller*)&addr)->base))
+    print %cont ", type = "+v.string((cpr_controller_type)((cpr_smem_hal_controller*)&addr)->type)
+    &threadsCount=v.value(((cpr_smem_hal_controller*)&addr)->threadsCount)
+    print %cont ", threadsCount = "+format.decimal(0, &threadsCount)
+    print "&indent3"+"tempSensorData: "
+    print %cont "hotTempCx10="+format.decimal(0, v.value(((cpr_smem_hal_controller*)&addr)->tempSensorData.hotTempCx10))
+    print %cont ", hotSensor="+format.decimal(0, v.value(((cpr_smem_hal_controller*)&addr)->tempSensorData.hotSensor))
+    print %cont ", coldTempCx10="+format.decimal(0, v.value(((cpr_smem_hal_controller*)&addr)->tempSensorData.coldTempCx10))
+    print %cont ", coldSensor="+format.decimal(0, v.value(((cpr_smem_hal_controller*)&addr)->tempSensorData.coldSensor))
+    &addr=&addr+v.sizeof(cpr_smem_hal_controller)
+    gosub print_cpr_hal_controller_cfg &addr
+    gosub print_cpr_hal_thread &addr
+    return
+
+print_cpr_hal_thread:
+    entry &addr
+    print "&indent3"+"[&addr] cpr_smem_hal_thread : "
+    print %cont "id = "+format.decimal(0,v.value(((cpr_smem_hal_thread*)&addr)->id))
+    print %cont ", init = "+format.decimal(0,v.value(((cpr_smem_hal_thread*)&addr)->init))
+    print %cont ", enabled = "+format.decimal(0,v.value(((cpr_smem_hal_thread*)&addr)->enabled))
+    print %cont ", roMask4Thread = "+format.decimal(0,v.value(((cpr_smem_hal_thread*)&addr)->roMask4Thread))
+    &addr=&addr+v.sizeof(cpr_smem_hal_thread)
+    print "&indent4"+"[&addr] cpr_smem_hal_thread_cfg: "
+    print %cont "upThresh = "+format.decimal(0, v.value(((cpr_smem_hal_thread_cfg*)&addr)->upThresh))
+    print %cont ", dnThresh = "+format.decimal(0, v.value(((cpr_smem_hal_thread_cfg*)&addr)->dnThresh))
+    print %cont ", consecUp = "+format.decimal(0, v.value(((cpr_smem_hal_thread_cfg*)&addr)->consecUp))
+    print %cont ", consecDn = "+format.decimal(0, v.value(((cpr_smem_hal_thread_cfg*)&addr)->consecDn))
+    &threadSensorsCount=v.value(((cpr_smem_hal_thread_cfg*)&addr)->sensorsCount)
+    print %cont ", sensorsCount = "+format.decimal(0, &threadSensorsCount)
+    &addr=&addr+v.sizeof(cpr_smem_hal_thread_cfg)
+    print "&indent5"+"Sensors ["
+    &t_threadSensorsCount=0
+    while &t_threadSensorsCount<&threadSensorsCount
+    (
+        print %cont format.decimal(0,v.value((uint8*)*(&addr)))+", "
+        &addr=&addr+v.sizeof(uint8)
+        &t_threadSensorsCount=&t_threadSensorsCount+1
+    )
+    print %cont "]"
+    return
+
+print_cpr_hal_controller_cfg:
+    entry &addr
+    &halControllerCfgAddr=&addr
+    print "&indent3"+"[&addr] cpr_smem_hal_controller_cfg : "
+    print %cont "sensorsTotal: "+format.decimal(0, v.value(((cpr_smem_hal_controller_cfg *)&addr)->sensorsTotal))
+    &bypassSensorsCount=v.value(((cpr_smem_hal_controller_cfg *)&addr)->bypassSensorsCount)
+    print %cont ", bypassSensorsCount: "+format.decimal(0, &bypassSensorsCount)
+    &disableSensorsCount=v.value(((cpr_smem_hal_controller_cfg *)&addr)->disableSensorsCount)
+    print %cont ", disableSensorsCount: "+format.decimal(0, &disableSensorsCount)
+    print %cont ", stepQuotMax: "+format.decimal(0, v.value(((cpr_smem_hal_controller_cfg *)&addr)->stepQuotMax))
+    print %cont ", stepQuotMin: "+format.decimal(0, v.value(((cpr_smem_hal_controller_cfg *)&addr)->stepQuotMin))
+    &addr=&addr+v.sizeof(cpr_smem_hal_controller_cfg)
+    
+    print %cont ", bypassSensors["
+    &t_bypassSensorsCount=0
+    while &t_bypassSensorsCount<&bypassSensorsCount
+    (
+        print %cont format.decimal(0, v.value((uint8*)*(&addr)))+", "
+        &addr=&addr+v.sizeof(uint8)
+        &t_bypassSensorsCount=&t_bypassSensorsCount+1
+    )
+    print %cont "]"
+
+    print %cont ", disableSensors["
+    &t_disableSensorsCount=0
+    while &t_disableSensorsCount<&disableSensorsCount
+    (
+        print %cont format.decimal(0, v.value((uint8*)*(&addr)))+", "
+        &addr=&addr+v.sizeof(uint8)
+        &t_disableSensorsCount=&t_disableSensorsCount+1
+    )
+    print %cont "]"
+
+    &refClkName=v.value(((cpr_smem_hal_controller_cfg*)&halControllerCfgAddr)->refClk)
+    if &refClkName!=0x0
+    (
+        print %cont ", refClk="+v.string(((char[50.])*(&addr)))
+        &addr=&addr+0x32
+    )
+    &ahbClkName=v.value(((cpr_smem_hal_controller_cfg*)&halControllerCfgAddr)->ahbClk)
+    if &ahbClkName!=0x0
+    (
+        print %cont ", ahbClk="+v.string(((char[50.])*(&addr)))
+        &addr=&addr+0x32
+    )
+    return
+
+print_cpr_versioned_voltage_plan:
+    entry &addr &t_railCount
+    print "&indent2"+"[&addr] cpr_smem_versioned_voltage_plan[&t_railCount] :"
+    print %attr 0x20 "&indent3"+"rail = "+v.string((cpr_domain_id)((cpr_smem_versioned_voltage_plan*)&addr)->rail)
+    &voltagePlanListCount=v.value(((cpr_smem_versioned_voltage_plan*)&addr)->count)
+    print "&indent3"+"count = "+format.decimal(0,v.value(&voltagePlanListCount))
+    &agingConfig=v.value(((cpr_smem_versioned_voltage_plan*)&addr)->agingCfg)
+    &addr=&addr+v.sizeof(cpr_smem_versioned_voltage_plan)
+    &t_voltagePlanListCount=0
+    while &t_voltagePlanListCount<&voltagePlanListCount
+    (
+        gosub print_voltage_plan_list &addr &t_voltagePlanListCount
+        &t_voltagePlanListCount=&t_voltagePlanListCount+1
+    )
+
+    if &agingConfig!=0x0
+    (
+        gosub print_cpr_aging_cfg &addr
+    )
+    print "&indent3"
+    return
+
+print_cpr_aging_cfg:
+    entry &addr
+    &cprAgingCfgAddr=&addr
+
+    print "&indent3"+"[&addr] cpr_smem_aging_cfg: "
+    print "&indent4"+"modeToRun = "+v.string((cpr_voltage_mode)((cpr_smem_aging_cfg *)&addr)->modeToRun)
+    print %cont ", sensorID = "+format.decimal(0, v.value(((cpr_smem_aging_cfg *)&addr)->sensorID))
+    &bypassSensorIDsCount=v.value(((cpr_smem_aging_cfg *)&addr)->bypassSensorIDsCount)
+    print %cont ", bypassSensorIDsCount = "+format.decimal(0, &bypassSensorIDsCount)
+    print %cont ", fusePackingFactor = "+format.decimal(0, v.value(((cpr_smem_aging_cfg *)&addr)->fusePackingFactor))
+    print %cont ", kv = "+format.decimal(0, v.value(((cpr_smem_aging_cfg *)&addr)->kv))
+    print %cont ", scalingFactor = "+format.decimal(0, v.value(((cpr_smem_aging_cfg *)&addr)->scalingFactor))
+    print %cont ", marginLimit = "+format.decimal(0, v.value(((cpr_smem_aging_cfg *)&addr)->marginLimit))
+    &addr=&addr+v.sizeof(cpr_smem_aging_cfg)
+    &t_bypassSensorIDsCount=0
+    print "&indent4"+"bypassSensorIDs: "
+    while &t_bypassSensorIDsCount<&bypassSensorIDsCount
+    (
+        print %cont format.decimal(0, v.value(((cpr_smem_aging_cfg *)&cprAgingCfgAddr)->bypassSensorIDs[&t_bypassSensorIDsCount]))+", "
+        &t_bypassSensorIDsCount=&t_bypassSensorIDsCount+1
+    )
+    &addr=&addr+(v.sizeof(uint8)*(&bypassSensorIDsCount))
+    print "&indent4"+"AgingFuse: "
+    &agingRawFuseCount=v.value(((cpr_smem_aging_cfg *)&cprAgingCfgAddr)->fuse.count)
+    gosub print_raw_fuse &addr &agingRawFuseCount
+    return
+
+print_raw_fuse:
+    entry &addr &rawFuseCount
+    print %cont "Count = "+format.decimal(0,&rawFuseCount)
+    &t_rawFuseCount=0
+    while &t_rawFuseCount<&rawFuseCount
+    (
+        print %cont " [address: 0x"+format.HEX(0,v.value(((cpr_smem_raw_fuse_data *)&addr)->address))
+        print %cont ", offset: "+format.decimal(0,v.value(((cpr_smem_raw_fuse_data *)&addr)->offset))
+        print %cont ", mask: 0x"+format.HEX(0,v.value(((cpr_smem_raw_fuse_data *)&addr)->mask))+"]"
+        &addr=&addr+((v.sizeof(cpr_smem_raw_fuse_data)))
+        &t_rawFuseCount=&t_rawFuseCount+1
+    )
+    return
+
+print_voltage_plan_list:
+    entry &addr &t_voltagePlanListCount
+    print "&indent3"+"[&addr] cpr_smem_voltage_plan_list[&t_voltagePlanListCount]:"
+    &addr=&addr+v.sizeof(cpr_smem_voltage_plan_list)
+    gosub print_cpr_version &addr
+    gosub print_cpr_voltage_plan &addr
+    print "&indent4"
+    return
+
+print_cpr_version:
+    entry &addr
+    print "&indent4"+"[&addr] cpr_smem_version:"
+    print %cont " foundry = "+v.string((cpr_foundry_id)((cpr_smem_version*)&addr)->foundry)
+    print %cont ", min = 0x"+format.HEX(0,v.value(((cpr_smem_version*)&addr)->min))
+    print %cont ", max = 0x"+format.HEX(0,v.value(((cpr_smem_version*)&addr)->max))
+    &addr=&addr+v.sizeof(cpr_smem_version)
+    return
+
+print_cpr_voltage_plan:
+    entry &addr
+    print "&indent4"+"[&addr] cpr_smem_voltage_plan:"
+    &modesCount=v.value(((cpr_smem_voltage_plan*)&addr)->modesCount)
+    print "&indent5"+"modesCount = "+format.decimal(0,v.value(&modesCount))
+    &tempAdjConfig=v.value(((cpr_smem_voltage_plan*)&addr)->tempAdjCfg)
+    &kvConfig=v.value(((cpr_smem_voltage_plan*)&addr)->kvCfg)
+    
+    &addr=&addr+v.sizeof(cpr_smem_voltage_plan)
+    print "&indent5"+"supportedModes [&addr] = "
+    &t_modesCount=0
+    while &t_modesCount<&modesCount
+    (
+        print %cont v.string((cpr_voltage_mode)((uint32*)*(&addr)))+", "
+        &addr=&addr+v.sizeof(uint32)
+        &t_modesCount=&t_modesCount+1
+    )
+    print "&indent5"
+
+    if &tempAdjConfig!=0x0
+    (
+        gosub print_cpr_temp_adj_cfg &addr
+    )
+
+    if &kvConfig!=0x0
+    (
+        gosub print_cpr_kv_cfg &addr
+    ) 
+
+    &t_modesCount=0
+    while &t_modesCount<&modesCount
+    (
+        gosub print_cpr_voltage_data &addr &t_modesCount
+        &t_modesCount=&t_modesCount+1
+    )
+    return
+
+print_cpr_voltage_data:
+    entry &addr &t_modesCount
+    &voltageDataAddr=&addr
+    print "&indent5"
+    print "&indent5"+"[&addr] cpr_smem_voltage_data[&t_modesCount]: "
+    print "&indent6"+"fref = "+format.decimal(0,v.value(((cpr_smem_voltage_data*)&addr)->fref))+"Hz"
+    &addr=&addr+v.sizeof(cpr_smem_voltage_data)
+
+    print "&indent6"+"[&addr]  cpr_smem_margin_cfg : "
+    &marginCount=v.value(((cpr_smem_margin_cfg*)&addr)->count)
+    print %cont "count = "+format.decimal(0,v.value(&marginCount))
+    if &marginCount!=0x0
+    (
+        &addr=&addr+v.sizeof(cpr_smem_margin_cfg)
+        &t_marginCount=0
+        while &t_marginCount<&marginCount
+        (
+            print "&indent7"+"Min:"+format.decimal(0,v.value(((cpr_smem_margin_data*)&addr)->cprRevMin))+", "
+            print %cont "Max:"+format.decimal(0,v.value(((cpr_smem_margin_data*)&addr)->cprRevMax))+", "
+            print %cont "openLoop:"+format.decimal(0,v.value(((cpr_smem_margin_data*)&addr)->openLoop))+", "
+            print %cont "closedLoop:"+format.decimal(0,v.value(((cpr_smem_margin_data*)&addr)->closedLoop))+", "
+            print %cont "MaxFtoC:"+format.decimal(0,v.value(((cpr_smem_margin_data*)&addr)->maxFloorToCeil))+", "
+            &addr=&addr+v.sizeof(cpr_smem_margin_data)
+            &t_marginCount=&t_marginCount+1
+        )
+    )
+
+    print "&indent6"+"[&addr]  cpr_smem_fuse_data : "
+    &voltFuse=v.value(((cpr_smem_fuse_data*)&addr)->volt)
+    &quotFuse=v.value(((cpr_smem_fuse_data*)&addr)->quot)
+    &roselFuse=v.value(((cpr_smem_fuse_data*)&addr)->rosel)
+    &quotOffsetFuse=v.value(((cpr_smem_fuse_data*)&addr)->quotOffset)
+    &voltOffsetFuse=v.value(((cpr_smem_fuse_data*)&addr)->voltOffset)
+    &addr=&addr+v.sizeof(cpr_smem_fuse_data)
+    if &voltFuse!=0x0
+    (
+        &type="volt"
+        gosub print_cpr_fuse &addr &type
+    )
+    if &quotFuse!=0x0
+    (
+        &type="quot"
+        gosub print_cpr_fuse &addr &type
+    )
+    if &roselFuse!=0x0
+    (
+        &type="rosel"
+        gosub print_cpr_fuse &addr &type
+    )
+    if &quotOffsetFuse!=0x0
+    (
+        &type="quotOffset"
+        gosub print_cpr_fuse &addr &type
+    )
+    if &voltOffsetFuse!=0x0
+    (
+        &type="voltOffset"
+        gosub print_cpr_fuse &addr &type
+    )
+
+    &marginTempBandsCount=4
+    &t_marginTempBandsCount=0
+    print "&indent6"+"MarginTempBand: "
+    while &t_marginTempBandsCount<&marginTempBandsCount
+    (
+        print %cont format.decimal(0,v.value(((cpr_smem_voltage_data *)&voltageDataAddr)->marginTempBands[&t_marginTempBandsCount]))+", "
+        &t_marginTempBandsCount=&t_marginTempBandsCount+1
+    )
+
+    print "&indent6"+"freqDelta = "+format.decimal(0,v.value(((cpr_smem_voltage_data *)&voltageDataAddr)->freqDelta))
+
+    if v.value(((cpr_smem_voltage_data *)&voltageDataAddr)->quotients)==0x1
+    (
+        gosub print_cpr_quotient_cfg &addr
+    )
+
+    &subModesCount=v.value(((cpr_smem_voltage_data *)&voltageDataAddr)->subModesCount)
+    print "&indent6"+"subModesCount = "+format.decimal(0,&subModesCount)
+    &t_subModesCount=0
+    while &t_subModesCount<&subModesCount
+    (
+        print "&indent6"+"[&addr] subModes[&t_subModesCount]: "
+        print %cont "Interpolation: "+format.decimal(0,v.value(((cpr_smem_freq_data *)&addr)->interplEnabled))+", "
+        print %cont "freq: "+format.decimal(0,v.value(((cpr_smem_freq_data *)&addr)->freq))+", "
+        print %cont "ceiling: "+format.decimal(0,v.value(((cpr_smem_freq_data *)&addr)->ceiling))+", "
+        print %cont "floor: "+format.decimal(0,v.value(((cpr_smem_freq_data *)&addr)->floor))
+        &t_subModesCount=&t_subModesCount+1
+        &addr=&addr+v.sizeof(cpr_smem_freq_data)
+    )
+
+    return
+
+print_cpr_quotient_cfg:
+    entry &addr
+    print "&indent6"+"[&addr] cpr_smem_quotient_cfg"
+    &quotientsCount=v.value(((cpr_smem_quotient_cfg*)&addr)->count)
+    print "&indent7"+"quotients count = "+format.decimal(0, &quotientsCount)
+    &addr=&addr+v.sizeof(cpr_smem_quotient_cfg)
+    &t_quotientsCount=0
+    print "&indent7"+" ro :quot"
+    while &t_quotientsCount<&quotientsCount
+    (
+        print "&indent7 "+format.decimal(0,v.value(((cpr_smem_quotient*)&addr)->ro))+" : "
+        print %cont format.decimal(0,v.value(((cpr_smem_quotient*)&addr)->quotient))+" "
+        &addr=&addr+v.sizeof(cpr_smem_quotient)
+        &t_quotientsCount=&t_quotientsCount+1
+    )
+    return
+
+print_cpr_fuse:
+    entry &addr &type
+    print "&indent7"+"[&addr] cpr_smem_fuse[&type]: "
+    &rawFuseCount=v.value(((cpr_smem_fuse*)&addr)->count)
+    &addr=&addr+v.sizeof(cpr_smem_fuse)
+    gosub print_raw_fuse &addr &rawFuseCount
+    return
+
+print_cpr_kv_cfg:
+    entry &addr
+    print "&indent5"+"[&addr] cpr_smem_kv_cfg:"
+    &kvCount=v.value(((cpr_smem_kv_cfg*)&addr)->count)
+    print "&indent6"+"count = "+format.decimal(0,v.value(&kvCount))
+    print "&indent6"+"ro : kv"
+    print "&indent6"+"-- : --"
+    &addr=&addr+v.sizeof(cpr_smem_kv_cfg)
+    &t_kvCount=0
+    while &t_kvCount<&kvCount
+    (
+        print "&indent6"+format.decimal(0,v.value(((cpr_smem_kv*)&addr)->ro))+" "
+        print %cont ": "+format.decimal(0,v.value(((cpr_smem_kv*)&addr)->kv))
+        &addr=&addr+v.sizeof(cpr_smem_kv)
+        &t_kvCount=&t_kvCount+1
+    )
+    return
+ 
+print_cpr_temp_adj_cfg:
+    entry &addr
+    print "&indent5"+"[&addr] cpr_smem_temp_adj_cfg:"
+    print "&indent6"+"Start = "+format.decimal(0,v.value(((cpr_smem_temp_adj_cfg*)&addr)->tempSensorStartId))+", "
+    print %cont "End = "+format.decimal(0,v.value(((cpr_smem_temp_adj_cfg*)&addr)->tempSensorEndId))+", "
+    print %cont "Points=["
+    &tempPointsCount=3
+    &t_tempPointsCount=0
+    while &t_tempPointsCount<&tempPointsCount
+    (
+        print %cont format.decimal(0,v.value(((cpr_smem_temp_adj_cfg*)&addr)->tempPoints[&t_tempPointsCount]))+","
+        &t_tempPointsCount=&t_tempPointsCount+1
+    )
+    print %cont "]"
+    &addr=&addr+v.sizeof(cpr_smem_temp_adj_cfg)
+    print "&indent6"
+    return
+
+printCprSmemModeState:
+    entry &i &addr
+    print "[&addr] &indent"+"cpr_smem_mode_state[&i] : "
+    print %cont %attr 0x24 "(mode = "+v.string((cpr_voltage_mode)((cpr_smem_mode_state*)&addr)->mode)
+    print %cont ", decodedFuseSteps = "+format.decimal(0,v.value(((cpr_smem_mode_state*)&addr)->decodedFuseSteps ))
+    print %cont ", decodedFuseOffset = "+format.decimal(0,v.value(((cpr_smem_mode_state*)&addr)->decodedFuseOffset))
+	print %cont ", totalMarginMV = "+format.decimal(0,v.value(((cpr_smem_mode_state*)&addr)->totalMarginMV))
+    print %cont ", enableCount = "+format.decimal(0,v.value(((cpr_smem_mode_state*)&addr)->enableCount      ))
+    print %cont ", targetsCount = "+format.decimal(0,v.value(((cpr_smem_mode_state*)&addr)->targetsCount     ))
+    print %cont ", submodesCount = "+format.decimal(0,v.value(((cpr_smem_mode_state*)&addr)->submodesCount    ))+")"
+    return
+
+printQuotient:
+    entry &i &addr
+    print "[&addr] &indent"+"&indent"+"cpr_quotient[&i] : "+v.string(*(cpr_quotient*)&addr)
+    return
+
+printSubmodeSettings:
+    entry &i &addr
+    print "[&addr] &indent"+"&indent"+"cpr_submode_settings[&i] : "
+    print %cont "(freq = "+format.decimal(0,v.value(((cpr_submode_settings*)&addr)->freq   ))
+    print %cont ", ceiling = "+format.decimal(0,v.value(((cpr_submode_settings*)&addr)->ceiling))
+    print %cont ", floor = "+format.decimal(0,v.value(((cpr_submode_settings*)&addr)->floor  ))
+    print %cont ", current = "+format.decimal(0,v.value(((cpr_submode_settings*)&addr)->current))
+    print %cont ", min = "+format.decimal(0,v.value(((cpr_submode_settings*)&addr)->min    ))
+    print %cont ", debug = "+v.string(((cpr_submode_settings*)&addr)->debug)+")"
+    return
+
+

@@ -1,0 +1,50 @@
+#/** @file SdccCoreTargetLib.inf
+#  
+#  SDCC BSP Target specific INF file
+#  
+#  Copyright (c) 2016, 2019-2022 Qualcomm Technologies, Inc. All Rights Reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+# 2022-01-05   jt      Add SdccHal.h
+# 2020-03-03   jt      Add NpaApiLib
+# 2019-07-16   jt      Add gEfiHalIommuProtocolGuid
+# 2016-12-08   jt      Update source file
+# 2016-01-18   jt      Initial version. Branched from 8996 XBL
+#
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SdccCoreTargetLib
+  FILE_GUID                      = 2B1BF55A-E7AB-44B5-9016-5E97A5FD77AA
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SdccTargetLib 
+
+[Sources.common]
+  SdccCoreBspLib.c
+  ../../../Kailua/Settings/SMMU/iort.h
+  ../../../../Library/SdccCommonLib/SdccHalLib/SdccHal.h
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  ArmLib
+  SdccClockLib 
+  NpaApiLib
+
+[Protocols]
+  gEfiHalIommuProtocolGuid

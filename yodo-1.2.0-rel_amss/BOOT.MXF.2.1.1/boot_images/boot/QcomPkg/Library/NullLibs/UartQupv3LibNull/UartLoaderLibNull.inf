@@ -1,0 +1,39 @@
+# @file  UartLoaderLibNull.inf
+#
+#
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#
+#
+#
+#=============================================================================
+#                              EDIT HISTORY
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+#
+#
+# when       who      what, where, why
+# --------   ---      --------------------------------------------------------
+# 03/27/20   ck       Initial revision
+#
+#=============================================================================
+
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = UartLoaderLib
+  MODULE_TYPE    = BASE
+  VERSION_STRING = 1.0
+  LIBRARY_CLASS  = UartLoaderLib
+
+
+[Sources]
+  UartXBL.c
+
+      
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+

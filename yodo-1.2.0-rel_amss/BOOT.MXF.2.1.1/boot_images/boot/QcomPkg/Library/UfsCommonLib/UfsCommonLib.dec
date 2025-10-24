@@ -1,0 +1,17 @@
+#/** @file UfsCommonLib.dec
+# UFS Common Library.
+#
+# Copyright (c) 2022 Qualcomm Technologies Inc. All rights reserved.
+#
+#**/
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = UfsCommonLib
+  PACKAGE_GUID                   = 28a1a40f-4545-447d-baba-435f6c4f7e18
+  PACKAGE_VERSION                = 0.1
+
+[Includes.common]
+  .
+
+

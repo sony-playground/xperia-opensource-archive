@@ -1,0 +1,11 @@
+&sw {
+	pmic {
+		pm: pm { };		
+		psi: psi { };
+		adc: adc { };
+	};
+};
+
+#include "pm.dtsi"
+#include "adc.dtsi"
+#include "pm_oem_psi.dtsi"

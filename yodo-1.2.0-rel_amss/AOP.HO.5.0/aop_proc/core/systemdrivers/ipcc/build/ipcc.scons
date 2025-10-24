@@ -1,0 +1,131 @@
+#===============================================================================
+#
+# IPCC driver
+#
+# GENERAL DESCRIPTION
+#    Build script
+#
+# Copyright (c) 2022 by Qualcomm Technologies, Inc.
+# All Rights Reserved.
+# Confidential and Proprietary - Qualcomm Technologies, Inc.
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/systemdrivers/ipcc/build/ipcc.scons#8 $
+#  $DateTime: 2022/04/21 14:59:52 $
+#  $Author: pwbldsvc $
+#
+#===============================================================================
+
+import os
+Import('env')
+env = env.Clone()
+
+#-------------------------------------------------------------------------------
+# Source path
+#-------------------------------------------------------------------------------
+SRCPATH = "${BUILD_ROOT}/core/systemdrivers/ipcc"
+
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+#-------------------------------------------------------------------------------
+# Image definitions
+#-------------------------------------------------------------------------------
+IPCC_IMAGES = ['CORE_AOP']
+
+# AOP does not have an 'IMAGE' in env. If the image team ever defines it, this
+# can be removed (provided the image is defined as 'aop' - if not defined as
+# 'aop' for whatever reason, then let this remain).
+env['IMAGE'] = 'aop'
+env['IPCC_IMAGE'] = 'aop'
+
+# Treat the chipset as stub if target config file is not added
+ipcc_config_path = os.path.join(
+  os.getcwd(), '..', 'image', env['IMAGE'], 'hw', env['CHIPSET'])
+if not os.path.exists(ipcc_config_path):
+  env['CHIPSET'] = 'stub'
+  # Move to the stub config folder for rest of the scons
+  ipcc_config_path = os.path.join(
+    os.getcwd(), '..', 'image', env['IMAGE'], 'hw', 'stub')
+
+#-------------------------------------------------------------------------------
+# Internal depends within CoreBSP
+#-------------------------------------------------------------------------------
+env.Append(CPPPATH = [
+  "${INC_ROOT}/core/systemdrivers/ipcc/inc",
+])
+
+CBSP_API = [
+  'KERNEL',
+  'POWER',
+  'PRODUCTS',
+  'SYSTEMDRIVERS',
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+
+#-------------------------------------------------------------------------------
+# Macros/defines
+#-------------------------------------------------------------------------------
+if env['CHIPSET'] in ['lanai']:
+  env.Append(CCFLAGS = " -DIPCC_HWMEMOPT")
+
+# Disable logging on this image
+env.Append(CCFLAGS = " -DIPCC_NO_LOG")
+
+#-------------------------------------------------------------------------------
+# Sources, libraries
+#-------------------------------------------------------------------------------
+IPCC_CORE_SOURCES = [
+  '${BUILDPATH}/image/IPCCImage.c',
+  '${BUILDPATH}/image/${IPCC_IMAGE}/IPCCSubsys.c',
+  '${BUILDPATH}/src/IPCC.c',
+  '${BUILDPATH}/src/IPCCInfo.c',
+  '${BUILDPATH}/src/IPCCLegacy.c',
+  '${BUILDPATH}/src/IPCCRx.c',
+  '${BUILDPATH}/src/${IPCC_IMAGE}/IPCC_Log.c',
+  '${BUILDPATH}/src/${IPCC_IMAGE}/IPCC_OS.c',
+]
+
+IPCC_ISLAND_SOURCES = [
+  '${BUILDPATH}/image/${IMAGE}/hw/${CHIPSET}/IPCCBSP.c',
+  '${BUILDPATH}/src/IPCCIsland.c',
+  '${BUILDPATH}/src/IPCCRxIsland.c',
+  '${BUILDPATH}/src/IPCCLegacyIsland.c',
+  '${BUILDPATH}/src/IPCCTx.c',
+  '${BUILDPATH}/src/${IPCC_IMAGE}/IPCC_LogIsland.c',
+  '${BUILDPATH}/src/${IPCC_IMAGE}/IPCC_OSIsland.c',
+]
+
+IPCC_SOURCES = []
+
+IPCC_SOURCES.extend(IPCC_CORE_SOURCES)
+IPCC_SOURCES.extend(IPCC_ISLAND_SOURCES)
+
+env.AddBinaryLibrary(IPCC_IMAGES, '${BUILDPATH}/IPCC', IPCC_SOURCES)
+
+#-------------------------------------------------------------------------------
+# RINIT
+#-------------------------------------------------------------------------------
+if 'USES_RINIT_PARSER' in env:
+  IPCC_RINIT_FILEPATH = os.path.join(ipcc_config_path, 'icbm.rinit')
+  env.AddRinitInfo('CORE_AOP', {'files': IPCC_RINIT_FILEPATH})
+
+#-------------------------------------------------------------------------------
+# Pack out files
+#-------------------------------------------------------------------------------
+ALL_IMAGE_FILES = env.FindFiles(
+  ['*'],
+  '../image')
+SHARED_SUBIMAGE_FILES = env.FindFiles(
+  ['IPCCSubsys.c'],
+  '../image/${IPCC_IMAGE}')
+SHARED_IMAGE_FILES = env.FindFiles(
+  ['IPCCImage.c'],
+  '../image')
+MY_IMAGE_FILES = env.FindFiles(
+  ['*'],
+  '../image/${IMAGE}/hw/${CHIPSET}')
+PACK_IMAGE_FILES = list(set(ALL_IMAGE_FILES) - set(SHARED_IMAGE_FILES) - set(MY_IMAGE_FILES) - set(SHARED_SUBIMAGE_FILES))
+env.CleanPack(IPCC_IMAGES, PACK_IMAGE_FILES)

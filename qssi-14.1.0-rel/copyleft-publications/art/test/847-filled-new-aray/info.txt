@@ -1,3 +1,0 @@
-Regression test for the verifier which used to hard fail when using
-filled-new-array with an unresolved type. We now accept it, and a
-NoClassDefFoundError will be thrown at runtime.

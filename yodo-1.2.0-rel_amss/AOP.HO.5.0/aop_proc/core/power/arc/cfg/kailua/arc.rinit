@@ -1,0 +1,372 @@
+#===========================================================================
+#                                 arc.rinit
+#
+#  DESCRIPTION:
+#    This file contains general ARC settings like irqs, tcs voting, etc
+#
+#  Copyright (c) 2019 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+module: { name = RPMH_ARC_ARC_ACC, group = ARC, min_ver = 1.0, max_ver = 1.9, import = [arc_export] }
+regs:
+  # Programs highest SVS (LO) and lowest Turbo (HI)
+  RMm_ACC_CTRL = [
+    { CX_ACC_LO,   CX_ACC_HI },     # Cx
+    { MX_ACC_LO,   MX_ACC_HI },     # Mx
+    { EBI_ACC_LO,  0xF},            # DDR Phy - Mem_Turbo is not supported
+    { LCX_ACC_LO,  LCX_ACC_HI },    # SSC_Cx
+    { LMX_ACC_LO,  LMX_ACC_HI },    # SSC_Mx
+    { GFX_ACC_LO,  GFX_ACC_HI },    # GFx
+    { MSS_ACC_LO,  MSS_ACC_HI },    # MSS
+    { DDR_ACC_LO,  DDR_ACC_HI },    # DDR Resource - Confirm this
+    { MMCX_ACC_LO, MMCX_ACC_HI },   # VDD_MM_Cx
+    { 0x6, 0x6 },                   # NSP -- Review
+    { MXC_ACC_LO,  MXC_ACC_HI },    # MxC
+    { 0x0, 0x1 },                   # LPINOC -- Review
+    { XO_ACC_LO, XO_ACC_HI }        # XO
+  ]
+
+module: { name = RPMH_ARC_ARC_ACC, group = ARC, min_ver = 2.0, import = [arc_v2_export] }
+regs:
+  # Programs highest SVS (LO) and lowest Turbo (HI)
+  RMm_ACC_CTRL = [
+    { CX_ACC_LO,   CX_ACC_HI },     # Cx
+    { MX_ACC_LO,   MX_ACC_HI },     # Mx
+    { EBI_ACC_LO,  0xF},            # DDR Phy - Mem_Turbo is not supported
+    { LCX_ACC_LO,  LCX_ACC_HI },    # SSC_Cx
+    { LMX_ACC_LO,  LMX_ACC_HI },    # SSC_Mx
+    { GFX_ACC_LO,  GFX_ACC_HI },    # GFx
+    { MSS_ACC_LO,  MSS_ACC_HI },    # MSS
+    { DDR_ACC_LO,  DDR_ACC_HI },    # DDR Resource - Confirm this
+    { MMCX_ACC_LO, MMCX_ACC_HI },   # VDD_MM_Cx
+    { 0x6, 0x6 },                   # NSP -- Review
+    { MXC_ACC_LO,  MXC_ACC_HI },    # MxC
+    { 0x0, 0x1 },                   # LPINOC -- Review
+    { XO_ACC_LO, XO_ACC_HI }        # XO
+  ]
+
+module: { name = RPMH_ARC_ARC_IRQ, group = ARC }
+vars:
+  # At the moment we don't use Post and Pre work GP interrupts
+  # except for RM7 (DDR Resource) but they are enabled in case
+  # we need any work before or after sequence is done.
+  irq_mask = 0xE0       # Error, Post and Pre work GP interrupt
+  ddr_irq_mask = 0xE1   # + Aggregation done to handle cx/mx/ddra dep
+
+regs:
+  RMm_IRQ_EN = [
+    ddr_irq_mask,    # Cx
+    ddr_irq_mask,    # Mx
+    ddr_irq_mask,    # DDR Phy
+    irq_mask,        # SSC_Cx
+    irq_mask,        # SSC_Mx
+    irq_mask,        # GFx
+    irq_mask,        # MSS
+    irq_mask,        # DDR Resource
+    irq_mask,        # VDD_MM_Cx
+    irq_mask,        # QLINK
+    irq_mask,        # MxC
+    irq_mask,        # LPINOC -- Review
+    irq_mask         # XO
+  ]
+
+module: { name = RPMH_ARC_ARC_WRAPPER_CSR, group = ARC, last = true }
+regs:
+  SLV_ID = 0x3       # Slave id for response back to DRVs
+  DRV_ID = 0x15      # DRV id for requests to VRMs - From RPMh sharepoint
+  ARC_DRVd_RESP_ADDR = [
+    0x0200000,       # DRV0 - APSS TZ
+    0x0210000,       # DRV1 - APSS HYP
+    0x0220000,       # DRV2 - APSS HLOS
+    0x0230000,       # DRV3 - APSS L3
+    0x0240000,       # DRV4 - Sec Proc
+    0x0250000,       # DRV5 - Audio
+    0x0260000,       # DRV6 - AOP
+    0x0270000,       # DRV7 - Debug
+    0x0280000,       # DRV8 - GPU
+    0x0290000,       # DRV9 - Display
+    0x02A0000,       # DRV10 - Compute
+    0x02B0000,       # DRV11 - TME HW
+    0x02C0000,       # DRV12 - TME SW
+    0x02D0000,       # DRV13 - Modem SW
+    0x02E0000,       # DRV14 - Modem HW
+    0x02F0000,       # DRV15 - WLAN_RF
+    0x0300000,       # DRV16 - WLAN_BB
+    0x0310000,       # DRV17 - CAM-IFE0 
+    0x0320000,       # DRV18 - CAM-IFE1 
+    0x0330000,       # DRV19 - CAM-IFE2 
+    0x0DE05A4,       # DRV20 - DDRAUX
+    0x07FE000        # DRV21 - ARC-CPRF
+  ]
+
+  # All BCM's are responded on a single address
+  ARC_BCM_DRV_RESP_ADDR = 0x0BE5E80
+
+  ARC_EN = 0x1    # Has to be last after all configuration
+                  # Notice the 'last' property set in group
+
+module: { name = RPMH_ARC_ARC_VT, group = ARC, min_ver = 1.0, max_ver = 1.9, import = [arc_export] }
+vars:
+  hlos_drv = 2
+  aop_drv = 6
+  arc_drv = 21
+  ddr_aux = 20
+  lpi_drv = 5
+
+  # Timer considered vote by actual DRVs
+  # Alter based on image load config and what is under test.
+  # All 0s is AOP standalone.
+  drv_timer_votes = [
+     0,       # TZ
+     0,       # HYP
+     1,       # HLOS
+     0,       # L3
+     0,       # SecProc
+     0,       # Audio
+     0,       # AOP
+     0,       # Debug
+     0,       # GPU
+     0,       # Display
+     0,       # Compute
+     0,       # TME HW
+     0,       # TME SW
+     0,       # Modem SW
+     0,       # Modem HW
+     0,       # WLAN_RF
+     0,       # WLAN_BB
+     0,       # CAM0
+     0,       # CAM1
+     0,       # CAM2
+     0,       # DDR_AUX
+     0,       # ARC
+   ]
+
+regs:
+  #SNoC votes PS ARC. May not be needed here
+  #DRVd_RMm_VOTE[ddr_aux, 7] = DDR_HLVL_ON
+
+  DRVd_RMm_VOTE[lpi_drv, 3] = LCX_MOL_HLVL
+
+  DRVd_RMm_VOTE[aop_drv, 4] = LMX_HLVL_NOM
+
+  DRVd_RMm_VOTE[arc_drv, 1] = MX_MOL_HLVL
+  DRVd_RMm_VOTE[arc_drv, 0] = CX_HLVL_RET
+  DRVd_RMm_VOTE[arc_drv, 11] = LNOC_MOL_HLVL
+
+  DRVd_RMm_VOTE[hlos_drv, 0] = CX_HLVL_NOM
+  DRVd_RMm_VOTE[hlos_drv, 1] = MX_HLVL_NOM
+  DRVd_RMm_VOTE[hlos_drv, 10] = MXC_HLVL_NOM
+  DRVd_RMm_VOTE[hlos_drv, 12] = XO_HLVL_ON
+
+  DRVd_RMm_TIMER[ , 0] = drv_timer_votes     # Cx timer considered votes
+  DRVd_RMm_TIMER[ , 1] = drv_timer_votes     # Mx timer considered votes
+
+  # DDR_SS - MSS uimage transition may overwrite this on use case boundary
+  DRVd_RMm_TIMER[ , 7] = drv_timer_votes
+  DRVd_RMm_TIMER[ , 12] = drv_timer_votes    # XO
+
+module: { name = RPMH_ARC_ARC_VT, group = ARC, min_ver = 2.0, import = [arc_v2_export] }
+vars:
+  hlos_drv = 2
+  aop_drv = 6
+  arc_drv = 21
+  ddr_aux = 20
+  lpi_drv = 5
+
+  # Timer considered vote by actual DRVs
+  # Alter based on image load config and what is under test.
+  # All 0s is AOP standalone.
+  drv_timer_votes = [
+     0,       # TZ
+     0,       # HYP
+     1,       # HLOS
+     0,       # L3
+     0,       # SecProc
+     0,       # Audio
+     0,       # AOP
+     0,       # Debug
+     0,       # GPU
+     0,       # Display
+     0,       # Compute
+     0,       # TME HW
+     0,       # TME SW
+     0,       # Modem SW
+     0,       # Modem HW
+     0,       # WLAN_RF
+     0,       # WLAN_BB
+     0,       # CAM0
+     0,       # CAM1
+     0,       # CAM2
+     0,       # DDR_AUX
+     0,       # ARC
+   ]
+
+regs:
+  #SNoC votes PS ARC. May not be needed here
+  #DRVd_RMm_VOTE[ddr_aux, 7] = DDR_HLVL_ON
+
+  DRVd_RMm_VOTE[lpi_drv, 3] = LCX_MOL_HLVL
+
+  DRVd_RMm_VOTE[aop_drv, 4] = LMX_HLVL_NOM
+
+  DRVd_RMm_VOTE[arc_drv, 1] = MX_MOL_HLVL
+  DRVd_RMm_VOTE[arc_drv, 0] = CX_HLVL_RET
+  DRVd_RMm_VOTE[arc_drv, 11] = LNOC_MOL_HLVL
+
+  DRVd_RMm_VOTE[hlos_drv, 0] = CX_HLVL_NOM
+  DRVd_RMm_VOTE[hlos_drv, 1] = MX_HLVL_NOM
+  DRVd_RMm_VOTE[hlos_drv, 10] = MXC_HLVL_NOM
+  DRVd_RMm_VOTE[hlos_drv, 12] = XO_HLVL_ON
+
+  DRVd_RMm_TIMER[ , 0] = drv_timer_votes     # Cx timer considered votes
+  DRVd_RMm_TIMER[ , 1] = drv_timer_votes     # Mx timer considered votes
+
+  # DDR_SS - MSS uimage transition may overwrite this on use case boundary
+  DRVd_RMm_TIMER[ , 7] = drv_timer_votes
+  DRVd_RMm_TIMER[ , 12] = drv_timer_votes    # XO
+
+module: { name = RPMH_ARC_ARC_PV, group = ARC }
+vars:
+  rail_vote_cfg = [
+    {1, 0},   # rail disable - cmd_enable, response required?
+    {1, 0},   # mode Ret
+    {1, 1},   # mode NPM
+    {1, 1}    # rail enable
+  ]
+  xo_vote_cfg = [
+    {1, 0},   # XO buffer off
+    {1, 0},   # XO off
+    {1, 1},   # XO buffer on
+    {1, 1}    # XO on
+  ]
+
+  rail_vote_data = [
+    0x0,      # Disable
+    0x3,      # RET
+    0x7,      # NPM
+    0x1       # Enable
+  ]
+  xo_vote_data = [
+    0x0,      # XO buffer off
+    0x0,      # XO off
+    0x1,      # XO buffer on
+    0x1,      # XO on
+  ]
+
+  vrm_slave = 0x4
+  vrm_en_offset = 0x4
+  vrm_mode_offset = 0x8
+  xo_en_offset = 0x4
+
+regs:
+  RMm_PV_TCS_CMDc_VOTE[0,] = rail_vote_cfg
+  RMm_PV_TCS_CMDc_VOTE[1,] = rail_vote_cfg
+  RMm_PV_TCS_CMDc_VOTE[2,] = rail_vote_cfg
+  RMm_PV_TCS_CMDc_VOTE[3,] = rail_vote_cfg
+  RMm_PV_TCS_CMDc_VOTE[4,] = rail_vote_cfg
+  RMm_PV_TCS_CMDc_VOTE[5,] = rail_vote_cfg
+  RMm_PV_TCS_CMDc_VOTE[6,] = rail_vote_cfg
+  # RMm_PV_TCS_CMDc_VOTE[7,] = 0x0             # DDR resource - Unused - Reset Val
+  RMm_PV_TCS_CMDc_VOTE[8,] = rail_vote_cfg
+  RMm_PV_TCS_CMDc_VOTE[9,] = rail_vote_cfg     # NSP -- Review
+  RMm_PV_TCS_CMDc_VOTE[10,] = rail_vote_cfg    # MxC
+  RMm_PV_TCS_CMDc_VOTE[11,] = rail_vote_cfg    # LPINOC -- Review
+  RMm_PV_TCS_CMDc_VOTE[12,] = xo_vote_cfg      # XO
+
+  RMm_PV_TCS_CMDc_VOTE_DATA[0,] = rail_vote_data
+  RMm_PV_TCS_CMDc_VOTE_DATA[1,] = rail_vote_data
+  RMm_PV_TCS_CMDc_VOTE_DATA[2,] = rail_vote_data
+  RMm_PV_TCS_CMDc_VOTE_DATA[3,] = rail_vote_data
+  RMm_PV_TCS_CMDc_VOTE_DATA[4,] = rail_vote_data
+  RMm_PV_TCS_CMDc_VOTE_DATA[5,] = rail_vote_data
+  RMm_PV_TCS_CMDc_VOTE_DATA[6,] = rail_vote_data
+  # RMm_PV_TCS_CMDc_VOTE_DATA[7,] = 0x0              # DDR resource - Unused - Reset Val
+  RMm_PV_TCS_CMDc_VOTE_DATA[8,] = rail_vote_data
+  RMm_PV_TCS_CMDc_VOTE_DATA[9,] = rail_vote_data     # NSP???
+  RMm_PV_TCS_CMDc_VOTE_DATA[10,] = rail_vote_data    # MxC
+  RMm_PV_TCS_CMDc_VOTE_DATA[11,] = rail_vote_data    # LPINOC -- Review.
+  RMm_PV_TCS_CMDc_VOTE_DATA[12,] = xo_vote_data      # XO
+
+  # CX Voting
+  # CMD DB query vrm.cx (arg0 - .mrv, arg1 - xc)
+  RMm_PV_TCS_CMDc_VOTE_ADDR[0, 0] = 0 : { cmd_db_addr("vrm.cx", vrm_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[0, 1] = 0 : { cmd_db_addr("vrm.cx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[0, 2] = 0 : { cmd_db_addr("vrm.cx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[0, 3] = 0 : { cmd_db_addr("vrm.cx", vrm_en_offset) }
+
+  # MX Voting
+  RMm_PV_TCS_CMDc_VOTE_ADDR[1, 0] = 0 : { cmd_db_addr("vrm.mx", vrm_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[1, 1] = 0 : { cmd_db_addr("vrm.mx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[1, 2] = 0 : { cmd_db_addr("vrm.mx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[1, 3] = 0 : { cmd_db_addr("vrm.mx", vrm_en_offset) }
+
+  # DDR Rail
+  RMm_PV_TCS_CMDc_VOTE_ADDR[2, 0] = 0 : { cmd_db_addr("vrm.ebi", vrm_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[2, 1] = 0 : { cmd_db_addr("vrm.ebi", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[2, 2] = 0 : { cmd_db_addr("vrm.ebi", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[2, 3] = 0 : { cmd_db_addr("vrm.ebi", vrm_en_offset) }
+
+  # SSC_Cx
+  RMm_PV_TCS_CMDc_VOTE_ADDR[3, 0] = 0 : { cmd_db_addr("vrm.lcx", vrm_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[3, 1] = 0 : { cmd_db_addr("vrm.lcx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[3, 2] = 0 : { cmd_db_addr("vrm.lcx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[3, 3] = 0 : { cmd_db_addr("vrm.lcx", vrm_en_offset) }
+
+  # SSC_MX
+  RMm_PV_TCS_CMDc_VOTE_ADDR[4, 0] = 0 : { cmd_db_addr("vrm.lmx", vrm_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[4, 1] = 0 : { cmd_db_addr("vrm.lmx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[4, 2] = 0 : { cmd_db_addr("vrm.lmx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[4, 3] = 0 : { cmd_db_addr("vrm.lmx", vrm_en_offset) }
+
+  # Graphics
+  RMm_PV_TCS_CMDc_VOTE_ADDR[5, 0] = 0 : { cmd_db_addr("vrm.gfx", vrm_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[5, 1] = 0 : { cmd_db_addr("vrm.gfx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[5, 2] = 0 : { cmd_db_addr("vrm.gfx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[5, 3] = 0 : { cmd_db_addr("vrm.gfx", vrm_en_offset) }
+
+  # MSS
+  RMm_PV_TCS_CMDc_VOTE_ADDR[6, 0] = 0 : { cmd_db_addr("vrm.mss", vrm_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[6, 1] = 0 : { cmd_db_addr("vrm.mss", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[6, 2] = 0 : { cmd_db_addr("vrm.mss", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[6, 3] = 0 : { cmd_db_addr("vrm.mss", vrm_en_offset) }
+
+  # DDRss - Doesn't vote via TCS
+
+  # MM_CX
+  RMm_PV_TCS_CMDc_VOTE_ADDR[8, 0] = 0 : { cmd_db_addr("vrm.mmcx", vrm_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[8, 1] = 0 : { cmd_db_addr("vrm.mmcx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[8, 2] = 0 : { cmd_db_addr("vrm.mmcx", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[8, 3] = 0 : { cmd_db_addr("vrm.mmcx", vrm_en_offset) }
+
+  # NSP
+  RMm_PV_TCS_CMDc_VOTE_ADDR[9, 0] = 0 : { cmd_db_addr("vrm.nsp", vrm_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[9, 1] = 0 : { cmd_db_addr("vrm.nsp", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[9, 2] = 0 : { cmd_db_addr("vrm.nsp", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[9, 3] = 0 : { cmd_db_addr("vrm.nsp", vrm_en_offset) }
+  
+  # MxC 
+  RMm_PV_TCS_CMDc_VOTE_ADDR[10, 0] = 0 : { cmd_db_addr("vrm.mxc", vrm_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[10, 1] = 0 : { cmd_db_addr("vrm.mxc", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[10, 2] = 0 : { cmd_db_addr("vrm.mxc", vrm_mode_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[10, 3] = 0 : { cmd_db_addr("vrm.mxc", vrm_en_offset) }
+
+  # XO Voting
+  #
+  # Since we don't support XO crystal off on Kona, CMD 1 and 3 are
+  # still populated with XOBuff VRM just in case. If we ever support
+  # crystal off, we will have to query with "vrm.xo".
+  RMm_PV_TCS_CMDc_VOTE_ADDR[12, 0] = 0 : { cmd_db_addr("vrm.xob", xo_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[12, 2] = 0 : { cmd_db_addr("vrm.xob", xo_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[12, 1] = 0 : { cmd_db_addr("vrm.xob", xo_en_offset) }
+  RMm_PV_TCS_CMDc_VOTE_ADDR[12, 3] = 0 : { cmd_db_addr("vrm.xob", xo_en_offset) }
+
+module: { name = AOSS_MISC, group = ARC  }
+vars:
+regs:
+    MXA_HMX_ACC_COMP_DATA = 0x6f
+    MXC_HMX_ACC_COMP_DATA = 0x6f
+    MEM_RA_SEL_REFGEN = 0x1
+    MXA_LMX_ACC_COMP_DATA = 0x6e
+    MXC_LMX_ACC_COMP_DATA = 0x6e

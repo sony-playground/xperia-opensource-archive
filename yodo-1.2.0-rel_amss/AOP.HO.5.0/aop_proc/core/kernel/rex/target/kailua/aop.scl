@@ -1,0 +1,290 @@
+/*
+#====*====*====*====*====*====*====*====*====*====*====*====*====*====*====*
+#
+#                     SCATTER LOADING DESCRIPTION FILE
+#
+#  Copyright (c) 2014-2017 by Qualcomm Technologies, Inc. All Rights Reserved.
+#  QUALCOMM Proprietary and Confidential.
+#
+#  GENERAL DESCRIPTION
+#
+#  The scatter loading description file is used to define the AOP memory map.
+#
+#*====*====*====*====*====*====*====*====*====*====*====*====*====*====*====*/
+
+#define AOPSS_CODE_START      0x0
+#define AOPSS_CODE_SIZE       0x18000           // 96 KB
+#define AOPSS_DATA_START      0xE0000
+#define AOPSS_DATA_SIZE       0x8000           // 32 KB
+
+#define AOPSS_CODE_END        (AOPSS_CODE_START + AOPSS_CODE_SIZE)
+#define AOPSS_DATA_END        (AOPSS_DATA_START + AOPSS_DATA_SIZE)
+
+#define AOPSS_DEVCFG_START      0x81C80000
+#define AOPSS_DEVCFG_END        0x81CA0000
+
+#define AOP_LOG_SIZE 0x200  /*512B*/
+
+#define DDR_LOG_SIZE 0x3E0 /*1kB*/
+#define AOPSS_DATA_IN_CRAM_SIZE 0x2800 /*10kB*/
+
+#define AOPSS_HEAP_STACK_GUARD_BAND 32
+
+
+#define AOPSS_INIT_STACK_SIZE 0x300  /*768B*/
+#define AOPSS_INIT_STACK_END  AOPSS_CODE_END
+#define AOPSS_INIT_STACK_START (AOPSS_INIT_STACK_END - AOPSS_INIT_STACK_SIZE - AOPSS_HEAP_STACK_GUARD_BAND)
+
+#define AOPSS_HEAP_SIZE       0x2F00 /* 12kB */
+#define AOPSS_HEAP_END        AOPSS_INIT_STACK_START
+#define AOPSS_HEAP_START      (AOPSS_HEAP_END - AOPSS_HEAP_SIZE)
+
+
+#define DDR_LOG_START         AOPSS_HEAP_START - DDR_LOG_SIZE
+#define AOPSS_LOG_START       DDR_LOG_START - AOP_LOG_SIZE
+#define DRAM_SECTION_START    AOPSS_LOG_START - AOPSS_DATA_IN_CRAM_SIZE
+#define AOPSS_RINIT_START    (0x81C00000) 
+#define AOPSS_PMIC_START     (0x81C14000)
+#define AOPSS_CODE_SEC_START (0x81C1C000)
+#define AOPSS_DDR_CODE_END   (0x81C60000)
+
+#define AOPSS_SYSDBG_START   (0x74699000) 
+#define AOPSS_SYSDBG_END     (0x746A4000) 
+#define AOPSS_SYSDBG_DUMMY_ZI_START   (0x746A4000) 
+#define AOPSS_SYSDBG_DUMMY_ZI_END     (0x746A5000) 
+
+ENTRY(Reset_Handler)
+
+PHDRS
+{
+  AOPSS_CODE PT_LOAD;
+  AOPSS_DATA PT_LOAD;
+  AOPSS_RINIT PT_LOAD;
+  AOPSS_PMIC PT_LOAD; 
+  AOPSS_DDR_CODE PT_LOAD; 
+  AOPSS_SYSDBG_CODE PT_LOAD;   
+  AOPSS_SYSDBG_DUMMY_4K PT_LOAD;   
+}
+
+SECTIONS
+{
+  /*================================================================================
+   *
+   * CODE RAM section
+   *
+   *================================================================================
+   */
+  CODE_RAM AOPSS_CODE_START :
+  {
+    __aop_coderam_base = .;
+
+    KEEP(*\startup.o(.text))
+    *(InRoot$$Sections .text .text*)
+    *(.rodata .rodata*)
+    KEEP(*\rinit_vals.o(.data*))
+    *(sleep_code_sec)
+  } : AOPSS_CODE
+
+  CPR_CRAM_RECLAIM_POOL:
+  {
+    __reclaim_cpr_cram_pool_base = .;
+    *(cpr_cram_reclaim_pool)
+    __reclaim_cpr_cram_end = .;
+  } : AOPSS_CODE
+
+  PM_CRAM_RECLAIM_POOL:
+  {
+    __reclaim_cram_pool_base = .;
+    *(pm_cram_reclaim_pool)
+    __reclaim_cram_end = .;
+  } : AOPSS_CODE
+
+  ASSERT(. <= DRAM_SECTION_START, "AOPSS_CODE oversized");
+
+  __aop_cram_size_left = DRAM_SECTION_START - .;
+  /*PRINT(__aop_cram_size_left = __aop_cram_size_left);*/
+
+  AOP_CRAM_ZI:
+  {
+    __aop_cram_zi_free_space_srt = .;
+    . = . + __aop_cram_size_left;
+    __aop_cram_zi_free_space_end = .;
+  } : AOPSS_CODE 
+
+  AOP_DATA_IN_CRAM DRAM_SECTION_START:
+  {
+    __writeable_exception_start = .;
+    *(clock_data_sec)
+    *(aop_cram_data_sec)
+  } : AOPSS_CODE
+
+  ASSERT(. <= AOPSS_LOG_START, "AOPSS_DATA in CRAM oversized");
+
+  AOP_ULOG AOPSS_LOG_START:
+  {
+    __aop_log_base = .;
+    . = . + AOP_LOG_SIZE;
+    __aop_log_limit = .;
+  } : AOPSS_CODE
+
+  DDR_ULOG DDR_LOG_START:
+  {
+    __ddr_log_base = .;
+    . = . + DDR_LOG_SIZE;
+    __ddr_log_limit = .;
+  } : AOPSS_CODE
+
+
+  ARM_LIB_HEAP AOPSS_HEAP_START :
+  {
+    __aop_heap_base = .;
+
+    . = . + AOPSS_HEAP_SIZE;
+
+    __aop_heap_limit = .;
+  }
+
+  ARM_LIB_STACK AOPSS_INIT_STACK_START :
+  {
+    . = . + AOPSS_HEAP_STACK_GUARD_BAND;
+
+    __aop_stack_base = .;
+
+    . = . + AOPSS_INIT_STACK_SIZE;
+
+    __aop_stack_limit = .;
+    __writeable_exception_end = .;
+
+  }
+
+  __aop_coderam_limit = .;
+
+  ASSERT(. <= AOPSS_CODE_END, "AOPSS_CODE oversized");
+
+  /*================================================================================
+   *
+   * DATA RAM section
+   *
+   *================================================================================
+   */
+  DATA_RAM AOPSS_DATA_START :
+  {
+    __aop_dataram_base = .;
+    KEEP(*\oem_uuid.o(.data*))
+    KEEP(*\qc_version.o(.data*))
+    KEEP(*\oem_version.o(.data*))
+   __aop_image_id_end = .;
+  } : AOPSS_DATA
+  
+  AOPSS_DATA :
+  {
+    KEEP(*\datetime.o (.data.gBuild*))
+    *(.data .data*)
+    *(.bss .bss*)
+  } : AOPSS_DATA
+
+  TASK_STACKS :
+  {
+    *(task_stacks) /* section for rex task stacks */
+  }
+
+  ASSERT(. < AOPSS_DATA_END, "AOPSS_DATA oversized");
+
+  __aop_dataram_limit = .;
+  __aop_dram_size_left = AOPSS_DATA_END - .;
+
+ /* PRINT(__aop_dram_size_left = __aop_dram_size_left);*/
+
+  AOP_DRAM_ZI:
+  {
+    __aop_dram_zi_free_space_srt = .;
+    . = . + __aop_dram_size_left;
+    __aop_dram_zi_free_space_end = .;
+  } : AOPSS_DATA 
+  __aop_dataram_end = .;
+ /*
+  * R-INIT DATA
+  */
+  RINIT_DATA AOPSS_RINIT_START :
+  {
+    __rinit_data_base = .;
+    *(rinit_data_sec)        /* R-init data section for autogenerated data */
+    __rinit_data_end = .;
+  } : AOPSS_RINIT
+
+  ASSERT (. < AOPSS_PMIC_START, "RINIT DATA oversized");
+  __aop_rinit_size_left = AOPSS_PMIC_START - .;
+  AOPSS_RINIT_ZI:
+  {
+    . = . + __aop_rinit_size_left;
+  } : AOPSS_RINIT
+  __aop_rinit_end = .;
+  
+ /*
+  * PMIC DATA
+  */
+  PMIC_DATA AOPSS_PMIC_START :
+  {
+    __pmic_data_start = .;
+    *(pm_ddr_reclaim_pool)
+    __pmic_data_end = .;
+  } : AOPSS_PMIC
+
+   ASSERT (. < AOPSS_CODE_SEC_START, "PMIC DATA oversized");
+
+  __aop_pmic_size_left = AOPSS_CODE_SEC_START - .;
+  AOPSS_PMIC_ZI:
+  {
+    . = . + __aop_pmic_size_left;
+  } : AOPSS_PMIC
+
+  DDR_CODE AOPSS_CODE_SEC_START:
+  {
+    __rinit_code_start = .;
+    *(rinit_code_sec_pool1)        /* R-init code section pool 1 for init data */
+    *(rinit_data_sec_pool2)        /* R-init data section pool 2 for init data */
+    *(rinit_data_sec_pool3)        /* R-init data section pool 3 for RO init data */
+    *(pm_dram_reclaim_pool)        /* R-init data section pool 3 for pmic data */
+    __rinit_code_end = .;
+  } : AOPSS_DDR_CODE
+
+  ASSERT (. < AOPSS_DDR_CODE_END, "DDR CODE oversized");
+
+  __aop_ddrcode_size_left = AOPSS_DDR_CODE_END - .;
+  AOPSS_DDR_CODE_ZI:
+  {
+    . = . + __aop_ddrcode_size_left;
+     __aopss_ddr_code_section_end = .;
+  } : AOPSS_DDR_CODE
+
+  SYSDBG_CODE AOPSS_SYSDBG_START:
+  {
+    __aop_sysdbg_start = .;   
+   *(.code_imem.*)
+   __aop_sysdbg_end = .;
+  } : AOPSS_SYSDBG_CODE
+  
+  __aop_sysdbg_code_section_end = .;  
+
+  ASSERT (. < AOPSS_SYSDBG_END, "SDI CODE oversized");
+  
+  SYSDBG_DUMMY_ZI AOPSS_SYSDBG_DUMMY_ZI_START:
+  {
+    __aop_sysdbg_dummy_start = .;      
+   *\AOP_SDI.lib(sysdbg_dummy_4k)
+    __aop_sysdbg_dummy_end = .; 
+  } : AOPSS_SYSDBG_DUMMY_4K
+   __aop_sysdbg_section_end = .; 
+
+  /*Linker markers for the devcfg image*/
+  __aop_devcfg_start = AOPSS_DEVCFG_START;
+  __aop_devcfg_end  = AOPSS_DEVCFG_END;
+  
+  /DISCARD/ :
+  {
+    * (.ARM.extab*)
+    * (.ARM.exid*)
+    * (.got)
+  }
+
+}

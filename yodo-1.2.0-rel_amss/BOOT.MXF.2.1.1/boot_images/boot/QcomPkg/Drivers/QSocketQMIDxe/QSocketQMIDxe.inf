@@ -1,0 +1,45 @@
+#/** @file QSocketQMIDxe.inf
+#  
+#  DXE driver for QSocket and QMI
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 02/09/20   ar     Updated FILE_GUID
+# 02/09/20   ar     Created DXE driver for QSocket and QMI driver
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = QSocketQMIDxe
+  FILE_GUID                      = 8b567f43-8824-46f7-8af7-39da50c0c0e6
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = QSocketQMIEntryPoint
+
+[Sources.common]
+  QSocketQMI_Dxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  IpcrtrLib
+  QmiLib
+
+[Protocols]
+  gEfiQSocketQMIProtocolGuid    
+
+[Depex] 
+  TRUE

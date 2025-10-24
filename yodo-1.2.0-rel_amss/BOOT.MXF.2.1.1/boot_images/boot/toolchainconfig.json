@@ -1,0 +1,163 @@
+{
+ "ToolChain" : {
+                "CLANG140" : { 
+                                              # search path should already contain the path where app exists after edksetup.bat/.sh
+                                             "Windows" :{
+                                                          "Path" : "C:\\Apps\\LLVM\\14.0.0\\bin\\",  # put in the search path
+                                                          "Tool_path" :	"C:\\Apps\\LLVM\\14.0.0\\tools\\bin\\",                                                      
+                                                          "Params" : [# append to the build command
+                                                                       "-t", "CLANG140WIN"
+                                                       ],
+                                            "Export": {
+                                                        "CLANG140" : "C:\\Apps\\LLVM\\14.0.0\\bin",
+                                                        "PATH_LINK" : "C:\\Apps\\LLVM\\14.0.0\\lib\\clang\\14.0.0\\lib"
+                                                      }
+                                                        } ,
+                                             "Linux" : {
+                                                          "Path" :  "/pkg/qct/software/llvm/release/arm/14.0.0/bin/" ,  # put in the search path use os.pathsep in python to concat
+                                                          "Tool_path" : "/pkg/qct/software/llvm/release/arm/14.0.0/tools/bin/" ,
+                                                          "Params" : [# append to the build command
+                                                                       "-t" , "CLANG140LINUX"
+                                                       ],
+                                            "Export": {
+                                                        "CLANG140" : "/pkg/qct/software/llvm/release/arm/14.0.0/bin",
+                                                        "PATH_LINK" : "/pkg/qct/software/llvm/release/arm/14.0.0/lib/clang/14.0.0/lib/"
+                                                      }
+                                                       } 
+                               },
+                               
+                "Pack"  : {
+                           "Windows" :{
+                                        "Path" : "$BOOTTOOLS\\image_header.py"
+                                      },
+                           "Linux" : {
+                                        "Path" : "$BOOTTOOLS/image_header.py"
+                                     }
+                                      
+                          },
+                "Merge" : {  # until find good name
+                            "Windows" :{
+                                         "Path" : "$BOOTTOOLS\\createxbl.py"
+                                       },
+                            "Linux" :{
+                                         "Path" : "$BOOTTOOLS/createxbl.py"
+                                       }
+                          } ,
+                "Create_Melf" : {
+                            "Windows" :{
+                                         "Path" : "$BOOTTOOLS\\create_multielf.py"
+                                       },
+                            "Linux" : {
+                                         "Path" : "$BOOTTOOLS/create_multielf.py"
+                                       }
+                          } ,
+                         
+                "Network_Sign_v2" : {
+                          "Windows" :{
+                                        "Path" : ["%SECTOOLS%\\sectools.exe","\\\\sundae\\sectools\\v2\\latest\\Windows\\sectools.exe"],
+                                        # Define macro $SECTOOLSROOT for buildex
+                                        "SetMacro":{"$SECTOOLSROOT":"@Path"},
+                                        # the set environment variable SECTOOLS as "@Path"(first avaiable path in "Path" item)
+                                        "Export":{
+                                                  "SECTOOLS":"@Path"                                    
+                                                 }
+
+                                      },
+                           "Linux" : {
+                                        "Path" : "$SECTOOLSROOT/sectools",
+                                        "Export":{
+                                                  "SECTOOLS_DIR":"/pkg/sectools/v2/latest/Linux"
+                                                  
+                                                 }
+                                     }
+                         } ,
+                "GenXBLConfig" : {
+                                  "Path" : "$BOOTTOOLS/XBLConfig/GenConfigImage.py"
+                                 },
+                                 
+                "VoltagePlanParser" : {
+                          "Path" : "$BUILDROOT/boot/QcomPkg/Library/CPRLib/voltage_plan_parser_wraper.py"
+                         } ,
+                "buildex" :{
+                            "Windows" :{
+                                         "Path" : "$BUILDROOT\\boot_tools\\buildex.py"
+                                       },
+                            "Linux" :{
+                                         "Path" : "$BUILDROOT/boot_tools/buildex.py"
+                                       }
+                },
+
+                "Lib_Size_check" : {
+                           "Path" : "$BOOTTOOLS/LibSizeCheck.py"
+                               },
+
+                "Nand_Preamble" : {
+                                    "Windows" :{
+                                                "Path" : "$BOOTTOOLS\\nand_preamble.py"
+                                    },
+                                    "Linux" : {
+                                               "Path" : "$BOOTTOOLS/nand_preamble.py"
+                                    }
+                },
+
+                "Training_Data" : {
+                                    "Windows" :{
+                                                "Path" : "$BOOTTOOLS\\create_trdata.py"
+                                    },
+                                    "Linux" : {
+                                               "Path" : "$BOOTTOOLS/create_trdata.py"
+                                    }
+                },
+                "Gendtb" : {
+                            "Windows" : {
+                                          "Path": "$BUILDROOT\\boot\\Settings\\Tools\\gendtb.py"
+                                        },
+                            "Linux" : {
+                                        "Path" : "$BUILDROOT/boot/Settings/Tools/gendtb.py"
+                                      }
+                           },
+                "DTC" : {
+                          "Windows" : {
+                                        "Path": "C:\\Apps\\DTC\\",
+                                        "Export": {
+                                                    "DTC" : "C:\\Apps\\DTC\\"
+                                                  }
+                                      },
+                          "Linux" : {
+                                      "Path" : "/pkg/qct/software/boottools/",
+                                      "Export" : {
+                                                  "DTC" : "/pkg/qct/software/boottools/"
+                                                 }
+                                    }
+                        },
+                "qc_dt_schema_check" : {
+                            "Windows" : {
+                                          "Path": "$BUILDROOT\\boot_tools\\dtschema_tools\\bin\\qc_dt_schema_check_tool.py",
+                                          "Params": [# append to the qc_dt_schema_check
+										              "-n" , "C:\\Apps\\dtschematools\\site_packages"
+                                                    ]
+                                        },
+                            "Linux" : {
+                                        "Path" : "$BUILDROOT/boot_tools/dtschema_tools/bin/qc_dt_schema_check_tool.py"
+                                      }
+                           },
+                "qc_dt_check" : {
+                            "Windows" : {
+                                          "Path": "$BUILDROOT\\boot_tools\\dtschema_tools\\bin\\qc_dt_check_tool.py",
+                                          "Params": [# append to the qc_dt_check
+                                                      "-n" , "C:\\Apps\\dtschematools\\site_packages"
+                                                    ]
+                                        },
+                            "Linux" : {
+                                        "Path" : "$BUILDROOT/boot_tools/dtschema_tools/bin/qc_dt_check_tool.py"
+                                      }
+                           },
+                "Autogenerate_Genmelf" :{
+                                         "Path" : "$BUILDROOT/boot_tools/genmelfscript.py"
+                                        },
+                "Append_To_Manifest" :{
+                                         "Path" : "$BUILDROOT/boot_tools/genmanifest.py"
+                                      }
+
+       }
+}

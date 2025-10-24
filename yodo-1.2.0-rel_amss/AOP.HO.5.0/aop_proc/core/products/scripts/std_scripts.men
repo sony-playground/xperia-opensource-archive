@@ -1,0 +1,78 @@
+ADD 
+MENU 
+( 
+	POPUP "[:CORRELATE]&CoreBSP Scripts" 
+	( 
+	POPUP "[:PSTEP]&Systemdrivers" 
+	( 
+	)
+	POPUP "[:PSTEP]&Kernel" 
+	( 
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/6150/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/waipio/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/670/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/55/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/cedros/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/24/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/845/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/Olympic/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/8250/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/7150/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/fillmore/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/855/aop_dump.cmm 
+		)
+		MENUITEM "[:FLASH]&AOP Core Dump" 
+		( 
+			CD &AOP_SCRIPTSDIR
+			cd.do ../bsp/aop/scripts/aop_dump/Saipan/aop_dump.cmm 
+		)
+	)
+	) 
+)

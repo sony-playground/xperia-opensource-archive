@@ -1,0 +1,52 @@
+#  @file  
+#                    BlkCryptoLib.INF
+#
+#
+#  Copyright (c) 2021  Qualcomm Technologies, Inc. All rights reserved.
+#
+
+#=============================================================================
+#                              EDIT HISTORY
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+#
+#
+# when       who      what, where, why
+# --------   ---      ---------------------------------------------------------
+# 04/28/21   gaurkash   Initial version
+#
+#=============================================================================*
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BlkCryptoLib
+  FILE_GUID                      = 6B9600C3-C31C-457A-B167-8E4BDE181C5E
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BlkCryptoLib
+
+[Sources.common]
+  BlkIoCryptoLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  BaseMemoryLib
+  PcdLib
+  UefiLib
+  MemoryAllocationLib
+  BootConfigLib
+  KernelLib
+  ArmLib
+
+[Protocols]
+  gEfiBlockIoCryptoProtocolGuid
+  gQcomScmProtocolGuid
+  gEfiShmBridgeProtocolGuid

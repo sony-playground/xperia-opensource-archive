@@ -1,0 +1,49 @@
+
+/dts-v1/;
+
+/ {
+    soc: soc { };
+    sw: sw { };
+};
+
+&soc {
+	#address-cells = < 0x1 >;
+	#size-cells = < 0x1 >;
+
+	pic_3: pic@100 {
+		compatible = "qcom,pic";
+		reg = < 0x100 0x20 >;
+		interrupt-controller;
+	};
+	uart1: uart@1000 {
+		compatible = "qcom,uart";
+		reg = < 0x1000 0x20 0x10000 0x100 0x18000 0x100 >;
+		reg-names = "base", "rx", "tx";
+		alt-interrupt-parent = < &{/soc/pic@100} >;
+		interrupt-parent = < &pic_3 >;
+		interrupt-parent-path =  &pic_3 ;
+	};
+
+	uart2: uart@2000 {
+		compatible = "qcom,uart";
+		reg = < 0x2000 0x20 >;
+		alt-interrupt-parent = < &{/soc/pic@100} >;
+		interrupt-parent = < &pic_3 >;
+		interrupt-parent-path =  &pic_3 ;
+	};
+
+	uart3: uart@3000 {
+		compatible = "qcom,uart";
+		reg = < 0x3000 0x20 >;
+		alt-interrupt-parent = < &{/soc/pic@100} >;
+		interrupt-parent = < &pic_3 >;
+		interrupt-parent-path =  &pic_3 ;
+	};
+};
+
+&sw {
+        boot {
+                /*        debug  trace  verbose */
+                config = <0x0000 0x0000 0x0001>;
+        };
+};

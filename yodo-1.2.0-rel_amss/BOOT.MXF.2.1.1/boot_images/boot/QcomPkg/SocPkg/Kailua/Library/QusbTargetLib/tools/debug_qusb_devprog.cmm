@@ -1,0 +1,168 @@
+;****************************************************************************
+;** dump_cir_buf_boot.cmm
+;**
+;** Copyright  2013-2018 by Qualcomm Technologies, Inc. All Rights Reserved.
+;**
+;****************************************************************************
+;**
+;**                        EDIT HISTORY FOR MODULE
+;**
+;** $Header: //components/rel/core.boot/6.1.1/QcomPkg/SocPkg/Kailua/Library/QusbTargetLib/tools/debug_qusb_devprog.cmm#1 $
+;**
+;** when       who          what, where, why
+;** --------   ---          ------------------------------------------------------
+;** 04/23/13   cheunga      Initial revision
+;** 01/27/13   kameya       Added support to dump perf logs
+;** 08/12/14   psapin       Added support to dump event logs
+;** 09/28/17   jaychoi      Added support to qusb for ramdump use case
+
+sys.d
+sys.m.a
+b
+
+entry &NOSYM
+local &dumpfile &os
+
+ 
+ TOOLBAR ON
+ STATUSBAR ON
+ ;Skip the moving T32 windows around
+ ;FramePOS 266.0,3.5833,,,Maximized
+ WinPAGE.RESet
+ 
+ WinPAGE.Create P000
+ WinCLEAR
+ 
+ WinPOS 0.28571 0.16667 109. 46. 24. 1. W001
+ WinTABS 10. 10. 25. 62.
+ d.l
+ 
+ WinPOS 115.14 0.16667 62. 46. 5. 0. W002
+ v.f
+ 
+ WinPOS 113.43 53.5 63. 13. 0. 0. W000
+ area.view
+ 
+ WinPOS 0.42857 53.0 107. 12. 42. 1. W003
+ WinTABS 13. 0. 0. 0. 0. 0. 0.
+ b.l
+ 
+ WinPAGE.select P000
+
+print "Please run with cd.do"
+
+IF "&NOSYM"=="nosym"
+(
+  print "Skipping Symbol ELF and path Loading"
+)
+ELSE
+(
+  y.reset
+  IF os.dir("..\..\..\..\..\..\..\Build\KailuaLAA\Loader\DEBUG_CLANG120WIN")
+  (
+    &os="DEBUG_CLANG120WIN"
+  )
+  ELSE IF os.dir("..\..\..\..\..\..\..\Build\KailuaLAA\Loader\DEBUG_CLANG120LINUX")
+  (
+    &os="DEBUG_CLANG120LINUX"
+  )
+  ELSE
+  (
+    print "Cannot find OS folder"
+    print "Please run with cd.do"
+    ENDDO
+  )
+  
+  ;data.load.elf "..\..\..\..\..\..\..\Build\KailuaLAA\RamDump\&os\AARCH64\QcomPkg\XBLLoader\XBLLoader\DEBUG\XBLLoader.dll" /nocode /noclear
+  ;y.spath.srd "..\..\..\..\..\..\..\"
+  data.load.elf "..\..\..\..\..\..\..\Build\KailuaLAA\DevprogD\&os\AARCH64\QcomPkg\DevPrg\DevPrgD\DEBUG\DevPrgD.dll" /nocode /strippart "QcomPkg" /sourcepath "..\..\..\..\..\..\..\..\boot_images\boot\QcomPkg\"
+
+)
+
+&clock_day=clock.date()
+&clock_time=clock.time()
+&clock_seconds=clock.seconds()
+
+&clock_seconds=string.cut("&clock_seconds",-1) ; remove the .
+printer.clipboard    ;in case previous script fail, printer in bad state, redirect to default
+mkdir "c:\dropbox\~qusb_&clock_seconds"
+
+&dumpfile="c:\dropbox\~qusb_&clock_seconds\gen.cir"
+printer.open &dumpfile
+winprint.v.v %index.off %hex.off %name.off %decimal %open.1 qusb_log_buffer.generic_log[0..qusb_generic_log_buf_size-1]
+printer.close
+
+&dumpfile="c:\dropbox\~qusb_&clock_seconds\bus.cir"
+printer.open &dumpfile
+winprint.v.v %index.off %hex.off %name.off %decimal %open.1 qusb_log_buffer.bus_log[0..qusb_bus_log_buf_size-1]
+printer.close
+
+&dumpfile="c:\dropbox\~qusb_&clock_seconds\err.cir"
+printer.open &dumpfile
+winprint.v.v %index.off %hex.off %name.off %decimal %open.1 qusb_log_buffer.error_log[0..qusb_error_log_buf_size-1]
+printer.close
+
+
+;&dumpfile="c:\dropbox\~qusb_&clock_seconds\~summary.txt"
+;printer.open &dumpfile
+;winprint.d.dump v.value(qusb_log_buffer.log_buffer_start)++v.value(qusb_log_buffer.log_buffer_size) /string /nohex
+;winprint.v.f /ARGS /Locals
+;winprint.v.v %open.3 sw_device %index.on %open.3 qusb_trb_list %index.on %open.3 qusb_trb_ring %index.on ;%open.1 sahara_log 
+;printer.close
+
+&pwd=os.pwd()
+print "&pwd"
+os robocopy "&pwd" "C:\Dropbox\~qusb_&clock_seconds" sortlog_boot.py
+cd "C:\Dropbox\~qusb_&clock_seconds"
+os python ".\sortlog_boot.py"
+cd &pwd
+
+
+IF !os.file("qusb_log_viewer.bat")
+(
+  os qusb_log_viewer.bat "C:\Dropbox\~qusb_&clock_seconds\~result.out"
+)
+ELSE
+(
+  os explorer "C:\Dropbox\~qusb_&clock_seconds"
+)
+
+;os notepad "c:\dropbox\~qusb_&clock_seconds\~summary.txt"
+
+ENDDO
+
+CreateFileHeader:
+  ENTRY &dumpfile
+  OPEN #1 &dumpfile /CREATE
+  CLOSE #1
+  RETURN
+
+insert_empty_line:
+  OPEN #1 &dumpfile /APPEND
+  WRITE #1 ""
+  CLOSE #1
+  RETURN
+
+print_single_line:
+  ENTRY &str
+  OPEN #1 &dumpfile /APPEND
+  WRITE #1 &str
+  CLOSE #1
+  RETURN
+
+; for optimizing printing of many fields
+open_print_multi_line:
+  OPEN #1 &dumpfile /APPEND
+  RETURN
+
+close_print_multi_line:
+  CLOSE #1
+  RETURN
+
+; TODO later improve with flags knowing which printer is already opened
+write_to_open_printer:
+  ENTRY &str
+  WRITE #1 &str
+  RETURN
+
+

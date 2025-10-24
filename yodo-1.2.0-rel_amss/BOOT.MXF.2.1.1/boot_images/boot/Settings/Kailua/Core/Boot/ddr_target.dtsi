@@ -1,0 +1,9 @@
+&soc {
+    ddr_target_dt {
+      compatible = "qcom,ddr_target_dt";
+      ddr_trng_always_en = <0>;
+      extnd_term_log_flag = <0>;
+      ddr_tr_led_flag = <0>;
+      ddr_boot_freq = <2092800>;
+    };
+};

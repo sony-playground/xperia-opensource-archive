@@ -1,0 +1,56 @@
+#/** @file ExtDrivers.dec
+#  
+#  External drivers headers declaration file.
+#  
+#  Copyright (c) 2019-2022 Qualcomm Technologies, Inc. All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 01/25/22   ck      Added MbnLoader
+# 09/20/21   ck      Removed ARM/AARCH64 includes
+# 07/13/20   rhy     Added MbnLoader in ARM arch
+# 07/02/20   ck      Added hwengines
+# 03/18/20   ck      Renamed MSM folder to SM
+# 03/09/20   ck      Added SDX and MSM XBLLoaderLib include directories
+# 09/30/19   epirvu  Initial revision
+#
+#==============================================================================
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = ExtDrivers
+  PACKAGE_GUID                   = 976A624F-45C0-D533-99E7-F1926F1D8DE3
+  PACKAGE_VERSION                = 0.1
+
+
+[Includes.common]
+  ../../Include/api/boot
+  ../../Include/api/systemdrivers
+  ../../Include/api/dal
+  ../../Include/api/securemsm
+  ../../Include/api/kernel/devcfg
+  ../../Library/MuslLib/musl/include 
+  ../../Library/MuslLib/musl/arch/arm
+  ../Include
+  ../Include/ExtDrivers
+  ../../Library/DDRLib/common
+  ../../Include/api/storage
+  ../../Include/api/pmic/pm
+  ../../Include/api/securemsm/secimgauth
+  ../../Include/api/securemsm/secboot
+  ../../Include/api/securemsm/seccfg
+  ../../Include/XBLLoader
+  ../../Include/Library
+  ../../Include/api/mproc
+  ../../Include/api/debugtools
+  ../../Include/api/hwengines
+  ../../SocPkg/Library/XBLLoaderLib  #TBD: to remove this dependency!!!
+# temporary
+  ../../XBLLoader

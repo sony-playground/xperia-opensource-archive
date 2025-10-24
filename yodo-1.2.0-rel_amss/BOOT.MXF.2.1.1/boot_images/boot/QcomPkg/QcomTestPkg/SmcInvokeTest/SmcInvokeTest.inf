@@ -1,0 +1,63 @@
+#/** @file SmcInvokeTest.inf
+#  
+#  Copyright (c) 2020, 2022 Qualcomm Technologies Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 07/1/20    shl      Added pack rule
+# 04/1/20    shl      Initial revision.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmcInvokeTest
+  FILE_GUID                      = BB74363B-1567-489C-9F0A-8019DA64F5BB
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = UefiMain
+
+[Sources]
+  SmcInvokeTest.c
+  CTestCallable.c
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Wno-unused-but-set-variable -Wno-gnu-folding-constant
+
+[Packages]
+  MdePkg/MdePkg.dec		
+  QcomPkg/QcomPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  TestInterfaceLib
+  UefiBootServicesTableLib
+  QcomLib
+  BootConfigLib
+  EfiFileLib
+  MemoryAllocationLib
+  
+[Guids]
+  gEfiEmmcGppPartition1Guid
+  gEfiEmmcUserPartitionGuid
+  gEfiUfsLU4Guid                  ## CONSUMES
+  gEfiNvme0Guid                   ## CONSUMES
+  gEfiSpiNor0Guid                 ## CONSUMES
+   
+[Ppis]
+
+[Protocols]
+  gQcomScmProtocolGuid
+  gEfiShmBridgeProtocolGuid
+
+[Pcd]
+

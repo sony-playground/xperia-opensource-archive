@@ -1,0 +1,59 @@
+/**
+
+This is the configuration file for PIL Proxy Vote
+
+Copyright (c) 2021 Qualcomm Technologies, Inc.
+All Rights Reserved.
+Confidential and Proprietary - Qualcomm Technologies, Inc.
+
+**/
+
+#include "../../Include/pil_proxy_vote_defines.h"
+
+&pil_proxy_vote {
+
+  pil_proxy_vote_1 {
+    subsys_id                = <TZ_PIL_AUTH_QDSP6_PROC>;
+    client_name              = "PIL_ADSP";
+    rail_names               = "/vcs/vdd_lpi_mx", "/vcs/vdd_lpi_cx";
+    rail_voltage_levels      = <RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM>;
+    icb_name                 = "/icb/arbiter";
+    icb_arb_master_slave     = <ICBID_MASTER_LPASS_PROC ICBID_SLAVE_EBI1>;
+    icb_arb_request_type     = <ICBARB_REQUEST_TYPE_3>;
+    icb_arb_request_data     = /bits/ 64 <100000000 100000000>;
+    flag                     = <FLAG_VOTE_AND_UNVOTE FLAG_VOTE_AND_UNVOTE>;
+  };
+  
+  pil_proxy_vote_4 {
+    subsys_id                = <TZ_PIL_AUTH_MODEM_SW_PROC>;
+    client_name              = "PIL_MODEM";
+    rail_names               = "/vcs/vdd_mx", "/vcs/vdd_cx", "/vcs/vdd_mxc";
+    rail_voltage_levels      = <RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM>;
+    flag                     = <FLAG_VOTE_AND_UNVOTE FLAG_VOTE_AND_UNVOTE>;
+  };
+  
+  pil_proxy_vote_18 {
+    subsys_id                = <TZ_PIL_AUTH_CDSP_PROC>;
+    client_name              = "PIL_CDSP";
+    rail_names               = "/vcs/vdd_mx", "/vcs/vdd_cx", "/vcs/vdd_mxc", "/vcs/vdd_nsp";
+    rail_voltage_levels      = <RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM>;
+    icb_name                 = "/icb/arbiter";
+    icb_arb_master_slave     = <ICBID_MASTER_CDSP_PROC ICBID_SLAVE_CLK_CTL ICBID_MASTER_CDSP_HCP ICBID_SLAVE_EBI1>;
+    icb_arb_request_type     = <ICBARB_REQUEST_TYPE_3 ICBARB_REQUEST_TYPE_3>;
+    icb_arb_request_data     = /bits/ 64 <100000000 100000000 5000000000 4000000000>;
+    flag                     = <FLAG_UNVOTE_ONLY FLAG_VOTE_ONLY>;
+  };
+  
+  pil_proxy_vote_37 {
+    subsys_id                = <TZ_PIL_AUTH_CDSP_DTB_PROC>;
+    client_name              = "PIL_CDSP";
+    rail_names               = "/vcs/vdd_mx", "/vcs/vdd_cx", "/vcs/vdd_mxc", "/vcs/vdd_nsp";
+    rail_voltage_levels      = <RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM>;
+    icb_name                 = "/icb/arbiter";
+    icb_arb_master_slave     = <ICBID_MASTER_CDSP_PROC ICBID_SLAVE_CLK_CTL ICBID_MASTER_CDSP_HCP ICBID_SLAVE_EBI1>;
+    icb_arb_request_type     = <ICBARB_REQUEST_TYPE_3 ICBARB_REQUEST_TYPE_3>;
+    icb_arb_request_data     = /bits/ 64 <100000000 100000000 5000000000 4000000000>;
+    flag                     = <(FLAG_VOTE_ONLY|FLAG_DTB_IMAGE) (FLAG_UNVOTE_ONLY|FLAG_DTB_IMAGE)>;
+  };
+  
+};

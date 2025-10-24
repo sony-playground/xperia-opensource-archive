@@ -1,0 +1,62 @@
+#/** @file
+#  
+#  SystemCacheTargetLib
+#  
+#  Copyright (c) 2021, Qualcomm Technologies, Inc. All Rights Reserved.
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/11/21   dais    Initial revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SystemCacheTargetLib
+  FILE_GUID                      = 971b1f98-f9fc-4e17-86f5-a643310b6c97
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SystemCacheTargetLib
+
+[BuildOptions.ARM]
+RVCT:*_*_*_CC_FLAGS = -DUSE_LOADER_UTILS
+
+[BuildOptions.AARCH64]
+GCC:*_*_*_CC_FLAGS = -DUSE_LOADER_UTILS
+
+[Sources]
+  ../../Include/msmhwiobase.h
+  SystemCacheTargetLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  MemoryAllocationLib
+
+[Depex]
+ TRUE
+
+[Protocols]
+  gEfiHwioProtocolGuid
+  
+[Guids]
+
+[Pcd]
+
+[Guids.common]

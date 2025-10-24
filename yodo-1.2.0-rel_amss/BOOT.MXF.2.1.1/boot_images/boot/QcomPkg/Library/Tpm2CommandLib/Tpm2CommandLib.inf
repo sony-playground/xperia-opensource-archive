@@ -1,0 +1,50 @@
+## @file
+#  Provides some TPM 2.0 commands
+#
+#  This library is used by other modules to send TPM 2.0 command.
+#
+#  Copyright (c) 2020, 2022 Qualcomm Technologies, Inc. 
+#  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#  Copyright (c) 2013 - 2018, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when        who      what, where, why
+# --------    ---     ----------------------------------------------------------
+# 02/23/22    shl     Added TpmSgNvIndex.c, Tpm2NVStorage.c
+# 07/18/20    shl     Initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Tpm2CommandLib
+  MODULE_UNI_FILE                = Tpm2CommandLib.uni
+  FILE_GUID                      = BF7DC8B3-989B-4115-AA56-1B1F8E54A751
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = Tpm2CommandLib
+
+[Sources]
+  Tpm2Capability.c
+  Tpm2Integrity.c
+  Tpm2Hierarchy.c
+  Tpm2Help.c
+  Tpm2NVStorage.c
+  TpmSgNvIndex.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  DebugLib
+  Tpm2DeviceLib

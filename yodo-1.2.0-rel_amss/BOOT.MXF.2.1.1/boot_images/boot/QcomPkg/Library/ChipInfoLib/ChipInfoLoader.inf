@@ -1,0 +1,64 @@
+#/** @file ChipInfoLib.inf
+#
+#  Build file for the ChipInfo Library.
+#
+#  Copyright (c) 2015, 2017 - 2020  Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who        what, where, why
+# --------   ---        ----------------------------------------------------------
+# 01/25/18   vk         Remove UEFI specific entries
+# 03/12/15   ck         Added UserExtensions.PackIt.PackIn
+# 01/09/15   pbi        Created file
+#==============================================================================
+
+# Several ChipInfoLib clients don't explicitly list a dependency on ChipInfo.
+# Instead, they have their dependency implicitly satisfied by one of their
+# other dependencies (e.g. ClockLib which depends on ChipInfoLib). When these
+# other dependencies are still using their NullLib versions (i.e., their
+# stubbed driver that doesn't depend on ChipInfo), the implicit dependency
+# is no longer satisfied and linking breaks.
+#
+# These clients need explicit dependencies on ChipInfo. All they need is
+# a dependency on ChipInfoCommonLib, which implements the APIs. However,
+# ChipInfoCore and ChipInfoLoader both define the same set of symbols with
+# different implementations so ChipInfoCommonLib can only include one of
+# them at a time because of symbol redifinition errors. Therefore:
+#   1. give Loader and Core the same ChipInfo library name: ChipInfoImageLib;
+#   2. include ChipInfoImageLib as a LibraryClass in ChipInfoCommon.inf; and
+#   3. select the correct Loader/Core ChipInfo library in the image's .dsc
+# This allows clients to just include ChipInfoCommonLib if they need ChipInfo.
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ChipInfoImageLib
+  FILE_GUID                      = DA3DB2B5-785B-4B94-AEA4-14EF557973A5
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ChipInfoImageLib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror
+
+[Sources]
+  ChipInfoLoader.c
+  ChipInfoBSP.c
+  ChipInfoImage_XBLLoader.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomSdkPkg/SdkLoader.dec
+  QcomPkg/XBLLoaderApi.dec
+
+[LibraryClasses]
+  BaseLib
+  MuslLib
+  ChipInfoTargetLib
+  ChipInfoSKULib

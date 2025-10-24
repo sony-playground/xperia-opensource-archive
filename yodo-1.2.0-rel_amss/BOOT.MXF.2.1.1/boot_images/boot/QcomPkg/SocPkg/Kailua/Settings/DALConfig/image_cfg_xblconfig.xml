@@ -1,0 +1,37 @@
+<devcfg>
+    <blobs>              
+        <blob 
+id="8550_xblconfig" name="DALPROP_PropsInfo_8550" 
+type="2" />  
+        <blob 
+id="8550_xml" name="DALPROP_PropsInfo_8550_xml" 
+type="0" />
+    </blobs>
+
+    <blob_mappings>
+        <mapping 
+id="8550_xml" 
+stage="0" soc_id="24597"/>
+        <mapping 
+id="8550_xblconfig" 
+stage="1" soc_id="24597"/>
+    </blob_mappings>
+
+    <loadlist>
+            <item type="soc"/>
+    </loadlist>
+
+    <image>
+        <target_img                 value="core"/>
+        <devcfg_target_build_id     value="DAL_DEVCFG_IMG"/>
+        <dal_config_target_id       value="0x8450"/>
+        <tcsr_soc_hw_version        addr="0x01FC8000"   direct="false" />
+        <multiCfg                   value="true"/>
+        <memory>
+            <props_memory_optimisation  value="true"/>
+            <size_of_struct             value="true"/>
+            <hw_version_specific_props  value="true"/>
+        </memory>
+    </image>
+    
+</devcfg>

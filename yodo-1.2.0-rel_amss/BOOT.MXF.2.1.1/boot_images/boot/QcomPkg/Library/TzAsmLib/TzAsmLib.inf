@@ -1,0 +1,37 @@
+#/** @file TzAsmLib.inf
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc. 
+#  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#   
+#  
+#**/
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 11/19/20   cm      Created new file
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = TzAsmLib
+  FILE_GUID                      = 7BBD529C-7E7F-4F31-9F07-CD2F139A600F
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = TzAsmLib
+
+[Sources.AARCH64]
+  tz_asm.S
+
+[Sources.Arm]
+  tz_asm_32.S
+
+[Packages]
+  MdePkg/MdePkg.dec
+
+
+
+

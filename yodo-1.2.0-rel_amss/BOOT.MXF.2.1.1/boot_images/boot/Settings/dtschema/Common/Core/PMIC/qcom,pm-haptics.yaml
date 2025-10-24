@@ -1,0 +1,86 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,pm-haptics.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm PM HAPTICS
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   Qualcom PMIC Haptics Configuration, it has required configurable parameters of
+   haptics like ext-boost-vdd, vmax-hdrm, boost-cfg-bob etc...
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,pm-haptics
+  
+  ext-boost-vdd:
+    description: ext-boost-vdd
+    $ref: /schemas/types.yaml#/definitions/uint32
+
+  vmax-hdrm:
+    description: vmax-hdrm
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  vmax-mv:
+    description: vmax-mv value
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  tlra-ol:
+    description: stlra-ol
+    $ref: /schemas/types.yaml#/definitions/uint32
+
+  autores-cfg:
+    description: autores-cfg
+    $ref: /schemas/types.yaml#/definitions/uint32
+
+  vbatt-min:
+    description: svbatt-min
+    $ref: /schemas/types.yaml#/definitions/uint32
+  
+  boost-cfg-bob:
+    description: boost-cfg-bob
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  lra-resistance:
+    description: lra-resistance
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  swr-io-volt:
+    description: swr-io-volt
+    $ref: /schemas/types.yaml#/definitions/uint32
+      
+required:
+  - compatible
+  - ext-boost-vdd
+  - vmax-hdrm
+  - vmax-mv
+  - tlra-ol
+  - autores-cfg
+  - vbatt-min
+  - boost-cfg-bob
+  - lra-resistance
+  - swr-io-volt
+
+
+additionalProperties: false
+
+examples:
+  - |
+    haptics { 
+      compatible = "qcom,pm-haptics";
+      ext-boost-vdd = <1>;
+      vmax-hdrm = <10>;
+      vmax-mv = <1400>;
+      tlra-ol = <1143>;
+      autores-cfg = <1>;
+      vbatt-min = <0>;			/* mV, 0 = always enabled */
+      boost-cfg-bob = <0>;       /* 0/1 , 0=HBST cfg, 1=BOB cfg*/
+      lra-resistance = <32>;
+      swr-io-volt = <0>;          /* 0 is 1.8v, 1=1.2v */
+    };

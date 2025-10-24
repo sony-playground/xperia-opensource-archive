@@ -1,0 +1,32 @@
+//============================================================================
+//  Name:                                                                     
+//    std_toolsconfig.cmm 
+//
+//  Description:                                                              
+//    None 
+//                                                                            
+// Copyright (c) 2022 by QUALCOMM Technologies, Incorporated.  All Rights Reserved.        
+//============================================================================
+//                                                                            
+// *** AUTO GENERATED FILE - DO NOT EDIT                                      
+//                                                                            
+// GENERATED: Mon Dec  5 02:58:22 2022 
+//============================================================================
+
+
+GLOBAL &AOP_ABS_BUILD_ROOT
+GLOBAL &AOP_BUILD_ROOT
+GLOBAL &AOP_CBSP_ROOT
+GLOBAL &AOP_SCRIPTSDIR
+GLOBAL &AOP_BUILDMSDIR
+
+
+
+&AOP_ABS_BUILD_ROOT="/local/mnt/workspace/CRMBuilds/AOP.HO.5.0-00285-KAILUA_E-1_20221205_024556/b/HY11_1/aop_proc"
+&AOP_BUILD_ROOT=os.ppd()+"/../../.."
+&AOP_CBSP_ROOT=os.ppd()+"/../.."
+&AOP_SCRIPTSDIR=os.ppd()+"/../../products"
+&AOP_BUILDMSDIR=os.ppd()+"/../../../aop/build/ms"
+
+
+ENDDO

@@ -1,0 +1,38 @@
+#===============================================================================
+#
+# Test driver inc path
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2020 by QUALCOMM Technologies, Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/settings/pmic/build/pm_config.api#1 $
+#  $DateTime: 2021/10/26 22:03:12 $
+#  $Author: pwbldsvc $
+#  $Change: 33677139 $
+#===============================================================================
+Import('env')
+
+env = env.Clone()
+
+#-------------------------------------------------------------------------------
+# Publish Public APIs
+# these are accecible internal or external to CoreBSP
+#-------------------------------------------------------------------------------
+if env['MSM_ID'] in ['waipio']:
+    env.PublishPublicApi('PMIC_SETTINGS', [
+         "${INC_ROOT}/core/settings/pmic/interface",
+         "${INC_ROOT}/core/settings/pmic/config/${CHIPSET_PMIC}",
+      ])
+else:
+    env.PublishPublicApi('PMIC_SETTINGS', [
+         "${INC_ROOT}/core/settings/pmic/interface",
+         "${INC_ROOT}/core/settings/pmic/config/${MSM_ID}",
+      ])
+env.LoadAPIUnits()
+

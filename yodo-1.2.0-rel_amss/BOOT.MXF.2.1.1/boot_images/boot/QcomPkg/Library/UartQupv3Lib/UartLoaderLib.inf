@@ -1,0 +1,49 @@
+# @file  UartLib.inf
+#
+#
+#  Copyright (c) 2016, 2020, 2022  Qualcomm Technologies, Inc.  All Rights Reserved.
+#
+#
+#
+#=============================================================================
+#                              EDIT HISTORY
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+#
+#
+# when       who      what, where, why
+# --------   ---      --------------------------------------------------------
+# 06/23/22   krd      Renamed BuildOptions.AARCH64 to BuildOptions
+# 11/7/16    VV       Initial revision
+#
+#=============================================================================
+
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = UartLoaderLib
+  MODULE_TYPE    = BASE
+  VERSION_STRING = 1.0
+  LIBRARY_CLASS  = UartLoaderLib
+
+[Sources]
+  UartXBL.c
+  UartXBLLoaderOs.c
+  UartFWLoad.c
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Wno-unused-but-set-variable
+  
+[LibraryClasses]
+  UartSettingsLib
+  ClockTargetLib
+  TlmmLib
+      
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/XBLLoaderApi.dec
+

@@ -1,0 +1,31 @@
+#/** @file            VerifiedBootDxeRelease.inf
+#  
+#    Copyright (c) 2021  Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+#=============================================================================
+#                              EDIT HISTORY
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+#
+#
+# when       who      what, where, why
+# --------   ---      --------------------------------------------------------
+# 05/23/21   shl      Initial version
+#
+#=============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = VerifiedBootDxe
+  FILE_GUID                      = FD975FB5-92C3-40B3-B05C-9C434326AB64
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = VerifiedBootDxeEntryPoint
+
+[Binaries.Arm]
+   PE32|VerifiedBootDxe.efi|RELEASE
+
+[Binaries.AARCH64]
+   PE32|AARCH64/VerifiedBootDxe.efi|RELEASE

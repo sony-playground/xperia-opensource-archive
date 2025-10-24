@@ -1,0 +1,37 @@
+#/** @file boot_slvcomlib_null.inf
+#
+#  Build file for the Boot SLVCOM NULL Library.
+#
+#  Copyright (c) 2022  Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who        what, where, why
+# --------   ---        ----------------------------------------------------------
+# 06/10/22   batta      Initial creation
+#=============================================================================
+
+[Defines]
+  INF_VERSION           = 0x00010005
+  BASE_NAME             = BootSlvcomLib
+  FILE_GUID             = 4AB30A77-91D3-443A-A829-2E54D3D14F96
+  MODULE_TYPE           = BASE
+  VERSION_STRING        = 1.0
+  LIBRARY_CLASS         = BootSlvcomLib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror
+
+[Sources]
+  boot_slvcom_null.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+
+[LibraryClasses]
+  DebugLib

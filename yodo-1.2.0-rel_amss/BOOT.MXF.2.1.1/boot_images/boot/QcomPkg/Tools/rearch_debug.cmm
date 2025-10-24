@@ -1,0 +1,22 @@
+;sys.d
+;sys.up
+
+winclear
+y.reset
+
+;do win.cmm
+
+;Data.LOAD.Binary ../SocPkg/Lahaina/Tools/PreSil\0x14800000++0x19000.bin 0x14800000
+Data.load ../../Build/LahainaLAA/XBL/DEBUG_CLANG40LINUX/AARCH64/QcomPkg/XBLLoader/XBL/DEBUG/XBL.dll ezaxi:
+cd ../../
+y.spath.srd += QcomPkg\XBLLoader
+y.spath.srd += QcomPkg\LoaderFrameWork
+y.spath.srd += QcomPkg\SocPkg\Library\XBLLib
+
+b.d
+
+b.s sbl1_main_ctl
+b.s boot_error_handler
+b.s sbl1_cspx_sync
+go
+

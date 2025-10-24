@@ -1,0 +1,46 @@
+#/** @file SecFuseLib.inf
+#
+#  SEC Fuse Lib
+#  
+#  Copyright (c) 2017, 2020, 2022 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 11/19/20   cm      Removed GetsecurityState.s and added TzAsmlib
+# 06/22/17   na      Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SecFuseLib
+  FILE_GUID                      = D6B9495B-DFBB-4335-A293-3E42A6BC8B34
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SecFuseLib
+
+
+[Sources.Common]
+  SecFuseLib.c
+
+[BuildOptions.AARCH64]
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  TzAsmLib
+
+[FixedPcd]

@@ -1,0 +1,29 @@
+{
+	"CFGL": {
+		"major_version" : 2,
+		"minor_version" : 0,
+		"file1": {
+			"file_name" : "/boot/QcomPkg/SocPkg/Kailua/Settings/DSF/release/target/Kailua/A003_8_0200_1_dcb.bin",
+			"config_name": "/A003_8_0200_1_dcb.bin",
+			"attributes": "0"
+		},
+		"file2": {
+			"file_name" : "/Build/KailuaLAA/DTC/pre-ddr-soc-kailua-1.0.dtb",
+			"__comment_ChipInfo" : "[63..48] Chip_Family - [47..32] Chip_ID - [31..24] Major_Version - [23..16] Minor_Version - [15..0] Reserved",
+			"chipinfo"  : "0x007F000001000000",
+			"__comment_PlatformInfo" : "[63..56] Platform_Type - [55..48] Platform_SubType - [47..40] Major_Version - [39..32] Minor_Version - [31..24] OEM_ID - [23..0] Reserved",
+			"platforminfo" : "0x0000000000000000",
+			"config_name": "pre-ddr-soc-kailua-1.0.dtb"
+		},
+	        "file3": {
+			"file_name" : "/boot/QcomPkg/SocPkg/Kailua/Settings/CPR/cpr_voltage_plan_kailua.bin",
+			"config_name": "/cpr.bin",
+			"attributes": "0"
+		},
+		"file4": {
+			"file_name" : "/boot/QcomPkg/SocPkg/Kailua/Settings/DSF/release/target/Kailua/A003_8_0100_1_dcb.bin",
+			"config_name": "/A003_8_0100_1_dcb.bin",
+			"attributes": "0"
+		}
+	}
+}

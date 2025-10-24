@@ -1,0 +1,34 @@
+#/** @file ramdumpheap.inf
+#
+#  ramdump heap lib
+#  
+#  Copyright (c) 2020-2021 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 09/07/20   yps     Initilize
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RamdumpheapLib
+  FILE_GUID                      = d34623d6-f118-11ea-adc1-0242ac120002  
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = RamdumpheapLib
+
+[Sources.common]
+  ramdump_heap.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/SocPkg/Library/XBLLoaderLib/XBLLoaderLibPkg.dec
+

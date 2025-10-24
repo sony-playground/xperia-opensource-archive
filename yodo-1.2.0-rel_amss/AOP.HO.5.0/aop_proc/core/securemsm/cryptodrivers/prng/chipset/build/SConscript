@@ -1,0 +1,67 @@
+#===============================================================================
+#
+# Crypto Driver Libraries
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2021 by QUALCOMM, Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/securemsm/cryptodrivers/prng/chipset/build/SConscript#2 $
+#  $DateTime: 2021/11/15 13:45:01 $
+#  $Author: pwbldsvc $
+#  $Change: 33995916 $
+#                      EDIT HISTORY FOR FILE
+#
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+
+#===============================================================================
+import os
+Import('env')
+
+env = env.Clone()
+
+#-------------------------------------------------------------------------------
+# Set-up the target
+#-------------------------------------------------------------------------------
+if os.path.exists(env.subst('${INC_ROOT}/core/securemsm/cryptodrivers/prng/chipset/${CHIPSET}')):
+    CRYPTO_PRNG_MSM_ID_DEFAULT = env['MSM_ID']
+    CRYPTO_PRNG_CHIPSET_ID_DEFAULT = env['CHIPSET']
+else:
+    env.PrintWarning('coretech_warning: crypto PRNG support for target not found')
+    Return(); 
+
+script_fname = CRYPTO_PRNG_CHIPSET_ID_DEFAULT+".SConscript"
+
+# change name for other targets that migh start with q, etc
+if env['MSM_ID'] in ['xxxx']:
+   script_fname = "xxxx.SConscript"
+
+CLEAN_SOURCES = env.FindFiles("*.h", "${BUILD_ROOT}/core/securemsm/cryptodrivers/prng/environment/")
+
+env.CleanPack(['CORE_AOP'], CLEAN_SOURCES)
+
+CLEAN_SOURCES_CHIPSET = "${BUILD_ROOT}/core/securemsm/cryptodrivers/prng/chipset/"+CRYPTO_PRNG_CHIPSET_ID_DEFAULT+"/"
+CLEAN_SOURCES = env.FindFiles("*.h", CLEAN_SOURCES_CHIPSET)
+
+env.CleanPack(['CORE_AOP'], CLEAN_SOURCES)
+
+CLEAN_SOURCES = env.FindFiles("*", "${BUILD_ROOT}/core/securemsm/cryptodrivers/prng/test")
+for x in env.FindFiles(['*.o', '*.lib', 'SConscript'], "${BUILD_ROOT}/core/securemsm/cryptodrivers/prng/test/build"):
+    CLEAN_SOURCES.remove(x)
+
+env.CleanPack(['CORE_AOP'],
+              CLEAN_SOURCES)
+
+#-------------------------------------------------------------------------------
+# Load sub scripts
+#-------------------------------------------------------------------------------
+env.SConscript(script_fname, exports='env')

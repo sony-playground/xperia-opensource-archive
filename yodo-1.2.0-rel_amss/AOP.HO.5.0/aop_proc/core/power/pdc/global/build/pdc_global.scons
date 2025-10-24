@@ -1,0 +1,72 @@
+#===========================================================================
+# PDC global build script
+#
+# Copyright (c) 2016-2019 by Qualcomm Technologies, Incorporated
+# All Rights Reserved
+# Qualcomm Proprietary/GTDR
+#===========================================================================
+
+Import('env')
+
+env = env.Clone()
+
+SRCPATH = '..'
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+# Checking the presence for target specific config/header files else
+# compiling with stubs
+tgt_paths = ['${BUILD_ROOT}/core/power/pdc/global/hal/hwio/${MSM_ID}']
+'''
+#todo: enable once external build pick correct config
+for apath in tgt_paths:
+    if not env.PathExists(apath):
+        env.PrintWarning('PDC_GLOBAL: Using stubs')
+        env['MSM_ID'] = 'stubs'
+        env.Append(CFLAGS = '-Wno-error')
+        break
+'''
+
+# APIs
+CBSP_API = [
+    'DAL',
+    'POWER',
+    'POWER_UTILS',
+    'SYSTEMDRIVERS',
+    # Keep it last as contains incorrect version of comdef.h
+    'KERNEL'
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+env.PublishPrivateApi('PDC_GLOBAL', [
+    '${BUILD_ROOT}/core/power/pdc/global/inc',
+    '${BUILD_ROOT}/core/power/pdc/global/hal/inc',
+    '${BUILD_ROOT}/core/power/pdc/global/hal/hwio/${MSM_ID}',
+])
+
+# Compilation options
+env.Append(CFLAGS = '${ARMCC_STDC99_CMD}')
+
+# Sources
+PDC_GLOBAL_SOURCES = [
+    '${BUILDPATH}/hal/src/pdc_global_hal.c',
+]
+
+PDC_GLOBAL_INIT_SRCS = [
+  '${BUILDPATH}/common/pdc_global.c',
+  ]
+
+# Adding settings files to R-init builder
+if 'USES_RINIT_PARSER' in env:
+    rinit_files = '${BUILD_ROOT}/core/power/pdc/global/cfg/${MSM_ID}'
+    if env.PathExists(rinit_files):
+        env.AddRinitInfo('CORE_AOP', {'files' : rinit_files})
+
+# Add sources to compile
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/pdc_global', PDC_GLOBAL_SOURCES)
+
+env2 = env.Clone()
+if env2['MSM_ID'] not in ['lanai']:
+  env2.Append(CCFLAGS    = ' -mlong-calls')
+env2.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/pdc_global_init', PDC_GLOBAL_INIT_SRCS)

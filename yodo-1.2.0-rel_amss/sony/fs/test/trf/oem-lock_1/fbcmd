@@ -1,0 +1,4 @@
+c download:0000053D
+b oem_lock_cms_blob_00440245573320.bin
+c oem lock
+w

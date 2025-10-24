@@ -1,0 +1,67 @@
+#/** @file DDITargetLib.inf
+#
+#  DDI Lib
+#
+#  Copyright (c) 2019-2021 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+# when       who       what, where, why
+# --------   ---       ----------------------------------------------------------
+# 06/05/19   jihyunl   Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DDITargetLib
+  FILE_GUID                      = 36b057ae-ae41-4113-bd03-ac00b6a09e1e
+  MODULE_TYPE                    = SEC
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DDITargetLib
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS = -DBUILD_BOOT_CHAIN
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DDDRCC_PLL_EXTENSION_0 -DFEATURE_BOOT_EXTERN_DDR_COMPLETED -DFEATURE_BOOT_DDI_ENABLE -DBUILD_BOOT_CHAIN -DUSE_LOADER_UTIL
+
+[Sources.common]
+
+# DDI Target Sources
+  ddi_testing.c
+  ddi_test_cases.c
+  ddi_test_list.c
+  ddi_memcpy.s
+
+#DSF Target Config
+# DDR target sources
+  # Header file inclusions
+  QcomPkg/Library/DDRLib/common/params/v9/ddr_params.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/SocPkg/Kailua/Library/DDRTargetLib/DDRTargetLibPkg.dec
+  QcomPkg/SocPkg/Kailua/Library/DSFTargetLib/DSFTargetLibPkg.dec
+  QcomSdkPkg/SdkLoader.dec
+  ArmPkg/ArmPkg.dec
+
+[LibraryClasses]
+  MuslLib
+  ServicesUtilsLib
+  DSFTargetLib
+  XBLConfigLib
+[FeaturePcd]
+
+[FixedPcd]
+ gQcomTokenSpaceGuid.PcdBuildType
+[Guids]
+

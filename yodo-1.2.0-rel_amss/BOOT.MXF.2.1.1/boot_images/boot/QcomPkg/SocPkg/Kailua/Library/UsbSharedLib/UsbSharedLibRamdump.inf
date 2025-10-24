@@ -1,0 +1,53 @@
+## @file UsbSharedLibLoader.inf
+#  Target specific USB3.0 common & shared init driver library for XBL Loader.
+#
+#  Copyright (c) 2017, 2021  Qualcomm Technologies, Inc . All rights reserved.
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = UsbSharedLib
+  FILE_GUID                      = 545a1222-468d-4a87-a234-ee997f3f07db
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = UsbSharedLib
+
+[Sources]
+  # Target specific header files
+  ../../Include/HalusbHWIO.h
+
+  # Target specific source files.
+  UsbSharedLib.c
+  UsbSharedLibRamdump.c
+  UsbSharedLibI2c.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec    
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  Settings/DeviceTreeSettings.dec
+  
+[LibraryClasses]
+  BusyWaitLib
+  ClockTargetLib
+  MuslLib
+  QusbDciCommonLib
+  DTBExtnLib
+  I2CLib
+
+[Protocols]
+  gEfiDtbExtnProtocolGuid   #Consumes
+
+[Guids.common]
+  gQcomTokenSpaceGuid
+  
+
+
+ [BuildOptions.ARM]
+  RVCT:*_*_*_CC_FLAGS = -DUSE_LOADER_UTILS -DTARGET_DEF_H=\"Target_cust.h\"
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DUSE_LOADER_UTILS -DTARGET_DEF_H=\"Target_cust.h\"
+  GCC:*_*_*_CC_FLAGS = -DUSE_LOADER_UTILS -DTARGET_DEF_H=\"Target_cust.h\"

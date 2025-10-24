@@ -1,0 +1,10 @@
+<config>
+  <image_tree>
+    <name>BOOT.MXF.2.1.1</name>
+    <build_id>BOOT.MXF.2.1.1-00102-KAILUA-1.58371.2</build_id>
+    <branch_point_revision>00102</branch_point_revision>
+    <revision>58371</revision>
+    <spin>2</spin>
+    <client>KAILUA</client>
+  </image_tree>
+</config>

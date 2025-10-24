@@ -1,0 +1,59 @@
+#/** @file MDPLibBoot.inf
+#  
+#  MDP Hardware library
+#  
+#  Copyright (c) 2016-2017, 2019-2021, 2022 Qualcomm Technologies, Inc.
+#  All Rights Reserved.
+#  Confidential and Proprietary - Qualcomm Technologies, Inc.
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MDPLibBoot
+  FILE_GUID                      = 4B97CFD9-41AD-4460-A532-37302DA2147B
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MDPLibBoot
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DRAMDUMP_MODE -Wno-unused-but-set-variable
+
+[Sources]
+  MDPClocksBoot.c
+  MDPLib.c
+  MDPEDID.c
+  MDPPanel.c
+  MDPConfig.c
+  parserutil.c
+  xmlparser.c
+  MDPSystemBoot.c
+  MDPVersion.c
+  DisplayUtils.c
+  MDPPostProcessing.c
+  MDPDemuraStub.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[Protocols]
+  gEfiBootLogoProtocolGuid
+
+[Pcd]
+  gQcomTokenSpaceGuid.PcdPrimaryFlags
+  gQcomTokenSpaceGuid.PcdUnderflowColor
+  gQcomTokenSpaceGuid.PcdPresentationMode
+  gQcomTokenSpaceGuid.PcdSecondaryPresentationMode
+  gQcomTokenSpaceGuid.PcdBacklightLevel
+  gQcomTokenSpaceGuid.PcdBGRTRotation
+
+[Pcd.common]
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel
+
+[LibraryClasses]
+  CacheMaintenanceLib

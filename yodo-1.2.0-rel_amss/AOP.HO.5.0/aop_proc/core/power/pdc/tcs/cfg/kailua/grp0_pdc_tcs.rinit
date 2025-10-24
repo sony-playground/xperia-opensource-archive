@@ -1,0 +1,309 @@
+#===========================================================================
+#                               gpr0_pdc_gtcs.rinit
+#
+#  DESCRIPTION:
+#    This file contains init values for GRP0 PDC TCS
+#
+#    Settings are obtained from TCS contents sheet maintained by Architecture
+#    team alongwith collaboration from SW and HW teams. 
+#
+#
+#  Copyright (c) 2021 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+#--------------------------------------------------------------------------
+# Common vars
+#--------------------------------------------------------------------------
+vars:
+    vrm_vol_offset = 0x0
+    vrm_en_offset = 0x4
+    vrm_mode_offset = 0x8
+    ret_mode = 3
+    lpm_mode = 4
+    auto_mode = 6
+    npm_mode = 7
+    disable = 0
+    enable = 1
+
+module: { name = RPMH_PDC_GRP0_GRP0_PDC_GTCS_MEM, group = PDC_TCS, min_ver = 1.0, max_ver = 1.9, import = [arc_export] }
+regs:
+# Sleep Set 0
+    TCSt_CMDn_ADDR[0, 0] = CX_LVL_ADDR
+    TCSt_CMDn_DATA[0, 0] = CX_HLVL_OFF
+    TCSt_CMDn_MSGID[0, 0] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 1] = MX_LVL_ADDR
+    TCSt_CMDn_DATA[0, 1] = MX_HLVL_RET
+    TCSt_CMDn_MSGID[0, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 2] = XO_LVL_ADDR
+    TCSt_CMDn_DATA[0, 2] = XO_HLVL_PMIC_OFF
+    TCSt_CMDn_MSGID[0, 2] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 3] = 0 :{ cmd_db_addr("vrm.soc") }
+    TCSt_CMDn_DATA[0, 3] = disable
+    TCSt_CMDn_MSGID[0, 3] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 4] = 0 : { cmd_db_addr("smpg2", vrm_mode_offset)}
+    TCSt_CMDn_DATA[0, 4] = ret_mode
+    TCSt_CMDn_MSGID[0, 4] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[0] = 0x0             # Dont serialize
+
+# Sleep Set 1
+    TCSt_CMDn_ADDR[1, 0] = CX_LVL_ADDR
+    TCSt_CMDn_DATA[1, 0] = CX_HLVL_OFF
+    TCSt_CMDn_MSGID[1, 0] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[1, 1] = MX_LVL_ADDR
+    TCSt_CMDn_DATA[1, 1] = MX_HLVL_RET
+    TCSt_CMDn_MSGID[1, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[1, 2] = XO_LVL_ADDR
+    TCSt_CMDn_DATA[1, 2] = XO_HLVL_ON
+    TCSt_CMDn_MSGID[1, 2] = {0, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[1, 3] = 0 : { cmd_db_addr("vrm.soc")}
+    TCSt_CMDn_DATA[1, 3] = disable
+    TCSt_CMDn_MSGID[1, 3] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[1, 4] = 0 : { cmd_db_addr("smpg2", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 4] = npm_mode
+    TCSt_CMDn_MSGID[1, 4] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[1] = 0x0             # Dont serialize
+
+# Sleep Set 2
+    TCSt_CMDn_ADDR[2, 0] = CX_LVL_ADDR
+    TCSt_CMDn_DATA[2, 0] = CX_HLVL_RET
+    TCSt_CMDn_MSGID[2, 0] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[2, 1] = MX_LVL_ADDR
+    TCSt_CMDn_DATA[2, 1] = MX_HLVL_RET
+    TCSt_CMDn_MSGID[2, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[2, 2] = XO_LVL_ADDR
+    TCSt_CMDn_DATA[2, 2] = XO_HLVL_PMIC_OFF
+    TCSt_CMDn_MSGID[2, 2] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[2, 3] = 0 : { cmd_db_addr("vrm.soc")}
+    TCSt_CMDn_DATA[2, 3] = disable
+    TCSt_CMDn_MSGID[2, 3] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[2, 4] = 0 : { cmd_db_addr("smpg2", vrm_mode_offset)}
+    TCSt_CMDn_DATA[2, 4] = ret_mode
+    TCSt_CMDn_MSGID[2, 4] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[2] = 0x0             # Dont serialize
+
+##############################################################################	
+
+# Wake Set 5
+    TCSt_CMDn_ADDR[5, 0] = CX_LVL_ADDR
+    TCSt_CMDn_DATA[5, 0] = CX_HLVL_LOW_SVS
+    TCSt_CMDn_MSGID[5, 0] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[5, 1] = MX_LVL_ADDR
+    TCSt_CMDn_DATA[5, 1] = MX_HLVL_LOW_SVS
+    TCSt_CMDn_MSGID[5, 1] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[5, 2] = XO_LVL_ADDR
+    TCSt_CMDn_DATA[5, 2] = XO_HLVL_ON
+    TCSt_CMDn_MSGID[5, 2] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[5, 3] = 0 : { cmd_db_addr("vrm.soc")}
+    TCSt_CMDn_DATA[5, 3] = enable
+    TCSt_CMDn_MSGID[5, 3] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[5, 4] = 0 : { cmd_db_addr("smpg2", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 4] = npm_mode
+    TCSt_CMDn_MSGID[5, 4] = {1, 1} # {rr, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[5] = 0x0             # Dont serialize
+
+module: { name = RPMH_PDC_GRP0_GRP0_PDC_GTCS_MEM, group = PDC_TCS, min_ver = 2.0, import = [arc_v2_export] }
+regs:
+# Sleep Set 0
+    TCSt_CMDn_ADDR[0, 0] = CX_LVL_ADDR
+    TCSt_CMDn_DATA[0, 0] = CX_HLVL_OFF
+    TCSt_CMDn_MSGID[0, 0] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 1] = MX_LVL_ADDR
+    TCSt_CMDn_DATA[0, 1] = MX_HLVL_RET
+    TCSt_CMDn_MSGID[0, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 2] = XO_LVL_ADDR
+    TCSt_CMDn_DATA[0, 2] = XO_HLVL_PMIC_OFF
+    TCSt_CMDn_MSGID[0, 2] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 3] = 0 :{ cmd_db_addr("vrm.soc") }
+    TCSt_CMDn_DATA[0, 3] = disable
+    TCSt_CMDn_MSGID[0, 3] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 4] = 0 : { cmd_db_addr("smpg2", vrm_mode_offset)}
+    TCSt_CMDn_DATA[0, 4] = ret_mode
+    TCSt_CMDn_MSGID[0, 4] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[0] = 0x0             # Dont serialize
+
+# Sleep Set 1
+    TCSt_CMDn_ADDR[1, 0] = CX_LVL_ADDR
+    TCSt_CMDn_DATA[1, 0] = CX_HLVL_OFF
+    TCSt_CMDn_MSGID[1, 0] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[1, 1] = MX_LVL_ADDR
+    TCSt_CMDn_DATA[1, 1] = MX_HLVL_RET
+    TCSt_CMDn_MSGID[1, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[1, 2] = XO_LVL_ADDR
+    TCSt_CMDn_DATA[1, 2] = XO_HLVL_ON
+    TCSt_CMDn_MSGID[1, 2] = {0, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[1, 3] = 0 : { cmd_db_addr("vrm.soc")}
+    TCSt_CMDn_DATA[1, 3] = disable
+    TCSt_CMDn_MSGID[1, 3] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[1, 4] = 0 : { cmd_db_addr("smpg2", vrm_mode_offset)}
+    TCSt_CMDn_DATA[1, 4] = npm_mode
+    TCSt_CMDn_MSGID[1, 4] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[1] = 0x0             # Dont serialize
+
+# Sleep Set 2
+    TCSt_CMDn_ADDR[2, 0] = CX_LVL_ADDR
+    TCSt_CMDn_DATA[2, 0] = CX_HLVL_RET
+    TCSt_CMDn_MSGID[2, 0] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[2, 1] = MX_LVL_ADDR
+    TCSt_CMDn_DATA[2, 1] = MX_HLVL_RET
+    TCSt_CMDn_MSGID[2, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[2, 2] = XO_LVL_ADDR
+    TCSt_CMDn_DATA[2, 2] = XO_HLVL_PMIC_OFF
+    TCSt_CMDn_MSGID[2, 2] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[2, 3] = 0 : { cmd_db_addr("vrm.soc")}
+    TCSt_CMDn_DATA[2, 3] = disable
+    TCSt_CMDn_MSGID[2, 3] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[2, 4] = 0 : { cmd_db_addr("smpg2", vrm_mode_offset)}
+    TCSt_CMDn_DATA[2, 4] = ret_mode
+    TCSt_CMDn_MSGID[2, 4] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[2] = 0x0             # Dont serialize
+
+##############################################################################	
+
+# Wake Set 5
+    TCSt_CMDn_ADDR[5, 0] = CX_LVL_ADDR
+    TCSt_CMDn_DATA[5, 0] = CX_HLVL_LOW_SVS
+    TCSt_CMDn_MSGID[5, 0] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[5, 1] = MX_LVL_ADDR
+    TCSt_CMDn_DATA[5, 1] = MX_HLVL_LOW_SVS
+    TCSt_CMDn_MSGID[5, 1] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[5, 2] = XO_LVL_ADDR
+    TCSt_CMDn_DATA[5, 2] = XO_HLVL_ON
+    TCSt_CMDn_MSGID[5, 2] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[5, 3] = 0 : { cmd_db_addr("vrm.soc")}
+    TCSt_CMDn_DATA[5, 3] = enable
+    TCSt_CMDn_MSGID[5, 3] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[5, 4] = 0 : { cmd_db_addr("smpg2", vrm_mode_offset)}
+    TCSt_CMDn_DATA[5, 4] = npm_mode
+    TCSt_CMDn_MSGID[5, 4] = {1, 1} # {rr, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[5] = 0x0             # Dont serialize
+
+
+###
+#Enable apps, spss, gpu, sde, cdsp, tme, mss, cam PDC
+###
+
+module: { name = RPMH_PDC_APPS_APPS_PDC_MOD, group = PDC_EN}
+regs:
+    CMD_ENABLE_BANK = [0xF, 0x0, 0x0, 0x0, 0x0, 0xF]
+    TIMER_MATCH_VALUE_LO = 0xFFFFFFFF
+    TIMER_MATCH_VALUE_HI = 0xFFFFFFFF
+    ENABLE_PDC =
+    {.ENABLE_PDC = 0x1}
+
+module: { name = RPMH_PDC_SP_SP_PDC, group = PDC_EN}
+regs:
+    CMD_ENABLE_BANK = [0xF, 0x0, 0xF, 0x0, 0x0, 0xF]
+    TIMER_MATCH_VALUE_LO = 0xFFFFFFFF
+    TIMER_MATCH_VALUE_HI = 0xFFFFFFFF
+    ENABLE_PDC =
+    {.ENABLE_PDC = 0x1}
+
+module: { name = RPMH_PDC_GPU_GPU_PDC, group = PDC_EN}
+regs:
+    CMD_ENABLE_BANK = [0xF, 0x0, 0x0, 0x0, 0x0, 0xF]
+    TIMER_MATCH_VALUE_LO = 0xFFFFFFFF
+    TIMER_MATCH_VALUE_HI = 0xFFFFFFFF
+    ENABLE_PDC =
+    {.ENABLE_PDC = 0x1}
+
+module: { name = RPMH_PDC_DISPLAY_DISPLAY_PDC, group = PDC_EN}
+regs:
+    CMD_ENABLE_BANK = [0xF, 0x0, 0x0, 0x0, 0x0, 0xF]
+    TIMER_MATCH_VALUE_LO = 0xFFFFFFFF
+    TIMER_MATCH_VALUE_HI = 0xFFFFFFFF
+    ENABLE_PDC =
+    {.ENABLE_PDC = 0x1}
+
+module: { name = RPMH_PDC_COMPUTE_COMPUTE_PDC, group = PDC_EN}
+regs:
+    CMD_ENABLE_BANK = [0xF, 0x0, 0x0, 0x0, 0x0, 0xF]
+    TIMER_MATCH_VALUE_LO = 0xFFFFFFFF
+    TIMER_MATCH_VALUE_HI = 0xFFFFFFFF
+    ENABLE_PDC =
+    {.ENABLE_PDC = 0x1}
+
+module: { name = RPMH_PDC_TME_TME_PDC_MOD, group = PDC_EN}
+regs:
+    CMD_ENABLE_BANK = [0xF, 0x0, 0x0, 0x0, 0x0, 0xF]
+    TIMER_MATCH_VALUE_LO = 0xFFFFFFFF
+    TIMER_MATCH_VALUE_HI = 0xFFFFFFFF
+    ENABLE_PDC =
+    {.ENABLE_PDC = 0x1}
+
+module: { name = RPMH_PDC_MODEM_MODEM_PDC, group = PDC_EN}
+regs:
+    CMD_ENABLE_BANK = [0x1F, 0x1F, 0x0, 0x0, 0x0, 0x1F]
+    TIMER_MATCH_VALUE_LO = 0xFFFFFFFF
+    TIMER_MATCH_VALUE_HI = 0xFFFFFFFF
+    ENABLE_PDC =
+    {.ENABLE_PDC = 0x1}
+
+module: { name = RPMH_PDC_CAM_CAM_PDC, group = PDC_EN}
+regs:
+    CMD_ENABLE_BANK = [0x0, 0x0, 0x0, 0x0, 0x0, 0x0]
+    TIMER_MATCH_VALUE_LO = 0xFFFFFFFF
+    TIMER_MATCH_VALUE_HI = 0xFFFFFFFF
+    ENABLE_PDC =
+    {.ENABLE_PDC = 0x1}
+
+module: { name = RPMH_PDC_DEBUG_DEBUG_PDC, group = PDC_EN}
+regs:
+    CMD_ENABLE_BANK = [0xF, 0x0, 0xF]
+    IRQ_ENABLE_LASTBANK = 0x1
+    TIMER_MATCH_VALUE_LO = 0xFFFFFFFF
+    TIMER_MATCH_VALUE_HI = 0xFFFFFFFF
+    ENABLE_PDC =
+    {.ENABLE_PDC = 0x1}
+
+#ToDo
+#     RPMH_PDC_GRP*_SEQ_CFG_DELAY_VAL_v

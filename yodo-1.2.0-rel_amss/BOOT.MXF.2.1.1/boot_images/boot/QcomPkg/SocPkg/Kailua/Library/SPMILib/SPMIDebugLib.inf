@@ -1,0 +1,70 @@
+#/** @file SPMIDebugLib.inf
+#  
+#  SPMI Debug Library INF file
+#  
+#  Copyright (c) 2012-2021 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 05/16/19   px      Add LockLib for SPMI transaction protection
+# 01/25/18   vk      Remove TimerLib dependency
+# 04/10/14   sg      Updated SPMIMemoryMapSize PCD entry.
+# 03/07/14   vk      Merge inf updates from v1 inf
+# 10/25/13   vk      Remove warning as error
+# 15/10/13   vk      Remove UEFI_APPLICATION
+# 08/06/12   unr     Added UEFI_APPLICATION and removed UefiDriverEntryPoint
+# 07/02/12   unr     Change dec inclusion to Msm8974Pkg.dec
+# 06/27/12   unr     Initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SPMIDebugLib
+  FILE_GUID                      = 3dc2607d-b53f-4e19-ab32-8e3220e0c50f
+  MODULE_TYPE                    = BASE 
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SPMIDebugLib
+
+[Sources.common]
+  ../../../../Library/SPMILib/src/core/SpmiBusDebug.c
+  ../../../../Library/SPMILib/src/core/SpmiIntrCtlr.c
+  ../../../../Library/SPMILib/src/core/SpmiPic.c
+  ../../../../Library/SPMILib/src/core/hal/SpmiHal.c
+  ../../../../Library/SPMILib/src/core/hal/hoya7/PmicArb.c
+  ../../../../Library/SPMILib/src/core/hal/hoya7/SpmiBusCfg.c
+  ../../../../Library/SPMILib/src/core/hal/hoya7/SpmiMaster.c
+  ../../../../Library/SPMILib/src/platform/os/xbl/SpmiOsImage.c
+  ../../../../Library/SPMILib/src/core/hal/hoya7/hw/v7p0/GeniImage.c
+  ../../../../Library/SPMILib/src/platform/config/hoya7/kailua/SpmiBlock.c
+  ../../../../Library/SPMILib/src/platform/target/kailua/SpmiTarget.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/Kailua/Library/SPMILib/SPMILib.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  BusyWaitLib
+  LockLib
+
+[Pcd.common]
+  gQcomTokenSpaceGuid.SPMIBasePhysical0
+  gQcomTokenSpaceGuid.SPMIBasePhysical1
+  gQcomTokenSpaceGuid.SPMIMemoryMapSize
+  gQcomTokenSpaceGuid.SPMIOwner
+  gQcomTokenSpaceGuid.SPMIDebugChannel
+
+[Protocols]
+  gEfiHwioProtocolGuid                  ## Consumes
+

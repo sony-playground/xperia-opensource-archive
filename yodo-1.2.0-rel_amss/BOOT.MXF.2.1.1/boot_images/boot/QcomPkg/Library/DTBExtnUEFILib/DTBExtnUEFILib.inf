@@ -1,0 +1,47 @@
+#/** @file DTBExtnUEFILib.inf
+#
+#  Component description file for DTB Extension UEFI Library module
+#
+#  Copyright (c) 2021 Qualcomm Technologies, Inc.  All Rights Reserved.
+#
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#  $Header: $
+#  $DateTime: $
+#  $Author: coresvc $
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/16/21   tmt     Initial version.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DTBExtnUEFILib
+  FILE_GUID                      = 149640F1-543F-41F8-80EB-29DBC034AB3A
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DTBExtnUEFILib
+  CONSTRUCTOR                    = DtbLibInit
+
+[Sources]
+  DTBExtnUEFILib.c
+  DTBuefiWrapper.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/Library/MuslLib/MuslLib.dec
+
+[LibraryClasses]
+  MuslLib
+  FdtLib
+
+[Protocols]
+  gEfiDtbExtnProtocolGuid

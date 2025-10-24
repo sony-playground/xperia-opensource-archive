@@ -1,0 +1,5 @@
+c download:00004400
+b gpt_0
+c Repartition
+c Get-partition-list
+w

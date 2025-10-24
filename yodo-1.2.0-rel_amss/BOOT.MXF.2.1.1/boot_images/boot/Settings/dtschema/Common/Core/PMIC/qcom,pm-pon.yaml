@@ -1,0 +1,259 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,pm-pon.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm PM PON
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   The Qualcomm compatible node...
+   Links to any data sheet or HW specific details
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,pm-pon
+  
+  pshold:
+    type: object
+  
+    properties:
+      enable:
+        description: pshold enable
+        $ref: /schemas/types.yaml#/definitions/uint8
+        enum:
+          - 0
+          - 1
+        
+      reset-type:
+        description: reset_type
+        
+    
+    required:
+      - enable
+      - reset-type
+      
+  smpl:
+    type: object
+    
+    properties:
+      enable:
+        description: smpl_enable
+        $ref: /schemas/types.yaml#/definitions/uint8
+        
+      smpl-delay:
+        description: smpl_delay
+        
+    
+    required:
+      - enable
+      - smpl-delay
+    
+  s2-kpdpwr:
+    type: object
+    
+    properties:
+      enable:
+        description: s2_kpdpwr_enable
+        $ref: /schemas/types.yaml#/definitions/uint8
+        
+      reset-type:
+        description: s2_kpdpwr_reset_type
+        $ref: /schemas/types.yaml#/definitions/uint8
+      
+      s1-ms:
+        description: s2_kpdpwr_s1_ms
+        
+        
+      s2-ms:
+        description: s2_kpdpwr_s2_ms
+        
+    
+    required:
+      - enable
+      - reset-type
+      - s1-ms
+      - s2-ms
+
+  s2-kpdpwr-resin:
+    type: object
+    
+    properties:
+      enable:
+        description: s2_kpdpwr_resin_enable
+        $ref: /schemas/types.yaml#/definitions/uint8
+        
+      reset-type:
+        description: s2_kpdpwr_resin_reset_type
+        $ref: /schemas/types.yaml#/definitions/uint8
+      
+      s1-ms:
+        description: s2_kpdpwr_resin_s1_ms
+        
+      
+      s2-ms:
+        description: s2_kpdpwr_resin_s2_ms
+        
+    
+    required:
+      - enable
+      - reset-type
+      - s1-ms
+      - s2-ms
+
+  s2-resin:
+    type: object
+    
+    properties:
+      enable:
+        description: s2_resin_enable
+        $ref: /schemas/types.yaml#/definitions/uint8
+        
+      reset-type:
+        description: s2_resin_reset_type
+        $ref: /schemas/types.yaml#/definitions/uint8
+      
+      s1-ms:
+        description: s2_resin_s1_ms
+        
+        
+      s2-ms:
+        description: s2_resin_s2_ms
+        
+    
+    required:
+      - enable
+      - reset-type
+      - s1-ms
+      - s2-ms
+
+  s3-reset:
+    type: object
+    
+    properties:
+      enable:
+        description: s3_enable
+        $ref: /schemas/types.yaml#/definitions/uint8
+        
+      s3-src:
+        description: s3_reset_src
+        $ref: /schemas/types.yaml#/definitions/uint8
+        
+      timer-value-ms:
+        description: s3_reset_timer_value_ms
+        
+    
+    required:
+      - enable
+      - s3-src
+      - timer-value-ms
+
+  long-pwrkey-dbnc-chk:
+    type: object
+    
+    properties:
+      dbnc-time-ms:
+        description: dbnc_time_ms
+        
+      
+      chk-at:
+        description: dbnc_chk_at
+        $ref: /schemas/types.yaml#/definitions/uint8
+      
+    required:
+      - dbnc-time-ms
+      - chk-at
+  
+  uvlo-config:
+    type: object
+    description: if config-value is empty, remove it from dts file
+    
+    properties:
+      config-value:
+        description: config_value
+        $ref: /schemas/types.yaml#/definitions/uint32-array
+    
+    required:
+      - config-value
+    
+  ovlo-config:
+    type: object
+    description: if config-value is empty, remove it from dts file
+    
+    properties:
+      config-value:
+        description: config_value
+        $ref: /schemas/types.yaml#/definitions/uint32-array
+    
+    required:
+      - config-value
+required:
+  - compatible
+  - pshold
+  - smpl
+  - s2-kpdpwr
+  - s2-kpdpwr-resin
+  - s2-resin
+  - s3-reset
+  - long-pwrkey-dbnc-chk
+
+
+additionalProperties: false
+
+examples:
+  - |
+    pon {
+    
+      compatible = "qcom,pm-pon";
+      
+      pshold{
+        enable = /bits/ 8 <(1)>;
+        reset-type = <1>;
+      };
+      
+      smpl{
+        enable = /bits/ 8 <(1)>;
+        smpl-delay = <800>;
+      };
+      
+      s2-kpdpwr {
+        enable = /bits/ 8 <(1)>;
+        reset-type = /bits/ 8 <(0)>;           
+        s1-ms = <10256>;
+        s2-ms = <2000>;
+      };
+      
+      s2-kpdpwr-resin {
+        enable = /bits/ 8 <0>;
+        reset-type = /bits/ 8 <1>;
+        s1-ms = <10256>;
+        s2-ms = <2000>;
+      };
+      
+      s2-resin {
+        enable = /bits/ 8 <(0)>;
+        reset-type = /bits/ 8 <1>;
+        s1-ms = <10256>;
+        s2-ms = <2000>;
+      };
+    
+      s3-reset {
+        enable = /bits/ 8 <0>;
+        s3-src = /bits/ 8 <0>;
+        timer-value-ms = <16000>;
+      };  
+      
+      ovlo-config {                  
+        config-value = <0 0 0>;
+      };
+      
+      long-pwrkey-dbnc-chk {
+        dbnc-time-ms = <200>;
+        chk-at = /bits/ 8 <2>;
+      };
+    };

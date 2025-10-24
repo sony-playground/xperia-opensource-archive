@@ -1,0 +1,40 @@
+#/** @file BlacklistLib.inf
+#
+#  BlacklistLib
+#  
+#  Copyright (c) 2020-2021 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who          what, where, why
+# --------   ---          ----------------------------------------------------------
+# 03/19/21   rama         Added packout rules
+# 10/13/20   digants      Initial revision.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BlackListLib
+  FILE_GUID                      = BD4CC3FB-4872-DDC9-2CE9-AF999D7B9264
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BlackListLib
+
+[Sources.common]
+  boot_blacklist.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+
+[LibraryClasses]
+  ConfigContextLib
+  MuslLib

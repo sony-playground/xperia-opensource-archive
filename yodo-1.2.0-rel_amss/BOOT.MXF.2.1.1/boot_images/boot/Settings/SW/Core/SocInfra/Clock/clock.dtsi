@@ -1,0 +1,21 @@
+&sw {
+
+              /* Clock Pegging Tool Data*/
+              clk_pegging_node{
+                            /*        cx_corner holds rail corner data to which all DFS clocks are scaled to
+                                      Currently, MIN_SVS is not supported
+                                      LOW_SVS     = <0x40, 0x2>  
+                                      SVS         = <0x80, 0x3>  
+                                      SVS_L1      = <0xC0, 0x4>  
+                                      NOMINAL     = <0x100, 0x5> 
+                                      TURBO       = <0x180, 0x6> 
+                                      TURBO_L1    = <0x1A0, 0x7>  */
+                            cx_corner = <0x100 0x5>;
+                            /*     limiting ddr-freq between <nMin, nMax>*/
+                            ddr_min_max_freq = <0xFF 0xFF>;
+                            /*     limiting shub-freq between <nMin, nMax>*/
+                            shub_min_max_freq = <0xFF 0xFF>;
+                            /* DISABLE = 0x0(default), ENABLE = 0x1 */
+                            test_mode = <DISABLE>;
+                           };
+};

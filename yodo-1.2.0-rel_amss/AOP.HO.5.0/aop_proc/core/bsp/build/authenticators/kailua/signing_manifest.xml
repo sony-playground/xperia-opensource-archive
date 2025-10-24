@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:signing_manifest xmlns:tns="http://www.qualcomm.com/sectools"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      schema_version="1.0"
+                      xsi:schemaLocation="http://www.qualcomm.com/sectools ../signing_manifest/signing_manifest.xsd">
+	<secure_image_command>
+		./../../../aop/build/AOP_AAAAANAAO.mbn --security-profile ./kailua_tme_security_profile.xml --image-id AOP --outfile ./../../../aop/build/AOP_AAAAANAAO_prod.mbn --sign --qti --cass-capability srot_prod_v6_kailua_srot_release
+	</secure_image_command>
+    <secure_image_command>
+		./../../../../../../HY11_1/aop_proc/core/bsp/aop/build/AOP_AAAAANAZO.mbn --security-profile ./kailua_tme_security_profile.xml --image-id AOP --outfile ./../../../../../../HY11_1/aop_proc/core/bsp/aop/build/AOP_AAAAANAZO_prod.mbn --sign --qti --cass-capability srot_prod_v6_kailua_srot_release
+	</secure_image_command>
+</tns:signing_manifest>

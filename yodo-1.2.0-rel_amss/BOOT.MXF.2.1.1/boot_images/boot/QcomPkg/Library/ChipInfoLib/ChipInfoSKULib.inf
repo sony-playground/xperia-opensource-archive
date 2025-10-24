@@ -1,0 +1,41 @@
+#/** @file ChipInfoCommonSKULib.inf
+#
+#  Build file for the ChipInfo Library.
+#
+#  Copyright (c) 2021  Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ChipInfoSKULib
+  FILE_GUID                      = CEDA66BF-0CAA-45FC-B91D-3467871194FF
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ChipInfoSKULib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror
+
+# Target-agnostic SKU information processing.
+# Most projects follow a standard mapping between the SKU_ID/P_CODE fuses
+# and the SKU/Product Codes they represent. This library implements that
+# common mapping, and is included in the global Common.dsc.inc.
+#
+# Custom SKU translations must be binary compatible with the other
+# targets in this warehouse. See Waipio from core.boot.6.0 for an example.
+[Sources]
+  ChipInfoSKU.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomSdkPkg/SdkLoader.dec
+  QcomPkg/XBLLoaderApi.dec
+
+[LibraryClasses]
+  BaseLib
+  MuslLib

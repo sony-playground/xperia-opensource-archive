@@ -1,0 +1,45 @@
+#/** @file BootResetLib.inf
+#
+#  BootResetLib
+#  
+#  Copyright 2020 by Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 02/14/20   rama    Initial Revision
+# 03/18/20   rama    Removed ExDrivers
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BootResetLib
+  FILE_GUID                      = 925AA3BF-ECA7-4fAB-8B2D-02E296B36809
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BootResetLib
+
+[Sources.common]
+  boot_reset.c
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS = --diag_error=warning
+  GCC:*_*_*_CC_FLAGS = -Werror
+  
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/XBLLoader/MemoryMgr/MemoryMgr.dec
+
+[LibraryClasses]
+  MuslLib

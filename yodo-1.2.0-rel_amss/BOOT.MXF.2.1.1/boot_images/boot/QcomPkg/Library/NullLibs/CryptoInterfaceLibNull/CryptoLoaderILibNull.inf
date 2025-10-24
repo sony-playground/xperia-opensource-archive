@@ -1,0 +1,41 @@
+#  @file CryptoLoaderILib.inf
+#  
+#  Interface Library for Crypto operations in XBL Ramdump
+#  
+#  Copyright (c) 2017, 2020 - 2021  Qualcomm Technologies Inc. All rights reserved.<BR>
+#  
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 12/09/20   ck      Changed BuildOptions to all arch, added LibraryClasses
+# 04/05/17   bd      Initial revision.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CryptoLoaderILib
+  FILE_GUID                      = 7c67a138-4842-445e-b86b-c771ac58e282
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CryptoLoaderILib
+
+[Sources.common]
+  cil_loader.c
+  
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Werror  
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/XBLRamDump/XBLRamDump.dec
+
+[LibraryClasses]
+  DebugLib

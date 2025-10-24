@@ -1,0 +1,56 @@
+// soc.dtsi
+//
+// Provides Common SoC settings for Kailua
+
+// If you use this file in Kailua as guide, please note:
+// This is wrong and needs to be removed.
+// There should be no nodes in this file, only #include files
+&soc {
+  usb: usb { };
+};
+
+/* Example of where various TechTeam provided settings files would land */
+
+#include "Core/Buses/I2C/i2c.dtsi"
+#include "Core/Buses/SPI/spi.dtsi"
+#include "Core/Boot/quantum.dtsi"
+#include "Core/PIL/pil.dtsi"
+//#include "Core/DAL/dal.dtsi"
+#include "Core/HWEngines/BAM/bam.dtsi"
+//#include "Core/HWEngines/PCIe/pcie.dtsi"
+//#include "Core/HWEngines/TSENS/tsens.dtsi"
+//#include "Core/MPROC/SMEM/smem.dtsi"
+#include "Core/SMMU/iort.dtsi"
+#include "Core/PMIC/pmic.dtsi"
+//#include "Core/Services/services.dtsi"
+//#include "Core/SocInfra/Busywait/busywait.dtsi"
+//#include "Core/SocInfra/Clock/clock.dtsi"
+//#include "Core/SocInfra/HWIO/hwio.dtsi"
+//#include "Core/SocInfra/ICB/icb.dtsi"
+#include "Core/SocInfra/TLMM/kailua-pinctrl.dtsi"
+#include "Core/Storage/SDCC/sdcc.dtsi"
+#include "Core/WiredConnectivity/USB/usb.dtsi"
+#include "Core/SSR/ssr.dtsi"
+#include "Core/Uefi/uefi.dtsi"
+
+#include "Multimedia/Display/display.dtsi"
+
+//#include "../SW/Core/Buses/I2C/i2c.dtsi"
+//#include "../SW/Core/Buses/SPI/spi.dtsi"
+//#include "../SW/Core/DAL/dal.dtsi"
+//#include "../SW/Core/HWEngines/ADC/adc.dtsi"
+//#include "../SW/Core/HWEngines/BAM/bam.dtsi"
+//#include "../SW/Core/HWEngines/PCIe/pcie.dtsi"
+//#include "../SW/Core/HWEngines/TSENS/tsens.dtsi"
+//#include "../SW/Core/MPROC/SMEM/smem.dtsi"
+//#include "../SW/Core/PMIC/pmic.dtsi"
+//#include "../SW/Core/Services/services.dtsi"
+//#include "../SW/Core/SocInfra/Busywait/busywait.dtsi"
+//#include "../SW/Core/SocInfra/Clock/clock.dtsi"
+//#include "../SW/Core/SocInfra/HWIO/hwio.dtsi"
+//#include "../SW/Core/SocInfra/ICB/icb.dtsi"
+//#include "../SW/Core/SocInfra/TLMM/tlmm.dtsi"
+//#include "../SW/Core/Storage/UFS/ufs.dtsi"
+//#include "../SW/Core/WiredConnectivity/USB/usb.dtsi"
+#include "Core/MPROC/SMP2P/smp2p.dtsi"
+#include "Core/MPROC/GLINK/glink.dtsi"

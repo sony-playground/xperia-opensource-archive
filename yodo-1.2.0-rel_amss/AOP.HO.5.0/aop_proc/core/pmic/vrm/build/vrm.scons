@@ -1,0 +1,142 @@
+#===============================================================================
+#
+# vrm libs
+#
+# GENERAL DESCRIPTION
+#    vrm build script
+#
+# Copyright (c) 2016 - 2018 by Qualcomm Technologies Incorporated, All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/pmic/vrm/build/vrm.scons#2 $
+#  $DateTime: 2021/11/21 14:11:45 $
+#  $Author: pwbldsvc $
+#  $Change: 34100696 $
+#                      EDIT HISTORY FOR FILE
+#
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+#
+#===============================================================================
+Import('env')
+
+env = env.Clone()
+
+   
+env['CCFLAGS'] += '${ARMCC_STDC99_CMD}'
+
+
+
+#-------------------------------------------------------------------------------
+# Load sub scripts
+#-------------------------------------------------------------------------------
+
+env.LoadSoftwareUnits()
+ 
+#-------------------------------------------------------------------------------
+# Internal depends within CoreBSP
+#-------------------------------------------------------------------------------
+CBSP_APIS = [
+   'DAL',
+   'DEBUGTRACE',
+   'POWER',
+   'PMIC',
+   'SERVICES',
+   'SYSTEMDRIVERS',
+   'KERNEL',
+   'AOP_SETTINGS',
+   'PMIC_SETTINGS'
+]
+
+env.RequirePublicApi(CBSP_APIS)
+env.RequireRestrictedApi(CBSP_APIS)
+           
+env.RequireProtectedApi([
+    'PMIC',
+    ])
+
+INC_DIRS = [
+  "${INC_ROOT}/core/pmic/vrm/src",
+  "${INC_ROOT}/core/pmic/vrm/src/vreg",
+  "${INC_ROOT}/core/pmic/vrm/src/xob",
+  "${INC_ROOT}/core/pmic/vrm/hal",
+  "${INC_ROOT}/core/pmic/vrm/utils",
+  "${INC_ROOT}/core/pmic/vrm/utils/os/aop",
+  "${INC_ROOT}/core/pmic/vrm/target",
+]
+
+if env['CHIPSET'] in ['sm8350']:
+  INC_DIRS.append("${INC_ROOT}/core/pmic/vrm/target/lahaina")
+  INC_DIRS.append("${INC_ROOT}/core/pmic/vrm/target/lahaina/hwio")
+else:
+  INC_DIRS.append("${INC_ROOT}/core/pmic/vrm/target/${MSM_ID}")
+  INC_DIRS.append("${INC_ROOT}/core/pmic/vrm/target/${MSM_ID}/hwio")
+
+env.PublishPrivateApi('VRM', INC_DIRS)
+
+#-------------------------------------------------------------------------------
+# Sources & Libraries
+#-------------------------------------------------------------------------------
+MAIN_LIB_IMAGES = ['CORE_AOP']
+
+SRCPATH = "${BUILD_ROOT}/core/pmic/vrm"  
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+VRM_SOURCE_PATHS = [
+  SRCPATH + "/src",
+  SRCPATH + "/src/vreg",
+  SRCPATH + "/src/xob",
+  SRCPATH + "/utils",
+  SRCPATH + "/utils/os/aop",
+  SRCPATH + "/hal",
+]
+
+if env['CHIPSET'] in ['sm8350']:
+  VRM_SOURCE_PATHS.append(SRCPATH + "/target/lahaina")
+else:
+  VRM_SOURCE_PATHS.append(SRCPATH + "/target/${MSM_ID}")
+    
+VRM_SOURCES = []
+
+for src_path in VRM_SOURCE_PATHS:
+   VRM_SOURCES += env.GlobFiles(src_path + '/*.c', posix=True)
+
+VRM_BLD_SOURCES = [f.replace(SRCPATH, '${BUILDPATH}') for f in VRM_SOURCES]
+
+# Adding settings files to R-init builder
+if 'USES_RINIT_PARSER' in env:
+  if env['CHIPSET'] in ['sm8350']:
+    env.AddRinitInfo('CORE_AOP', {'files' : '${BUILD_ROOT}/core/pmic/vrm/target/lahaina'})
+  else:
+    env.AddRinitInfo('CORE_AOP', {'files' : '${BUILD_ROOT}/core/pmic/vrm/target/${MSM_ID}'})
+
+env.AddBinaryLibrary(MAIN_LIB_IMAGES, '${BUILDPATH}/vrm', VRM_BLD_SOURCES)
+
+LIB_NAME        = 'vrm'
+IMAGE_SOURCES   = ['CORE_AOP']
+
+env2 = env.Clone() #clone for init sources
+
+LIB_INIT_SOURCES = [
+  '${BUILDPATH}/src/init/vrm_driver_init.c',
+  '${BUILDPATH}/src/init/vrm_cmd_db.c',
+  '${BUILDPATH}/src/init/vrm_rsrc_init.c',
+  '${BUILDPATH}/hal/init/vrm_hal_init.c',
+  '${BUILDPATH}/hal/init/vrm_hal_rescfg_init.c',
+  '${BUILDPATH}/hal/init/vrm_hal_typecfg.c',
+  '${BUILDPATH}/hal/init/vrm_hal_votetable_init.c',
+  '${BUILDPATH}/utils/os/aop/init/vrm_os_init.c',
+]
+
+if LIB_INIT_SOURCES:
+    if env2['PM_MLONG_CFLAG'] is 'TRUE':
+      #only compile with mlong-calls for AOP_MMU_TARGETS, will add to code size
+      if env2['MSM_ID'] not in ['lanai']:
+        env2.Append(CCFLAGS    = ' -mlong-calls')
+    env2.AddBinaryLibrary(IMAGE_SOURCES, '${BUILDPATH}/'+LIB_NAME+'_init', LIB_INIT_SOURCES)
+    

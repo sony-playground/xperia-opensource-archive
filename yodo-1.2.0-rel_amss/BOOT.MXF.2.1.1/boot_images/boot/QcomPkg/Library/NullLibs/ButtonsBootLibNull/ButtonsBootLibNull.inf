@@ -1,0 +1,36 @@
+#/** @file ButtonsBootLibNull.inf
+#
+#  Null Buttons Boot lib if Buttons Boot lib is not available
+#
+#  Copyright (c) 2020, 2022 Qualcomm Technologies, Inc . All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/08/22   rama    Change the Base name to actual lib name
+# 02/18/20   ck      Initial revision
+#
+#==============================================================================
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ButtonsBootLib
+  FILE_GUID                      = C562E3B6-7661-4B16-9F0F-72F6702A59DE
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ButtonsBootLib
+
+[Sources]
+  ButtonsBootLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/XBLLoaderApi.dec  
+  QcomPkg/Library/MuslLib/MuslLib.dec
+
+

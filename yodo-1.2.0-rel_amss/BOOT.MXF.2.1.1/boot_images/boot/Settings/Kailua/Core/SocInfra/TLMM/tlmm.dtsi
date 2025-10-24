@@ -1,0 +1,12 @@
+&soc {
+  tlmm: pinctrl@f100000 {
+      compatible = "qcom,kailua-pinctrl";
+      reg = <0xf100000 0x100000>;
+      ngpios = <210>;
+      width = <0x1000>;
+      id = <0x0>;
+      version = <0x1>;
+      gpio-controller;
+      #gpio-cells = <2>;
+  };
+};

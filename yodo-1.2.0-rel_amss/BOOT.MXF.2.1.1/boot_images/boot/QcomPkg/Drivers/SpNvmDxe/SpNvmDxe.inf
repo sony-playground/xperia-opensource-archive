@@ -1,0 +1,75 @@
+#/** @file SpnvmDxe.inf
+#  
+#  QUALCOMM SPNVM Driver INF file
+#  
+#  Copyright (c) 2020-2021, Qualcomm Technologies Inc. All rights reserved.
+#  
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# --------     ---     ----------------------------------------------------------
+# 04/19/21     av      Open sTPM nvm channel only if TPM type is sTPM
+# 02/11/21     sn      Dependency on ChargerExDxe
+# 05/30/20     ll      initial release
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                 = 0x00010005
+  BASE_NAME                   = SpNvmDxe
+  FILE_GUID                   = 97ad158f-c621-41f1-8cde-354594f09d88
+  MODULE_TYPE                 = DXE_DRIVER
+  VERSION_STRING              = 1.0
+  ENTRY_POINT                 = sp_nvm_entry_point
+
+[Sources.common]
+  main/SpNvmDxe.c
+  main/NvmSegment.c
+  main/SecNvmManager.c
+  main/nvm_main.c
+  osGlue/osCommon_UEFI.c
+  command/Operation.c
+  command/IsCommitOp.c
+  command/OpenPartitionOp.c
+  command/CreatePartitionOp.c
+  command/CommitOp.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -O0
+ 
+[LibraryClasses]
+  DALModEnvLib
+  BaseMemoryLib
+  UefiLib
+  UefiDriverEntryPoint
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  BaseLib
+  QcomBaseLib
+  QcomLib
+  ULogApiLib
+  PrintLib
+  DebugLib
+[Guids]
+  gEfiEventExitBootServicesGuid    ## CONSUMES
+
+[Protocols]
+  gEfiSpcomProtocolGuid
+  gEfiSpNvmProtocolGuid
+  gChargerExProtocolGuid
+  gEfiRscHandlerProtocolGuid
+  gEfiClockProtocolGuid
+  gQcomTpmControlProtocolGuid
+
+[Depex]
+  TRUE

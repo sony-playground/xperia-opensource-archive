@@ -1,0 +1,5 @@
+c getvar:version
+c download:00001000
+b dump1
+c flash:boot
+w

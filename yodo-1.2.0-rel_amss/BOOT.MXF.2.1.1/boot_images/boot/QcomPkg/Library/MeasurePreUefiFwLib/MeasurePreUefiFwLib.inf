@@ -1,0 +1,34 @@
+#/** @file 
+#                   MeasurePreUefiFwLibRelease.inf
+#
+#
+# Copyright (c) 2022  Qualcomm Technologies, Inc. All rights reserved.
+#
+#  
+#**/
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who      what, where, why
+# -------    ---      --------------------------------------------------------
+# 03/26/22   shl      Removed "|RELEASE"
+# 06/21/21   shl      Added path
+# 05/24/21   shl      Initial version
+#=============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MeasurePreUefiFwLib
+  FILE_GUID                      = 6E4CEBE8-FF18-40D1-9FFA-82CD418E2685
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MeasurePreUefiFwLib
+
+[Binaries.Arm]
+  PE32|MeasurePreUefiFwLib.lib
+
+[Binaries.AARCH64]
+  PE32|MeasurePreUefiFwLib.lib
+
+

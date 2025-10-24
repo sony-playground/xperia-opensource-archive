@@ -1,0 +1,63 @@
+-API Stats-
+	API_Stats.rst
+	
+-Platform Overview-
+	Platform_Overview.rst
+	
+-Version & Description- 
+Initial Version 1.0
+    --Version 1.0--
+    The first version of Qualcomm Native UEFI Platform SDK with initial set of protocol APIs.
+	
+-Protocols-
+    --SECURITY--
+
+    --PMIC--
+
+    --POWER--
+
+    --SOCINFRA--
+
+    --INTERFACES--
+
+    --PERIPHERALS--
+
+    --MEMORY--
+	
+    --MULTIMEDIA--
+	
+    --CORE SERVICES & SMMU--label:tech_core
+
+    --UEFI_CORE--
+
+
+-Sample Applications-
+	gpio_app.rst
+	hsuart_app.rst
+	i2c_app.rst
+	pmicgpio_app.rst
+	spi_app.rst
+	usbhostporttest_app.rst
+	usbserialtest_app.rst
+	adctest_app.rst  
+	basicuefi_app.rst  
+	ddrfreqtest_app.rst  
+	ecatstest_app.rst    
+	hyptest_app.rst  
+	kerneltest_app.rst  
+	led_app.rst             
+	systemcache_app.rst  
+	ufs_app.rst       
+	boottest_app.rst   
+	ddrinfotest_app.rst  
+	eeprom_app.rst         
+	keypad_app.rst      
+	quantum_rtdvtest_app.rst  
+	thermal_app.rst      
+	usbfnloopback_app.rst  
+	usbmsdtest_app.rst
+
+
+
+
+

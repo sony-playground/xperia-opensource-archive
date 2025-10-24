@@ -1,0 +1,38 @@
+#/** @file boot_slvcomlib.inf
+#
+#  Build file for the Boot SLVCOM Library.
+#
+#  Copyright (c) 2022  Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who        what, where, why
+# --------   ---        ----------------------------------------------------------
+# 06/10/22   batta      Initial creation
+#=============================================================================
+
+[Defines]
+  INF_VERSION           = 0x00010005
+  BASE_NAME             = BootSlvcomLib
+  FILE_GUID             = 11970CA5-7353-4A7E-A1D6-F0B64C22576E
+  MODULE_TYPE           = BASE
+  VERSION_STRING        = 1.0
+  LIBRARY_CLASS         = BootSlvcomLib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror -DSAHARA_MAX_MEMORY_DATA_SIZE_IN_BYTES=0x1000
+
+[Sources]
+  boot_slvcom.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+
+[LibraryClasses]
+  BaseLib
+  SlvcomLib

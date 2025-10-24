@@ -1,0 +1,37 @@
+#/** @file MinidumpLibNull.inf
+#
+#  Null MinidumpLib if it is not available
+#
+#  Copyright (c) 2020, Qualcomm Technologies, Inc . All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/30/20   aus     Initial revision.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MinidumpLibNull
+  FILE_GUID                      = E57E540B-FEA5-46B0-8518-0798E64B4B49
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MinidumpLib
+
+[Sources]
+  MinidumpLibNull.c
+
+[Packages]
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomSdkPkg/SdkLoader.dec
+  QcomPkg/XBLLoaderApi.dec
+  MdePkg/MdePkg.dec
+  QcomPkg/Library/MinidumpLib/MinidumpLib.dec
+  
+

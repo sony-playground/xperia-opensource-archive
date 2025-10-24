@@ -1,0 +1,37 @@
+#/** @file DDITargetLibNull.inf
+#
+#  DDI Null Lib
+#
+#  Copyright (c) 2021 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+# when       who       what, where, why
+# --------   ---       ----------------------------------------------------------
+# 08/12/21   ck        Initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DDITargetLib
+  FILE_GUID                      = 36b057ae-ae41-4113-bd03-ac00b6a09e1e
+  MODULE_TYPE                    = SEC
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DDITargetLib
+
+
+[Sources.common]
+  DDITargetLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec

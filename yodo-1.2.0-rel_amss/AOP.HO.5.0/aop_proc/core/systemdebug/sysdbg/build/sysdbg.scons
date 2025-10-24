@@ -1,0 +1,183 @@
+#===========================================================================
+# SYSDBG build script
+#
+# Copyright (c) 2016-2017,2022 by Qualcomm Technologies, Incorporated
+# All Rights Reserved
+# Qualcomm Proprietary/GTDR
+#===========================================================================
+
+Import('env')
+
+env = env.Clone()
+
+env.Append(CCFLAGS = ' -O1')
+env.Append(CCFLAGS = ' -mlong-calls')
+env.Append(CCFLAGS = ' -fno-builtin') # Not to use __aeabi_memcpy()
+
+SRCPATH = '..'
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+#if env.IsBuildInternal():
+if not env.PathExists('${BUILD_ROOT}/core/systemdebug/sysdbg/src/target/${CHIPSET}'):
+   env.PrintWarning('SYSDBG driver not supported on this target yet. Using stub driver.')
+   env['MSM_ID'] = 'stub'
+   env['CHIPSET'] = 'stub'
+   
+# Compilation options
+env.Append(CFLAGS = '${ARMCC_STDC99_CMD}')
+
+# ETFETB Base address 
+if env['MSM_ID'] == 'pinnacle':
+	env.Append(CPPDEFINES = ["ETFETB_BASE=QDSS_AOSS_TMC_TMC_CXTMC_F128W64K_REG_BASE"])
+
+if env['MSM_ID'] == 'kuno':
+	env.Append(CPPDEFINES = ["ETFETB_BASE=QDSS_AOSS_TMC_TMC_CXTMC_F128W16K_REG_BASE"])
+
+if env['MSM_ID'] == 'kailua':
+	env.Append(CPPDEFINES = ["ETFETB_BASE=QDSS_AOSS_APB_TMC_TMC_CXTMC_F128W64K_REG_BASE"])
+
+if env['MSM_ID'] == 'hamoa':
+	env.Append(CPPDEFINES = ["ETFETB_BASE=QDSS_AOSS_APB_TMC_TMC_CXTMC_F128W64K_REG_BASE"])
+	
+if env['MSM_ID'] == 'lanai':
+	env.Append(CPPDEFINES = ["ETFETB_BASE=QDSS_AOSS_APB_TMC_TMC_CXTMC_F128W64K_REG_BASE"])
+	
+if env['MSM_ID'] == 'kapiti':
+	env.Append(CPPDEFINES = ["ETFETB_BASE=QDSS_AOSS_APB_TMC_TMC_CXTMC_F128W64K_REG_BASE"])
+	
+# SWAO ETB Base address 
+env.Append(CPPDEFINES = ["SWAOETB_BASE=ETFETB_BASE "])
+
+# LPASS ETB Base address 
+env.Append(CPPDEFINES = ["LPASSETB_BASE=QDSS_LPASS_LPI_LPASS_ETFETB_LPASS_ETFETB_CXTMC_F64W16K_REG_BASE"])
+# SSC ETB Base address 
+env.Append(CPPDEFINES = ["SSCETB_BASE=QDSS_SSC_SSC_ETFETB_SSC_ETFETB_CXTMC_F32W16K_REG_BASE"])
+
+# ETR Base address
+env.Append(CPPDEFINES = ["ETR_BASE=QDSS_ETR_ETR_CXTMC_R64W32D_REG_BASE"])  
+# ETR1 Base address
+env.Append(CPPDEFINES = ["ETR1_BASE=QDSS_ETR1_ETR1_CXTMC_R64W32D_REG_BASE"])  
+
+# This is the magic number that is used by all of system debug code
+env.Append(CPPDEFINES = ["SYSDBG_MAGIC_NUMBER=0x42445953"])
+
+#-------------------------------------------------------------------------------
+# TARGET-SPECIFIC DEFINES
+#-------------------------------------------------------------------------------
+
+
+if env['CHIPSET'] in ['kuno']:
+   env.Append(CPPDEFINES = 'KUNO_STUBS')
+   
+if env['CHIPSET'] in ['lanai']:
+   env.Append(CPPDEFINES = 'RISCV_TARGET')
+   env.Append(CPPDEFINES = 'LANAI_STUBS') # TODO_HVM
+   env.Append(CPPDEFINES = ["SHARED_IMEM_BASE=0x74680000"])
+elif env['CHIPSET'] in ['pinnacle']:
+   env.Append(CPPDEFINES = 'PINNACLE_STUBS')
+   env.Append(CPPDEFINES = ["SHARED_IMEM_BASE=0x74680000"])
+else:
+    env.Append(CPPDEFINES = ["SHARED_IMEM_BASE=0x746AA000"])
+
+#-------------------------------------------------------------------------------
+# HWIO
+#-------------------------------------------------------------------------------
+
+if env.has_key('HWIO_IMAGE'):
+  # Modules depend on which CHIPSET is being build
+  modules = [
+         'AOSS_.*',
+         'RPMH_.*',
+         'AOP',
+         'AOP_DEC',
+         'RPMH_DDRAUX_.*',
+         'APSS_.*',         
+         'GCC_CLK_CTL_REG',
+         'G_CTRL_CNTR',         
+         'QDSS_ETR.*',
+         'QDSS_.*',
+         'QDSS_AOSS_.*',
+         'QDSS_LPASS_LPI_.*',	 
+         'QDSS_SSC_SSC_.*',
+         'TCSR_TCSR_.*',         
+         'PMIC.*',
+         'SPMI.*',
+         'MSS.*',
+         'MPSS.*',
+         'SSC.*',
+         'TURING.*',
+         'LPASS.*',         
+         'RAMBLUR_PIMEM_REGS.*',
+         'QDSS_APSS_APSS.*',
+         'LLCC.*',
+         'GEM_NOC', 
+         'DPCC_.*',
+         'MC_BROADCAST_.*',         
+         'AOP_F0_QTMR_V1_F0',
+         'GCC_GPLL4_.*',
+      ]
+  env.AddHWIOFile('HWIO', [
+      {
+         'filename': '${INC_ROOT}/core/systemdebug/sysdbg/inc/target/${CHIPSET}/sysdbg_hwio.h',
+         'output-phys': True,
+         'modules': modules,
+         'header': '#include "msmhwiobase.h"'
+      }
+   ])
+
+
+#
+#------------------------------------------------------------------------------
+# Add API folders
+#------------------------------------------------------------------------------
+
+CBSP_API = [
+  'DEBUGTRACE',
+  'MPROC',
+  'POWER',
+  'POWER_UTILS',
+  'SYSTEMDRIVERS',
+  'SYSDBG_SYSTEMDRIVERS_CLOCK',
+  'SYSTEMDEBUG',
+  'DBGINFOLIB',  
+  'PMIC',
+  # Keep it last as contains incorrect version of comdef.h
+  'KERNEL'
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+env.PublishPrivateApi('SYSDBG_SYSTEMDRIVERS_CLOCK', [
+    '${BUILD_ROOT}/core/systemdrivers/clock/inc',
+    '${BUILD_ROOT}/core/systemdrivers/clock/hw/${CHIPSET}/inc',
+])  
+
+if env['CHIPSET'] in ['waipio','fillmore','kailua','netrani','palima','aurora','kapiti','pinnacle', 'kuno','lanai','hamoa']:
+  SYSDBG_SOURCES = [
+     '${BUILDPATH}/src/sysdbg_main.c',
+     '${BUILDPATH}/src/sysdbg_mem_dump.c',
+     '${BUILDPATH}/src/sysdbg_reset.c',
+     '${BUILDPATH}/src/sysdbg_log.c',
+     '${BUILDPATH}/src/sysdbg_err.c',
+     '${BUILDPATH}/src/sysdbg_chipinfo.c',
+     '${BUILDPATH}/src/target/${CHIPSET}/sysdbg_timer.c',
+     '${BUILDPATH}/src/target/${CHIPSET}/sysdbg_qdss.c',
+     '${BUILDPATH}/src/target/${CHIPSET}/sysdbg_target.c',
+     '${BUILDPATH}/src/target/${CHIPSET}/sysdbg_target_data.c',
+     '${BUILDPATH}/src/target/${CHIPSET}/sysdbg_target_clk.c',  
+     '${BUILDPATH}/src/target/${CHIPSET}/sysdbg_ddr.c',
+     '${BUILDPATH}/src/target/${CHIPSET}/sysdbg_dload.c',
+     '${BUILDPATH}/src/target/${CHIPSET}/sysdbg_${CHIPSET}_asm.s',
+  ]
+else:
+  SYSDBG_SOURCES = [
+     '${BUILDPATH}/src/target/${CHIPSET}/sysdbg_main.c',
+  ]
+  
+# Add sources to compile
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/AOP_SDI', SYSDBG_SOURCES)
+
+
+
+

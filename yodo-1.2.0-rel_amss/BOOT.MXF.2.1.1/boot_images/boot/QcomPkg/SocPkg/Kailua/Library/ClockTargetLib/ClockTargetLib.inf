@@ -1,0 +1,48 @@
+#/** @file ClockTargetLib.inf
+#
+#  XBL Loader Clock Driver build file.
+#  
+#  Copyright (c) 2017-2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ClockTargetLib
+  FILE_GUID                      = 9FAC2E72-4842-F555-2E0B-59807D44C66F
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ClockTargetLib
+
+[Sources]
+  # Include Header
+  ../../Include/msmhwiobase.h
+  ../../../../Include/Library/CoreMsgRam.h
+  ../../../../Include/api/systemdrivers/ClockBoot.h
+  ../../../Library/ClockBaseLib/hal/inc/HALclkXBL.h
+  ../../../Library/ClockBaseLib/hal/inc/HALclkXBLInternal.h
+  ../../../Library/ClockBaseLib/hal/hw/HALclkGenericPLL.h
+  ../../../Library/ClockBaseLib/inc/ClockBSP.h
+  ../../../Library/ClockBaseLib/inc/ClockDriver.h
+  inc/HALclkHWIO.h
+
+
+[Sources.common]
+  src/ClockTarget.c
+  src/HALclkTarget.c
+  image/Loader/ClockXBL.c
+  image/Loader/ClockBSP.c
+  image/Loader/ClockSec.c
+ 
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec  
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  
+[LibraryClasses]
+  ClockBaseLib
+  IcbCfgLib

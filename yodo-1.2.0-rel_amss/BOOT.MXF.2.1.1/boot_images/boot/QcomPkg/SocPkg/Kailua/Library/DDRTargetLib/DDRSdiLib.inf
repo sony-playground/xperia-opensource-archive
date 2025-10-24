@@ -1,0 +1,56 @@
+#/** @file DDRSdiLib.inf
+#
+#  DDR SDI Lib
+#  
+#  Copyright (c) 2019-2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+# when       who       what, where, why
+# --------   ---       ----------------------------------------------------------
+# 05/29/20   rama      Add SmcLib.dec
+# 06/21/19   yps       Removed binaries section
+# 01/25/19   daisond   Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DDRSdiLib
+  FILE_GUID                      = B90EACA0-47CE-79C4-C1BA-14A4973FF8BC
+  MODULE_TYPE                    = SEC
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DDRSdiLib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DXBLSDICOMPONENT -DUSE_LOADER_UTILS -DFEATURE_BOOT_EXTERN_DDR_COMPLETED -DBUILD_BOOT_CHAIN
+  
+[Sources.common]
+# SDI source
+  ../../../Kailua/Library/DDRTargetLib/ddr_sdi_wrapper.c
+  #../../../ddr_sdi_log.c
+  ../../../../Library/DDRLib/common/params/v5/ddr_params.h
+  #../../../ddr_sdi_log.h
+  ../../../Kailua/Library/DSFTargetLib/interface/src/ddr_fw_interface.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/SocPkg/Kailua/Library/DDRTargetLib/DDRTargetLibPkg.dec
+  QcomPkg/SocPkg/Kailua/Library/DSFTargetLib/DSFTargetLibPkg.dec
+  QcomPkg/Library/DDRLib/DDRLibPkg.dec
+  QcomSdkPkg/SdkLoader.dec
+  QcomPkg/XBLLoader/SmcLib/SmcLib.dec
+
+[LibraryClasses]
+  MuslLib
+  ClockTargetLib
+  IcbTargetLib
+  DDRFwSdiLib

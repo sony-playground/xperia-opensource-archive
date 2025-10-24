@@ -1,0 +1,35 @@
+#/** @file EL1CpuInitLib.inf
+#
+#  Cpu init lib for EL1
+#
+#  Copyright (c) 2020 , 2022 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 06/27/22   krd     Added proper path for sources.ARM
+# 11/03/20   yps     Initial Revision
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = CpuInitLib
+  FILE_GUID                      = 614964F4-F194-4967-91E4-E87A0D93AC8D
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = CpuInitLib
+
+[Sources.Arm]
+  ARM/sbl1.S |GCC
+[Sources.AARCH64]
+  Aarch64/Aarch64_EL1.s |GCC
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  

@@ -1,0 +1,50 @@
+/*------------------------------------------------------------------------------
+   mproc-glink device-tree source. 
+------------------------------------------------------------------------------*/
+/*!
+   This file contains GLINK settings specific to SOC.
+*/
+
+/*------------------------------------------------------------------------------
+ Copyright (c) 2022 Qualcomm Technologies, Inc. All Rights Reserved.
+ Qualcomm Technologies, Inc. Confidential and Proprietary.
+------------------------------------------------------------------------------*/
+
+#include "smem_host_type.h"
+#include "glink_defines.h"
+#include "ipcc_defines.h"
+
+&sw {
+   glink {
+        compatible = "qcom,glink";
+		xport-smem-config {
+		    edge-01{
+			remote-host = <SMEM_ADSP>;
+		    fifo-size = <0x4000>;
+            mtu-size = <0x1000>;
+			irq-out = <IPCC_C_LPASS GLINK_IPCC_IRQ>;
+			default-qos = <1>;
+			custom-fifo-alloc = <0>;
+			clear-interrupt = <0>;
+			};
+			edge-02{
+			remote-host = <SMEM_CDSP>;
+		    fifo-size = <0x4000>;
+            mtu-size = <0x1000>;
+			irq-out = <IPCC_C_CDSP GLINK_IPCC_IRQ>;
+			default-qos = <1>;
+			custom-fifo-alloc = <0>;
+			clear-interrupt = <0>;
+			};
+			edge-03{
+			remote-host = <SMEM_MODEM>;
+		    fifo-size = <0x4000>;
+            mtu-size = <0x1000>;
+			irq-out = <IPCC_C_MPSS GLINK_IPCC_IRQ>;
+			default-qos = <1>;
+			custom-fifo-alloc = <0>;
+			clear-interrupt = <0>;
+			};
+        };
+  };		
+};

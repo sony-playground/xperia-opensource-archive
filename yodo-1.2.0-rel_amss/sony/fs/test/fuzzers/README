@@ -1,0 +1,66 @@
+# Building
+
+1. Install Clang (version 4.0 is assumed, but other version might work)
+
+The Clang compiler from the LLVM project should be used. Theoretically, it's
+possible to use GCC, but Clang has better support for the different sanitizers
+used to detect issues.
+
+The libFuzzer library is used to drive the fuzzers. This library contains the
+main() function, and the necessary code for the coverage guided mutation of test
+data.
+
+Clang can be installed in a number of ways, but probably the easiest on Ubuntu
+is to follow the instructions found at http://apt.llvm.org, replicated below.
+
+Ubuntu 14.04:
+
+Create /etc/apt/sources.list.d/llvm.list (exact filename can be changed), with
+the following contents:
+
+  deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-4.0 main
+  deb-src http://apt.llvm.org/trusty/ llvm-toolchain-trusty-4.0 main
+
+Next, install Clang and libFuzzer:
+
+  # apt-get update
+  # apt-get install clang-4.0 libfuzzer-4.0-dev
+
+In some cases, libstdc++ also needs to be updated to link with libFuzzer. The
+easiest way of doing that is to install newer GCC versions from the Ubuntu
+toolchain PPA:
+
+  # add-apt-repository ppa:ubuntu-toolchain-r/test
+  # apt-get update
+  # apt-get install g++-6 gcc-6
+
+This step can fail due to dependency issues. If that is the case, a workaround
+is to use aptitude (or any other package manager which resolves dependencies) to
+install, and accept the solution which upgrades libstdc++ (among others).
+
+  # aptitude install g++-6 gcc-6
+
+2. Build with make
+
+To build the fuzzers, just invoke make; the Makefile should do the rest. The
+Makefile assumes that the libFuzzer library is installed according to the
+instructions above; if it isn't, the LIBFUZZER variable can be set to point to
+the right location.
+
+  $ make
+
+# Running
+
+Once the fuzzers are built, there are a number of executable files in the
+current directory. To run a fuzzer, the executable is started by providing a
+directory containing the initial corpus on the command line, like so:
+
+  $ ./fuzzer <corpus_dir>
+
+The corpus directory can be empty, but to improve the results of fuzzers, it is
+always a good idea to provide some example files to start from.
+
+A fuzzer accepts a number of options. A list of all options is available by
+providing the "-help=1" option:
+
+  $ ./fuzzer -help=1

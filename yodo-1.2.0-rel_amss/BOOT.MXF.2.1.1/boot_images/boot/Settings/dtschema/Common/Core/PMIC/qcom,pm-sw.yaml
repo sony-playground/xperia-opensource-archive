@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,pm-sw.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm PM SW
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   Qualcomm PMIC SW confifuration details
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,pm-sw
+  
+  verbose:
+    description: verbose
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  driver-post-init:
+    description: driver-post-init
+    $ref: /schemas/types.yaml#/definitions/uint32-array
+   
+  apply-rsns-trim:
+    description: apply-rsns-trim
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  rsns-trim-value:
+    description: rsns-trim-value
+    $ref: /schemas/types.yaml#/definitions/uint32
+
+  primming-enable:
+    description: primming-enable
+    $ref: /schemas/types.yaml#/definitions/uint32
+      
+required:
+  - compatible
+  - verbose
+  - driver-post-init
+  - apply-rsns-trim
+  - rsns-trim-value
+  - primming-enable
+
+
+additionalProperties: false
+
+examples:
+  - |
+    sw-config {
+      compatible = "qcom,pm-sw";  
+      
+      verbose = <0>; /*Set to TRUE will output verbose PON reason into uart log. Set to 2 will output verbose PON reason and raw data into uart log By default setting to FALSE to avoid impacting boot performance*/
+      driver-post-init = <1 0 0 1 1>;  /*PM_CLK_ENABLE   PM_BUSID_0   PMIC_A  PM_CLK_RF_1  PM_TRUE*/
+      apply-rsns-trim = <0>;
+      rsns-trim-value = <0>;
+      primming-enable = <0>;
+    };

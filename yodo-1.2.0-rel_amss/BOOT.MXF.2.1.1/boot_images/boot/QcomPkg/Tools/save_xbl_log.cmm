@@ -1,0 +1,49 @@
+;============================================================================
+;  Name:
+;    boot_print_logs.cmm
+;
+;  Description:
+;     Script for printing boot logs
+;
+; Copyright (c) 2022 Qualcomm Technologies Incorporated.
+; All Rights Reserved.
+; Qualcomm Technologies Confidential and Proprietary
+;
+;----------------------------------------------------------------------------
+;============================================================================
+;
+;                        EDIT HISTORY FOR MODULE
+;
+;
+;when         who     what, where, why
+;----------   ---     ----------------------------------------------------------
+;09/15/22     rama    Initial Version
+;============================================================================;
+
+ENTRY &file
+
+if (symbol.exist(logger_ptr))
+(
+  &log_buff_addr = v.value((*(logger_ptr)).log_meta_info.log_buf_start)
+  &log_buff_size = v.value((*(logger_ptr)).log_meta_info.log_buf_size)
+  WINPOS 40% 35% 30% 35% 0. 0. W004 Normal "LOGS"
+  data.dump &log_buff_addr++&log_buff_size /string /nohex
+
+  if("&file" != "")
+  (
+    data.save.binary &file &log_buff_addr++&log_buff_size
+  )
+  else
+  (
+    data.save.binary C:\Temp\xbl_log.txt &log_buff_addr++&log_buff_size
+  )
+)
+else
+(
+  print "Symbols for logger not found"
+)
+
+RETURN
+
+
+

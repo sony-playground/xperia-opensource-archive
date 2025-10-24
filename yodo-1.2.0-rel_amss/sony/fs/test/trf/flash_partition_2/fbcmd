@@ -1,0 +1,5 @@
+c download:00006000
+b ufs_gpt_4_swap
+c Repartition:4
+c Get-partition-list
+w

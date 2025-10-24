@@ -1,0 +1,77 @@
+/*
+#====*====*====*====*====*====*====*====*====*====*====*====*====*====*====*
+#
+#                     SCATTER LOADING DESCRIPTION FILE
+#
+#  Copyright (c) 2020 by Qualcomm Technologies, Inc. All Rights Reserved.
+#  QUALCOMM Proprietary and Confidential.
+#
+#  GENERAL DESCRIPTION
+#
+#  The scatter loading description file is used to define the AOP memory map.
+#
+#*====*====*====*====*====*====*====*====*====*====*====*====*====*====*====*/
+
+#define AOPSS_DEVCFG_START      0x81C80000
+#define AOPSS_DEVCFG_END        0x81CA0000
+#define AOPSS_DEVCFG_SIZE       (AOPSS_DEVCFG_END - AOPSS_DEVCFG_END)
+
+PHDRS
+{
+  AOPSS_DEVCFG_DATA PT_LOAD;
+  AOPSS_DEVCFG_CODE PT_LOAD;
+}
+
+SECTIONS
+{
+  /*================================================================================
+   *
+   * DATA section
+   *
+   *================================================================================
+   */
+   AOPSS_DEVCFG_DATA_TOP AOPSS_DEVCFG_START:
+  {
+    *(aop_devcfg_top_sec)
+  } : AOPSS_DEVCFG_DATA
+
+  AOPSS_DEVCFG_DATA_REST:
+  {
+    *(.data .data*)
+    *(.bss .bss*)
+    KEEP(*\devcfg_main.o(.data*))
+    /* ToDo: Remove all references to pm_*_reclaim_pool */
+    *(pm_ddr_reclaim_pool)
+    *(pm_dram_reclaim_pool)
+  } : AOPSS_DEVCFG_DATA
+
+  . = ALIGN(0x1000);
+
+  /*================================================================================
+   *
+   * CODE section
+   *
+   *================================================================================
+   */
+  AOPSS_DEVCFG_CODE_ALL :
+  {
+    *(InRoot$$Sections .text .text*)
+    *(.rodata .rodata*)
+  } : AOPSS_DEVCFG_CODE
+
+  __aop_devcfg_size_left = AOPSS_DEVCFG_END - .;
+
+  AOPSS_DEVCFG_CODE_ZI:
+  {
+    . = . + __aop_devcfg_size_left;
+  } : AOPSS_DEVCFG_CODE
+  ASSERT(. <= AOPSS_DEVCFG_END, "Overflow past AOP_DEVCFG_END");
+
+  /DISCARD/ :
+  {
+    * (.ARM.extab*)
+    * (.ARM.exid*)
+    * (.got)
+  }
+
+}

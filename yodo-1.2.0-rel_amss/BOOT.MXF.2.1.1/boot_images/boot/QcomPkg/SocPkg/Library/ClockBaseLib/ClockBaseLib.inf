@@ -1,0 +1,53 @@
+#/** @file ClockBaseLib.inf
+#
+#  XBL Loader Clock Driver base library build file.
+#
+#  Copyright (c) 2017-2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ClockBaseLib
+  FILE_GUID                      = 9FAC2E72-4842-F555-2E0B-59807D44C66F
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ClockBaseLib
+
+[Sources]
+  hal/inc/HALclkXBL.h
+  hal/inc/HALclkXBLInternal.h
+  inc/ClockBSP.h
+  inc/ClockDriver.h
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Wno-unused-but-set-variable
+
+[Sources.common]
+  src/ClockDriver.c
+  hal/src/HALclk.c
+  hal/hw/HALclkLucidEvoPLL.c
+  hal/hw/HALclkTaycanPLL.c
+  hal/hw/HALclkPongoEvoPLL.c
+  hal/hw/HALclkZondaEvoPLL.c
+  hal/hw/HALclkLucidOlePLL.c
+  hal/hw/HALclkPongoOlePLL.c
+  hal/hw/HALclkZondaOlePLL.c
+  hal/hw/HALclkLucidEkaPLL.c
+  hal/hw/HALclkPongoEkaPLL.c
+  hal/hw/HALclkZondaEkaPLL.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BootUtilLib
+  BusyWaitLib
+  ChipInfoCommonLib
+  CoreUtilsLib

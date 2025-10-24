@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,tlmm.yaml#
+$schema: http://devicetree.org/meta-schemas/gpios.yaml#
+
+title: Qualcomm waipio-pinctrl
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   The Qualcomm compatible node...
+   Links to any data sheet or HW specific details
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    enum:
+      - qcom,waipio-pinctrl
+      - qcom,kailua-pinctrl
+      - qcom,lassen-pinctrl
+      - qcom,aurora-pinctrl
+      - qcom,hamoa-pinctrl
+      - qcom,lanai-pinctrl
+      - qcom,pinnacles-pinctrl
+ 
+  reg:
+    maxItems: 1
+    items:
+      - description: core registers
+  
+  ngpios:
+    maxItems: 1
+  
+  width:
+    maxItems: 1
+  
+  id:
+    maxItems: 1
+  
+  version:
+    maxItems: 1
+  
+  qcom,sleep-config:
+    maxItems: 1
+  
+  gpio-controller: true
+  
+  '#gpio-cells':
+    maxItems: 1
+
+required:
+  - compatible
+  - reg
+  - ngpios
+  - width
+  - id
+
+additionalProperties: false
+
+examples:
+  - |
+    tlmm: pinctrl@f100000{
+        compatible = "qcom,waipio-pinctrl";
+        reg = <0xf100000 0x100000>;
+        ngpios = <210>;
+        width = <0x1000>;
+        id = <0x0>;
+        version = <0x1>;
+        
+        gpio-controller;
+        #gpio-cells = <2>;
+    };

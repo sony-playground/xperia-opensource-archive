@@ -1,0 +1,89 @@
+#=============================================================================
+# PMIC TARGET LIBRARY
+#
+# Target:    All
+# Processor: All
+#
+#=============================================================================
+# $Header: //components/rel/aop.ho/5.0/aop_proc/core/pmic/pm/target/build/pmic_target.scons#6 $
+#=============================================================================
+#  Copyright 2010-2018 Qualcomm Technologies Incorporated.
+#  All Rights Reserved.
+#  QUALCOMM Proprietary/GTDR
+#=============================================================================
+
+Import('env')
+
+IMAGE_SOURCES   = ['CORE_AOP']
+#-----------------------------------------------------------------------------
+# Invoke chipset build file
+#-----------------------------------------------------------------------------
+
+if env['CHIPSET'] in ['sdm845']:
+  env.SConscript('../sdm845_pm8998_pmi8998/build/pmic_target_rpm.scons', exports='env')
+#SM6150_CHANGES
+if env['CHIPSET'] in ['sm6150']:
+  env.SConscript('../sm6150_pm6150_pm6150l/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['TalosAU']:
+  env.SConscript('../TalosAU_pm6150_pm6150l/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['sdm670']:
+  if env['CHIPSET_PMIC'] in ['pm670']:
+     env.SConscript('../sdm670_pm660_pm660l/build/pmic_target_rpm.scons', exports='env')
+  else:
+     env.SConscript('../qcs605_pm660_pm8005/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['sdx24']:
+  env.SConscript('../sdx24_pmx24/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['sdx55']:
+  env.SConscript('../sdx55_pmx55/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['sm8250']:
+  env.SConscript('../sm8250_pm8250_pm8250l/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['Saipan']:
+  env.SConscript('../Saipan_pmSaipan_pmSaipanl/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['sdm855']:
+  env.SConscript('../sdm855_pm855_pm855l/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['sdm1000']:
+  env.SConscript('../sdm1000_pmc1000/build/pmic_target_rpm.scons', exports='env')
+#SDM855au_CHANGES
+if env['CHIPSET'] in ['sdm855au']:
+  env.SConscript('../sdm855_pm855_pm855l/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['sm7150']:
+  env.SConscript('../sm7150_pm7150_pm7150l/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['sm8350']:
+  env.SConscript('../lahaina_pmlahainaB_pmlahainaC/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['makena']:
+  env.SConscript('../makena_pmmakenaB_pmmakenaC/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['bitra']:
+  env.SConscript('../bitra_pmbitra_pmbitral/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['cedros']:
+  env.SConscript('../cedros_pmcedrosB_pmcedrosC/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['kodiak']:
+  env.SConscript('../kodiak_pmkodiakB_pmkodiakC/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['Olympic']:
+  env.SConscript('../Olympic_pmx65/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['makenaau']:
+  env.SConscript('../makenaau_pmmakenaauB_pmmakenaauC/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['fillmore']:
+  env.SConscript('../fillmore_pmfillmoreB_pmfillmoreC/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['aurora']:
+  env.SConscript('../aurora_pmauroraB_pmauroraC/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['kailua']:
+  env.SConscript('../kailua/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['pinnacle']:
+  env.SConscript('../pinnacle/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['kuno']:
+  env.SConscript('../kuno/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['lanai']:
+  env.SConscript('../lanai/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['hamoa']:
+  env.SConscript('../hamoa/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['kapiti']:
+  env.SConscript('../kapiti/build/pmic_target_rpm.scons', exports='env') 
+if env['CHIPSET'] in ['lassen']:
+  env.SConscript('../lassen_pmlassenB_pmlassenC/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['netrani']:
+  env.SConscript('../netrani_pmnetraniB_pmnetraniC/build/pmic_target_rpm.scons', exports='env')
+if env['CHIPSET'] in ['waipio']:
+    if env['CHIPSET_PMIC'] in ['waipio']:
+        env.SConscript('../waipio_pmwaipioB_pmwaipioC/build/pmic_target_rpm.scons', exports='env')
+    elif env['CHIPSET_PMIC'] in ['palima']:
+        env.SConscript('../palima_pmpalimaB_pmpalimaC/build/pmic_target_rpm.scons', exports='env')

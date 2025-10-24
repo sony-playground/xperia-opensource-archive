@@ -1,0 +1,40 @@
+#/** @file QSaharaServer.inf
+#
+#  INF used by packit.py for including tools files into packed build.
+#
+#  Copyright (c) 2022 Qualcomm Technologies Inc. All rights reserved.
+#
+#**/
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when        who  what, where, why
+# ----------  ---  ----------------------------------------------------------
+# 2022-04-27  ck   Added ethernet files and readme
+# 2022-03-17  yps  Added QsaharaServer linux version
+# 2022-02-11  yps  Initial release
+#==============================================================================
+
+[Sources]
+
+[UserExtensions.PackIt.PackIn]
+  ./QSaharaServer.exe
+  ./src
+  ./src/comm.c
+  ./src/ethernet_comm_lnx.c
+  ./src/ethernet_comm_win.c
+  ./src/external_utils.c
+  ./src/kickstart.c
+  ./src/kickstart_log.c
+  ./src/kickstart_utils.c
+  ./src/Readme.txt
+  ./src/sahara_protocol.c
+  ./src/windows_utils.c
+  ./src/uart_comm_lnx.c
+  ./src/uart_comm_win.c
+  ./src/usb_comm_lnx.c
+  ./src/usb_comm_win.c
+  ./src/transport_protocol.c
+  ./QSaharaServer
+  

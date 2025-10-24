@@ -1,0 +1,303 @@
+&vadc {
+   #address-cells = <1>;
+   #size-cells = <0>;
+   pm8350b: spmi-vadc@3 {
+      compatible = "qcom,spmi-vadc";
+      reg = <0x31>;
+   
+      use-interrupt = <0>;
+      fullscale-code = <0x70e4>;
+      fullscale-uV = <1875000>;
+      fullratiometric-code = <0x4000>;
+      read-timeout-uS = <500000>;
+      ldo-settling-uS = <67>;
+      slave-id = <0>;
+      peripheral-id = <0x31>;
+      master-id = <0>;
+      pmic-device = <0>;
+   
+      vadc_ch_cfg { 
+         VPH_PWR {
+         	hw-channel = <0x8e>;
+         	settling-delay-uS = <0>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "abs ";
+         	scaling-factor = <1 3>;
+         	offset-factor = <0>;
+         	scaling-method = "tomV";
+         	pull-up-res = <0>;
+				adc-sid = <0x4>;
+         	int-table;
+         };
+         
+         PMIC_TEMP3 {
+         	hw-channel = <0x3>;
+         	settling-delay-uS = <0>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "abs ";
+         	scaling-factor = <1 1>;
+         	offset-factor = <(-273000)>;
+         	scaling-method = "xtuV";
+         	pull-up-res = <0>;
+				adc-sid = <0x4>;
+         	int-table = &pmic_die_temp_tb;
+         };
+         
+         CHG_TEMP {
+         	hw-channel = <0x10>;
+         	settling-delay-uS = <0>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "abs ";
+         	scaling-factor = <1 1>;
+         	offset-factor = <0>;
+         	scaling-method = "tomV";
+         	pull-up-res = <0>;
+				adc-sid = <0x4>;
+         	int-table;
+         };
+         
+         BATT_THERM {
+         	hw-channel = <0x44>;
+         	settling-delay-uS = <100>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "raio";
+         	scaling-factor = <1 1>;
+         	offset-factor = <(-273)>;
+         	scaling-method = "xtr ";
+         	pull-up-res = <100000>;
+				adc-sid = <0x4>;
+         	int-table = &sys_therm_tb;
+         };
+         
+         BATT_THERM_PU_30K {
+         	hw-channel = <0x24>;
+         	settling-delay-uS = <100>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "raio";
+         	scaling-factor = <1 1>;
+         	offset-factor = <(-273)>;
+         	scaling-method = "xtr ";
+         	pull-up-res = <30000>;
+				adc-sid = <0x4>;
+         	int-table = &sys_therm_tb;
+         };
+         
+         BATT_THERM_PU_400K {
+         	hw-channel = <0x64>;
+         	settling-delay-uS = <100>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "raio";
+         	scaling-factor = <1 1>;
+         	offset-factor = <(-273)>;
+         	scaling-method = "xtr ";
+         	pull-up-res = <400000>;
+				adc-sid = <0x4>;
+         	int-table = &sys_therm_tb;
+         };
+         
+         BATT_ID_OHMS {
+         	hw-channel = <0x45>;
+         	settling-delay-uS = <100>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "raio";
+         	scaling-factor = <1 1>;
+         	offset-factor = <0>;
+         	scaling-method = "res ";
+         	pull-up-res = <100000>;
+				adc-sid = <0x4>;
+         	int-table;
+         };
+         
+         BATT_ID_OHMS_PU_30K {
+         	hw-channel = <0x25>;
+         	settling-delay-uS = <100>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "raio";
+         	scaling-factor = <1 1>;
+         	offset-factor = <0>;
+         	scaling-method = "res ";
+         	pull-up-res = <30000>;
+				adc-sid = <0x4>;
+         	int-table;
+         };
+         
+         BATT_ID_OHMS_PU_400K {
+         	hw-channel = <0x65>;
+         	settling-delay-uS = <100>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "raio";
+         	scaling-factor = <1 1>;
+         	offset-factor = <0>;
+         	scaling-method = "res ";
+         	pull-up-res = <400000>;
+				adc-sid = <0x4>;
+         	int-table;
+         };
+         
+         VBATT {
+         	hw-channel = <0x8f>;
+         	settling-delay-uS = <0>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "abs ";
+         	scaling-factor = <1 3>;
+         	offset-factor = <0>;
+         	scaling-method = "tomV";
+         	pull-up-res = <0>;
+				adc-sid = <0x4>;
+         	int-table;
+         };
+         
+         VBATT_2S {
+         	hw-channel = <0x8f>;
+         	settling-delay-uS = <0>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "abs ";
+         	scaling-factor = <1 6>;
+         	offset-factor = <0>;
+         	scaling-method = "tomV";
+         	pull-up-res = <0>;
+				adc-sid = <0x4>;
+         	int-table;
+         };
+         
+         VBATT_2S_MID {
+         	hw-channel = <0x96>;
+         	settling-delay-uS = <0>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "abs ";
+         	scaling-factor = <1 3>;
+         	offset-factor = <0>;
+         	scaling-method = "tomV";
+         	pull-up-res = <0>;
+				adc-sid = <0x4>;
+         	int-table;
+         };
+         
+         USB_IN {
+         	hw-channel = <0x11>;
+         	settling-delay-uS = <0>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "abs ";
+         	scaling-factor = <1 16>;
+         	offset-factor = <0>;
+         	scaling-method = "tomV";
+         	pull-up-res = <0>;
+				adc-sid = <0x4>;
+         	int-table;
+         };
+         
+         USB_IN_I_MV {
+         	hw-channel = <0x17>;
+         	settling-delay-uS = <0>;
+         	average-sample = <1>;
+         	decimation-ratio = <1024>;
+         	cal-method = "abs ";
+         	scaling-factor = <1 16>;
+         	offset-factor = <0>;
+         	scaling-method = "tomV";
+         	pull-up-res = <0>;
+				adc-sid = <0x4>;
+         	int-table;
+         };
+      };
+   
+      vadc-avg-ch {
+     	   ch-name = "XO_THERM_GPS";
+     	   low-name = "XO_THERM_GPS_LOW";
+     	   med-name = "XO_THERM_GPS_MED";
+     	   high-name = "XO_THERM_GPS_HIGH";
+     	   med-to-low = <5120>;
+     	   low-to-med = <15360>;
+     	   high-to-med = <32768>;
+     	   med-to-high = <43008>;
+      };
+   
+      gpio-map { 
+     	   aux_pin1 {
+     	      vadc_ch = <0x5 0x25 0x45 0x65>;
+     	      gpio-num = <1>;
+     	   };
+     	   aux_pin2 {
+     	      vadc_ch = <0x6 0x26 0x46 0x66>;
+     	      gpio-num = <2>;
+     	   };
+      };
+   
+      therm_table: therm_table { };
+   };
+};
+
+&therm_table {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	sys_therm_tb: therm_tb@1 {
+		/* Resistance to Degree K */
+		reg = <1>;
+		table = <
+			 4251000 233
+			 3004900 238
+			 2148900 243
+			 1553800 248
+			 1135300 253
+			  837800 258
+			  624100 263
+			  469100 268
+			  355600 273
+			  271800 278
+			  209400 283
+			  162500 288
+			  127000 293
+			  100000 298
+				79200 303
+				63200 308
+				50700 313
+				40900 318
+				33200 323
+				27100 328
+				22200 333
+				18300 338
+				15200 343
+				12600 348
+				10600 353
+				 8890 358
+				 7500 363
+				 6360 368
+				 5410 373
+				 4620 378
+				 3970 383
+				 3420 388
+				 2950 393
+				 2560 398>;
+	};
+
+	pmic_die_temp_tb: therm_tb@2 {
+		/* Resistance to Degree mK */
+		reg = <2>;
+		table = <
+		  433700 213000
+		  473100 233000
+		  512400 253000
+		  551500 273000
+		  590500 293000
+		  629300 313000
+		  667900 333000
+		  706400 353000
+		  744600 373000
+		  782500 393000
+		  820100 413000>;
+	};
+};

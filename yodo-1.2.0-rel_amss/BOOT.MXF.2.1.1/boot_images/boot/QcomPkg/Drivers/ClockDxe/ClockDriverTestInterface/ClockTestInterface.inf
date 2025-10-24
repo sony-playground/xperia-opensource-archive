@@ -1,0 +1,50 @@
+#/** @file ClockTestInterface.inf
+#  
+#  Component description file for clock test driver being used to test the common clock interface APIs
+#  
+#  Copyright (c) 2020 QUALCOMM Technologies, Inc.  All Rights Reserved.  
+#  QUALCOMM Proprietary and Confidential.
+# 
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 08/28/20   gbedi   Created.
+#
+#==============================================================================
+
+
+
+[Defines]
+  INF_VERSION                     = 0x00010005
+  BASE_NAME                       = ClockTestInterface
+  FILE_GUID                       = 13833f10-e7a5-11ea-8b6e-0800200c9a66                                   
+  MODULE_TYPE                     = DXE_DRIVER
+  VERSION_STRING                  = 1.0
+  ENTRY_POINT                     = ClockTestInterfaceEntryPoint
+
+[Sources.common]
+  ClockTestInterface.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  
+[LibraryClasses]
+  BaseLib
+  QcomLib
+  UefiLib
+  DebugLib
+  ClockApiLib
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  
+[Depex]
+gEfiDalSysProtocolGuid

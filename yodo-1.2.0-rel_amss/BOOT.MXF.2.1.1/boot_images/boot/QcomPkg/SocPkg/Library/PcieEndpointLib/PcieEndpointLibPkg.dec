@@ -1,0 +1,16 @@
+#/**
+# @file PcieEndpointLibPkg.dec
+#
+# Copyright (c) 2020 Qualcomm Technologies, Inc.
+# All Rights Reserved.
+# Confidential and Proprietary - Qualcomm Technologies, Inc.
+#**/
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = PcieEndpointLibPkg
+  PACKAGE_GUID                   = 044DCEDA-4BA3-17A0-4FEE-DA971E022DE1
+  PACKAGE_VERSION                = 0.1
+
+[Includes.common]
+

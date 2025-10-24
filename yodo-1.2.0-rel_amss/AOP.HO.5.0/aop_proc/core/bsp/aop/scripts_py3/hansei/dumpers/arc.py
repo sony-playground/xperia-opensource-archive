@@ -1,0 +1,323 @@
+#  ===========================================================================
+#
+#  Copyright (c) 2013-2016 Qualcomm Technologies, Inc.  
+#  All Rights Reserved.
+#  QUALCOMM Proprietary and Confidential.
+#
+#  ===========================================================================
+
+
+from __future__ import print_function
+import struct
+import logging
+logger = logging.getLogger(__name__)
+
+import os
+import itertools
+import math
+from binascii import hexlify
+import pandas as pd
+
+from locators.core_dump import locate as locate_core_dump
+from dwarf import decode_object, Structure
+from dwarf import Array as darray
+from hansei_utils import *
+from dumpers.targ_spec_config import *
+from dumpers.summary import chip_version
+from dumpers.vrm_vt import arc_vrm_sts
+#masks for length of bit region
+masks = {
+    0 : 0x00000000,
+    1 : 0x00000001,
+    2 : 0x00000003,
+    3 : 0x00000007,
+    4 : 0x0000000F,
+    5 : 0x0000001F,
+    6 : 0x0000003F,
+    7 : 0x0000007F,
+    8 : 0x000000FF,
+    9 : 0x000001FF,
+    10: 0x000003FF,
+    11: 0x000007FF,
+    12: 0x00000FFF,
+    13: 0x00001FFF,
+    14: 0x00003FFF,
+    15: 0x00007FFF,
+    16: 0x0000FFFF,
+    17: 0x0001FFFF,
+    18: 0x0003FFFF,
+    19: 0x0007FFFF,
+    20: 0x000FFFFF,
+    21: 0x001FFFFF,
+    22: 0x003FFFFF,
+    23: 0x007FFFFF,
+    20: 0x00FFFFFF,
+}
+    
+# bitfields for commond types
+arc_vt = {
+    'ARC_VOTE_TABLE' : {
+        0 : {
+            'name' : 'OL',
+            'end'  : 3,
+        },
+        31 : {
+            'name' : 'RR',
+            'end'  : 31,
+        },
+    },
+}
+
+rm_ol_type = {
+    'ARC_OL_STATUS' : {
+        12 : {
+            'name' : 'CURRENT_OL',
+            'end'  : 15,
+        },
+        16 : {
+            'name' : 'SOLVED_OL',
+            'end'  : 19,
+        },
+        20 : {
+            'name' : 'AGGREGATED_OL',
+            'end'  : 23,
+        },
+        24 : {
+            'name' : 'SEQUENCE_OL',
+            'end'  : 27,
+        },
+        28 : {
+            'name' : 'DESTINATION_OL',
+            'end'  : 31,
+        },
+    },
+}
+tab_size = 8
+dump_error = 0 # should only be used for error that indicate dump corruption
+
+# Hardcoding BASE addresses 
+vt_base_address = 0
+vt_tmr_base_address = 0
+rm_blk_enb_base_addr = 0
+rm_ol_base_addr = 0
+rm_seq_base_addr = 0 
+
+ 
+no_rm = 0
+no_drv = 0
+ARC_votetable = [[]]#[[0 for i in range(no_drv)] for j in range(no_rm)] 
+ARC_votetable2 = [[]]
+g_res = 0
+def dump(debug_data): #dump_path, memory, debug_info, fill_char):
+    global dump_error
+    global ARC_votetable, ARC_votetable2
+    global no_rm
+    global no_drv,g_res
+    global vt_base_address,vt_tmr_base_address, rm_blk_enb_base_addr, rm_ol_base_addr, rm_seq_base_addr 
+    dump_error = 0
+    memory = debug_data['rpm_memory']
+    debug_info = debug_data['debug_info']
+    fill_char = debug_data['args'].fill_char
+    dump_path = debug_data['dump_path']
+    target = debug_data['target']
+    target_ver = target+'-'+str(chip_version)
+    if target_ver in targ_spec_config:
+        target = target_ver
+    debug_data['printer'].p("Dumping ARC Vote table registers...")
+
+    vt_base_address = targ_spec_config[target]['arc']['vt_base_address']
+    vt_tmr_base_address = targ_spec_config[target]['arc']['vt_tmr_base_address']
+    rm_blk_enb_base_addr = targ_spec_config[target]['arc']['rm_enb_base_addr']
+    rm_ol_base_addr = targ_spec_config[target]['arc']['rm_ol_base_addr'] 
+    rm_seq_base_addr = targ_spec_config[target]['arc']['rm_seq_base_addr'] 
+    no_rm = targ_spec_config[target]['arc']['no_rm']
+    no_drv = targ_spec_config[target]['arc']['no_drv']
+    ARC_votetable = [[0 for i in range(no_drv)] for j in range(no_rm)]
+    ARC_votetable2 = [[0 for i in range(no_drv)] for j in range(no_rm)]
+
+    try:
+        ver_data = memory.read(rm_ol_base_addr, 4)
+    except:
+        debug_data['printer'].p("\tARC registers bin is not recovered...")
+        return
+
+    g_res_type = debug_info.variables[b'g_res'].die
+    g_res_address = debug_info.variables[b'g_res'].address
+    g_res = decode_object('g_res', g_res_address, None, memory, debug_info, die=g_res_type)
+    #import pdb; pdb.set_trace()
+    dump_arc_summary(dump_path, memory, target, g_res, debug_info, fill_char)
+    
+    
+    if dump_error != 0:
+      debug_data['printer'].p("\t...Non-critical errors occured in processing dump, continuing")
+    else:
+      debug_data['printer'].p("\t...DONE")
+
+def dump_arc_summary(dump_path, memory, target, g_res, debug_info, fill_char):
+    dump_path = os.path.join(dump_path, 'reqs_for_resources')
+    if not os.path.exists(dump_path):
+        os.makedirs(dump_path)
+
+    arc_file_name = os.path.join(dump_path, 'arc_vt.txt')
+    arc_csv_file_name = os.path.join(dump_path, 'arc_vt.csv')
+    summary_file_name = os.path.join(dump_path, 'rpmh_summary.txt')
+
+    with open(arc_file_name, 'w') as arc_file, open(summary_file_name, 'a') as summary_file:
+        
+        print("\n ~~ARC Resource Summary~~", file=arc_file)
+        #import pdb; pdb.set_trace()
+
+        for rm in range(0,no_rm):
+            
+            # Reading whether RM Operational Levels
+            ol_addr = rm_ol_base_addr + (0x4*rm)
+            ol_data = memory.read(ol_addr, 4) 
+            ol = struct.unpack('<L', ol_data)[0]
+            CU_OL =  (ol >> 12 ) & 0x0000000F
+            print("\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", file=arc_file)
+            try:
+                print('\t %s : RM [%d] Current OL: %s  (%s), mv: %d, vrm_enb_sts: %d' % (targ_spec_config[target]['arc']['rm'][rm], rm, hex(CU_OL), get_level(CU_OL, rm, g_res,target ), arc_vrm_sts[rm][0],arc_vrm_sts[rm][1]), file=arc_file)
+            except:
+                print('\t %s : RM [%d] Current OL: %s  (%s)' % (targ_spec_config[target]['arc']['rm'][rm], rm, hex(CU_OL), get_level(CU_OL, rm, g_res,target )), file=arc_file)
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", file=arc_file)
+
+            for drv in range(0,no_drv):
+                address = vt_base_address + (0x10000*drv) + (0x10*rm) 
+                arc_data = memory.read(address, 4) 
+                arc_vt = struct.unpack('<L', arc_data)[0] & 0xF
+                drv_name = targ_spec_config[target]['drv'][drv]
+                level = get_level(arc_vt, rm, g_res,target )
+                address = vt_tmr_base_address + (0x10000*drv) + (0x10*rm) 
+                try:
+                  arc_data = memory.read(address, 4) 
+                  arc_tmr = struct.unpack('<L', arc_data)[0] & 0xF
+                except:
+                  arc_tmr = 0
+                if arc_vt != 0:
+                    print("\t\t{0:>15s} : DRV[{1:>2d}] Vote : {2:>1s} ({3:>7s}), Timer: {4:>2d}" .format(drv_name, drv, hex(arc_vt), level, arc_tmr), file=arc_file)
+            try:
+                #import pdb; pdb.set_trace()
+                vt_bcm_base_address = targ_spec_config[target]['arc']['vt_bcm_base_address']
+                no_bcm_drv = targ_spec_config[target]['arc']['no_bcm_drv']
+                for drv in range(0,no_bcm_drv):
+                    address = vt_bcm_base_address + (0x1000*drv) + (0x10*rm) 
+                    arc_data = memory.read(address, 4) 
+                    arc_vt = struct.unpack('<L', arc_data)[0] & 0xF
+                    drv_name = targ_spec_config[target]['bcm_drv'][drv]
+                    level = get_level(arc_vt, rm, g_res,target )
+                    if arc_vt != 0:
+                        print("\t\t{0:>15s} : DRV[{1:>2d}] Vote : {2:>1s} ({3:>7s})" .format(drv_name, drv, hex(arc_vt), level), file=arc_file)
+            except:
+                print("\n Separate vote table for bcm not available ", file=arc_file)
+
+        print("#################################################################################################", file=arc_file)
+        print("\n ~~ARC VOTE TABLE Dump~~", file=arc_file)
+        print("\n ~~ARC Status~~", file=summary_file)
+        
+        arc_vote_table_dict = {}
+        for rm in range(0,no_rm):
+            # Reading whether RM is Enabled or not
+            enb_addr = rm_blk_enb_base_addr + (0x4*rm)
+            enb_data = memory.read(enb_addr, 4) 
+            rm_enb = struct.unpack('<L', enb_data)[0]
+            ol_addr = rm_ol_base_addr + (0x4*rm)
+            ol_data = memory.read(ol_addr, 4) 
+            ol = struct.unpack('<L', ol_data)[0]
+            print('\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', file=arc_file)
+            print('\t %s : RM[%d] Vote Table' % (targ_spec_config[target]['arc']['rm'][rm],rm), file=arc_file)
+            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', file=arc_file)
+            print('\t\t RM Enabled = %d' % (rm_enb & 0x00000001), file=arc_file)
+
+            rm_name = targ_spec_config[target]['arc']['rm'][rm]
+            arc_rm_dict = arc_vote_table_dict[rm_name] = {}
+            arc_region_data = {}
+            arc_rm_busy_status = -1
+            arc_rm_pc_status = -1
+
+            bitfield = rm_ol_type['ARC_OL_STATUS']
+            print("\t\tRegister Decode:".expandtabs(tab_size), file=arc_file)
+            index = 12
+            while index < 32 :
+                region = bitfield[index]
+                data = ol
+                data = data >> index
+                mask = 1
+                for i in range(index, region['end']):
+                    mask = (mask << 1) + 1
+                data = data & mask
+                out_str = "\t\t {0:>25s} = {1:>8s} ({2:>7s})".format(region['name'], hex(data), get_level(data, rm, g_res,target))            
+                print(out_str.expandtabs(tab_size), file=arc_file)
+                arc_region_data[region['name']] = convert_to_int(data)
+                index = region['end']+1
+            
+            # Reading whether RM Sequencer status
+            seq_addr = rm_seq_base_addr + (0x40*rm)
+            seq_data = memory.read(seq_addr, 4) 
+            seq = struct.unpack('<L', seq_data)[0]
+            print('\t\t RM Sequencer Status' , file=arc_file)
+            print('\t\t\t Busy = %d' % ((seq >>31) & 0x00000001), file=arc_file)
+            arc_rm_busy_status = convert_to_int((seq >>31) & 0x00000001)
+            
+            if (seq >>31) & 0x00000001:
+                print('\t RM %d is Busy' % (rm), file=summary_file)
+            else:
+                print('\t RM %d is Idle' % (rm), file=summary_file)
+                
+            print('\t\t\t PC = %s' % (hex(seq  & 0x00000fff)), file=arc_file)
+            arc_rm_pc_status = hex(seq  & 0x00000fff)
+
+            for drv in range(0,no_drv):
+                address = vt_base_address + (0x10000*drv) + (0x10*rm) 
+                arc_data = memory.read(address, 4) 
+                arc_vt = struct.unpack('<L', arc_data)[0] & 0xF
+                level = get_level(arc_vt, rm, g_res,target )
+                ARC_votetable[rm][drv] = arc_vt
+                ARC_votetable2[rm][drv] = level
+                address = vt_tmr_base_address + (0x10000*drv) + (0x10*rm) 
+                try:
+                  arc_data = memory.read(address, 4) 
+                  arc_tmr = struct.unpack('<L', arc_data)[0] & 0xF
+                except:
+                  arc_tmr = 0
+                print("\t\t{0:>15s} : DRV[{1:>2d}] Vote : {2:>1s}  ({3:>7s}) , Timer: {4:>2d}" .format((targ_spec_config[target]['drv'][drv]), drv, hex(arc_vt), level,arc_tmr), file=arc_file)
+                arc_rm_dict[targ_spec_config[target]['drv'][drv]] = convert_to_int(arc_vt)
+            try:
+                vt_bcm_base_address = targ_spec_config[target]['arc']['vt_bcm_base_address']
+                no_bcm_drv = targ_spec_config[target]['arc']['no_bcm_drv']
+                for drv in range(0,no_bcm_drv):
+                    address = vt_bcm_base_address + (0x1000*drv) + (0x10*rm) 
+                    arc_data = memory.read(address, 4) 
+                    arc_vt = struct.unpack('<L', arc_data)[0] & 0xF
+                    drv_name = targ_spec_config[target]['bcm_drv'][drv]
+                    level = get_level(arc_vt, rm, g_res,target )
+                    print("\t\t{0:>15s} : DRV[{1:>2d}] Vote : {2:>1s} ({3:>7s})" .format(drv_name, drv, hex(arc_vt), level), file=arc_file)
+                    arc_rm_dict[drv_name] = convert_to_int(arc_vt)
+            except:
+                print("\n Separate vote table for bcm not available ", file=arc_file)
+
+            # add region data collected above at end of dict
+            arc_rm_dict.update(arc_region_data)
+            arc_rm_dict["Busy"] = arc_rm_busy_status
+            arc_rm_dict["PC"] = arc_rm_pc_status
+
+        df = pd.DataFrame().from_dict(arc_vote_table_dict, orient="columns")
+        df.insert(loc=0,column='Name', value=df.index)
+        df.to_csv(arc_csv_file_name, index=False)
+
+def get_level (arc_vt, rm, g_res, target):
+    try:
+        if targ_spec_config[target]['arc']['rm'][rm] in ['XO']:
+            level = xo_level[g_res[rm].vlvls[arc_vt]]
+        elif targ_spec_config[target]['arc']['rm'][rm] in ['DDR_SS']:
+            level = ddrss_level[g_res[rm].vlvls[arc_vt]]
+        else:
+            level = rail_level[g_res[rm].vlvls[arc_vt]]
+    except:
+        level = ''
+    return level
+
+def convert_to_int(value):
+    try:
+        return int(value, 10)
+    except:
+        return value

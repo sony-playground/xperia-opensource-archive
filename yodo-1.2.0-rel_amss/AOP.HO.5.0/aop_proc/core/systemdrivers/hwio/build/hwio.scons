@@ -1,0 +1,34 @@
+#=============================================================================
+# HWIO LIBRARY
+#
+# Target:    All
+# Processor: All
+#
+#=============================================================================
+# $Header: //components/rel/aop.ho/5.0/aop_proc/core/systemdrivers/hwio/build/hwio.scons#1 $
+#=============================================================================
+#  Copyright 2014 Qualcomm Technologies, Inc.
+#  All Rights Reserved.
+#  QUALCOMM Proprietary/GTDR
+#=============================================================================
+
+import os
+
+Import('env')
+env = env.Clone()
+
+
+if env['MSM_ID'] in ['waipio']:
+	CHIPSET = env['CHIPSET_PMIC']
+else:
+	CHIPSET = env['CHIPSET']
+	
+SRCPATHSCRIPTS = env['BUILD_ROOT'] + '/core/systemdrivers/hwio/scripts/'
+
+try:
+  env.AddCMMScripts ('AOP', [SRCPATHSCRIPTS], {
+    'HWIORegisters.cmm' : ["Registers - %s" % CHIPSET.upper(), CHIPSET]
+  }, 'SystemDrivers')
+except:
+  pass
+

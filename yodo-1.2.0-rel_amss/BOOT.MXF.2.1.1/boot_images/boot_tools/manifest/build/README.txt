@@ -1,0 +1,1 @@
+This location is reserved for manifest.xml

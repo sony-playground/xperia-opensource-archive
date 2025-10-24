@@ -1,0 +1,50 @@
+#/** @file ErrorHandlerLib.inf
+#
+#  Error handler Lib
+#  
+#  Copyright (c) 2015-2020,2022 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 05/24/22   rama    Added LogsToMediaLib
+# 11/12/20   rama    Added UCLib
+# 10/29/20   yps     Initial
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ErrorHandlerLib
+  FILE_GUID                      = 2875BE06-3CB7-41AD-AC22-57942C97C9AB
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ErrorHandlerLib
+
+[Sources.common]
+  error_handler_el1.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  SecPkg/SecLib.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec  
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomPkg/SocPkg/Library/XBLLoaderLib/XBLLoaderLibPkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/XBLLoader/SmcLib/SmcLib.dec
+  QcomPkg/SocPkg/Library/XBLLoaderArchLib/XBLLoaderArchLibPkg.dec
+  QcomPkg/SocPkg/Library/BootPblSharedDataLib/BootPblSharedDataLib.dec
+  SecPkg/UCLib.dec
+  SecPkg/DbgInfoLib.dec
+  QcomPkg/XBLLoader/LogsToMediaLib/LogsToMediaLib.dec
+
+[LibraryClasses]
+  MediaInterfaceLib
+  LogsToMediaLib

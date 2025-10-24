@@ -1,0 +1,28 @@
+#/** @file SmcLib.dec
+#  
+#  SmcLib headers declaration file.
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc. All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 03/27/20   ds      Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = SmcLib
+  PACKAGE_GUID                   = 976A624F-45C0-D533-99E7-F1926F1D8DE3
+  PACKAGE_VERSION                = 0.1
+
+
+[Includes.common]
+  .

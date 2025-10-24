@@ -1,0 +1,38 @@
+#/** @file RscDxe.inf
+#
+#  DXE driver for RSC
+#
+#  Copyright (c) 2020, 2021, Qualcomm  Technologies Incorporated. All rights reserved.
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RscDxe
+  FILE_GUID                      = EA888DF7-D431-44AF-844C-7b29390f2758
+
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = RscDxeEntryPoint
+
+
+
+[Sources.common]
+  RscDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  RscTargetLib
+
+[Depex]
+  TRUE
+
+[Protocols]
+  gEfiRscProtocolGuid
+  gEfiClockProtocolGuid
+  gEfiHwioProtocolGuid

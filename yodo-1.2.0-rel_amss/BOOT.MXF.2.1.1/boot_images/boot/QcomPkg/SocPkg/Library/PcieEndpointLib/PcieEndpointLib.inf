@@ -1,0 +1,24 @@
+#/**
+# @file PcieEndpointLib.inf
+#
+# Copyright (c) 2020 Qualcomm Technologies, Inc.
+# All Rights Reserved.
+# Confidential and Proprietary - Qualcomm Technologies, Inc.
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PcieEndpointLib
+  FILE_GUID                      = A444DAE6-41ED-F794-6154-6E8A3CA9B675
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PcieEndpointLib
+
+[LibraryClasses]
+  PcieEndpointTargetLib
+
+[Binaries.Arm]
+   PE32|PcieEndpointLib.lib
+
+[Binaries.AARCH64]
+   PE32|PcieEndpointLib.lib

@@ -1,0 +1,35 @@
+#/** @file PsStateDxe.inf
+#
+#  DXE driver for PsState
+#
+#  Copyright (c) 2022, Qualcomm  Technologies Incorporated. All rights reserved.
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PsStateDxe
+  FILE_GUID                      = 92BDCB29-D427-400E-847D-37345FC1D5F0
+
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PsStateDxeEntryPoint
+
+
+
+[Sources.common]
+  PsStateDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+
+[Depex]
+  TRUE
+
+[Protocols]
+  gQcomScmProtocolGuid

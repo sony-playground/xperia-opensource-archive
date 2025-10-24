@@ -1,0 +1,39 @@
+#/** @file boot_xrc.inf
+#
+#  Build file for the Boot XRC Library.
+#
+#  Copyright (c) 2022  Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who        what, where, why
+# --------   ---        ----------------------------------------------------------
+# 07/08/22   batta      Initial creation
+#=============================================================================
+
+[Defines]
+  INF_VERSION           = 0x00010005
+  BASE_NAME             = BootXRCLib
+  FILE_GUID             = 6A961A56-F17A-49C7-86FE-3620ED895F79
+  MODULE_TYPE           = BASE
+  VERSION_STRING        = 1.0
+  LIBRARY_CLASS         = BootXRCLib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror
+
+[Sources]
+  boot_xrc_null.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+
+[LibraryClasses]
+  BaseLib
+  SlvcomLib
+  XRCLib

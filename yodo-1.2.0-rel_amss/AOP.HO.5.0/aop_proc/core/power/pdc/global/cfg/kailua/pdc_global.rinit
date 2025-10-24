@@ -1,0 +1,45 @@
+#===========================================================================
+#                             pdc_global.rinit
+#
+#  DESCRIPTION:
+#    This file contains settings for PDC global region which includes
+#    assigning DRV ids, configuring time out delays and interrupts.
+#
+#  Copyright (c) 2019 QUALCOMM Technologies, Inc. (QTI). 
+#  All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+module : { name = RPMH_PDC_PDC_GLOBAL, group = PDC_GLOBAL }
+
+regs:
+    # Setting up DRV ids
+    APPS_PDC_RSC_DRV = [ 0x0, 0x1, 0x2, 0x3 ]    # TZ, HYP, HLOS, L3
+    SP_PDC_RSC_DRV = 0x4
+    AUDIO_PDC_RSC_DRV = 0x5
+    AOP_PDC_RSC_DRV = 0x6
+    DEBUG_PDC_RSC_DRV = 0x7
+    GPU_PDC_RSC_DRV = 0x8
+    DISPLAY_PDC_RSC_DRV = 0x9
+    COMPUTE_PDC_RSC_DRV = 0xA
+    PDC_TME_PDC_RSC_DRV_ID = [0xB, 0xC]
+    MODEM_PDC_RSC_DRV = [0xD, 0xE]
+    WLAN_RF_PDC_RSC_DRV  = 0x0F
+    WLAN_BB_PDC_RSC_DRV = 0x10
+    CAM_PDC_RSC_DRV = [0x11, 0x12, 0x13]
+
+    # EPCB time out settings
+    EPCB_TIMEOUT_THRESHOLD = 0xFFFF    # max time out
+    EPCB_TIMEOUT_IRQ_EN = 0xFFF        # IRQs enabled for all DRVs
+
+    # PDC sequencer to AOP interrupts - enable all now. Sequences
+    # will be updated as they need them.
+    PDC_AOP_IRQ_EN = 0xFFFFFF
+
+    # PDC Locks for 
+    SOC_SLEEP_LOCK_MASK = 0x1296       # Consider Modem, Audio, Compute based on PIL msg.
+
+    CX_COLLAPSE_LOCK_MASK = 0x0
+
+    DBG_RSRC_REL_LOCK_MASK = 0x1FFF    # Consider all DRVs

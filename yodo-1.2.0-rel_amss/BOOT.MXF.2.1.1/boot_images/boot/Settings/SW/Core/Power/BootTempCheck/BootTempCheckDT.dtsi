@@ -1,0 +1,12 @@
+&soc {
+	BootTempBsp{
+      compatible = "qcom,BootTempBsp";
+	  BootTempThres{
+	    nUpperThresholdDegC       = <150>;
+		nLowerThresholdDegC       = <0xFFFFFF6A>;
+		uMaxNumIterations         = <40>;
+		uWaitPerIterationMicroSec = <500000>;
+		uSensor                   = <0>;
+	  };
+	};
+};

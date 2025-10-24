@@ -1,0 +1,6 @@
+module: { name = AWSM, group = AWSM_EN }
+regs:
+  SLP_TIMER_BACKOFF = 0xD84
+  #Mask QTimer F1
+  AOP_TIMER_MASK = 0x2
+  FEAT_EN = 0x3

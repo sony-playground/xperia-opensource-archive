@@ -1,0 +1,47 @@
+#/** @file 
+#   StackCanaryBaseLibCore_lite.inf
+#
+#
+# Copyright (c) 2021 Qualcomm Technologies, Inc. All rights reserved.
+#
+#  
+#**/
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 06/22/21   cm      Initial version
+# 
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = StackCanaryBaseLib
+  FILE_GUID                      = 2de551bd-533a-4374-8ba4-c041ea0dc34f
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = StackCanaryBaseLib
+
+[Sources]
+  StackCanaryCommon.c
+  StackCanaryCore.c
+
+[Sources.AARCH64]
+  ModuleEntryPoint.asm | RVCT
+  ModuleEntryPointCore.S | GCC
+
+[Sources.ARM]
+  ARM/ModuleEntryPoint.asm | RVCT
+  ARM/ModuleEntryPointCore_lite.S | GCC
+
+[LibraryClasses]
+  RandomStackCanaryLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  ArmPkg/ArmPkg.dec
+

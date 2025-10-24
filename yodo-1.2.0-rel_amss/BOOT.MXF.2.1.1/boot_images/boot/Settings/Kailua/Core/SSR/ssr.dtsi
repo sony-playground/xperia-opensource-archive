@@ -1,0 +1,79 @@
+/**
+
+This is the configuration file for SSR
+
+Copyright (c) 2021 Qualcomm Technologies, Inc.
+All Rights Reserved.
+Confidential and Proprietary - Qualcomm Technologies, Inc.
+
+Update value of max_subsys_configured when new ssr_subsys_config is added
+
+**/
+
+#include <ssr_defines.h>
+
+&soc {
+ ssr {
+
+  max_subsys_configured = <3>;
+  
+  smp2p_err_fatal_handle: smp2p_err_fatal {
+    entry_name = "slave-kernel";
+    bit        = <0>;
+  };
+  
+  smp2p_err_ready_handle: smp2p_err_ready {
+    entry_name = "slave-kernel";
+    bit        = <1>;
+  };
+  
+  smp2p_proxy_unvote_handle: smp2p_proxy_unvote {
+    entry_name = "slave-kernel";
+    bit        = <2>;
+  };
+  
+  smp2p_stop_ack_handle: smp2p_stop_ack {
+    entry_name = "slave-kernel";
+    bit        = <3>;
+  };
+  
+  ssr_subsys_config_1 {
+    subsys_name          = "adsp";
+    subsys_id            = <1>;
+    host                 = <SMEM_ADSP>;
+    sfr_type             = <SMEM_SSR_REASON_LPASS0>;
+    wdog_intr            = <518 INTR_CONFIG_LEVEL_TRIGGER>;
+    err_fatal            = <&smp2p_err_fatal_handle>;
+    proxy_unvote         = <&smp2p_proxy_unvote_handle>;
+    err_ready            = <&smp2p_err_ready_handle>;
+    stop_ack_bit         = <&smp2p_stop_ack_handle>;
+    qmi_svc_ins			 = <SSCTL_QMI_SERVICE_INSTANCE_ADSP_V02>;
+  };
+  
+  ssr_subsys_config_2 {
+    subsys_name          = "cdsp";
+    subsys_id            = <18>;
+    host                 = <SMEM_CDSP>;
+    sfr_type             = <601>;
+    wdog_intr            = <610 INTR_CONFIG_LEVEL_TRIGGER>;
+    err_fatal            = <&smp2p_err_fatal_handle>;
+    proxy_unvote         = <&smp2p_proxy_unvote_handle>;
+    err_ready            = <&smp2p_err_ready_handle>;
+    stop_ack_bit         = <&smp2p_stop_ack_handle>;
+    qmi_svc_ins			 = <SSCTL_QMI_SERVICE_INSTANCE_CDSP_V02>;
+  };
+  
+  ssr_subsys_config_3 {
+    subsys_name          = "modem";
+    subsys_id            = <4>;
+    host                 = <SMEM_MODEM>;
+    sfr_type             = <SMEM_SSR_REASON_MSS0>;
+    wdog_intr            = <296 INTR_CONFIG_LEVEL_TRIGGER>;
+    err_fatal            = <&smp2p_err_fatal_handle>;
+    proxy_unvote         = <&smp2p_proxy_unvote_handle>;
+    err_ready            = <&smp2p_err_ready_handle>;
+    stop_ack_bit         = <&smp2p_stop_ack_handle>;
+    qmi_svc_ins			 = <SSCTL_QMI_SERVICE_INSTANCE_MPSS_V02>;
+  };
+ };
+};

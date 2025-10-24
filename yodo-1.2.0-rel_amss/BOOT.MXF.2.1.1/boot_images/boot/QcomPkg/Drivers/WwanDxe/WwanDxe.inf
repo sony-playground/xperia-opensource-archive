@@ -1,0 +1,48 @@
+#/** @file
+#  
+#  Wireless Connectivity WWAN Power control Driver
+#  
+#  Copyright (c) 2020, Qualcomm Technologies Inc. All rights reserved.
+#  
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who          what, where, why
+# --------   ---          ----------------------------------------------------------
+# 09/15/20   skgupta      initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = WwanDxe
+  FILE_GUID                      = FC16D7DC-BF51-4785-ACD1-763D0C0D1485
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = WwanEntryPoint
+
+[BuildOptions.AARCH64]
+
+[Sources.common]
+  WwanDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  WwanLib
+
+[Protocols]
+
+[Guids]
+
+[Pcd]
+
+[Depex]
+   gEfiDalSysProtocolGuid

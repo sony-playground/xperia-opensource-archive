@@ -1,0 +1,44 @@
+#/** @file DloadDump.inf
+#
+#  DloadDump.inf 
+#  
+#  Copyright 2019-2020 by Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 07/24/20   rama    Added BootPblSharedDataLib.dec
+# 06/29/20   rama     Added SecLib.dec
+# 09/29/19   digants  Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DloadDumpLib
+  FILE_GUID                      = BD4CC3FB-4872-DDC9-2CE9-AF999D7B9264
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DloadDumpLib
+
+[Sources.common]
+  dload_dump.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+  SecPkg/SecLib.dec
+  QcomPkg/SocPkg/Library/BootPblSharedDataLib/BootPblSharedDataLib.dec
+  SecPkg/DbgInfoLib.dec
+
+[LibraryClasses]
+  ConfigContextLib
+  MuslLib

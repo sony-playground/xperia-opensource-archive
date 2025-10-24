@@ -1,0 +1,43 @@
+#/** @file DDRSdiLibNull.inf
+#
+#  DDR SDI Null Lib
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+# when       who       what, where, why
+# --------   ---       ----------------------------------------------------------
+# 05/29/20   rama      Add SmcLib.dec
+# 04/14/20   ck        Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DDRSdiLibNull
+  FILE_GUID                      = 897340E5-8D23-4859-A482-3A78B1DA57AA
+  MODULE_TYPE                    = SEC
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DDRSdiLib
+  
+  
+[Sources.common]
+  DDRSdiLibNull.c
+  ../../../XBLLoader/boot_extern_debug_interface.c
+
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+  QcomPkg/XBLLoader/SmcLib/SmcLib.dec
+  
+[LibraryClasses]

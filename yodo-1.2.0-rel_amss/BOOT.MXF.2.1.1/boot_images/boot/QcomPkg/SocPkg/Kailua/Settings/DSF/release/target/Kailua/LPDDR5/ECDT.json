@@ -1,0 +1,2536 @@
+{
+    "name": "ECDT.json",
+    "description": "eCDT entry file",
+    "platform": "SM8550 (Kailua) v2",
+    "platformCode": "2",
+    "version": "2.2",
+    "ConfigName": ".ecdt_config_SM8550_LP5.json",
+    "data": [
+        {
+            "type": {
+                "hexcode": "0",
+                "name": "Qualcomm"
+            },
+            "manufacturing_id": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "rank_select": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "package_type": {
+                "hexcode": null,
+                "name": null
+            },
+            "density": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "revision_id_2": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "density_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "revision_id_2_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "MRMatchs": [],
+            "packet_list": [],
+            "overEntrie": {
+                "DisableFreq": [],
+                "VoltageLevel": [],
+                "jedcAcTimings": [],
+                "platform_id": [],
+                "safeModes": []
+            },
+            "tmrs_entries": null,
+            "MRSequences": null,
+            "MRSequenceGroups": [
+                {
+                    "MRSequences": [
+                        {
+                            "comments": null,
+                            "entry": [
+                                40901
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40902
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40903
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40904
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40943
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40944
+                            ],
+                            "index": 6
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40945
+                            ],
+                            "index": 7
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40946
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40947
+                            ],
+                            "index": 9
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40948
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40949
+                            ],
+                            "index": 11
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40950
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "enable": true,
+                    "name": "New"
+                }
+            ]
+        },
+        {
+            "type": {
+                "hexcode": "0",
+                "name": "Qualcomm"
+            },
+            "manufacturing_id": {
+                "hexcode": "1",
+                "name": "Samsung"
+            },
+            "rank_select": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "package_type": {
+                "hexcode": null,
+                "name": null
+            },
+            "density": {
+                "hexcode": "24",
+                "name": "16Gb"
+            },
+            "revision_id_1": {
+                "hexcode": "9",
+                "name": "9"
+            },
+            "revision_id_2": {
+                "hexcode": "0",
+                "name": "0"
+            },
+            "io_width": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "density_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "revision_id_2_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "MRMatchs": [],
+            "packet_list": [],
+            "overEntrie": {
+                "DisableFreq": [
+                    {
+                        "hf": [
+                            {
+                                "hexcode": "6",
+                                "name": "3196.8 MHz",
+                                "value": 3196800,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "3686.4 MHz",
+                                "value": 3686400,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "4224 MHz",
+                                "value": 4224000,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": true
+                            }
+                        ],
+                        "lf": [
+                            {
+                                "hexcode": "6",
+                                "name": "200 MHz",
+                                "value": 200000,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "547.2 MHz",
+                                "value": 547200,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "768 MHz",
+                                "value": 768000,
+                                "vdda": "SVS",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "3",
+                                "name": "1555.2 MHz",
+                                "value": 1555200,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "2",
+                                "name": "1708.8 MHz",
+                                "value": 1708800,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS_L1",
+                                "vddmx": "SVS_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "1",
+                                "name": "2092.8 MHz",
+                                "value": 2092800,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "0",
+                                "name": "2736 MHz",
+                                "value": 2736000,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO",
+                                "vddmx": "TURBO",
+                                "IsChecked": false
+                            }
+                        ]
+                    }
+                ],
+                "VoltageLevel": [],
+                "jedcAcTimings": [],
+                "platform_id": [],
+                "safeModes": []
+            },
+            "tmrs_entries": null,
+            "MRSequences": null,
+            "MRSequenceGroups": [
+                {
+                    "MRSequences": [
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51711
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 6
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 7
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 9
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 11
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 12
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 14
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 16
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 17
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 18
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 19
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 20
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 21
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 22
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 23
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 24
+                        }
+                    ],
+                    "enable": true,
+                    "name": "New"
+                }
+            ]
+        },
+        {
+            "type": {
+                "hexcode": "0",
+                "name": "Qualcomm"
+            },
+            "manufacturing_id": {
+                "hexcode": "1",
+                "name": "Samsung"
+            },
+            "rank_select": {
+                "hexcode": "1",
+                "name": "Single-Rank"
+            },
+            "package_type": {
+                "hexcode": null,
+                "name": null
+            },
+            "density": {
+                "hexcode": "24",
+                "name": "16Gb"
+            },
+            "revision_id_1": {
+                "hexcode": "9",
+                "name": "9"
+            },
+            "revision_id_2": {
+                "hexcode": "8",
+                "name": "8"
+            },
+            "io_width": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "density_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "revision_id_2_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "MRMatchs": [],
+            "packet_list": [],
+            "overEntrie": {
+                "DisableFreq": [
+                    {
+                        "hf": [
+                            {
+                                "hexcode": "6",
+                                "name": "3187.2 MHz",
+                                "value": 3187200,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL_L1",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "3686.4 MHz",
+                                "value": 3686400,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO",
+                                "vddmx": "TURBO",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "4224 MHz",
+                                "value": 4224000,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": true
+                            }
+                        ],
+                        "lf": [
+                            {
+                                "hexcode": "6",
+                                "name": "200 MHz",
+                                "value": 200000,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "547.2 MHz",
+                                "value": 547200,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "768 MHz",
+                                "value": 768000,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "3",
+                                "name": "1555.2 MHz",
+                                "value": 1555200,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "2",
+                                "name": "1708.8 MHz",
+                                "value": 1708800,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS_L1",
+                                "vddmx": "SVS_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "1",
+                                "name": "2092.8 MHz",
+                                "value": 2092800,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "0",
+                                "name": "2736 MHz",
+                                "value": 2736000,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            }
+                        ]
+                    }
+                ],
+                "VoltageLevel": [],
+                "jedcAcTimings": [],
+                "platform_id": [],
+                "safeModes": []
+            },
+            "tmrs_entries": null,
+            "MRSequences": null,
+            "MRSequenceGroups": [
+                {
+                    "MRSequences": [
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51711
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 6
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 7
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 9
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 11
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 12
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 14
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 16
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 17
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 18
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 19
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 20
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 21
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 22
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 23
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 24
+                        }
+                    ],
+                    "enable": true,
+                    "name": "New"
+                }
+            ]
+        },
+        {
+            "type": {
+                "hexcode": "0",
+                "name": "Qualcomm"
+            },
+            "manufacturing_id": {
+                "hexcode": "1",
+                "name": "Samsung"
+            },
+            "rank_select": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "package_type": {
+                "hexcode": null,
+                "name": null
+            },
+            "density": {
+                "hexcode": "20",
+                "name": "12Gb"
+            },
+            "revision_id_1": {
+                "hexcode": "9",
+                "name": "9"
+            },
+            "revision_id_2": {
+                "hexcode": "0",
+                "name": "0"
+            },
+            "io_width": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "density_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "revision_id_2_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "MRMatchs": [],
+            "packet_list": [],
+            "overEntrie": {
+                "DisableFreq": [
+                    {
+                        "hf": [
+                            {
+                                "hexcode": "6",
+                                "name": "3196.8 MHz",
+                                "value": 3196800,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "3686.4 MHz",
+                                "value": 3686400,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "4224 MHz",
+                                "value": 4224000,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": true
+                            }
+                        ],
+                        "lf": [
+                            {
+                                "hexcode": "6",
+                                "name": "200 MHz",
+                                "value": 200000,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "547.2 MHz",
+                                "value": 547200,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "768 MHz",
+                                "value": 768000,
+                                "vdda": "SVS",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "3",
+                                "name": "1555.2 MHz",
+                                "value": 1555200,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "2",
+                                "name": "1708.8 MHz",
+                                "value": 1708800,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS_L1",
+                                "vddmx": "SVS_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "1",
+                                "name": "2092.8 MHz",
+                                "value": 2092800,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "0",
+                                "name": "2736 MHz",
+                                "value": 2736000,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO",
+                                "vddmx": "TURBO",
+                                "IsChecked": false
+                            }
+                        ]
+                    }
+                ],
+                "VoltageLevel": [],
+                "jedcAcTimings": [],
+                "platform_id": [],
+                "safeModes": []
+            },
+            "tmrs_entries": null,
+            "MRSequences": null,
+            "MRSequenceGroups": [
+                {
+                    "MRSequences": [
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51711
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 6
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 7
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 9
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 11
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 12
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 14
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 16
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 17
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 18
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 19
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 20
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 21
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 22
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 23
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 24
+                        }
+                    ],
+                    "enable": true,
+                    "name": "New"
+                }
+            ]
+        },
+        {
+            "type": {
+                "hexcode": "0",
+                "name": "Qualcomm"
+            },
+            "manufacturing_id": {
+                "hexcode": "1",
+                "name": "Samsung"
+            },
+            "rank_select": {
+                "hexcode": "3",
+                "name": "Dual-Rank"
+            },
+            "package_type": {
+                "hexcode": null,
+                "name": null
+            },
+            "density": {
+                "hexcode": "20",
+                "name": "12Gb"
+            },
+            "revision_id_1": {
+                "hexcode": "9",
+                "name": "9"
+            },
+            "revision_id_2": {
+                "hexcode": "8",
+                "name": "8"
+            },
+            "io_width": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "density_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "revision_id_2_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "MRMatchs": [],
+            "packet_list": [],
+            "overEntrie": {
+                "DisableFreq": [
+                    {
+                        "hf": [
+                            {
+                                "hexcode": "6",
+                                "name": "3187.2 MHz",
+                                "value": 3187200,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL_L1",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "3686.4 MHz",
+                                "value": 3686400,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO",
+                                "vddmx": "TURBO",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "4224 MHz",
+                                "value": 4224000,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": true
+                            }
+                        ],
+                        "lf": [
+                            {
+                                "hexcode": "6",
+                                "name": "200 MHz",
+                                "value": 200000,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "547.2 MHz",
+                                "value": 547200,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "768 MHz",
+                                "value": 768000,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "3",
+                                "name": "1555.2 MHz",
+                                "value": 1555200,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "2",
+                                "name": "1708.8 MHz",
+                                "value": 1708800,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS_L1",
+                                "vddmx": "SVS_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "1",
+                                "name": "2092.8 MHz",
+                                "value": 2092800,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "0",
+                                "name": "2736 MHz",
+                                "value": 2736000,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            }
+                        ]
+                    }
+                ],
+                "VoltageLevel": [],
+                "jedcAcTimings": [],
+                "platform_id": [],
+                "safeModes": []
+            },
+            "tmrs_entries": null,
+            "MRSequences": null,
+            "MRSequenceGroups": [
+                {
+                    "MRSequences": [
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51711
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 6
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 7
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 9
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 11
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 12
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 14
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 16
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 17
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 18
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 19
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 20
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 21
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 22
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 23
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 24
+                        }
+                    ],
+                    "enable": true,
+                    "name": "New"
+                }
+            ]
+        },
+        {
+            "type": {
+                "hexcode": "0",
+                "name": "Qualcomm"
+            },
+            "manufacturing_id": {
+                "hexcode": "1",
+                "name": "Samsung"
+            },
+            "rank_select": {
+                "hexcode": "3",
+                "name": "Dual-Rank"
+            },
+            "package_type": {
+                "hexcode": null,
+                "name": null
+            },
+            "density": {
+                "hexcode": "24",
+                "name": "16Gb"
+            },
+            "revision_id_1": {
+                "hexcode": "9",
+                "name": "9"
+            },
+            "revision_id_2": {
+                "hexcode": "8",
+                "name": "8"
+            },
+            "io_width": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "density_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "revision_id_2_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "MRMatchs": [],
+            "packet_list": [],
+            "overEntrie": {
+                "DisableFreq": [
+                    {
+                        "hf": [
+                            {
+                                "hexcode": "6",
+                                "name": "3187.2 MHz",
+                                "value": 3187200,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL_L1",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "3686.4 MHz",
+                                "value": 3686400,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO",
+                                "vddmx": "TURBO",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "4224 MHz",
+                                "value": 4224000,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": true
+                            }
+                        ],
+                        "lf": [
+                            {
+                                "hexcode": "6",
+                                "name": "200 MHz",
+                                "value": 200000,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "547.2 MHz",
+                                "value": 547200,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "768 MHz",
+                                "value": 768000,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "3",
+                                "name": "1555.2 MHz",
+                                "value": 1555200,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "2",
+                                "name": "1708.8 MHz",
+                                "value": 1708800,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS_L1",
+                                "vddmx": "SVS_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "1",
+                                "name": "2092.8 MHz",
+                                "value": 2092800,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "0",
+                                "name": "2736 MHz",
+                                "value": 2736000,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            }
+                        ]
+                    }
+                ],
+                "VoltageLevel": [],
+                "jedcAcTimings": [],
+                "platform_id": [],
+                "safeModes": []
+            },
+            "tmrs_entries": null,
+            "MRSequences": null,
+            "MRSequenceGroups": [
+                {
+                    "MRSequences": [
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51711
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 6
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 7
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 9
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 11
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 12
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 14
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 16
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 17
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 18
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 19
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 20
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 21
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 22
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 23
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 24
+                        }
+                    ],
+                    "enable": true,
+                    "name": "New"
+                }
+            ]
+        },
+        {
+            "type": {
+                "hexcode": "0",
+                "name": "Qualcomm"
+            },
+            "manufacturing_id": {
+                "hexcode": "1",
+                "name": "Samsung"
+            },
+            "rank_select": {
+                "hexcode": "1",
+                "name": "Single-Rank"
+            },
+            "package_type": {
+                "hexcode": null,
+                "name": null
+            },
+            "density": {
+                "hexcode": "20",
+                "name": "12Gb"
+            },
+            "revision_id_1": {
+                "hexcode": "9",
+                "name": "9"
+            },
+            "revision_id_2": {
+                "hexcode": "8",
+                "name": "8"
+            },
+            "io_width": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "density_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "revision_id_2_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "MRMatchs": [],
+            "packet_list": [],
+            "overEntrie": {
+                "DisableFreq": [
+                    {
+                        "hf": [
+                            {
+                                "hexcode": "6",
+                                "name": "3187.2 MHz",
+                                "value": 3187200,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL_L1",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "3686.4 MHz",
+                                "value": 3686400,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO",
+                                "vddmx": "TURBO",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "4224 MHz",
+                                "value": 4224000,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": true
+                            }
+                        ],
+                        "lf": [
+                            {
+                                "hexcode": "6",
+                                "name": "200 MHz",
+                                "value": 200000,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "547.2 MHz",
+                                "value": 547200,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "768 MHz",
+                                "value": 768000,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "3",
+                                "name": "1555.2 MHz",
+                                "value": 1555200,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "2",
+                                "name": "1708.8 MHz",
+                                "value": 1708800,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS_L1",
+                                "vddmx": "SVS_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "1",
+                                "name": "2092.8 MHz",
+                                "value": 2092800,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "0",
+                                "name": "2736 MHz",
+                                "value": 2736000,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            }
+                        ]
+                    }
+                ],
+                "VoltageLevel": [],
+                "jedcAcTimings": [],
+                "platform_id": [],
+                "safeModes": []
+            },
+            "tmrs_entries": null,
+            "MRSequences": null,
+            "MRSequenceGroups": [
+                {
+                    "MRSequences": [
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51488
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51711
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 6
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 7
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 9
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 11
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 12
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 14
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 16
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51457
+                            ],
+                            "index": 17
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 18
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 19
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51464
+                            ],
+                            "index": 20
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40833,
+                                63744
+                            ],
+                            "index": 21
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                40832,
+                                51457
+                            ],
+                            "index": 22
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 23
+                        },
+                        {
+                            "comments": null,
+                            "entry": [
+                                51456
+                            ],
+                            "index": 24
+                        }
+                    ],
+                    "enable": true,
+                    "name": "New"
+                }
+            ]
+        },
+        {
+            "type": {
+                "hexcode": "0",
+                "name": "Qualcomm"
+            },
+            "manufacturing_id": {
+                "hexcode": "1",
+                "name": "Samsung"
+            },
+            "rank_select": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "package_type": {
+                "hexcode": null,
+                "name": null
+            },
+            "density": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1": {
+                "hexcode": "9",
+                "name": "9"
+            },
+            "revision_id_2": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "density_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "revision_id_2_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "MRMatchs": [],
+            "packet_list": [],
+            "overEntrie": {
+                "DisableFreq": [],
+                "VoltageLevel": [
+                    {
+                        "color": null,
+                        "hexcode": 2,
+                        "hf": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            1,
+                            1,
+                            1
+                        ],
+                        "lf": [
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            0
+                        ],
+                        "param": "VDD2L",
+                        "value": "920"
+                    }
+                ],
+                "jedcAcTimings": [],
+                "platform_id": [],
+                "safeModes": [
+                    {
+                        "hexcode": "16",
+                        "name": "Enable DVFSC (VDD2 Scaling)",
+                        "description": null,
+                        "enableID": "0",
+                        "enableName": "Disable",
+                        "sf_default": "1"
+                    }
+                ]
+            },
+            "tmrs_entries": null,
+            "MRSequences": null,
+            "MRSequenceGroups": [
+                {
+                    "MRSequences": [],
+                    "enable": true,
+                    "name": "New"
+                }
+            ]
+        },
+        {
+            "type": {
+                "hexcode": "0",
+                "name": "Qualcomm"
+            },
+            "manufacturing_id": {
+                "hexcode": "255",
+                "name": "Micron"
+            },
+            "rank_select": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "package_type": {
+                "hexcode": null,
+                "name": null
+            },
+            "density": {
+                "hexcode": "20",
+                "name": "12Gb"
+            },
+            "revision_id_1": {
+                "hexcode": "7",
+                "name": "7"
+            },
+            "revision_id_2": {
+                "hexcode": "0",
+                "name": "0"
+            },
+            "io_width": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "density_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "revision_id_2_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "MRMatchs": [],
+            "packet_list": [],
+            "overEntrie": {
+                "DisableFreq": [
+                    {
+                        "hf": [
+                            {
+                                "hexcode": "6",
+                                "name": "3196.8 MHz",
+                                "value": 3196800,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "3686.4 MHz",
+                                "value": 3686400,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "4224 MHz",
+                                "value": 4224000,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO_L1",
+                                "vddmx": "TURBO_L1",
+                                "IsChecked": true
+                            }
+                        ],
+                        "lf": [
+                            {
+                                "hexcode": "6",
+                                "name": "200 MHz",
+                                "value": 200000,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "5",
+                                "name": "547.2 MHz",
+                                "value": 547200,
+                                "vdda": "SVS",
+                                "vddcx": "LOW_SVS",
+                                "vddmx": "LOW_SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "4",
+                                "name": "768 MHz",
+                                "value": 768000,
+                                "vdda": "SVS",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "3",
+                                "name": "1555.2 MHz",
+                                "value": 1555200,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS",
+                                "vddmx": "SVS",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "2",
+                                "name": "1708.8 MHz",
+                                "value": 1708800,
+                                "vdda": "TURBO",
+                                "vddcx": "SVS_L1",
+                                "vddmx": "SVS_L1",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "1",
+                                "name": "2092.8 MHz",
+                                "value": 2092800,
+                                "vdda": "TURBO",
+                                "vddcx": "NOMINAL",
+                                "vddmx": "NOMINAL",
+                                "IsChecked": false
+                            },
+                            {
+                                "hexcode": "0",
+                                "name": "2736 MHz",
+                                "value": 2736000,
+                                "vdda": "TURBO",
+                                "vddcx": "TURBO",
+                                "vddmx": "TURBO",
+                                "IsChecked": false
+                            }
+                        ]
+                    }
+                ],
+                "VoltageLevel": [],
+                "jedcAcTimings": [],
+                "platform_id": [],
+                "safeModes": []
+            },
+            "tmrs_entries": null,
+            "MRSequences": null,
+            "MRSequenceGroups": [
+                {
+                    "MRSequences": [],
+                    "enable": true,
+                    "name": "New"
+                }
+            ]
+        },
+        {
+            "type": {
+                "hexcode": "0",
+                "name": "Qualcomm"
+            },
+            "manufacturing_id": {
+                "hexcode": "255",
+                "name": "Micron"
+            },
+            "rank_select": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "package_type": {
+                "hexcode": null,
+                "name": null
+            },
+            "density": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1": {
+                "hexcode": "8",
+                "name": "8"
+            },
+            "revision_id_2": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "density_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "revision_id_1_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "revision_id_2_rank_1": {
+                "hexcode": null,
+                "name": null
+            },
+            "io_width_rank_1": {
+                "hexcode": null,
+                "name": "No restrictions"
+            },
+            "MRMatchs": [],
+            "packet_list": [],
+            "overEntrie": {
+                "DisableFreq": [],
+                "VoltageLevel": [],
+                "jedcAcTimings": [],
+                "platform_id": [],
+                "safeModes": [
+                    {
+                        "hexcode": "16",
+                        "name": "Enable DVFSC (VDD2 Scaling)",
+                        "description": null,
+                        "enableID": "0",
+                        "enableName": "Disable",
+                        "sf_default": "1"
+                    }
+                ]
+            },
+            "tmrs_entries": null,
+            "MRSequences": null,
+            "MRSequenceGroups": [
+                {
+                    "MRSequences": [],
+                    "enable": true,
+                    "name": "New"
+                }
+            ]
+        }
+    ]
+}

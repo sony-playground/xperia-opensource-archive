@@ -1,0 +1,81 @@
+;============================================================================
+;  Name:
+;    symbol_load.cmm
+;
+;  Description:
+;     Loads UEFI symbols, after halting target
+;
+; Copyright (c) 2018-2021 Qualcomm Technologies, Inc.  
+; All Rights Reserved.
+; Qualcomm Technologies Proprietary and Confidential. 
+;
+;----------------------------------------------------------------------------
+;============================================================================
+;
+;                        EDIT HISTORY FOR MODULE
+;
+;
+;
+; when         who     what, where, why
+; ----------   ---     ----------------------------------------------------------
+;2021-08-16    cm      Added set_pkg_paths
+;2020-11-09    kpa     support target specific base addr and info block offset
+;2018-10-22    kpa     Fix duplicate toolbars buttons on multiple script invoke 
+;2018-07-02    kpa     Pass target package path to common script
+;2018-06-12    kpa     Initial Version
+;============================================================================;
+
+global &DebugScriptsDir
+
+local &CwDir
+
+entry &Option
+
+  &CwDir=os.ppd()
+  do &CwDir/set_pkg_paths.cmm
+
+  ; Wrapper script for common symbol loading script
+  ; Pass TargetPkg Path for invoking target specific scripts
+  IF ("&DebugScriptsDir"=="")
+  (
+    &DebugScriptsDir="&CwDir"
+    print "Error!! DebugScriptsDir not Set, using current folder &CwDir"
+  )
+
+  ; Set current directory forcibly
+  IF ("&Option"=="FORCE")
+  (
+    &DebugScriptsDir="&CwDir"
+    print "Forcing current folder as the base &DebugScriptsDir"
+  )
+
+  print "Build Target Dir: &DebugScriptsDir"
+
+  ; Set target specific image address and offsets
+  
+  ; set defaults
+  &UefiRamEntryAddr=0xA7AD9000
+  &InfoBlkPtrOffset=0x00601000
+  
+  IF !os.file("&DebugScriptsDir/configure_target.cmm")
+  (
+    print "WARN:  &DebugScriptsDir/configure_target.cmm missing !!"
+    print "WARN:  Using Defaults for UEFI entry point Addr, InfoBlkPtr"
+  )
+  ELSE
+  (
+    do &DebugScriptsDir/configure_target.cmm
+    ; set defaults
+    &UefiRamEntryAddr=&gUefiRamEntryAddr
+    &InfoBlkPtrOffset=&gInfoBlkPtrOffset    
+  )  
+
+  IF ("&Option"=="")
+  (
+    ; Set Default so remaining positional args are not affected in symbol_load_common
+    ; if "Option" was omitted
+    &Option="NONE"
+  )
+  ; Call the actual script
+  cd.do &DebugScriptsDir/../../Tools/symbol_load_common.cmm &CwDir &Option &UefiRamEntryAddr &InfoBlkPtrOffset
+

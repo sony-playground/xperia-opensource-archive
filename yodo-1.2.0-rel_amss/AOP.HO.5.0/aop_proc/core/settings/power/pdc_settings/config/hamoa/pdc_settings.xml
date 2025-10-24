@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ * @brief: Configuration file for the PDC driver
+ * 
+ * Copyright (c) 2020 by Qualcomm Technologies Incorporated. All Rights Reserved.
+ * 
+ * $DateTime:$
+ * $Header:$
+ * $Change:$
+-->
+<driver name="/core/power">
+<device name="pdc">
+    <!-- Disables WLAN PDC is set to 1 -->
+    <props name="is_wlan_disabled" type="AOPPROP_ATTR_TYPE_UINT32">
+        0
+    </props>
+</device>
+</driver>

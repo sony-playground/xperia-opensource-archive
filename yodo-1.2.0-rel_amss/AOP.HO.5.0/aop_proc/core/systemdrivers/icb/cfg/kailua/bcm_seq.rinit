@@ -1,0 +1,178 @@
+#===========================================================================
+#                               bcm_seq.rinit
+#
+#  DESCRIPTION:
+#    This file contains BCM sequencer instructions.
+#
+#  Copyright (c) 2021 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated 
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+module : { name = RPMH_BCM_BCM_SEQ_CFG, group = BCM }
+vars:
+  br_addrs = [0x7a, 0x82, 0x86, 0x8e, 0x94, 0x9c, 0xa4, 0xaa, 0xb2, 0xb6, 0xbc, 0xd8, 0xc4, 0xcc, 0xce, 0xd6]
+
+#==============
+# Branch Offsets
+# 0x7a, // TCS_START, BRANCH_REG: 0
+# 0x82, // IS_IPA_ON, BRANCH_REG: 1
+# 0x86, // INTR_AOP, BRANCH_REG: 2
+# 0x8e, // END, BRANCH_REG: 3
+# 0x94, // CLK_CHG, BRANCH_REG: 4
+# 0x9c, // CLK_ON, BRANCH_REG: 5
+# 0xa4, // CLK_OFF, BRANCH_REG: 6
+# 0xaa, // IPA_ON, BRANCH_REG: 7
+# 0xb2, // IS_IPA_OFF, BRANCH_REG: 8
+# 0xb6, // PWR_ON, BRANCH_REG: 9
+# 0xbc, // PWR_OFF, BRANCH_REG: 10
+# 0xd8, // IPA_OFF, BRANCH_REG: 11
+# 0xc4, // IS_LPINOC_PRE, BRANCH_REG: 12
+# 0xcc, // IS_LPINOC_PRE_SKIP, BRANCH_REG: 13
+# 0xce, // IS_LPINOC_POST, BRANCH_REG: 14
+# 0xd6, // IS_LPINOC_POST_SKIP, BRANCH_REG: 15
+#==============
+# Start offsets
+#  0x0, // CombinedSequence
+# 0x30, // AOPASequence
+# 0x3c, // AOPBSequence
+# 0x48, // InitSequence
+#  0x0, // MMNoCWASequence
+# 0x50, // ACVSequence
+# 0x1a, // DDRSequence
+# 0xe0, // CPLOCK_DIS_DDRSequence
+# 0x5c, // LPINOCSequence
+#==============
+  
+# Hand edit start addresses below
+regs:
+#                                       MC   SHUB   N/A  SNOC MMNO  CNOC CRYP IPA  QUP  CDSP  LPIN  ALC   ACV
+  RPMH_BCM_SEQ_CFG_HW_START_ADDR_CDm = [0x1a, 0x1a, 0x0, 0x0, 0x0,  0x0, 0x0, 0x0, 0x0, 0x0,  0x5c, 0x8e, 0x50]
+  RPMH_BCM_SEQ_CFG_SW_START_ADDR_CDm = [0x1a, 0x1a, 0x0, 0x0, 0x48, 0x0, 0x0, 0x0, 0x0, 0x48, 0x5c, 0x8e, 0x50]
+
+  RPMH_BCM_SEQ_CFG_BRANCH_ADDR_BRb = br_addrs
+
+module : { name = RPMH_BCM_BCM_SEQ_MEM, group = BCM }
+regs:
+  RPMH_BCM_SEQ_MEMq = [
+    0x38002843,    #0x000    : 0x2843    CombinedSequence:       BEQ    same_cp=1           END
+                   #0x002    : 0x3800                            BEQR   dir=1               TCS_START
+    0x314538c9,    #0x004    : 0x38c9                            BEQR   restore_valid=1     PWR_ON
+                   #0x006    : 0x3145                            BEQR   cp_is_zero=0        CLK_ON
+    0x1c0438c1,    #0x008    : 0x38c1                            BEQR   restore_valid=1     IS_IPA_ON
+                   #0x00a    : 0x1c04                            CALL   CLK_CHG
+    0x388a3888,    #0x00c    : 0x3888                            BEQR   pc_valid=1          IS_IPA_OFF
+                   #0x00e    : 0x388a                            BEQR   pc_valid=1          PWR_OFF
+    0x50013946,    #0x010    : 0x3946                            BEQR   cp_is_zero=1        CLK_OFF
+                   #0x012    : 0x5001                            SET1   seq_change_done
+    0x30004001,    #0x014    : 0x4001                            SET0   seq_change_done
+                   #0x016    : 0x3000                            BEQR   dir=0               TCS_START
+    0x50141000,    #0x018    : 0x1000                            RETURN
+                   #0x01a    : 0x5014    DDRSequence:            SET1   ddraux_o_change_req
+    0x6010700f,    #0x01c    : 0x700f                            WAIT1  ddraux_i_cplock_req
+                   #0x01e    : 0x6010                            WAIT0  fe_aggtn_start
+    0x600f5016,    #0x020    : 0x5016                            SET1   cplock_ack_loc
+                   #0x022    : 0x600f                            WAIT0  ddraux_i_cplock_req
+    0x700e4016,    #0x024    : 0x4016                            SET0   cplock_ack_loc
+                   #0x026    : 0x700e                            WAIT1  ddraux_i_change_ack
+    0x50154014,    #0x028    : 0x4014                            SET0   ddraux_o_change_req
+                   #0x02a    : 0x5015                            SET1   seq_change_done_for_shub_by_seq0
+    0x18034015,    #0x02c    : 0x4015                            SET0   seq_change_done_for_shub_by_seq0
+                   #0x02e    : 0x1803                            JMP    END
+    0x1c002843,    #0x030    : 0x2843    AOPASequence:           BEQ    same_cp=1           END
+                   #0x032    : 0x1c00                            CALL   TCS_START
+    0x400c500c,    #0x034    : 0x500c                            SET1   seq_generic_int_a
+                   #0x036    : 0x400c                            SET0   seq_generic_int_a
+    0x18037008,    #0x038    : 0x7008                            WAIT1  sw_override_seq_unblock_a
+                   #0x03a    : 0x1803                            JMP    END
+    0x500d3800,    #0x03c    : 0x3800    AOPBSequence:           BEQR   dir=1               TCS_START
+                   #0x03e    : 0x500d                            SET1   seq_generic_int_b
+    0x7009400d,    #0x040    : 0x400d                            SET0   seq_generic_int_b
+                   #0x042    : 0x7009                            WAIT1  sw_override_seq_unblock_b
+    0x18033000,    #0x044    : 0x3000                            BEQR   dir=0               TCS_START
+                   #0x046    : 0x1803                            JMP    END
+    0x70045004,    #0x048    : 0x5004    InitSequence:           SET1   pwr_collapse_req
+                   #0x04a    : 0x7004                            WAIT1  pwr_collapse_done
+    0x1803500e,    #0x04c    : 0x500e                            SET1   clk_disable_req
+                   #0x04e    : 0x1803                            JMP    END
+    0x50113140,    #0x050    : 0x3140    ACVSequence:            BEQR   cp_is_zero=0        TCS_START
+                   #0x052    : 0x5011                            SET1   ddraux_acv_tcs_start
+    0x4011700d,    #0x054    : 0x700d                            WAIT1  ddraux_acv_tcs_done
+                   #0x056    : 0x4011                            SET0   ddraux_acv_tcs_start
+    0x18033940,    #0x058    : 0x3940                            BEQR   cp_is_zero=1        TCS_START
+                   #0x05a    : 0x1803                            JMP    END
+    0x38002843,    #0x05c    : 0x2843    LPINOCSequence:         BEQ    same_cp=1           END
+                   #0x05e    : 0x3800                            BEQR   dir=1               TCS_START
+    0x388a388c,    #0x060    : 0x388c                            BEQR   pc_valid=1          IS_LPINOC_PRE
+                   #0x062    : 0x388a                            BEQR   pc_valid=1          PWR_OFF
+    0x3946388e,    #0x064    : 0x388e                            BEQR   pc_valid=1          IS_LPINOC_POST
+                   #0x066    : 0x3946                            BEQR   cp_is_zero=1        CLK_OFF
+    0x1c0438cc,    #0x068    : 0x38cc                            BEQR   restore_valid=1     IS_LPINOC_PRE
+                   #0x06a    : 0x1c04                            CALL   CLK_CHG
+    0x38c93145,    #0x06c    : 0x3145                            BEQR   cp_is_zero=0        CLK_ON
+                   #0x06e    : 0x38c9                            BEQR   restore_valid=1     PWR_ON
+    0x500138ce,    #0x070    : 0x38ce                            BEQR   restore_valid=1     IS_LPINOC_POST
+                   #0x072    : 0x5001                            SET1   seq_change_done
+    0x30004001,    #0x074    : 0x4001                            SET0   seq_change_done
+                   #0x076    : 0x3000                            BEQR   dir=0               TCS_START
+    0x50001000,    #0x078    : 0x1000                            RETURN
+                   #0x07a    : 0x5000    TCS_START:              SET1   seq_tcs_start
+    0x40007000,    #0x07c    : 0x7000                            WAIT1  tcs_seq_cmp
+                   #0x07e    : 0x4000                            SET0   seq_tcs_start
+    0x39871000,    #0x080    : 0x1000                            RETURN
+                   #0x082    : 0x3987    IS_IPA_ON:              BEQR   is_ipa_cd=1         IPA_ON
+    0x500d1000,    #0x084    : 0x1000                            RETURN
+                   #0x086    : 0x500d    INTR_AOP:               SET1   seq_generic_int_b
+    0x7009400d,    #0x088    : 0x400d                            SET0   seq_generic_int_b
+                   #0x08a    : 0x7009                            WAIT1  sw_override_seq_unblock_b
+    0x50011000,    #0x08c    : 0x1000                            RETURN
+                   #0x08e    : 0x5001    END:                    SET1   seq_change_done
+    0x10004001,    #0x090    : 0x4001                            SET0   seq_change_done
+                   #0x092    : 0x1000                            RETURN
+    0x70025003,    #0x094    : 0x5003    CLK_CHG:                SET1   clock_change_req
+                   #0x096    : 0x7002                            WAIT1  clock_change_done
+    0x10004003,    #0x098    : 0x4003                            SET0   clock_change_req
+                   #0x09a    : 0x1000                            RETURN
+    0x0008400e,    #0x09c    : 0x400e    CLK_ON:                 SET0   clk_disable_req
+                   #0x09e    : 0x0008                            DELI   15028ns
+    0x10004012,    #0x0a0    : 0x4012                            SET0   etfval_switch
+                   #0x0a2    : 0x1000                            RETURN
+    0x7001500e,    #0x0a4    : 0x500e    CLK_OFF:                SET1   clk_disable_req
+                   #0x0a6    : 0x7001                            WAIT1  clk_disable_done
+    0x500b1000,    #0x0a8    : 0x1000                            RETURN
+                   #0x0aa    : 0x500b    IPA_ON:                 SET1   ipa_restore_req
+    0x400b700b,    #0x0ac    : 0x700b                            WAIT1  ipa_restore_ack
+                   #0x0ae    : 0x400b                            SET0   ipa_restore_req
+    0x398b1000,    #0x0b0    : 0x1000                            RETURN
+                   #0x0b2    : 0x398b    IS_IPA_OFF:             BEQR   is_ipa_cd=1         IPA_OFF
+    0x40041000,    #0x0b4    : 0x1000                            RETURN
+                   #0x0b6    : 0x4004    PWR_ON:                 SET0   pwr_collapse_req
+    0x10006004,    #0x0b8    : 0x6004                            WAIT0  pwr_collapse_done
+                   #0x0ba    : 0x1000                            RETURN
+    0x50045012,    #0x0bc    : 0x5012    PWR_OFF:                SET1   etfval_switch
+                   #0x0be    : 0x5004                            SET1   pwr_collapse_req
+    0x10007004,    #0x0c0    : 0x7004                            WAIT1  pwr_collapse_done
+                   #0x0c2    : 0x1000                            RETURN
+    0x5017238d,    #0x0c4    : 0x238d    IS_LPINOC_PRE:          BEQ    island_llc_en=0     IS_LPINOC_PRE_SKIP
+                   #0x0c6    : 0x5017                            SET1   ddraux_o_lpinoc_req
+    0x40177011,    #0x0c8    : 0x7011                            WAIT1  ddraux_i_lponoc_ack
+                   #0x0ca    : 0x4017                            SET0   ddraux_o_lpinoc_req
+    0x238f1000,    #0x0cc    : 0x1000    IS_LPINOC_PRE_SKIP:     RETURN
+                   #0x0ce    : 0x238f    IS_LPINOC_POST:         BEQ    island_llc_en=0     IS_LPINOC_POST_SKIP
+    0x70125018,    #0x0d0    : 0x5018                            SET1   ddraux_o_lpinoc_post_req
+                   #0x0d2    : 0x7012                            WAIT1  ddraux_i_lponoc_post_ack
+    0x10004018,    #0x0d4    : 0x4018                            SET0   ddraux_o_lpinoc_post_req
+                   #0x0d6    : 0x1000    IS_LPINOC_POST_SKIP:    RETURN
+    0x700a500a,    #0x0d8    : 0x500a    IPA_OFF:                SET1   ipa_pc_req
+                   #0x0da    : 0x700a                            WAIT1  ipa_pc_ack
+    0x1000400a,    #0x0dc    : 0x400a                            SET0   ipa_pc_req
+                   #0x0de    : 0x1000                            RETURN
+    0x700e5014,    #0x0e0    : 0x5014    CPLOCK_DIS_DDRSequence: SET1   ddraux_o_change_req
+                   #0x0e2    : 0x700e                            WAIT1  ddraux_i_change_ack
+    0x50154014,    #0x0e4    : 0x4014                            SET0   ddraux_o_change_req
+                   #0x0e6    : 0x5015                            SET1   seq_change_done_for_shub_by_seq0
+    0x18034015,    #0x0e8    : 0x4015                            SET0   seq_change_done_for_shub_by_seq0
+                   #0x0ea    : 0x1803                            JMP    END
+ ]                       
+
+

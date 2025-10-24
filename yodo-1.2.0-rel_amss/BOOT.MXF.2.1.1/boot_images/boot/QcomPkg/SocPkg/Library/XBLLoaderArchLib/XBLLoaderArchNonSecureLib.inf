@@ -1,0 +1,49 @@
+#/** @file XBLLoaderArchNonSecureLib.inf
+#
+#  XBL Loader Arch Lib
+#  
+#  Copyright (c) 2021 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 06/22/21   rama    Initial revision
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = XBLLoaderArchLib 
+  FILE_GUID                      = 77BEFF56-16CC-428C-94F6-D6E1E7BBE721
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = XBLLoaderArchLib
+
+[Sources.Arm]
+  ARM/boot_error_handler_arm.c
+  ARM/sbl_crashdump_arm.c
+
+[Sources.AARCH64]
+  AARCH64/boot_error_handler_aarch64.c
+  AARCH64/sbl_crashdump_aarch64_non_secure.c
+  
+  
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Werror -DBOOT_LOADER -DBOOT_WATCHDOG_DISABLED
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/Library/XBLLoaderArchLib/XBLLoaderArchLibPkg.dec
+  QcomPkg/SocPkg/Library/XBLLoaderLib/XBLLoaderLibPkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/Library/MinidumpLib/MinidumpLib.dec
+
+[LibraryClasses]
+  CacheMaintenanceLib

@@ -1,0 +1,39 @@
+#/** @file HfatDev.inf
+#
+#  HfatDev
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/24/20   vk      Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = HfatDevLib
+  FILE_GUID                      = 5654A2C6-80BA-4608-AAE1-73003106E288
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = HfatDevLib
+
+[Sources.common]
+  boot_hfat_dev.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+
+[LibraryClasses]
+  ConfigContextLib
+  MuslLib

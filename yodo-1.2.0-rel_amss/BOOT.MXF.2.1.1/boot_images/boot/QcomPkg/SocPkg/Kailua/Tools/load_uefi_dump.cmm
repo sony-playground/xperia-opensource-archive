@@ -1,0 +1,49 @@
+;============================================================================
+;  Name:
+;    load_uefi_dump.cmm
+;
+;  Description:
+;     Load UEFI crashdumps to T32 simulator
+;
+; Copyright (c) 2018, 2019, 2022 Qualcomm Technologies Incorporated.
+; All Rights Reserved.
+; Qualcomm Technologies Confidential and Proprietary
+;
+;----------------------------------------------------------------------------
+;============================================================================
+;
+;                        EDIT HISTORY FOR MODULE
+
+;
+;when         who     what, where, why
+;----------   ---     ----------------------------------------------------------
+;2022-02-11   rbv     Added CPU and moved shared imem to config target
+;2018-06-12   kpa     Initial Version
+;============================================================================;
+
+
+ENTRY &DumpPath &CoreNum
+
+sys.CPU cortexA510
+
+LOCAL &CwDir
+&CwDir=OS.PPD()
+DO &CwDir/set_pkg_paths.cmm
+
+if !os.file("&CwDir/configure_target.cmm")
+(
+ area.clear
+ area.reset
+ area.create UEFI_Logs 1000. 8192.
+ area.select UEFI_Logs
+ area.view UEFI_Logs
+ print %COLOR.RED  "Error:  &CwDir/configure_target.cmm is missing !"
+ enddo
+)
+else
+(
+ do &CwDir/configure_target.cmm
+)
+
+; Wrapper script for common load_uefi_dump.cmm
+CD.DO ../../Tools/load_uefi_dump_common.cmm &DumpPath &CwDir &CoreNum

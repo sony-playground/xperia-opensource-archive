@@ -1,0 +1,34 @@
+#/** @file            NoSpuTpmDxeRelease.inf
+# 
+#    Contains generic Qualcomm Tpm driver.
+# 
+#    Copyright (c) 2021  Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+#=============================================================================
+#                              EDIT HISTORY
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+#
+#
+# when       who      what, where, why
+# --------   ---      --------------------------------------------------------
+# 05/23/21   shl      Initial version
+#
+#=============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = TpmDxe
+  FILE_GUID                      = 20CDB94C-0EC6-426A-8947-56C26E4E9A95
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = TpmDxeInitialize
+
+[Binaries.Arm]
+   PE32|TpmDxe.efi|RELEASE
+
+[Binaries.AARCH64]
+   PE32|AARCH64/TpmDxe.efi|RELEASE
+

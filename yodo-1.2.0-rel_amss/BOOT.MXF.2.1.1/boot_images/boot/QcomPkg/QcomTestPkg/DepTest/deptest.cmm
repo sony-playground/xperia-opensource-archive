@@ -1,0 +1,58 @@
+;============================================================================
+;  Name:
+;    deptest.cmm
+;
+;  Description:
+;    Check if any executable range is marked as readwrite
+;
+; Copyright (c) 2016 Qualcomm Technologies, Inc.
+; All Rights Reserved. 
+; Qualcomm Technologies Proprietary and Confidential.
+;
+;----------------------------------------------------------------------------
+;============================================================================
+;
+;                        EDIT HISTORY FOR MODULE
+;
+;
+;
+;   when        who     what, where, why
+;  ----------   ---     -----------------------------------------------------
+;  2016-05-10   vk      Initial version
+;============================================================================;
+
+ENTRY &StartAddr &Range &FileName
+
+if ("&FileName"=="")
+(
+  &TempFile=OS.TMPFILE()
+  &TempFile="&TempFile.txt"
+  print "&TempFile"
+  &FileName= "&TempFile"
+)
+
+printer.open &FileName
+
+if ("&StartAddr"!="") 
+(
+  if ("&Range"!="")
+  (
+    wp.mmu.list.pt &StartAddr++&Range
+  )
+  else
+    wp.mmu.list.pt &StartAddr
+)
+else
+(
+  wp.mmu.list.pt
+)
+
+printer.close
+
+edit &FileName
+
+os python find_exec_rw.py &FileName
+pwd
+
+wait 5.s
+edit dep_violations.txt

@@ -1,0 +1,42 @@
+#/** @file NandLibNull.inf
+#  
+#  Nand Null Library INF file
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc. All Rights Reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+# 03/30/2020   ck      Initial version
+#
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NandCommonLib
+  FILE_GUID                      = 68EA9EE4-AE96-4736-9531-0E4D09A2B60D
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NandCommonLib 
+
+
+[Sources.common]
+  NandLibNull.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomSdkPkg/SdkLoader.dec
+  QcomPkg/XBLLoaderApi.dec  
+
+
+

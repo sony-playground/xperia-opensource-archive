@@ -1,0 +1,99 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,glink.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm Technologies Core MPROC Glink DeviceTree Schema
+
+maintainers:
+  - Core MPROC team at Qualcomm <core.services.mproc@qti.qualcomm.com>
+
+description: |
+   Glink provides point-to-point Inter Processor (packet) Communication in Qualcomm SOCs
+
+# A dictionary of DT properties for this binding schema
+properties:
+
+  compatible:
+    const: qcom,glink
+
+  xport-smem-config:
+    type: object
+
+    patternProperties:
+      "^edge-0[0-9]$":
+        type: object
+        
+        properties:
+          remote-host:
+            description: Remote host's SMEM ID
+            
+          fifo-size:
+            description: Tx FIFO size
+              
+          mtu-size:
+            description: Tx MTU size
+          
+          irq-out:
+            description: Outgoing interrupt details. IPCC Client ID and Glink IRQ which is internally assigned.
+            $ref: /schemas/types.yaml#/definitions/uint32-array
+            
+          default-qos:
+            description: Uses default QoS interface (0 or 1, used as boolean)
+          
+          custom-fifo-alloc:
+            description: Uses custom FIFO allocation function (0 or 1, used as boolean)
+            
+          clear-interrupt:
+            description: Uses an explicit interrupt clear (0 or 1, used as boolean)
+            
+        required:
+          - remote-host
+          - fifo-size
+          - mtu-size
+          - irq-out
+          - default-qos
+          - custom-fifo-alloc
+          - clear-interrupt              
+
+required:
+  - compatible
+  - xport-smem-config
+      
+additionalProperties: true
+
+examples:
+- |
+   glink {
+        compatible = "qcom,glink";
+          xport-smem-config {
+            edge-01{
+            remote-host = <2>;
+            fifo-size = <0x4000>;
+            mtu-size = <0x1000>;
+            irq-out = <3 0>;
+            default-qos = <1>;
+            custom-fifo-alloc = <0>;
+            clear-interrupt = <0>;
+            };
+            edge-02{
+            remote-host = <5>;
+            fifo-size = <0x4000>;
+            mtu-size = <0x1000>;
+            irq-out = <6 0>;
+            default-qos = <1>;
+            custom-fifo-alloc = <0>;
+            clear-interrupt = <0>;
+            };
+            edge-03{
+            remote-host = <1>;
+            fifo-size = <0x4000>;
+            mtu-size = <0x1000>;
+            irq-out = <2 0>;
+            default-qos = <1>;
+            custom-fifo-alloc = <0>;
+            clear-interrupt = <0>;
+            };
+        };
+    };

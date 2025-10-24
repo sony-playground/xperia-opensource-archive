@@ -1,0 +1,48 @@
+{
+  "Components" :[
+                 { # reference sample for dependent PKG
+                   "Name" : "QcomTools" ,
+                   "Dependency" :
+                                  {
+                                  "Pkg":"QcomToolsPkg",
+                                  "ImagePath":"$BOOTROOT/QcomPkg/QcomToolsPkg/Bin/QcomTools/$REL/tools.fv"
+                                  },
+                   "Process" : [
+                                 {
+                                   "ToolChain" : "buildex" ,
+                                   "Params" : ["-t", "QcomToolsPkg", "--variant","laa","-r", "debug"]   
+                                 }
+                               ]
+                 },            
+                 {   # reference sample, propagate to other components
+                   "Name" : "QcomTest" ,
+                   "Process" : [
+                                 {
+                                   "ToolChain" : "CLANG140" ,
+                                   "AArch" : "AARCH64" ,
+                                   "Params" : ["$EDK2ROOT/BaseTools/Source/Python/build/build.py","-p", "QcomPkg/QcomTestPkg/QcomTestPkg.dsc", "-j", "QcomPkg/QcomTestPkg/build_QcomTestPkg.log","-w","-a", "AARCH64","-b","$REL"]   
+                                 }
+                               ]
+                 } 
+                ] ,
+   "CreateImages" : [
+                       
+                      {
+                        "Name" : "QcomTest" ,    # Just cosmetic, readable field for reference, ignored by tool/script
+                        "Process" : [
+                                         {
+                                           "ToolChain" : "Copy" ,
+                                           "Components" : ["QcomTools","QcomTest"],
+										   "Createfolders" : ["$BOOTROOT/$TARGETROOT/Bin/$TARGETID/$REL/unsigned","$BOOTROOT/$TARGETROOT/Bin/$TARGETID/$REL/sign"],
+                                           "Params" : ["$BUILDROOT/Build/QcomTest/$REL_$COMPILER/FV/FVMAIN_COMPACT.Fv", "$BOOTROOT/$TARGETROOT/Bin/$TARGETID/$REL/unsigned/tests.fv"]
+                                         },
+										 {
+                                           "ToolChain" : "Copy" ,
+										   "Createfolders" : ["$BOOTROOT/$TARGETROOT/Bin/$TARGETID/$REL"],
+                                           "Params" : ["$BUILDROOT/Build/QcomTest/$REL_$COMPILER/FV/FVMAIN_COMPACT.Fv", "$BOOTROOT/$TARGETROOT/Bin/$TARGETID/$REL/tests.fv"]
+                                         }
+                                        ]
+                      } 
+						
+					]
+ }

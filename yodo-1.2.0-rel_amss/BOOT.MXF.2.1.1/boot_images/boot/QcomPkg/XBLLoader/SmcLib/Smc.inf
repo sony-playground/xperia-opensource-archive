@@ -1,0 +1,40 @@
+#/** @file Smc.inf
+#
+#  SmcLib
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/27/20   ds     Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SmcLib
+  FILE_GUID                      = 2878BE06-3CB7-41AD-AC22-57942C97C9AB
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SmcLib
+
+[Sources.AARCH64]
+ boot_Aarch64_tz_fastcall.S
+ 
+[Sources.arm]
+ boot_fastcall_tz.s
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/LoaderFramework/LoaderFrameworkApi.dec  
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec  
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec

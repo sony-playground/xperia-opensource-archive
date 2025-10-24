@@ -1,1 +1,0 @@
-../988-method-trace/expected-stderr.txt

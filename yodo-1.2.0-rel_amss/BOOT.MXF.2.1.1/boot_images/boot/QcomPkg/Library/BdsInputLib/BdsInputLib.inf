@@ -1,0 +1,53 @@
+#/** @file BdsInputLib.inf
+#  
+#  Qcom utilities library. Any lib dependency added to QcomLib or QcomBaseLib
+#  causes incompatibility with the drivers using them (for example runtime drivers)
+#  can be added to this lib.
+#  
+#  Copyright (c) 2020, Qualcomm Technologies Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 05/20/19   ps      Initial version
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BdsInputLib
+  FILE_GUID                      = 3697653B-0000-8612-0000-CA947B754C30
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BdsInputLib
+
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[Sources]
+  BdsInput.c
+
+#BuildOptions.AARCH64]
+  #GCC:*_*_*_CC_FLAGS = -O0
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  DebugLib
+  ParserLib
+  QcomLib
+  BaseLib
+
+[Guids]
+
+[Protocols]
+

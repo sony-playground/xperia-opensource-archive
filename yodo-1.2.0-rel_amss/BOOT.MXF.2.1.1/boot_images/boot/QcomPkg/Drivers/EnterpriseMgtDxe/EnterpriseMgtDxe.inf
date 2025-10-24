@@ -1,0 +1,74 @@
+#/** @file EnterpriseMgtDxe.inf
+#
+#  Build file for the EnterpriseMgtDxe driver.
+#
+#  Copyright (c) 2020,2022, Qualcomm Technologies Inc. All rights reserved.
+#
+#
+#**/
+
+#==============================================================================
+# $Header:  $
+#                              EDIT HISTORY
+#
+#
+# when          who     what, where, why
+# ----------    ---    --------------------------------------------------------
+# 02/21/2020     hh    Initial version.
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = EnterpriseMgtDxe
+  FILE_GUID                      = BCD44E0F-AC01-49BC-B1F1-E94D0376DB6A
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = EnterpriseMgtDxeEntryPoint
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -O0 -fno-inline
+
+[Sources.common]
+  EnterpriseMgtDxe.c
+  EnterpriseMgtAcpiPatch.c
+  EnterpriseMgtVarLock.c
+  EnterpriseMgtCore.c
+  EnterpriseMgtAcpiPatch.h
+  EnterpriseMgtVarLock.h
+  EnterpriseMgtDxeBaseDef.h
+  EnterpriseMgtCore.h
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiCfgLib
+  UefiLib
+  BaseLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  DebugLib
+  QcomBaseLib
+  IoLib
+  EnterpriseMgtTargetConfigLib
+  EnterpriseMgtLib
+  FuseControlLib
+  
+[Protocols]
+  gQcomEnterpriseMgtProtocolGuid ## PRODUCES
+  gVariablePolicyProtocolGuid    ## CONSUMES
+  gQcomAcpiPlatformProtocolGuid  ## CONSUMES
+
+[Guids]
+
+[Depex]
+  gVariablePolicyProtocolGuid
+  AND
+  gQcomAcpiPlatformProtocolGuid
+
+
+

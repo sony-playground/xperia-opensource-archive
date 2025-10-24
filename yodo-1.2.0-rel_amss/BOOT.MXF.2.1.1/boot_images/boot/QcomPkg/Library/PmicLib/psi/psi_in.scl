@@ -1,0 +1,35 @@
+//                           EDIT HISTORY FOR FILE
+//  This section contains comments describing changes made to the module.
+//  Notice that changes are listed in reverse chronological order.
+
+//  $Change: 39147961 $
+   
+// when       who     what, where, why
+// --------   ---     -------------------------------------------------------
+// 06/23/14   akm     Created for psi elf image creation
+// ==========================================================================*/
+
+RAM CODE_START_ADDR CODE_SIZE
+{
+    CODE CODE_START_ADDR 
+    {
+      pm_psi.o (pm_psi_info, +FIRST)
+      psi_main.o (+RO)
+    }
+
+    //  This block is for the RW data
+    //
+    APP_RAM +0x0
+    {
+      * (+RO)
+      * (+RW)
+    }
+    
+    //  This block is for the zero init data
+    //
+    APP_RAM_ZI +0x0
+    {
+      * (+ZI)
+    }
+}
+

@@ -1,0 +1,44 @@
+#/** @file
+#  
+#  GPIO test application
+#  
+#  Copyright (c) 2021, Qualcomm Technologies, Inc. All rights reserved.
+#  
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 05/20/21   amr     Initial version to demonstrate GPIO usage.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GPIOTest
+  FILE_GUID                      = 1128edc3-b080-4b80-98cf-21e775d62349
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = GPIOAppMain
+
+[Sources]
+  GPIOApp.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  
+[LibraryClasses]
+  QcomLib
+  TestInterfaceLib
+  MemoryAllocationLib
+  UefiApplicationEntryPoint
+  GPIOApiLib
+
+[Protocols]
+  gEfiGPIOProtocolGuid
+

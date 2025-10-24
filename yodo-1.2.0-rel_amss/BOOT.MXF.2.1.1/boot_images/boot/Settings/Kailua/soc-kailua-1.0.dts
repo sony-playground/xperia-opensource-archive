@@ -1,0 +1,15 @@
+// platform-mtp.dts
+//
+// Container DTS file for specific hardware platform: Kailua MTP
+
+/dts-v1/;
+
+/ {
+	compatible = "qcom,kailua-mtp", "qcom,kailua", "qcom,mtp";
+	model = "qcom,kailua";
+};
+
+#include "soc_pre-ddr.dtsi"             /* Common SoC Node Definitions */
+#include "soc.dtsi"                     /* Post-DDR SoC Node Definitions */
+
+// Add any platform specific nodes/properties here

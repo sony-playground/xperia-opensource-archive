@@ -1,0 +1,59 @@
+#/** @file PrePiFvDecompressLib.inf
+#
+#  Contains Qualcomm PrePiFvDecompressLib library sources.
+#
+#  Copyright (c) 2019,2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 07/18/19   kpa     Initial revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PrePiFvDecompressLib
+  FILE_GUID                      = FF20F54F-44F0-268E-1C68-6693269BDDB0
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PrePiFvDecompressLib
+
+#
+#  VALID_ARCHITECTURES           = ARM AARCH64
+#
+
+[Sources]
+  PrePiFvDecompress.c
+  DecompressCommon.c
+  FvList.c
+
+
+[Packages]
+  QcomPkg/Library/SchedulerLib/SchedulerLibPkg.dec
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  FvParserLib
+  ZlibDecompressLib
+  LzmaDecompressLib
+  KernelLib
+  LockLib
+
+[Guids]
+  gFvDecompressHobGuid
+  
+[Protocols]
+
+

@@ -1,0 +1,42 @@
+#/** @file PASRDxe.inf
+#
+#  PASRDxe Driver INF file
+#
+#  Copyright (c) 2022 Qualcomm Technologies Inc. All rights reserved.
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PASRDxe
+  FILE_GUID                      = a4b0793a-4402-4ae1-906e-d0fabad27073
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PASRDxeEntryPoint
+
+[Sources.common]
+  PASRDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  PASRLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  LockLib
+
+[Protocols]
+  gEfiPasrProtocolGuid
+
+[Guids]
+  gEfiEventPASRActivateGuid
+
+[Depex]
+  TRUE

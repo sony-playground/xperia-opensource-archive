@@ -1,0 +1,83 @@
+#/** @file MhiTest.inf
+#
+#  MHI Test Application inf file.
+#
+#  Copyright (c) 2021 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ----------------------------------------------------------
+# 05/21/2020   nr      Initial Revision
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MhiTest
+  FILE_GUID                      = 476BD78E-1746-4744-9347-1768DA9755CE
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = MhiTestEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[Sources]
+  MhiTest.c
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS=-Wno-unused-but-set-variable
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/QcomTestPkg/QcomTestPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  EfiFileLib
+  QcomLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  UncachedMemoryAllocationLib
+  ParserLib
+  DevicePathLib
+  GuidedFvLib
+  NpaApiLib
+  DALModEnvLib
+  PcieDxeLib
+  MhiDxeLib
+
+[Guids]
+  gEfiUefiPartitionTypeGuid
+  gEfiSdRemovableGuid
+  gQcomTokenSpaceGuid
+  gToolsFvGuid
+  gTestsFvGuid
+
+[Protocols]
+  gEfiQcMhiDxeProtocolGuid
+  gEfiQcPcieDxeProtocolGuid
+  gEfiSimpleFileSystemProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gEfiLoadedImageProtocolGuid
+  gEfiClockProtocolGuid
+  gEfiChipInfoProtocolGuid
+  gQcomPmicDriverTestProtocolGuid
+  gEfiTLMMProtocolGuid
+  gEfiHalIommuProtocolGuid

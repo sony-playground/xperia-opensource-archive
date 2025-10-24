@@ -1,0 +1,71 @@
+#/** @file SMMUDxe.inf
+#  
+#  SMMU Driver for UEFI
+#  
+#  Copyright (c) 2010-2011, 2013-2014 Qualcomm Technologies, Inc.
+#  All rights reserved.
+#  Qualcomm Confidential and Proprietary
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/15/17   amo     Created
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = HALIOMMUv3
+  FILE_GUID                      = 6b6c2bf2-c4e8-4b54-8bf9-adaddcaf20eb
+  MODULE_TYPE                    = UEFI_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = HAL_IOMMUv3DxeEntryPoint
+
+[Sources.common]
+  HALIOMMUv3Dxe.c
+  HALIOMMUv3.c
+  HALIOMMUv3Reg.c
+  HALIOMMUv3Queue.c
+  mmu.c
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -O0
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  ArmLib
+  BaseLib
+  UefiBootServicesTableLib
+  UefiLib
+  UefiDriverEntryPoint
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  CacheMaintenanceLib
+  IORTLib
+  UncachedMemoryAllocationLib
+
+[Protocols]
+  gEdkiiIoMmuProtocolGuid ##PRODUCES
+  gQcomScmProtocolGuid ##CONSUMES
+  gEfiPciIoProtocolGuid ##CONSUMES
+  gEfiSmmuMapSidProtocolGuid ## Produces
+
+[Guids]
+
+[Pcd]
+
+[Depex]
+  TRUE

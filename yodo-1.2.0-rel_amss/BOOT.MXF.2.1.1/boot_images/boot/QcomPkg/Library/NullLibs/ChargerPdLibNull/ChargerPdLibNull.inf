@@ -1,0 +1,43 @@
+#/** @file ChargerPdLibNull.inf
+#
+#  Contains Qualcomm implementation for ChargerPdLibNull
+#
+#  Copyright (c) 2021, Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/09/21   ns      Initial revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ChargerPdLib
+  FILE_GUID                      = 027B02FA-E1A0-4996-A734-66B05EF6FE73
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ChargerPdLib
+
+#
+#  VALID_ARCHITECTURES           = ARM AARCH64
+#
+
+[Sources]
+  ChargerPdLibNull.c  
+
+#[BuildOptions.AARCH64]
+# GCC:*_*_*_CC_FLAGS = -O0
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec

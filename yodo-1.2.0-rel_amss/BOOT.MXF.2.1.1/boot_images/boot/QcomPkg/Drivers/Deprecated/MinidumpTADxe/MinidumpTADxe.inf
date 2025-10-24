@@ -1,0 +1,45 @@
+#/** @file MinidumpTADxe.inf
+#
+#  Minidump TA loading description file.
+#
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MinidumpTADxe
+  FILE_GUID                      = 2A0ECDCE-01AE-446E-9FFD-C4217DE0340F
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = MinidumpTADxeInitialize
+
+[Sources.common]
+  MinidumpTADxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  ArmPkg/ArmPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  UefiCfgLib
+  UefiBootServicesTableLib
+  DebugLib
+  UefiDriverEntryPoint
+  MinidumpTALib
+  SmemLib
+
+
+[Protocols]
+  gQcomQseecomProtocolGuid
+
+
+[Depex]
+  TRUE
+

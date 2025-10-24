@@ -1,0 +1,32 @@
+#/** @file WhitelistLib.inf
+#
+#  WhitelistLib
+#  
+#  Copyright (c) 2022 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 05/24/22   rama    Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = WhitelistLib
+  FILE_GUID                      = BD4CC3FB-4872-DDC9-2CE9-AF999D7B9264
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = WhitelistLib
+
+[Binaries.Arm]
+  PE32|WhitelistLib.lib
+
+[Binaries.AARCH64]
+  PE32|WhitelistLib.lib

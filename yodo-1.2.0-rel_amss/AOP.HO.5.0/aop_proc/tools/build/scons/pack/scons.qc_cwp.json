@@ -1,0 +1,2239 @@
+{
+    "ArchiveRevision": "$Header: //components/rel/scons.qc/3.0/pack/scons.qc_cwp.json#9 $", 
+    "ComponentBase": "scons.qc", 
+    "DataRevision": "0001", 
+    "InclusionRoots": [
+        "tools/build/scons"
+    ], 
+    "JsonFormatVersion": "1.0", 
+    "PropertyPaths": [
+        {
+            "Path": "tools", 
+            "PathType": "Folder", 
+            "PropertyPaths": [
+                {
+                    "Path": "build", 
+                    "PathType": "Folder", 
+                    "PropertyPaths": [
+                        {
+                            "Path": "scons", 
+                            "PathType": "Folder", 
+                            "PropertyPaths": [
+                                {
+                                    "Path": "Notice_scons_QCA.txt", 
+                                    "PathType": "File", 
+                                    "Properties": [
+                                        {
+                                            "Name": "FileType", 
+                                            "Values": [
+                                                "Document"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "Purpose", 
+                                            "Values": [
+                                                "+", 
+                                                "Basic", 
+                                                "BasicBuild"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "Permission", 
+                                            "Values": [
+                                                "Standard"
+                                            ]
+                                        }
+                                    ]
+                                }, 
+                                {
+                                    "Path": "Notice_scons_QTI.txt", 
+                                    "PathType": "File", 
+                                    "Properties": [
+                                        {
+                                            "Name": "FileType", 
+                                            "Values": [
+                                                "Document"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "Purpose", 
+                                            "Values": [
+                                                "+", 
+                                                "Basic", 
+                                                "BasicBuild"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "Permission", 
+                                            "Values": [
+                                                "Standard"
+                                            ]
+                                        }
+                                    ]
+                                }, 
+                                {
+                                    "Path": "SCons", 
+                                    "PathType": "Folder", 
+                                    "Properties": [
+                                        {
+                                            "Name": "Purpose", 
+                                            "Values": [
+                                                "Basic", 
+                                                "BasicBuild"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "FileType", 
+                                            "Values": [
+                                                "BuildScript"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "Permission", 
+                                            "Values": [
+                                                "Standard"
+                                            ]
+                                        }
+                                    ], 
+                                    "PropertyPaths": [
+                                        {
+                                            "Path": "...", 
+                                            "PathType": "Folder", 
+                                            "PropertyPaths": [
+                                                {
+                                                    "Path": "*", 
+                                                    "PathType": "File"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }, 
+                                {
+                                    "Path": "build", 
+                                    "PathType": "Folder", 
+                                    "PropertyPaths": [
+                                        {
+                                            "Path": "ComSConstruct.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "ComSConstruct.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "build.cmd", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "build.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "build.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "build.sh", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "log_output.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "logger.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "logger.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "qtee.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "rename-log.cmd", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "rename-log.sh", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "start.scons", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }, 
+                                {
+                                    "Path": "data", 
+                                    "PathType": "Folder", 
+                                    "Properties": [
+                                        {
+                                            "Name": "Purpose", 
+                                            "Values": [
+                                                "Basic", 
+                                                "BasicBuild"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "FileType", 
+                                            "Values": [
+                                                "BuildScript"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "Permission", 
+                                            "Values": [
+                                                "Standard"
+                                            ]
+                                        }
+                                    ]
+                                }, 
+                                {
+                                    "Path": "pack", 
+                                    "PathType": "Folder", 
+                                    "Properties": [
+                                        {
+                                            "Name": "FileType", 
+                                            "Values": [
+                                                "Miscellaneous"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "Permission", 
+                                            "Values": [
+                                                "Restricted"
+                                            ]
+                                        }
+                                    ], 
+                                    "PropertyPaths": [
+                                        {
+                                            "Path": "scons.qc_cwp.json", 
+                                            "PathType": "File"
+                                        }, 
+                                        {
+                                            "Path": "su_tools_build_scons.pack", 
+                                            "PathType": "File"
+                                        }
+                                    ]
+                                }, 
+                                {
+                                    "Path": "release.txt", 
+                                    "PathType": "File", 
+                                    "Properties": [
+                                        {
+                                            "Name": "FileType", 
+                                            "Values": [
+                                                "Document"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "Purpose", 
+                                            "Values": [
+                                                "+", 
+                                                "Basic", 
+                                                "BasicBuild"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "Permission", 
+                                            "Values": [
+                                                "Standard"
+                                            ]
+                                        }
+                                    ]
+                                }, 
+                                {
+                                    "Path": "scripts", 
+                                    "PathType": "Folder", 
+                                    "PropertyPaths": [
+                                        {
+                                            "Path": "analytic_data_builder.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "analytic_data_builder.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "analytic_grep.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "apps_defs.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "arm.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "build_log_timing_parser.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "Test"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "buildspec_builder.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "buildspec_builder.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "cmdline.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "cmdline.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "comcc_addt.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "comcc_addt.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "config.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "config.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "cygwin.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "defaults.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "defaults.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "elfparserutils.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "elfparserutils.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "externalpaths.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "externalpaths.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "fatfs_builder.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "formatting.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "formatting.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "gcc_x86.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "generic_builders.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "generic_builders.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "genincpaths.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "genpaths.pl", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "genpaths.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "genuses.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "genusesflags.pl", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "hdeptree.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "hexagon.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "hexagon.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "hexagon_obf_decoder_builder.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "hexagon_obfuscator.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "lcs_builder.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "lcs_builder.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "link_path_builder.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "link_path_builder.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "llvm.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "llvm.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "llvm_ppasm.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "llvm_ppasm.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "loaded_builders.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "loaded_builders.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "modem_defs.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "msvc.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "nm.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "nm.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "platform_blast.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "platform_l4.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "platform_rex.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "ppasm.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "qdsp6_defs.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "qdsp6_defs.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "rvct.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "scons_mod.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "scons_mod.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "sharedlib_symbol.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "single_defs.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "swift_build_utils.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "utils.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "utils.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "version_builder.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "version_builder.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }, 
+                                {
+                                    "Path": "tcfg", 
+                                    "PathType": "Folder", 
+                                    "PropertyPaths": [
+                                        {
+                                            "Path": "target_config.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "tcfgparser.py", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "BuildScript"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Purpose", 
+                                                    "Values": [
+                                                        "+", 
+                                                        "Basic", 
+                                                        "BasicBuild"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Standard"
+                                                    ]
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "tcfgparser.pyc", 
+                                            "PathType": "File", 
+                                            "Properties": [
+                                                {
+                                                    "Name": "FileType", 
+                                                    "Values": [
+                                                        "Miscellaneous"
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Name": "Permission", 
+                                                    "Values": [
+                                                        "Restricted"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }, 
+                                {
+                                    "Path": "test", 
+                                    "PathType": "Folder", 
+                                    "Properties": [
+                                        {
+                                            "Name": "Permission", 
+                                            "Values": [
+                                                "Standard"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "FileType", 
+                                            "Values": [
+                                                "BuildScript"
+                                            ]
+                                        }, 
+                                        {
+                                            "Name": "Purpose", 
+                                            "Values": [
+                                                "Test"
+                                            ]
+                                        }
+                                    ], 
+                                    "PropertyPaths": [
+                                        {
+                                            "Path": "do_from_another_process.py", 
+                                            "PathType": "File"
+                                        }, 
+                                        {
+                                            "Path": "fSCons", 
+                                            "PathType": "Folder", 
+                                            "PropertyPaths": [
+                                                {
+                                                    "Path": "Node", 
+                                                    "PathType": "Folder", 
+                                                    "PropertyPaths": [
+                                                        {
+                                                            "Path": "FS", 
+                                                            "PathType": "Folder", 
+                                                            "PropertyPaths": [
+                                                                {
+                                                                    "Path": "__init__.py", 
+                                                                    "PathType": "File"
+                                                                }
+                                                            ]
+                                                        }, 
+                                                        {
+                                                            "Path": "__init__.py", 
+                                                            "PathType": "File"
+                                                        }
+                                                    ]
+                                                }, 
+                                                {
+                                                    "Path": "__init__.py", 
+                                                    "PathType": "File"
+                                                }
+                                            ]
+                                        }, 
+                                        {
+                                            "Path": "fake_scons_env.py", 
+                                            "PathType": "File"
+                                        }, 
+                                        {
+                                            "Path": "pack_results.py", 
+                                            "PathType": "File"
+                                        }, 
+                                        {
+                                            "Path": "test_add_library.py", 
+                                            "PathType": "File"
+                                        }, 
+                                        {
+                                            "Path": "test_config.py", 
+                                            "PathType": "File"
+                                        }, 
+                                        {
+                                            "Path": "test_for_deps_on_redip_artifacts.py", 
+                                            "PathType": "File"
+                                        }, 
+                                        {
+                                            "Path": "test_release_txt.py", 
+                                            "PathType": "File"
+                                        }, 
+                                        {
+                                            "Path": "test_tcfg_parser.py", 
+                                            "PathType": "File"
+                                        }, 
+                                        {
+                                            "Path": "test_utils.py", 
+                                            "PathType": "File"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

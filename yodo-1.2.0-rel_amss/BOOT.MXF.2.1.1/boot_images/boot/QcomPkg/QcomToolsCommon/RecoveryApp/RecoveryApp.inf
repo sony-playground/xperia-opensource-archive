@@ -1,0 +1,46 @@
+#/** @file RecoveryApp.inf
+#
+#  Test App for EFI_RECOVERY protocol
+#
+#  Copyright (c) 2021 Qualcomm Technologies, Inc.
+#  All rights reserved.
+#  Qualcomm Technologies, Confidential and Proprietary.
+#
+#**/
+#
+#/*=============================================================================
+#                              EDIT HISTORY
+#
+#
+# when           who         what, where, why
+# --------       ---         -----------------------------------------------------------
+# 2021/04/12     dmohan      Initial revision
+#=============================================================================*/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RecoveryApp
+  FILE_GUID                      = 21D49DEA-307F-4874-BAC4-F62E28049B79
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = RecoveryAppMain
+
+[Sources]
+  RecoveryApp.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[Protocols]
+  gEfiShellProtocolGuid                  ## CONSUMES
+  gEfiRecoveryProtocolGuid               ## CONSUMES
+  gEfiSMEMProtocolGuid                   ## CONSUMES
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  QcomLib
+  PrintLib

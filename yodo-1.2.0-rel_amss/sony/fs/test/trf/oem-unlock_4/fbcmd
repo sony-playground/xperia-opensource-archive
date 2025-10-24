@@ -1,0 +1,5 @@
+c download:00000000
+b zerobyte
+c Write-TA:2:66671
+c oem unlock 2A103D267E1808BA
+w

@@ -1,0 +1,41 @@
+#/*===============================================================================
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#
+#  FILE:         SerialPortDxe.inf
+#  DESCRIPTION:
+#
+#  REVISION HISTORY
+#  when       who         what, where, why
+#  --------   ---         --------------------------------------------------------
+#  05/05/20   yw         initial version
+#
+#================================================================================*/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SerialPortDxe
+  FILE_GUID                      = 84cc57f6-38be-4acf-9752-73d1e23f793f
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SerialPortDxeEntry
+  
+[Sources.common]
+  SerialPortDxe.c
+  
+[Packages]
+  QcomPkg/QcomPkg.dec
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  
+ [LibraryClasses]
+  UefiDriverEntryPoint
+  SerialPortLib
+
+[Protocols]
+  gEfiSerialPortProtocolGuid
+  
+[Depex]
+  TRUE
+  

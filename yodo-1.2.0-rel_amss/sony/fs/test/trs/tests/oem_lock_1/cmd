@@ -1,0 +1,4 @@
+run authenticate_1
+fc oem lock -s OKAY
+fc reboot -s OKAY
+sh final.sh

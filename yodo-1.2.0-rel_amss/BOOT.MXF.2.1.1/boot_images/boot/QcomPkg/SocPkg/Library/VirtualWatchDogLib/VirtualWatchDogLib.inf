@@ -1,0 +1,27 @@
+#@file
+#      VirtualWatchDogLib.inf
+#
+#   Copyright (c) 2020  Qualcomm Technologies, Inc. All rights reserved.
+#   Qualcomm Technologies Proprietary and Confidential.
+#
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = VirtualWatchDogLib
+  FILE_GUID                      = D20582DD-0FA8-41C6-A5B3-4C3744C0589E
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = WatchDogLib
+
+[Sources.common]
+  VirtualWatchDogLib.c
+  WdogHypCall.S
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  ArmLib

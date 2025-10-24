@@ -1,0 +1,35 @@
+#/** @file DTBTest.inf
+#
+#  DTB protocol unit test
+#
+#  Copyright (c) 2021  Qualcomm Technologies Inc. All rights reserved.
+#
+#**/
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DTBTest
+  FILE_GUID                      = 779F3818-61EF-11EB-AF8F-7F566203E4A0
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = DTBTestMain
+
+[Sources]
+  DTBTest.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiApplicationEntryPoint
+  UefiLib
+  PcdLib
+  TestInterfaceLib
+  DTBExtnUEFILib
+
+[Protocols]
+  gEfiDtbExtnProtocolGuid        ## CONSUMES
+

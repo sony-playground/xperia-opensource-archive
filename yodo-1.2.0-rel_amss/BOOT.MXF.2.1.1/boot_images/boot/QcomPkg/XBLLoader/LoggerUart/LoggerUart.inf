@@ -1,0 +1,41 @@
+#/** @file LoggerUart.inf
+#
+#  Logger UART Lib
+#  
+#  Copyright (c) 2015-2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 09/27/19   ep     Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LoggerUartLib
+  FILE_GUID                      = 6b4f1ae7-67f6-44e8-9c32-b889cacb1162
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LoggerUartLib
+
+[Sources.common]
+  boot_logger_uart.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/LoaderFramework/LoaderFrameworkApi.dec  
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomPkg/XBLLoader/LoggerUart/LoggerUart.dec  
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+  
+[LibraryClasses]
+  

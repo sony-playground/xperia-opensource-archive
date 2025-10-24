@@ -1,0 +1,43 @@
+PIL Proxy Vote DT properties
+
+Required properties:
+ - subsys_id : Should be part of "Peripheral type" section in pil_proxy_vote_defines.h
+ - client_name : PIL sub-system client name
+
+
+Optional property:
+ - rail_names: RPM rail name required for sub-system
+ - rail_voltage_levels: Respective volatge Level defination for RPM rails defined in rail_names. 
+   Should be part of "Volatge Level defination for RPM rails" section in pil_proxy_vote_defines.h.
+ - icb_name: ICB name for sub-system. Usually it is defined as ""/icb/arbiter".
+ - icb_arb_master_slave: ICB arbiter master slave pairs. In the pair, first one is master (required 
+   to be part of section "Master Identifiers" ection in pil_proxy_vote_defines.h) and 
+   second one is slave (required to be part of section "Master Identifiers" ection in pil_proxy_vote_defines.h). 
+   For multiple master slave pairs, you keep on adding master slave pairs one after another.
+ - icb_arb_request_type - Should be part of "Arbitration Request Types" section in 
+   pil_proxy_vote_defines.h. For multiple ICB arbiter request type, add type entries one after another.
+ - icb_arb_request_data - ICB arbiter data. First one is instantaneous bandwidth in Bytes/second.
+   Second on is arbitrated bandwidth in Bytes/second. For multiple ICB arbiter data, keep on adding 
+   instantaneous bandwidth and arbitrated bandwidth pairs one after another.
+
+
+Note: 
+ - Node name of subsytem should be "pil_proxy_vote_" + <Sub-system Id from pil_proxy_vote_defines.h>
+ - Entries in rail_names should match entries in rail_voltage_levels. 
+ - For every one master-slave pair (2 entries) in icb_arb_master_slave property, respective icb_arb_request_type 
+   entry should present.
+ - For every one master-slave pair (2 entries) in icb_arb_master_slave property, respective instantaneous bandwidth
+   arbitrated bandwidth pair (2 entries) entry should present in icb_arb_request_data
+
+Example:
+
+  pil_proxy_vote_18 {
+    subsys_id                = <TZ_PIL_AUTH_CDSP_PROC>;
+    client_name              = "PIL_CDSP";
+    rail_names               = "/vcs/vdd_mx", "/vcs/vdd_cx", "/vcs/vdd_mxc";
+    rail_voltage_levels      = <RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM RAIL_VOLTAGE_LEVEL_NOM>;
+    icb_name                 = "/icb/arbiter";
+    icb_arb_master_slave     = <ICBID_MASTER_CDSP_PROC ICBID_SLAVE_CLK_CTL>;
+    icb_arb_request_type     = <ICBARB_REQUEST_TYPE_3>;
+    icb_arb_request_data     = /bits/ 64 <100000000 100000000>;
+  };

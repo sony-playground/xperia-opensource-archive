@@ -1,0 +1,141 @@
+## @file Usb4ConfigDxe
+#
+#  Usb4ConfigDxe configures the system for USB4 usage.
+#
+#  Copyright (c) 2020-2021 Qualcomm Technologies Inc. All rights reserved.<BR>
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Usb4Dxe
+  FILE_GUID                      = BE13E24A-8043-4AD9-B7BA-EA8D2D58262E
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = Usb4Entry
+
+[Sources]
+#  Usb4Ring.h
+#  Usb4Ctrl.h
+#  Usb4AdpPort.h
+#  Usb4Router.h
+#  Usb4RouterOp.h
+#  Usb4Cm.h
+#  usb4_platform_cio_phy.h
+#  Usb4Hwio.h
+  usb4_hwio.h
+  pd_hwioreg_dut.h
+  msmhwio_usb4.h
+  usb4_api.h
+  usb4_qdrv.h
+  usb4_cm.h
+  usb4_platform.h
+  usb4_platform_target.h
+  usb4_platform_defs.h
+  usb4_platform_ahb_access.h
+  usb4_interrupts.h
+  usb4_gcc.h
+  hwio_qusb4phy_swi.h
+  hwio_qusb4phy_module_names.h
+  hwio_refgen_swi.h
+  usb4_mem.h
+  usb4_path_manager.h
+  usb4_path.h
+  usb4_path_segment.h
+  usb4_operation.h
+  usb4_router.h
+  usb4_port.h
+  usb4_ctrl_iface.h
+  usb4_ctrl_packet.h
+  usb4_HIA.h
+  usb4_hi_ring.h
+  usb4_frames_seg_calc.h
+  usb4_uc_fw_image.h
+  usb4_dp_aux.h
+  usb4_drv_subsystem.h
+  usb4_gcc_hwio.h
+
+  Usb4Entry.c
+#  Usb4Ring.c
+#  Usb4Ctrl.c
+#  Usb4AdpPort.c
+#  Usb4Router.c
+#  Usb4RouterOp.c
+#  Usb4Cm.c
+
+  Usb4InitDxe.c
+  Usb4ClientUsb3.c
+
+  usb4_qdrv.c
+  usb4_platform.c
+  usb4_platform_target.c
+  usb4_platform_uc_target.c
+  usb4_platform_target_gpio.c
+  usb4_platform_cio_phy_target.c
+  usb4_dp_aux_plaform.c
+#  usb4_platform_cio_phy_emulation.c
+  usb4_cm.c
+  usb4_cm_hotplug.c
+  usb4_cm_interdomain.c
+  usb4_cm_ioctl.c
+  usb4_cm_logger.c
+  usb4_interrupts.c
+  usb4_platform_interrupts.c
+  usb4_gcc_platform.c
+  usb4_mem.c
+  usb4_platform_ahb_access_target.c
+  usb4_path_manager.c
+  usb4_path.c
+  usb4_path_segment.c
+  usb4_router.c
+  usb4_router_tmu.c
+  usb4_port.c
+  usb4_ctrl_iface.c
+  usb4_ctrl_packet.c
+  usb4_HIA.c
+  usb4_hi_ring.c
+  usb4_frames_seg_calc.c
+  usb4_utils.c
+
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  Usb4ConfigLib
+  QcomLib
+
+[Guids]
+  gEfiEventExitBootServicesGuid
+  gEfiEventToggleUsbModeGuid
+  gInitUsbControllerGuid
+  gUsb4FwPartiGuid
+  gBackupUsb4FwPartiGuid
+
+[Protocols]
+  gQcomUsb4ConfigProtocolGuid   #consumes
+  gEfiChipInfoProtocolGuid      #consumes
+  gEfiHwioProtocolGuid          #consumes
+  gEfiPilProtocolGuid           #consumes
+  gQcomUsb4ProtocolGuid         #consumes
+  gQcomRngProtocolGuid          #consumes 
+
+[Depex]
+  gQcomUsb4ConfigProtocolGuid
+
+# -DUSB4_USE_ENABLE_ALL_CLKS_CMM -DUSB_USE_STATIC_LOAD_METHOD
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -O0 -DASIC -DSOC_TLMM -DUSB4_PLATFORM_GPIO_TLMM -DUSB4_PLATFORM_GPIO_TLMM -DUSB4_WA_CR_QCTDD06702880_TX_RS_ALWAYS_SET -DUSB4_WA_CR_QCTDD06911734_FCM_junk_credit_grant -DUSB4_LOAD_FIRMWARE_ONLY
+  #GCC:*_*_*_CC_FLAGS = -O0
+  #MSFT:*_*_*_CC_FLAGS = -O0
+
+[BuildOptions.ARM]
+  RVCT:*_*_*_CC_FLAGS = -O0 -DASIC -DSOC_TLMM -DUSB4_PLATFORM_GPIO_TLMM -DUSB4_PLATFORM_GPIO_TLMM -DUSB4_WA_CR_QCTDD06702880_TX_RS_ALWAYS_SET -DUSB4_WA_CR_QCTDD06911734_FCM_junk_credit_grant -DUSB4_LOAD_FIRMWARE_ONLY
+  #RVCT:*_*_*_CC_FLAGS = -O0
+
+[Pcd]
+  gQcomTokenSpaceGuid.InitUsbControllerOnBoot

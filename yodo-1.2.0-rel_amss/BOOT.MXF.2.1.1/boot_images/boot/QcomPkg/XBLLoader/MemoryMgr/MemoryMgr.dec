@@ -1,0 +1,41 @@
+#/** @file MemoryMgr.dec
+#  
+#  XBL Loader headers declaration file.
+#  
+#  Copyright (c) 2011-2015,2017, 2019 Qualcomm Technologies, Inc. All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 09/30/19   epirvu  Initial revision
+#
+#==============================================================================
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = MemoryMgr
+  PACKAGE_GUID                   = 976A624F-45C0-D533-99E7-F1926F1D8DE3
+  PACKAGE_VERSION                = 0.1
+
+
+[Includes.common]
+  ../../Include/api/boot
+  ../../Include/api/systemdrivers
+  ../../Include/api/dal
+  ../../Include/api/securemsm
+  ../../Include/api/kernel/devcfg
+  ../Include
+  ../Include/ExtDrivers
+  ../../Library/DDRLib/common
+  ../../Include/api/storage
+  ../../Include/api/pmic/pm
+  ../../Include/Library
+  ../../Include/api/mproc
+  ../../Include/api/debugtools
+  

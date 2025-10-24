@@ -1,0 +1,59 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,arb_pvc.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm ARB PVC
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   The Qualcomm compatible node...
+   Links to any data sheet or HW specific details
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,arb_pvc
+  
+  mgpi-addr:
+    type: object
+  
+    properties:
+      pvc-port-id:
+        description: pvc-port-id
+        $ref: /schemas/types.yaml#/definitions/uint32
+        
+      spmi-priority:
+        description: spmi-priority
+        $ref: /schemas/types.yaml#/definitions/uint32
+        
+      addr-cfg:
+        description: addr-cfg
+    
+    required:
+      - pvc-port-id
+      - spmi-priority
+      
+required:
+  - compatible
+
+
+additionalProperties: false
+
+examples:
+  - |
+    pvc {
+    
+      compatible = "qcom,arb_pvc";
+      
+      mgpi-addr{
+        pvc-port-id = <3>;
+        spmi-priority = <0>;
+        /*addr-cfg = <0x2 0xC546 0x5>;*/  /* MGPI0, UICC1, L5C */
+      };
+      
+    };

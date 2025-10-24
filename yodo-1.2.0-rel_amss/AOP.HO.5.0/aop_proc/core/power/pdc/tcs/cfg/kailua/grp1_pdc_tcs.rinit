@@ -1,0 +1,142 @@
+#===========================================================================
+#                               gpr1_pdc_tcs.rinit
+#
+#  DESCRIPTION:
+#    This file contains init values for GRP1 PDC TCS
+#
+#    Settings are obtained from TCS contents sheet maintained by Architecture
+#    team alongwith collaboration from SW and HW teams. 
+#
+#
+#  Copyright (c) 2021 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+#--------------------------------------------------------------------------
+# Common vars
+#--------------------------------------------------------------------------
+vars:
+    vrm_vol_offset = 0x0
+    vrm_en_offset = 0x4
+    vrm_mode_offset = 0x8
+    ret_mode = 3
+    lpm_mode = 4
+    auto_mode = 6
+    npm_mode = 7
+    disable = 0
+    enable = 1
+
+module: { name = RPMH_PDC_GRP1_GRP1_PDC_GTCS_MEM, group = PDC_TCS, min_ver = 1.0, max_ver = 1.9, import = [arc_export] }
+regs:
+# Sleep Set 0
+    TCSt_CMDn_ADDR[0, 0] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[0, 0] = LCX_HLVL_RET
+    TCSt_CMDn_MSGID[0, 0] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 1] = LMX_LVL_ADDR
+    TCSt_CMDn_DATA[0, 1] = LMX_HLVL_SVS
+    TCSt_CMDn_MSGID[0, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 2] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[0, 2] = ret_mode
+    TCSt_CMDn_MSGID[0, 2] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[0] = 0x0             # Dont serialize
+
+# Sleep Set 1
+    TCSt_CMDn_ADDR[1, 0] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[1, 0] = LCX_HLVL_LOW_SVS_D1
+    TCSt_CMDn_MSGID[1, 0] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[1, 1] = LMX_LVL_ADDR
+    TCSt_CMDn_DATA[1, 1] = LMX_HLVL_SVS
+    TCSt_CMDn_MSGID[1, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[1, 2] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[1, 2] = ret_mode
+    TCSt_CMDn_MSGID[1, 2] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[1] = 0x0             # Dont serialize
+
+##############################################################################	
+
+# Wake Set
+    TCSt_CMDn_ADDR[2, 0] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[2, 0] = LCX_HLVL_LOW_SVS_D1
+    TCSt_CMDn_MSGID[2, 0] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[2, 1] = LMX_LVL_ADDR
+    TCSt_CMDn_DATA[2, 1] = LMX_HLVL_SVS
+    TCSt_CMDn_MSGID[2, 1] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[2, 2] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[2, 2] = npm_mode
+    TCSt_CMDn_MSGID[2, 2] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[2] = 0x0             # Dont serialize
+
+##############################################################################	
+
+module: { name = RPMH_PDC_GRP1_GRP1_PDC_GTCS_MEM, group = PDC_TCS, min_ver = 2.0, import = [arc_v2_export] }
+regs:
+# Sleep Set 0
+    TCSt_CMDn_ADDR[0, 0] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[0, 0] = LCX_HLVL_RET
+    TCSt_CMDn_MSGID[0, 0] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 1] = LMX_LVL_ADDR
+    TCSt_CMDn_DATA[0, 1] = LMX_HLVL_SVS
+    TCSt_CMDn_MSGID[0, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[0, 2] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[0, 2] = ret_mode
+    TCSt_CMDn_MSGID[0, 2] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[0] = 0x0             # Dont serialize
+
+# Sleep Set 1
+    TCSt_CMDn_ADDR[1, 0] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[1, 0] = LCX_HLVL_LOW_SVS_D1
+    TCSt_CMDn_MSGID[1, 0] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[1, 1] = LMX_LVL_ADDR
+    TCSt_CMDn_DATA[1, 1] = LMX_HLVL_SVS
+    TCSt_CMDn_MSGID[1, 1] = {0, 1} # {fnf, write}
+
+    TCSt_CMDn_ADDR[1, 2] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[1, 2] = ret_mode
+    TCSt_CMDn_MSGID[1, 2] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[1] = 0x0             # Dont serialize
+
+##############################################################################	
+
+# Wake Set
+    TCSt_CMDn_ADDR[2, 0] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[2, 0] = LCX_HLVL_LOW_SVS_D1
+    TCSt_CMDn_MSGID[2, 0] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[2, 1] = LMX_LVL_ADDR
+    TCSt_CMDn_DATA[2, 1] = LMX_HLVL_SVS
+    TCSt_CMDn_MSGID[2, 1] = {1, 1} # {rr, write}
+
+    TCSt_CMDn_ADDR[2, 2] = LCX_LVL_ADDR
+    TCSt_CMDn_DATA[2, 2] = npm_mode
+    TCSt_CMDn_MSGID[2, 2] = {0, 1} # {fnf, write}
+
+    # Wait for completion mask
+    WAIT_FOR_CMPL[2] = 0x0             # Dont serialize
+
+module: { name = RPMH_PDC_AUDIO_AUDIO_PDC, group = PDC_EN }
+regs:
+    TIMER_MATCH_VALUE_LO = 0xFFFFFFFF
+    TIMER_MATCH_VALUE_HI = 0xFFFFFFFF
+    CMD_ENABLE_BANK = [0x3, 0x3, 0x3]
+    ENABLE_PDC =
+    {.ENABLE_PDC = 0x1}

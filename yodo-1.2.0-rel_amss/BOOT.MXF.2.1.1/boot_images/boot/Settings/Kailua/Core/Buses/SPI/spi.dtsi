@@ -1,0 +1,592 @@
+/**
+
+This is the settings file for spi
+
+Copyright (c) 2022 Qualcomm Technologies, Inc.
+All Rights Reserved.
+Confidential and Proprietary - Qualcomm Technologies, Inc.
+*/
+
+#include "spi_defines.h"
+
+&soc {
+ spi: spi@A00000{
+
+  #address-cells = <1>;
+  #size-cells = <0>;
+
+  compatible = "qcom,spi-controller";
+  reg = <0x00A00000 0x00100000 >;
+
+#ifdef SSC_USE_SPI_01
+  spi_device_config_1@1 {
+    reg = <0x1>;
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00080000>;
+    qupv3_instance              = /bits/ 8 <QUP_1>;
+    core_index                  = /bits/ 8 <0>;
+    se_index                    = /bits/ 8 <0>;
+    gpi_index                   = /bits/ 8 <0>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    miso_encoding                = <SPI_01_MISO>;
+    mosi_encoding                = <SPI_01_MOSI>;
+    clk_encoding                 = <SPI_01_CLK>;
+    cs_encoding                  = <SPI_01_CS_0>;    
+    sleep_miso_encoding          = /bits/ 8 <0>;
+    sleep_mosi_encoding          = /bits/ 8 <0>;
+    sleep_clk_encoding           = /bits/ 8 <0>;
+    sleep_cs_encoding            = /bits/ 8 <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+
+    se_clock                    = "gcc_qupv3_wrap1_s0_clk";
+  };
+#endif
+#ifdef SSC_USE_SPI_02
+  spi_device_config_2@2 {
+    reg=<0x2>;
+
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00084000>;
+    qupv3_instance              = /bits/ 8 <QUP_1>;
+    core_index                  = /bits/ 8 <1>;
+    se_index                    = /bits/ 8 <1>;
+    gpi_index                   = /bits/ 8 <0>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    miso_encoding                = <SPI_02_MISO>;
+    mosi_encoding                = <SPI_02_MOSI>;
+    clk_encoding                 = <SPI_02_CLK>;
+    cs_encoding                  = <SPI_02_CS_0>;
+    sleep_miso_encoding          = <0>;
+    sleep_mosi_encoding          = <0>;
+    sleep_clk_encoding           = <0>;
+    sleep_cs_encoding            = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+
+    se_clock                    = "gcc_qupv3_wrap1_s1_clk";
+  };
+#endif
+#ifdef SSC_USE_SPI_03
+  spi_device_config_3@3 {
+    reg=<0x3>;
+
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00088000>;
+    qupv3_instance              = /bits/ 8 <QUP_1>;
+    core_index                  = /bits/ 8 <2>;
+    se_index                    = /bits/ 8 <2>;
+    gpi_index                   = /bits/ 8 <2>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    
+    miso_encoding                = <SPI_03_MISO>;
+    mosi_encoding                = <SPI_03_MOSI>;
+    clk_encoding                 = <SPI_03_CLK>;
+    cs_encoding                  = <SPI_03_CS_0>;
+    sleep_miso_encoding          = <0>;
+    sleep_mosi_encoding          = <0>;
+    sleep_clk_encoding           = <0>;
+    sleep_cs_encoding            = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;    
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;    
+
+
+    se_clock                    = "gcc_qupv3_wrap1_s2_clk";
+
+  };
+#endif
+#ifdef SSC_USE_SPI_04
+  spi_device_config_4@4 {
+    reg=<0x4>;
+
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x0008C000>;
+    qupv3_instance              = /bits/ 8 <QUP_1>;
+    core_index                  = /bits/ 8 <3>;
+    se_index                    = /bits/ 8 <3>;
+    gpi_index                   = /bits/ 8 <3>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    
+    miso_encoding                = <SPI_04_MISO>;
+    mosi_encoding                = <SPI_04_MOSI>;
+    clk_encoding                 = <SPI_04_CLK>;
+    cs_encoding                  = <SPI_04_CS_0>;
+    sleep_miso_encoding          = <0>;
+    sleep_mosi_encoding          = <0>;
+    sleep_clk_encoding           = <0>;
+    sleep_cs_encoding            = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;    
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+    
+ 
+    se_clock                    = "gcc_qupv3_wrap1_s3_clk";
+  };
+#endif
+#ifdef SSC_USE_SPI_05
+  spi_device_config_5@5 {
+    reg=<0x5>;
+
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00090000>;
+    qupv3_instance              = /bits/ 8 <QUP_0>;
+    core_index                  = /bits/ 8 <4>;
+    se_index                    = /bits/ 8 <4>;
+    gpi_index                   = /bits/ 8 <4>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+        
+    miso_encoding                = <SPI_05_MISO>;
+    mosi_encoding                = <SPI_05_MOSI>;
+    clk_encoding                 = <SPI_05_CLK>;
+    cs_encoding                  = <SPI_05_CS_0>;
+    sleep_miso_encoding          = <0>;
+    sleep_mosi_encoding          = <0>;
+    sleep_clk_encoding           = <0>;
+    sleep_cs_encoding            = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;    
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+    
+ 
+    se_clock                    = "gcc_qupv3_wrap1_s4_clk";
+	
+  };
+#endif
+#ifdef SSC_USE_SPI_06
+  spi_device_config_6@6 {
+    reg=<0x6>;
+
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00094000>;
+    qupv3_instance              = /bits/ 8 <QUP_1>;
+    core_index                  = /bits/ 8 <5>;
+    se_index                    = /bits/ 8 <5>;
+    gpi_index                   = /bits/ 8 <5>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+        
+    miso_encoding               = <SPI_06_MISO>;
+    mosi_encoding               = <SPI_06_MOSI>;
+    clk_encoding                = <SPI_06_CLK>;
+    cs_encoding                 = <SPI_06_CS_0>;
+    sleep_miso_encoding          = <0>;
+    sleep_mosi_encoding          = <0>;
+    sleep_clk_encoding           = <0>;
+    sleep_cs_encoding            = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+
+ 
+    se_clock                    = "gcc_qupv3_wrap1_s5_clk";
+	
+  };
+#endif
+#ifdef SSC_USE_SPI_07
+  spi_device_config_7@7 {
+    reg=<0x7>;
+
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00098000>;
+    qupv3_instance              = /bits/ 8 <QUP_1>;
+    core_index                  = /bits/ 8 <6>;
+    se_index                    = /bits/ 8 <6>;
+    gpi_index                   = /bits/ 8 <6>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    
+    miso_encoding               = <SPI_07_MISO>;
+    mosi_encoding               = <SPI_07_MOSI>;
+    clk_encoding                = <SPI_07_CLK>;
+    cs_encoding                 = <SPI_07_CS_0>;
+    sleep_miso_encoding          = <0>;
+    sleep_mosi_encoding          = <0>;
+    sleep_clk_encoding           = <0>;
+    sleep_cs_encoding            = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+    
+ 
+    se_clock                    = "gcc_qupv3_wrap1_s6_clk";
+	
+  };
+#endif
+#ifdef SSC_USE_SPI_08
+  spi_device_config_8@8 {
+    reg=<0x8>;
+
+    core_base_addr              = <QUPV3_1_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_1_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x0009C000>;
+    qupv3_instance              = /bits/ 8 <QUP_0>;
+    core_index                  = /bits/ 8 <7>;
+    se_index                    = /bits/ 8 <7>;
+    gpi_index                   = /bits/ 8 <7>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    miso_encoding               = <SPI_08_MISO>;
+    mosi_encoding               = <SPI_08_MOSI>;
+    clk_encoding                = <SPI_08_CLK>;
+    cs_encoding                 = <SPI_08_CS_0>;
+    sleep_miso_encoding          = <0>;
+    sleep_mosi_encoding          = <0>;
+    sleep_clk_encoding           = <0>;
+    sleep_cs_encoding            = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;    
+
+ 
+    se_clock                    = "gcc_qupv3_wrap1_s7_clk";
+  };
+#endif
+#ifdef SSC_USE_SPI_09
+  spi_device_config_9@9 {
+    reg=<0x9>;
+
+    core_base_addr              = <QUPV3_2_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_2_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00080000>;
+    qupv3_instance              = /bits/ 8 <QUP_2>;
+    core_index                  = /bits/ 8 <8>;
+    se_index                    = /bits/ 8 <0>;
+    gpi_index                   = /bits/ 8 <8>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    miso_encoding               = <SPI_09_MISO>;
+    mosi_encoding               = <SPI_09_MOSI>;
+    clk_encoding                = <SPI_09_CLK>;
+    cs_encoding                 = <SPI_09_CS_0>;
+    sleep_miso_encoding          = <0>;
+    sleep_mosi_encoding          = <0>;
+    sleep_clk_encoding           = <0>;
+    sleep_cs_encoding            = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;    
+    
+ 
+    se_clock                    = "gcc_qupv3_wrap2_s0_clk";
+	
+  };
+#endif
+#ifdef SSC_USE_SPI_10
+  spi_device_config_10@a {
+    reg=<0xa>;
+
+    core_base_addr              = <QUPV3_2_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_2_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00084000>;
+    qupv3_instance              = /bits/ 8 <QUP_2>;
+    core_index                  = /bits/ 8 <9>;
+    se_index                    = /bits/ 8 <1>;
+    gpi_index                   = /bits/ 8 <9>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+        
+    miso_encoding               = <SPI_10_MISO>;
+    mosi_encoding               = <SPI_10_MOSI>;
+    clk_encoding                = <SPI_10_CLK>;
+    cs_encoding                 = <SPI_10_CS_0>;
+    sleep_miso_encoding          = <0>;
+    sleep_mosi_encoding          = <0>;
+    sleep_clk_encoding           = <0>;
+    sleep_cs_encoding            = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+
+ 
+    se_clock                    = "gcc_qupv3_wrap2_s1_clk";
+
+  };
+#endif
+#ifdef SSC_USE_SPI_11
+  spi_device_config_11@b {
+    reg=<0xb>;
+
+    core_base_addr              = <QUPV3_2_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_2_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00088000>;
+    qupv3_instance              = /bits/ 8 <QUP_2>;
+    core_index                  = /bits/ 8 <10>;
+    se_index                    = /bits/ 8 <2>;
+    gpi_index                   = /bits/ 8 <10>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    miso_encoding               = <SPI_11_MISO>;
+    mosi_encoding               = <SPI_11_MOSI>;
+    clk_encoding                = <SPI_11_CLK>;
+    cs_encoding                 = <SPI_11_CS_0>;
+    sleep_miso_encoding          = <0>;
+    sleep_mosi_encoding          = <0>;
+    sleep_clk_encoding           = <0>;
+    sleep_cs_encoding            = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;    
+
+ 
+    se_clock                    = "gcc_qupv3_wrap2_s2_clk";
+
+  };
+#endif
+#ifdef SSC_USE_SPI_12
+  spi_device_config_12@c {
+    reg=<0xc>;
+
+    core_base_addr              = <QUPV3_2_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_2_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x0008C000>;
+    qupv3_instance              = /bits/ 8 <QUP_2>;
+    core_index                  = /bits/ 8 <11>;
+    se_index                    = /bits/ 8 <3>;
+    gpi_index                   = /bits/ 8 <11>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    miso_encoding               = <SPI_12_MISO>;
+    mosi_encoding               = <SPI_12_MOSI>;
+    clk_encoding                = <SPI_12_CLK>;
+    cs_encoding                 = <SPI_12_CS_0>;
+    sleep_miso_encoding          = <0>;
+    sleep_mosi_encoding          = <0>;
+    sleep_clk_encoding           = <0>;
+    sleep_cs_encoding            = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+    
+ 
+    se_clock                    = "gcc_qupv3_wrap2_s3_clk";
+  };
+#endif
+#ifdef SSC_USE_SPI_13
+  spi_device_config_13@d {
+    reg=<0xd>;
+
+    core_base_addr              = <QUPV3_2_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_2_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00090000>;
+    qupv3_instance              = /bits/ 8 <QUP_2>;
+    core_index                  = /bits/ 8 <12>;
+    se_index                    = /bits/ 8 <4>;
+    gpi_index                   = /bits/ 8 <12>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    miso_encoding               = <SPI_13_MISO>;
+    mosi_encoding               = <SPI_13_MOSI>;
+    clk_encoding                = <SPI_13_CLK>;
+    cs_encoding                 = <SPI_13_CS_0>;
+    sleep_miso_encoding         = <0>;
+    sleep_mosi_encoding         = <0>;
+    sleep_clk_encoding          = <0>;
+    sleep_cs_encoding           = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+    
+ 
+    se_clock                    = "gcc_qupv3_wrap2_s4_clk";
+  };
+#endif
+#ifdef SSC_USE_SPI_14
+  spi_device_config_14@e {
+    reg=<0xe>;
+
+    core_base_addr              = <QUPV3_2_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_2_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00094000>;
+    qupv3_instance              = /bits/ 8 <QUP_2>;
+    core_index                  = /bits/ 8 <13>;
+    se_index                    = /bits/ 8 <5>;
+    gpi_index                   = /bits/ 8 <13>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    
+    miso_encoding               = <SPI_14_MISO>;
+    mosi_encoding               = <SPI_14_MOSI>;
+    clk_encoding                = <SPI_14_CLK>;
+    cs_encoding                 = <SPI_14_CS_0>;
+    sleep_miso_encoding         = <0>;
+    sleep_mosi_encoding         = <0>;
+    sleep_clk_encoding          = <0>;
+    sleep_cs_encoding           = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+
+ 
+    se_clock                    = "gcc_qupv3_wrap2_s5_clk";
+  };
+#endif
+#ifdef SSC_USE_SPI_15
+  spi_device_config_15@f {
+    reg=<0xf>;
+
+    core_base_addr              = <QUPV3_2_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_2_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00094000>;
+    qupv3_instance              = /bits/ 8 <QUP_2>;
+    core_index                  = /bits/ 8 <14>;
+    se_index                    = /bits/ 8 <6>;
+    gpi_index                   = /bits/ 8 <14>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    
+    miso_encoding               = <SPI_15_MISO>;
+    mosi_encoding               = <SPI_15_MOSI>;
+    clk_encoding                = <SPI_15_CLK>;
+    cs_encoding                 = <SPI_15_CS_0>;
+    sleep_miso_encoding         = <0>;
+    sleep_mosi_encoding         = <0>;
+    sleep_clk_encoding          = <0>;
+    sleep_cs_encoding           = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+
+ 
+    se_clock                    = "gcc_qupv3_wrap2_s6_clk";
+  };
+#endif
+#ifdef SSC_USE_SPI_16
+  spi_device_config_16@10 {
+    reg=<0x10>;
+
+    core_base_addr              = <QUPV3_2_CORE_BASE_ADDRESS>;
+    common_base_addr            = <QUPV3_2_CORE_COMMON_BASE_ADDRESS>;
+    core_offset                 = <0x00094000>;
+    qupv3_instance              = /bits/ 8 <QUP_2>;
+    core_index                  = /bits/ 8 <15>;
+    se_index                    = /bits/ 8 <7>;
+    gpi_index                   = /bits/ 8 <15>;
+    core_irq                    = /bits/ 8 <0>;
+    polled_mode                 = /bits/ 8 <1>;
+    min_data_length_for_dma     = /bits/ 8 <0>;
+    
+    
+    miso_encoding               = <SPI_16_MISO>;
+    mosi_encoding               = <SPI_16_MOSI>;
+    clk_encoding                = <SPI_16_CLK>;
+    cs_encoding                 = <SPI_16_CS_0>;
+    sleep_miso_encoding         = <0>;
+    sleep_mosi_encoding         = <0>;
+    sleep_clk_encoding          = <0>;
+    sleep_cs_encoding           = <0>;
+
+    tcsr_reg_offset             = <0x00000000>;
+    tcsr_base_addr              = <0x01FC0000>;
+    tcsr_reg_value              = <0x00000000>;
+    
+    se_clock_frequency          = <19200>;
+    se_clock_dfs_index          = /bits/ 8 <1>;
+
+ 
+    se_clock                    = "gcc_qupv3_wrap2_s7_clk";
+  };
+#endif
+ };
+};

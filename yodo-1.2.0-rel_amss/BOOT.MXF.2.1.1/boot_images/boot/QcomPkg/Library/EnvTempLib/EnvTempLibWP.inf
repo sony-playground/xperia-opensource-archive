@@ -1,0 +1,39 @@
+#/** @file EnvTempLibWP.inf
+#
+#  Qualcomm implementation for EnvTempLib Library.
+#
+#  Copyright (c) 2020,2021 Qualcomm Technologies, Inc. All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 12/9/20   cm        Initial version
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = EnvTempLib
+  FILE_GUID                      = 4A942505-3FD1-424F-AB08-C404CCC9AF64
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = EnvTempLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF EBC ARM AARCH64
+#
+
+[Sources]
+  EnvTempLibWP.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+
+ 

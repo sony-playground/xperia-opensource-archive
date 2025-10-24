@@ -1,0 +1,78 @@
+#/** @file Pwrup.inf
+#
+#  Module powerup app
+#
+#  Copyright (c) 2020 - 2021 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ----------------------------------------------------------
+# 04/07/2020   yg      Initial Revision
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Pwrup
+  FILE_GUID                      = 7CAC56A8-B971-473B-AECA-13BA82FD77D0
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = PwrupEntry
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[Sources]
+  Pwrup.c
+  Config.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/QcomTestPkg/QcomTestPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  EfiFileLib
+  QcomLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  ParserLib
+  DevicePathLib
+  GuidedFvLib
+  NpaApiLib
+  DALModEnvLib
+  PcieTestUtilsLib
+
+[Guids]
+  gEfiUefiPartitionTypeGuid
+  gEfiSdRemovableGuid
+  gQcomTokenSpaceGuid
+  gToolsFvGuid
+  gTestsFvGuid
+
+[Protocols]
+  gEfiSimpleFileSystemProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gEfiLoadedImageProtocolGuid
+  gEfiClockProtocolGuid
+  gEfiChipInfoProtocolGuid
+  gQcomPmicDriverTestProtocolGuid
+  gEfiTLMMProtocolGuid
+  gEfiHalIommuProtocolGuid
+

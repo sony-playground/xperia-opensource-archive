@@ -1,0 +1,37 @@
+#/** @file ClockTargetLibNull.inf
+#
+#  Null Clock Target lib if Clock Target lib is not available
+#
+#  Copyright (c) 2020, 2022, Qualcomm Technologies, Inc . All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 02/10/20   ck      Initial revision
+#
+#==============================================================================
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ClockTargetLib
+  FILE_GUID                      = ED7B370A-A203-45C4-BB05-73E152F0E8F2
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ClockTargetLib
+
+[Sources]
+  ClockTargetLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+
+[LibraryClasses]
+

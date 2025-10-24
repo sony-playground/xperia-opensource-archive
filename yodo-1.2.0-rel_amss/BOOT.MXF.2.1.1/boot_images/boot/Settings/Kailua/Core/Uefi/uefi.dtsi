@@ -1,0 +1,8 @@
+// Core/Uefi/Uefi.dtsi
+// core boot Uefi settings
+
+#include "cfg/ueficfg.dtsi"
+
+&sw {
+        uefi { };
+};

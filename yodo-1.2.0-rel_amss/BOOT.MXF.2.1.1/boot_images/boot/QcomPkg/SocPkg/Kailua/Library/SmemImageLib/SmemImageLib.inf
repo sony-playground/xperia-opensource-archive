@@ -1,0 +1,47 @@
+# @file  SmemImageLib.inf
+#
+#
+#       Copyright (c) 2021 Qualcomm Technologies, Incorporated.
+#                        All rights reserved.
+#       Qualcomm Technologies, Confidential and Proprietary.
+# 
+#
+#
+#=============================================================================
+#                              EDIT HISTORY
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+#
+#
+# when       who      what, where, why
+# --------   ---      --------------------------------------------------------
+# 07/1/21   ar       Initial version
+#
+#=============================================================================
+
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = SmemImageLib
+  MODULE_TYPE    = BASE
+  VERSION_STRING = 1.0
+  LIBRARY_CLASS  = SmemImageLib
+
+[Sources]
+  smem_xbl_cfg_kailua.c
+
+[LibraryClasses]
+ 
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  SecPkg/Library/ACLib/ACLib.dec
+

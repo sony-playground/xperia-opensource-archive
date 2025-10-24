@@ -1,0 +1,5 @@
+&soc {
+	quantum_dt {
+		enter_quantum = <0>;
+	};
+};

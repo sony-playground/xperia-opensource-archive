@@ -1,0 +1,71 @@
+#/** @file IPCCv2Lib.inf
+#
+#  Qualcomm IPCC Library
+#
+#  Copyright (c) 2022 Qualcomm Technologies, Inc.
+#  All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 06/10/22   shm     Initial revision.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = IPCCLib
+  FILE_GUID                      = 94E52588-BCDB-43C6-8174-D4DDF7D16C0B
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = IPCCLib
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DIPCC_HWMEMOPT -DIPCC_NO_LOG -DIPCC_SUPPORT_EXTENDED_APIS
+
+[Sources.common]
+  ../src/IPCC.c
+  ../src/IPCCLegacyIsland.c
+  ../src/IPCCInfo.c
+  ../src/IPCCTx.c
+  ../src/IPCCIsland.c
+  ../src/uefi/IPCC_Log.c
+  ../src/uefi/IPCC_LogIsland.c
+  ../src/uefi/IPCC_OS.c
+  ../src/uefi/IPCC_OSIsland.c
+  ../src/IPCCLegacy.c
+  ../src/IPCCRx.c
+  ../src/IPCCRxIsland.c
+  ../image/IPCCImage.c
+  ../image/uefi/IPCCSubsys.c
+  ../inc/IPCC_Internal.h
+  ../inc/IPCC_Tx.h
+  ../inc/IPCC_Log.h
+  ../inc/IPCC_Legacy.h
+  ../inc/IPCC_OS.h
+  ../inc/IPCC_Rx.h
+  ../inc/IPCC_Image.h
+  ../inc/IPCC_InfoInternal.h
+  ../inc/IPCCHWIO.h
+
+[Packages]
+  QcomPkg/QcomPkg.dec
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[Protocols]
+  gEfiCpuArchProtocolGuid
+
+[LibraryClasses]
+  DALModEnvLib
+  DALFwkLib
+  IPCCTargetLib
+  QcomLib
+  KernelLib

@@ -1,0 +1,91 @@
+Import('env')
+
+ 
+env = env.Clone()
+
+#generate AC static policy
+if env['MSM_ID'] in ['waipio','fillmore','netrani','kailua']:
+	aop_code_gen_script = env.RealPath("${BUILD_ROOT}/core/aop_accesscontrol/ACConfigDataLib/tools/xPU/code_genV2_xpu4.py")
+	aop_target_json = env.RealPath("${BUILD_ROOT}/core/aop_accesscontrol/ACConfigDataLib/${MSM_ID}/target_info.json")
+	aop_output_folder = env.RealPath("${BUILD_ROOT}/core/aop_accesscontrol/ACConfigDataLib/${MSM_ID}")
+	aop_ac_xml = env.RealPath("${BUILD_ROOT}/core/aop_accesscontrol/ACConfigDataLib/${MSM_ID}/${MSM_ID}AccessControl.xml")
+	code_gen_cmd = "python {} -x {} -t {} -j {} -o {} -i AOP".format(
+		aop_code_gen_script,
+		aop_ac_xml,
+		env['MSM_ID'],
+		aop_target_json,
+		aop_output_folder
+	)
+	env.ExecCmds(code_gen_cmd)
+
+if env['MSM_ID'] in ['lanai','kuno','hamoa','pinnacle']:
+	env.Append(CPPDEFINES = 'AC_NO_STATIC_POLICY')
+
+SRCPATH = ".."
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+CBSP_API = [
+    'DAL',
+    'SYSTEMDRIVERS',
+    'REX',
+    'KERNEL',
+]
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+
+env.PublishProtectedApi('AC', [
+    '${INC_ROOT}/core/aop_accesscontrol/ACLib/Include/api',
+    '${INC_ROOT}/core/aop_accesscontrol/ACLib/Include',
+    '${INC_ROOT}/core/aop_accesscontrol/ACLib/accesscontrol/xpu/v4/inc',
+    '${INC_ROOT}/core/aop_accesscontrol/ACLib/accesscontrol/xpu/v4/target/${MSM_ID}',
+    '${INC_ROOT}/core/aop_accesscontrol/ACConfigDataLib/${MSM_ID}',
+])
+
+AC_API = []
+if env['MSM_ID'] in ['waipio','fillmore','netrani','kailua']:
+	AC_API.append('${BUILD_ROOT}/core/aop_accesscontrol/ACConfigDataLib/${MSM_ID}')
+
+env.PublishRestrictedApi('AC', AC_API)
+env.RequireProtectedApi(['AC'])
+
+
+AC_SOURCES=[
+	'${BUILD_ROOT}/core/aop_accesscontrol/ACLib/accesscontrol/xpu/AccessControlxPU.c',
+	'${BUILD_ROOT}/core/aop_accesscontrol/ACLib/accesscontrol/xpu/AccessControlxPUUtil.c',
+	'${BUILD_ROOT}/core/aop_accesscontrol/ACLib/accesscontrol/xpu/v4/src/HALxPU4.c',
+]
+
+AC_INIT_SOURCES=[
+    '${BUILD_ROOT}/core/aop_accesscontrol/ACLib/accesscontrol/src/aop_ac.c',
+    '${BUILD_ROOT}/core/aop_accesscontrol/ACLib/accesscontrol/xpu/v4/src/HALxPU4Util.c',
+]
+
+if env['MSM_ID'] in ['waipio','fillmore','netrani','kailua', 'lanai','pinnacle','kuno','hamoa']:
+	AC_SOURCES += [
+		'${BUILD_ROOT}/core/aop_accesscontrol/ACConfigDataLib/${MSM_ID}/AccessControlTargetData.c',
+	]
+	if env['MSM_ID'] not in ['lanai','kuno','hamoa','pinnacle']: #all targets starting with Lanai will not protect their own static policy. TME will do this
+		AC_SOURCES += [
+			'${BUILD_ROOT}/core/aop_accesscontrol/ACConfigDataLib/${MSM_ID}/ACXpuStaticConfig.c',
+		]
+	AC_INIT_SOURCES += [
+		'${BUILD_ROOT}/core/aop_accesscontrol/ACLib/accesscontrol/cfg/${MSM_ID}/AccessControlTarget.c',
+	]
+
+AC_STUB_SOURCES=[
+	'${BUILD_ROOT}/core/aop_accesscontrol/ACLib/accesscontrol/stub/aop_ac.c',
+]
+
+#Add AC_ERR_IGNORE for targets during bringup/where AC policy is very dynamic
+if env['MSM_ID'] in ['fillmore','netrani','aurora','kailua','pinnacle']:
+	env.Append(CPPDEFINES = 'AC_ERR_IGNORE')
+
+if env['MSM_ID'] in ['waipio','fillmore','netrani','kailua','aurora','lanai','pinnacle','kuno','hamoa']:
+  env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/aop_accesscontrol', AC_SOURCES)
+  env2 = env.Clone()
+  if env['MSM_ID'] not in ['lanai','kuno','hamoa','pinnacle']:
+	env2.Append(CCFLAGS    = ' -mlong-calls')	
+  env2.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/aop_accesscontrol_init', AC_INIT_SOURCES)
+else:
+  env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/aop_accesscontrol', AC_STUB_SOURCES)

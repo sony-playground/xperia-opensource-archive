@@ -1,0 +1,40 @@
+// Core/Storage/UFS/ufs.dtsi
+// core storage HW settings
+
+&soc {
+	  #address-cells = <1>;
+	  #size-cells = <1>;
+      ufs: ufs0@1D80000 {
+         compatible = "qcom,ufs";
+         reg = <0x01D80000 0x00007000>;
+
+	 EnableLogging = /bits/ 8 <0>; 
+
+	 FUA_Value = /bits/ 8 <0>;
+
+	 LinkStartupRetryCount = /bits/ 8 <5>;
+
+	 BatteryThresholdMv = <3600>;
+
+	 timeout_values {
+            fDeviceInitTimeoutUs = <2500000>;
+	    UTRDPollTimeoutUs = <30000000>;
+	 };
+
+	 init_speed_params {
+	    EnableHighSpeed = /bits/ 8 <1>;
+	    NumGears = /bits/ 8 <5>;
+	    NumLanes = /bits/ 8 <2>;
+	    Rate = /bits/ 8 <1>;
+	 };
+
+	 perf_speed_params {
+	    EnableHighSpeed = /bits/ 8 <1>;
+	    NumGears = /bits/ 8 <5>;
+	    NumLanes = /bits/ 8 <2>;
+	    Rate = /bits/ 8 <1>;
+	 };
+     };
+};
+
+

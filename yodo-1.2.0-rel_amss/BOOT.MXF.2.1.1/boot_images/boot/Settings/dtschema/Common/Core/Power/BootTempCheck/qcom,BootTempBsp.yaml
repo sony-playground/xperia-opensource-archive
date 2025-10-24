@@ -1,0 +1,70 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,BootTempBsp.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm Boot Temp Check DT
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   The Qualcomm compatible node...
+   Links to any data sheet or HW specific details
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,BootTempBsp
+  
+  BootTempThres:
+    type: object
+    
+    properties:
+      nUpperThresholdDegC:
+        maxItems: 1
+        description: nUpperThresholdDegC
+
+      nLowerThresholdDegC:
+        maxItems: 1
+        description: nLowerThresholdDegC
+        
+      uMaxNumIterations:
+        maxItems: 1
+        description: uMaxNumIterations
+      
+      uWaitPerIterationMicroSec:
+        maxItems: 1
+        description: uWaitPerIterationMicroSec
+        
+      uSensor:
+        maxItems: 1
+        description: uSensor
+        
+    required:
+      - nUpperThresholdDegC
+      - nLowerThresholdDegC
+      - uMaxNumIterations
+      - uWaitPerIterationMicroSec
+      - uSensor
+    
+required:
+  - compatible
+  - BootTempThres
+
+additionalProperties: false
+
+examples:
+  - |
+    BootTempBsp{
+      compatible = "qcom,BootTempBsp";
+      BootTempThres{
+        nUpperThresholdDegC       = <150>;
+        nLowerThresholdDegC       = <0xFFFFFF6A>;
+        uMaxNumIterations         = <40>;
+        uWaitPerIterationMicroSec = <500000>;
+        uSensor                   = <0>;
+      };
+    };

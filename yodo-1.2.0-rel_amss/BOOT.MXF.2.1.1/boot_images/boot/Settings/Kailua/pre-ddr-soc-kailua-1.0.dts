@@ -1,0 +1,7 @@
+// pre_ddr-soc.dts
+//
+// Container DTS file for specific hardware platform: Kailua SoC
+
+/dts-v1/;
+
+#include "soc_pre-ddr.dtsi"                     /* Common SoC Node Definitions */

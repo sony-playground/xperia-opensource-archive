@@ -1,0 +1,36 @@
+#/** @file PmbusQupv3Lib.inf
+#
+#  PMBus QupV3 Lib
+#  
+#  Copyright (c) 2022 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 06/07/22   jc      Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = PmbusQupv3Lib
+  FILE_GUID      = 164c71de-60bc-4428-9c45-8a39f698f8c2
+  MODULE_TYPE    = BASE
+  VERSION_STRING = 1.0
+  LIBRARY_CLASS  = PmbusQupv3Lib
+
+[Sources]
+  pmbus.c
+  
+[LibraryClasses]
+  SmbusQupv3Lib
+  
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec

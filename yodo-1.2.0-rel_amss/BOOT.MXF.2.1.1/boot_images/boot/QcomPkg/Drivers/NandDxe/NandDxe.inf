@@ -1,0 +1,94 @@
+#/** @file NandDxe.inf
+#
+#  SLC NAND Driver UEFI INF file
+#
+#  Copyright (c) 2017, 2019-2020 Qualcomm Technologies, Inc.
+#  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   -----   ----------------------------------------------------------
+# 2020/06/09   eo      Porting Nand support to XBL Core
+# 2019/09/20   sa      Added BlockIoRefreshGuid as dependency.
+# 2019/05/03   sa      Added StorageProfileLib library.
+# 2017/03/03   eo      Initial version.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NandDxe
+  FILE_GUID                      = F077B5FB-AA11-4e56-B25E-707854DE6AD5
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = NandDxeEntryPoint
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS =
+  MSFT:*_*_*_CC_FLAGS =
+
+[Sources.common]
+  NandFtlApi.c
+  NandFtlCore.c
+  NandFtlOsal.c
+  NandFtlUtil.c
+  NandMibib.c
+  NandDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiRuntimeServicesTableLib
+  UefiLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  UefiDriverEntryPoint
+  IoLib
+  DALModEnvLib
+  BamLib
+  QpicLib
+  NandHalLib
+  NandCommonLib
+  UncachedMemoryAllocationLib
+  UefiCfgLib
+  BootConfigLib
+  StorageProfileLib
+
+[Guids]
+  gEfiEventExitBootServicesGuid
+  gBlockIoRefreshGuid
+  gEfiEventVirtualAddressChangeGuid             ## CONSUMES ## Event
+
+[Protocols]
+  gEfiChipInfoProtocolGuid
+  gEfiBlockIoProtocolGuid
+  gEfiCpuArchProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiMemCardInfoProtocolGuid
+  gEfiNandIoProtocolGuid
+  gEfiNandPartiGuidProtocolGuid
+  gEfiEraseBlockProtocolGuid
+  gQcomScmProtocolGuid
+  gEfiPartitionRecordGuid
+  gEfiSMEMProtocolGuid
+
+[Pcd.common]
+
+[Depex]
+  gEfiClockProtocolGuid
+  AND
+  gEfiTimerArchProtocolGuid
+

@@ -1,0 +1,86 @@
+#/** @file DDRTargetLib.inf
+#
+#  DDR Lib
+#  
+#  Copyright (c) 2017-2022 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+# when       who       what, where, why
+# --------   ---       ----------------------------------------------------------
+# 05/05/22   sairajma  added shrm minidump support
+# 06/25/20   rama      Add ExtDrivers.dec and SecLib.dec
+# 05/29/20   rama      Add SmcLib.dec
+# 10/22/18   yps       Sync with orignal file
+# 02/21/18   sl        Added DDI sources and enable FEATURE_BOOT_DDI_ENABLE
+# 09/26/17   daisond   Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DDRTargetLib
+  FILE_GUID                      = B90EACA0-47CE-79C4-C1BA-14A4973FF8BC
+  MODULE_TYPE                    = SEC
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DDRTargetLib
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS = -DSHARED_IMEM_DDR_PARAM_BASE=0xFE805190 -DSHARED_IMEM_DDR_TRAINING_COOKIE=0xFE805018 -DBUILD_BOOT_CHAIN
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DDDRCC_PLL_EXTENSION_0 -DFEATURE_BOOT_EXTERN_DDR_COMPLETED -DSHARED_IMEM_DDR_PARAM_BASE=0xFE805190 -DSHARED_IMEM_DDR_TRAINING_COOKIE=0xFE805018 -DBUILD_BOOT_CHAIN -DUSE_LOADER_UTIL
+
+  
+[Sources.common]
+  ../../../../Library/DDRLib/common/ddr_sync.c
+  ../../../../Library/DDRLib/common/params/v9/ddr_params.c
+  ../../../../Library/DDRLib/common/ddr_sns_drivers.c
+  ../../../../Library/DDRLib/common/ddr_test.c
+  ../../../../Library/DDRLib/common/ddr_log.c
+ 
+# DDR Target Sources
+
+  ../../../Kailua/Library/DDRTargetLib/ddr_external_api.c
+  ../../../Kailua/Library/DDRTargetLib/ddr_shared_params.c
+  ../../../Kailua/Library/DDRTargetLib/ddr_temperature.c
+
+#DSF Target Config 
+# DDR target sources 
+  # Header file inclusions  
+  ../../../../Library/DDRLib/common/params/v9/ddr_params.h
+
+#Target header inclusion
+  ../../../Kailua/Library/DDRTargetLib/ddr_status_reg.h
+  ../../../Kailua/Library/DDRTargetLib/ddr_target.h
+  ../../../Kailua/Library/DDRTargetLib/ddr_shared_params.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/SocPkg/Kailua/Library/DDRTargetLib/DDRTargetLibPkg.dec
+  QcomPkg/SocPkg/Kailua/Library/DSFTargetLib/DSFTargetLibPkg.dec
+  #QcomPkg/SocPkg/Kailua/Library/DDITargetLib/DDITargetLibPkg.dec
+  QcomSdkPkg/SdkLoader.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  SecPkg/SecLib.dec
+  QcomPkg/Library/MinidumpLib/MinidumpLib.dec
+
+[LibraryClasses]
+  MuslLib
+  ServicesUtilsLib
+  DSFTargetLib
+  #DDITargetLib
+  XBLConfigLib
+  DDRFwSdiLib
+  
+[FixedPcd]
+ gQcomTokenSpaceGuid.PcdBuildType
+

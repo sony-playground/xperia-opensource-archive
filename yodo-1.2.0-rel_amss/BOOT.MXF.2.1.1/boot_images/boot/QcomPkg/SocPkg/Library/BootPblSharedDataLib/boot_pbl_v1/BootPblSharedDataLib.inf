@@ -1,0 +1,29 @@
+#  @file BootPblSharedDataLibRelease.inf
+#  
+#  Interface Library for pbl shared data in XBL Loader
+#  
+#  Copyright (c) 2021 Qualcomm Technologies Inc. All rights reserved.<BR>
+#  
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/23/21   rama      Initial revision.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BootPblSharedDataLib
+  FILE_GUID                      = 2C2927F4-EC48-4C93-9DBB-0A812845C498
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BootPblSharedDataLib
+
+[Binaries.Arm]
+   PE32|BootPblSharedDataLib.lib
+
+[Binaries.AARCH64]
+   PE32|BootPblSharedDataLib.lib

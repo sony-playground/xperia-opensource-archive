@@ -1,0 +1,1240 @@
+#===========================================================================
+#                             arc_rm_seq.rinit
+#
+#  DESCRIPTION:
+#    This file provides settings for ARC RMs and sequencer.
+#
+#  Copyright (c) 2019 QUALCOMM Technologies, Inc. (QTI). 
+#  All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+# Sequence memory initialization
+module : { name = RPMH_ARC_ARC_SEQ_MEM, group = ARC }
+vars:
+arc_seqs = [ ###16 bit sequencer
+
+  0x39523890 ,  #0x000: 0x3890   	DOWNSequence0:               BEQR   MOL2BMOL=1          BMOL_WA
+                #0x002: 0x3952   	                             BEQR   APM_DOWNSW=1        MX_BOOST
+  0x20cd3d00 ,  #0x004: 0x3d00   	                             BEQR   SWWR_PRE=1          SWWR_PRE
+                #0x006: 0x20cd   	                             BEQ    RET2PC=0            NOT_SWWR_RET2PC
+  0x29423ec0 ,  #0x008: 0x3ec0   	                             BEQR   SWWR_RET2PC_PRE=1   SWWR_PRE
+                #0x00a: 0x2942   	NOT_SWWR_RET2PC:             BEQ    APM_DOWNSW=1        APM_SWITCHDN
+  0x1c065002 ,  #0x00c: 0x5002   	                             SET1   rm_acc_pre_req
+                #0x00e: 0x1c06   	                             CALL   HWAUXPRE
+  0x3da83883 ,  #0x010: 0x3883   	                             BEQR   MOL2BMOL=1          ISO
+                #0x012: 0x3da8   	                             BEQR   MXA=1               DYN_ACC_DN_PRE
+  0x1c073ca8 ,  #0x014: 0x3ca8   	                             BEQR   MXC=1               DYN_ACC_DN_PRE
+                #0x016: 0x1c07   	                             CALL   HWAUXMAIN
+  0x40023d41 ,  #0x018: 0x3d41   	                             BEQR   SWWR_POST=1         SWWR_POST
+                #0x01a: 0x4002   	                             SET0   rm_acc_pre_req
+  0x3caa3daa ,  #0x01c: 0x3daa   	                             BEQR   MXA=1               DYN_ACC56_DN_POST
+                #0x01e: 0x3caa   	                             BEQR   MXC=1               DYN_ACC56_DN_POST
+  0x20562416 ,  #0x020: 0x2416   	                             BEQ    CX=0                RETURN
+                #0x022: 0x2056   	                             BEQ    MOL2RET=0           RETURN
+  0x82838083 ,  #0x024: 0x8083   	                             MV     TCS1_CMD_ENABLE     0011
+                #0x026: 0x8283   	                             MV     TCS5_CMD_ENABLE     0011
+  0x50331c13 ,  #0x028: 0x1c13   	                             CALL   CX_TCS1
+                #0x02a: 0x5033   	                             SET1   tcs5_trigger
+  0x384e181c ,  #0x02c: 0x181c   	                             JMP    CX_TCS5
+                #0x02e: 0x384e   	UPSequence0:                 BEQR   RET2MOL=1           MX_ON
+  0x3d003992 ,  #0x030: 0x3992   	                             BEQR   FROMPC=1            MX_BOOST
+                #0x032: 0x3d00   	                             BEQR   SWWR_PRE=1          SWWR_PRE
+  0x3da21c06 ,  #0x034: 0x1c06   	                             CALL   HWAUXPRE
+                #0x036: 0x3da2   	                             BEQR   MXA=1               DYN_ACC_UP_PRE
+  0x38053ca2 ,  #0x038: 0x3ca2   	                             BEQR   MXC=1               DYN_ACC_UP_PRE
+                #0x03a: 0x3805   	                             BEQR   PC2MOL=1            RESET_ASSERT
+  0x3da61c07 ,  #0x03c: 0x1c07   	                             CALL   HWAUXMAIN
+                #0x03e: 0x3da6   	                             BEQR   MXA=1               DYN_ACC89_UP_POST
+  0x3dcb3ca6 ,  #0x040: 0x3ca6   	                             BEQR   MXC=1               DYN_ACC89_UP_POST
+                #0x042: 0x3dcb   	                             BEQR   SWWR_CX_APM_SWITCHUP=1 APM_SWITCHUP
+  0x385e500d ,  #0x044: 0x500d   	                             SET1   rm_acc_post_req
+                #0x046: 0x385e   	                             BEQR   RET2MOL=1           MX_SETTLED
+  0x00023884 ,  #0x048: 0x3884   	                             BEQR   BMOL2MOL=1          DEISO
+                #0x04a: 0x0002   	                             DELI   104ns
+  0x3d413891 ,  #0x04c: 0x3891   	                             BEQR   BMOL2MOL=1          MOL_WA
+                #0x04e: 0x3d41   	                             BEQR   SWWR_POST=1         SWWR_POST
+  0x1000400d ,  #0x050: 0x400d   	                             SET0   rm_acc_post_req
+                #0x052: 0x1000   	                             RETURN
+  0x20562416 ,  #0x054: 0x2416   	MX_ON:                       BEQ    CX=0                RETURN
+                #0x056: 0x2056   	                             BEQ    RET2MOL=0           RETURN
+  0x50308103 ,  #0x058: 0x8103   	                             MV     TCS2_CMD_ENABLE     0011
+                #0x05a: 0x5030   	                             SET1   tcs2_trigger
+  0x50338287 ,  #0x05c: 0x8287   	                             MV     TCS5_CMD_ENABLE     1100
+                #0x05e: 0x5033   	                             SET1   tcs5_trigger
+  0x24161000 ,  #0x060: 0x1000   	                             RETURN
+                #0x062: 0x2416   	MX_SETTLED:                  BEQ    CX=0                RETURN
+  0x1c1c1c14 ,  #0x064: 0x1c14   	                             CALL   CX_TCS2
+                #0x066: 0x1c1c   	                             CALL   CX_TCS5
+  0x38901000 ,  #0x068: 0x1000   	                             RETURN
+                #0x06a: 0x3890   	XODownSequence:              BEQR   MOL2BMOL=1          BMOL_WA
+  0x0007501c ,  #0x06c: 0x501c   	                             SET1   arc_pwr_rail_clk_gating
+                #0x06e: 0x0007   	                             DELI   10036ns
+  0x000d501f ,  #0x070: 0x501f   	                             SET1   arc_cxo_pad_disable
+                #0x072: 0x000d   	                             DELI   100048ns
+  0x50013988 ,  #0x074: 0x3988   	                             BEQR   XOBELOW2D=1         GCNT_TO_SLEEP
+                #0x076: 0x5001   	                             SET1   rm_pv_pre_req
+  0x40017009 ,  #0x078: 0x7009   	                             WAIT1  pv_rm_ack9
+                #0x07a: 0x4001   	                             SET0   rm_pv_pre_req
+  0x50011000 ,  #0x07c: 0x1000   	                             RETURN
+                #0x07e: 0x5001   	XOUPSequence:                SET1   rm_pv_pre_req
+  0x40017009 ,  #0x080: 0x7009   	                             WAIT1  pv_rm_ack9
+                #0x082: 0x4001   	                             SET0   rm_pv_pre_req
+  0x388a39c9 ,  #0x084: 0x39c9   	                             BEQR   XOABOVE1=1          GCNT_FROM_SLEEP
+                #0x086: 0x388a   	                             BEQR   BMOL2MOL=1          TURN_ON_PAD
+  0x10003891 ,  #0x088: 0x3891   	                             BEQR   BMOL2MOL=1          MOL_WA
+                #0x08a: 0x1000   	                             RETURN
+  0x38a02f57 ,  #0x08c: 0x2f57   	DDRSSDownSeq:                BEQ    DDRMGR_SW_MODE=1    LEGACY_DDRSSDownSeq
+                #0x08e: 0x38a0   	                             BEQR   MOL2BMOL=1          DDRPS_DOWN_VOTE
+  0x2f581815 ,  #0x090: 0x1815   	                             JMP    SHUB_PATH_ST
+                #0x092: 0x2f58   	DDRSSUpSeq:                  BEQ    DDRMGR_SW_MODE=1    LEGACY_DDRSSUpSeq
+  0x1815389f ,  #0x094: 0x389f   	                             BEQR   BMOL2MOL=1          DDRPS_UP_VOTE
+                #0x096: 0x1815   	                             JMP    SHUB_PATH_ST
+  0x80032240 ,  #0x098: 0x2240   	LEGACY_DDRSSDownSeq:         BEQ    dn_threshold0=0     SWWR_PRE
+                #0x09a: 0x8003   	                             MV     TCS0_CMD_ENABLE     0011
+  0x22401819 ,  #0x09c: 0x1819   	                             JMP    DDRSS_TCS0
+                #0x09e: 0x2240   	LEGACY_DDRSSUpSeq:           BEQ    up_threshold0=0     SWWR_PRE
+  0x18198007 ,  #0x0a0: 0x8007   	                             MV     TCS0_CMD_ENABLE     1100
+                #0x0a2: 0x1819   	                             JMP    DDRSS_TCS0
+  0x1c00502e ,  #0x0a4: 0x502e   	DDRSS_TCS0:                  SET1   tcs0_trigger
+                #0x0a6: 0x1c00   	                             CALL   SWWR_PRE
+  0x402e7020 ,  #0x0a8: 0x7020   	                             WAIT1  tcs0_complete
+                #0x0aa: 0x402e   	                             SET0   tcs0_trigger
+  0x500f1000 ,  #0x0ac: 0x1000   	                             RETURN
+                #0x0ae: 0x500f   	SWWR_PRE:                    SET1   arc_aop_pre_int
+  0x7016400f ,  #0x0b0: 0x400f   	                             SET0   arc_aop_pre_int
+                #0x0b2: 0x7016   	                             WAIT1  csr_unblock_seq_pre
+  0x50111000 ,  #0x0b4: 0x1000   	                             RETURN
+                #0x0b6: 0x5011   	SWWR_POST:                   SET1   arc_aop_post_int
+  0x70174011 ,  #0x0b8: 0x4011   	                             SET0   arc_aop_post_int
+                #0x0ba: 0x7017   	                             WAIT1  csr_unblock_seq_post
+  0x2f561000 ,  #0x0bc: 0x1000   	                             RETURN
+                #0x0be: 0x2f56   	SHUB_PATH_ST:                BEQ    ISLAND_LLC_DISABLE=1 RETURN
+  0x700b5004 ,  #0x0c0: 0x5004   	                             SET1   arc_bcm_pre_req
+                #0x0c2: 0x700b   	                             WAIT1  bcm_arc_pre_ack
+  0x10004004 ,  #0x0c4: 0x4004   	                             SET0   arc_bcm_pre_req
+                #0x0c6: 0x1000   	                             RETURN
+  0x70265034 ,  #0x0c8: 0x5034   	TCS6_TRIG:                   SET1   tcs6_trigger
+                #0x0ca: 0x7026   	                             WAIT1  tcs6_complete
+  0x10004034 ,  #0x0cc: 0x4034   	                             SET0   tcs6_trigger
+                #0x0ce: 0x1000   	                             RETURN
+  0x18218301 ,  #0x0d0: 0x8301   	DDRPS_DOWN_VOTE:             MV     TCS6_CMD_ENABLE     0001
+                #0x0d2: 0x1821   	                             JMP    TCS6_TRIG
+  0x18218302 ,  #0x0d4: 0x8302   	DDRPS_UP_VOTE:               MV     TCS6_CMD_ENABLE     0010
+                #0x0d6: 0x1821   	                             JMP    TCS6_TRIG
+  0x50071c06 ,  #0x0d8: 0x1c06   	APM_SWITCHDN:                CALL   HWAUXPRE
+                #0x0da: 0x5007   	                             SET1   arc_cprf_change_req
+  0x4007700e ,  #0x0dc: 0x700e   	                             WAIT1  cprf_arc_change_ack
+                #0x0de: 0x4007   	                             SET0   arc_cprf_change_req
+  0x50131c14 ,  #0x0e0: 0x1c14   	                             CALL   CX_TCS2
+                #0x0e2: 0x5013   	                             SET1   arc_ret_0pin
+  0x40145014 ,  #0x0e4: 0x5014   	                             SET1   arc_save_ff
+                #0x0e6: 0x4014   	                             SET0   arc_save_ff
+  0x000c501a ,  #0x0e8: 0x501a   	                             SET1   arc_restore_ff
+                #0x0ea: 0x000c   	                             DELI   50024ns
+  0x7014501d ,  #0x0ec: 0x501d   	                             SET1   arc_apm_start_switch
+                #0x0ee: 0x7014   	                             WAIT1  apm_arc_switch_done
+  0x5001401d ,  #0x0f0: 0x401d   	                             SET0   arc_apm_start_switch
+                #0x0f2: 0x5001   	                             SET1   rm_pv_pre_req
+  0x40017009 ,  #0x0f4: 0x7009   	                             WAIT1  pv_rm_ack9
+                #0x0f6: 0x4001   	                             SET0   rm_pv_pre_req
+  0x80833d41 ,  #0x0f8: 0x3d41   	                             BEQR   SWWR_POST=1         SWWR_POST
+                #0x0fa: 0x8083   	                             MV     TCS1_CMD_ENABLE     0011
+  0x50241813 ,  #0x0fc: 0x1813   	                             JMP    CX_TCS1
+                #0x0fe: 0x5024   	ISO:                         SET1   dyn_acc_comp_disable
+  0x0007501c ,  #0x100: 0x501c   	                             SET1   arc_pwr_rail_clk_gating
+                #0x102: 0x0007   	                             DELI   10036ns
+  0x00035025 ,  #0x104: 0x5025   	                             SET1   mxc_acgc_disable
+                #0x106: 0x0003   	                             DELI   208ns
+  0x3c0c5012 ,  #0x108: 0x5012   	                             SET1   arc_iso_input
+                #0x10a: 0x3c0c   	                             BEQR   CX=1                WAIT_SLEEP_CLK_DIS
+  0x349b3c9a ,  #0x10c: 0x3c9a   	                             BEQR   MXC=1               MXC_CLAMP_MEM_RET
+                #0x10e: 0x349b   	                             BEQR   MXC=0               SET_CLAMP_MEM
+  0x5016390f ,  #0x110: 0x390f   	                             BEQR   2PC=1               SET_RET0
+                #0x112: 0x5016   	                             SET1   arc_iso_output
+  0x50185017 ,  #0x114: 0x5017   	                             SET1   arc_freeze_output_early
+                #0x116: 0x5018   	                             SET1   arc_freeze_output
+  0x10000002 ,  #0x118: 0x0002   	                             DELI   104ns
+                #0x11a: 0x1000   	                             RETURN
+  0x1000391b ,  #0x11c: 0x391b   	MXC_CLAMP_MEM_RET:           BEQR   2PC=1               SET_CLAMP_MEM
+                #0x11e: 0x1000   	                             RETURN
+  0x10005015 ,  #0x120: 0x5015   	SET_CLAMP_MEM:               SET1   arc_clamp_mem
+                #0x122: 0x1000   	                             RETURN
+  0x381d4021 ,  #0x124: 0x4021   	DEISO:                       SET0   vdd_rm_gpo_0
+                #0x126: 0x381d   	                             BEQR   PC2MOL=1            RESET_DEASSERT
+  0x4015401a ,  #0x128: 0x401a   	                             SET0   arc_restore_ff
+                #0x12a: 0x4015   	                             SET0   arc_clamp_mem
+  0x50220003 ,  #0x12c: 0x0003   	                             DELI   208ns
+                #0x12e: 0x5022   	                             SET1   aoss_cs_n_mask
+  0x40235023 ,  #0x130: 0x5023   	                             SET1   aoss_wl_en_clk
+                #0x132: 0x4023   	                             SET0   aoss_wl_en_clk
+  0x40134022 ,  #0x134: 0x4022   	                             SET0   aoss_cs_n_mask
+                #0x136: 0x4013   	                             SET0   arc_ret_0pin
+  0x40174016 ,  #0x138: 0x4016   	                             SET0   arc_iso_output
+                #0x13a: 0x4017   	                             SET0   arc_freeze_output_early
+  0x40124018 ,  #0x13c: 0x4018   	                             SET0   arc_freeze_output
+                #0x13e: 0x4012   	                             SET0   arc_iso_input
+  0x40244025 ,  #0x140: 0x4025   	                             SET0   mxc_acgc_disable
+                #0x142: 0x4024   	                             SET0   dyn_acc_comp_disable
+  0x401c0006 ,  #0x144: 0x0006   	                             DELI   5044ns
+                #0x146: 0x401c   	                             SET0   arc_pwr_rail_clk_gating
+  0x50191000 ,  #0x148: 0x1000   	                             RETURN
+                #0x14a: 0x5019   	RESET_ASSERT:                SET1   arc_pwr_up_rst
+  0x40191000 ,  #0x14c: 0x1000   	                             RETURN
+                #0x14e: 0x4019   	RESET_DEASSERT:              SET0   arc_pwr_up_rst
+  0x00092696 ,  #0x150: 0x2696   	                             BEQ    MMCX=0              RETURN
+                #0x152: 0x0009   	                             DELI   20020ns
+  0x50051000 ,  #0x154: 0x1000   	                             RETURN
+                #0x156: 0x5005   	HWAUXPRE:                    SET1   arc_cprf_pre_req
+  0x4005700c ,  #0x158: 0x700c   	                             WAIT1  cprf_arc_pre_ack
+                #0x15a: 0x4005   	                             SET0   arc_cprf_pre_req
+  0x50011000 ,  #0x15c: 0x1000   	                             RETURN
+                #0x15e: 0x5001   	HWAUXMAIN:                   SET1   rm_pv_pre_req
+  0x40017009 ,  #0x160: 0x7009   	                             WAIT1  pv_rm_ack9
+                #0x162: 0x4001   	                             SET0   rm_pv_pre_req
+  0x700e5007 ,  #0x164: 0x5007   	                             SET1   arc_cprf_change_req
+                #0x166: 0x700e   	                             WAIT1  cprf_arc_change_ack
+  0x500e4007 ,  #0x168: 0x4007   	                             SET0   arc_cprf_change_req
+                #0x16a: 0x500e   	                             SET1   rm_pv_post_req
+  0x400e7009 ,  #0x16c: 0x7009   	                             WAIT1  pv_rm_ack9
+                #0x16e: 0x400e   	                             SET0   rm_pv_post_req
+  0x22e31000 ,  #0x170: 0x1000   	                             RETURN
+                #0x172: 0x22e3   	DYN_ACC_UP_PRE:              BEQ    up_threshold2=0     SKIP_ACC89_UP_PRE
+  0x00035027 ,  #0x174: 0x5027   	ACC89_UP_PRE:                SET1   arc_vcomp89_en
+                #0x176: 0x0003   	                             DELI   208ns
+  0x50260002 ,  #0x178: 0x0002   	                             DELI   104ns
+                #0x17a: 0x5026   	                             SET1   arc_vcomp89_ra_driver
+  0x23161000 ,  #0x17c: 0x1000   	                             RETURN
+                #0x17e: 0x2316   	SKIP_ACC89_UP_PRE:           BEQ    up_threshold3=0     RETURN
+  0x402b502d ,  #0x180: 0x502d   	                             SET1   arc_vcomp56_en
+                #0x182: 0x402b   	                             SET0   arc_vcomp56_hw_ctrl_en
+  0x502c0004 ,  #0x184: 0x0004   	                             DELI   520ns
+                #0x186: 0x502c   	                             SET1   arc_vcomp56_enabled
+  0x2396502a ,  #0x188: 0x502a   	                             SET1   arc_vcomp56_dir
+                #0x18a: 0x2396   	                             BEQ    br_not_rchd_nom=0   RETURN
+  0x22e71824 ,  #0x18c: 0x1824   	                             JMP    ACC89_UP_PRE
+                #0x18e: 0x22e7   	DYN_ACC89_UP_POST:           BEQ    up_threshold2=0     SKIP_ACC89_UP_END
+  0x00024028 ,  #0x190: 0x4028   	ACC89_UP_END:                SET0   arc_acc89_sa
+                #0x192: 0x0002   	                             DELI   104ns
+  0x40264029 ,  #0x194: 0x4029   	                             SET0   arc_acc89_ra
+                #0x196: 0x4026   	                             SET0   arc_vcomp89_ra_driver
+  0x40272b16 ,  #0x198: 0x2b16   	                             BEQ    up_threshold3=1     RETURN
+                #0x19a: 0x4027   	                             SET0   arc_vcomp89_en
+  0x10004022 ,  #0x19c: 0x4022   	                             SET0   arc_not_rchd_nom
+                #0x19e: 0x1000   	                             RETURN
+  0x3ba52316 ,  #0x1a0: 0x2316   	SKIP_ACC89_UP_END:           BEQ    up_threshold3=0     RETURN
+                #0x1a2: 0x3ba5   	                             BEQR   br_not_rchd_nom=1   ACC89_UP_END
+  0x402d402c ,  #0x1a4: 0x402c   	                             SET0   arc_vcomp56_enabled
+                #0x1a6: 0x402d   	                             SET0   arc_vcomp56_en
+  0x2e6b5022 ,  #0x1a8: 0x5022   	                             SET1   arc_not_rchd_nom
+                #0x1aa: 0x2e6b   	                             BEQ    DYN_ACC_SS_BIN=1    DYN_ACC89_STOP_OVER
+  0x10004027 ,  #0x1ac: 0x4027   	                             SET0   arc_vcomp89_en
+                #0x1ae: 0x1000   	                             RETURN
+  0x10005027 ,  #0x1b0: 0x5027   	DYN_ACC89_STOP_OVER:         SET1   arc_vcomp89_en
+                #0x1b2: 0x1000   	                             RETURN
+  0x502d232c ,  #0x1b4: 0x232c   	DYN_ACC_DN_PRE:              BEQ    dn_threshold3=0     ACC89_DN
+                #0x1b6: 0x502d   	ACC56_DN:                    SET1   arc_vcomp56_en
+  0x502c0004 ,  #0x1b8: 0x0004   	                             DELI   520ns
+                #0x1ba: 0x502c   	                             SET1   arc_vcomp56_enabled
+  0x1000402a ,  #0x1bc: 0x402a   	                             SET0   arc_vcomp56_dir
+                #0x1be: 0x1000   	                             RETURN
+  0x50282256 ,  #0x1c0: 0x2256   	ACC89_DN:                    BEQ    dn_threshold0=0     RETURN
+                #0x1c2: 0x5028   	                             SET1   arc_acc89_sa
+  0x50290002 ,  #0x1c4: 0x0002   	                             DELI   104ns
+                #0x1c6: 0x5029   	                             SET1   arc_acc89_ra
+  0x2baf4027 ,  #0x1c8: 0x4027   	                             SET0   arc_vcomp89_en
+                #0x1ca: 0x2baf   	                             BEQ    br_not_rchd_nom=1   ACC56_DN
+  0x232e1000 ,  #0x1cc: 0x1000   	                             RETURN
+                #0x1ce: 0x232e   	DYN_ACC56_DN_POST:           BEQ    dn_threshold3=0     ACC56_HWCTRL
+  0x4022502b ,  #0x1d0: 0x502b   	                             SET1   arc_vcomp56_hw_ctrl_en
+                #0x1d2: 0x4022   	                             SET0   arc_not_rchd_nom
+  0x22561000 ,  #0x1d4: 0x1000   	                             RETURN
+                #0x1d6: 0x2256   	ACC56_HWCTRL:                BEQ    dn_threshold0=0     RETURN
+  0x502b23ad ,  #0x1d8: 0x23ad   	                             BEQ    br_not_rchd_nom=0   CHK_RCHD_NOM
+                #0x1da: 0x502b   	                             SET1   arc_vcomp56_hw_ctrl_en
+  0x10005022 ,  #0x1dc: 0x5022   	CHK_RCHD_NOM:                SET1   arc_not_rchd_nom
+                #0x1de: 0x1000   	                             RETURN
+  0x70155020 ,  #0x1e0: 0x5020   	GCNT_TO_SLEEP:               SET1   arc_global_cnt_clk_sel
+                #0x1e2: 0x7015   	                             WAIT1  global_cnt_arc_ack
+  0x10005022 ,  #0x1e4: 0x5022   	                             SET1   arc_cxo_div2_disable
+                #0x1e6: 0x1000   	                             RETURN
+  0x40224020 ,  #0x1e8: 0x4020   	GCNT_FROM_SLEEP:             SET0   arc_global_cnt_clk_sel
+                #0x1ea: 0x4022   	                             SET0   arc_cxo_div2_disable
+  0x10006015 ,  #0x1ec: 0x6015   	                             WAIT0  global_cnt_arc_ack
+                #0x1ee: 0x1000   	                             RETURN
+  0x401c401f ,  #0x1f0: 0x401f   	TURN_ON_PAD:                 SET0   arc_cxo_pad_disable
+                #0x1f2: 0x401c   	                             SET0   arc_pwr_rail_clk_gating
+  0x1c141000 ,  #0x1f4: 0x1000   	                             RETURN
+                #0x1f6: 0x1c14   	APM_SWITCHUP:                CALL   CX_TCS2
+  0x7014501d ,  #0x1f8: 0x501d   	                             SET1   arc_apm_start_switch
+                #0x1fa: 0x7014   	                             WAIT1  apm_arc_switch_done
+  0x8103401d ,  #0x1fc: 0x401d   	                             SET0   arc_apm_start_switch
+                #0x1fe: 0x8103   	                             MV     TCS2_CMD_ENABLE     0011
+  0x1c145030 ,  #0x200: 0x5030   	                             SET1   tcs2_trigger
+                #0x202: 0x1c14   	                             CALL   CX_TCS2
+  0x601a181c ,  #0x204: 0x181c   	                             JMP    CX_TCS5
+                #0x206: 0x601a   	WAIT_SLEEP_CLK_DIS:          WAIT0  sleep_clk_en_ack
+  0x50131000 ,  #0x208: 0x1000   	                             RETURN
+                #0x20a: 0x5013   	SET_RET0:                    SET1   arc_ret_0pin
+  0x40145014 ,  #0x20c: 0x5014   	                             SET1   arc_save_ff
+                #0x20e: 0x4014   	                             SET0   arc_save_ff
+  0x1000501a ,  #0x210: 0x501a   	                             SET1   arc_restore_ff
+                #0x212: 0x1000   	                             RETURN
+  0x700a5003 ,  #0x214: 0x5003   	BMOL_WA:                     SET1   rm_non_op_req
+                #0x216: 0x700a   	                             WAIT1  rm_non_op_ack
+  0x40031000 ,  #0x218: 0x1000   	                             RETURN
+                #0x21a: 0x4003   	MOL_WA:                      SET0   rm_non_op_req
+  0x81061000 ,  #0x21c: 0x1000   	                             RETURN
+                #0x21e: 0x8106   	MX_BOOST:                    MV     TCS2_CMD_ENABLE     1000
+  0x21965030 ,  #0x220: 0x5030   	                             SET1   tcs2_trigger
+                #0x222: 0x2196   	                             BEQ    FROMPC=0            RETURN
+  0x50338287 ,  #0x224: 0x8287   	                             MV     TCS5_CMD_ENABLE     1100
+                #0x226: 0x5033   	                             SET1   tcs5_trigger
+  0x502f1000 ,  #0x228: 0x1000   	                             RETURN
+                #0x22a: 0x502f   	CX_TCS1:                     SET1   tcs1_trigger
+  0x402f7021 ,  #0x22c: 0x7021   	                             WAIT1  tcs1_complete
+                #0x22e: 0x402f   	                             SET0   tcs1_trigger
+  0x70221000 ,  #0x230: 0x1000   	                             RETURN
+                #0x232: 0x7022   	CX_TCS2:                     WAIT1  tcs2_complete
+  0x10004030 ,  #0x234: 0x4030   	                             SET0   tcs2_trigger
+                #0x236: 0x1000   	                             RETURN
+  0x40337025 ,  #0x238: 0x7025   	CX_TCS5:                     WAIT1  tcs5_complete
+                #0x23a: 0x4033   	                             SET0   tcs5_trigger
+  0x10001000 ,  #0x23c: 0x1000   	                             RETURN
+                #0x23e: 0x1000   	RETURN:                      RETURN
+  0x0cf52e1e , #sha id for identification
+  0x57aa6123   #hash id for identification
+]
+
+# branch offsets within sequence memory 
+SWWR_PRE                       = 	0xae
+SWWR_POST                      = 	0xb6
+APM_SWITCHDN                   = 	0xd8
+ISO                            = 	0xfe
+DEISO                          = 	0x124
+RESET_ASSERT                   = 	0x14a
+HWAUXPRE                       = 	0x156
+HWAUXMAIN                      = 	0x15e
+GCNT_TO_SLEEP                  = 	0x1e0
+GCNT_FROM_SLEEP                = 	0x1e8
+TURN_ON_PAD                    = 	0x1f0
+APM_SWITCHUP                   = 	0x1f6
+WAIT_SLEEP_CLK_DIS             = 	0x206
+NOT_SWWR_RET2PC                = 	0xa
+MX_ON                          = 	0x54
+SET_RET0                       = 	0x20a
+BMOL_WA                        = 	0x214
+MOL_WA                         = 	0x21a
+MX_BOOST                       = 	0x21e
+CX_TCS1                        = 	0x22a
+CX_TCS2                        = 	0x232
+SHUB_PATH_ST                   = 	0xbe
+RETURN                         = 	0x23e
+LEGACY_DDRSSDownSeq            = 	0x98
+LEGACY_DDRSSUpSeq              = 	0x9e
+DDRSS_TCS0                     = 	0xa4
+MXC_CLAMP_MEM_RET              = 	0x11c
+SET_CLAMP_MEM                  = 	0x120
+CX_TCS5                        = 	0x238
+RESET_DEASSERT                 = 	0x14e
+MX_SETTLED                     = 	0x62
+DDRPS_UP_VOTE                  = 	0xd4
+DDRPS_DOWN_VOTE                = 	0xd0
+TCS6_TRIG                      = 	0xc8
+DYN_ACC_UP_PRE                 = 	0x172
+SKIP_ACC89_UP_PRE              = 	0x17e
+ACC89_UP_PRE                   = 	0x174
+ACC89_UP_END                   = 	0x190
+DYN_ACC89_UP_POST              = 	0x18e
+SKIP_ACC89_UP_END              = 	0x1a0
+DYN_ACC_DN_PRE                 = 	0x1b4
+SKIP_ACC56_DN                  = 	0x0
+DYN_ACC56_DN_POST              = 	0x1ce
+DYN_ACC89_STOP_OVER            = 	0x1b0
+ACC89_DN                       = 	0x1c0
+CHK_RCHD_NOM                   = 	0x1dc
+ACC56_HWCTRL                   = 	0x1d6
+ACC56_DN                       = 	0x1b6
+
+br_addrs = [
+  SWWR_PRE,
+  SWWR_POST,
+  APM_SWITCHDN,
+  ISO,
+  DEISO,
+  RESET_ASSERT,
+  HWAUXPRE,
+  HWAUXMAIN,
+  GCNT_TO_SLEEP,
+  GCNT_FROM_SLEEP,
+  TURN_ON_PAD,
+  APM_SWITCHUP,
+  WAIT_SLEEP_CLK_DIS,
+  NOT_SWWR_RET2PC,
+  MX_ON,
+  SET_RET0
+]
+
+sw_config_branch = [
+  BMOL_WA,
+  MOL_WA,
+  MX_BOOST,
+  CX_TCS1,
+  CX_TCS2,
+  SHUB_PATH_ST,
+  RETURN,
+  LEGACY_DDRSSDownSeq,
+  LEGACY_DDRSSUpSeq,
+  DDRSS_TCS0,
+  MXC_CLAMP_MEM_RET,
+  SET_CLAMP_MEM,
+  CX_TCS5,
+  RESET_DEASSERT,
+  MX_SETTLED,
+  DDRPS_UP_VOTE,
+  DDRPS_DOWN_VOTE,
+  TCS6_TRIG,
+  DYN_ACC_UP_PRE,
+  SKIP_ACC89_UP_PRE,
+  ACC89_UP_PRE,
+  ACC89_UP_END,
+  DYN_ACC89_UP_POST,
+  SKIP_ACC89_UP_END,
+  DYN_ACC_DN_PRE,
+  SKIP_ACC56_DN,
+  DYN_ACC56_DN_POST,
+  DYN_ACC89_STOP_OVER,
+  ACC89_DN,
+  CHK_RCHD_NOM,
+  ACC56_HWCTRL,
+  ACC56_DN,
+]
+
+regs:
+  SEQ_MEM_i = arc_seqs
+
+  # Sequence UP branch addresses/offsets
+  SEQ_UP_BR_ADDRi = br_addrs
+
+  # Sequence DOWN branch addresses/offsets
+  SEQ_DOWN_BR_ADDRi = br_addrs
+
+  SEQ_SW_CONF_ADDRi = sw_config_branch
+
+module: { name = RPMH_ARC_ARC_RM, group = ARC, min_ver = 1.0, max_ver = 1.9, import = [arc_export]  }
+vars:
+
+  # Sequence offsets within sequence memory 
+  DOWNSequence0                  = 	0x0
+  UPSequence0                    = 	0x2e
+  XODownSequence                 = 	0x6a
+  XOUPSequence                   = 	0x7e
+  DDRSSDownSeq                   = 	0x8c
+  DDRSSUpSeq                     = 	0x92
+  SHUB_PATH_ST                   = 	0xbe
+
+  # Init time OLs
+  cx_ol = CX_HLVL_NOM
+  mx_ol = MX_HLVL_NOM
+  ebi_ol = EBI_MOL_HLVL
+  lcx_ol = LCX_MOL_HLVL
+  lmx_ol = LMX_HLVL_NOM
+  ddr_ol = DDR_HLVL_ON
+  xo_ol = XO_HLVL_ON
+  mxc_ol = MXC_HLVL_NOM
+
+regs:
+  # RM 0-2 - Enable AGGR interrupt for Cx/Mx/DDR dependency
+  # enabled via runtime code
+  RMm_AGGR_BLOCK_EN = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+
+  # CX
+  RMm_OPERATIONAL_LEVEL = [
+    { cx_ol, 0x0, cx_ol, cx_ol, cx_ol },
+    { mx_ol, 0x0, mx_ol, mx_ol, mx_ol },
+    { ebi_ol, 0x0, ebi_ol, ebi_ol, ebi_ol },
+    { lcx_ol, 0x0, lcx_ol, lcx_ol, lcx_ol },
+    { lmx_ol, 0x0, lmx_ol, lmx_ol, lmx_ol },
+    { 0x0, 0x0, 0x0, 0x0, 0x0 },                  # GFx is kept off
+    { 0x0, 0x0, 0x0, 0x0, 0x0 },                  # MSS is kept off
+    { ddr_ol, 0x0, ddr_ol, ddr_ol, ddr_ol },
+    { 0x0, 0x0, 0x0, 0x0, 0x0 },                  # MMCx is kept off
+    { 0x0, 0x0, 0x0, 0x0, 0x0 },                  # NSP is kept off -- Review
+    { mxc_ol, 0x0, mxc_ol, mxc_ol, mxc_ol },      # MxC
+    { 0x1, 0x0, 0x1, 0x1, 0x1 },                  # LPINOC is to be kept on -- Review
+    { xo_ol, 0x0, xo_ol, xo_ol, xo_ol },          # XO -- Review
+  ]
+
+  # UP Sequence addresses
+  RMm_SEQ_UP_START_ADDR[0] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[1] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[2] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[3] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[4] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[5] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[6] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[7] = DDRSSUpSeq
+  RMm_SEQ_UP_START_ADDR[8] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[9] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[10] = UPSequence0      # MxC
+  RMm_SEQ_UP_START_ADDR[11] = SHUB_PATH_ST     # LPINOC -- Review
+  RMm_SEQ_UP_START_ADDR[12] = XOUPSequence     # XO
+
+  # Down Sequence address
+  RMm_SEQ_DOWN_START_ADDR[0] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[1] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[2] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[3] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[4] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[5] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[6] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[7] = DDRSSDownSeq
+  RMm_SEQ_DOWN_START_ADDR[8] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[9] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[10] = DOWNSequence0      # MxC
+  RMm_SEQ_DOWN_START_ADDR[11] = SHUB_PATH_ST       # LPINOC -- Review
+  RMm_SEQ_DOWN_START_ADDR[12] = XODownSequence     # XO
+
+  # SW Conf Event - static    # DBG: add SWWR_PRE for RM0,1,2.
+  SW_CONF_EVENT[0] = 0x9      # CX | DDR_RAIL (for DDR Aux communication)
+  SW_CONF_EVENT[1] = 0x40     # MXA: Bit 9 needs update on SS parts.
+  SW_CONF_EVENT[2] = 0x8      # DDR_RAIL
+  SW_CONF_EVENT[3] = 0x1000   # LPI_CX: Configured but not used in seq.
+  SW_CONF_EVENT[4] = 0x0      # LPI_MX: Not used in seq.
+  SW_CONF_EVENT[5] = 0x0      # GFx: Not used in seq.
+  SW_CONF_EVENT[6] = 0x100    # MSS: Configured but not used in seq.
+  SW_CONF_EVENT[7] = 0x0      # SWWR_PRE: Not used in the seq.
+  SW_CONF_EVENT[8] = 0x400    # MMCX: Configured but not used in seq.
+  SW_CONF_EVENT[9] = 0x0      # NSP: Not used in seq.
+  SW_CONF_EVENT[10] = 0x4     # MXC: bit9 needs update on SS parts.
+  SW_CONF_EVENT[11] = 0x0     # LPINOC -- Not used in Seq.
+  SW_CONF_EVENT[12] = 0x2     # IS_CXO -- Used in HW, needs to be configured.
+
+  # Threshold crossing events (used with GP TCSs)
+  MODEc_TH[1] = [MX_HLVL_SVS_L1, MX_HLVL_SVS_L1, MX_HLVL_SVS_L1, MX_HLVL_TUR]
+  MODEc_TH[7] = [DDR_HLVL_LOW_LATENCY, 0, 0, 0]
+  MODEc_TH[10] = [MXC_HLVL_SVS_L1, MXC_HLVL_SVS_L1, MXC_HLVL_SVS_L1, MXC_HLVL_TUR]
+
+  # Solver configuration - Seed values only - needs characterization per RM.
+
+  # CX_RM
+  SOLVER_TABLE_MODE[0] = [
+    {0x2D00, 0},   # 600 usec, off to Turbo (AOP handles transition)
+    {0x2D00, 1},   # 600 usec, Ret to Turbo
+    {0x0, 2},      # 0 usec, MOL - (min_)svs
+    {0x0, 2},      # 0 usec, MOL - (min_)svs
+    {0x0, 2},      # 0 usec, MOL - (min_)svs
+    {0x0, 2}       # 0 usec, MOL - (min_)svs
+  ]
+  MIN_SLEEP_TIME[0] = [ 0x7800, 0x3C00, 0x0, 0x0, 0x0, 0x0 ]
+
+  # MX_RM
+  SOLVER_TABLE_MODE[1] = [
+    # MX is not allowed to be turned off.
+    {0x1A80, 1},        # 350 usec, Ret to Turbo (100 us for AOP + 200 us DDR)
+    {0x1A80, 2},        # 350 usec, SVS to Turbo
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+  ]
+  # Backoff x 2
+  MIN_SLEEP_TIME[1] = [ 0x3500, 0x3500, 0x0, 0x0, 0x0, 0x0 ]
+
+  # DDR_Rail
+  SOLVER_TABLE_MODE[2] = [
+    {0xB40, 0},         # 150 usec, off to Turbo (AOP handles transition)
+    {0x5A0, 1},         # 75 usec, Ret to Turbo (55 usec for slew + 20 overhead)
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2}            # 0 usec, MOL - (min_)svs
+  ]
+  # Backoff x 2
+  MIN_SLEEP_TIME[2] = [ 0x1680, 0xB40, 0x0, 0x0, 0x0, 0x0 ]
+
+  # SSC_Cx
+  SOLVER_TABLE_MODE[3] = [
+    {0x2580, 0},        # 500 usec, Off to MOL + AOP for parent/child.
+    {0x1680, 1},        # 300 usec, Ret to MOL + AOP for parent/child.
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+  ]
+  # Backoff x 1.5
+  MIN_SLEEP_TIME[3] = [ 0x3840, 0x21C0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # SSC_Mx
+  SOLVER_TABLE_MODE[4] = [
+    {0x2580, 0},        # 500 usec, Off to MOL + AOP for parent/child.
+    {0x1680, 1},        # 300 usec, Ret to MOL + AOP for parent/child.
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+  ]
+  # Backoff x 1.5
+  MIN_SLEEP_TIME[4] = [ 0x3840, 0x21C0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # GFx
+  SOLVER_TABLE_MODE[5] = [
+    {0x2D00, 0},        # 600 usec, off
+    {0x0, 1},           # 0 usec, MOL - (min_)svs
+    {0x0, 1},           # 0 usec, MOL - (min_)svs
+    {0x0, 1},           # 0 usec, MOL - (min_)svs
+    {0x0, 1},           # 0 usec, MOL - (min_)svs
+    {0x0, 1}            # 0 usec, MOL - (min_)svs
+  ]
+  # Backoff x 1.5
+  MIN_SLEEP_TIME[5] = [ 0x4380, 0x0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # MSS
+  SOLVER_TABLE_MODE[6] = [
+    {0x2D00, 0},         # 600 usec, off to MOL
+    {0x0, 1},            # 0 usec, MOL - (min_)svs
+    {0x0, 1},            # 0 usec, MOL - (min_)svs
+    {0x0, 1},            # 0 usec, MOL - (min_)svs
+    {0x0, 1},            # 0 usec, MOL - (min_)svs
+    {0x0, 1}             # 0 usec, MOL - (min_)svs
+  ]
+    # Backoff x 1.5
+    MIN_SLEEP_TIME[6] = [ 0x4380, 0x0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # Power State ARC (tracks state of DDR)
+  SOLVER_TABLE_MODE[7] = [
+    {0x3FC0, 0},        # 850 usec, Lowest Power State (D4 for LP5, D3 for LP4) TODO: Should be higher than 1 (for LP5)?
+    {0x3FC0, 1},        # 850 usec, D3 for both LP4 and lP5
+    {0x1E00, 2},        # 400 usec, Low Latency Mode (Only collapse VDDA).
+    {0x0, 3},           # 0 usec, Active (= D0?) --> Solves to CP1.
+    {0x0, 3},           # 0 usec, Active (= D0?)
+    {0x0, 3}            # 0 usec, Active (= D0?)
+  ]
+  # Threshold (7ms for the lowest power state, 2ms for D3)
+  MIN_SLEEP_TIME[7] = [ 0x9600, 0x9600, 0x2D00, 0x0, 0x0, 0x0 ]
+
+  # MM_Cx - Needs updating. 
+  SOLVER_TABLE_MODE[8] = [
+    {0x2580, 0},        # 500 usec, Off to MOL + AOP for parent/child.
+    {0x0, 1},           # 0 usec, MOL - LOWSVS
+    {0x0, 1},           # 0 usec, MOL - LOWSVS
+    {0x0, 1},           # 0 usec, MOL - LOWSVS
+    {0x0, 1},           # 0 usec, MOL - LOWSVS
+    {0x0, 1},           # 0 usec, MOL - LOWSVS
+  ]
+  # Backoff x 1.5
+  MIN_SLEEP_TIME[8] = [ 0x3840, 0x0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # NSP - Review
+  SOLVER_TABLE_MODE[9] = [
+      {0xF00, 0},          # 200 usec - initial guesstimate
+      {0x0, 1},            # 0 usec, On 
+      {0x0, 1},            # 0 usec, On 
+      {0x0, 1},            # 0 usec, On 
+      {0x0, 1},            # 0 usec, On 
+      {0x0, 1},            # 0 usec, On 
+  ]
+  # Backoff x 1.5
+  MIN_SLEEP_TIME[9] = [ 0x1680, 0x0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # MxC
+  SOLVER_TABLE_MODE[10] = [
+    {0x2580, 0},        # 500 usec, OFF to MOL
+    {0x1A80, 1},        # 350 usec, RET - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+  ]
+  # # Backoff x 1.5
+  MIN_SLEEP_TIME[10] = [ 0x3840, 0x27C0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # XO
+  SOLVER_TABLE_MODE[12] = [
+    #{0x2EE00, 0},      # 10 msec, Crystal off - UNUSED
+    {0x1E00, 1},        # 400 msec, PMIC buffer off
+    {0x1E00, 2},        # 400 msec, SoC buffer off
+    {0x0, 3},           # 0 usec, On
+    {0x0, 3},           # 0 usec, On
+    {0x0, 3},           # 0 usec, On
+    {0x0, 3},           # 0 usec, On
+  ]
+  # Backoff x 2
+  MIN_SLEEP_TIME[12] = [ 0x7800, 0x7800, 0x0, 0x0, 0x0, 0x0 ]
+
+
+  ARC_RMm_CTRL = [
+    # En, Ret, MOL
+    { 1, 1, CX_MOL_HLVL },       # Cx
+    { 1, 1, MX_MOL_HLVL },       # Mx
+    { 1, 1, 2 },                 # DDR Rail (== RET+1)
+    { 1, 1, LCX_MOL_HLVL },      # SSC_Cx
+    { 1, 1, LMX_MOL_HLVL },      # SSC_Mx
+    { 1, 0, GFX_MOL_HLVL },      # GFx - No separate retention level
+    { 1, 0, MSS_MOL_HLVL},        # MSS
+    { 1, 2, DDR_MOL_HLVL },      # DDR_SS
+    { 1, 0, MMCX_MOL_HLVL },     # MM_Cx - No separate retention level
+    { 1, 0, NSP_MOL_HLVL },      # NSP
+    { 1, 0, MXC_MOL_HLVL },      # MxC
+    { 1, 0, 1 },                 # LPINOC -- Review
+    { 1, 3, XO_MOL_HLVL }        # XO
+  ]
+
+  #RM=CX turn off CX, MX, MXC, GFX, MMCX CPRC via its CPRF.
+  RPMH_ARC_RMm_CPRF_DEP_MASK[0] = 0x1723 #0xF722
+
+  #RM=XO turn off CX, MX, MXC, GFX, MSS, MMCX CPRC via its CPRF
+  RPMH_ARC_RMm_CPRF_DEP_MASK[12] = 0x1763 #0xF763
+
+  #Turn off all CPRC when entering AOSS Sleep.
+  RPMH_ARC_EXT_NON_OPm_CPRF_DEP_MASK[0] = 0x177F #0xF77F
+
+  #Turn off LCX CPRC when LCX_RCO turns off.
+  RPMH_ARC_EXT_NON_OPm_CPRF_DEP_MASK[1] = 0x8
+
+
+module: { name = RPMH_ARC_ARC_RM, group = ARC, min_ver = 2.0, import = [arc_v2_export]  }
+vars:
+
+  # Sequence offsets within sequence memory 
+  DOWNSequence0                  = 	0x0
+  UPSequence0                    = 	0x2e
+  XODownSequence                 = 	0x6a
+  XOUPSequence                   = 	0x7e
+  DDRSSDownSeq                   = 	0x8c
+  DDRSSUpSeq                     = 	0x92
+  SHUB_PATH_ST                   = 	0xbe
+
+  # Init time OLs
+  cx_ol = CX_HLVL_NOM
+  mx_ol = MX_HLVL_NOM
+  ebi_ol = EBI_MOL_HLVL
+  lcx_ol = LCX_MOL_HLVL
+  lmx_ol = LMX_HLVL_NOM
+  ddr_ol = DDR_HLVL_ON
+  xo_ol = XO_HLVL_ON
+  mxc_ol = MXC_HLVL_NOM
+
+regs:
+  # RM 0-2 - Enable AGGR interrupt for Cx/Mx/DDR dependency
+  # enabled via runtime code
+  RMm_AGGR_BLOCK_EN = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+
+  # CX
+  RMm_OPERATIONAL_LEVEL = [
+    { cx_ol, 0x0, cx_ol, cx_ol, cx_ol },
+    { mx_ol, 0x0, mx_ol, mx_ol, mx_ol },
+    { ebi_ol, 0x0, ebi_ol, ebi_ol, ebi_ol },
+    { lcx_ol, 0x0, lcx_ol, lcx_ol, lcx_ol },
+    { lmx_ol, 0x0, lmx_ol, lmx_ol, lmx_ol },
+    { 0x0, 0x0, 0x0, 0x0, 0x0 },                  # GFx is kept off
+    { 0x0, 0x0, 0x0, 0x0, 0x0 },                  # MSS is kept off
+    { ddr_ol, 0x0, ddr_ol, ddr_ol, ddr_ol },
+    { 0x0, 0x0, 0x0, 0x0, 0x0 },                  # MMCx is kept off
+    { 0x0, 0x0, 0x0, 0x0, 0x0 },                  # NSP is kept off -- Review
+    { mxc_ol, 0x0, mxc_ol, mxc_ol, mxc_ol },      # MxC
+    { 0x1, 0x0, 0x1, 0x1, 0x1 },                  # LPINOC is to be kept on -- Review
+    { xo_ol, 0x0, xo_ol, xo_ol, xo_ol },          # XO -- Review
+  ]
+
+  # UP Sequence addresses
+  RMm_SEQ_UP_START_ADDR[0] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[1] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[2] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[3] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[4] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[5] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[6] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[7] = DDRSSUpSeq
+  RMm_SEQ_UP_START_ADDR[8] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[9] = UPSequence0
+  RMm_SEQ_UP_START_ADDR[10] = UPSequence0      # MxC
+  RMm_SEQ_UP_START_ADDR[11] = SHUB_PATH_ST     # LPINOC -- Review
+  RMm_SEQ_UP_START_ADDR[12] = XOUPSequence     # XO
+
+  # Down Sequence address
+  RMm_SEQ_DOWN_START_ADDR[0] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[1] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[2] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[3] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[4] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[5] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[6] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[7] = DDRSSDownSeq
+  RMm_SEQ_DOWN_START_ADDR[8] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[9] = DOWNSequence0
+  RMm_SEQ_DOWN_START_ADDR[10] = DOWNSequence0      # MxC
+  RMm_SEQ_DOWN_START_ADDR[11] = SHUB_PATH_ST       # LPINOC -- Review
+  RMm_SEQ_DOWN_START_ADDR[12] = XODownSequence     # XO
+
+  # SW Conf Event - static    # DBG: add SWWR_PRE for RM0,1,2.
+  SW_CONF_EVENT[0] = 0x9      # CX | DDR_RAIL (for DDR Aux communication)
+  SW_CONF_EVENT[1] = 0x40     # MXA: Bit 9 needs update on SS parts.
+  SW_CONF_EVENT[2] = 0x8      # DDR_RAIL
+  SW_CONF_EVENT[3] = 0x1000   # LPI_CX: Configured but not used in seq.
+  SW_CONF_EVENT[4] = 0x0      # LPI_MX: Not used in seq.
+  SW_CONF_EVENT[5] = 0x0      # GFx: Not used in seq.
+  SW_CONF_EVENT[6] = 0x100    # MSS: Configured but not used in seq.
+  SW_CONF_EVENT[7] = 0x0      # SWWR_PRE: Not used in the seq.
+  SW_CONF_EVENT[8] = 0x400    # MMCX: Configured but not used in seq.
+  SW_CONF_EVENT[9] = 0x0      # NSP: Not used in seq.
+  SW_CONF_EVENT[10] = 0x4     # MXC: bit9 needs update on SS parts.
+  SW_CONF_EVENT[11] = 0x0     # LPINOC -- Not used in Seq.
+  SW_CONF_EVENT[12] = 0x2     # IS_CXO -- Used in HW, needs to be configured.
+
+  # Threshold crossing events (used with GP TCSs)
+  MODEc_TH[1] = [MX_HLVL_SVS_L1, MX_HLVL_SVS_L1, MX_HLVL_SVS_L1, MX_HLVL_TUR]
+  MODEc_TH[7] = [DDR_HLVL_LOW_LATENCY, 0, 0, 0]
+  MODEc_TH[10] = [MXC_HLVL_SVS_L1, MXC_HLVL_SVS_L1, MXC_HLVL_SVS_L1, MXC_HLVL_TUR]
+
+  # Solver configuration - Seed values only - needs characterization per RM.
+
+  # CX_RM
+  SOLVER_TABLE_MODE[0] = [
+    {0x2D00, 0},   # 600 usec, off to Turbo (AOP handles transition)
+    {0x2D00, 1},   # 600 usec, Ret to Turbo
+    {0x0, 2},      # 0 usec, MOL - (min_)svs
+    {0x0, 2},      # 0 usec, MOL - (min_)svs
+    {0x0, 2},      # 0 usec, MOL - (min_)svs
+    {0x0, 2}       # 0 usec, MOL - (min_)svs
+  ]
+  MIN_SLEEP_TIME[0] = [ 0x7800, 0x3C00, 0x0, 0x0, 0x0, 0x0 ]
+
+  # MX_RM
+  SOLVER_TABLE_MODE[1] = [
+    # MX is not allowed to be turned off.
+    {0x1A80, 1},        # 350 usec, Ret to Turbo (100 us for AOP + 200 us DDR)
+    {0x1A80, 2},        # 350 usec, SVS to Turbo
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+  ]
+  # Backoff x 2
+  MIN_SLEEP_TIME[1] = [ 0x3500, 0x3500, 0x0, 0x0, 0x0, 0x0 ]
+
+  # DDR_Rail
+  SOLVER_TABLE_MODE[2] = [
+    {0xB40, 0},         # 150 usec, off to Turbo (AOP handles transition)
+    {0x5A0, 1},         # 75 usec, Ret to Turbo (55 usec for slew + 20 overhead)
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2}            # 0 usec, MOL - (min_)svs
+  ]
+  # Backoff x 2
+  MIN_SLEEP_TIME[2] = [ 0x1680, 0xB40, 0x0, 0x0, 0x0, 0x0 ]
+
+  # SSC_Cx
+  SOLVER_TABLE_MODE[3] = [
+    {0x2580, 0},        # 500 usec, Off to MOL + AOP for parent/child.
+    {0x1680, 1},        # 300 usec, Ret to MOL + AOP for parent/child.
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+  ]
+  # Backoff x 1.5
+  MIN_SLEEP_TIME[3] = [ 0x3840, 0x21C0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # SSC_Mx
+  SOLVER_TABLE_MODE[4] = [
+    {0x2580, 0},        # 500 usec, Off to MOL + AOP for parent/child.
+    {0x1680, 1},        # 300 usec, Ret to MOL + AOP for parent/child.
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+    {0x0, 2},           # 0 usec, MOL - (min_)svs
+  ]
+  # Backoff x 1.5
+  MIN_SLEEP_TIME[4] = [ 0x3840, 0x21C0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # GFx
+  SOLVER_TABLE_MODE[5] = [
+    {0x2D00, 0},        # 600 usec, off
+    {0x0, 1},           # 0 usec, MOL - (min_)svs
+    {0x0, 1},           # 0 usec, MOL - (min_)svs
+    {0x0, 1},           # 0 usec, MOL - (min_)svs
+    {0x0, 1},           # 0 usec, MOL - (min_)svs
+    {0x0, 1}            # 0 usec, MOL - (min_)svs
+  ]
+  # Backoff x 1.5
+  MIN_SLEEP_TIME[5] = [ 0x4380, 0x0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # MSS
+  SOLVER_TABLE_MODE[6] = [
+    {0x2D00, 0},         # 600 usec, off to MOL
+    {0x0, 1},            # 0 usec, MOL - (min_)svs
+    {0x0, 1},            # 0 usec, MOL - (min_)svs
+    {0x0, 1},            # 0 usec, MOL - (min_)svs
+    {0x0, 1},            # 0 usec, MOL - (min_)svs
+    {0x0, 1}             # 0 usec, MOL - (min_)svs
+  ]
+    # Backoff x 1.5
+    MIN_SLEEP_TIME[6] = [ 0x4380, 0x0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # Power State ARC (tracks state of DDR)
+  SOLVER_TABLE_MODE[7] = [
+    {0x3FC0, 0},        # 850 usec, Lowest Power State (D4 for LP5, D3 for LP4) TODO: Should be higher than 1 (for LP5)?
+    {0x3FC0, 1},        # 850 usec, D3 for both LP4 and lP5
+    {0x1E00, 2},        # 400 usec, Low Latency Mode (Only collapse VDDA).
+    {0x0, 3},           # 0 usec, Active (= D0?) --> Solves to CP1.
+    {0x0, 3},           # 0 usec, Active (= D0?)
+    {0x0, 3}            # 0 usec, Active (= D0?)
+  ]
+  # Threshold (7ms for the lowest power state, 2ms for D3)
+  MIN_SLEEP_TIME[7] = [ 0x9600, 0x9600, 0x2D00, 0x0, 0x0, 0x0 ]
+
+  # MM_Cx - Needs updating. 
+  SOLVER_TABLE_MODE[8] = [
+    {0x2580, 0},        # 500 usec, Off to MOL + AOP for parent/child.
+    {0x0, 1},           # 0 usec, MOL - LOWSVS
+    {0x0, 1},           # 0 usec, MOL - LOWSVS
+    {0x0, 1},           # 0 usec, MOL - LOWSVS
+    {0x0, 1},           # 0 usec, MOL - LOWSVS
+    {0x0, 1},           # 0 usec, MOL - LOWSVS
+  ]
+  # Backoff x 1.5
+  MIN_SLEEP_TIME[8] = [ 0x3840, 0x0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # NSP - Review
+  SOLVER_TABLE_MODE[9] = [
+      {0xF00, 0},          # 200 usec - initial guesstimate
+      {0x0, 1},            # 0 usec, On 
+      {0x0, 1},            # 0 usec, On 
+      {0x0, 1},            # 0 usec, On 
+      {0x0, 1},            # 0 usec, On 
+      {0x0, 1},            # 0 usec, On 
+  ]
+  # Backoff x 1.5
+  MIN_SLEEP_TIME[9] = [ 0x1680, 0x0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # MxC
+  SOLVER_TABLE_MODE[10] = [
+    {0x2580, 0},        # 500 usec, OFF to MOL
+    {0x1A80, 1},        # 350 usec, RET - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+    {0x0, 2},           # 0 usec, MOL - SVS
+  ]
+  # # Backoff x 1.5
+  MIN_SLEEP_TIME[10] = [ 0x3840, 0x27C0, 0x0, 0x0, 0x0, 0x0 ]
+
+  # XO
+  SOLVER_TABLE_MODE[12] = [
+    #{0x2EE00, 0},      # 10 msec, Crystal off - UNUSED
+    {0x1E00, 1},        # 400 msec, PMIC buffer off
+    {0x1E00, 2},        # 400 msec, SoC buffer off
+    {0x0, 3},           # 0 usec, On
+    {0x0, 3},           # 0 usec, On
+    {0x0, 3},           # 0 usec, On
+    {0x0, 3},           # 0 usec, On
+  ]
+  # Backoff x 2
+  MIN_SLEEP_TIME[12] = [ 0x7800, 0x7800, 0x0, 0x0, 0x0, 0x0 ]
+
+
+  ARC_RMm_CTRL = [
+    # En, Ret, MOL
+    { 1, 1, CX_MOL_HLVL },       # Cx
+    { 1, 1, MX_MOL_HLVL },       # Mx
+    { 1, 1, 2 },                 # DDR Rail (== RET+1)
+    { 1, 1, LCX_MOL_HLVL },      # SSC_Cx
+    { 1, 1, LMX_MOL_HLVL },      # SSC_Mx
+    { 1, 0, GFX_MOL_HLVL },      # GFx - No separate retention level
+    { 1, 0, MSS_MOL_HLVL},        # MSS
+    { 1, 2, DDR_MOL_HLVL },      # DDR_SS
+    { 1, 0, MMCX_MOL_HLVL },     # MM_Cx - No separate retention level
+    { 1, 0, NSP_MOL_HLVL },      # NSP
+    { 1, 0, MXC_MOL_HLVL },      # MxC
+    { 1, 0, 1 },                 # LPINOC -- Review
+    { 1, 3, XO_MOL_HLVL }        # XO
+  ]
+
+  #RM=CX turn off CX, MX, MXC, GFX, MMCX CPRC via its CPRF.
+  RPMH_ARC_RMm_CPRF_DEP_MASK[0] = 0x1723 #0xF722
+
+  #RM=XO turn off CX, MX, MXC, GFX, MSS, MMCX CPRC via its CPRF
+  RPMH_ARC_RMm_CPRF_DEP_MASK[12] = 0x1763 #0xF763
+
+  #Turn off all CPRC when entering AOSS Sleep.
+  RPMH_ARC_EXT_NON_OPm_CPRF_DEP_MASK[0] = 0x177F #0xF77F
+
+  #Turn off LCX CPRC when LCX_RCO turns off.
+  RPMH_ARC_EXT_NON_OPm_CPRF_DEP_MASK[1] = 0x8
+
+
+module: { name = RPMH_ARC_ARC_SW_OVERRIDE, group = ARC }
+regs:
+   #WAIT_EVENT_MASK_RM[0] = 0x3000000 # Auto Ack for arc_pwr_rail_clk_gating and cx_soc_sleep_req_done
+   #WAIT_EVENT_VAL_RM[0] = 0x3000000  # Auto Ack for arc_pwr_rail_clk_gating and cx_soc_sleep_req_done
+   WAIT_EVENT_MASK_RM = 0x1000000 # arc_pwr_rail_clk_gating
+   WAIT_EVENT_VAL_RM = 0x1000000 # arc_pwr_rail_clk_gating
+
+# GP TCS Configuration (Sequence below is sensitive to that)
+# 
+# TCS  Owner     CMD3              CMD2              CMD1              CMD0              
+# 0    DDRSS     VRMSoC on, FF     XO on, FF         VRMSoC off, FF    XO off, FF        
+# 1    Cx        x                 MxC off, FF       Mx ret, FF        Cx off, FF        
+# 2    Cx        Mx turbo, RR      MxC ret, RR       Cx ret, FF        Mx mol/nom, RR    
+# 3    LPI_Cx    x                 x                 x                 x              
+# 4    AOP       x                 x                 x                 x
+# 5    Cx        VDDA0p9 EN, RR    VDDA1p2 EN, RR    VDDA0p9 DIS, FF   VDDA1p2 DIS,FF
+# 6    DDR_PS     x                   x              NORMAL,FF         SPECIAL, RR
+#
+# MxA/MxC
+# Threshold        
+# 0/1/2 -           Nom  
+# 3     -           Nom+1 (Turbo)
+#
+module: { name = RPMH_ARC_ARC_GP_TCS, group = ARC, min_ver = 1.0, max_ver = 1.9, import = [arc_export] }
+vars:
+  vol_offset = 0
+  en_offset = 4
+  disable = 0
+  enable = 1
+
+regs:
+  TCSm_RM_SEL = [
+    7,              # DDRSS RM is the owner
+    0,              # Cx RM is owner
+    0,              # Cx RM is owner
+    3,              # LPI_Cx RM is owner
+    3,              # LPI_Cx RM is owner
+    0,              # CX RM is owner
+    7,              # DDRSS RM is the owner
+  ]
+
+  # TCS0 Command configuration
+  TCSm_TCS_CMDc_VOTE_CFG[0] = 0                    # All FF, no wait_for_compl
+  # TCS0 Data configuration
+  TCSm_TCS_CMDc_VOTE_DATA[0] = [0, 0, 1, 1]
+  # TCS0 Address configuration
+  TCSm_TCS_CMDc_VOTE_ADDR[0, 0] = XO_LVL_ADDR
+  TCSm_TCS_CMDc_VOTE_ADDR[0, 1] = 0 : { cmd_db_addr("vrm.soc", 0x0) }
+  TCSm_TCS_CMDc_VOTE_ADDR[0, 2] = XO_LVL_ADDR
+  TCSm_TCS_CMDc_VOTE_ADDR[0, 3] = 0 : { cmd_db_addr("vrm.soc", 0x0) }
+
+  # TCS1 Command configuration
+  TCSm_TCS_CMDc_VOTE_CFG[1] = 0			           # FnF, no wait_for_compl
+  # TCS1 Data configuration
+  TCSm_TCS_CMDc_VOTE_DATA[1] = [CX_HLVL_OFF, MX_HLVL_RET, MXC_HLVL_OFF, 0]
+  # TCS1 Address configuration
+  TCSm_TCS_CMDc_VOTE_ADDR[1] = [CX_LVL_ADDR, MX_LVL_ADDR, MXC_LVL_ADDR, 0]
+
+  # TCS2 Command configuration
+  TCSm_TCS_CMDc_VOTE_CFG[2, 0] = {.CMD_RR = 0x1, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+  TCSm_TCS_CMDc_VOTE_CFG[2, 1] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+  TCSm_TCS_CMDc_VOTE_CFG[2, 2] = {.CMD_RR = 0x1, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+  TCSm_TCS_CMDc_VOTE_CFG[2, 3] = {.CMD_RR = 0x1, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+  # TCS2 Data configuration
+  TCSm_TCS_CMDc_VOTE_DATA[2] = [MX_MOL_HLVL, CX_HLVL_RET, MXC_HLVL_RET, MX_HLVL_TUR]
+  # TCS2 Address configuration
+  TCSm_TCS_CMDc_VOTE_ADDR[2] = [MX_LVL_ADDR, CX_LVL_ADDR, MXC_LVL_ADDR, MX_LVL_ADDR]
+
+  # Kailua does not have LCX-EBI dependency and does not use TCS3
+  # TCS3 Command configuration
+  # TCS3 Data configuration
+  # TCS3 Address configuration
+
+  # Kailua does not have LCX-EBI dependency and does not use TCS4
+  # TCS4 Command configuration
+  # TCS4 Data configuration
+  # TCS4 Address configuration
+
+  # TCS5 Command configuration
+  TCSm_TCS_CMDc_VOTE_CFG[5, 0] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Review
+  TCSm_TCS_CMDc_VOTE_CFG[5, 1] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Review
+  TCSm_TCS_CMDc_VOTE_CFG[5, 2] = {.CMD_RR = 0x1, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Review
+  TCSm_TCS_CMDc_VOTE_CFG[5, 3] = {.CMD_RR = 0x1, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Review
+  # TCS5 Data configuration
+  TCSm_TCS_CMDc_VOTE_ADDR[5, 0] = 0 : {cmd_db_addr("ldoe1", en_offset)} #--Review
+  TCSm_TCS_CMDc_VOTE_ADDR[5, 1] = 0 : {cmd_db_addr("ldoe3", en_offset)} #--Review
+  TCSm_TCS_CMDc_VOTE_ADDR[5, 2] = 0 : {cmd_db_addr("ldoe1", en_offset)} #--Review
+  TCSm_TCS_CMDc_VOTE_ADDR[5, 3] = 0 : {cmd_db_addr("ldoe3", en_offset)} #--Review
+  # TCS5 Address configuration
+  TCSm_TCS_CMDc_VOTE_DATA[5, 0] = disable
+  TCSm_TCS_CMDc_VOTE_DATA[5, 1] = disable
+  TCSm_TCS_CMDc_VOTE_DATA[5, 2] = enable
+  TCSm_TCS_CMDc_VOTE_DATA[5, 3] = enable
+
+  # TCS6 Command configuration
+  TCSm_TCS_CMDc_VOTE_CFG[6, 0] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Special
+  TCSm_TCS_CMDc_VOTE_CFG[6, 1] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Normal
+  TCSm_TCS_CMDc_VOTE_CFG[6, 2] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+  TCSm_TCS_CMDc_VOTE_CFG[6, 3] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+
+  # TCS6 Data configuration
+  TCSm_TCS_CMDc_VOTE_DATA[6, 0] = 0x0 #Special
+  TCSm_TCS_CMDc_VOTE_DATA[6, 1] = 0x1 #Normal
+  TCSm_TCS_CMDc_VOTE_DATA[6, 2] = 0x0
+  TCSm_TCS_CMDc_VOTE_DATA[6, 3] = 0x0
+
+  # TCS6 Address configuration
+  TCSm_TCS_CMDc_VOTE_ADDR[6, 0] = LNOC_LVL_ADDR #--Review
+  TCSm_TCS_CMDc_VOTE_ADDR[6, 1] = LNOC_LVL_ADDR #--Review
+  TCSm_TCS_CMDc_VOTE_ADDR[6, 2] = 0
+  TCSm_TCS_CMDc_VOTE_ADDR[6, 3] = 0
+
+module: { name = RPMH_ARC_ARC_GP_TCS, group = ARC, min_ver = 2.0, import = [arc_v2_export] }
+vars:
+  vol_offset = 0
+  en_offset = 4
+  disable = 0
+  enable = 1
+
+regs:
+  TCSm_RM_SEL = [
+    7,              # DDRSS RM is the owner
+    0,              # Cx RM is owner
+    0,              # Cx RM is owner
+    3,              # LPI_Cx RM is owner
+    3,              # LPI_Cx RM is owner
+    0,              # CX RM is owner
+    7,              # DDRSS RM is the owner
+  ]
+
+  # TCS0 Command configuration
+  TCSm_TCS_CMDc_VOTE_CFG[0] = 0                    # All FF, no wait_for_compl
+  # TCS0 Data configuration
+  TCSm_TCS_CMDc_VOTE_DATA[0] = [0, 0, 1, 1]
+  # TCS0 Address configuration
+  TCSm_TCS_CMDc_VOTE_ADDR[0, 0] = XO_LVL_ADDR
+  TCSm_TCS_CMDc_VOTE_ADDR[0, 1] = 0 : { cmd_db_addr("vrm.soc", 0x0) }
+  TCSm_TCS_CMDc_VOTE_ADDR[0, 2] = XO_LVL_ADDR
+  TCSm_TCS_CMDc_VOTE_ADDR[0, 3] = 0 : { cmd_db_addr("vrm.soc", 0x0) }
+
+  # TCS1 Command configuration
+  TCSm_TCS_CMDc_VOTE_CFG[1] = 0			           # FnF, no wait_for_compl
+  # TCS1 Data configuration
+  TCSm_TCS_CMDc_VOTE_DATA[1] = [CX_HLVL_OFF, MX_HLVL_RET, MXC_HLVL_OFF, 0]
+  # TCS1 Address configuration
+  TCSm_TCS_CMDc_VOTE_ADDR[1] = [CX_LVL_ADDR, MX_LVL_ADDR, MXC_LVL_ADDR, 0]
+
+  # TCS2 Command configuration
+  TCSm_TCS_CMDc_VOTE_CFG[2, 0] = {.CMD_RR = 0x1, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+  TCSm_TCS_CMDc_VOTE_CFG[2, 1] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+  TCSm_TCS_CMDc_VOTE_CFG[2, 2] = {.CMD_RR = 0x1, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+  TCSm_TCS_CMDc_VOTE_CFG[2, 3] = {.CMD_RR = 0x1, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+  # TCS2 Data configuration
+  TCSm_TCS_CMDc_VOTE_DATA[2] = [MX_MOL_HLVL, CX_HLVL_RET, MXC_HLVL_RET, MX_HLVL_TUR]
+  # TCS2 Address configuration
+  TCSm_TCS_CMDc_VOTE_ADDR[2] = [MX_LVL_ADDR, CX_LVL_ADDR, MXC_LVL_ADDR, MX_LVL_ADDR]
+
+  # Kailua does not have LCX-EBI dependency and does not use TCS3
+  # TCS3 Command configuration
+  # TCS3 Data configuration
+  # TCS3 Address configuration
+
+  # Kailua does not have LCX-EBI dependency and does not use TCS4
+  # TCS4 Command configuration
+  # TCS4 Data configuration
+  # TCS4 Address configuration
+
+  # TCS5 Command configuration
+  TCSm_TCS_CMDc_VOTE_CFG[5, 0] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Review
+  TCSm_TCS_CMDc_VOTE_CFG[5, 1] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Review
+  TCSm_TCS_CMDc_VOTE_CFG[5, 2] = {.CMD_RR = 0x1, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Review
+  TCSm_TCS_CMDc_VOTE_CFG[5, 3] = {.CMD_RR = 0x1, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Review
+  # TCS5 Data configuration
+  TCSm_TCS_CMDc_VOTE_ADDR[5, 0] = 0 : {cmd_db_addr("ldoe1", en_offset)} #--Review
+  TCSm_TCS_CMDc_VOTE_ADDR[5, 1] = 0 : {cmd_db_addr("ldoe3", en_offset)} #--Review
+  TCSm_TCS_CMDc_VOTE_ADDR[5, 2] = 0 : {cmd_db_addr("ldoe1", en_offset)} #--Review
+  TCSm_TCS_CMDc_VOTE_ADDR[5, 3] = 0 : {cmd_db_addr("ldoe3", en_offset)} #--Review
+  # TCS5 Address configuration
+  TCSm_TCS_CMDc_VOTE_DATA[5, 0] = disable
+  TCSm_TCS_CMDc_VOTE_DATA[5, 1] = disable
+  TCSm_TCS_CMDc_VOTE_DATA[5, 2] = enable
+  TCSm_TCS_CMDc_VOTE_DATA[5, 3] = enable
+
+  # TCS6 Command configuration
+  TCSm_TCS_CMDc_VOTE_CFG[6, 0] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Special
+  TCSm_TCS_CMDc_VOTE_CFG[6, 1] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0} #--Normal
+  TCSm_TCS_CMDc_VOTE_CFG[6, 2] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+  TCSm_TCS_CMDc_VOTE_CFG[6, 3] = {.CMD_RR = 0x0, .CMD_WAIT_FOR_CMP = 0, .CMD_EN=0}
+
+  # TCS6 Data configuration
+  TCSm_TCS_CMDc_VOTE_DATA[6, 0] = 0x0 #Special
+  TCSm_TCS_CMDc_VOTE_DATA[6, 1] = 0x1 #Normal
+  TCSm_TCS_CMDc_VOTE_DATA[6, 2] = 0x0
+  TCSm_TCS_CMDc_VOTE_DATA[6, 3] = 0x0
+
+  # TCS6 Address configuration
+  TCSm_TCS_CMDc_VOTE_ADDR[6, 0] = LNOC_LVL_ADDR #--Review
+  TCSm_TCS_CMDc_VOTE_ADDR[6, 1] = LNOC_LVL_ADDR #--Review
+  TCSm_TCS_CMDc_VOTE_ADDR[6, 2] = 0
+  TCSm_TCS_CMDc_VOTE_ADDR[6, 3] = 0
+
+module: { name = RPMH_ARC_ARC_RM, group = ARC_THERM, min_ver = 1.0, max_ver = 1.9, import = [arc_export]  }
+regs:
+### Thermal OL Mask being set in arc_target.c
+### This is to prevent the system from voting on ARC rails
+### before ARC, CPRF are fully initialized.
+  # 0C Hardening - Thermal configuration
+
+ NORMAL_OL_MASK = 0xFFFF
+
+ ALLOWED_OL_MODE = 0
+
+ THERMAL_OL_MASK = [
+    CX_THERM_OLS,
+    MX_THERM_OLS,
+    EBI_THERM_OLS,
+    LCX_THERM_OLS,
+    LMX_THERM_OLS,
+    GFX_THERM_OLS,
+    MSS_THERM_OLS,
+    DDR_THERM_OLS,
+    MMCX_THERM_OLS,
+    NSP_THERM_OLS,
+    MXC_THERM_OLS,
+    LNOC_THERM_OLS,
+    XO_THERM_OLS
+ ]
+
+  # Additional backoff for 0C thermal - fixed 100 us for now. Actual profiling
+  # is needed to be exact but 0C is not frequent so may be okay to chose the
+  # functional and stability side over power
+  ADDITIONAL_BACKOFF_TIME = 0x780
+
+module: { name = RPMH_ARC_ARC_RM, group = ARC_THERM, min_ver = 2.0, import = [arc_v2_export]  }
+regs:
+### Thermal OL Mask being set in arc_target.c
+### This is to prevent the system from voting on ARC rails
+### before ARC, CPRF are fully initialized.
+  # 0C Hardening - Thermal configuration
+
+ NORMAL_OL_MASK = 0xFFFF
+
+ ALLOWED_OL_MODE = 0
+
+ THERMAL_OL_MASK = [
+    CX_THERM_OLS,
+    MX_THERM_OLS,
+    EBI_THERM_OLS,
+    LCX_THERM_OLS,
+    LMX_THERM_OLS,
+    GFX_THERM_OLS,
+    MSS_THERM_OLS,
+    DDR_THERM_OLS,
+    MMCX_THERM_OLS,
+    NSP_THERM_OLS,
+    MXC_THERM_OLS,
+    LNOC_THERM_OLS,
+    XO_THERM_OLS
+ ]
+
+  # Additional backoff for 0C thermal - fixed 100 us for now. Actual profiling
+  # is needed to be exact but 0C is not frequent so may be okay to chose the
+  # functional and stability side over power
+  ADDITIONAL_BACKOFF_TIME = 0x780
+
+module: { name = RPMH_ARC_ARC_RM, group = ARC_THERM, min_ver = 1.0, max_ver = 1.9, import = [arc_export], last = true}
+regs:
+  THERMAL_MODE_SEL = 1
+
+module: { name = RPMH_ARC_ARC_RM, group = ARC_THERM, min_ver = 2.0, import = [arc_v2_export], last = true}
+regs:
+  THERMAL_MODE_SEL = 1

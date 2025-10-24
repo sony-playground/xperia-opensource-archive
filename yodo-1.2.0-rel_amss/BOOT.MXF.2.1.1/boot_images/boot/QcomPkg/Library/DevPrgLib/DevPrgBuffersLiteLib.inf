@@ -1,0 +1,35 @@
+#/** @file DevPrgBuffersLiteLib.inf
+#
+#  Device Programmer Buffer library for lite version.
+#
+#  Copyright (c) 2022 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when        who  what, where, why
+# ----------  ---  ----------------------------------------------------------
+# 2022-04-27  wek  Initial revision.
+#
+#==============================================================================
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DevPrgBufferseLiteLib
+  FILE_GUID                      = A3F80102-D293-449A-8D00-AD2847F04BE8
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DevPrgLLib
+
+[Sources]
+  devprgb_buffers_ddr.c
+  devprgb_buffers_lite.c
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror -DUSE_LOADER_UTILS -DFIREHOSE_LITE_CHANNEL_BUFFER_SIZE=16384 -DFIREHOSE_DDR_CHANNEL_BUFFER_SIZE=1
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec

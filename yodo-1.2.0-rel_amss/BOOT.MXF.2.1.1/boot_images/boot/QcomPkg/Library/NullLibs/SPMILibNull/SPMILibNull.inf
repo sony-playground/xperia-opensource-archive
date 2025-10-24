@@ -1,0 +1,49 @@
+#/** @file SPMILibNull.inf
+#  
+#  SPMI Library INF file
+#  
+#  Copyright (c) 2015,2019-2020, 2022 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#  $Header: $
+#  $DateTime: 2011/01/26 16:45:04 $
+#  $Author: coresvc $
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/08/22   rama    Change the Base name to actual lib name
+# 05/08/15   plc     Initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SPMILib
+  FILE_GUID                      = A738058A-0040-4EB8-B954-F59157AEFFB6
+  MODULE_TYPE                    = BASE 
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SPMILib
+
+[Sources.common]
+  SPMILibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+
+[Pcd.common]
+  gQcomTokenSpaceGuid.SPMIBasePhysical0
+  gQcomTokenSpaceGuid.SPMIBasePhysical1
+  gQcomTokenSpaceGuid.SPMIMemoryMapSize
+  gQcomTokenSpaceGuid.SPMIOwner
+

@@ -1,0 +1,61 @@
+#===============================================================================
+# UNPA build script
+#
+# Copyright (c) 2016 QUALCOMM Technologies Incorporated.
+# All Rights Reserved.
+# QUALCOMM Technologies Proprietary/GTDR
+#===============================================================================
+
+Import('env')
+env = env.Clone()
+
+# Source PATH
+UNPA_ROOT = "${BUILD_ROOT}/core/power/unpa"
+UNPA_SRCPATH = UNPA_ROOT + '/src'
+env.VariantDir( '${BUILDPATH}', UNPA_SRCPATH, duplicate=0 )
+
+
+# Dependencies
+CBSP_API = [
+  'UNPA',
+  'DAL',
+  'POWER',
+  'POWER_UTILS',
+  'SERVICES',
+  'SYSTEMDRIVERS',
+  'KERNEL',
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+
+env.Append(CFLAGS = '${ARMCC_STDC99_CMD}')
+
+if env['MSM_ID'] == 'lanai':
+   env.Append(CPPDEFINES = 'LANAI_TARGET_CONFIG')
+
+# Sources
+UNPA_SRCFILES = [
+  '${BUILDPATH}/unpa.c',
+  '${BUILDPATH}/unpa_resource.c',
+  '${BUILDPATH}/unpa_client.c',
+  '${BUILDPATH}/unpa_query.c',
+  
+# Although included here, test code is #ifdef-d out unless UNPA_TEST is defined
+  '${BUILDPATH}/unpa_test.c',  
+]
+
+# Init srcs
+UNPA_INIT_SOURCES = [
+  '${BUILDPATH}/unpa_init.c',
+]
+
+# Add sources to compile
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/unpa', UNPA_SRCFILES)
+
+env2 = env.Clone() #clone for init sources
+if env2['MSM_ID'] not in ['lanai']:
+  env2.Append(CCFLAGS    = ' -mlong-calls')
+env2.AddBinaryLibrary(['CORE_AOP'],'${BUILDPATH}/unpa_init', UNPA_INIT_SOURCES)
+

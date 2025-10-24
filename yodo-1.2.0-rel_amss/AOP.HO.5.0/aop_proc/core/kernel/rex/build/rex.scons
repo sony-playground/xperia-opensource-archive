@@ -1,0 +1,263 @@
+#===============================================================================
+#                    Copyright 2009 Qualcomm Technologies Incorporated.
+#                           All Rights Reserved.
+#                         QUALCOMM Proprietary/GTDR
+#===============================================================================
+# REXL4 Libs
+#-------------------------------------------------------------------------------
+
+# aop_proc/core/kernel/rex/inc/target/fillmore/aoss_cc_hwio.h #FILLMORE_TODO 
+
+Import('env')
+env = env.Clone()
+   
+#SDM855AU_CHANGES
+if env['MSM_ID'] in ['855au']:
+   env['MSM_ID'] = '855'
+
+#-------------------------------------------------------------------------------
+# Source PATH
+#-------------------------------------------------------------------------------
+SRCPATH = "${BUILD_ROOT}/core/kernel/rex"
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+#-------------------------------------------------------------------------------
+# External depends within CoreBSP
+#-------------------------------------------------------------------------------
+env.RequireExternalApi([
+
+])
+
+#-------------------------------------------------------------------------------
+# Internal depends within CoreBSP
+#-------------------------------------------------------------------------------
+CBSP_API = [
+   'DAL',
+   'DEBUGTOOLS',
+   'DEBUGTRACE',
+   'HWENGINES',
+   'SERVICES',
+   'SYSTEMDRIVERS',
+   'PRODUCTS',
+   'POWER',
+   'MPROC',
+   'REX',
+   'ARC',
+   # needs to be last also contains wrong comdef.h
+   'KERNEL',
+]
+
+env.PublishPrivateApi('REX', [
+   "${INC_ROOT}/core/kernel/rex/src",
+   "${INC_ROOT}/core/kernel/rex/arch/cortex-m3/",
+   "${INC_ROOT}/core/kernel/rex/arch/riscv/",
+   "${INC_ROOT}/core/kernel/rex/target/${MSM_ID}/",
+   "${INC_ROOT}/core/kernel/rex/inc/target/${MSM_ID}/",
+   "${INC_ROOT}/core/kernel/rex/inc/common/",
+   "${INC_ROOT}/core/kernel/rex/inc/arch/",
+   ])
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequirePrivateApi(CBSP_API)
+
+if env['MSM_ID'] == 'waipio':
+  env.Append(CPPDEFINES = 'WAIPIO_TARGET_CONFIG')
+if env['MSM_ID'] == 'kailua':
+  env.Append(CPPDEFINES = 'KAILUA_TARGET_CONFIG')
+if env['MSM_ID'] == 'kapiti':
+  env.Append(CPPDEFINES = 'KAPITI_TARGET_CONFIG')
+if env['MSM_ID'] == 'pinnacle':
+  env.Append(CPPDEFINES = 'PINNACLE_TARGET_CONFIG')
+if env['MSM_ID'] == 'kuno':
+  env.Append(CPPDEFINES = 'KUNO_TARGET_CONFIG')
+
+
+if 'USES_REX_TIMESLICING' in env:
+   env.Append(CPPDEFINES= ["FEATURE_REX_TIMESLICING"])
+if env['MSM_ID'] == 'waipio':
+  env.Append(CPPDEFINES = 'LASSEN_TARGET_CONFIG')
+if env['MSM_ID'] == 'lanai':
+  env.Append(CPPDEFINES = 'LANAI_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'LANAI_STUBS')
+  env.Append(CPPDEFINES = 'RISCV_TARGET')
+  env.Append(CPPDEFINES = 'RUMI')
+if env['MSM_ID'] == 'hamoa':
+  env.Append(CPPDEFINES = 'HAMOA_TARGET_CONFIG')
+  
+#-------------------------------------------------------------------------------
+# Sources, libraries
+#-------------------------------------------------------------------------------
+
+REX_C_SOURCES = [
+   '${BUILDPATH}/src/rex.c',
+   #'${BUILDPATH}/arch/cortex-m3/coredump.c',
+    '${BUILDPATH}/target/${MSM_ID}/aop_interrupt_table.c',
+    '${BUILDPATH}/target/${MSM_ID}/exception_isr.c',
+    #'${BUILDPATH}/target/${MSM_ID}/image_layout.c',
+    '${BUILDPATH}/target/${MSM_ID}/retarget.c',
+    '${BUILDPATH}/target/${MSM_ID}/aop_mpu_cfg.c',
+    '${BUILDPATH}/common/stack_protect.c',
+    #'${BUILDPATH}/common/xpu_init.c',
+    '${BUILDPATH}/target/${MSM_ID}/qmp_msg_driver.c',
+    '${BUILDPATH}/common/DALHeap.c',
+    '${BUILDPATH}/common/datetime.c',
+    ]
+if env['MSM_ID'] == 'lanai':
+  REX_ARCH_C_SOURCES = [
+     '${BUILDPATH}/common/time_service_riscv.c',
+     '${BUILDPATH}/arch/riscv/rexriscv.c',
+     '${BUILDPATH}/arch/riscv/rexcore.c',
+     '${BUILDPATH}/arch/riscv/vectors.c',
+     '${BUILDPATH}/arch/riscv/exceptions.c',
+     '${BUILDPATH}/arch/riscv/aop_pmp.c',
+     '${BUILDPATH}/target/${MSM_ID}/clic_driver.c',
+     '${BUILDPATH}/target/${MSM_ID}/startup.S',
+     '${BUILDPATH}/target/${MSM_ID}/portASM.S',
+      ]
+
+if env['MSM_ID'] == 'kailua':
+  REX_ARCH_C_SOURCES = [
+     '${BUILDPATH}/common/time_service.c',
+     '${BUILDPATH}/arch/cortex-m3/rexarm.c',
+     '${BUILDPATH}/arch/cortex-m3/rexcore.c',
+     '${BUILDPATH}/arch/cortex-m3/vectors.c',
+     '${BUILDPATH}/arch/cortex-m3/exceptions.c',
+     '${BUILDPATH}/arch/cortex-m3/aop_mpu.c',
+     '${BUILDPATH}/target/${MSM_ID}/startup.s',
+      ]
+
+if env['MSM_ID'] == 'pinnacle':
+  REX_ARCH_C_SOURCES = [
+     '${BUILDPATH}/common/time_service.c',
+     '${BUILDPATH}/arch/cortex-m3/rexarm.c',
+     '${BUILDPATH}/arch/cortex-m3/rexcore.c',
+     '${BUILDPATH}/arch/cortex-m3/vectors.c',
+     '${BUILDPATH}/arch/cortex-m3/exceptions.c',
+     '${BUILDPATH}/arch/cortex-m3/aop_mpu.c',
+     '${BUILDPATH}/target/${MSM_ID}/startup.s',
+      ]
+
+if env['MSM_ID'] == 'kuno':
+  REX_ARCH_C_SOURCES = [
+     '${BUILDPATH}/common/time_service.c',
+     '${BUILDPATH}/arch/cortex-m3/rexarm.c',
+     '${BUILDPATH}/arch/cortex-m3/rexcore.c',
+     '${BUILDPATH}/arch/cortex-m3/vectors.c',
+     '${BUILDPATH}/arch/cortex-m3/exceptions.c',
+     '${BUILDPATH}/arch/cortex-m3/aop_mpu.c',
+     '${BUILDPATH}/target/${MSM_ID}/startup.s',
+      ]
+
+
+if env['MSM_ID'] == 'hamoa':
+  REX_ARCH_C_SOURCES = [
+     '${BUILDPATH}/common/time_service.c',
+     '${BUILDPATH}/arch/cortex-m3/rexarm.c',
+     '${BUILDPATH}/arch/cortex-m3/rexcore.c',
+     '${BUILDPATH}/arch/cortex-m3/vectors.c',
+     '${BUILDPATH}/arch/cortex-m3/exceptions.c',
+     '${BUILDPATH}/arch/cortex-m3/aop_mpu.c',
+     '${BUILDPATH}/target/${MSM_ID}/startup.s',
+      ]
+	  
+if env['MSM_ID'] == 'kapiti':
+  REX_ARCH_C_SOURCES = [
+     '${BUILDPATH}/common/time_service.c',
+     '${BUILDPATH}/arch/cortex-m3/rexarm.c',
+     '${BUILDPATH}/arch/cortex-m3/rexcore.c',
+     '${BUILDPATH}/arch/cortex-m3/vectors.c',
+     '${BUILDPATH}/arch/cortex-m3/exceptions.c',
+     '${BUILDPATH}/arch/cortex-m3/aop_mpu.c',
+     '${BUILDPATH}/target/${MSM_ID}/startup.s',
+      ]
+
+if env['MSM_ID'] == 'lanai':
+  REX_C_INIT_SOURCES = [
+     '${BUILDPATH}/arch/riscv/coredump.c',
+     ]
+
+if env['MSM_ID'] == 'kailua':
+  REX_C_INIT_SOURCES = [
+     '${BUILDPATH}/arch/cortex-m3/coredump.c',
+     ]
+
+
+if env['MSM_ID'] == 'pinnacle':
+  REX_C_INIT_SOURCES = [
+     '${BUILDPATH}/arch/cortex-m3/coredump.c',
+     ]
+	 
+if env['MSM_ID'] == 'kuno':
+  REX_C_INIT_SOURCES = [
+     '${BUILDPATH}/arch/cortex-m3/coredump.c',
+     ]
+
+
+if env['MSM_ID'] == 'hamoa':
+  REX_C_INIT_SOURCES = [
+     '${BUILDPATH}/arch/cortex-m3/coredump.c',
+     ]
+
+if env['MSM_ID'] == 'kapiti':
+  REX_C_INIT_SOURCES = [
+     '${BUILDPATH}/arch/cortex-m3/coredump.c',
+     ]
+	 
+# Add sources to compile
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/rex', REX_C_SOURCES)
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/rex_arch', REX_ARCH_C_SOURCES)
+env.AddLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/rex_c_init_sources', REX_C_INIT_SOURCES)
+   
+# ============================================================================
+# TIMESLICING
+# ============================================================================
+if 'USES_RCINIT' in env and 'USES_REX_TIMESLICING' in env:
+   RCINIT_IMG = ['CORE','DALSYS_REX','REX_IMAGE','REX', 'CORE_AOP']
+   env.AddRCInitFunc(           # Code Fragment in TMC: NO
+    RCINIT_IMG,                 # define TMC_RCINIT_INIT_IPCMEM_POOL_INIT
+    {
+     'sequence_group'             : 'RCINIT_GROUP_7',                   # required
+     'init_name'                  : 'rex_timeslice_init',                     # required
+     'init_function'              : 'rex_timeslice_init',           # required
+     'dependencies'               : ['dalsys']
+    })
+   
+
+# ============================================================================
+# HWIO
+# ============================================================================
+ 
+if env.has_key('HWIO_IMAGE'):
+   env.AddHWIOFile('HWIO', [
+       {
+         'filename': '${INC_ROOT}/core/kernel/rex/src/rex_hwio.h',
+         'modules': ['WFSS_A5SS_QTMR_F0V1_QTMR_F0V1_QTMR_V1', 'WFSS_A5SS_QTMR_F2V1_QTMR_F2V1_QTMR_V1', 'WFSS_A5SS_A_A_QGIC2' ],
+         'filter-exclude': ['TSENS', 'RPU', 'RESERVED'],
+         'output-offsets': True,
+         'header':
+           '\n#include \"msmhwiobase.h\"\n' 
+       }
+    ])
+
+#-------------------------------------------------------------------------------
+# QDSS SW Events
+#-------------------------------------------------------------------------------
+if 'USES_QDSS_SWE' in env:
+    QDSS_IMG = ['QDSS_EN_IMG']
+    events = [
+             ['AOP_NON_SECURE_WD_BITE_INT_RECEIVED','aop_abort_interrupt_received (APPS NON SECURE WD BITE) ... aborting'],
+             ['AOP_APPS_HANG_STATUS','aop_apps_hang_status (Core: 0x%x) (Gladiator: 0x%x) (GIC: 0x%x) (WDOG: 0x%x)'],
+             ['AOP_LOG_REGISTER','aop_log_register (PhysAddress: 0x%0.8x) (Value: 0x%0.8x)'],
+             ['AOP_GIC_ERR','aop_gic_mem_corr (ERR_INT: %d), (FAULT_INT: %d)'],
+             ['QMP_MSG_DRVR_MAP_EXPAND','MSG DRV: Map is expanding.Current Size: %d'],
+             ['CLASS_STRING_NOT_FOUND','MSG DRV: Class string recieved was not found in map'],
+             ['MSG_Q_OVERFLOW','MSG DRV: Queue overflowed'],
+             ['ERROR_MSG_Q_LEN','QMP MSG: error (size: %d) > 0x64'],
+             ['HEAP_SEC_FAIL','Heap security check fail (error code: %d)'],
+             ['DH_VERIFY','verifying: %p, %p'],
+             ['DH_ERROR','error: %p:%x'],
+	         ['AOP_ERR_FATAL', 'aop_err_fatal (lr: 0x%0.8x) (ipsr: 0x%0.8x)'],
+             ['AOSS_CC_RESET', 'AOSS CC RESET STATUS: (0x%x)'],
+            ]
+    env.AddSWEInfo(QDSS_IMG, events)

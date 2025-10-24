@@ -1,0 +1,130 @@
+/*------------------------------------------------------------------------------
+   mproc_smem device-tree source. 
+------------------------------------------------------------------------------*/
+/*!
+   This file contains SMEM partition settings 
+*/
+
+/*------------------------------------------------------------------------------
+ Copyright (c) 2021-2022 Qualcomm Technologies, Inc. All Rights Reserved.
+ Qualcomm Technologies, Inc. Confidential and Proprietary.
+------------------------------------------------------------------------------*/
+
+#include "smem_toc_defines.h"
+#include "smem_host_type.h"
+
+&sw {
+   	smem: smem {
+        compatible = "qcom,kailua-smem";
+        smem-vers = <0x000c0000>;
+        smem-toc-vers = <0x00000001>;
+        smem-max-items = <0x288>;
+        smem-partitions {
+		    part-01{
+		    size = <0x60000>; /*Apps<->Sensors partition merged to Apps<->ADSP.*/
+            flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+            host0 = <SMEM_APPS>;
+			host1 = <SMEM_ADSP>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+		    };
+			part-02{
+			size = <0x20000>;
+            flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+            host0 = <SMEM_APPS>;
+			host1 = <SMEM_NSP>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+			part-03{
+			size = <0x8000>;
+            flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+			host0 = <SMEM_APPS>;
+			host1 = <SMEM_SPSS_NONSP>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+			part-04{
+			size = <0x4000>;
+			flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+			host0 = <SMEM_TZ>;
+			host1 = <SMEM_SPSS_SP>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+			part-05{
+			size = <0x2000>;
+            flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+			host0 = <SMEM_TZ>;
+			host1 = <SMEM_NSP>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+			part-06{
+			size = <0x4000>; /* TZ<->SSC partition. Merged to TZ<->ADSP*/
+            flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+			host0 = <SMEM_TZ>;
+			host1 = <SMEM_ADSP>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+			part-07{
+			size = <0x2000>;
+            flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+			host0 = <SMEM_TZ>;
+			host1 = <SMEM_MODEM>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+			part-08{
+			size = <0x4000>;
+            flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+			host0 = <SMEM_MODEM>;
+			host1 = <SMEM_SPSS_SP>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+			part-09{
+			size = <0x7C000>;
+            flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+			host0 = <SMEM_APPS>;
+			host1 = <SMEM_MODEM>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+			part-10{
+			size = <0x30000>; /* Modem<->Sensor partition merged to Modem<->ADSP*/
+            flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+			host0 = <SMEM_MODEM>;
+			host1 = <SMEM_ADSP>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+			part-11{
+			size = <0x8000>;
+            flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+			host0 = <SMEM_APPS>;
+			host1 = <SMEM_TME>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+			part-12{
+			size = <0x2000>;
+            flags = <SMEM_TOC_ENTRY_FLAGS_ENABLE_RW_PROTECTION>;
+			host0 = <SMEM_MODEM>;
+			host1 = <SMEM_TME>;
+			size-cacheline = <0x20>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+			part-13{
+			size = <0>;
+            flags = <0>;
+			host0 = <SMEM_INVALID_HOST>;
+			host1 = <SMEM_INVALID_HOST>;
+			size-cacheline = <0>;
+			exclusion-sizes = <0 0 0 0>;
+			};
+        };
+      };			
+};
+

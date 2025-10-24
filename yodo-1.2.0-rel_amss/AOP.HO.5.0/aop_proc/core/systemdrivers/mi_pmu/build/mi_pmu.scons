@@ -1,0 +1,82 @@
+#===============================================================================
+#
+#                             Edit History
+#
+# $Header: //components/rel/aop.ho/5.0/aop_proc/core/systemdrivers/mi_pmu/build/mi_pmu.scons#1 $
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+# 2019/08/14   sds     Initial Creation
+#
+#===============================================================================
+#                 Copyright (c) 2019 by Qualcomm Technologies, Inc.
+#                              All Rights Reserved.
+#           Proprietary and Confidential - Qualcomm Technologies, Inc/GTDR
+#===============================================================================
+Import('env')
+env = env.Clone()
+
+#-------------------------------------------------------------------------------
+# Python library imports
+#-------------------------------------------------------------------------------
+import os
+
+#-------------------------------------------------------------------------------
+# Source PATH
+#-------------------------------------------------------------------------------
+BUILDPATH = '..'
+env.VariantDir('${BUILDPATH}', BUILDPATH, duplicate=0)
+BUILDPATH = env.RealPath(BUILDPATH)
+SRCPATH = os.path.join(BUILDPATH, 'src')
+
+#-------------------------------------------------------------------------------
+# Internal depends within CoreBSP
+#-------------------------------------------------------------------------------
+CBSP_APIS = [
+  'HAL',
+  'POWER',
+  'SYSTEMDRIVERS',
+   # needs to be last also contains wrong comdef.h
+  'KERNEL',
+]
+
+env.RequirePublicApi(CBSP_APIS)
+env.RequireRestrictedApi(CBSP_APIS)
+
+#-------------------------------------------------------------------------------
+# Stubs detection
+#-------------------------------------------------------------------------------
+if not env.PathExists('${BUILD_ROOT}/core/systemdrivers/mi_pmu/cfg/${MSM_ID}'):
+  env['MSM_ID'] = 'stubs'
+
+#-------------------------------------------------------------------------------
+# Private depends within ICB
+#-------------------------------------------------------------------------------
+env.PublishPrivateApi('MI_PMU_API', [
+    os.path.join(SRCPATH, 'common'),
+    os.path.join(SRCPATH, '${MSM_ID}'),
+    ])
+
+#-------------------------------------------------------------------------------
+# Compiler options
+#-------------------------------------------------------------------------------
+env.Append(CCFLAGS = '${ARMCC_STDC99_CMD}')
+
+#-------------------------------------------------------------------------------
+# Settings files for R-init builder
+#-------------------------------------------------------------------------------
+if 'USES_RINIT_PARSER' in env and env['MSM_ID'] != 'stubs':
+    env.AddRinitInfo('CORE_AOP', 
+      {'files' : '${BUILD_ROOT}/core/systemdrivers/mi_pmu/cfg/${MSM_ID}'})
+
+#-------------------------------------------------------------------------------
+# Sources
+#-------------------------------------------------------------------------------
+mi_pmu_src = [
+  '${BUILDPATH}/src/common/mi_pmu.c',
+  '${BUILDPATH}/src/${MSM_ID}/mi_pmu_target.c',
+]
+
+#-------------------------------------------------------------------------------
+# Images
+#-------------------------------------------------------------------------------
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/mi_pmu', mi_pmu_src)

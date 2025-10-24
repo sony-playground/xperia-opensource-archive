@@ -1,0 +1,274 @@
+#include "pm_defines.h"
+
+&pm{   
+
+  pon {
+    compatible = "qcom,pm-pon";  
+          
+    pshold {
+      enable = /bits/ 8 <PM_TRUE>;
+      reset-type = /bits/ 8 <PM_SHUTDOWN>;
+    };
+    
+    smpl {
+      enable = /bits/ 8 <PM_TRUE>;
+      smpl-delay = <800>;
+    };
+    
+    s2-kpdpwr {
+      enable = /bits/ 8 <PM_FALSE>;
+      reset-type = /bits/ 8 <PM_WARM_RESET>;           
+      s1-ms = <10256>;
+      s2-ms = <2000>;
+    };  
+    
+    s2-kpdpwr-resin {
+      enable = /bits/ 8 <PM_FALSE>;
+      reset-type = /bits/ 8 <PM_HARD_RESET>;
+      s1-ms = <4480>;
+      s2-ms = <0>;
+    };
+    
+    s2-resin {
+      enable = /bits/ 8 <PM_FALSE>;
+      reset-type = /bits/ 8 <PM_HARD_RESET>;
+      s1-ms = <10256>;
+      s2-ms = <2000>;
+    };
+    
+    s3-reset {
+      enable = /bits/ 8 <PM_TRUE>;
+      s3-src = /bits/ 8 <PM_PON_RESET_SOURCE_RESIN_AND_KPDPWR>;
+      timer-value-ms = <16000>;
+    };  
+    
+    uvlo-config {
+      // pmic_index  thresh_mv  hyst_mv  enable
+      // < PMIC_B      2500      300     PM_ENABLE>
+      config-value = <0
+                    >;
+    };
+
+    ovlo-config {    
+      // pmic_index  thresh_mv  hyst_mv  enable
+      // < PMIC_B      2500      300     PM_ENABLE>              
+      config-value = <0
+                    >;
+    };
+          
+    long-pwrkey-dbnc-chk {
+      dbnc-time-ms = <200>;
+      chk-at = /bits/ 8 <2>;
+    };
+  };
+  
+  
+  display {
+    compatible = "qcom,pm-display";
+
+    // You can define siwre-map here. Or set a-swire-sel and e-swire-sel respectively.
+    // If you want to set a-swire-sel and e-swire-sel manually, you need to remove swire-map or assign invalid value to it at first.
+    // e.g.: 
+    // swire-map = <MAP_INVALID>;  // This line can also be removed in this case
+    // a-swire-sel = <ASWIRE_MAP_SEL_0>;
+    // e-swire-sel = <ESWIRE_MAP_SEL_0>;
+    swire-map = /bits/ 8 <MAP_A>;
+    apply-default-volt = /bits/ 8 <PM_FALSE>;
+    default-elvss = <(-4000)>;
+    default-elvdd = <4600>;
+    default-oledb = <6400>;
+  };
+  
+  haptics { 
+    compatible = "qcom,pm-haptics";
+    ext-boost-vdd = <1>;
+    vmax-hdrm = <0xA>;
+    vmax-mv = <1400>;
+    tlra-ol = <0x0477>;
+    autores-cfg = <1>;
+    vbatt-min = <0>;			/* mV, 0 = always enabled */
+    boost-cfg-bob = <0>;                /* 0/1 , 0=HBST cfg, 1=BOB cfg*/
+    lra-resistance = <36>;
+    swr-io-volt = <0>;          	/* 0 is 1.8v, 1=1.2v */
+	
+  };
+  
+  charger {
+//    parallel-charger = <PM_FALSE>;
+    parallel-charger = /bits/ 8 <PM_FALSE>;
+    charger-pmic-index = <PMIC_H>;
+
+    loader-dbc-threshold = <3000>;
+    dbc-sdp-thd-inc = <100>; // increase threshold to avoid triggering uvlo due to SDP charger can not provide enough power
+//    skip-loader-dbc = <PM_DISABLE>;
+    skip-loader-dbc = /bits/ 8 <PM_ENABLE>;
+
+//    core-dbc-threshold = <3300>;
+    core-dbc-threshold = <3000>;
+//    skip-core-dbc = <PM_DISABLE>;
+    skip-core-dbc = /bits/ 8 <PM_DISABLE>;
+
+//    uv-oc-1s-threshold = <2400>; // 1s battery UV/OC threshold for whole pack
+    uv-oc-1s-threshold = <2000>; // 1s battery UV/OC threshold for whole pack
+    uv-oc-2s-threshold = <5800>; // 2s battery UV/OC threshold for 2 cells
+
+//    apply-ichg-fs = <PM_ENABLE>;
+    apply-ichg-fs = /bits/ 8 <PM_ENABLE>;
+    // 0: 10A
+    // 1: 20A
+    ichg-fs = <0>;
+
+    // 0: No Mid
+    // 1: 1 Mid
+    // 2: 2 Mid
+    batt-2s-option = <1>; 
+
+    // In the uint of Celcius
+    too-hot-afp-threshold = <72>;
+//    apply-too-hot-afp = <PM_ENABLE>;
+    apply-too-hot-afp = /bits/ 8 <PM_DISABLE>;
+
+    // In the uint of Celcius
+    too-cold-afp-threshold = <(-15)>;
+//    apply-too-cold-afp = <PM_ENABLE>;
+    apply-too-cold-afp = /bits/ 8 <PM_DISABLE>;
+
+//    apply-boot-wo-batt = <PM_ENABLE>;
+    apply-boot-wo-batt = /bits/ 8 <PM_ENABLE>;
+//    boot-wo-batt = <PM_ON>;
+    boot-wo-batt = /bits/ 8 <PM_ON>;
+    icl-boot-wo-batt = <1000>;
+    
+//    apply-float-voltage = <PM_DISABLE>;
+//    float-voltage-mv = <4350>;
+    apply-float-voltage = /bits/ 8 <PM_ENABLE>;
+    float-voltage-mv = <4480>;
+
+//    apply-pre-charge-current = <PM_ENABLE>;
+    apply-pre-charge-current = /bits/ 8 <PM_ENABLE>;
+    // this value represents 1s battery pre_charger current, 2s battery's pre_charger current is half of this value, that is 150mA.
+//    pre-charge-ma = <300>;
+    pre-charge-ma = <600>;
+
+//    apply-fast-charge-current = <PM_DISABLE>;
+//    fast-charge-ma = <1000>;
+    apply-fast-charge-current = /bits/ 8 <PM_ENABLE>;
+    fast-charge-ma = <800>;
+
+//    apply-icl = <PM_DISABLE>;
+//    icl-ma = <2000>;
+    apply-icl = /bits/ 8 <PM_ENABLE>;
+    icl-ma = <1500>;
+    
+//    apply-float-charger-icl = <PM_DISABLE>;
+    apply-float-charger-icl = /bits/ 8 <PM_DISABLE>;
+    float-charger-icl-ma = <1000>;
+
+//    apply-vsysmin = <PM_DISABLE>;
+    apply-vsysmin = /bits/ 8 <PM_DISABLE>;
+    vsysmin = <3200>;
+ 
+//    usb-suspend = <PM_OFF>;
+    usb-suspend = /bits/ 8 <PM_OFF>;
+
+    wls-usb-prior-swap = <PM_INPUT_PRIORITY_WLS>;
+    batt-detect-src = <PM_BMD_SRC_ID>;
+
+    max-dbg-board-id = <11000>;
+    min-dbg-board-id = <3000>;
+
+//    detect-jig-by-therm = <PM_DISABLE>;
+    detect-jig-by-therm = /bits/ 8 <PM_DISABLE>;
+    max-therm = <780>;
+    min-therm = <80>;
+    jig-icl-ma = <1500>;
+    
+    // This delay is in the unit of ms.
+    uvp-recover-delay = <300>;
+
+//    ignore-temp-in-dbc = <PM_DISABLE>;
+    ignore-temp-in-dbc = /bits/ 8 <PM_DISABLE>;
+
+    batt-therm-pull-up = <PM_THERM_PULL_UP_100K>;
+
+    // Enable ext sense will set IBAT_SENSE_OPTION to EXT_ONLY
+//    ibat-via-ext-sense = <PM_DISABLE>;
+    ibat-via-ext-sense = /bits/ 8 <PM_DISABLE>;
+
+    // this option only takes effect if ibat_via_ext_sense is enabled
+    // 1x: 5 mOhm external R-sense. Default ext sns bit weight.
+    // 2x: 1 mOhm external R-sense with 2 mOhm ADC configuration
+    // 2.5x: 2 mOhm external R-sense with 5 mOhm ADC configuration
+    ext-rsns-adc-scale = <PM_EXT_RSNS_SCALE_1x>;
+
+    // VBAT threshold to allow RTC power on to HLOS
+    // Assign a high threshold will equivalently disable this feature.
+    vbat-thd-rtc-pon = <3600>;
+
+    // vsys-min-recover-mv is the Vsys_min configured for dead battery recover.
+    // vflt-recover-mv is the Vfloat configured for dead battery recover.
+    // vsys-min-recover should higher then vflt in order to avoid entering CC charging.
+    // Usually 100mV higher.
+    // They will be restored after battery recovering.
+    vsys-min-recover-mv = <4600>;
+    vflt-recover-mv = <4500>;
+  };
+
+  camera {
+    compatible = "qcom,pm-camera";  
+
+    // Set the value to <0xFFFF 0xFFFF> will disable PM8010 programming
+    rst-signal = <7 11>;
+  };
+
+  sw-config {
+    compatible = "qcom,pm-sw";  
+
+    // verbose: PON_EVENT_LOG_LEVEL_MIN: Only brief PON event log
+    //          PON_EVENT_LOG_LEVEL_VERBOSE: verbose parsed log
+    // 			PON_EVENT_LOG_LEVEL_RAWDATA: verbose parsed log and raw data
+    //          PON_EVENT_LOG_LEVEL_MAX: All log. Currently same as _RAWDATA
+    // By default setting to PON_EVENT_LOG_LEVEL_BRIEF to avoid impacting boot performance
+    verbose = <PON_EVENT_LOG_LEVEL_MIN>;
+    driver-post-init = <
+      PM_LDO_SET_AHC            PM_BUSID_0   PMIC_M  PM_LDO_3     PM_FALSE
+      PM_LDO_SET_AHC            PM_BUSID_0   PMIC_M  PM_LDO_5     PM_FALSE
+      PM_LDO_SET_AHC            PM_BUSID_0   PMIC_M  PM_LDO_6     PM_FALSE
+      PM_LDO_SET_AHC            PM_BUSID_0   PMIC_N  PM_LDO_5     PM_TRUE
+      PM_LDO_SET_AHC            PM_BUSID_0   PMIC_N  PM_LDO_6     PM_TRUE
+	  // PM_SMPS_SET_AHC_HR        PM_BUSID_0   PMIC_C  PM_SMPS_1    0x6E
+      // PM_SMPS_SET_ULS           PM_BUSID_0   PMIC_F  PM_SMPS_6    1375000          /*The Voltage is in microVolts*/
+	  // PM_LDO_SET_ULS            PM_BUSID_0   PMIC_F  PM_SMPS_6    1375000          /*The Voltage is in microVolts*/
+      // PM_CLK_ENABLE             PM_BUSID_0   PMIC_A  PM_CLK_RF_1  PM_TRUE 
+      // PM_SMPS_SET_VOLT          PM_BUSID_0   PMIC_B  PM_SMPS_1    1200 
+      // PM_SMPS_SET_AHC           PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_FALSE 
+      // PM_LDO_SET_AHC            PM_BUSID_0   PMIC_B  PM_LDO_1     PM_FALSE
+      // PM_LDO_SET_VOLT           PM_BUSID_0   PMIC_B  PM_LDO_1     1200
+      // PM_LDO_SET_MODE           PM_BUSID_0   PMIC_B  PM_LDO_1     PM_SW_MODE_NPM        
+      // PM_SMPS_SET_MODE          PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_SW_MODE_NPM       
+      // PM_SMPS_SET_PD_CTRL       PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_TRUE    
+      // PM_SMPS_SET_PIN_CTRL      PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_TRUE   
+      // PM_SMPS_SET_OCP_BROADCAST PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_TRUE
+      // PM_LDO_SET_PD_CTRL        PM_BUSID_0   PMIC_B  PM_LDO_1     PM_TRUE   
+      // PM_LDO_SET_PIN_CTRL       PM_BUSID_0   PMIC_B  PM_LDO_1     PM_TRUE  
+      // PM_LDO_SET_OCP_BROADCAST  PM_BUSID_0   PMIC_B  PM_LDO_1     PM_TRUE
+      // PM_CLK_DRV_STR            PM_BUSID_0   PMIC_A  PM_CLK_RF_1  3
+      // PM_SMPS_SET_ENABLE        PM_BUSID_0   PMIC_B  PM_SMPS_1    PM_TRUE    
+      // PM_LDO_SET_ENABLE         PM_BUSID_0   PMIC_B  PM_LDO_1     PM_TRUE 
+      // PM_SPMI_CLK_DATA_CFG      PM_BUSID_0   PMIC_A  0x2          0x2              /*BUS_ID, PMIC_ID, CLK buff Config, DATA buff Config*/
+      // PM_SPMI1_CLK_DATA_CFG     PM_BUSID_0   PMIC_A  0x2          0x3              /*BUS_ID, PMIC_ID, CLK buff Config, DATA buff Config   -- This item is for SPMI_MASTER2_SPMI_CLK_BUF_CFG*/
+      // PM_LDO_LPM_OCP_RESP       PM_BUSID_0   PMIC_A  PM_SDAM_1    PM_TRUE          /* FALSE = Trigger Reset; TRUE = Send INT */
+      // PM_LDO_OCP_RESP_CFG       PM_BUSID_0   PMIC_B  PM_LDO_1     PM_FALSE
+      PM_LDO_SET_ENABLE            PM_BUSID_0   PMIC_B  PM_LDO_11    PM_FALSE
+      
+	  /*Delay*/
+      PM_DELAY(10)
+    > ; 
+
+    apply-rsns-trim = <PM_FALSE>;
+    rsns-trim-value = <0>;
+    primming-enable = <0>;
+  };
+
+};
+

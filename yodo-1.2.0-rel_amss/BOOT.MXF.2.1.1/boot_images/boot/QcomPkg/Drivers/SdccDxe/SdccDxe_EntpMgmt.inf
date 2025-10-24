@@ -1,0 +1,79 @@
+#/** @file SdccDxe_EntpMgmt.inf
+#  
+#  SDCC Driver UEFI INF file
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  
+#  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   -----   ----------------------------------------------------------
+# 2020/07/14   jt      Initial version
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SdccDxe
+  FILE_GUID                      = F10F76DB-42C1-533F-34A8-69BE24653110
+  MODULE_TYPE                    = DXE_RUNTIME_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SdccDxeEntryPoint
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Wno-missing-field-initializers -Wno-missing-braces -DSD_ONLY -DENTP_MGMT
+  
+[Sources.common]
+  SdccDxe.c
+  SdccBlockIO2.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  SdccHalLib
+  SdccCommonLib
+  RpmbLib
+  RpmbListenerLib
+  BootConfigLib
+  
+[Guids]
+  gEfiSdRemovableGuid
+  gEfiEventDetectSdCardGuid
+  gEfiEventExitBootServicesGuid 
+  gEfiEventVirtualAddressChangeGuid             ## CONSUMES ## Event
+  gEfiSDBootOptionGuid
+
+[Protocols]
+  gEfiBlockIoProtocolGuid
+  gEfiBlockIo2ProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiMemCardInfoProtocolGuid 
+  gEfiEmmcWpProtocolGuid
+  gEfiEraseBlockProtocolGuid
+  gEfiSdccConfigProtocolGuid
+  gEfiStorageDevMgmtProtocolGuid
+  gEfiPlatformInfoProtocolGuid
+  gQcomAcpiPlatformProtocolGuid
+  gEfiDtbExtnProtocolGuid
+  
+[Pcd.common]
+  gQcomTokenSpaceGuid.SDCCExtSlotNumber
+  gQcomTokenSpaceGuid.SDCCEmmcSlotNumber
+  gQcomTokenSpaceGuid.SDCCEventBasedSDDetectEnabled
+  gQcomTokenSpaceGuid.SDCCEmmcHwResetEnabled
+
+[Depex]
+  gEfiClockProtocolGuid
+  AND
+  gEfiTimerArchProtocolGuid
+  

@@ -1,0 +1,61 @@
+#/** @file
+#  
+#  Top Level Mode Multiplexor DXE Driver build file.
+#  
+#  Copyright (c) 2010-2011,2013-2015,2021  Qualcomm Technologies Inc. All rights reserved.
+#  
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 18/04/21   amr     Extending TLMM Driver to support EFI_GPIO_PROTOCOL
+# 04/04/14   vk      Suppress warning
+# 10/15/13   vk      Remove includes section, not uspported in BaseTools
+# 01/13/11   dcf     Created.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = DALTLMM
+  FILE_GUID                      = 8681cc5a-0df6-441e-b4b8-e915c538f067
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.1
+  ENTRY_POINT                    = TLMMEntryPoint
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Wno-missing-field-initializers
+
+[Sources.common]
+  TLMMDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  DALFwkLib
+  DALModEnvLib
+  TlmmLib
+  TLMMTargetLib
+  UefiDriverEntryPoint
+  QcomLib
+
+[Protocols]
+  gEfiTLMMProtocolGuid
+  gEfiGPIOProtocolGuid
+
+[Guids]
+
+[Pcd]
+
+[Depex]
+  gEfiDalSysProtocolGuid
+

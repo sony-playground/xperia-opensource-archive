@@ -1,0 +1,58 @@
+#/** @file
+#
+#  Pcie Test Utils
+#
+#  Copyright (c) 2021 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ----------------------------------------------------------
+# 04/26/2021   yg      Initial Revision
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PcieTestUtilsLib
+  FILE_GUID                      = 3F9AEF25-5DA4-40E0-BB42-184587DBA381
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PcieTestUtilsLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[Sources]
+  PcieTestUtils.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/QcomTestPkg/QcomTestPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  DxeServicesTableLib
+  MemoryAllocationLib
+  UncachedMemoryAllocationLib
+  NpaApiLib
+
+[Protocols]
+  gEfiQcPcieDxeProtocolGuid
+  gEfiChipInfoProtocolGuid
+  gEfiTLMMProtocolGuid
+  gEfiPlatformInfoProtocolGuid
+

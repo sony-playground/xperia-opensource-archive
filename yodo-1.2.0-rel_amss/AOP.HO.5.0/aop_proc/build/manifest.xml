@@ -1,0 +1,10 @@
+<config>
+  <image_tree>
+    <name>AOP.HO.5.0</name>
+    <build_id>AOP.HO.5.0-00285-KAILUA_E-1</build_id>
+    <branch_point_revision/>
+    <revision>00285</revision>
+    <spin>1</spin>
+    <client>KAILUA_E</client>
+  </image_tree>
+</config>

@@ -1,0 +1,69 @@
+#/** @file SlvcomLib.inf
+#  
+#  Slvcom library for Ramdump
+#  
+#  Copyright (c) 2021 Qualcomm Technologies, Inc.  All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SlvcomLib
+  FILE_GUID                      = db0f7d3c-3d69-4706-b3ae-9fdad532ff14
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SlvcomLib
+
+
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS = -DSLVCOM_FEATURE_SECMODE_SUPPORT
+  GCC:*_*_*_CC_FLAGS = -DSLVCOM_FEATURE_SECMODE_SUPPORT -DCUST_H=\"boot_target.h\"
+  MSFT:*_*_*_CC_FLAGS = -DSLVCOM_FEATURE_SECMODE_SUPPORT -DSLVCOM_FEATURE_SECMODE_SUPPORT -DSLVCOM_FEATURE_SECMODE_SUPPORT
+
+[BuildOptions.ARM]
+  RVCT:*_*_*_CC_FLAGS = -J Library/MuslLib/musl/include
+
+[Sources.common]
+  inc/slvcom_gpio.h
+  inc/slvcom_list.h
+  inc/slvcom_log.h
+  inc/slvcom_os.h
+  inc/slvcom_spi.h
+  inc/slvcom_target.h
+  src/slvcom_core.c
+  src/slvcom_gpio_boot.c
+  src/slvcom_log.c
+  src/slvcom_spi_boot.c
+  src/slvcom_target_boot.c
+  cfg/slvcom_cfg.h
+  
+[Packages]
+  QcomPkg/QcomPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/SocPkg/Library/XBLLoaderLib/XBLLoaderLibPkg.dec
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  
+[LibraryClasses]
+  SPILib
+  TlmmLib
+  BusyWaitLib
+  
+[FixedPcd]
+  gQcomTokenSpaceGuid.PcdSmemInformation
+[BuildOptions.AARCH64]
+MSFT: *_*_*_PLATFORM_FLAGS == /wd4312 /wd4245 /wd4018 /wd4244 /wd4146 /wd4308 /wd4706 /wd4389 /wd4152 /wd4459 /wd4204 /wd4311 /wd4090 /wd4701 /wd4457 /wd4295 /wd4703 /wd4133 /wd4047 /wd4221 /wd4020 /wd4057 /wd4334 /wd4113 /wd4267

@@ -1,0 +1,35 @@
+#/** @file TrialBootInfoCoreLib.inf
+#  
+#  
+#  Copyright (c) 2022 Qualcomm Technologies, Inc.
+#  All rights reserved.
+#  Qualcomm Confidential and Proprietary
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 5/17/22    sp      Initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = TrialBootInfoCoreLib
+  FILE_GUID                      = e1b9398f-2783-435c-9486-41a83cc09cf0
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = TrialBootInfoCoreLib
+
+[Sources]
+  trial_boot_info.c
+  trial_boot_uefi.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec

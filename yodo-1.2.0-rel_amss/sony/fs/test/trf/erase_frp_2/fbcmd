@@ -1,0 +1,4 @@
+c Read-partition:frp
+c erase:frp
+c Read-partition:frp
+w

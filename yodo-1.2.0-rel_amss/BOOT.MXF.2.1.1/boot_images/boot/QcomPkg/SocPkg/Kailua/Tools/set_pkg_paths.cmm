@@ -1,0 +1,32 @@
+;============================================================================
+;  Name:
+;    set_pkg_paths.cmm
+;
+;  Description:
+;    Set paths for UEFI T32 scripts
+;
+; Copyright (c) 2021 Qualcomm Technologies Incorporated.
+; All Rights Reserved.
+; Qualcomm Technologies Confidential and Proprietary
+;
+;----------------------------------------------------------------------------
+
+GLOBAL &KailuaLAA_CorePkg
+
+LOCAL &pth
+LOCAL &pth2
+LOCAL &CommonTools
+
+&pth=OS.PPD()
+&pth="&pth/../../../../../"
+&pth=OS.FILE.REALPATH("&pth")
+&pth2=STRING.CUT("&pth", -1)
+
+&KailuaLAA_CorePkg="&pth2"
+
+&CommonTools=OS.PPD()
+&CommonTools="&CommonTools/../../../Tools"
+&CommonTools=OS.FILE.REALPATH("&CommonTools")
+
+DO &CommonTools/cmm/set_common_pkg_paths.cmm
+

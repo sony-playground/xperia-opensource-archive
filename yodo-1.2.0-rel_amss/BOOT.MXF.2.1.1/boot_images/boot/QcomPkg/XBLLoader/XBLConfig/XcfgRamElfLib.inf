@@ -1,0 +1,47 @@
+#/** @file XcfgRamElf.inf
+#
+#  XBLConfig Ram Elf interface Lib
+#  
+#  Copyright (c) 2017,2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 10/16/20   rama    renamed lib name to XcfgRamElf
+# 08/06/20   ck      QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+# 05/11/17   kpa     remove XcfgRamAuth.c and add XcfgAuth.c
+# 01/26/17   kpa     Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = XcfgRamElf
+  FILE_GUID                      = 6FD9880F-4F84-573F-9A01-F0BACC9B1121
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = XcfgRamElf
+
+[Sources.common]
+  XcfgRamElf.c
+  XcfgRamFlash.c
+  XcfgUtils.c  
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/LoaderFramework/LoaderFrameworkApi.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  SecPkg/SecLib.dec
+
+[LibraryClasses]
+  XBLCommonLib
+

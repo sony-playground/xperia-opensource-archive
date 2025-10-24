@@ -1,0 +1,16 @@
+#/**
+# @file MhiDeviceLibPkg.dec
+#
+# Copyright (c) 2020 Qualcomm Technologies, Inc.
+# All Rights Reserved.
+# Confidential and Proprietary - Qualcomm Technologies, Inc.
+#**/
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = MhiDeviceLibPkg
+  PACKAGE_GUID                   = CC293ECF-4633-BE5B-306F-1696DB2B2760
+  PACKAGE_VERSION                = 0.1
+
+[Includes.common]
+

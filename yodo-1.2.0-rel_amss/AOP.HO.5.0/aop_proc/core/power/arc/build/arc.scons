@@ -1,0 +1,97 @@
+#===========================================================================
+# ARC build script
+#
+# Copyright (c) 2016-2019 by Qualcomm Technologies, Incorporated
+# All Rights Reserved
+# Qualcomm Proprietary/GTDR
+#===========================================================================
+
+Import('env')
+
+env = env.Clone()
+
+SRCPATH = '..'
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+# Checking the presence for target specific config/header files else
+# compiling with stubs
+tgt_paths = [
+    '${BUILD_ROOT}/core/power/arc/hal/hwio/${MSM_ID}',
+    '${BUILD_ROOT}/core/power/arc/cfg/${MSM_ID}'
+]
+'''
+#todo: enable once external build pick correct config
+if not all([env.PathExists(apath) for apath in tgt_paths]):
+    env.PrintWarning('ARC: Using stubs')
+    env.Append(CFLAGS = '-Wno-error')
+    env['MSM_ID'] = 'stubs'
+'''
+
+# APIs
+CBSP_API = [
+    'DAL',
+    'SYSTEMDRIVERS',
+    'POWER',
+    'POWER_UTILS',
+    'KERNEL',
+]
+
+if env['MSM_ID'] == '670':
+    env.Append(CPPDEFINES = 'SDM670_TARGET_CONFIG')
+	
+if env['MSM_ID'] == 'Olympic':
+    env.Append(CPPDEFINES = 'Olympic_TARGET_CONFIG')
+
+if env['MSM_ID'] in ['makena','makenaau']:
+    env.Append(CPPDEFINES = 'MAKENA_TARGET_CONFIG')
+
+if env['MSM_ID'] == 'lanai':
+    env.Append(CPPDEFINES = 'LANAI_TARGET_CONFIG')
+    env.Append(CPPDEFINES = 'RISCV_TARGET')
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+env.PublishPrivateApi('ARC', [
+    '${BUILD_ROOT}/core/power/arc/inc',
+    '${BUILD_ROOT}/core/power/arc/common',
+    '${BUILD_ROOT}/core/power/arc/hal/inc',
+    '${BUILD_ROOT}/core/power/arc/hal/hwio/${MSM_ID}',
+    '${BUILDPATH}/core/power/arc/target/${MSM_ID}/inc',
+])
+
+# Compilation options
+env.Append(CFLAGS = '${ARMCC_STDC99_CMD}')
+
+# Sources
+ARC_SOURCES = [
+    '${BUILDPATH}/common/arc.c',
+    '${BUILDPATH}/hal/src/arc_hal.c',
+    '${BUILDPATH}/cfg/${MSM_ID}/arc_cfg.c',
+    '${BUILDPATH}/common/arc_runtime.c',
+]
+
+ARC_INIT_SOURCES = [
+  '${BUILDPATH}/common/arc_internal.c',
+  '${BUILDPATH}/common/arc_init.c',
+]
+
+if env['MSM_ID'] in ['55']:
+  ARC_SOURCES += ['${BUILDPATH}/target/${MSM_ID}/src/arc_toggle_rms.c']
+
+if env['MSM_ID'] in ['8350','cedros','kailua','kodiak','waipio','fillmore','aurora','lassen','netrani','kapiti','lanai','kuno','pinnacle','hamoa']: #Kuno_todo check, PINNACLES TODO check
+  ARC_SOURCES += ['${BUILDPATH}/target/${MSM_ID}/src/arc_target.c']
+
+# Adding settings files to R-init builder
+if 'USES_RINIT_PARSER' in env:
+	env.AddRinitInfo('CORE_AOP', 
+					 {'files' : '${BUILD_ROOT}/core/power/arc/cfg/${MSM_ID}'})
+
+# Add sources to compile
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/arc', ARC_SOURCES)
+
+# Add init sources
+env2 = env.Clone()
+if env2['MSM_ID'] not in ['lanai']:
+  env2.Append(CCFLAGS    = ' -mlong-calls')
+env2.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/arc_init', ARC_INIT_SOURCES)

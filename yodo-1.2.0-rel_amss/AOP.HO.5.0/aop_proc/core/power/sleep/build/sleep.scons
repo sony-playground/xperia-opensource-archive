@@ -1,0 +1,198 @@
+#===========================================================================
+# Sleep build script
+#
+# Copyright (c) 2019 by Qualcomm Technologies, Incorporated
+# All Rights Reserved
+# Qualcomm Proprietary/GTDR
+#===========================================================================
+
+Import('env')
+import os
+env = env.Clone()
+
+SRCPATH = '../src'
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+# APIs
+CBSP_API = [
+    'DAL',
+    'POWER',
+    'POWER_UTILS',
+    'SERVICES',
+    'DEBUGTRACE',
+    'SYSTEMDRIVERS',
+    'PMIC',
+    'KERNEL',
+    'UNPA',
+    'MPROC',
+    'DDR_MGR',
+    'PWR_UTILS',
+    'DBGINFOLIB',
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+env.RequireProtectedApi(['SLEEP'])
+
+env.PublishPublicApi('SLEEP', [
+    '${BUILD_ROOT}/core/power/sleep/inc'
+])
+
+env.Append(CFLAGS = '${ARMCC_STDC99_CMD}')
+env.Append(CPPDEFINES = 'RSC_DYNAMIC_SEQ')
+# for advanced MMU capable targets for memory offloading
+env.Append(CPPDEFINES = 'DDR_OFFLOADED_INIT')
+if env['MSM_ID'] == 'waipio':
+   env.Append(CPPDEFINES = 'WAIPIO_TARGET_CONFIG')
+   #env.Append(CPPDEFINES = 'WAIPIO_EMULATION_CONFIG')
+   env.Append(CPPDEFINES = 'WAIPIO_STUBS')
+   env.Append(CPPDEFINES = 'AOP_DLITE_SLEEP')
+   env.Append(CPPDEFINES = 'ELASTIC_PDC_BACKOFF')
+   env.Append(CPPDEFINES = 'DEBUG_LPM_VIOLATORS')
+   env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+   env.Append(CPPDEFINES = 'AOSS_0C_ARC_MITIG') #QCTDD07042657
+   env.Append(CPPDEFINES = 'TME_VDU_WA')        #QCTDD07464631
+elif env['MSM_ID'] == 'kailua':
+   env.Append(CPPDEFINES = 'KAILUA_TARGET_CONFIG')
+#   env.Append(CPPDEFINES = 'KAILUA_EMULATION_CONFIG')
+#   env.Append(CPPDEFINES = 'KAILUA_STUBS')
+#   env.Append(CPPDEFINES = 'ELASTIC_PDC_BACKOFF')
+   env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+   env.Append(CPPDEFINES = 'TME_VDU_WA')        #QCTDD07464631
+   #env.Append(CPPDEFINES = 'AOSS_0C_ARC_MITIG') #QCTDD07042657
+   env.Append(CPPDEFINES = 'DEBUG_LPM_VIOLATORS')
+elif env['MSM_ID'] == 'pinnacle':
+   env.Append(CPPDEFINES = 'PINNACLE_TARGET_CONFIG')
+   #env.Append(CPPDEFINES = 'PINNACLE_EMULATION_CONFIG')
+   env.Append(CPPDEFINES = 'PINNACLE_STUBS')
+   env.Append(CPPDEFINES = 'ELASTIC_PDC_BACKOFF')
+   #env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+   #env.Append(CPPDEFINES = 'AOSS_0C_ARC_MITIG') #QCTDD07042657
+elif env['MSM_ID'] == 'kuno':
+   env.Append(CPPDEFINES = 'KUNO_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'KUNO_EMULATION_CONFIG')
+   env.Append(CPPDEFINES = 'KUNO_STUBS')
+   env.Append(CPPDEFINES = 'ELASTIC_PDC_BACKOFF')
+   #env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+   #env.Append(CPPDEFINES = 'AOSS_0C_ARC_MITIG') #QCTDD07042657
+elif env['MSM_ID'] == 'kapiti':
+   env.Append(CPPDEFINES = 'KAPITI_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'KAPITI_EMULATION_CONFIG')
+   env.Append(CPPDEFINES = 'KAPITI_STUBS')
+   env.Append(CPPDEFINES = 'ELASTIC_PDC_BACKOFF')
+   env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+   #env.Append(CPPDEFINES = 'AOSS_0C_ARC_MITIG') #QCTDD07042657
+   env.Append(CPPDEFINES = 'DEBUG_LPM_VIOLATORS')
+elif env['MSM_ID'] == 'lanai':
+   env.Append(CPPDEFINES = 'RISCV_TARGET')
+   env.Append(CPPDEFINES = 'LANAI_TARGET_CONFIG')
+   #env.Append(CPPDEFINES = 'LANAI_EMULATION_CONFIG')
+   #env.Append(CPPDEFINES = 'LANAI_STUBS')
+   #env.Append(CPPDEFINES = 'ELASTIC_PDC_BACKOFF')
+   env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+   env.Append(CPPDEFINES = 'TME_VDU_WA')        #QCTDD07464631
+   #env.Append(CPPDEFINES = 'AOSS_0C_ARC_MITIG') #QCTDD07042657
+   env.Append(CPPDEFINES = 'SVE_NEEDS')        
+elif env['MSM_ID'] == 'hamoa':
+   env.Append(CPPDEFINES = 'HAMOA_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'HAMOA_EMULATION_CONFIG')
+   env.Append(CPPDEFINES = 'HAMOA_STUBS')
+   env.Append(CPPDEFINES = 'ELASTIC_PDC_BACKOFF')
+   env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+   #env.Append(CPPDEFINES = 'AOSS_0C_ARC_MITIG') #QCTDD07042657
+   env.Append(CPPDEFINES = 'DEBUG_LPM_VIOLATORS')
+
+#STUB CHECK
+#if not env.PathExists('${BUILD_ROOT}/core/power/sleep/src/target/${MSM_ID}'):
+#  env['MSM_ID'] = 'STUB'
+#  env['BUILDPATH'] = os.path.join(env['BUILDPATH'], 'target/stub')
+#  env.PrintWarning('STUBBED config for SLEEP')
+#  STUBBED_SLEEP_SOURCES = [
+#    '${BUILDPATH}/aop_sleep.c',
+#    '${BUILDPATH}/aop_cx_collapse.c',
+#    '${BUILDPATH}/aop_cx_retention.c',
+#    '${BUILDPATH}/aop_server.c',
+#    '${BUILDPATH}/aop_pil_driver.c',
+#    '${BUILDPATH}/aop_sleep_stats.c',
+#  ]
+  # Add sources to compile
+#  env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/sleep', STUBBED_SLEEP_SOURCES)
+#  Return()
+
+# Sources
+SLEEP_SOURCES = [
+    '${BUILDPATH}/aop_server.c',
+    '${BUILDPATH}/aop_sleep_stats.c',
+    '${BUILDPATH}/target/${MSM_ID}/aop_pil_driver.c',
+]
+
+if env['MSM_ID'] in ['kailua', 'lanai','kapiti','pinnacle','kuno', 'hamoa']:
+  SLEEP_SOURCES += ['${BUILDPATH}/aop_awsm_sleep.c']
+  SLEEP_INIT_SOURCES = [ '${BUILDPATH}/init/aop_awsm_sleep_init.c', ]
+else:
+  SLEEP_SOURCES += ['${BUILDPATH}/aop_sleep.c']
+  SLEEP_INIT_SOURCES = [ '${BUILDPATH}/init/aop_sleep_init.c', ]
+
+if env['MSM_ID'] in ['8250']:
+  SLEEP_SOURCES += ['${BUILDPATH}/target/${MSM_ID}/apps_pdc_irq_wa.c']
+if env['MSM_ID'] in ['Saipan']:
+  SLEEP_SOURCES += ['${BUILDPATH}/target/${MSM_ID}/aop_pdc_irq_wa.c']
+if env['MSM_ID'] in ['waipio','netrani','kailua','lanai']:
+  SLEEP_SOURCES += ['${BUILDPATH}/target/${MSM_ID}/tme_vdu_wa.c'] #QCTDD07464631
+
+
+if env['MSM_ID'] in ['55','Olympic','kodiak']:
+  SLEEP_SOURCES = SLEEP_SOURCES + ['${BUILDPATH}/aop_cx_retention.c',]
+  SLEEP_INIT_SOURCES = SLEEP_INIT_SOURCES + ['${BUILDPATH}/init/aop_cx_retention_init.c',]
+elif env['MSM_ID'] in ['kailua','lassen', 'lanai','hamoa']:
+  SLEEP_SOURCES = SLEEP_SOURCES + ['${BUILDPATH}/arc_assisted_cx_collapse.c'] 
+  SLEEP_INIT_SOURCES = SLEEP_INIT_SOURCES + ['${BUILDPATH}/init/arc_assisted_cx_collapse_init.c',]
+elif env['MSM_ID'] in ['kapiti', 'pinnacle','kuno']:  
+  SLEEP_SOURCES = SLEEP_SOURCES + ['${BUILDPATH}/arc_assisted_cx_retention.c'] 
+  SLEEP_INIT_SOURCES = SLEEP_INIT_SOURCES + ['${BUILDPATH}/init/arc_assisted_cx_retention_init.c',]
+else:
+  SLEEP_SOURCES = SLEEP_SOURCES + ['${BUILDPATH}/aop_cx_collapse.c'] 
+  SLEEP_INIT_SOURCES = SLEEP_INIT_SOURCES + ['${BUILDPATH}/init/aop_cx_collapse_init.c',]
+
+# Add sources to compile
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/sleep', SLEEP_SOURCES)
+
+# Add init sources as well
+env2 = env.Clone() #clone for init sources
+if env2['MSM_ID'] not in ['lanai']:
+  env2.Append(CCFLAGS    = ' -mlong-calls')
+env2.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/sleep_init', SLEEP_INIT_SOURCES)
+# RINIT FILES
+if 'USES_RINIT_PARSER' in env:
+    rinit_files = '${BUILD_ROOT}/core/power/sleep/src/target/${MSM_ID}'
+    if env.PathExists(rinit_files):
+        env.AddRinitInfo('CORE_AOP', {'files' : rinit_files})
+
+#-------------------------------------------------------------------------------
+# QDSS SW Events
+#-------------------------------------------------------------------------------
+if 'USES_QDSS_SWE' in env:
+    QDSS_IMG = ['QDSS_EN_IMG']
+    events = [
+             ['AOP_SLEEP_FIRST=600', 'AOP_SLEEP_FIRST'],
+             ['CX_COLLAPSE_ENTER', 'Entering CX collapse start'],
+             ['CX_COLLAPSE_EXIT', 'Exiting CX collapse start'],
+             ['CX_COLLAPSE_ENTER_COMPLETE', 'Entering CX collapse complete'],
+             ['CX_COLLAPSE_EXIT_COMPLETE', 'Exiting CX collapse complete'],   
+             ['AOSS_SLEEP_ENTER', 'Entering AOSS Sleep: (wakeup hi: 0x%x), (wakeup_lo: 0x%x)'],
+             ['AOSS_SLEEP_EXIT', 'Exiting AOSS Sleep'],
+             ['HALT_ENTER', 'Entering halt: (wakeup hi: 0x%x), (wakeup_lo: 0x%x)'],
+             ['HALT_EXIT', 'Exiting halt'],
+             ['IMAGE_NAME_INVALID', 'PIL ERROR:Invalid image name recieved over QMP!!!  (val: %s)'],
+             ['PIL_MALFORMED_JSON', 'PIL ERROR:Invalid JSON format, could not parse'],
+             ['RPMH_WAKE_ASSERTED', 'RPMH_WAKE seen'],
+             ['AOSS_BACKOFF_CHANGED','Changing back off to: %d ticks, last seen wakeup: %d, max restore took: %d, min restore took %d'],
+             ['AOSS_BACKOFF_CEIL','AOSS BACKOFF cieling reached (last seen: %d), (ceiling: %d), (backoff now: %d)'],
+             ['AOSS_BACKOFF_FLOOR','AOSS BACKOFF floor reached (last seen: %d), (floor: %d), (backoff now: %d)'],
+             ['CX_COLLAPSE_DEBUG','Cx arc was stuck at (arc pc: 0x%x), (APM status: 0x%x), (APM FUNC OUT: 0x%x), (RPMH_AHB_ERR: 0x%x)'],
+             ['AOP_TME_IRQ_ASSERTED', 'AOP asserted TME IRQ at (0x%x)'],
+             ['AOP_SLEEP_LAST=680', 'AOP_SLEEP_LAST'],
+             ['AOP_BOOT_COMPLETE=700', 'AOP_BOOT_COMPLETE'],
+             ]
+    env.AddSWEInfo(QDSS_IMG, events)

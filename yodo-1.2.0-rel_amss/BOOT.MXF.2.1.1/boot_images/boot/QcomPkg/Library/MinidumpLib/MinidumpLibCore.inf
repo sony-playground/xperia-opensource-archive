@@ -1,0 +1,46 @@
+#/** @file Minidump.inf
+#
+# Minidump Lib
+#  
+#  Copyright (c) 2020-2022 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 01/18/22   rama    Source file name change updates
+# 02/12/21   vk      Move boot_minidump to lib
+# 03/30/20   aus     Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MinidumpLib
+  FILE_GUID                      = 75D4C9D7-6911-448E-B756-0A75F7324687
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MinidumpLib
+
+[Sources.common]
+  boot_minidump_common.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  SecPkg/DbgInfoLib.dec
+  QcomPkg/Library/MinidumpLib/MinidumpLib.dec
+  QcomPkg/SocPkg/Library/XBLLoaderLib/XBLLoaderLibPkg.dec
+
+[LibraryClasses]
+  MuslLib
+  BaseLib
+  SmemLib
+

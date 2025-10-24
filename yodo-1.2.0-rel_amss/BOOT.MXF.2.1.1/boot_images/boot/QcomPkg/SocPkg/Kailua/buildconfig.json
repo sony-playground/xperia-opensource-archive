@@ -1,0 +1,378 @@
+{
+    "Components": [{
+            "Name": "XBL_SC",
+            "Binary": "$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/xbl_sc.elf"
+        },
+        {
+            "Name": "TME_FW",
+            "Binary": "$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/signed_firmware_soc_view.elf"
+        },
+        {
+            "Name": "TME_SEQ_RAM",
+            "Binary": "$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/sequencer_ram.elf"
+        },
+        {
+            "Name": "XBL_Ramdump",
+            "Process": [{
+                    "ToolChain": "CLANG140",
+                    "AArch": "AARCH64",
+                    "Params": ["$EDK2ROOT/BaseTools/Source/Python/build/build.py", "-p", "QcomPkg/SocPkg/Kailua/Common/Ramdump.dsc", "--verbose", "-j", "QcomPkg/SocPkg/Kailua/$VAR/build_Ramdump.log", "-w", "-a", "AARCH64", "-b", "$REL"]
+                }
+            ]
+        },
+        {
+            "Name": "DevPrg_ddr",
+            "Process": [{
+                    "ToolChain": "CLANG140",
+                    "AArch": "AARCH64",
+                    "Params": ["$EDK2ROOT/BaseTools/Source/Python/build/build.py", "-p", "QcomPkg/SocPkg/Kailua/Common/DevprogD.dsc", "--verbose", "-j", "QcomPkg/SocPkg/Kailua/$VAR/build_DevprogD.log", "-w", "-a", "AARCH64", "-b", "$REL"]
+                }
+            ]
+        },
+        {
+            "Name": "DevPrg_lite",
+            "Process": [{
+                    "ToolChain": "CLANG140",
+                    "AArch": "AARCH64",
+                    "Params": ["$EDK2ROOT/BaseTools/Source/Python/build/build.py", "-p", "QcomPkg/SocPkg/Kailua/Common/DevprogL.dsc", "--verbose", "-j", "QcomPkg/SocPkg/Kailua/$VAR/build_DevprogL.log", "-w", "-a", "AARCH64", "-b", "$REL"]
+                }
+            ]
+        },
+        {
+            "Name": "XBL_Core",
+            "Process": [{
+                    "ToolChain": "CLANG140",
+                    "AArch": "AARCH64",
+                    "Params": ["$EDK2ROOT/BaseTools/Source/Python/build/build.py", "-p", "QcomPkg/SocPkg/Kailua/$VAR/Core.dsc", "-j", "QcomPkg/SocPkg/Kailua/$VAR/build_Core.log", "-w", "-a", "AARCH64", "-b", "$REL", "-y", "XBLCore_build_report.txt"]
+                }, {
+                    "ToolChain": "Pack",
+                    "Params": ["$BUILDROOT/Build/Kailua$VAR/Core/$REL_$COMPILER/FV/FVMAIN_COMPACT.Fv", "$BUILDROOT/Build/Kailua$VAR/Core/$REL_$COMPILER/FV/uefi.elf", "0xA7000000", "elf", "64","nohash"]
+                }
+            ]
+        },
+        {
+            "Name": "DDI",
+            "Process": [{
+                    "ToolChain": "CLANG140",
+                    "AArch": "AARCH64",
+                    "Params": ["$EDK2ROOT/BaseTools/Source/Python/build/build.py", "-p", "QcomPkg/SocPkg/Kailua/Common/DDI.dsc", "--verbose", "-j", "QcomPkg/SocPkg/Kailua/$VAR/build_DDI.log", "-w", "-a", "AARCH64", "-b", "$REL"]
+                }
+            ]
+        }, {
+            "Name": "Pmic",
+            "Process": [{
+                    "ToolChain": "CLANG140",
+                    "AArch": "AARCH64",
+                    "Params": ["$EDK2ROOT/BaseTools/Source/Python/build/build.py", "-p", "QcomPkg/SocPkg/Kailua/Common/Pmic.dsc", "--verbose", "-j", "QcomPkg/SocPkg/Kailua/$VAR/build_Pmic.log", "-w", "-a", "AARCH64", "-b", "$REL"]
+                }
+            ]
+        }, {
+            "Name": "JtagProgrammer",
+            "Process": [{
+                    "ToolChain": "CLANG140",
+                    "AArch": "AARCH64",
+                    "Params": ["$EDK2ROOT/BaseTools/Source/Python/build/build.py", "-p", "QcomPkg/SocPkg/Kailua/Common/JtagProgrammer.dsc", "--verbose", "-j", "QcomPkg/SocPkg/Kailua/$VAR/build_JtagProgrammer.log", "-w", "-a", "AARCH64", "-b", "$REL"]
+                }
+            ]
+        }, {
+            "Name": "LoaderTest",
+            "Process": [{
+                    "ToolChain": "CLANG140",
+                    "AArch": "AARCH64",
+                    "Params": ["$EDK2ROOT/BaseTools/Source/Python/build/build.py", "-p", "QcomPkg/SocPkg/Kailua/Common/LoaderTest.dsc", "-j", "QcomPkg/SocPkg/Kailua/$VAR/build_LoaderTest.log", "-w", "-a", "AARCH64", "-b", "$REL"]
+                }
+            ]
+        }, {
+            "Name": "DTS",
+            "Process": [{
+                    "ToolChain": "Gendtb",
+                    "Createfolders": ["$BUILDROOT/Build/Kailua$VAR/DTC"],
+                    "Params": ["-f", "$BOOTROOT/Settings/Kailua/soc-kailua-1.0.dts", "-o", "$BUILDROOT/Build/Kailua$VAR/DTC/", "-c", "$BUILDROOT/../../tools/llvm/release/arm/14.0.0/bin", "-d", "$BUILDROOT/../../tools/dtc/1.6.1", "-i", "Settings/Kailua/Include Settings/Include"]
+                },
+                {
+                    "ToolChain": "Gendtb",
+                    "Createfolders": ["$BUILDROOT/Build/Kailua$VAR/DTC"],
+                    "Params": ["-f", "$BOOTROOT/Settings/Kailua/pre-ddr-soc-kailua-1.0.dts", "-o", "$BUILDROOT/Build/Kailua$VAR/DTC/", "-c", "$BUILDROOT/../../tools/llvm/release/arm/14.0.0/bin", "-d", "$BUILDROOT/../../tools/dtc/1.6.1", "-i", "Settings/Kailua/Include Settings/Include"]
+                },
+                {
+                    "ToolChain": "qc_dt_schema_check",
+					"Createfolders": ["$BUILDROOT/Build/Kailua$VAR/DTSCHEMA/QC_DT_SCHEMA_CHECK"],
+                    "Params": [
+                               "-d", "$BUILDROOT/../../tools/dtc/1.6.1",
+                               "-p", "$BUILDROOT/../../tools/llvm/release/arm/14.0.0/bin",
+                               "-y", "$BOOTROOT/Settings/dtschema/Common",
+                               "-t", "$BOOTTOOLS/dtschema_tools/bin",
+							   "-o", "$BUILDROOT/Build/Kailua$VAR/DTSCHEMA/QC_DT_SCHEMA_CHECK",
+							   "-r", "project_schema.yaml",
+                               "-v",
+                               "-n", "$BUILDROOT/../../tools/python/3.10.6/bin",
+                               "-c"
+                              ]
+                },
+                {
+                    "ToolChain": "qc_dt_check",
+					"Createfolders": ["$BUILDROOT/Build/Kailua$VAR/DTSCHEMA/QC_DT_CHECK"],
+                    "Params": [
+                               "-d", "$BUILDROOT/../../tools/dtc/1.6.1",
+                               "-p", "$BUILDROOT/../../tools/llvm/release/arm/14.0.0/bin",
+                               "-u", "$BUILDROOT/Build/Kailua$VAR/DTC/", 
+                               "-r", "$BUILDROOT/Build/Kailua$VAR/DTSCHEMA/QC_DT_SCHEMA_CHECK/project_schema.yaml",
+                               "-t", "$BOOTTOOLS/dtschema_tools/bin",
+                               "-i", "$BOOTROOT/Settings/Kailua/Include", "$BOOTROOT/Settings/Include",
+							   "-o", "$BUILDROOT/Build/Kailua$VAR/DTSCHEMA/QC_DT_CHECK",
+                               "-v"
+                              ]
+                }
+            ]
+        }
+    ],
+    "CreateImages": [
+        {
+            "Name": "XBL_S",
+            "Process": [{
+                    "ToolChain": "Network_Sign_v2",
+                    "Components": ["XBL_SC", "TME_FW", "TME_SEQ_RAM"],
+                    "CreateFolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign"],
+                    "Params": [
+                        "secure-image", "$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/xbl_sc.elf",
+                        "--outfile", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign/xbl_sc.elf",
+                        "--image-id", "XBL-SC",
+                        "--security-profile", "$BUILDROOT/ssg_tmefwrel/profiles/kailua/kailua_tme_security_profile.xml",
+                        "--sign",
+                        "--signing-mode", "TEST"]
+                }, {
+                    "ToolChain": "Copy",
+                    "Params": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign/xbl_sc.elf", "$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/xbl_sc.elf"]
+                }, 
+				{
+                    "ToolChain": "Network_Sign_v2",
+                    "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign"],
+                    "Params": [
+                        "secure-image","$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/signed_firmware_soc_view.elf",
+                        "--outfile", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign/signed_firmware_soc_view.elf",
+                        "--image-id", "TME-FW",
+                        "--security-profile", "$BUILDROOT/ssg_tmefwrel/profiles/kailua/kailua_tme_security_profile.xml",
+                        "--sign",
+                        "--signing-mode", "TEST"]
+                },  {
+                    "ToolChain": "Copy",
+                    "Params": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign/signed_firmware_soc_view.elf", "$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/signed_firmware_soc_view.elf"]
+                },
+				{
+                    "ToolChain":"Create_Melf",
+                    "Params": ["-o",
+                        "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/xbl_s.melf",
+                        "-f",
+                        "$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/sequencer_ram.elf,$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/signed_firmware_soc_view.elf,$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/xbl_sc.elf"]
+                }
+            ]
+        }, {
+            "Name": "XBL_RAMDUMP",
+            "Process": [
+                {
+                    "ToolChain": "Copy",
+                    "Components": ["XBL_Ramdump"],
+                    "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned"],
+                    "Params": ["$BUILDROOT/Build/Kailua$VAR/RamDump/$REL_$COMPILER/$AARCH/XBLRamDump.elf", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned/XblRamdump.elf"]
+                }, {
+                    "ToolChain": "Network_Sign_v2",
+                    "Components": ["XBL_Ramdump"],
+                    "CreateFolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign"],
+                    "Params": [
+                        "secure-image", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned/XblRamdump.elf",
+                        "--outfile", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign/default/xblramdump/XblRamdump.elf",
+                        "--image-id", "XBL-RAM-DUMP",
+                        "--security-profile", "$BUILDROOT/ssg_tmefwrel/profiles/kailua/kailua_tme_security_profile.xml",
+                        "--sign",
+                        "--signing-mode", "TEST"]
+                }, {
+                    "ToolChain": "Copy",
+                    "Params": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign/default/xblramdump/XblRamdump.elf", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL"]
+                }
+            ]
+        }, {
+            "Name": "UEFI",
+            "Process": [{
+                    "ToolChain": "Copy",
+                    "Components": ["XBL_Core"],
+                    "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned"],
+                    "Params": ["$BUILDROOT/Build/Kailua$VAR/Core/$REL_$COMPILER/FV/uefi.elf", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned"]
+
+                }, {
+                    "ToolChain": "Network_Sign_v2",
+                    "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign"],
+                    "Params": [
+                        "secure-image", "$BUILDROOT/Build/Kailua$VAR/Core/$REL_$COMPILER/FV/uefi.elf",
+                        "--outfile", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign/default/uefi/uefi.elf",
+                        "--image-id", "UEFI",
+                        "--security-profile", "$BUILDROOT/ssg_tmefwrel/profiles/kailua/kailua_tme_security_profile.xml",
+                        "--sign",
+                        "--signing-mode", "TEST"]
+                }, {
+                    "ToolChain": "Copy",
+                    "Params": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign/default/uefi/uefi.elf","$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/uefi.elf"]
+                }
+            ]
+        },
+        {
+            "Name": "XBL_S_DEVPRG_NS",
+            "Process": [{
+                    "ToolChain": "GenXBLConfig",
+                    "Components": ["DTS"],
+                    "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL", "$BUILDROOT/Build/Kailua$VAR/xblconfigdevprg"],
+                    "Params": ["-i", "$BOOTROOT/$TARGETROOT/$VAR/create_xbl_config_dev_prg.json",
+                        "-b", "$BUILDROOT",
+                        "--sectools_directory", "$SECTOOLSROOT",
+                        "--tools_path", "$BOOTTOOLS/XBLConfig",
+                        "-f", "ELF",
+                        "--output-file", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/xbl_config_devprg",
+                        "--autogen_directory", "$BUILDROOT/Build/Kailua$VAR/xblconfigdevprg",
+                        "--elf-address", "0x1494E000",
+                        "--security_profile", "$BUILDROOT/ssg_tmefwrel/profiles/kailua/kailua_tme_security_profile.xml",
+                        "--sign_id", "XBL-CONFIG",
+                        "--sectools_version", "v2",
+                        "--signing_mode","TEST"]
+                }, {
+                    "ToolChain": "Copy",
+                    "Components": ["DevPrg_ddr"],
+                    "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned"],
+                    "Params": ["$BUILDROOT/Build/Kailua$VAR/DevprogD/$REL_$COMPILER/$AARCH/DevPrgD.elf", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned/prog_firehose_ddr.elf"]
+                }, {
+                    "ToolChain": "Network_Sign_v2",
+                    "Params": [
+                        "secure-image", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned/prog_firehose_ddr.elf",
+                        "--outfile", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/prog_firehose_ddr.elf",
+                        "--image-id", "DEVICE-PROGRAMMER",
+                        "--security-profile", "$BUILDROOT/ssg_tmefwrel/profiles/kailua/kailua_tme_security_profile.xml",
+                        "--sign",
+                        "--signing-mode", "TEST"]
+                }, {
+                    "ToolChain": "Create_Melf",
+                    "Components": ["XBL_SC", "TME_FW", "TME_SEQ_RAM", "DevPrg_ddr"],
+                    "Params": ["-o",
+                        "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/xbl_s_devprg_ns.melf",
+                        "-f",
+                        "$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/sequencer_ram.elf,$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/signed_firmware_soc_view.elf,$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/xbl_sc.elf,$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/prog_firehose_ddr.elf,$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/xbl_config_devprg.elf"
+                        ]
+                    }
+                ]
+            },
+            {
+            "Name": "XBL_S_DEVPRGL_NS",
+            "Process": [{
+                    "ToolChain": "GenXBLConfig",
+                    "Components": ["DTS"],
+                    "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL", "$BUILDROOT/Build/Kailua$VAR/xblconfigdevprg"],
+                    "Params": ["-i", "$BOOTROOT/$TARGETROOT/$VAR/create_xbl_config_dev_prg.json",
+                        "-b", "$BUILDROOT",
+                        "--sectools_directory", "$SECTOOLSROOT",
+                        "--tools_path", "$BOOTTOOLS/XBLConfig",
+                        "-f", "ELF",
+                        "--output-file", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/xbl_config_devprg",
+                        "--autogen_directory", "$BUILDROOT/Build/Kailua$VAR/xblconfigdevprg",
+                        "--elf-address", "0x1494E000",
+                        "--security_profile", "$BUILDROOT/ssg_tmefwrel/profiles/kailua/kailua_tme_security_profile.xml",
+                        "--sign_id", "XBL-CONFIG",
+                        "--sectools_version", "v2",
+                        "--signing_mode","TEST"]
+                }, {
+                    "ToolChain": "Copy",
+                    "Components": ["DevPrg_lite"],
+                    "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned"],
+                    "Params": ["$BUILDROOT/Build/Kailua$VAR/DevprogL/$REL_$COMPILER/$AARCH/DevPrgL.elf", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned/prog_firehose_lite.elf"]
+                }, {
+                    "ToolChain": "Network_Sign_v2",
+                    "Params": [
+                        "secure-image", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned/prog_firehose_lite.elf",
+                        "--outfile", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/prog_firehose_lite.elf",
+                        "--image-id", "DEVICE-PROGRAMMER",
+                        "--security-profile", "$BUILDROOT/ssg_tmefwrel/profiles/kailua/kailua_tme_security_profile.xml",
+                        "--sign",
+                        "--signing-mode", "TEST"]
+                }, {
+                    "ToolChain": "Create_Melf",
+                    "Components": ["XBL_SC", "TME_FW", "TME_SEQ_RAM", "DevPrg_lite"],
+                    "Params": ["-o",
+                        "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/xbl_s_devprgl_ns.melf",
+                        "-f",
+                        "$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/sequencer_ram.elf,$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/signed_firmware_soc_view.elf,$BOOTROOT/$TARGETROOT/Bin_ext/$VAR/QC_sign/xbl_sc.elf,$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/prog_firehose_lite.elf,$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/xbl_config_devprg.elf"
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "JtagProgrammer",
+                "Process": [{
+                        "ToolChain": "Copy",
+                        "Components": ["JtagProgrammer"],
+                        "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned"],
+                        "Params": ["$BUILDROOT/Build/Kailua$VAR/JtagProgrammer/$REL_$COMPILER/$AARCH/QcomPkg/Library/JtagProgrammerLib/JtagProgrammer/DEBUG/JtagProgrammer.dll", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned/JtagProgrammer.elf"]
+                    }, {
+                        "ToolChain": "Copy",
+                        "Params": ["$BUILDROOT/Build/Kailua$VAR/JtagProgrammer/$REL_$COMPILER/$AARCH/QcomPkg/Library/JtagProgrammerLib/JtagProgrammer/DEBUG/JtagProgrammer.dll", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/JtagProgrammer.elf"]
+                    }
+                ]
+            }, {
+                "Name": "xbl_config",
+                "Process": [{
+                            "ToolChain": "GenXBLConfig",
+                            "Components": ["DTS"],
+                            "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL", "$BUILDROOT/Build/Kailua$VAR/xblconfig"],
+                            "Params": ["-i", "$BOOTROOT/$TARGETROOT/$VAR/create_xbl_config.json",
+                                "-b", "$BUILDROOT",
+                                "--sectools_directory", "$SECTOOLSROOT",
+                                "--tools_path", "$BOOTTOOLS/XBLConfig",
+                                "-f", "ELF",
+                                "--output-file", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/xbl_config",
+                                "--autogen_directory", "$BUILDROOT/Build/Kailua$VAR/xblconfig",
+                                "--elf-address", "0x1494E000",
+                                "--security_profile", "$BUILDROOT/ssg_tmefwrel/profiles/kailua/kailua_tme_security_profile.xml",
+                                "--sign_id", "XBL-CONFIG",
+                                "--sectools_version", "v2",
+                                "--signing_mode","TEST"]
+                        }
+                        ]
+                    }, {
+                "Name": "SHRM",
+                "Process": [{
+                        "ToolChain": "Network_Sign_v2",
+                        "Params": [
+                            "secure-image", "$BOOTROOT/QcomPkg/SocPkg/Kailua/Library/DSFTargetLib/release/target/Kailua/shrm.elf",
+                            "--outfile", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/shrm.elf",
+                            "--image-id", "SHRM",
+                            "--security-profile", "$BUILDROOT/ssg_tmefwrel/profiles/kailua/kailua_tme_security_profile.xml",
+                            "--sign",
+                            "--signing-mode", "TEST"]
+                        }
+                        ]
+                    }
+                    , {
+                        "Name": "ImageFv",
+                        "Process": [{
+                                "ToolChain": "Pack",
+                                "Params": ["$BUILDROOT/Build/Kailua$VAR/Core/$REL_$COMPILER/FV/IMAGEFV_COMPACT.Fv", "$BUILDROOT/Build/Kailua$VAR/Core/$REL_$COMPILER/FV/imagefv.elf", "0x0", "elf", "32","nohash"]
+                            }, {
+                                "ToolChain": "Copy",
+                                "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned"],
+                                "Params": ["$BUILDROOT/Build/Kailua$VAR/Core/$REL_$COMPILER/FV/imagefv.elf", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/unsigned"]
+
+                            }, {
+                                "ToolChain": "Network_Sign_v2",
+                                "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign"],
+                                "Params": [
+                                    "secure-image", "$BUILDROOT/Build/Kailua$VAR/Core/$REL_$COMPILER/FV/imagefv.elf",
+                                    "--outfile", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/imagefv.elf",
+                                    "--image-id", "UEFIFV",
+                                    "--security-profile", "$BUILDROOT/ssg_tmefwrel/profiles/kailua/kailua_tz_security_profile.xml",
+                                    "--sign",
+                                    "--signing-mode", "TEST"]
+                            }, {
+                                "ToolChain": "Copy",
+                                "Createfolders": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign/default/uefifv"],
+                                "Params": ["$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/imagefv.elf", "$BOOTROOT/$TARGETROOT/Bin/$VAR/$REL/sign/default/uefifv/"]
+                            }
+                        ]
+                    }
+                ]
+
+            }

@@ -1,0 +1,39 @@
+#/** @file EepromLibNull.inf
+#  
+#  Eeprom Null Library INF file
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc. All Rights Reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+# 05/13/2020   ck      Initial version
+#
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = EepromLibNull
+  FILE_GUID                      = C953B392-7FF7-44D7-AD0B-8ACA807050A3
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = EepromLib 
+
+
+[Sources.common]
+  EepromLibNull.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomSdkPkg/SdkLoader.dec
+  QcomPkg/XBLLoaderApi.dec  
+
+
+

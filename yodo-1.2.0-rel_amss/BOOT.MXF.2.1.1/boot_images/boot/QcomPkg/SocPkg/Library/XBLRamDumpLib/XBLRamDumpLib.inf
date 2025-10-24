@@ -1,0 +1,50 @@
+#/** @file XBLRamDumpLib.inf
+#
+#  XBL RamDump
+#  
+#  Copyright (c) 2015-2019, 2022 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 06/27/22   krd     Add ARM support as well for the compiler flags
+# 06/10/19   nm      Add I2CLib
+# 04/26/17   vk      Make image type  USER_DEFINED
+# 06/15/16   kpa     Add support for Display
+# 03/10/16   aab     Added PmicLib and SPMILib
+# 03/09/16   kpa     Use LoaderCacheLib instead of shared functions cache api
+# 08/06/15   as      Use shared functions
+# 05/19/15   kpa     Added PIMEMTargetLib.
+# 05/12/15   bh      Replace LoaderUtilsLib with MuslLib
+# 05/01/15   plc     Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = XBLRamDumpLib
+  FILE_GUID                      = 545E720B-F218-4DE5-9246-8A6EE0E095FA
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = XBLRamDumpLib
+
+[Sources.common]
+  XBLRamDumpLib.c
+
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Werror -DFEATURE_SAHARA_BOOT -DSAHARA_MAX_PACKET_SIZE_IN_BYTES=0x400 -DSAHARA_MAX_MEMORY_DATA_SIZE_IN_BYTES=0x1000 -DSAHARA_PACKET_LOG_LENGTH=0x64 -DUSE_GNU_LD -DUSE_LOADER_UTILS -DFEATURE_BOOT_LOGGER_RAM -DFEATURE_BOOT_LOGGER_TIMER -DFEATURE_BOOT_LOGGER_JTAG -DFEATURE_BOOT_LOGGER_UART -DBOOT_MEMORY_DEBUG_64BIT
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/SocPkg/Library/BootPblSharedDataLib/BootPblSharedDataLib.dec
+
+[LibraryClasses]
+  BaseLib
+  SPILib

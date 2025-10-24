@@ -1,0 +1,7 @@
+// SW: Core/Uefi/cfg/
+
+&sw {
+    uefi {
+         //CONFIGFILENODE
+    };
+};

@@ -1,0 +1,116 @@
+#===========================================================================
+#                               grp4_pdc.rinit
+#
+#  DESCRIPTION:
+#    This file contains init values for GRP4_PDC (Debug PDC)
+#
+#    Settings are obtained from TCS contents sheet maintained by 
+#    Architecture team alongwith collaboration from SW and HW teams.
+#
+#  Copyright (c) 2021 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+#--------------------------------------------------------------------------
+# Common vars
+#--------------------------------------------------------------------------
+vars:
+
+module: { name = RPMH_PDC_GRP4_GRP4_PDC_SEQ_MEM, group = PDC_SEQ}
+
+regs:
+ SEQ_MEM = [
+#CX_COL_AOSS:
+  0x50012880,  #0x000: 0x2880   BEQ       rst_ctrl_resin_in=1           ABNORMAL_RESET
+               #0x002: 0x5001   SET1      pdc_mode_control
+  0x50035002,  #0x004: 0x5002   SET1      soc_sleep_req
+               #0x006: 0x5003   SET1      cx_collapse_req
+  0x70037002,  #0x008: 0x7002   WAIT1     soc_sleep_unlock
+               #0x00a: 0x7003   WAIT1     cx_collapse_unlock
+  0x701d501d,  #0x00c: 0x501d   SET1      seq_tcs_2_start
+               #0x00e: 0x701d   WAIT1     tcs_2_seq_cmp
+  0x28807000,  #0x010: 0x7000   WAIT1     sequence_resume
+               #0x012: 0x2880   BEQ       rst_ctrl_resin_in=1           ABNORMAL_RESET
+  0x701f501f,  #0x014: 0x501f   SET1      seq_tcs_0_start
+               #0x016: 0x701f   WAIT1     tcs_0_seq_cmp
+  0x40024003,  #0x018: 0x4003   SET0      cx_collapse_req
+               #0x01a: 0x4002   SET0      soc_sleep_req
+  0x00051000,  #0x01c: 0x1000   RETURN
+#ABNORMAL_RESET:
+               #0x01e: 0x0005   DELI      1040ns
+  0x290228c7,  #0x020: 0x28c7   BEQ       cx_is_active_or_ret=1         POST_PWR_UP_RESET
+               #0x022: 0x2902   BEQ       cx_ret_to_pc=1                CHECK_APM_STATUS
+  0x2a812944,  #0x024: 0x2944   BEQ       cx_in_pc=1                    ABNORMAL_BRINGUP
+               #0x026: 0x2a81   BEQ       apm_is_busy=1                 WAIT_APM_DONE
+  0x18042985,  #0x028: 0x2985   BEQ       apm_dom=1                     POST_PWR_MUX_SWCH
+               #0x02a: 0x1804   JMP       ABNORMAL_BRINGUP
+#WAIT_APM_DONE:
+  0x1805600e,  #0x02c: 0x600e   WAIT0     addl_seq_wait_event_4_vdd_cx_apm_is_busy
+               #0x02e: 0x1805   JMP       POST_PWR_MUX_SWCH
+#CHECK_APM_STATUS:
+  0x29872a83,  #0x030: 0x2a83   BEQ       apm_is_busy=1                 WAIT_APM_IDLE
+               #0x032: 0x2987   BEQ       apm_dom=1                     POST_PWR_UP_RESET
+  0x600e1804,  #0x034: 0x1804   JMP       ABNORMAL_BRINGUP
+#WAIT_APM_IDLE:
+               #0x036: 0x600e   WAIT0     addl_seq_wait_event_4_vdd_cx_apm_is_busy
+  0x50111804,  #0x038: 0x1804   JMP       ABNORMAL_BRINGUP
+#ABNORMAL_BRINGUP:
+               #0x03a: 0x5011   SET1      addl_seq_pwr_ctrl_7_save_ff_bar
+  0x500d500a,  #0x03c: 0x500a   SET1      addl_seq_pwr_ctrl_0_act_br_switch_sel
+               #0x03e: 0x500d   SET1      addl_seq_pwr_ctrl_3_apm_ctrl_clk_en
+  0x500c600d,  #0x040: 0x600d   WAIT0     addl_seq_wait_event_3_apm_ctrl_clk_on
+               #0x042: 0x500c   SET1      addl_seq_pwr_ctrl_2_start_apm_switch
+  0x400d700c,  #0x044: 0x700c   WAIT1     addl_seq_wait_event_2_apm2out_tile_trans_done
+               #0x046: 0x400d   SET0      addl_seq_pwr_ctrl_3_apm_ctrl_clk_en
+#POST_PWR_MUX_SWCH:
+  0x50145015,  #0x048: 0x5015   SET1      addl_seq_pwr_ctrl_11_restore_ff_mux_sel
+               #0x04a: 0x5014   SET1      addl_seq_pwr_ctrl_10_restore_ff
+  0x2a460004,  #0x04c: 0x0004   DELI      520ns
+               #0x04e: 0x2a46   BEQ       reset_completed=1             SKIP_RESET_ASSERT
+  0x50135012,  #0x050: 0x5012   SET1      addl_seq_pwr_ctrl_8_pwr_up_rst
+#SKIP_RESET_ASSERT:
+               #0x052: 0x5013   SET1      addl_seq_pwr_ctrl_9_pwr_up_rst_mux_sel
+  0x40120004,  #0x054: 0x0004   DELI      520ns
+               #0x056: 0x4012   SET0      addl_seq_pwr_ctrl_8_pwr_up_rst
+  0x40120004,  #0x058: 0x0004   DELI      520ns
+#POST_PWR_UP_RESET:
+               #0x05a: 0x4012   SET0      addl_seq_pwr_ctrl_8_pwr_up_rst
+  0x40145013,  #0x05c: 0x5013   SET1      addl_seq_pwr_ctrl_9_pwr_up_rst_mux_sel
+               #0x05e: 0x4014   SET0      addl_seq_pwr_ctrl_10_restore_ff
+  0x50105016,  #0x060: 0x5016   SET1      addl_seq_pwr_ctrl_12_clamp_mem_iso_out_freeze_io_ret_0pin_mem_svs_mem_turbo_bar
+               #0x062: 0x5010   SET1      addl_seq_pwr_ctrl_6_iso_input_bar
+  0x500b500e,  #0x064: 0x500e   SET1      addl_seq_pwr_ctrl_4_func_clk_dis_bar
+               #0x066: 0x500b   SET1      addl_seq_pwr_ctrl_1_xo_div2_enable
+  0x500f0004,  #0x068: 0x0004   DELI      520ns
+               #0x06a: 0x500f   SET1      addl_seq_pwr_ctrl_5_xo_pad_enable
+  0x501a2ac8,  #0x06c: 0x2ac8   BEQ       aoss_cc_rpmh_accell_gdsc_pwr_on=1POST_RPMH_PWR_UP
+               #0x06e: 0x501a   SET1      addl_seq_pwr_ctrl_16_bring_rpmh_accel_out_of_power_collapse
+  0x7013700f,  #0x070: 0x700f   WAIT1     addl_seq_wait_event_5_aoss_cc_rpmh_accell_gdsc_pwr_on
+#POST_RPMH_PWR_UP:
+               #0x072: 0x7013   WAIT1     addl_seq_wait_event_9_aoss_cc_rpmh_accel_clk_on
+  0x50182b49,  #0x074: 0x2b49   BEQ       ddr_pwrstate_up=1             SKIP_DDR_AUX
+               #0x076: 0x5018   SET1      addl_seq_pwr_ctrl_14_ddraux_seq_override
+  0x40195019,  #0x078: 0x5019   SET1      addl_seq_pwr_ctrl_15_ddraux_seq_start
+               #0x07a: 0x4019   SET0      addl_seq_pwr_ctrl_15_ddraux_seq_start
+  0x40187012,  #0x07c: 0x7012   WAIT1     addl_seq_wait_event_8_o_ddraux_debugpdc_seq_done
+               #0x07e: 0x4018   SET0      addl_seq_pwr_ctrl_14_ddraux_seq_override
+#SKIP_DDR_AUX:
+  0x70145017,  #0x080: 0x5017   SET1      addl_seq_pwr_ctrl_13_status_to_rst_ctrl
+               #0x082: 0x7014   WAIT1     addl_seq_wait_event_10_tied_low
+  0x00001000   #0x084: 0x1000   RETURN
+               #0x086: 0x0000
+]
+
+GRP4_SEQ_CFG_BR_ADDR = [
+    0x1e,
+    0x2c,
+    0x30,
+    0x36,
+    0x3a,
+    0x48,
+    0x52,
+    0x5a,
+    0x72,
+    0x80
+]

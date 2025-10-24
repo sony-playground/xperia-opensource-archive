@@ -1,0 +1,58 @@
+#/** @file PASRLib.inf
+#  
+#  Contains interface to PASR feature in UEFI
+#  
+#  Copyright (c) 2022 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 04/18/22   ddk     Initial revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PASRLib
+  FILE_GUID                      = e30214e8-86e2-462b-81d8-21e5e4525624
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PASRLib
+
+#
+#  VALID_ARCHITECTURES           = ARM AARCH64
+#
+
+[Sources]
+  PASRLib.c
+  PASRQMP.c
+
+[BuildOptions.common]
+  GCC:*_*_*_CC_FLAGS = -O0
+#  MSFT:*_*_*_CC_FLAGS = -O0
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+
+[LibraryClasses]
+  SmemLib
+  MuslLib
+  DebugLib
+
+[Protocols]
+  gEfiGLINKProtocolGuid
+
+[FixedPcd]
+  gQcomTokenSpaceGuid.PcdMaxMemory
+  gQcomTokenSpaceGuid.PcdMemoryBase
+  gQcomTokenSpaceGuid.PcdMemorySize

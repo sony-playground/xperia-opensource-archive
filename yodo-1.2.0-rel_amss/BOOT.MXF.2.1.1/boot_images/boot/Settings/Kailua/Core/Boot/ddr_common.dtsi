@@ -1,0 +1,7 @@
+&soc {
+	ddr_common_dt{
+	    compatible = "qcom,ddr_common_dt";
+		print_severity_dt = <8210>;
+		ddr_log_level_dt = <0>;
+	};
+};

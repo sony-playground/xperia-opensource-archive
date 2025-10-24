@@ -1,0 +1,81 @@
+#/** @file NandCommonLib.inf
+#  
+#  SLC Nand Library UEFI INF file
+#  
+#  Copyright (c) 2017, 2019-2020, 2022 Qualcomm Technologies, Inc. All Rights Reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+# 2022-07-21   gk      Workaround for Rumi.(BuildOptions)
+# 2020-06-08   sa      Removed unsupported compiler flags.
+# 2019-02-03   sa      Changes to support QPIC 2.0
+# 2017-03-03   eo      Initial version.
+#
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NandCommonLib
+  FILE_GUID                      = 51F0224D-FE08-44b9-A258-6DE3D56A9352
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NandCommonLib 
+
+[Sources.common]
+  flash_fwk.c
+  flash_dal_util.c
+  flash_nand_entry.c
+  flash_nand_config.c
+  flash_nand_core.c
+  flash_nand_init.c
+  flash_nand_partition.c
+  flash_partition_services.c
+  flash_osal_core.c
+  flash_onfi.c
+  flash_otp_config.c
+  flash_properties.c
+  flash_bam_wrapper.c
+
+  NandHalLib/flash_hal.h
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -DBUILD_BOOT_CHAIN -DFLASH_ENABLE_NAND -DFLASH_ENABLE_DMA -DFLASH_CFG_INCLUDE_H=\"flash_cfg_qpic_2_0.h\"
+  MSFT:*_*_*_CC_FLAGS =
+
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec  
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  BaseMemoryLib
+  ServicesUtilsLib
+  SmemLib
+  NandHalLib
+  TimerLib
+  PcdLib
+  
+[Guids]
+  #gEfiPartTypeUnusedGuid                        ## SOMETIMES_CONSUMES ## GUID
+  #gEfiPartTypeSystemPartGuid                    ## SOMETIMES_CONSUMES ## Protocol
+  gEfiHashAlgorithmSha1Guid
+  gEfiPartitionTypeGuid                         ## CONSUMES
+
+[Protocols]
+  gEfiHashProtocolGuid
+
+[Pcd.common]
+
+  

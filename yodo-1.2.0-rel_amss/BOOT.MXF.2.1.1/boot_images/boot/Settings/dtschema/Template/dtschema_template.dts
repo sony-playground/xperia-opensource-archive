@@ -1,0 +1,21 @@
+// dt-schema template.dtsi
+//
+// Provides Common SoC settings for specific chip
+// A template file used to corroborate YAML file
+// The "include" line at bottom should be pointing 
+// to dts file for which the YAML file is being tested.
+
+/dts-v1/;
+
+/ {
+	model = "Qualcomm Technologies, Inc. Waipio";
+	compatible = "qcom,waipio";
+	qcom,msm-id = <8450>;
+
+	#address-cells = <2>;
+	#size-cells = <2>;
+
+};
+
+
+// ADD HERE: Include the DTSI file path that needs to be checked against YAML File

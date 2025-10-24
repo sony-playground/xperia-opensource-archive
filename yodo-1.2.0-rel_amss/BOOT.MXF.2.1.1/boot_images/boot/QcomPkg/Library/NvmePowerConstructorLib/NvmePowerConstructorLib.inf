@@ -1,0 +1,42 @@
+#/** @file NvmePowerConstructorLib.inf
+#
+# Library to power on NVME power rails.
+# Must be linked anonymously to NvmExpressDxe.
+#
+# Copyright (c) 2020 Qualcomm Technologies, Inc.
+# All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when        who  what, where, why
+# ----------  ---  -----------------------------------------------------------
+# 2020-04-27  wek  Library to power up NVMe on UEFI before NVMe Library starts
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION       = 0x00010017
+  BASE_NAME         = NvmePowerConstructorLib
+  FILE_GUID         = 74556B14-D7F8-46B3-854D-76630D757995
+  VERSION_STRING    = 1.0
+  MODULE_TYPE       = DXE_DRIVER
+  LIBRARY_CLASS     = NvmePowerConstructorLib|DXE_DRIVER
+  CONSTRUCTOR       = NvmePowerConstructor
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  DebugLib
+  BootConfigLib
+  NvmeCoreTargetLib
+
+[Sources]
+  NvmePowerConstructorLib.c
+

@@ -1,0 +1,53 @@
+#/** @file DALGenLibCore.inf
+#
+#  DAL configuration library
+#
+#  Copyright (c) 2015-2018, 2020 - 2022  Qualcomm Technologies, Inc.
+#  All rights reserved.
+#  Qualcomm Technologies, Inc Confidential and Proprietary
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#  $Header:  $
+#  $DateTime:  $
+#  $Author:  $
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 02/27/17   ts      Added support for GSI/GPI
+# 02/12/16   ts      Added pcie xml config support
+# 04/14/15   vk      Initial revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DALGenLibCore
+  FILE_GUID                      = 9ddf0f91-94d3-41c5-9c3a-3634c98e8231
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DALGenLibCore
+
+[Sources.common]
+  DALNull.dcfg
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/Library/PmicLib/adc/build/AdcLibPkg.dec
+  QcomPkg/Library/TsensLib/TsensLibPkg.dec
+  QcomPkg/SocPkg/Library/GpiDrvLib/GpiDrvLibPkg.dec
+  QcomPkg/SocPkg/Kailua/Library/PmicLib/PmicLib.dec
+  
+[Packages.USES_FEATURE_XBOOT]
+  SomcPkg/Platform/SomcSm8550Pkg/SomcSm8550Pkg.dec
+
+[LibraryClasses]
+  BaseLib
+

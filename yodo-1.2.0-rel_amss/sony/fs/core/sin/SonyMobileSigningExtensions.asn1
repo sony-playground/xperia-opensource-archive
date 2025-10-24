@@ -1,0 +1,36 @@
+SonyMobileSigningExtensions DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+KeyUsage ::= SEQUENCE SIZE(1..MAX) OF Purpose
+
+Purpose ::= CHOICE {
+    flash	 ImageName,
+    boot	 BootImage,
+    simlock	 NULL,
+    ...
+}
+
+ImageName ::= UTF8String
+
+BootImage ::= ENUMERATED {
+    normal,
+    fota,
+    ramdumper,
+    service,
+    ...
+}
+
+DeviceBinding ::= Binding
+
+Binding ::= CHOICE {
+    imei	 IMEI,
+    deviceId	 DeviceId,
+    ...
+}
+
+IMEI ::= NumericString
+
+DeviceId ::= OCTET STRING
+
+END
+

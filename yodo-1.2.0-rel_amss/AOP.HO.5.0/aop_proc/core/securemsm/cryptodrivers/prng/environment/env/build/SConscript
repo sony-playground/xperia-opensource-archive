@@ -1,0 +1,35 @@
+#===============================================================================
+#
+# SECUREMSM Libs
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2021 by QUALCOMM, Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/securemsm/cryptodrivers/prng/environment/env/build/SConscript#1 $
+#  $DateTime: 2021/10/26 22:03:12 $
+#  $Author: pwbldsvc $
+#  $Change: 33677139 $
+#                      EDIT HISTORY FOR FILE
+#
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+#
+#===============================================================================
+Import('env')
+
+env = env.Clone()
+env.Replace(BUILDPATH = env.subst('${BUILDPATH}/${BUILD_ID}'))
+
+#-------------------------------------------------------------------------------
+# Load sub scripts
+#-------------------------------------------------------------------------------
+env.LoadSoftwareUnits()

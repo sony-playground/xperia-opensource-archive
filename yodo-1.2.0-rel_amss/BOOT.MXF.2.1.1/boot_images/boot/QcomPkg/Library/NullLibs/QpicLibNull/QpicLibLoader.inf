@@ -1,0 +1,36 @@
+#/** @file QpicLibLoader.inf
+#  
+#  QPIC Library INF file
+#  
+#  Copyright (c) 2022 Qualcomm Technologies, Inc. All Rights Reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+# 2022-07-08   rhy     Initial revision
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = QpicLib
+  FILE_GUID                      = 0F2B0881-71B1-4ff4-AF7C-CE25AD1B35BD 
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = QpicLib 
+
+[Sources.common]
+  qpiclibloader_null.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec  
+  QcomPkg/Library/NandCommonLib/NandLibPkg.dec  

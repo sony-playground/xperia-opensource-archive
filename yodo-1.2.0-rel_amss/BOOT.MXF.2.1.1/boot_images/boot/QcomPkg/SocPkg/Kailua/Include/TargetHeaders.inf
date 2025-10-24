@@ -1,0 +1,18 @@
+#/** @file TargetHeaders.inf 
+#  
+#  INF used by packit.py for packing out based on target
+#  		This file itself will be packed out and not shipped to customers
+#  
+#  Copyright (c) 2021 Qualcomm Technologies Inc. All rights reserved.
+#
+#**/
+#
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 04/05/21   rama    Initial revision
+#
+#==============================================================================

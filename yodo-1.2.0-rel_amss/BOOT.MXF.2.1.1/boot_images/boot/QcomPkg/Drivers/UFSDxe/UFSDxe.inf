@@ -1,0 +1,110 @@
+#/** @file UFSDxe.inf
+#
+#  UFSDxe INF file
+#  
+#  Copyright (c) 2013, 2015-18, 2020-21,2022 Qualcomm Technologies, Inc.  
+#  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+# 2022/07/01   ak      Add gQcomAcpiPlatformProtocolGuid
+# 2021/10/25   jt      Add gEfiEventExitBootServicesGuid
+# 2021/09/08   jt      Add gEfiDtbExtnProtocolGuid
+# 2021/04/28   jt      Add gEfiBlockIoCryptoProtocolGuid
+# 2020/03/31   jt      Add gEfiStorageDevMgmtProtocolGuid
+# 2018/08/16   jt      Add gEfiPsleepProtocolGuid
+# 2018/02/16   jt      Add gEfiHalIommuProtocolGuid
+# 2016/09/21   jt      Add storage write protect protocol 
+# 2015/04/03   rm      Add BootConfigLib
+# 2015/03/26   rm      Added RpmbListenerLib
+# 2013/05/04   ai      Initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = UFSDxe
+  FILE_GUID                      = 0D35CD8E-97EA-4F9A-96AF-0F0D89F76567
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = UFSDxeInitialize
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Wno-missing-field-initializers -Wno-missing-braces -Wno-unused-but-set-variable
+
+[Sources.common]
+  UFS.c
+  UfsBlockIO2.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  BaseLib
+  UefiRuntimeServicesTableLib
+  UefiLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  UefiDriverEntryPoint
+  IoLib
+  UncachedMemoryAllocationLib
+  UefiCfgLib
+  SerialPortLib
+  PrintLib
+  ArmLib
+  MemoryAllocationLib
+  CacheMaintenanceLib
+  TimerLib
+  PcdLib
+  UfsCommonLib
+  RpmbListenerLib
+  BootConfigLib
+  KernelLib
+  LockLib
+  BlkCryptoLib
+
+[Guids]
+  gEfiEventExitBootServicesGuid 
+
+[Protocols]
+  gEfiBlockIoProtocolGuid
+  gEfiBlockIoCryptoProtocolGuid
+  gEfiBlockIo2ProtocolGuid
+  gEfiCpuArchProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiClockProtocolGuid
+  gEfiHwioProtocolGuid
+  gEfiSdccRpmbProtocolGuid
+  gQcomScmProtocolGuid
+  gEfiMemCardInfoProtocolGuid
+  gEfiEraseBlockProtocolGuid
+  gEfiStorageWpProtocolGuid
+  gEfiHalIommuProtocolGuid
+  gEfiStorageDevMgmtProtocolGuid
+  gEfiDtbExtnProtocolGuid
+  gQcomAcpiPlatformProtocolGuid
+
+# [Pcd.common]
+#  gQcomTokenSpaceGuid.UFSSlotNumber
+
+[Depex]
+	TRUE
+#  gEfiClockProtocolGuid
+#  AND
+#  gEfiTimerArchProtocolGuid
+
+[Pcd.common]
+  gQcomTokenSpaceGuid.PcdQTimerEnabled
+

@@ -1,0 +1,38 @@
+#include "pm_defines.h"
+
+&pvc{
+  compatible = "qcom,arb_pvc";
+
+ // mgpi-addr{
+   // pvc-port-id = <MGPI_PVC_PORT>;
+   // spmi-priority = <SPMI_ACCESS_PRIORITY_LOW>;
+   // addr-cfg = <
+	//  0x1 0xC746  /* MGPI0, UICC1, L7B */
+    //  0x0 0x5A49  /* MGPI1, NFC, CLK7 */
+	//  0x0 0x0     /* MGPI2, Spare */
+	//  0x0 0x0     /* MGPI3, Spare MGPI, used by WLAN to be configured by MGPI module */
+	//  0x1 0xC946  /* MGPI4, SD card, default disabled unless for QRD L9B*/
+	//  0x1 0xC646  /* MGPI5, UICC0, L6B */
+	//  0x3 0xC244  /* MGPI6, AOP PDC TRIGGER, L2D RM/NPM control*/
+	//  0x0 0x0     /* MGPI7, vioctl[1], Law communication */
+	//  > ;
+ // };
+
+};
+
+
+&mgpi{
+  compatible = "qcom,arb_mgpi";
+
+  //port-cfg = <  /* MGPIPortId  PVCPortId  +veEdgeEnable +veEdgePvcPortAddIndex -veEdgeData -veEdgeEnable -veEdgePvcPortAddIndex -veEdgeData MUXSelFlag MUXSelValue //*/    
+    
+    /*0 MGPI_PVC_PORT PM_FALSE 0 0    PM_TRUE  0 0 PM_TRUE  0 */  /* UICC1 port0 */  
+    /*1 MGPI_PVC_PORT PM_FALSE 1 0x80 PM_FALSE 1 0 PM_TRUE  4  */  /* NFC port1 */    
+    /*2 MGPI_PVC_PORT PM_FALSE 2 0x0  PM_FALSE 2 0 PM_FALSE 0  */  /* Spare port2 */    
+    /*3 MGPI_PVC_PORT PM_FALSE 3 0x0  PM_FALSE 3 0 PM_FALSE 0  */  /* Spare port3 */    
+    /*4 MGPI_PVC_PORT PM_FALSE 4 0    PM_FALSE 4 0 PM_TRUE  0  */  /* SD Card Removal port4 */    
+    /*5 MGPI_PVC_PORT PM_FALSE 5 0    PM_TRUE  5 0 PM_FALSE 0  */  /* UICC0 port5 */
+ //   >;
+	
+};
+

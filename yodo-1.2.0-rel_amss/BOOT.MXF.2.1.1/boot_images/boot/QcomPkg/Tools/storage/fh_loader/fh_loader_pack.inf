@@ -1,0 +1,18 @@
+#/** @file fh_loader_pack.inf
+#
+#  INF used by packit.py for including tools files into packed build.
+#
+#  Copyright (c) 2021 Qualcomm Technologies Inc. All rights reserved.
+#
+#**/
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when        who  what, where, why
+# ----------  ---  ----------------------------------------------------------
+# 2021-04-17  wek  Initial release
+#==============================================================================
+
+[Sources]
+

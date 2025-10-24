@@ -1,2 +1,0 @@
-Various tests on interface method linking when not finding a public
-implementation.

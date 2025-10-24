@@ -1,0 +1,543 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,spmi-vadc.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm SPMI VADC
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   Qualcomm SPMI PMIC voltage ADC (VADC) is a 16 
+   bit sigma-delta ADC provides interface to read voltage
+   and temperature
+
+
+
+# A dictionary of DT properties for this binding schema
+properties:
+  compatible:
+    const: qcom,spmi-vadc
+
+  reg:
+    description: SPMI PMIC device peripheral id
+    
+  use-interrupt:
+    description: use-interrupt
+    
+    
+  fullscale-code:
+    description: fullscale-code
+    
+    
+  fullscale-uV:
+    description: fullscale-uV
+    
+    
+  fullratiometric-code:
+    description: fullratiometric-code
+    
+    
+  read-timeout-uS:
+    description: read-timeout-uS
+    
+    
+  ldo-settling-uS:
+    description: ldo-settling-uS
+    
+    
+  slave-id:
+    description: slave-id
+    
+    
+  peripheral-id:
+    description: peripheral-id
+    
+    
+  master-id:
+    description: master-id
+    
+    
+  pmic-device:
+    description: pmic-device
+    
+
+  bus-id:
+    description: bus-id
+    
+
+  vadc_ch_cfg:
+    type: object
+
+    patternProperties:
+      "^.*":
+        type: object
+        
+        properties:
+          hw-channel:
+            description: hw-channel
+            
+            
+          settling-delay-uS:
+            description: settling-delay-uS
+            
+              
+          average-sample:
+            description: average-sample
+            
+            
+          decimation-ratio:
+            description: decimation-ratio
+            
+              
+          cal-method:
+            description: cal-method
+            $ref: /schemas/types.yaml#/definitions/string
+            
+          scaling-factor:
+            description: scaling-factor
+            $ref: /schemas/types.yaml#/definitions/uint32-array
+              
+          offset-factor:
+            description: offset-factor
+            
+            
+          scaling-method:
+            description: scaling-method
+            $ref: /schemas/types.yaml#/definitions/string
+            
+          adc-sid:
+            description: adc-sid
+            
+            
+          int-table: true
+            
+        required:
+          - hw-channel
+          - settling-delay-uS
+          - average-sample
+          - decimation-ratio
+          - cal-method
+          - scaling-factor
+          - offset-factor
+          - scaling-method
+          - pull-up-res
+          - adc-sid
+    
+
+  vadc-avg-ch:
+    type: object
+    
+    properties:
+      ch-name:
+        description: ch-name
+        $ref: /schemas/types.yaml#/definitions/string
+        
+      low-name:
+        description: low-name
+        $ref: /schemas/types.yaml#/definitions/string
+          
+      med-name:
+        description: med-name
+        $ref: /schemas/types.yaml#/definitions/string
+        
+      high-name:
+        description: high-name
+        $ref: /schemas/types.yaml#/definitions/string
+          
+      med-to-low:
+        description: med-to-low
+        
+        
+      low-to-med:
+        description: low-to-med
+        
+          
+      high-to-med:
+        description: high-to-med
+        
+        
+      med-to-high:
+        description: med-to-high
+        
+        
+    required:
+      - ch-name
+      - low-name
+      - med-name
+      - high-name
+      - med-to-low
+      - low-to-med
+      - high-to-med
+      - med-to-high
+      
+  gpio-map:
+    type: object
+    
+    properties:
+      aux_pin1:
+        type: object
+      
+        properties:
+          pmic-sid:
+            description: pmic-sid
+            
+          
+          gpio-num:
+            description: gpio-num
+            
+          
+      aux_pin2:
+        type: object
+      
+        properties:
+          pmic-sid:
+            description: pmic-sid
+            
+          
+          gpio-num:
+            description: gpio-num
+            
+      
+  therm_table:
+    type: object
+    
+    properties:
+      therm_tb@1:
+        type: object
+      
+        properties:
+          reg:
+            description: reg
+            
+          
+          table:
+            description: table
+            $ref: /schemas/types.yaml#/definitions/uint32-array
+          
+        required:
+          - reg
+          - table
+        
+      therm_tb@2:
+        type: object
+      
+        properties:
+          reg:
+            description: reg
+            
+          
+          table:
+            description: table
+            $ref: /schemas/types.yaml#/definitions/uint32-array
+          
+        required:
+          - reg
+          - table
+        
+    required:
+      - therm_tb@1
+      - therm_tb@2
+        
+        
+required:
+  - compatible
+  - reg
+  - use-interrupt
+  - fullscale-code            
+  - fullscale-uV
+  - fullratiometric-code
+  - read-timeout-uS
+  - ldo-settling-uS
+  - slave-id
+  - peripheral-id
+  - master-id
+  - pmic-device
+  - vadc_ch_cfg
+  - vadc-avg-ch
+  - gpio-map
+  
+
+additionalProperties: false
+
+examples:
+  - |
+    vadc {
+      #address-cells = <1>;
+      #size-cells = <0>;
+      spmi-vadc@7 {
+        compatible = "qcom,spmi-vadc";
+        reg = <0x31>;
+        use-interrupt = <0>;
+        fullscale-code = <0x70e4>;             
+        fullscale-uV = <1875000>;
+        fullratiometric-code = <0x4000>;
+        read-timeout-uS = <500000>;
+        ldo-settling-uS = <67>;
+        slave-id = <0>;            /* SID for Tokei, main ADC interface */
+        peripheral-id = <0x31>;    /* PID for ADC instance used */
+        master-id = <0>;
+        pmic-device = <0>;
+        bus-id = <0>;             /* bus id */
+     
+        vadc_ch_cfg { 
+           VPH_PWR {
+              hw-channel = <0x8e>;
+              settling-delay-uS = <0>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "abs ";
+              scaling-factor = <1 3>;    /* Scaling factor N / D */
+              offset-factor = <0>;       /* Offset value after scaling */
+              scaling-method = "tomV";   /* Value scale to mV */
+              pull-up-res = <0>;
+              adc-sid = <0x3>;
+           };
+           
+           PMIC_TEMP3 {
+              hw-channel = <0x3>;
+              settling-delay-uS = <0>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "abs ";
+              scaling-factor = <1 1>;
+              offset-factor = <(-273000)>;
+              scaling-method = "xtuV";
+              pull-up-res = <0>;
+              adc-sid = <0x3>;
+              int-table = <433700 213000>; /* pmic_die_temp_tb address (&pmic_die_temp_tb) */
+           };
+           
+           CHG_TEMP {
+              hw-channel = <0x10>;
+              settling-delay-uS = <0>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "abs ";
+              scaling-factor = <1 1>;
+              offset-factor = <0>;
+              scaling-method = "tomV";
+              pull-up-res = <0>;
+              adc-sid = <0x3>;
+           };
+           
+           BATT_THERM {
+              hw-channel = <0x44>;
+              settling-delay-uS = <100>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "raio";
+              scaling-factor = <1 1>;
+              offset-factor = <(-273)>;
+              scaling-method = "xtr ";
+              pull-up-res = <100000>;
+              adc-sid = <0x3>;
+              int-table = <433700 213000>; /* &sys_therm_tb */
+           };
+           
+           BATT_THERM_PU_30K {
+              hw-channel = <0x24>;
+              settling-delay-uS = <100>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "raio";
+              scaling-factor = <1 1>;
+              offset-factor = <(-273)>;
+              scaling-method = "xtr ";
+              pull-up-res = <30000>;
+              adc-sid = <0x3>;
+              int-table = <433700 213000>; /* &sys_therm_tb */
+           };
+           
+           BATT_THERM_PU_400K {
+              hw-channel = <0x64>;
+              settling-delay-uS = <100>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "raio";
+              scaling-factor = <1 1>;
+              offset-factor = <(-273)>;
+              scaling-method = "xtr ";
+              pull-up-res = <400000>;
+              adc-sid = <0x3>;
+              int-table = <433700 213000>; /* &sys_therm_tb */
+           };
+
+           BATT_THERM_OHMS {
+              hw-channel = <0x44>;
+              settling-delay-uS = <100>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "raio";
+              scaling-factor = <1 1>;
+              offset-factor = <0>;
+              scaling-method = "res ";
+              pull-up-res = <100000>;
+              adc-sid = <0x3>;
+              int-table = <433700 213000>; /* &sys_therm_tb */
+           };
+   
+           BATT_ID_OHMS {
+              hw-channel = <0x45>;
+              settling-delay-uS = <100>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "raio";
+              scaling-factor = <1 1>;
+              offset-factor = <0>;
+              scaling-method = "res ";
+              pull-up-res = <100000>;
+              adc-sid = <0x3>;
+           };
+
+           BATT_ID_OHMS_PU_30K {
+              hw-channel = <0x25>;
+              settling-delay-uS = <100>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "raio";
+              scaling-factor = <1 1>;
+              offset-factor = <0>;
+              scaling-method = "res ";
+              pull-up-res = <30000>;
+              adc-sid = <0x3>;
+           };
+           
+           BATT_ID_OHMS_PU_400K {
+              hw-channel = <0x65>;
+              settling-delay-uS = <100>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "raio";
+              scaling-factor = <1 1>;
+              offset-factor = <0>;
+              scaling-method = "res ";
+              pull-up-res = <400000>;
+              adc-sid = <0x3>;
+           };
+           
+           VBATT {
+              hw-channel = <0x8f>;
+              settling-delay-uS = <0>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "abs ";
+              scaling-factor = <1 3>;
+              offset-factor = <0>;
+              scaling-method = "tomV";
+              pull-up-res = <0>;
+              adc-sid = <0x3>;
+           };
+           
+           VBATT_2S {
+              hw-channel = <0x8f>;
+              settling-delay-uS = <0>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "abs ";
+              scaling-factor = <1 6>;
+              offset-factor = <0>;
+              scaling-method = "tomV";
+              pull-up-res = <0>;
+              adc-sid = <0x3>;
+           };
+           
+           VBATT_2S_MID {
+              hw-channel = <0x96>;
+              settling-delay-uS = <0>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "abs ";
+              scaling-factor = <1 3>;
+              offset-factor = <0>;
+              scaling-method = "tomV";
+              pull-up-res = <0>;
+              adc-sid = <0x3>;
+           };
+           
+           USB_IN {
+              hw-channel = <0x11>;
+              settling-delay-uS = <0>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "abs ";
+              scaling-factor = <1 16>;
+              offset-factor = <0>;
+              scaling-method = "tomV";
+              pull-up-res = <0>;
+              adc-sid = <0x3>;
+              int-table = <433700 213000>; /* pmic_die_temp_tb address (&pmic_die_temp_tb) */
+           };
+
+           VWLS {
+              hw-channel = <0x12>;
+              settling-delay-uS = <0>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "abs ";
+              scaling-factor = <1 16>;
+              offset-factor = <0>;
+              scaling-method = "tomV";
+              pull-up-res = <0>;
+              adc-sid = <0x3>;
+              int-table = <433700 213000>; /* pmic_die_temp_tb address (&pmic_die_temp_tb) */
+           };
+           
+           USB_IN_I {
+              hw-channel = <0x17>;
+              settling-delay-uS = <0>;
+              average-sample = <1>;
+              decimation-ratio = <1024>;
+              cal-method = "abs ";
+              scaling-factor = <8 25>;
+              offset-factor = <0>;
+              scaling-method = "tomV";
+              pull-up-res = <0>;
+              adc-sid = <0x3>;
+              int-table = <433700 213000>; /* pmic_die_temp_tb address (&pmic_die_temp_tb) */
+           };
+        };
+     
+        vadc-avg-ch {
+           ch-name = "XO_THERM_GPS";
+           low-name = "XO_THERM_GPS_LOW";
+           med-name = "XO_THERM_GPS_MED";
+           high-name = "XO_THERM_GPS_HIGH";
+           med-to-low = <5120>;
+           low-to-med = <15360>;
+           high-to-med = <32768>;
+           med-to-high = <43008>;
+        };
+     
+        gpio-map { 
+           /* For GPIO that need to be used for ADC input, Set the PMIC SID + GPIO number here */
+           aux_pin1 {
+              pmic-sid = <0>;
+              gpio-num = <1>;
+           };
+           aux_pin2 {
+              pmic-sid = <1>;
+              gpio-num = <2>;
+           };
+        };
+     
+        therm_table {
+          #address-cells = <1>;
+          #size-cells = <0>;
+
+          therm_tb@1 {
+            /* Resistance to Degree K */
+            reg = <1>;
+            table = <4251000 233>;
+          };
+
+          therm_tb@2 {
+            /* Resistance to Degree mK */
+            reg = <2>;
+            table = <433700 213000>;
+          };
+        };
+      };
+    };

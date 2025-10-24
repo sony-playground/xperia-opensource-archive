@@ -1,0 +1,227 @@
+#===============================================================================
+# CPR Libs
+#
+# GENERAL DESCRIPTION
+#    CPR Build Script
+#
+# Copyright (c) 2016-2017 by Qualcomm Technologies Incorporated. All Rights Reserved.
+#-------------------------------------------------------------------------------
+# $Header: //components/rel/aop.ho/5.0/aop_proc/core/power/cpr/build/cpr.scons#11 $
+# $Author: pwbldsvc $
+# $Date  : $
+# $Change: 40122426 $
+#===============================================================================
+import os, sys
+Import('env')
+env = env.Clone()
+
+#-------------------------------------------------------------------------------
+# Target Checks
+#-------------------------------------------------------------------------------
+# This check is used to build correct version of the new cpr driver depending
+# on targets. Once we have PW that has all targets which supports same cpr
+# implementation, this check can be skipped.
+#bitra_TODO: add CPR support
+supported_cpr_targets = ['845', '24','670', '855', '855au', '6150',\
+                        '1000', '7150', '55', 'TalosAU', '8250', 'Saipan',\
+                        '8350', 'makena', 'cedros', 'Olympic','kodiak','makenaau',\
+                        'waipio','fillmore','kailua','aurora','lassen','netrani','kapiti','lanai','kuno', 'hamoa','pinnacle']
+if env['MSM_ID'] not in supported_cpr_targets:
+    env.PrintInfo('CPR driver not supported on this target')
+    Return()
+
+if env['MSM_ID'] in ['855']:
+   env.Append(CPPDEFINES = [   "GFX_CPR_CONTROLLER_BASE=0x62C9A000"   ])
+   env.Append(CPPDEFINES = 'SDM855_TARGET_CONFIG')
+elif env['MSM_ID'] in ['7150']:
+   env.Append(CPPDEFINES = [   "GFX_CPR_CONTROLLER_BASE=0x6509A000"   ])
+   env.Append(CPPDEFINES = 'SM7150_TARGET_CONFIG')
+elif env['MSM_ID'] in ['Saipan']:
+   env.Append(CPPDEFINES = [   "GFX_CPR_CONTROLLER_BASE=0x63D9A000"   ])
+elif env['MSM_ID'] in ['8250']:
+   env.Append(CPPDEFINES = [   "GFX_CPR_CONTROLLER_BASE=0x63D9A000"   ])
+elif env['MSM_ID'] in ['8350']:
+   env.Append(CPPDEFINES = [   "GFX_CPR_CONTROLLER_BASE=0x63D9A000"   ])
+elif env['MSM_ID'] in ['waipio']:
+   env.Append(CPPDEFINES = [   "GFX_CPR_CONTROLLER_BASE=0x63D9A000"   ])
+   env.Append(CPPDEFINES = 'WAIPIO_STUBS')
+elif env['MSM_ID'] in ['kailua']:
+   env.Append(CPPDEFINES = 'KAILUA_CPR_CONFIG')
+elif env['MSM_ID'] in ['hamoa']:
+   env.Append(CPPDEFINES = 'HAMOA_CPR_CONFIG')
+elif env['MSM_ID'] in ['lanai']:
+   env.Append(CPPDEFINES = 'LANAI_CPR_CONFIG')
+   env.Append(CPPDEFINES = 'RISCV_TARGET')
+   env.Append(CPPDEFINES = 'RUMI')
+elif env['MSM_ID'] in ['pinnacle']:
+   env.Append(CPPDEFINES = 'PINNACLE_CPR_CONFIG')
+elif env['MSM_ID'] in ['kuno']:
+   env.Append(CPPDEFINES = 'KUNO_CPR_CONFIG')
+elif env['MSM_ID'] in ['kapiti']:
+   env.Append(CPPDEFINES = 'KAPITI_CPR_CONFIG')
+elif env['MSM_ID'] in ['7350']:
+   env.Append(CPPDEFINES = [   "GFX_CPR_CONTROLLER_BASE=0x63D9A000"   ])
+elif env['MSM_ID'] in ['fillmore']:
+   env.Append(CPPDEFINES = [   "GFX_CPR_CONTROLLER_BASE=0x63D9A000"   ])
+   env.Append(CPPDEFINES = 'WAIPIO_STUBS')                             #FILLMORE_STUBS
+elif env['MSM_ID'] in ['aurora']:
+   env.Append(CPPDEFINES = [   "GFX_CPR_CONTROLLER_BASE=0x63D9A000"   ])
+   env.Append(CPPDEFINES = 'WAIPIO_STUBS')                             #AURORA_TODO
+elif env['MSM_ID'] in ['lassen']:
+   env.Append(CPPDEFINES = [   "GFX_CPR_CONTROLLER_BASE=0x63D9A000"   ])
+   env.Append(CPPDEFINES = 'WAIPIO_STUBS')                             #LASSEN_TODO
+elif env['MSM_ID'] in ['netrani']:
+   env.Append(CPPDEFINES = [   "GFX_CPR_CONTROLLER_BASE=0x63D9A000"   ])
+   env.Append(CPPDEFINES = 'WAIPIO_STUBS')                             #NETRANI_TODO
+
+CPR_ROOT = "${BUILD_ROOT}/core/power/cpr"
+TARGET_DIR  = '../target/${MSM_ID}'
+CFG_FILE = env.RealPath(TARGET_DIR + '/Voltage_Plan_${MSM_ID}.xlsx')
+env.VariantDir('${BUILDPATH}', CPR_ROOT, duplicate=0)
+
+def set_image_params(image, loglevel, enableFatalAssert=1, cflags=''):
+    env['CPR_LOG_LEVEL'] = loglevel
+    env['CPR_LOG_ENABLE_FATAL_ASSERT'] = str(enableFatalAssert)
+    env['CPR_IMAGE'] = image
+    env['CPR_CFLAGS'] = cflags
+
+if 'CORE_AOP' in env:
+    set_image_params('AOP', 'CPR_LOG_LEVEL_FATAL', '--c99')
+else:
+    env.PrintError('CPR driver not supported on this image')
+    sys.exit(1)
+
+#-------------------------------------------------------------------------------
+# Get RInit
+#-------------------------------------------------------------------------------
+def autogen(target, source, env):
+    from subprocess import check_call
+    args = ['python']
+    args.extend([File(s).abspath for s in source])
+    args.extend([File(s).abspath for s in target])
+    check_call(args)
+
+VP_SRC = TARGET_DIR + '/cpr_voltage_plan_${MSM_ID}.rinit'
+
+#check if XL and config files exist or
+#else use the files generated (especially for packed builds)
+if os.path.isfile(CFG_FILE):
+    if env.Execute( 'python {dir}/../tools/cpr_cfg.py {img} {target} {dir}/{out}'.format(
+                img = env['CPR_IMAGE'],
+                dir = env.RealPath('.'),
+                target = env['MSM_ID'],
+                out = TARGET_DIR)
+            ):
+        env.PrintError('Voltage Plan parsing failed. Exiting!!!')
+        sys.exit(1)
+
+    print "VP PARSER: Configuration files exist"
+else:
+    print "VP PARSER: Configuration file does not exist"
+
+no_clean_list = [VP_SRC]
+
+#to prevent cpr_voltage_plan_${MSM_ID}.rinit
+#from getting removed by clean build command
+env.NoClean(no_clean_list)
+
+#---------------------------------------------------------------------
+# Process RInit
+#---------------------------------------------------------------------
+if 'USES_RINIT_PARSER' in env:
+    env.AddRinitInfo('CORE_AOP', 
+            {'files' : '${BUILD_ROOT}/core/power/cpr/target/${MSM_ID}'})
+
+#---------------------------------------------------------------------
+# CMD_DB check
+#---------------------------------------------------------------------
+if 'USES_CMD_DB_CHECK' in env:
+    # Add CommandDB check if not an external build
+    if env['BUILD_ID'] not in ['AAAAANAZO']:
+        env.AddCmdDBCheck('CORE_AOP', {'voltage_plan' : CFG_FILE})
+
+#---------------------------------------------------------------------
+# Generate HWIO
+#---------------------------------------------------------------------
+if env.has_key('HWIO_IMAGE'):
+    env.AddHWIOFile('HWIO', [
+        # Note: The 'filename' argument must have the correct path filled in.
+        {
+          'filename': '${BUILDPATH}/target/${MSM_ID}/hwio/cpr_hwio.h',
+          'modules': [
+            'CX_CPR3',
+          ],
+          'output-offsets': True,
+          'output-phys': True,
+          'output-fvals': True,
+          'explicit-addressing': True,
+          'ignore-prefixes': True,
+          'header': '''#include "msmhwiobase.h"
+                       #include "msmhwio.h"''',
+        },
+    ])
+#----------------------------------------------------------------------
+# Compile Sources.
+#----------------------------------------------------------------------
+env.PublishPrivateApi('CPR', [
+    '${BUILD_ROOT}/core/power/cpr/inc',
+    '${BUILD_ROOT}/core/power/cpr/target/inc',
+    '${BUILD_ROOT}/core/power/cpr/target/${MSM_ID}',
+    '${BUILD_ROOT}/core/power/cpr/target/${MSM_ID}/hwio',
+])
+
+IMAGES = ['CORE_AOP']
+
+#APIs
+CBSP_API = [
+    'DAL',
+    'POWER',
+    'POWER_UTILS',
+    'SYSTEMDRIVERS',
+    'UNPA',
+    'CPR',
+    'ARC',
+    'MPROC',
+    'KERNEL',
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+
+if env.has_key('HWIO_IMAGE'):
+    env.AddHWIOFile('HWIO', [
+    # Note: The 'filename' argument must have the correct path filled in.
+        {
+            'filename': '${BUILDPATH}/target/${MSM_ID}/hwio/cprf_hwio.h',
+            'modules': [
+                'RPMH_CPRF_CPRF',
+            ],
+            'output-offsets': True,
+            'output-phys': True,
+            'output-fvals': True,
+            'header': '''#include "msmhwiobase.h"''',
+        },
+    ])
+
+CPR_SOURCES = [
+    '${BUILDPATH}/target/${MSM_ID}/cpr_retention.c',
+    '${BUILDPATH}/target/${MSM_ID}/cpr_target.c',
+    '${BUILDPATH}/src/cpr_image.c',
+    '${BUILDPATH}/src/cpr_utils.c',
+    '${BUILDPATH}/src/cpr_smem.c',
+    '${BUILDPATH}/src/cpr.c',
+]
+
+CPR_INIT_SOURCES = [
+  '${BUILDPATH}/target/${MSM_ID}/cpr_target_autogen.c',
+  '${BUILDPATH}/target/${MSM_ID}/cpr_target_init.c',
+  '${BUILDPATH}/src/cpr_init.c',
+  ]
+
+env.AddBinaryLibrary(IMAGES, '${BUILDPATH}/${MSM_ID}/cpr', CPR_SOURCES)
+
+env2 = env.Clone() #init sources are compiled differently
+if env2['MSM_ID'] not in ['lanai']:
+  env2.Append(CCFLAGS    = ' -mlong-calls')
+env2.AddBinaryLibrary(IMAGES, '${BUILDPATH}/${MSM_ID}/cpr_init', CPR_INIT_SOURCES)

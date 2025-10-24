@@ -1,0 +1,260 @@
+#! indent = tab, tabstop = 4
+#===========================================================================
+#                                 vrm.rinit
+#
+#  DESCRIPTION:
+#    This file contains general VRM settings like vrm initial config, sequence memory config, etc.
+#    This file also includes settings dependent on cmd db like AOP PDC TCS commands and so on.
+#
+#  Copyright (c) 2017 - 2018 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated 
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+#-------------------------------------------------------------------------------
+# RPMH_VRM_VRM_CFG
+#-------------------------------------------------------------------------------
+
+module: {name = RPMH_VRM_VRM_CFG, group = VRM}
+
+regs:
+
+  # Enable clock gating
+  VRM_CLK_GATING_EN_CFG = 0x01
+
+  # settling time config
+  VREG_READY_WDOG_ERROR_ENABLE = 0x1
+  VREG_READY_EXTRA_TIME = 0x13  # 1 micro sec
+
+  # Enable DRS and WRS comparison in CMD SYN
+  CMD_SYN_DRS_WRS_COMP_EN_CSR_REG = 0x1
+
+  # response addresses
+  RESP_ADDR_DRVr = [
+    0x00200000,
+    0x00210000,
+    0x00220000,
+    0x00230000,
+    0x00240000,
+    0x00250000,
+    0x00260000,
+    0x00270000,
+    0x00280000,
+    0x00290000,
+    0x002A0000,
+    0x002B0000,
+    0x002C0000,
+    0x002D0000,
+    0x002E0000,
+    0x002F0000,
+    0x00300000,
+    0x00310000,
+    0x00320000,
+    0x00330000,
+    0x00DE05A4,
+    0x007FE000,
+  ]
+
+  RESP_ADDR2_DRV = 0x0120F000
+
+  MIN_SETTLING_TIME_CSR_REG = 0x3C0  # 50 micro sec
+
+  # branch addresses
+  VREG_READY_CLR_BR_ADDR_CSR_REG = 0x31
+  SW_WORKAROUND_BR_ADDR0_CSR_REG = 0x33
+  SW_WORKAROUND_BR_ADDR1_CSR_REG = 0x37
+  SW_WORKAROUND_BR_ADDR2_CSR_REG = 0x3b
+
+#-------------------------------------------------------------------------------
+# RPMH_VRM_VRM_SEQMEM
+#-------------------------------------------------------------------------------
+
+module: {name = RPMH_VRM_VRM_SEQMEM, group = VRM }
+
+regs:
+  # sequence memory configurations
+
+  SEQ_WORDr = [###8 bit sequencer
+  0xa6a07975 , #  0x0   // 0x75     RESCHGSequence:               BEQR voltage_sw_workaround=1 SWWR_PRE
+               #  0x1   // 0x79                                   BEQR enable_sw_workaround=1 SWWR_PRE
+               #  0x2   // 0xa0                                   SET1 hw_aux_change_broadcast_start
+               #  0x3   // 0xa6                                   SET1 brcst_arb_req
+  0x80e086e6 , #  0x4   // 0xe6                                  WAIT1 brcst_arb_gnt
+               #  0x5   // 0x86                                   SET0 brcst_arb_req
+               #  0x6   // 0xe0                                  WAIT1 hw_aux_change_broadcast_done
+               #  0x7   // 0x80                                   SET0 hw_aux_change_broadcast_start
+  0x87e7a7a2 , #  0x8   // 0xa2                                   SET1 pmic_arb_if_start
+               #  0x9   // 0xa7                                   SET1 pmic_arb_req
+               #  0xa   // 0xe7                                  WAIT1 pmic_arb_gnt
+               #  0xb   // 0x87                                   SET0 pmic_arb_req
+  0xe3a382e2 , #  0xc   // 0xe2                                  WAIT1 pmic_arb_if_done
+               #  0xd   // 0x82                                   SET0 pmic_arb_if_start
+               #  0xe   // 0xa3                                   SET1 sm_settling_start
+               #  0xf   // 0xe3                                  WAIT1 sm_settling_done
+  0x5f5f7083 , #  0x10  // 0x83                                   SET0 sm_settling_start
+               #  0x11  // 0x70                                   BEQR sm_vreg_ready_selected=1 VREG_RDY_CLR
+               #  0x12  // 0x5f                                   BEQ  down_vote_abort=1 END_SEQ
+               #  0x13  // 0x5f                                   BEQ  down_vote_abort=1 END_SEQ               // 0x76                                   BEQR voltage_sw_workaround=1 SWWR_POST
+  0xe6a6a15f , #  0x14  // 0x5f                                   BEQ  down_vote_abort=1 END_SEQ               // 0x7a                                   BEQR enable_sw_workaround=1 SWWR_POST
+               #  0x15  // 0xa1                                   SET1 hw_aux_settled_broadcast_start
+               #  0x16  // 0xa6                                   SET1 brcst_arb_req
+               #  0x17  // 0xe6                                  WAIT1 brcst_arb_gnt
+  0x2081e186 , #  0x18  // 0x86                                   SET0 brcst_arb_req
+               #  0x19  // 0xe1                                  WAIT1 hw_aux_settled_broadcast_done
+               #  0x1a  // 0x81                                   SET0 hw_aux_settled_broadcast_start
+               #  0x1b  // 0x20                                  RETURN
+  0xa183e3a3 , #  0x1c  // 0xa3     HeadRoomSequence:             SET1 sm_settling_start
+               #  0x1d  // 0xe3                                  WAIT1 sm_settling_done
+               #  0x1e  // 0x83                                   SET0 sm_settling_start
+               #  0x1f  // 0xa1                                   SET1 hw_aux_settled_broadcast_start
+  0xe186e6a6 , #  0x20  // 0xa6                                   SET1 brcst_arb_req
+               #  0x21  // 0xe6                                  WAIT1 brcst_arb_gnt
+               #  0x22  // 0x86                                   SET0 brcst_arb_req
+               #  0x23  // 0xe1                                  WAIT1 hw_aux_settled_broadcast_done
+  0xa7a22081 , #  0x24  // 0x81                                   SET0 hw_aux_settled_broadcast_start
+               #  0x25  // 0x20                                  RETURN
+               #  0x26  // 0xa2     PBSSequence:                  SET1 pmic_arb_if_start
+               #  0x27  // 0xa7                                   SET1 pmic_arb_req
+  0x82e287e7 , #  0x28  // 0xe7                                  WAIT1 pmic_arb_gnt
+               #  0x29  // 0x87                                   SET0 pmic_arb_req
+               #  0x2a  // 0xe2                                  WAIT1 pmic_arb_if_done
+               #  0x2b  // 0x82                                   SET0 pmic_arb_if_start
+  0x7083e3a3 , #  0x2c  // 0xa3                                   SET1 sm_settling_start
+               #  0x2d  // 0xe3                                  WAIT1 sm_settling_done
+               #  0x2e  // 0x83                                   SET0 sm_settling_start
+               #  0x2f  // 0x70                                  BEQR sm_vreg_ready_selected=1 VREG_RDY_CLR
+  0xaa20a920 , #  0x30  // 0x20                                  RETURN
+               #  0x31  // 0xa9     VREG_RDY_CLR:                 SET1 vreg_ready_clr_sent
+               #  0x32  // 0x20                                  RETURN
+               #  0x33  // 0xaa     SWWR_PRE:                     SET1 sequencer_pre_irq_valid
+  0xab20e98a , #  0x34  // 0x8a                                   SET0 sequencer_pre_irq_valid
+               #  0x35  // 0xe9                                  WAIT1 csr_sw_pre_unblock_seq
+               #  0x36  // 0x20                                  RETURN
+               #  0x37  // 0xab     SWWR_POST:                    SET1 sequencer_post_irq_valid
+  0x2020ea8b , #  0x38  // 0x8b                                   SET0 sequencer_post_irq_valid
+               #  0x39  // 0xea                                  WAIT1 csr_sw_post_unblock_seq
+               #  0x3a  // 0x20                                  RETURN
+               #  0x3b  // 0x20     END_SEQ:                     RETURN
+  ]
+
+  SEQ_START_ADDRr = [
+    0x00,
+    0x1c,
+    0x26,
+  ]
+
+#-------------------------------------------------------------------------------
+# RPMH_VRM_VRM_RES_CFG
+#-------------------------------------------------------------------------------
+
+module: {name = RPMH_VRM_VRM_RES_CFG, group = VRM}
+  
+regs:
+  VREG_READY_WDOG_ERROR_ENABLE_CSR_REGr = [
+    0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
+    0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
+    0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
+    0x1, 0x1,
+  ]
+
+#-------------------------------------------------------------------------------
+# RPMH_VRM_VRM_INTERRUPT
+#-------------------------------------------------------------------------------
+
+module: {name = RPMH_VRM_VRM_INTERRUPT, group = VRM}
+
+regs:
+  # vreg_ready wdog irq
+  VREG_READY_WDOG_IRQ_ENABLE_0_CSR = 0xFFFFFFFF
+
+  # error irqs
+  MAX_VOLTAGE_VIOLATION_IRQ_ENABLE_0_CSR = 0xFFFFFFFF
+  MAX_VOLTAGE_VIOLATION_IRQ_ENABLE_1_CSR = 0xFFFFFFFF
+  MAX_VOLTAGE_VIOLATION_IRQ_ENABLE_2_CSR = 0x0000FFFF  
+  CTT_OVERFLOW_IRQ_ENABLE_CSR = 0x3FFFFF
+  S_PORT_FAILURE_IRQ_ENABLE_CSR = 0x1
+
+  #Enable Sequence IRQ's for all sequencers, irq is only triggered if Sequencer WA is enabled
+  VRM_SEQUENCER_IRQ_ENABLE_PRE_CSR = 0xFFFFFFFF
+
+#-------------------------------------------------------------------------------
+# RPMH_PDC_GRP3_GRP3_PDC_GTCS_MEM
+#-------------------------------------------------------------------------------
+module: {name = RPMH_PDC_GRP3_GRP3_PDC_GTCS_MEM, group = VRM_TCS}
+vars:
+ resp_req_write = 0x10100
+ fire_and_forget = 0x10000
+
+ # VRM address offsets
+ en_offset = 0x4
+ mode_offset = 0x8
+
+ #rail modes
+ pass = 0x2
+ retention = 0x3
+ lpm = 0x4
+ auto = 0x6
+ npm = 0x7
+
+ #PBS commands
+ sleep_arg = 0x0
+ wake_arg = 0x1
+
+
+regs:
+
+ # TCS 0
+ GRP3_TCSt_CMDn_ADDR[0, 0] = 0 : { cmd_db_addr("vrm.aoss",0) }
+ GRP3_TCSt_CMDn_DATA[0, 0] = sleep_arg
+ GRP3_TCSt_CMDn_MSGID[0, 0] = resp_req_write
+
+ GRP3_TCSt_CMDn_ADDR[0, 1] = 0 : { cmd_db_addr("smpe4", mode_offset) }
+ GRP3_TCSt_CMDn_DATA[0, 1] = retention
+ GRP3_TCSt_CMDn_MSGID[0, 1] = fire_and_forget
+  
+ GRP3_TCSt_CMDn_ADDR[0, 2] = 0 : { cmd_db_addr("ldob15", mode_offset) }
+ GRP3_TCSt_CMDn_DATA[0, 2] = lpm
+ GRP3_TCSt_CMDn_MSGID[0, 2] = fire_and_forget
+ 
+
+ # TCS 1
+ # spare
+
+
+ # TCS 2
+ # spare
+
+
+ # TCS 3
+ GRP3_TCSt_CMDn_ADDR[3, 0] = 0 : { cmd_db_addr("vrm.aoss",0) }
+ GRP3_TCSt_CMDn_DATA[3, 0] = wake_arg
+ GRP3_TCSt_CMDn_MSGID[3, 0] = resp_req_write
+
+ GRP3_TCSt_CMDn_ADDR[3, 1] = 0 : { cmd_db_addr("smpe4", mode_offset) }
+ GRP3_TCSt_CMDn_DATA[3, 1] = auto
+ GRP3_TCSt_CMDn_MSGID[3, 1] = fire_and_forget
+  
+ GRP3_TCSt_CMDn_ADDR[3, 2] = 0 : { cmd_db_addr("ldob15", mode_offset) }
+ GRP3_TCSt_CMDn_DATA[3, 2] = npm
+ GRP3_TCSt_CMDn_MSGID[3, 2] = fire_and_forget
+
+ 
+ # enable TCS0,1,2,3 with enable mask based on commands which 
+ # we need to wait for completion even for down case
+ # e.g. if cmd 1,2 are needed to be waited for completion
+ # then 0x6 is the enable mask
+ GRP3_TCSt_CMD_WAIT_FOR_CMPL_BANK = [
+   0x1, 0x0, 0x0, 0x1,
+ ]
+
+#-------------------------------------------------------------------------------
+# RPMH_PDC_AOP_AOP_PDC
+#-------------------------------------------------------------------------------
+
+module: {name = RPMH_PDC_AOP_AOP_PDC, group = VRM_TCS}
+
+regs:
+ # enable TCS0,1,2,3 with enable mask based on commands used 
+ # e.g. if cmd 0, 1 are used then 0x3 is the enable mask
+ AOP_TCSt_CMD_ENABLE_BANK = [
+   0x7, 0x0, 0x0, 0x7,
+ ]

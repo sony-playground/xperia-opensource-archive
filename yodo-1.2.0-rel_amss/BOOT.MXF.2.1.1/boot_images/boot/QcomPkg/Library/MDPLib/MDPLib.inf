@@ -1,0 +1,90 @@
+#/** @file MDPLib.inf
+#  
+#  MDP Hardware library
+#  
+#  Copyright (c) 2010-2017, 2019-2021, 2022 Qualcomm Technologies, Inc. 
+#  All rights reserved.
+#  Confidential and Proprietary - Qualcomm Technologies, Inc.
+#
+#**/
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MDPLib
+  FILE_GUID                      = 5AC2547A-9BD4-49e2-B51E-1221CC868D39
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MDPLib
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS = 
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Wno-unused-but-set-variable
+
+[Sources]
+  MDPClocks.c
+  MDPLib.c
+  MDPEDID.c
+  MDPPanel.c
+  MDPConfig.c
+  parserutil.c
+  xmlparser.c
+  MDPSystem.c
+  MDPVersion.c
+  MDPPeripherals.c
+  DisplayUtils.c
+  MDPPostProcessing.c
+  MDPDemura.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  HALMDSSLib
+  ExternalDisplayLib
+  HALDSILib
+  MDPPlatformLib
+  BaseMemoryLib
+  PcdLib
+  UncachedMemoryAllocationLib
+  ArmLib
+  UefiCfgLib
+  BaseSynchronizationLib
+  RamPartitionTableLib
+  I2CApiLib
+  FdtLib
+  MuslLib
+
+[Guids]
+  gEfiImageFvNameGuid
+
+[Protocols]
+  gEfiClockProtocolGuid
+  gQcomI2CProtocolGuid
+  gEfiDiskIoProtocolGuid
+  gEfiHalIommuProtocolGuid
+  gEfiDDRGetInfoProtocolGuid
+  gEfiBootLogoProtocolGuid
+  gEfiHwioProtocolGuid
+  gEfiPilProtocolGuid
+
+[Depex]
+  gEfiClockProtocolGuid AND gQcomI2CProtocolGuid
+
+[Pcd]
+  gQcomTokenSpaceGuid.PcdPrimaryFlags
+  gQcomTokenSpaceGuid.PcdUnderflowColor
+  gQcomTokenSpaceGuid.PcdPresentationMode
+  gQcomTokenSpaceGuid.PcdSecondaryPresentationMode
+  gQcomTokenSpaceGuid.PcdBacklightLevel
+  gQcomTokenSpaceGuid.PcdBGRTRotation
+
+[Pcd.common]
+  gEfiMdePkgTokenSpaceGuid.PcdDebugPrintErrorLevel

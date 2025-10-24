@@ -1,0 +1,298 @@
+{
+  # Development build clean Lanai
+  "lndevclean" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Lanai,QcomToolsPkg", "-C", "XBL_CORE", "--build_flags", "cleanall"],
+  
+  # Development build clean Kailua
+  "kdevclean" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua,QcomToolsPkg", "-C", "XBL_CORE", "--build_flags", "cleanall"],
+  
+  # Development build clean Lassen
+  "ldevclean" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen,QcomToolsPkg", "-C", "XBL_CORE", "--build_flags", "cleanall"],
+  
+  # Development build clean Pinnacles
+  "pdevclean" : ["--variant", "LE", "-r", "DEBUG", "-t", "Pinnacles,QcomToolsPkg", "-C", "XBL_CORE", "--build_flags", "cleanall"],
+  
+  # Development build clean Pinnacles
+  "pdevclean" : ["--variant", "MN", "-r", "DEBUG", "-t", "Pinnacles,QcomToolsPkg", "-C", "XBL_CORE", "--build_flags", "cleanall"],
+
+  # Development build for testing
+  "abl" : ["--variant", "LAA", "-r", "DEBUG", "-t", "QcomModulePkg"],
+
+  # Test Pkg
+  "tests" : ["--variant", "LAA", "-r", "DEBUG", "-t", "QcomToolsPkg,QcomTestPkg"],
+
+  # SOC tests
+  "soctests" : ["--variant", "LAA", "-r", "DEBUG", "-t", "QcomToolsPkg,QcomSocPlatTestPkg"],
+
+  # Tools Pkg
+  "tools" : ["--variant", "LAA", "-r", "DEBUG", "-t", "QcomToolsPkg"],
+
+  # Build Lanai LAA, Debug
+  "lnld" : ["-r", "DEBUG", "-t", "Lanai"],
+  
+  # Build Lanai LAA, Release
+  "lnlr" : ["-r", "RELEASE", "-t", "Lanai"],
+
+  # Build Lanai LAA, Release and Debug
+  "lnl" : ["--variant", "LAA", "-t", "Lanai,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Lanai LAA, Debug include tools and test
+  "lnttld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Lanai,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Lanai LAA, Release include tools and test
+  "lnttlr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Lanai,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Lanai LAA, Debug, RAM dump only
+  "lnlddump" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Lanai", "-C", "XBL_RAMDUMP"],
+
+  # Build Lanai LAA, Debug, Loader only
+  "lnldl" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Lanai", "-C", "XBL_LOADER"],
+  
+  # Build Lanai LAA, Debug, DevPrgDDR only
+  "lnldprg" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Lanai", "-C", "DEVPRG_DDR"],
+  
+  # Build Lanai LAA, Debug, DevPrgLite only
+  "lnldlite" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Lanai", "-C", "DEVPRG_LITE"],
+  
+  # Build Lanai LAA, Debug, XBL core
+  "lnldc" : ["-t", "Lanai,QcomToolsPkg", "--variant", "LAA", "-r", "DEBUG",  "-C", "XBL_CORE"],
+  
+  # Build Lanai LAA, Release, XBL core
+  "lnlrc" : ["-t", "Lanai,QcomToolsPkg", "--variant", "LAA", "-r", "RELEASE",  "-C", "XBL_CORE"],
+  
+  # Build Lanai LAA, Debug, UEFI only
+  "lndu" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Lanai", "-i", "UEFI"],
+
+  # Build Lanai LAA, Release, UEFI only
+  "lnru" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Lanai", "-i", "UEFI"],
+  
+  # Build Kailua LAA, Release and Debug
+  "kl" : ["--variant", "LAA", "-t", "Kailua,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Kailua LAA, Debug
+  "kld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua"],
+  
+  # Build Kailua LAA, Release
+  "klr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Kailua"],
+  
+  # Build Kailua LAA, Debug include tools and test
+  "kttld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Kailua LAA, Release include tools and test
+  "kttlr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Kailua,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Kailua LAA, Debug, RAM dump only
+  "klddump" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua", "-C", "XBL_RAMDUMP"],
+
+  # Build Kailua LAA, Debug, Loader only
+  "kldl" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua", "-C", "XBL_LOADER"],
+  
+  # Build Kailua LAA, Debug, DevPrgDDR only
+  "kldprg" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua", "-C", "DEVPRG_DDR"],
+  
+  # Build Kailua LAA, Debug, DevPrgLite only
+  "kldlite" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Kailua", "-C", "DEVPRG_LITE"],
+  
+  # Build Kailua LAA, Debug, XBL core
+  "kldc" : ["-t", "Kailua,QcomToolsPkg", "--variant", "LAA", "-r", "DEBUG",  "-C", "XBL_CORE"],
+  
+  # Build Kailua LAA, Release, XBL core
+  "klrc" : ["-t", "Kailua,QcomToolsPkg", "--variant", "LAA", "-r", "RELEASE",  "-C", "XBL_CORE"],
+  
+  # Build Kailua LAA, Debug, UEFI only
+  "kldu" : ["-t", "Kailua,QcomToolsPkg", "--variant", "LAA", "-r", "DEBUG", "-i", "UEFI"],
+  
+  # Build Kailua LAA, Release, UEFI only
+  "klru" : ["-t", "Kailua,QcomToolsPkg", "--variant", "LAA", "-r", "RELEASE", "-i", "UEFI"],
+
+  # Build Lassen LE, Release and Debug
+  "ll" : ["--variant", "LAA", "-t", "Lassen,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Lassen LE, Debug
+  "lld" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen"],
+  
+  # Build Lassen LE, Release
+  "llr" : ["--variant", "LE", "-r", "RELEASE", "-t", "Lassen"],
+  
+  # Build Lassen LE, Debug include tools and test
+  "lttld" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Lassen LE, Release include tools and test
+  "lttlr" : ["--variant", "LE", "-r", "RELEASE", "-t", "Lassen,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Lassen LE, Debug, RAM dump only
+  "llddump" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen", "-C", "XBL_RAMDUMP"],
+
+  # Build Lassen LE, Debug, Loader only
+  "lldl" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen", "-C", "XBL_LOADER"],
+  
+  # Build Lassen, Debug, DevPrgDDR only
+  "lldprg" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen", "-C", "DEVPRG_DDR"],
+  
+  # Build Lassen LE, Debug, DevPrgLite only
+  "lldlite" : ["--variant", "LE", "-r", "DEBUG", "-t", "Lassen", "-C", "DEVPRG_LITE"],
+  
+  # Build Lassen LE, Debug, XBL core
+  "lldc" : ["-t", "Lassen,QcomToolsPkg", "--variant", "LE", "-r", "DEBUG",  "-C", "XBL_CORE"],
+  
+  # Build Lassen LE, Release, XBL core
+  "llrc" : ["-t", "Lassen,QcomToolsPkg", "--variant", "LE", "-r", "RELEASE",  "-C", "XBL_CORE"],
+  
+  # Build Lassen LE, Debug, UEFI only
+  "lldu" : ["-t", "Lassen,QcomToolsPkg", "--variant", "LE", "-r", "DEBUG", "-i", "UEFI"],
+  
+  # Build Lassen LE, Release, UEFI only
+  "llru" : ["-t", "Lassen,QcomToolsPkg", "--variant", "LE", "-r", "RELEASE", "-i", "UEFI"],
+
+  # Build Hamoa WP, Release and Debug
+  "hw" : ["--variant", "WP", "-t", "Hamoa,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Hamoa WP, Debug
+  "hwd" : ["--variant", "WP", "-r", "DEBUG", "-t", "Hamoa"],
+  
+  # Build Hamoa WP, Release
+  "hwr" : ["--variant", "WP", "-r", "RELEASE", "-t", "Hamoa"],
+  
+  # Build Hamoa WP, Debug include tools and test
+  "httld" : ["--variant", "WP", "-r", "DEBUG", "-t", "Hamoa,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Hamoa WP, Release include tools and test
+  "httlr" : ["--variant", "WP", "-r", "RELEASE", "-t", "Hamoa,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Hamoa WP, Debug, RAM dump only
+  "hwddump" : ["--variant", "WP", "-r", "DEBUG", "-t", "Hamoa", "-C", "XBL_RAMDUMP"],
+
+  # Build Hamoa WP, Debug, Loader only
+  "hwdl" : ["--variant", "WP", "-r", "DEBUG", "-t", "Hamoa", "-C", "XBL_LOADER"],
+  
+  # Build Hamoa WP, Debug, DevPrgDDR only
+  "hwdprg" : ["--variant", "WP", "-r", "DEBUG", "-t", "Hamoa", "-C", "DEVPRG_DDR"],
+  
+  # Build Hamoa WP, Debug, DevPrgLite only
+  "hwdlite" : ["--variant", "WP", "-r", "DEBUG", "-t", "Hamoa", "-C", "DEVPRG_LITE"],
+  
+  # Build Hamoa WP, Debug, XBL core
+  "hwdc" : ["-t", "Hamoa,QcomToolsPkg", "--variant", "WP", "-r", "DEBUG",  "-C", "XBL_CORE"],
+  
+  # Build Hamoa WP, Release, XBL core
+  "hwrc" : ["-t", "Hamoa,QcomToolsPkg", "--variant", "WP", "-r", "RELEASE",  "-C", "XBL_CORE"],
+  
+  # Build Hamoa WP, Debug, UEFI only
+  "hwdu" : ["-t", "Hamoa,QcomToolsPkg", "--variant", "WP", "-r", "DEBUG", "-i", "UEFI"],
+  
+  # Build Hamoa WP, Release, UEFI only
+  "hwru" : ["-t", "Hamoa,QcomToolsPkg", "--variant", "WP", "-r", "RELEASE", "-i", "UEFI"],
+  
+  # Build Pinnacles LE, Release and Debug
+  "pl" : ["--variant", "LE", "-t", "Pinnacles,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Pinnacles MN, Release and Debug
+  "pm" : ["--variant", "MN", "-t", "Pinnacles,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Pinnacles LE, Debug
+  "pld" : ["--variant", "LE", "-r", "DEBUG", "-t", "Pinnacles"],
+  
+  # Build Pinnacles MN, Debug
+  "pmd" : ["--variant", "MN", "-r", "DEBUG", "-t", "Pinnacles"],
+  
+  # Build Pinnacles LE, Release
+  "plr" : ["--variant", "LE", "-r", "RELEASE", "-t", "Pinnacles"],
+  
+  # Build Pinnacles MN, Release
+  "pmr" : ["--variant", "MN", "-r", "RELEASE", "-t", "Pinnacles"],
+  
+  # Build Pinnacles LE, Debug include tools and test
+  "pttld" : ["--variant", "LE", "-r", "DEBUG", "-t", "Pinnacles,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Pinnacles MN, Debug include tools and test
+  "pttmd" : ["--variant", "MN", "-r", "DEBUG", "-t", "Pinnacles,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Pinnacles LE, Release include tools and test
+  "pttlr" : ["--variant", "LE", "-r", "RELEASE", "-t", "Pinnacles,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Pinnacles MN, Release include tools and test
+  "pttmr" : ["--variant", "MN", "-r", "RELEASE", "-t", "Pinnacles,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Pinnacles LE, Debug, RAM dump only
+  "plddump" : ["--variant", "LE", "-r", "DEBUG", "-t", "Pinnacles", "-C", "XBL_RAMDUMP"],
+  
+  # Build Pinnacles MN, Debug, RAM dump only
+  "pmddump" : ["--variant", "MN", "-r", "DEBUG", "-t", "Pinnacles", "-C", "XBL_RAMDUMP"],
+
+  # Build Pinnacles LE, Debug, Loader only
+  "pldl" : ["--variant", "LE", "-r", "DEBUG", "-t", "Pinnacles", "-C", "XBL_LOADER"],
+  
+  # Build Pinnacles MN, Debug, Loader only
+  "pmdl" : ["--variant", "MN", "-r", "DEBUG", "-t", "Pinnacles", "-C", "XBL_LOADER"],
+  
+  # Build Pinnacles, Debug, DevPrgDDR only
+  "pldprg" : ["--variant", "LE", "-r", "DEBUG", "-t", "Pinnacles", "-C", "DEVPRG_DDR"],
+  
+  # Build Pinnacles, Debug, DevPrgDDR only
+  "pmdprg" : ["--variant", "MN", "-r", "DEBUG", "-t", "Pinnacles", "-C", "DEVPRG_DDR"],
+  
+  # Build Pinnacles LE, Debug, DevPrgLite only
+  "pldlite" : ["--variant", "LE", "-r", "DEBUG", "-t", "Pinnacles", "-C", "DEVPRG_LITE"],
+  
+  # Build Pinnacles MN, Debug, DevPrgLite only
+  "pmdlite" : ["--variant", "MN", "-r", "DEBUG", "-t", "Pinnacles", "-C", "DEVPRG_LITE"],
+  
+  # Build Pinnacles LE, Debug, XBL core
+  "pldc" : ["-t", "Pinnacles,QcomToolsPkg", "--variant", "LE", "-r", "DEBUG",  "-C", "XBL_CORE"],
+  
+  # Build Pinnacles MN, Debug, XBL core
+  "pmdc" : ["-t", "Pinnacles,QcomToolsPkg", "--variant", "MN", "-r", "DEBUG",  "-C", "XBL_CORE"],
+  
+  # Build Pinnacles LE, Release, XBL core
+  "plrc" : ["-t", "Pinnacles,QcomToolsPkg", "--variant", "LE", "-r", "RELEASE",  "-C", "XBL_CORE"],
+  
+  # Build Pinnacles MN, Release, XBL core
+  "pmrc" : ["-t", "Pinnacles,QcomToolsPkg", "--variant", "MN", "-r", "RELEASE",  "-C", "XBL_CORE"],
+  
+  # Build Pinnacles LE, Debug, UEFI only
+  "pldu" : ["-t", "Pinnacles,QcomToolsPkg", "--variant", "LE", "-r", "DEBUG", "-i", "UEFI"],
+  
+  # Build Pinnacles MN, Debug, UEFI only
+  "pmdu" : ["-t", "Pinnacles,QcomToolsPkg", "--variant", "MN", "-r", "DEBUG", "-i", "UEFI"],
+  
+  # Build Pinnacles LE, Release, UEFI only
+  "plru" : ["-t", "Pinnacles,QcomToolsPkg", "--variant", "LE", "-r", "RELEASE", "-i", "UEFI"],
+  
+  # Build Pinnacles MN, Release, UEFI only
+  "pmru" : ["-t", "Pinnacles,QcomToolsPkg", "--variant", "MN", "-r", "RELEASE", "-i", "UEFI"],
+  
+  # Build Halliday LAA, Debug
+  "hald" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Halliday"],
+  
+  # Build Halliday LAA, Release
+  "halr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Halliday"],
+  
+  # Build Halliday LAA, Debug include tools and test
+  "hattld" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Halliday,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Halliday LAA, Release include tools and test
+  "hattlr" : ["--variant", "LAA", "-r", "RELEASE", "-t", "Halliday,QcomToolsPkg,QcomTestPkg"],
+  
+  # Build Halliday LAA, Debug, RAM dump only
+  "halddump" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Halliday", "-C", "XBL_RAMDUMP"],
+
+  # Build Halliday LAA, Debug, Loader only
+  "haldl" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Halliday", "-C", "XBL_LOADER"],
+  
+  # Build Halliday LAA, Debug, DevPrgDDR only
+  "haldprg" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Halliday", "-C", "DEVPRG_DDR"],
+  
+  # Build Halliday LAA, Debug, DevPrgLite only
+  "haldlite" : ["--variant", "LAA", "-r", "DEBUG", "-t", "Halliday", "-C", "DEVPRG_LITE"],
+  
+  # Build Halliday LAA, Debug, XBL core
+  "haldc" : ["-t", "Halliday,QcomToolsPkg", "--variant", "LAA", "-r", "DEBUG",  "-C", "XBL_CORE"],
+  
+  # Build Halliday LAA, Release, XBL core
+  "halrc" : ["-t", "Halliday,QcomToolsPkg", "--variant", "LAA", "-r", "RELEASE",  "-C", "XBL_CORE"],
+  
+  # Build Halliday LAA, Debug, UEFI only
+  "haldu" : ["-t", "Halliday,QcomToolsPkg", "--variant", "LAA", "-r", "DEBUG", "-i", "UEFI"],
+  
+  # Build Halliday LAA, Release, UEFI only
+  "halru" : ["-t", "Halliday,QcomToolsPkg", "--variant", "LAA", "-r", "RELEASE", "-i", "UEFI"]
+}

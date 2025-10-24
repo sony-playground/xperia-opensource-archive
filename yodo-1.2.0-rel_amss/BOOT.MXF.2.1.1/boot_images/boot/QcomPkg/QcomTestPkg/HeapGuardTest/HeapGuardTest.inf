@@ -1,0 +1,53 @@
+#/** @file HeapGuardTest.inf
+#  
+#  Qualcomm HeapGuard Test Application
+#  
+#  Copyright (c) 2022 Qualcomm Technolgies Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 05/05/22   cm      Initial revision
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = HeapGuardTest
+  FILE_GUID                      = 3760d6f7-e250-4a83-b1ff-157e90606243 
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = HeapGuardTestMain 
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = ARM AARCH64
+#
+
+
+[Sources]
+  HeapGuardTest.c
+
+[BuildOptions]
+ GCC:*_*_*_CC_FLAGS = -O0 -fno-inline
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  QcomLib
+  MemoryAllocationLib
+  TestInterfaceLib
+  UefiApplicationEntryPoint
+  
+
+
+

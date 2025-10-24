@@ -1,0 +1,62 @@
+#/** @file DevPrgUfsLib.inf
+#
+#  DevPrg common logic enabling only UFS.
+#
+#  Copyright (c) 2022 Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when        who  what, where, why
+# ----------  ---  ----------------------------------------------------------
+# 2022-04-27  wek  Initial revision, derived from DevPrg Lib.
+#
+#==============================================================================
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DevPrgLib
+  FILE_GUID                      = 4D39D4D4-8BC6-4FB3-B4A4-CF3494D38097
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DevPrgDLib
+
+[Sources]
+  devprg_firehose.c
+  devprg_gpt.c
+  devprg_log.c
+  devprg_security.c
+  devprg_sha.c
+  devprg_utils.c
+  devprg_storage.c
+  devprg_storage_nand.c
+  devprg_storage_null.c
+  devprg_storage_nvme.c
+  devprg_storage_sdcc.c
+  devprg_storage_spinor.c
+  devprg_storage_ufs.c
+  devprg_target.c
+  devprg_transfer.c
+  devprg_transport.c
+  devprg_usb.c
+  devprg_xml.c
+  ../DevPrgSomcLib/FirehoseVersion.h
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -Werror -DUSE_LOADER_UTILS -DFEATURE_DEVPRG_UFS -DVIP_SW_ID=26
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/XBLLoader/SmcLib/SmcLib.dec
+  SecPkg/SecLib.dec
+
+[LibraryClasses]
+  DevPrgBuffersLib
+  UfsLoaderLib
+  SdccCommonLib
+  QusbLib

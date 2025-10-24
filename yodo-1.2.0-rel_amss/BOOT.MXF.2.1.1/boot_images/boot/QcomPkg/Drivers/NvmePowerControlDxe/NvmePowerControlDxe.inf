@@ -1,0 +1,54 @@
+#/** @file NvmePowerControlDxe.inf
+#
+#  NvmePowerControl DXE INF file
+#
+#  Copyright (c) 2021-2022 Qualcomm Technologies, Inc.
+#  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when        who  what, where, why
+# ----------  ---  ------------------------------------------------------------
+# 2022/06/13  sc   Add check for offmode charging.
+# 2021/03/25  wek  Initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NvmePowerControlDxe
+  FILE_GUID                      = EE26A170-2409-4900-A57D-7BA4C61908D2
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = NvmePowerControlDxeEntryPoint
+
+[BuildOptions.AARCH64]
+
+[Sources.common]
+  NvmePowerControlDxe.c
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  DebugLib
+  NvmeCoreTargetLib
+  UefiLib
+  BaseLib
+  UefiCfgLib
+
+[Protocols]
+  gChargerExProtocolGuid
+
+[Depex]
+  TRUE
+

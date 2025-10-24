@@ -1,0 +1,17 @@
+#/** @file EepromLibPkg.dec
+# EEPROM Library package.
+#
+# Copyright (c) 2020 Qualcomm Technologies Inc. All rights reserved.
+#
+#**/
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = EepromLibPkg
+  PACKAGE_GUID                   = 2E64862F-23FB-403D-9736-AD92550D0914
+  PACKAGE_VERSION                = 0.1
+
+[Includes.common]
+  
+
+

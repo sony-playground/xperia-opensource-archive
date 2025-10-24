@@ -1,0 +1,1 @@
+yodo-1.2.0-rel_amss/BOOT.MXF.2.1.1/boot_images/boot/QcomPkg/SocPkg/Kailua/Tools/hwio/scripts/hwioreg.per filter=lfs diff=lfs merge=lfs -text

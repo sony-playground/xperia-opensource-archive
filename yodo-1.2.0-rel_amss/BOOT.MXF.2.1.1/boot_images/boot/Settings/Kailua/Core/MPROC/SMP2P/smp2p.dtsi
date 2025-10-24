@@ -1,0 +1,43 @@
+/*------------------------------------------------------------------------------
+   mproc_smp2p device-tree source. 
+------------------------------------------------------------------------------*/
+/*!
+   This file contains SMP2P settings specific to SOC.
+*/
+
+/*------------------------------------------------------------------------------
+ Copyright (c) 2022 Qualcomm Technologies, Inc. All Rights Reserved.
+ Qualcomm Technologies, Inc. Confidential and Proprietary.
+------------------------------------------------------------------------------*/
+
+#include "smem_host_type.h"
+#include "smp2p_defines.h"
+&sw {
+   smp2p {
+        compatible = "qcom,smp2p";
+		fflags = <SMP2P_FFLAGS_SSR_HANDSHAKE>;
+        max-entries = <0x10>;
+        smp2p-interrupts {
+		    intr-01{
+		    dest = <SMEM_ADSP>; 
+            proc = <IPCC_C_LPASS>;
+            irq = <SMP2P_IRQ>;
+			};
+			intr-02{
+		    dest = <SMEM_CDSP>; 
+            proc = <IPCC_C_CDSP>;
+            irq = <SMP2P_IRQ>;
+			};
+			intr-03{
+		    dest = <SMEM_MODEM>; 
+            proc = <IPCC_C_MPSS>;
+            irq = <SMP2P_IRQ>;
+			};
+			intr-04{
+		    dest = <SMEM_INVALID_HOST>; 
+            proc = <SMP2P_NULL_CLIENT>;
+            irq = <SMP2P_NULL_SIGNAL>;
+			};
+        };
+  };		
+};

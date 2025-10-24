@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,ddr_common_dt.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm DDR Target DT
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   The Qualcomm compatible node...
+   Links to any data sheet or HW specific details
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,ddr_common_dt
+ 
+  print_severity_dt:
+    maxItems: 1
+    description: current severity with which DDR logs are printerd, change as needed.
+
+  ddr_log_level_dt:
+    maxItems: 1
+    description: by default only logs Error Conditions with DDRSNS, change as needed.
+    
+required:
+  - compatible
+  - print_severity_dt
+  - ddr_log_level_dt
+
+additionalProperties: false
+
+examples:
+  - |
+    ddr_common_dt{
+      compatible = "qcom,ddr_common_dt";
+      print_severity_dt = <8210>;
+      ddr_log_level_dt = <0>;
+    };

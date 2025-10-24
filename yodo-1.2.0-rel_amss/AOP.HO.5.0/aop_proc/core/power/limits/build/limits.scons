@@ -1,0 +1,63 @@
+#===============================================================================
+#
+# Limits Central Broadcast system
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+#   Copyright (c) 2016-2019 Qualcomm Technologies, Inc. (QTI).
+#   All Rights Reserved.
+#   Qualcomm Confidential and Proprietary.
+#   Export of this technology or software is regulated by the U.S. Government.
+#   Diversion contrary to U.S. law prohibited.
+#-------------------------------------------------------------------------------
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/power/limits/build/limits.scons#1 $
+#  $DateTime: 2021/10/26 22:03:12 $
+#===============================================================================
+
+Import('env')
+env = env.Clone()
+
+#-------------------------------------------------------------------------------
+# Target Build Options
+#-------------------------------------------------------------------------------
+#Turn off optimizations for easier debug
+#env.Append(CCFLAGS = ' -O0')
+
+#-------------------------------------------------------------------------------
+# Source PATH
+#-------------------------------------------------------------------------------
+SRCPATH = '../src'
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+#-------------------------------------------------------------------------------
+# Internal depends within CoreBSP
+#-------------------------------------------------------------------------------
+CBSP_API = [
+    'DAL',
+    'HAL',
+    'DEBUGTOOLS',
+    'POWER',
+    'POWER_PDC',
+    'SERVICES',
+    'SYSTEMDRIVERS',
+    'KERNEL',
+    'PMIC'
+]
+
+# SOURCE FILES
+
+
+#-------------------------------------------------------------------------------
+# RINIT FILES
+#-------------------------------------------------------------------------------
+
+# Unlike other modules, here we are checking if rinit_files path exists for a
+# given target since the PW could have targets where PDC TCSs are not 
+# initialized from RINIT and as such those targets would not have the files.
+if 'USES_RINIT_PARSER' in env:
+    rinit_files = '${BUILD_ROOT}/core/power/limits/cfg/${MSM_ID}'
+    if env.PathExists(rinit_files):
+        env.AddRinitInfo('CORE_AOP', {'files' : rinit_files})
+
+

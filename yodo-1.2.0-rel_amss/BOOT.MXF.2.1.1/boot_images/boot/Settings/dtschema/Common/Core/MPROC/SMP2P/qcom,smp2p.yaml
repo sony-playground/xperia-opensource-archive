@@ -1,0 +1,86 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,smp2p.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm Technologies Core MPROC SMP2P DeviceTree Schema
+
+maintainers:
+  - Core MPROC team at Qualcomm <core.services.mproc@qti.qualcomm.com>
+
+description: |
+   SMP2P provides point-to-point Inter Processor (Control) Communication in Qualcomm SOCs
+
+# A dictionary of DT properties for this binding schema
+properties:
+
+  compatible:
+    const: qcom,smp2p
+    
+  fflags:
+    description: SMP2P configuration feature flags
+    
+  max-entries:
+    description: Maximum SMP2P entries allowed
+
+  smp2p-interrupts:
+    type: object
+
+    patternProperties:
+      "^intr-0[0-9]$":
+        type: object
+        
+        properties:
+          dest:
+            description: Destination's SMEM ID
+            
+          proc:
+            description: Destination's IPCC client ID
+              
+          irq:
+            description: IPCC IRQ number for SMP2P
+            
+        required:
+          - dest
+          - proc
+          - irq         
+
+required:
+  - compatible
+  - fflags
+  - max-entries
+  - smp2p-interrupts
+
+      
+additionalProperties: false
+
+examples:
+- |
+    smp2p {
+      compatible = "qcom,smp2p";
+      fflags = <0x000001>;
+      max-entries = <0x10>;
+      smp2p-interrupts {
+        intr-01{
+        dest = <2>; 
+        proc = <3>;
+        irq = <2>;
+        };
+        intr-02{
+          dest = <5>; 
+          proc = <6>;
+          irq = <2>;
+          };
+        intr-03{
+          dest = <1>; 
+          proc = <2>;
+          irq = <2>;
+          };
+        intr-04{
+          dest = <0xFFFF>; 
+          proc = <136>;
+          irq = <(-1)>;
+          };
+      };
+    };

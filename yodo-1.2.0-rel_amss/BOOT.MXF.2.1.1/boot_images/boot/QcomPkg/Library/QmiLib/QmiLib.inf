@@ -1,0 +1,87 @@
+#/** @file QmiLib.inf
+#  
+#  QMI library for UEFI
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  
+#  All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 11/04/14   ar      Created QMI library for UEFI
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = QmiLib
+  FILE_GUID                      = d89e2362-25c4-129a-4ad8-320bd3a683ea
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = QmiLib
+
+
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS = -DFEATURE_CH_MIGRATION_FREE -DFEATURE_THREADLESS_ENV -DFEATURE_IPC_ROUTER_XAL_GLINK_SUPPORTED
+  GCC:*_*_*_CC_FLAGS = -DFEATURE_CH_MIGRATION_FREE -DFEATURE_THREADLESS_ENV -DFEATURE_IPC_ROUTER_XAL_GLINK_SUPPORTED
+  MSFT:*_*_*_CC_FLAGS = -DFEATURE_CH_MIGRATION_FREE -DFEATURE_THREADLESS_ENV -DFEATURE_IPC_ROUTER_XAL_GLINK_SUPPORTED
+
+[BuildOptions.ARM]
+  RVCT:*_*_*_CC_FLAGS = -J Library/MuslLib/musl/include
+
+[Sources.common]
+  common/qmi_common.h
+  common/qmi_common_target.h
+  common/qmi_fw_init.c
+  common/qmi_loopback.c
+  encdec/qmi_idl_accessor.c
+  encdec/qmi_idl_lib.c
+  encdec/qmi_idl_lib_target.h
+  qcci/qmi_cci_common.c
+  qcci/qmi_cci_common.h
+  qcci/qmi_cci_target.c
+  qcci/qmi_cci_target.h
+  qcci/qmi_cci_xport_ipc.c
+  qcsi/qmi_csi_common.c
+  qcsi/qmi_csi_common.h
+  qcsi/qmi_csi_target.c
+  qcsi/qmi_csi_target.h
+  qcsi/qmi_csi_xport_ipc.c
+
+[LibraryClasses]
+  PcdLib
+  BaseLib
+  ArmLib
+  UefiBootServicesTableLib
+  UefiLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  DALModEnvLib
+  IpcrtrLib
+  
+[Packages]
+  QcomPkg/QcomPkg.dec
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+# This is required otherwise we get linker errors
+[Protocols]
+  gEfiIpccProtocolGuid
+  gEfiGLINKProtocolGuid
+
+[FixedPcd]
+  gQcomTokenSpaceGuid.PcdSmemInformation
+[BuildOptions.AARCH64]
+MSFT: *_*_*_PLATFORM_FLAGS == /wd4312 /wd4245 /wd4018 /wd4244 /wd4146 /wd4308 /wd4706 /wd4389 /wd4152 /wd4459 /wd4204 /wd4311 /wd4090 /wd4701 /wd4457 /wd4295 /wd4703 /wd4133 /wd4047 /wd4221 /wd4020 /wd4057 /wd4334 /wd4113 /wd4267

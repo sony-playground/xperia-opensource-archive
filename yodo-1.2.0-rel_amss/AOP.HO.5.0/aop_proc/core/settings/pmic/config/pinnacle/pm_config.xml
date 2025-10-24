@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ * @brief: Configuration file for the Test driver
+ * 
+ * Copyright (c) 2020 by Qualcomm Technologies Incorporated. All Rights Reserved.
+ * 
+ * $DateTime:$
+ * $Header:$
+ * $Change:$
+-->
+
+<driver name="NULL">
+    <device name="pmic">
+        <props name="PM_PROP_SMPS_RAIL" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            smps_rail
+        </props>
+        <props name="PM_PROP_SMPS_RSRC" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            smps_rsrc
+        </props>
+        <props name="PM_PROP_SMPS_DEP" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            smps_dep
+        </props>
+        <props name="PM_PROP_LDO_RAIL" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            ldo_rail
+        </props>
+        <props name="PM_PROP_LDO_RSRC" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            ldo_rsrc
+        </props>
+        <props name="PM_PROP_LDO_DEP" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            ldo_dep
+        </props>
+        <props name="PM_PROP_BOB_RAIL" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            bob_rail
+        </props>
+        <props name="PM_PROP_BOB_RSRC" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            bob_rsrc
+        </props>
+        <props name="PM_PROP_BOB_DEP" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            bob_dep
+        </props>
+        <props name="PM_PROP_CLK_INFO" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            clk_info
+        </props>
+        <props name="PM_PROP_CLK_RSRC" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            clk_rsrc
+        </props>
+        <props name="PM_PROP_CLK_DEP" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            clk_dep
+        </props>
+        <props name="PM_PROP_PSTM_INFO" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            pstm_info
+        </props>
+        <props name="PM_PROP_TARGET_RSRC_INFO" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            target_rsrc_info
+        </props>
+        <props name="PM_PROP_TARGET_RSRC_NUM" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            num_of_target_rsrc
+        </props>
+        <props name="PM_PROP_RPMH_DRV_ID" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            rpmh_drv_id
+        </props>
+        <props name="PM_PROP_SMPS_NUM" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            num_of_smps
+        </props>
+        <props name="PM_PROP_LDO_NUM" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            num_of_ldo
+        </props>
+        <props name="PM_PROP_BOB_NUM" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            num_of_bob
+        </props>
+        <props name="PM_PROP_PSTM_SEQ" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            num_of_pstm_seq
+        </props>
+        <props name="PM_PROP_DEP_SMPS7" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            smps7_b_child_dep
+        </props>
+        <props name="PM_PROP_DEP_SMPS8" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            smps8_b_child_dep
+        </props>
+        <props name="PM_PROP_DEP_SMPS10" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            smps10_b_child_dep
+        </props> 
+        <props name="PM_PROP_PERIPH_BITMAP" type="AOPPROP_ATTR_TYPE_STRUCT_PTR">
+            pm_periph_bitmap
+        </props>       
+    </device>
+</driver>

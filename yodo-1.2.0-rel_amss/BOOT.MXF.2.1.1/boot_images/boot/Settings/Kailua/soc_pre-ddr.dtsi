@@ -1,0 +1,30 @@
+// soc_pre-ddr.dtsi
+//
+// Provides Common SoC settings for Kailua
+
+/ {
+	compatible = "qcom,kailua";
+	model = "qcom,kailua";
+
+	#address-cells = <2>;
+	#size-cells = <2>;
+
+	soc: soc {
+		#address-cells = <1>;
+		#size-cells = <1>;
+	};
+
+	sw: sw { };
+};
+
+// Core Pre-DDR SoC settings here
+
+#include "Core/Boot/ddr_common.dtsi"
+#include "Core/Boot/ddr_target.dtsi"
+#include "../SW/Core/Boot/boot.dtsi"	/* Boot SW configuration settings */
+#include "Core/PMIC/pmic_pre_ddr.dtsi"
+#include "Core/SocInfra/PlatformInfo/PlatformInfo.dtsi"
+#include "Core/SocInfra/TLMM/tlmm.dtsi"
+#include "Core/Storage/UFS/ufs.dtsi"
+#include "Core/MPROC/SMEM/smem.dtsi"
+#include "../SW/Core/Power/BootTempCheck/BootTempCheckDT.dtsi"

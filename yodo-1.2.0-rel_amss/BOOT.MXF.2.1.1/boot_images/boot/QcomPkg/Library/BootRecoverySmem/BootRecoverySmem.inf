@@ -1,0 +1,36 @@
+#/** @file BootRecoverySmem.inf
+#
+#  BootRecoverySmemLib
+#  
+#  Copyright 2021 by Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 06/29/21   sp  Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BootRecoverySmemLib
+  FILE_GUID                      = BD4CC3FB-4872-DDC9-2CE9-AF999D7B9264
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BootRecoverySmemLib
+
+[Sources.common]
+  boot_recovery_smem.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomSdkPkg/SdkLoader.dec
+

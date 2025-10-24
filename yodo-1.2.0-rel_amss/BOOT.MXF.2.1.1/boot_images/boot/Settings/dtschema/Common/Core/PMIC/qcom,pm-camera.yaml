@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,pm-camera.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm PM Camera
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   The Qualcomm compatible node...
+   Links to any data sheet or HW specific details
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,pm-camera
+ 
+  rst-signal:
+    $ref: /schemas/types.yaml#/definitions/uint32-array
+    description: reset gpio
+
+required:
+  - compatible
+  - rst-signal
+
+additionalProperties: false
+
+examples:
+  - |
+    camera {
+      compatible = "qcom,pm-camera";  
+      
+      rst-signal = <7 11>;
+    };

@@ -1,0 +1,28 @@
+#/** @file LogsToMediaLib.dec
+#  
+#  Dec file for LogsToMediaLib
+#  
+#  Copyright (c) 2021 Qualcomm Technologies, Inc. All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 07/11/21   digants  Initial revision
+#
+#==============================================================================
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = LogsToMediaLib
+  PACKAGE_GUID                   = 976A624F-45C0-D533-99E7-F1926F1D8DE3
+  PACKAGE_VERSION                = 0.1
+
+
+[Includes.common]
+  ./

@@ -1,0 +1,32 @@
+# @file PmicPsiLib.inf
+# 
+# PMIC Data image for code space storage
+#
+# Copyright (c) 2014-2018, 2020-2021  Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#=============================================================================
+
+[Defines]
+  INF_VERSION       = 0x00010005
+  BASE_NAME         = PmicPsiLib
+  FILE_GUID         = 5BA0BCB0-C7B9-11EB-9345-0800200C9A66
+  MODULE_TYPE       = BASE
+  VERSION_STRING    = 1.0
+  LIBRARY_CLASS     = PmicPsiLib
+
+
+ 
+[Sources.common]
+   ../../../../../Library/PmicLib/target/kailua/psi/pm_psi.c
+   
+[Sources.AARCH64]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec 
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec 
+  QcomPkg/XBLLoaderApi.dec  
+  QcomPkg/SocPkg/Kailua/Library/PmicLib/loader/PmicLoaderLib.dec
+  QcomPkg/SocPkg/Kailua/Library/PmicLib/PmicLib.dec
+

@@ -1,0 +1,57 @@
+#/** @file EnterpriseMgtApp.inf
+#
+#  Build file for the EnterpriseMgtApp test app.
+#
+#  Copyright (c) 2020, Qualcomm Technologies Inc. All rights reserved.
+#
+#
+#**/
+
+#==============================================================================
+# $Header:  $
+#                              EDIT HISTORY
+#
+#
+# when          who     what, where, why
+# ----------    ---    --------------------------------------------------------
+# 02/21/2020     hh    Initial version.
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = EnterpriseMgtApp
+  FILE_GUID                      = 61149BE8-D161-4DC1-B097-2157D15AD5D6
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = EnterpriseMgtAppMain
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -O0 -fno-inline
+
+[Sources]
+  EnterpriseMgtApp.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  EnterpriseMgtLib
+  QcomLib
+  
+[Guids]
+
+[Protocols]
+  gQcomEnterpriseMgtProtocolGuid   ## CONSUMES
+  gEfiTLMMProtocolGuid             ## CONSUMES
+

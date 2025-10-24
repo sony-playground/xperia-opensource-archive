@@ -1,0 +1,47 @@
+##/** @file ClockApiLib.inf
+#
+#  Clock API library
+#
+#  Copyright (c) 2020,  Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ClockApiLib
+  FILE_GUID                      = AC13F43F-5698-4F4A-A89B-C6501ED5A342
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ClockApiLib
+
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS = -DTARGET_UEFI
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DTARGET_UEFI
+
+[Sources.common]
+  ClockApi.c
+
+[Packages]
+  QcomPkg/QcomPkg.dec
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+
+[Protocols]
+  gEfiClockProtocolGuid
+
+[Guids]
+  gQcomTokenSpaceGuid
+  gEfiEventExitBootServicesGuid
+
+[Depex]
+  TRUE

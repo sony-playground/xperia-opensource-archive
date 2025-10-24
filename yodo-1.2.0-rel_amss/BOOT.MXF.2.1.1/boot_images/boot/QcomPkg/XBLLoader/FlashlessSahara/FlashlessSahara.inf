@@ -1,0 +1,43 @@
+#/** @file FlashlessSaharaLib.inf
+#
+#  FlashlessSaharaLib
+#  
+#  Copyright (c) 2019-2022 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 05/24/22   rama    Remvoved RamdumpTableLib
+# 02/11/22   rama    changes to support sahara logging
+# 11/26/19   rhy     Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FlashlessSaharaLib
+  FILE_GUID                      = BD4CC3FB-4872-DDC9-2CE9-AF999D7B9264
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = FlashlessSaharaLib
+
+[Sources.common]
+  boot_flashless_sahara.c
+  boot_sahara.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+
+[LibraryClasses]
+  ConfigContextLib
+  MuslLib
+  SaharaLogging

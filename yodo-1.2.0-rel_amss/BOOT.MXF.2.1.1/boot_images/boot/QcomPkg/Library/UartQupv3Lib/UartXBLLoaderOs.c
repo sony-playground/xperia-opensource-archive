@@ -1,0 +1,223 @@
+/*==================================================================================================
+
+FILE: uart_os.c
+
+DESCRIPTION: This module provides the os based functionalities for the UART.
+
+Copyright (c) 2021 Qualcomm Technologies, Inc.
+        All Rights Reserved.
+Qualcomm Technologies, Inc. Confidential and Proprietary.
+
+==================================================================================================*/
+/*==================================================================================================
+                                            DESCRIPTION
+====================================================================================================
+
+GLOBAL FUNCTIONS:
+   uart_busy_wait
+   uart_clock_open
+   uart_clock_close
+   uart_get_driver_properties
+   uart_get_properties
+   uart_interrupt_close
+   uart_interrupt_done
+   uart_interrupt_open
+   uart_tlmm_open
+   uart_tlmm_close
+   uart_busy_wait
+
+==================================================================================================*/
+/*==================================================================================================
+Edit History
+
+$Header: //components/rel/core.boot/6.1.1/QcomPkg/Library/UartQupv3Lib/UartXBLLoaderOs.c#1 $
+
+when       who     what, where, why
+--------   ---     --------------------------------------------------------
+04/26/22   MP		Removed Clock_Handle NULL validation
+11/7/16    VV       Initial revision
+
+==================================================================================================*/
+
+/*-------------------------------------------------------------------------
+* Include Files
+* ----------------------------------------------------------------------*/
+#include "UartOs.h"
+#include "UartApi.h"
+#include "UartDefs.h"
+#include "UartLog.h"
+#include "Clock.h"
+#include "DDITlmm.h"
+#include "UartSettings.h"
+#define UART_LOGGING_FILE_ID 40
+
+/*==================================================================================================
+                                              TYPEDEFS
+==================================================================================================*/
+
+/*==================================================================================================
+                                              GLOBALS
+==================================================================================================*/
+
+/*==================================================================================================
+                                          GLOBAL FUNCTIONS
+==================================================================================================*/
+
+/*==================================================================================================
+
+FUNCTION: uart_busy_wait
+
+DESCRIPTION:
+
+==================================================================================================*/
+void uart_busy_wait(uint32 usecs)
+{
+   return;
+}
+
+/*==================================================================================================
+
+FUNCTION: uart_clock_close
+
+DESCRIPTION:
+
+==================================================================================================*/
+uart_result uart_clock_close(uart_context* h)
+{
+   return UART_SUCCESS;
+}
+
+/*==================================================================================================
+
+FUNCTION: uart_clock_open
+
+DESCRIPTION:
+
+==================================================================================================*/
+uart_result uart_clock_open(uart_context* h, uint32 input_freq)
+{
+  ClockResult res = TRUE ;
+  ClockIdType qup_id;
+  ClockHandle clock_handle;
+
+  res = Clock_Attach(&clock_handle, NULL);
+  if (res != CLOCK_SUCCESS) {
+    return UART_ERROR;
+  }
+        
+  res = Clock_GetId(clock_handle, (const char *)(h->properties->core_clock_id), &qup_id);
+  if (res != CLOCK_SUCCESS) { 
+    return UART_ERROR;
+  }
+
+  res = Clock_SetFrequency(clock_handle,
+                           qup_id,
+                           input_freq / 1000,
+                           CLOCK_FREQUENCY_KHZ_AT_LEAST,
+                           NULL);
+  if (res != CLOCK_SUCCESS) { 
+    return UART_ERROR;
+  } 
+ 
+  res = Clock_Enable(clock_handle, qup_id);
+  if (res != CLOCK_SUCCESS) { 
+    return UART_ERROR;
+  }
+  
+  return UART_SUCCESS;
+}
+
+/*==================================================================================================
+
+FUNCTION: uart_get_driver_propertiess
+
+DESCRIPTION:
+
+==================================================================================================*/
+uart_result uart_get_driver_properties( void )
+{
+   return UART_SUCCESS;
+}
+
+/*==================================================================================================
+
+FUNCTION: uart_get_properties
+
+DESCRIPTION:
+
+==================================================================================================*/
+uart_result uart_get_properties(uart_context* h)
+{
+   h->properties = uart_settings_get_properties(h->port_id);
+   return UART_SUCCESS;
+
+}
+/*==================================================================================================
+
+FUNCTION: uart_interrupt_close
+
+DESCRIPTION:
+
+==================================================================================================*/
+uart_result uart_interrupt_close(uart_context* h)
+{
+    return UART_SUCCESS;
+}
+
+/*==================================================================================================
+
+FUNCTION: uart_interrupt_done
+
+DESCRIPTION:
+
+==================================================================================================*/
+uart_result uart_interrupt_done(uart_context* h)
+{
+    return UART_SUCCESS;
+}
+
+/*==================================================================================================
+
+FUNCTION: uart_interrupt_open
+
+DESCRIPTION:
+
+==================================================================================================*/
+uart_result uart_interrupt_open(uart_context* h, void* isr)
+{
+   return UART_SUCCESS;
+
+}
+
+/*==================================================================================================
+
+FUNCTION: uart_tlmm_close
+
+DESCRIPTION:
+
+==================================================================================================*/
+uart_result uart_tlmm_close(uart_context* h)
+{
+   return UART_SUCCESS;
+}
+
+/*==================================================================================================
+
+FUNCTION: uart_tlmm_open
+
+DESCRIPTION:
+
+==================================================================================================*/
+uart_result uart_tlmm_open(uart_context* h)
+{
+   if(h->properties->gpio_tx_config != 0)
+   {
+      Tlmm_ConfigGpioGroup(DAL_TLMM_GPIO_ENABLE,(DALGpioSignalType*)&h->properties->gpio_tx_config, 1);
+   }
+   if(h->properties->gpio_rx_config != 0)
+   {
+      Tlmm_ConfigGpioGroup(DAL_TLMM_GPIO_ENABLE,(DALGpioSignalType*)&h->properties->gpio_rx_config, 1);
+   }
+
+   return UART_SUCCESS;
+}

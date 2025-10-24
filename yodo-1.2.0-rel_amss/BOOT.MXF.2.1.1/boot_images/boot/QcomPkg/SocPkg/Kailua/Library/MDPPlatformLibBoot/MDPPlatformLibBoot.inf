@@ -1,0 +1,35 @@
+#/** @file MDPPlatformLibBoot.inf
+#  
+#  MDP PLatform library
+#  
+#  Copyright (c) 2021-2022 Qualcomm Technologies, Inc.
+#  All Rights Reserved.
+#  Confidential and Proprietary - Qualcomm Technologies, Inc.
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MDPPlatformLibBoot
+  FILE_GUID                      = 0176B88A-D7CB-42FF-B1B4-E35A49E2CC16
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MDPPlatformLibBoot
+
+[BuildOptions.AARCH64]
+GCC:*_*_*_CC_FLAGS = -Wno-unused-but-set-variable
+
+[Sources.common]
+  MDPPlatformLib.c
+ 
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/XBLRamDump/XBLRamDump.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+ 
+[FixedPcd]
+ gQcomTokenSpaceGuid.PcdDisplayForceSwRenderer
+  
+

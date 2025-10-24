@@ -1,0 +1,50 @@
+
+#===============================================================================
+#
+# PMIC INC PATHs
+#
+# GENERAL DESCRIPTION
+#    PMIC INC PATHs
+#
+# Copyright (c) 2016 by Qualcomm Technologies Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/pmic/build/pmic.api#1 $
+#  $DateTime: 2021/10/26 22:03:12 $
+#  $Author: pwbldsvc $
+#  $Change: 33677139 $
+#===============================================================================
+
+Import('env')
+
+#-------------------------------------------------------------------------------
+# Publish Public APIs
+# These are accessible internal or external to CoreBSP
+#-------------------------------------------------------------------------------
+
+env.PublishPublicApi('PMIC', [
+    "${INC_ROOT}/core/api/pmic/pm",
+    "${INC_ROOT}/core/api/pmic/spmi",
+    "${INC_ROOT}/core/api/pmic/vrm",
+])
+
+#-------------------------------------------------------------------------------
+# Publish Restricted APIs
+# These are accessible only internal to CoreBSP
+#-------------------------------------------------------------------------------
+
+env.PublishRestrictedApi('PMIC', [
+    "${INC_ROOT}/core/pmic/inc/pm",
+    "${INC_ROOT}/core/pmic/inc/spmi",
+    "${INC_ROOT}/core/pmic/inc/vrm",
+])
+
+# --------------------------------------------------------------------------- #
+# Search for additional APIs                                                  #
+# --------------------------------------------------------------------------- #
+
+env.LoadAPIUnits()
+

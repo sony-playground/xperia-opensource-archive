@@ -1,3 +1,0 @@
-Tests that we don't inline a callee with
-  Return -> TryBoundary ->Exit
-chain if the caller has irreducible loops.

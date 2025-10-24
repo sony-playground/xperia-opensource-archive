@@ -1,0 +1,35 @@
+#/** @file ClockLib.inf
+#
+#  Component description file for ClockLib module.
+#
+#  Copyright (c) 2018-2021  Qualcomm Technologies, Inc. All rights reserved.
+#
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010006
+  BASE_NAME                      = ClockLib
+  FILE_GUID                      = 9FAC2E72-4842-F555-2E0B-59807D44C66F
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.1
+  LIBRARY_CLASS                  = ClockLib
+
+
+[Sources.common]
+  ClockImage.c
+  ClockTarget.c
+  ClockCPU.c
+  ClockBSP.c
+  ClockTargetBSP.c
+  ClockPropData.c
+  ClockImageBIST.c
+
+[LibraryClasses]
+  HALclkSharedLib   # for PLL implimetation
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+

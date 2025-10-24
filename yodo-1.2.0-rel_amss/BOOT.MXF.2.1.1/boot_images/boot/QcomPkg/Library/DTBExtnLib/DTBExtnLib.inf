@@ -1,0 +1,48 @@
+#/** @file DTBExtnLib.inf
+#  
+#  
+#  Copyright (c) 2020-2021 Qualcomm Technologies, Inc.
+#  All rights reserved.
+#  Qualcomm Confidential and Proprietary
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 07/16/20   tmt     Create Library initially
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DTBExtnLib
+  FILE_GUID                      = e1b9398f-2783-435c-9486-41a83cc09cf0
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DTBExtnLib
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -DPORT_ARMv8
+
+[Sources]
+  DTBExtnLib_env.h
+  DTBExtnLib_blob.c
+  DTBExtnLib_node.c
+  DTBExtnLib_prop.c
+  DTBExtnLib_driver.c
+  DTBHexDump.c
+  DTBExtnLib_overlay.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/Library/MuslLib/MuslLib.dec
+
+[LibraryClasses]
+  MuslLib
+  FdtLib

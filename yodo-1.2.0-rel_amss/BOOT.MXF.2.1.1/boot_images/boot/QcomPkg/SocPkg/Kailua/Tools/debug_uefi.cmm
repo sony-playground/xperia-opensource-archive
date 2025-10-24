@@ -1,0 +1,228 @@
+;============================================================================
+;  Name:
+;    debug_uefi.cmm
+;
+;  Description:
+;     Debug UEFI Environment
+;
+; Copyright (c) 2013-2021 Qualcomm Technologies Incorporated.
+; All Rights Reserved.
+; Qualcomm Technologies Confidential and Proprietary
+;
+;----------------------------------------------------------------------------
+
+;============================================================================
+;  CMM script variables
+;============================================================================
+global &Variant
+global &RelFolder
+global &UefiBase
+global &TargetInnerDir
+global &TargetMiddleDir
+
+local &TargetPkg
+local &UefiRamEntryAddr
+local &RamFvAddr
+local &Target
+local &CwDir
+local &UefiBinPathSubset
+local &CommonTools
+local &PreSil
+
+;============================================================================
+;External Script Files
+;============================================================================
+local &set_target_specific_api
+local &SystemUp
+local &SystemDown
+
+;---------------------------------------------------
+; Setup area and log
+;---------------------------------------------------
+winclear
+area.clear
+area.reset
+area.create UEFI_Logs 1000. 8192.
+area.select UEFI_Logs
+area.view UEFI_Logs
+
+;---------------------------------------------------
+; Entry point
+;---------------------------------------------------
+ENTRY &OptArgs &Modules
+
+  &Target="Kailua"
+  &TargetPkg="Soc"+"Pkg"
+  &RelFolder="DEBUG"
+
+  &OptArgs=convert.toupper("&OptArgs")
+  &Modules=convert.toupper("&Modules")
+  if ((string.scan("&OptArgs", "REL",0)!=-1))
+  (
+    &RelFolder="RELEASE"
+  )
+
+  ; Check if PreSil Flag is set
+  if ((string.scan("&OptArgs", "SA",0)!=-1))
+  (
+    &PreSil="SA"
+  )
+  if ((string.scan("&OptArgs", "FBC",0)!=-1))
+  (
+    &PreSil="FBC"
+  )
+
+  y.reset
+
+;-----------------------------------------------------------------
+; Mask interrupts during assembler and HLSS single step operations
+;-----------------------------------------------------------------
+  sys.option.imaskhll on
+  sys.option.imaskasm on
+  sys.option.enreset on
+
+
+  ; Setup present and other directories
+  &CwDir=os.ppd()
+  &TargetInnerDir="&CwDir"
+  &TargetMiddleDir="&CwDir"
+
+  if ("&TargetPkg"=="SocPkg")
+  (
+    &UefiBinPathSubset="&Target/Bin"
+
+    ; Update TargetMiddleDir to point to tools folder one level up
+    ; ie change from QcomPkg/SocPkg/<target>/tools to
+    ; QcomPkg/SocPkg/tools
+    &TargetMiddleDir="&CwDir/../../tools"
+
+    ;__FIX__ remove below line and corr dependency in other scripts
+    &CwDir="&CwDir/../../tools"
+  )
+  else
+  (
+    &UefiBinPathSubset="Bin/&Target"
+  )
+  &CommonTools="&TargetMiddleDir/../../Tools"
+
+  ;Update path for
+  &set_target_specific_api="&TargetInnerDir/debug_uefi_target_api.cmm"
+  IF (!OS.FILE("&set_target_specific_api"))
+  (
+    print "Error!! script not found : &set_target_specific_api. "
+    enddo
+  )
+  
+  ;--------------------------------------------------------------
+  ; Set Target Specific Subroutines. Cmm does not seem to allow 
+  ; to "include" another cmm with api defines instead invoke the
+  ; subroutine name along with the script defining it.
+  ;--------------------------------------------------------------
+  &SystemUp="do &set_target_specific_api SystemUp"
+  &SystemDown="do &set_target_specific_api SystemDown"  
+
+  gosub VariantCheck
+  entry &VariantRequested
+
+  do &CommonTools/cmm/variant_setup.cmm &Target &UefiBinPathSubset &VariantRequested
+  print "Setting Variant to &Variant"
+
+  ; Set target specific image address and offsets
+  if !os.file("&TargetInnerDir/configure_target.cmm")
+  (
+    print "Error:  &TargetInnerDir/configure_target.cmm missing !"
+    enddo
+  )
+  else
+  (
+    do &TargetInnerDir/configure_target.cmm
+  )
+
+  GoSub SetArguments &Variant
+  &UefiBase=&UefiRamEntryAddr
+
+  gosub TargetSetup &PreSil
+
+  ;Load T32 UEFI awareness
+  do &CommonTools/cmm/t32_uefi_menu.cmm &TargetInnerDir
+
+  b.d
+
+  ;&UefiBinPathSubset to be passed before optional arguments &OptArgs
+  do &CommonTools/dxe_dbg.cmm &Target &TargetPkg &UefiRamEntryAddr &RamFvAddr &UefiDebugCookieAddr &UefiBinPathSubset &gInfoBlkPtrOffset &OptArgs &Modules 
+  cd &CwDir
+enddo
+
+;---------------------------------------------------
+;SetArguments
+;---------------------------------------------------
+SetArguments:
+  Entry &Varaint
+
+  ; set defaults
+  &UefiRamEntryAddr=&gUefiRamEntryAddr
+  &RamFvAddr=&gRamFvAddr
+
+  local &Ppd
+  &Ppd=OS.PPD()
+  do &Ppd/set_pkg_paths.cmm
+
+  return
+
+TargetSetup:
+  Entry &PreSil
+  &SharedImemBase=0x146AA000
+
+  if (string.scan("&OptArgs", "NORESET",0)==-1)
+  (
+    &SystemDown
+    &SystemUp
+  )
+
+  if (string.scan("&OptArgs", "NOPRESIL",0)!=-1)
+  (
+    &PreSil=""
+  )
+
+  do &TargetMiddleDir/cookies_set.cmm &SharedImemBase &PreSil
+
+  if (("&PreSil"=="SA")||("&PreSil"=="FBC"))
+  (
+    print "Running pre-sil UEFI"
+    do &TargetInnerDir/PreSil/pre_sil.cmm &PreSil &Modules
+
+    if ("&OptArgs"=="SA")
+    (
+        &OptArgs="RAM"
+        &Modules="go"
+    )
+  )
+  else
+  (
+    if (string.scan("&OptArgs", "NOPRESIL",0)==-1)
+    (
+      b.set &UefiRamEntryAddr /o /disablehit
+      go
+    )
+  )
+  wait !run()
+
+  return
+
+VariantCheck:
+  local &VarPos
+  local &VariantLength
+
+  &VariantLength=0x3
+
+  &VarPos=string.scan("&OptArgs", "VAR_", 0)
+  if (&VarPos==-1)
+    return
+
+  &VarExtract=string.ScanAndExtract("&OptArgs", "VAR_", "")
+  &VarExtract=string.split("&VarExtract", ",", 0)
+
+  &VarExtract=string.mid("&OptArgs", &VarPos+0x4, &VariantLength)
+
+  return &VarExtract
+

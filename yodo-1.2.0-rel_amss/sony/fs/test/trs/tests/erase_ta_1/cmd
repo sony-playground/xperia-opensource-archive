@@ -1,0 +1,15 @@
+# Authenticate to allow format TA
+run authenticate_1
+
+# Read and store current TA
+fc Read-partition:TA -f read_res 12
+fd ta_backup -f read_res -s OKAY
+
+# Use erase to remove TA information
+fc erase:TA -s OKAY
+
+# Format new TA
+fc Format-TA -s OKAY
+
+# Restore old TA
+sh restore.sh

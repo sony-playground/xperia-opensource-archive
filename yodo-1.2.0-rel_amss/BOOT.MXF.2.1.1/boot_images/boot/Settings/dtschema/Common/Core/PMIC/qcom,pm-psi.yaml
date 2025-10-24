@@ -1,0 +1,98 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,pm-psi.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm PM PSI
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   Qualcomm PMIC PSI configuration details
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,pm-psi
+  
+  pm-psi-variant:
+    type: object
+    
+    properties:
+    
+      major:
+        description: pm_psi_variant_major
+        $ref: /schemas/types.yaml#/definitions/uint8
+        
+      minor:
+        description: pm_psi_variant_minor
+        $ref: /schemas/types.yaml#/definitions/uint16
+        
+    required:
+       - major
+       - minor       
+  
+  pm-psi-clogic:
+    type: object
+    
+    properties:
+      clogic-version:
+        description: clogic-version
+        $ref: /schemas/types.yaml#/definitions/uint32
+      
+      clogic-data:
+        description: clogic-data
+        $ref: /schemas/types.yaml#/definitions/uint32-array    
+        
+    required:
+       - clogic-version
+  
+  pm-psi-seq:
+    type: object
+    
+    properties:
+    
+      opsi-settings-version:
+        description: opsi-settings-version
+        $ref: /schemas/types.yaml#/definitions/uint32
+      
+      post-device-opsi:
+        description: post-device-opsi
+        $ref: /schemas/types.yaml#/definitions/uint32-array
+    
+    required:
+      - opsi-settings-version
+        
+required:
+  - compatible
+  - pm-psi-variant
+  - pm-psi-clogic
+  - pm-psi-seq
+
+
+additionalProperties: false
+
+examples:
+  - |
+    psi{
+      compatible = "qcom,pm-psi";
+      
+      pm-psi-variant{
+        major = /bits/ 8 <0x0>;
+        minor = /bits/ 16 <0x0>;
+      };
+      
+      pm-psi-seq {    
+        opsi-settings-version = <0>;
+        //post-device-opsi = < 0       0    2      0     0x0150     0xC0    0xFF   0         0 > ;
+      };
+        
+      pm-psi-clogic {    
+        clogic-version = <0>;
+        //clogic-data = < 0    0    0   0x10   0xFF   0x0052        2 > ;
+      };      
+    };
+

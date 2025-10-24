@@ -1,0 +1,153 @@
+#===============================================================================
+#
+# TCS system
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+#   Copyright (c) 2016-2019 Qualcomm Technologies, Inc. (QTI).
+#   All Rights Reserved.
+#   Qualcomm Confidential and Proprietary.
+#   Export of this technology or software is regulated by the U.S. Government.
+#   Diversion contrary to U.S. law prohibited.
+#-------------------------------------------------------------------------------
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/power/pdc/tcs/build/tcs.scons#12 $
+#  $DateTime: 2022/12/02 14:03:35 $
+#===============================================================================
+
+Import('env')
+env = env.Clone()
+
+#-------------------------------------------------------------------------------
+# Source PATH
+#-------------------------------------------------------------------------------
+SRCPATH = '../src'
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+#-------------------------------------------------------------------------------
+# Target Build Options
+#-------------------------------------------------------------------------------
+# Checking the presence for target specific config/header files else
+# compiling with stubs
+tgt_paths = [ SRCPATH + '/target/${MSM_ID}/pdc_tcs_target.c' ]
+'''
+#todo: enable once external build pick correct config
+for apath in tgt_paths:
+    if not env.PathExists(apath):
+        env.PrintWarning('PDC_TCS: Using stubs')
+        env['MSM_ID'] = 'stubs'
+        env.Append(CFLAGS = '-Wno-error')
+        break
+'''
+#Turn off optimizations for easier debug
+#env.Append(CCFLAGS = ' -O0')
+
+
+#-------------------------------------------------------------------------------
+# Internal depends within CoreBSP
+#-------------------------------------------------------------------------------
+CBSP_API = [
+    'DAL',
+    'HAL',
+    'DEBUGTOOLS',
+    'DEBUGTRACE',
+    'POWER',
+    'POWER_PDC',
+    'SERVICES',
+    'SYSTEMDRIVERS',
+    'KERNEL',
+    'PMIC',
+    'MPROC',
+    'AOP_SETTINGS',
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequirePrivateApi(['POWER_PDC_CMN'])
+
+
+#-------------------------------------------------------------------------------
+# Target Specific Defines
+#-------------------------------------------------------------------------------
+
+# On some of the targets, PDC TCS driver has some specific setup. If a given 
+# target requires such setup, add the Defines here for that target.
+
+tgt_defs = {
+    '8250' : ['SM8250_TARGET_CONFIG'],
+    'Saipan' : ['Saipan_TARGET_CONFIG'],
+    '55' : ['SDX55_TARGET_CONFIG']
+
+    # other (target, list) pairs
+}
+env.Append(CPPDEFINES = tgt_defs.get(env['MSM_ID'], []))
+
+
+#-------------------------------------------------------------------------------
+# SOURCE FILES
+#-------------------------------------------------------------------------------
+
+PDC_TCS_SOURCES = [
+    '${BUILDPATH}/pdc_tcs.c',
+    '${BUILDPATH}/target/${MSM_ID}/pdc_tcs_target.c'
+]
+
+PDC_TCS_UPDATE_SRCS = [
+  '${BUILDPATH}/pdc_tcs_contents.c',
+  ]
+
+if env['MSM_ID'] == 'waipio':
+   env.Append(CPPDEFINES = 'WAIPIO_TARGET_CONFIG')
+if env['MSM_ID'] == 'kailua':
+   env.Append(CPPDEFINES = 'KAILUA_TARGET_CONFIG')
+if env['MSM_ID'] == 'hamoa':
+   env.Append(CPPDEFINES = 'HAMOA_TARGET_CONFIG')
+if env['MSM_ID'] == 'fillmore':
+   env.Append(CPPDEFINES = 'FILLMORE_TARGET_CONFIG')
+if env['MSM_ID'] == 'kapiti':
+   env.Append(CPPDEFINES = 'KAPITI_TARGET_CONFIG')
+if env['MSM_ID'] == 'lanai':
+   env.Append(CPPDEFINES = 'LANAI_TARGET_CONFIG')
+   env.Append(CPPDEFINES = 'LANAI_STUBS')
+   env.Append(CPPDEFINES = 'RISCV_TARGET')
+if env['MSM_ID'] == 'pinnacle':
+   env.Append(CPPDEFINES = 'PINNACLE_TARGET_CONFIG')
+if env['MSM_ID'] == 'kuno':
+   env.Append(CPPDEFINES = 'KUNO_TARGET_CONFIG')
+
+if env['MSM_ID'] in ['waipio','kailua','lanai', 'hamoa','kapiti']:  #kapiti_todo : hwio compilation issue 
+  env.Append(CPPDEFINES = 'DYNAMIC_PDC_TCS_UPDATE') #for common files
+  PDC_TCS_SOURCES = PDC_TCS_SOURCES + PDC_TCS_UPDATE_SRCS
+#-------------------------------------------------------------------------------
+# RINIT FILES
+#-------------------------------------------------------------------------------
+
+# Unlike other modules, here we are checking if rinit_files path exists for a
+# given target since the PW could have targets where PDC TCSs are not 
+# initialized from RINIT and as such those targets would not have the files.
+if 'USES_RINIT_PARSER' in env:
+    rinit_files = '${BUILD_ROOT}/core/power/pdc/tcs/cfg/${MSM_ID}'
+    if env.PathExists(rinit_files):
+        env.AddRinitInfo('CORE_AOP', {'files' : rinit_files})
+
+
+#-------------------------------------------------------------------------------
+# Create libraries
+#-------------------------------------------------------------------------------
+env.Append(CCFLAGS    = ' -mlong-calls')
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/pdc_tcs', PDC_TCS_SOURCES)
+
+#-------------------------------------------------------------------------------
+# QDSS SW Events
+#-------------------------------------------------------------------------------
+if 'USES_QDSS_SWE' in env:
+    QDSS_IMG = ['QDSS_EN_IMG']
+    events = [
+             ['PDC_SLEEP_TCS_FIRST=900', 'PDC_SLEEP_TCS_FIRST'],
+             ['WLAN_PDC_SEARCH_NOT_FOUND', 'Not found (res_addr: 0x%x) in range (min_tcs: 0x%x) to (max_tcs: 0x%x)'],
+             ['WLAN_PDC_EMPTY_TCS_RESULT', 'Found empty slot at TCS:(0x%x) CMD:(0x%x)'],
+             ['WLAN_PDC_WHITELIST_VIOLATION', 'Aborting, HLOS tried voting on resource not allowed'],
+             ['PDC_SLEEP_TCS_LAST=1000', 'PDC_SLEEP_TCS_LAST'],
+             ]
+    env.AddSWEInfo(QDSS_IMG, events)
+

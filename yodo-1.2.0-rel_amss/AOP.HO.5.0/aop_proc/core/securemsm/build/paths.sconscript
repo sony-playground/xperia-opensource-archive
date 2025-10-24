@@ -1,0 +1,48 @@
+#===============================================================================
+#
+# SECUREMSM Paths
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2021 by Qualcomm Technologies Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/securemsm/build/paths.sconscript#1 $
+#  $DateTime: 2021/10/26 22:03:12 $
+#  $Author: pwbldsvc $
+#  $Change: 33677139 $
+#                      EDIT HISTORY FOR FILE
+#                      
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#  
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 01/26/15   wt      Added AOSTLM API
+#===============================================================================
+Import('env')
+
+# Public APIs these are accecible by anyone internal or external to CoreBSP
+env.PublishPublicApi('SECUREMSM', [
+   "${INC_ROOT}/core/api/securemsm",
+   "${INC_ROOT}/core/api/securemsm/aostlm",
+   "${INC_ROOT}/core/api/securemsm/unifiedcrypto",
+])
+
+# Restricted APIs these are accecible by anyone within CoreBSP
+env.PublishRestrictedApi('SECUREMSM', [
+   "${INC_ROOT}/core/api/securemsm",
+   "${INC_ROOT}/core/api/securemsm/aostlm",
+   "${INC_ROOT}/core/securemsm/cryptodrivers/prng/shared/inc",
+   "${INC_ROOT}/core/securemsm/cryptodrivers/prng/test/inc",
+   "${INC_ROOT}/core/api/securemsm/secboot",
+   "${INC_ROOT}/core/api/securemsm/crypto",
+   "${BUILD_ROOT}/core/securemsm/secboot/api",
+   "${BUILD_ROOT}/core/securemsm/secmath/shared/inc",
+])
+
+env.LoadAPIUnits()

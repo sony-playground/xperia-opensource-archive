@@ -1,0 +1,75 @@
+﻿/*===========================================================================
+                             aop_settings_autogen.c
+
+DESCRIPTION:
+  Data for aop settings
+
+Copyright (c) 2020 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+QUALCOMM Proprietary.  Export of this technology or software is regulated
+by the U.S. Government. Diversion contrary to U.S. law prohibited.
+===========================================================================*/
+//===========================================================================
+//                     Includes and Variable Definitions
+//===========================================================================
+
+//---------------------------------------------------------------------------
+// Include Files
+//---------------------------------------------------------------------------
+#include "comdef.h"
+#include "aop_settings.h"
+%for include in include_list:
+#include "${include}"
+%endfor
+
+//---------------------------------------------------------------------------
+// Constant / Define Declarations
+//--------------------------------------------------------------------------
+#define ARRAY_SIZE(arr) sizeof(arr)/sizeof(arr[0])
+
+//---------------------------------------------------------------------------
+// Type Declarations
+//---------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------
+// Local Object Definitions
+//---------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------
+// Static Variable Definitions
+//---------------------------------------------------------------------------
+%for device in device_list:
+property_type_t ${device['name']}_prop_arr[] = 
+{
+%for property_name in device['property_list']:
+  {
+    .prop_id =  ${device['property_list'][property_name]['id']}, /*${property_name}*/
+    .prop_val = ${device['property_list'][property_name]['val']},
+  },
+%endfor
+};
+
+%endfor
+
+device_type_t devices[] __attribute__((used)) = {
+%for device in device_list:
+  {
+    .device_id = ${device['id']}, /*${device['name']}*/
+    .num_props_for_device = ARRAY_SIZE(${device['name']}_prop_arr),
+    .props = (property_type_t*)&${device['name']}_prop_arr
+  },
+%endfor
+};
+
+__attribute__((section("aop_devcfg_top_sec")))
+volatile aop_devcfg_top_t aop_devcfg_top = 
+{
+  .pDevices = (device_type_t*)(&devices),
+  .num_devices = ARRAY_SIZE(devices),
+  .cookie = 0xA0DA7A,
+};
+
+
+void aop_settings_init(void)
+{ //Need to have some code touching the data else, linker optimizes out.
+  aop_devcfg_top.cookie = 0xDEADC0DE;
+}

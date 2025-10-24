@@ -1,0 +1,49 @@
+// Core/Storage/SDCC/sdcc.dtsi
+// core storage HW settings
+
+#include "sdcc_defines.h" 
+
+&soc {
+	  #address-cells = <1>;
+	  #size-cells = <1>;
+      sdcc: sdc1@8804000 {
+         compatible = "qcom,sdcc";
+         reg = <0x8804000 0x00001000>;
+
+	     EnableLogging = /bits/ 8 <0>; 
+
+	     DriveStrength = <0x1FE4>; 
+	     MaxSpeedMode = /bits/ 8 <SDCC_SDR104_MODE>; 
+
+	     HsrSettings {
+	        DLLConfig = <0x7442C>;
+	        DLLTestCtrl = <0x1800000>; 
+	        DDRConfig = <0x80040868>; 
+	        DLLUserCtrl = <0x090106C0>;
+            DLLConfig2 = <0x5400>;
+		    DLLConfig3 = <0x08>;
+			
+	        SDR104 {
+		       V1 {
+		          DLLConfig2 = <0x87C00>;
+		          DLLConfig3 = <0x08>; 
+               };
+		       V2 {
+		          DLLConfig2 = <0x8A800>;
+		          DLLConfig3 = <0x10>; 
+		       };
+		    };
+
+	        SDR50 {
+		       DLLConfig2 = <0x5400>;
+		       DLLConfig3 = <0x08>; 
+		    };
+         };
+      };
+};
+
+
+
+
+
+

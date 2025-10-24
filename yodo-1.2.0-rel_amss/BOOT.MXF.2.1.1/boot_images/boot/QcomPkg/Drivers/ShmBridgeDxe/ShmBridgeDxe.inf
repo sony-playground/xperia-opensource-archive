@@ -1,0 +1,31 @@
+#/** @file            ShmBridgeDxeRelease.inf
+#  
+#    Copyright (c) 2021  Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+#=============================================================================
+#                              EDIT HISTORY
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+#
+#
+# when       who      what, where, why
+# --------   ---      --------------------------------------------------------
+# 05/23/21   shl      Initial version
+#
+#=============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ShmBridgeDxe
+  FILE_GUID                      = 6FBA2FAA-9F31-4909-8414-9B612617B447
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = ShmBridgeEntryPoint
+
+[Binaries.Arm]
+   PE32|ShmBridgeDxe.efi|RELEASE
+
+[Binaries.AARCH64]
+   PE32|AARCH64/ShmBridgeDxe.efi|RELEASE

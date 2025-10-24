@@ -1,0 +1,41 @@
+#/** @file LoggerMhi.inf
+#
+#  Logger MHI Lib
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 08/10/20   ck       Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LoggerMhiLib
+  FILE_GUID                      = D3425F32-78B9-4DAC-A251-405A5A8C325B
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LoggerMhiLib
+
+
+[Sources.common]
+  boot_logger_mhi.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/LoaderFramework/LoaderFrameworkApi.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+
+
+[LibraryClasses]

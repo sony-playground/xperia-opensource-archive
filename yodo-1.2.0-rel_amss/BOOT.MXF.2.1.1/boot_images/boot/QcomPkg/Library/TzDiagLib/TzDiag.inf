@@ -1,0 +1,50 @@
+#/** @file TzDiag.inf
+#  
+#  TZ Diag Library INF file
+#  
+#  Copyright (c) 2020   Qualcomm Technologies, Inc. All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 08/28/20   dpk     created
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = TzDiagLib
+  FILE_GUID                      = 77560602-F4F5-4D85-9329-2C6098C1BEEA
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = TzDiagLib
+
+[Sources.common]
+  TzDiag.c
+  TzDiagConfig.c  
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  #QcomPkg/QcomModulePkg.dec
+
+[LibraryClasses]
+  MemoryAllocationLib
+  UefiLib
+  DebugLib
+  UncachedMemoryAllocationLib
+  QcomBaseLib
+
+[Protocols]
+  gQcomScmProtocolGuid
+  gEfiChipInfoProtocolGuid

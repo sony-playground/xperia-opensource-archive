@@ -1,0 +1,46 @@
+#  @file  
+#                    ButtonsLib.INF
+#
+#
+#   Copyright (c) 2019-2022 Qualcomm Technologies, Inc. All rights reserved.
+#   Qualcomm Technologies Proprietary and Confidential.
+#
+
+#=============================================================================
+#                              EDIT HISTORY
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+#
+#
+# when         who      what, where, why
+# ----------   ---      ---------------------------------------------------------
+# 2019-2020-10-07   rh       Creation of the BOOT version
+#=============================================================================*
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ButtonsBootLib
+  FILE_GUID                      = E8065F73-651A-47E0-8706-C77D041580C2
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = ButtonsBootLib
+
+[Sources.common]
+  ButtonsBootLib.c
+
+[BuildOptions]
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/SocPkg.dec
+
+[LibraryClasses]
+  DebugLib
+  PmicLib
+  XBLLoaderLib
+

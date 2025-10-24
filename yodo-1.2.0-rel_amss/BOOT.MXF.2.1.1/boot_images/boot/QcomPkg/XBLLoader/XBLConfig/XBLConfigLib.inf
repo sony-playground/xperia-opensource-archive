@@ -1,0 +1,44 @@
+#/** @file XBLConfigLib.inf
+#
+#  XBL Config Lib
+#  
+#  Copyright (c) 2016, 2020-2021  Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/19/21   rama    Removed bootModeInterface.dec
+# 01/19/20   yps     Removed XcfgLoaderElf
+# 10/16/20   rama    Added XcfgRamAddr
+# 08/01/15   kpa     Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = XBLConfigLib
+  FILE_GUID                      = 52835EFE-4C0F-4204-245D-D9886EF7DD97
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = XBLConfigLib
+
+[Sources.common]
+   XBLConfig.c
+   XcfgAuth.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+
+[LibraryClasses]
+  XcfgRamLib
+

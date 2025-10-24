@@ -1,0 +1,243 @@
+# 1 "/local/mnt/workspace/CRMBuilds/AOP.HO.5.0-00285-KAILUA_E-1_20221205_024556/b/HY11_1/aop_proc/core/kernel/rex/target/kailua/aop.scl"
+# 1 "<built-in>" 1
+# 1 "<built-in>" 3
+# 358 "<built-in>" 3
+# 1 "<command line>" 1
+# 1 "<built-in>" 2
+# 1 "/local/mnt/workspace/CRMBuilds/AOP.HO.5.0-00285-KAILUA_E-1_20221205_024556/b/HY11_1/aop_proc/core/kernel/rex/target/kailua/aop.scl" 2
+# 56 "/local/mnt/workspace/CRMBuilds/AOP.HO.5.0-00285-KAILUA_E-1_20221205_024556/b/HY11_1/aop_proc/core/kernel/rex/target/kailua/aop.scl"
+ENTRY(Reset_Handler)
+
+PHDRS
+{
+  AOPSS_CODE PT_LOAD;
+  AOPSS_DATA PT_LOAD;
+  AOPSS_RINIT PT_LOAD;
+  AOPSS_PMIC PT_LOAD;
+  AOPSS_DDR_CODE PT_LOAD;
+  AOPSS_SYSDBG_CODE PT_LOAD;
+  AOPSS_SYSDBG_DUMMY_4K PT_LOAD;
+}
+
+SECTIONS
+{
+
+
+
+
+
+
+  CODE_RAM 0x0 :
+  {
+    __aop_coderam_base = .;
+
+    KEEP(*\startup.o(.text))
+    *(InRoot$$Sections .text .text*)
+    *(.rodata .rodata*)
+    KEEP(*\rinit_vals.o(.data*))
+    *(sleep_code_sec)
+  } : AOPSS_CODE
+
+  CPR_CRAM_RECLAIM_POOL:
+  {
+    __reclaim_cpr_cram_pool_base = .;
+    *(cpr_cram_reclaim_pool)
+    __reclaim_cpr_cram_end = .;
+  } : AOPSS_CODE
+
+  PM_CRAM_RECLAIM_POOL:
+  {
+    __reclaim_cram_pool_base = .;
+    *(pm_cram_reclaim_pool)
+    __reclaim_cram_end = .;
+  } : AOPSS_CODE
+
+  ASSERT(. <= (((0x0 + 0x18000) - 0x300 - 32) - 0x2F00) - 0x3E0 - 0x200 - 0x2800, "AOPSS_CODE oversized");
+
+  __aop_cram_size_left = (((0x0 + 0x18000) - 0x300 - 32) - 0x2F00) - 0x3E0 - 0x200 - 0x2800 - .;
+
+
+  AOP_CRAM_ZI:
+  {
+    __aop_cram_zi_free_space_srt = .;
+    . = . + __aop_cram_size_left;
+    __aop_cram_zi_free_space_end = .;
+  } : AOPSS_CODE
+
+  AOP_DATA_IN_CRAM (((0x0 + 0x18000) - 0x300 - 32) - 0x2F00) - 0x3E0 - 0x200 - 0x2800:
+  {
+    __writeable_exception_start = .;
+    *(clock_data_sec)
+    *(aop_cram_data_sec)
+  } : AOPSS_CODE
+
+  ASSERT(. <= (((0x0 + 0x18000) - 0x300 - 32) - 0x2F00) - 0x3E0 - 0x200, "AOPSS_DATA in CRAM oversized");
+
+  AOP_ULOG (((0x0 + 0x18000) - 0x300 - 32) - 0x2F00) - 0x3E0 - 0x200:
+  {
+    __aop_log_base = .;
+    . = . + 0x200;
+    __aop_log_limit = .;
+  } : AOPSS_CODE
+
+  DDR_ULOG (((0x0 + 0x18000) - 0x300 - 32) - 0x2F00) - 0x3E0:
+  {
+    __ddr_log_base = .;
+    . = . + 0x3E0;
+    __ddr_log_limit = .;
+  } : AOPSS_CODE
+
+
+  ARM_LIB_HEAP (((0x0 + 0x18000) - 0x300 - 32) - 0x2F00) :
+  {
+    __aop_heap_base = .;
+
+    . = . + 0x2F00;
+
+    __aop_heap_limit = .;
+  }
+
+  ARM_LIB_STACK ((0x0 + 0x18000) - 0x300 - 32) :
+  {
+    . = . + 32;
+
+    __aop_stack_base = .;
+
+    . = . + 0x300;
+
+    __aop_stack_limit = .;
+    __writeable_exception_end = .;
+
+  }
+
+  __aop_coderam_limit = .;
+
+  ASSERT(. <= (0x0 + 0x18000), "AOPSS_CODE oversized");
+
+
+
+
+
+
+
+  DATA_RAM 0xE0000 :
+  {
+    __aop_dataram_base = .;
+    KEEP(*\oem_uuid.o(.data*))
+    KEEP(*\qc_version.o(.data*))
+    KEEP(*\oem_version.o(.data*))
+   __aop_image_id_end = .;
+  } : AOPSS_DATA
+
+  AOPSS_DATA :
+  {
+    KEEP(*\datetime.o (.data.gBuild*))
+    *(.data .data*)
+    *(.bss .bss*)
+  } : AOPSS_DATA
+
+  TASK_STACKS :
+  {
+    *(task_stacks)
+  }
+
+  ASSERT(. < (0xE0000 + 0x8000), "AOPSS_DATA oversized");
+
+  __aop_dataram_limit = .;
+  __aop_dram_size_left = (0xE0000 + 0x8000) - .;
+
+
+
+  AOP_DRAM_ZI:
+  {
+    __aop_dram_zi_free_space_srt = .;
+    . = . + __aop_dram_size_left;
+    __aop_dram_zi_free_space_end = .;
+  } : AOPSS_DATA
+  __aop_dataram_end = .;
+
+
+
+  RINIT_DATA (0x81C00000) :
+  {
+    __rinit_data_base = .;
+    *(rinit_data_sec)
+    __rinit_data_end = .;
+  } : AOPSS_RINIT
+
+  ASSERT (. < (0x81C14000), "RINIT DATA oversized");
+  __aop_rinit_size_left = (0x81C14000) - .;
+  AOPSS_RINIT_ZI:
+  {
+    . = . + __aop_rinit_size_left;
+  } : AOPSS_RINIT
+  __aop_rinit_end = .;
+
+
+
+
+  PMIC_DATA (0x81C14000) :
+  {
+    __pmic_data_start = .;
+    *(pm_ddr_reclaim_pool)
+    __pmic_data_end = .;
+  } : AOPSS_PMIC
+
+   ASSERT (. < (0x81C1C000), "PMIC DATA oversized");
+
+  __aop_pmic_size_left = (0x81C1C000) - .;
+  AOPSS_PMIC_ZI:
+  {
+    . = . + __aop_pmic_size_left;
+  } : AOPSS_PMIC
+
+  DDR_CODE (0x81C1C000):
+  {
+    __rinit_code_start = .;
+    *(rinit_code_sec_pool1)
+    *(rinit_data_sec_pool2)
+    *(rinit_data_sec_pool3)
+    *(pm_dram_reclaim_pool)
+    __rinit_code_end = .;
+  } : AOPSS_DDR_CODE
+
+  ASSERT (. < (0x81C60000), "DDR CODE oversized");
+
+  __aop_ddrcode_size_left = (0x81C60000) - .;
+  AOPSS_DDR_CODE_ZI:
+  {
+    . = . + __aop_ddrcode_size_left;
+     __aopss_ddr_code_section_end = .;
+  } : AOPSS_DDR_CODE
+
+  SYSDBG_CODE (0x74699000):
+  {
+    __aop_sysdbg_start = .;
+   *(.code_imem.*)
+   __aop_sysdbg_end = .;
+  } : AOPSS_SYSDBG_CODE
+
+  __aop_sysdbg_code_section_end = .;
+
+  ASSERT (. < (0x746A4000), "SDI CODE oversized");
+
+  SYSDBG_DUMMY_ZI (0x746A4000):
+  {
+    __aop_sysdbg_dummy_start = .;
+   *\AOP_SDI.lib(sysdbg_dummy_4k)
+    __aop_sysdbg_dummy_end = .;
+  } : AOPSS_SYSDBG_DUMMY_4K
+   __aop_sysdbg_section_end = .;
+
+
+  __aop_devcfg_start = 0x81C80000;
+  __aop_devcfg_end = 0x81CA0000;
+
+  /DISCARD/ :
+  {
+    * (.ARM.extab*)
+    * (.ARM.exid*)
+    * (.got)
+  }
+
+}

@@ -1,0 +1,39 @@
+#/** @file MemoryMgr.inf
+#
+#  RamInit Lib
+#  
+#  Copyright (c) 2015-2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 09/27/19   ep     Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MemoryMgrLib
+  FILE_GUID                      = 2878BE06-3CB7-41AD-AC22-57942C97C9AB
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MemoryMgrLib
+
+[Sources.common]
+  boot_memory_mgr.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/LoaderFramework/LoaderFrameworkApi.dec  
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec  
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+  

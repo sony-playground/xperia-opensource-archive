@@ -1,0 +1,28 @@
+#include "pm_defines.h"
+
+&psi{
+  compatible = "qcom,pm-psi";
+
+  pm-psi-variant{
+    major = /bits/ 8 <0x0>;
+    minor = /bits/ 16 <0x0>;
+  };
+
+  pm-psi-clogic{
+    clogic-version = <1>;
+    clogic-data = <
+    /* btype  bid  sid  data   mask   register      operator  */
+          0    0    0   0x10   0xFF   0x0052        GREATER 
+    > ; 
+  };
+  
+  pm-psi-seq { 
+    opsi-settings-version = <1>;
+    post-device-opsi = < 
+/* btype  bid   reg_op        sid   register    data    Mask  cond_st  cond_end */
+      0    0    PM_SBL_NOP      0     0x0000    0x00    0x00  0        0 
+    > ; 
+  };
+
+};
+

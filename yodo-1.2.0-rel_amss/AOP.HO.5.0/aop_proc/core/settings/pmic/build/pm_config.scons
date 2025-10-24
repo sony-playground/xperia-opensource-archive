@@ -1,0 +1,53 @@
+#===============================================================================
+#
+# pmic Scons
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2020 by QUALCOMM Technologies, Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/settings/pmic/build/pm_config.scons#1 $
+#  $DateTime: 2021/10/26 22:03:12 $
+#  $Author: pwbldsvc $
+#  $Change: 33677139 $
+#                      EDIT HISTORY FOR FILE
+#
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+#
+#===============================================================================
+
+
+Import('env')
+
+env = env.Clone()
+if env['MSM_ID'] in ['waipio']:
+    SETTINGS_C_SOURCES = [
+            '${BUILD_ROOT}/core/settings/pmic/config/${CHIPSET_PMIC}/pm_config_target.c',
+            '${BUILD_ROOT}/core/settings/pmic/config/${CHIPSET_PMIC}/pm_config_dep.c',
+          ]
+else:
+    SETTINGS_C_SOURCES = [
+            '${BUILD_ROOT}/core/settings/pmic/config/${MSM_ID}/pm_config_target.c',
+            '${BUILD_ROOT}/core/settings/pmic/config/${MSM_ID}/pm_config_dep.c',
+          ]
+          
+if env['MSM_ID'] in ['waipio']:
+    SETTINGS_XML_SOURCES = [
+            '${BUILD_ROOT}/core/settings/pmic/config/${CHIPSET_PMIC}/pm_config.xml',
+          ]
+else:
+    SETTINGS_XML_SOURCES = [
+            '${BUILD_ROOT}/core/settings/pmic/config/${MSM_ID}/pm_config.xml',
+          ]
+      
+env.AddDevCfgInfo(['CORE_AOP'], {'c_files': SETTINGS_C_SOURCES,
+                                 'xml_files': SETTINGS_XML_SOURCES})

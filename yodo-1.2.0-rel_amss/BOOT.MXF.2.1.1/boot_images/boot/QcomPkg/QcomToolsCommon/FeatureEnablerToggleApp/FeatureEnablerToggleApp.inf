@@ -1,0 +1,52 @@
+#  @file FeatureEnablerToggleApp.inf
+#
+#  FeatureEnablerDxe Toggle application inf file.
+#
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.
+#  All Rights Reserved.
+#  Confidential and Proprietary - Qualcomm Technologies, Inc.
+#
+#
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ----------------------------------------------------------
+# 2020-08-21   zwy     initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = FeatureEnablerToggleApp
+  FILE_GUID                      = 8F790527-11E3-42E8-9923-C67A23A95AA9
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = FeatureEnablerToggleAppMain
+
+[Sources]
+  FeatureEnablerToggleApp.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  QcomLib
+
+[Guids]
+  gQcomTokenSpaceGuid
+
+[Protocols]
+  gEfiLoadedImageProtocolGuid
+
+

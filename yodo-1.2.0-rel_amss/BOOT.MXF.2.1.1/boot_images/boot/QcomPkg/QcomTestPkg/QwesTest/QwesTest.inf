@@ -1,0 +1,49 @@
+#===================================================================================
+# Copyright (c) 2020 Qualcomm Technologies, Inc.
+# All Rights Reserved.
+# Confidential and Proprietary - Qualcomm Technologies, Inc.
+#===================================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = QwesTest
+  FILE_GUID                      = 8884BAB1-8C4D-4212-9EF7-B57F0A7598E0
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = UefiMain
+
+[Sources]
+  QwesTest.c
+  UsefulBuf.c
+
+[Packages]
+  MdePkg/MdePkg.dec		
+  QcomPkg/QcomPkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  TestInterfaceLib
+  UefiBootServicesTableLib
+  QcomLib
+  BootConfigLib
+  EfiFileLib
+  MemoryAllocationLib
+  
+[Guids]
+  gEfiEmmcGppPartition1Guid
+  gEfiEmmcUserPartitionGuid
+  gEfiUfsLU4Guid                  ## CONSUMES
+  gEfiNvme0Guid                   ## CONSUMES
+  gEfiSpiNor0Guid                 ## CONSUMES
+   
+[Ppis]
+
+[Protocols]
+  gQcomScmProtocolGuid
+  gEfiShmBridgeProtocolGuid
+
+[Pcd]
+

@@ -1,0 +1,146 @@
+;============================================================================
+; Name: timer_callback_dump.cmm
+;
+; Description: Dump registered timer callback apis, Symbols should be loaded First
+;
+;
+; Copyright (c) 2020 Qualcomm Technologies, Inc.
+; All Rights Reserved.
+; Qualcomm Technologies Proprietary and Confidential.
+;
+;----------------------------------------------------------------------------
+
+;============================================================================
+;
+;                        EDIT HISTORY FOR MODULE
+;
+;
+;
+;  when         who     what, where, why
+;  ----------   ---     -----------------------------------------------------
+;  05-07-2020   ka      Initial version
+;============================================================================;
+
+;
+;NOTE:  symbols should be loaded (example via symbol_load.cmm)
+;
+
+
+; ---------------------------------------------------------
+; Script entry point
+; ---------------------------------------------------------
+  print
+  print
+  print "----------------------------"
+  print "+ UEFI Timer Callback Dump +"
+  print "----------------------------"
+  print " "
+
+  local &callback_start_ptr
+  local &callback_walk_ptr  
+  local &mEfiTimerListPtr
+  local &NextPtr
+  local &PrintCount
+  local &IEVENT_Ptr
+  local &IEVENTStartOffset
+  local &IEVENT_TimerLinkPtr
+
+  &PrintCount=0
+
+  do ../InitOffsets.cmm
+  &mEfiTimerListPtr=address.offset(mEfiTimerList)
+  print "mEfiTimerListPtr : &mEfiTimerListPtr"
+  
+  ; Use dummy Addr 0x1000 to compute offset
+  &IEVENT_TimerLinkPtr=VAR.ADDRESS(((RD:(IEVENT*)0x1000)->Timer).Link)
+  &IEVENTStartOffset=&IEVENT_TimerLinkPtr-RD:0x1000
+  
+  &callback_start_ptr=&mEfiTimerListPtr
+
+  ;ARCHState 0=64-bit, 1=32-bit
+  if (&ARCHState==1)
+  (
+    &callback_walk_ptr=data.long(RD:&callback_start_ptr)
+  )
+  else
+  (
+    &callback_walk_ptr=DATA.QUAD(RD:&callback_start_ptr)
+  )
+
+  print
+  print "--------------------------------------------------------------------------------------------------------------------------------------------"
+  print " #    IEVENT_Ptr               TriggerTime (ms)        Period (ms)      CallBackFn Address     CallBackFunction Symbol "
+  print "--------------------------------------------------------------------------------------------------------------------------------------------"
+  
+  while ((&callback_walk_ptr!=&callback_start_ptr)&&(&callback_walk_ptr!=0))
+  (
+    ;print "Processing node &callback_walk_ptr "
+    &IEVENT_Ptr=(&callback_walk_ptr-&IEVENTStartOffset)
+    
+    gosub print_callback_info &IEVENT_Ptr
+
+    if (&ARCHState==1)
+    (
+      &NextPtr=DATA.LONG(RD:&callback_walk_ptr)
+    )
+    else
+    (
+      &NextPtr=DATA.QUAD(RD:&callback_walk_ptr)
+    )
+    &callback_walk_ptr=&NextPtr
+  )
+
+
+enddo
+
+print_callback_info:
+  entry &IEVENT_print_ptr
+
+  local &IEVENT_Signature
+  local &IEVENT_SignatureAddr
+  
+  local &IEVENT_NotifyFunction
+  local &IEVENT_NotifyFnAddr
+
+  local &IEVENT_TriggerTime
+  local &IEVENT_TrgTimeAddr
+  
+  local &IEVENT_TimerPeriod
+  local &IEVENT_PeriodAddr  
+
+  &IEVENT_SignatureAddr=VAR.ADDRESS((((IEVENT*)&IEVENT_print_ptr)->Signature))
+  &IEVENT_Signature=DATA.QUAD(&IEVENT_SignatureAddr)
+  
+  &IEVENT_NotifyFnAddr=VAR.ADDRESS((((IEVENT*)&IEVENT_print_ptr)->NotifyFunction))
+  &IEVENT_NotifyFunction=DATA.QUAD(&IEVENT_NotifyFnAddr)
+
+              ;The number of 100ns units until the timer expires   
+  &IEVENT_TrgTimeAddr=VAR.ADDRESS((((IEVENT*)&IEVENT_print_ptr)->Timer).TriggerTime)
+  &IEVENT_TriggerTime=DATA.QUAD(&IEVENT_TrgTimeAddr)  
+  ; Convert to millisec from 100 nanosec units  = period x100/1000000
+  &IEVENT_TriggerTime=&IEVENT_TriggerTime/10000.
+  
+  
+  &IEVENT_PeriodAddr=VAR.ADDRESS((((IEVENT*)&IEVENT_print_ptr)->Timer).Period)
+  &IEVENT_TimerPeriod=DATA.QUAD(&IEVENT_PeriodAddr)  
+            ; Convert to millisec from 100 nanosec units  = period x100/1000000
+  &IEVENT_TimerPeriod=&IEVENT_TimerPeriod/10000.
+
+  if (&IEVENT_Signature!=0x746E7665)
+  (
+    print "Error: Signature mismatch. Potential Data corruption. exiting "
+	return
+  )
+
+  &PrintCount=&PrintCount+1  
+  print FORMAT.Decimal(2.,&PrintCount),\
+  		"    0x", FORMAT.HEX(16.,&IEVENT_print_ptr),\
+        "      ", FORMAT.Decimal(16.,&IEVENT_TriggerTime),\
+        "      ", FORMAT.Decimal(16.,&IEVENT_TimerPeriod),\
+        "    0x", FORMAT.HEX(16.,&IEVENT_NotifyFunction),\
+        "    ",   sYmbol.Name(P:&IEVENT_NotifyFunction)
+	
+
+  return
+
+enddo

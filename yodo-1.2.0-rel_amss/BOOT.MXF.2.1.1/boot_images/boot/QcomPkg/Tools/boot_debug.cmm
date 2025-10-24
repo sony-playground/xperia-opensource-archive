@@ -1,0 +1,210 @@
+;****************************************************************************
+;**         boot_debug.cmm
+;**
+;**         This script performs setup for debugging on secboot 3.0 Architecture.
+;**
+;** Copyright  2018-2022 by Qualcomm Technologies, Incorporated.  All Rights Reserved.
+;**
+;****************************************************************************
+;**
+;**                        EDIT HISTORY FOR MODULE
+;**
+;** $$
+;**
+;** when       who     what, where, why
+;** --------   ---     ------------------------------------------------------
+;** 06/15/22   amaji   Added support for Kapiti
+;** 04/26/22   ts      Added support for Halliday
+;** 02/23/21   rhy     Added support for Pinnacles
+;** 09/23/21   ck      Added support for Lassen
+;** 02/19/21   rama    Ported changes for removing unused options
+;** 10/06/20   rama    Added rumi emulation version as argument
+;** 08/07/20   rama    Added support for Waipio
+;** 03/13/20   ck      Added support for Olympic
+;** 01/03/20   rrawat  Added support for Cedros
+;** 06/20/18   ds      Add SM8250
+;****************************************************************************
+
+  ; This script is a wrapper for the target specific debug script
+
+  ;============================================================================
+  ; Declare variables used
+  ;============================================================================
+  local  &Choice
+  local  &Option  ; Menu Option
+  global &Platform
+  global &Storage
+  local  &Variant
+  
+  ;============================================================================
+  ; Get the arguments passed in.
+  ;============================================================================
+  ENTRY &Choice &Variant &Platform &Option &Storage &DumpType &DumpStorage &QSEEBuildPath &RumiEmulation
+  
+  ;============================================================================
+  ; Set up the display window
+  ;============================================================================
+
+  winclear
+  area.RESET 
+  WINPOS 0% 50% 68% 50% 0. 0. W001
+  Area.create MAIN
+  Area.view MAIN
+  Area.select MAIN
+  
+  ;============================================================================
+  ; If user passed TARGET on command line, just go
+  ;============================================================================ 
+
+  if "&Choice"=="Lanai"
+  (
+    gosub CheckVariant
+    do boot_debug_common.cmm Soc Lanai SM Loader False &Variant &Platform &Option &Storage &DumpType &DumpStorage &QSEEBuildPath &RumiEmulation
+    enddo
+  )
+  
+    if "&Choice"=="Halliday"
+  (
+    gosub CheckVariant
+    do boot_debug_common.cmm Soc Halliday SM Loader False &Variant &Platform &Option &Storage &DumpType &DumpStorage &QSEEBuildPath &RumiEmulation
+    enddo
+  )
+  
+  if "&Choice"=="Fillmore"
+  (
+    gosub CheckVariant
+    do boot_debug_common.cmm Soc Fillmore SM Loader False &Variant &Platform &Option &Storage &DumpType &DumpStorage &QSEEBuildPath &RumiEmulation
+    enddo
+  )
+
+  if "&Choice"=="Kailua"
+  (
+    gosub CheckVariant
+    do boot_debug_common.cmm Soc Kailua SM Loader False &Variant &Platform &Option &Storage &DumpType &DumpStorage &QSEEBuildPath &RumiEmulation
+    enddo
+  )
+  if "&Choice"=="Kapiti"
+  (
+    gosub CheckVariant
+    do boot_debug_common.cmm Soc Kapiti SM Loader False &Variant &Platform &Option &Storage &DumpType &DumpStorage &QSEEBuildPath &RumiEmulation
+    enddo
+  )
+  
+  if "&Choice"=="Aurora"
+  (
+    gosub CheckVariant
+    do boot_debug_common.cmm Soc Aurora SM Loader False &Variant &Platform &Option &Storage &DumpType &DumpStorage &QSEEBuildPath &RumiEmulation
+    enddo
+  )
+
+  if "&Choice"=="Lassen"
+  (
+    gosub CheckVariant
+    do boot_debug_common.cmm Soc Lassen CSM Loader False &Variant &Platform &Option &Storage &DumpType &DumpStorage &QSEEBuildPath &RumiEmulation
+    enddo
+  )
+  
+  if "&Choice"=="Hamoa"
+  (
+    gosub CheckVariant
+    do boot_debug_common.cmm Soc Hamoa SM Loader False &Variant &Platform &Option &Storage &DumpType &DumpStorage &QSEEBuildPath &RumiEmulation
+    enddo
+  )
+  
+  if "&Choice"=="Pinnacles"
+  (
+    gosub CheckVariant
+    do boot_debug_common.cmm Soc Pinnacles SDX Loader False &Variant &Platform &Option &Storage &DumpType &DumpStorage &QSEEBuildPath &RumiEmulation
+    enddo
+  )
+
+  ;============================================================================
+  ; Provide user with a choice for the chipset
+  ;============================================================================
+    
+  print "Please enter chipset name: "
+  print "eg: Lanai, Kailua, Lassen, Palima, Hamoa, Pinnacles, Halliday, Aurora"
+  print
+  print "Please make a choice: "
+  enter &Choice
+  print "Enter Variant Lanai LAA, Kailua LAA, Lassen LE, Palima LAA, Hamoa WP, Pinnacles MN/LE, Halliday LAA, Aurora LAA:"
+  enter &Variant
+  gosub CheckVariant
+
+  if "&Choice"=="Lanai"
+  (
+    do boot_debug_common.cmm Soc Lanai SM Loader False &Variant
+    enddo
+  )
+  
+   if "&Choice"=="Halliday"
+  (
+    do boot_debug_common.cmm Soc Halliday SM Loader False &Variant
+    enddo
+  )
+
+  if "&Choice"=="Palima"
+  (
+    do boot_debug_common.cmm Soc Palima SM Loader False &Variant
+    enddo
+  )
+
+  if "&Choice"=="Fillmore"
+  (
+    do boot_debug_common.cmm Soc Fillmore SM Loader False &Variant
+    enddo
+  )
+  
+
+  if "&Choice"=="Kailua"
+  (
+    do boot_debug_common.cmm Soc Kailua SM Loader False &Variant
+    enddo
+  )
+  
+  if "&Choice"=="Aurora"
+  (
+    gosub CheckVariant
+    do boot_debug_common.cmm Soc Aurora SM Loader False &Variant &Platform &Option &Storage &DumpType &DumpStorage &QSEEBuildPath &RumiEmulation
+    enddo
+  )
+
+  if "&Choice"=="Lassen"
+  (
+    print
+    print
+    print "Enter storage type: "
+    print "eg: PCIe, eMMC"
+    print
+    print "Please make a choice: "
+    enter &Storage
+
+    do boot_debug_common.cmm Soc Lassen CSM Loader False &Variant default default &Storage
+    enddo
+  )
+  
+  if "&Choice"=="Hamoa"
+  (
+    do boot_debug_common.cmm Soc Hamoa SM Loader False &Variant
+    enddo
+  )
+  
+  if "&Choice"=="Pinnacles"
+  (
+    do boot_debug_common.cmm Soc Pinnacles SDX Loader False &Variant
+    enddo
+  )
+  
+  ;Default case 
+  (
+    print "Incorrect entry"
+    enddo
+  )
+  
+CheckVariant:
+  if "&Variant"==""
+  (
+    print "Variant not passed.  Exiting."
+    END
+  )
+  return

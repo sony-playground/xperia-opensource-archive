@@ -1,0 +1,59 @@
+#===============================================================================
+#
+# SYSDBG INC PATHs
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2016-2017 by QUALCOMM Technologies, Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/systemdebug/build/paths.sconscript#1 $
+#  $DateTime: 2021/10/26 22:03:12 $
+#  $Author: pwbldsvc $
+#  $Change: 33677139 $
+#                      EDIT HISTORY FOR FILE
+#                      
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#  
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+#
+#===============================================================================
+Import('env')
+
+env = env.Clone()
+
+if not env.PathExists("${INC_ROOT}/core/api/systemdrivers/clock/${CHIPSET}"):
+  env['CHIPSET'] = 'stub'
+
+#-------------------------------------------------------------------------------
+# Publish Public APIs
+# These are accessible internal or external to CoreBSP
+#-------------------------------------------------------------------------------
+if env['CHIPSET'] in ['waipio','fillmore']:
+  env.PublishPublicApi('SYSTEMDEBUG', [
+     "${INC_ROOT}/core/api/systemdebug",
+     "${INC_ROOT}/core/api/kernel/libstd",
+     "${INC_ROOT}/core/systemdebug/sysdbg/inc",
+     "${INC_ROOT}/core/systemdebug/sysdbg/inc/target/${CHIPSET}"
+  ])
+else:
+  env.PublishPublicApi('SYSTEMDEBUG', [
+     "${INC_ROOT}/core/api/systemdebug",
+     "${INC_ROOT}/core/api/kernel/libstd",
+     "${INC_ROOT}/core/systemdebug/sysdbg/inc",
+     "${INC_ROOT}/core/systemdebug/sysdbg/inc/target/${CHIPSET}"
+  ])
+
+#-------------------------------------------------------------------------------
+# Publish Restricted APIs
+# These are accessible only within CoreBSP
+#-------------------------------------------------------------------------------
+
+
+

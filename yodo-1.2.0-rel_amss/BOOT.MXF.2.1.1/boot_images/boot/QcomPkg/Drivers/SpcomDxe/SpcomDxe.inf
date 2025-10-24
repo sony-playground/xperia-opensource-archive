@@ -1,0 +1,67 @@
+#/** @file SpcomDxe.inf
+#  
+#  QUALCOMM SPCOM Driver INF file
+#  
+#  Copyright (c) 2020-2021, Qualcomm Technologies Inc. All rights reserved.
+#  
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# --------     ---     ----------------------------------------------------------
+# 02/11/21     sn      Dependecy on ChargerExDxe
+# 03/09/20     vp      initial release
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                 = 0x00010005
+  BASE_NAME                   = SpcomDxe
+  FILE_GUID                   = 6a47e906-ab41-45ff-b5bc-bbbd513450de
+  MODULE_TYPE                 = DXE_DRIVER
+  VERSION_STRING              = 1.0
+  ENTRY_POINT                 = Spcom_Init
+
+[Sources.common]
+  SpcomDxe.c
+  spcom.c
+  spcom_os_al.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -O0
+ 
+[LibraryClasses]
+  DALModEnvLib
+  BaseMemoryLib
+  UefiLib
+  UefiDriverEntryPoint
+  MemoryAllocationLib
+  UefiBootServicesTableLib
+  BaseLib
+  QcomBaseLib
+  QcomLib
+  ULogApiLib
+  PrintLib
+  DebugLib
+[Guids]
+  gEfiEventExitBootServicesGuid   ## CONSUMES
+
+[Protocols]
+  gEfiSpcomProtocolGuid
+  gEfiGLINKProtocolGuid
+  gEfiHwioProtocolGuid
+  gChargerExProtocolGuid
+  gEfiRscHandlerProtocolGuid
+  gEfiClockProtocolGuid
+  
+[Depex]
+  TRUE

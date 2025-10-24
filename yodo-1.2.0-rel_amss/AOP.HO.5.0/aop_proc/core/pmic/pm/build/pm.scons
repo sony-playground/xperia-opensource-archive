@@ -1,0 +1,292 @@
+#===============================================================================
+#
+#
+# GENERAL DESCRIPTION
+#
+# Copyright (c) 2011-2018 Qualcomm Technologies Incorporated. All Rights Reserved
+#
+# Qualcomm Proprietary
+#
+# Export of this technology or software is regulated by the U.S. Government.
+# Diversion contrary to U.S. law prohibited.
+#
+# All ideas, data and information contained in or disclosed by
+# this document are confidential and proprietary information of
+# Qualcomm Technologies Incorporated and all rights therein are expressly reserved.
+# By accepting this material the recipient agrees that this material
+# and the information contained therein are held in confidence and in
+# trust and will not be used, copied, reproduced in whole or in part,
+# nor its contents revealed in any manner to others without the express
+# written permission of Qualcomm Technologies Incorporated.
+#
+#-------------------------------------------------------------------------------
+#
+# $Header: //components/rel/aop.ho/5.0/aop_proc/core/pmic/pm/build/pm.scons#7 $
+# $DateTime: 2022/09/16 14:12:16 $ 
+#
+#                      EDIT HISTORY FOR FILE
+#                      
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#  
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 05/08/13   aks     Clk driver code re-factoring 
+# 04/12/13   hs      Code refactoring.
+# 01/29/13   aks     Adding support for 5v boost as a separate driver
+# 01/23/13   hs      Used new driver code.
+# 01/22/13   dy      Add 8x10 support
+# 01/22/13   dy      Merge target folder into common framework/npa folder
+# 06/25/12   hs      Moved to core\systemdrivers.
+# 03/30/12   hs      Added support for VBATT APP.
+# 03/07/12   hs      Added support for BOOT builds.
+# 03/12/12   hs      Updated.
+# 03/07/12   hs      Added support for MPSS and RPM builds.
+# 01/24/12   hs      Created
+#===============================================================================
+
+Import('env')
+supported_targets = ['845', '24', '55', '670', '855', '1000', '6150', '855au', '7150','8250', 'TalosAU', 'Saipan', '8350', 'bitra','makena', 'cedros','Olympic','kodiak','waipio','makenaau','fillmore','kailua','aurora','lassen','netrani','kapiti','pinnacle','kuno','hamoa','lanai']
+if env['MSM_ID'] not in supported_targets:
+    env.PrintWarning('Bailing from PMIC scripts; no support for build targets other than %s' % supported_targets)
+    Return()
+
+if env['MSM_ID'] in ['lanai']:
+   env.Append(CPPDEFINES = 'RISCV_TARGET')
+
+env.Append(CCFLAGS = '${ARMCC_STDC99_CMD}') #needed for designated initializers
+
+env.Replace(PMIC_ROOT = ["${INC_ROOT}/core/pmic/pm",])
+
+env.PublishProtectedApi( 'PMIC_APP', [    
+    '${PMIC_ROOT}/app/vrm/src',
+    ])
+
+if env['CHIPSET'] in ['sm8350']:
+    env.PublishProtectedApi( 'PMIC_CONFIG', [    
+    '${PMIC_ROOT}/config/common',
+    '${PMIC_ROOT}/config/lahaina',
+    '${PMIC_ROOT}/config/lahaina/src']) 
+else:    
+    env.PublishProtectedApi( 'PMIC_CONFIG', [    
+    '${PMIC_ROOT}/config/common',
+    '${PMIC_ROOT}/config/${CHIPSET}',
+    '${PMIC_ROOT}/config/${CHIPSET}/src']) 
+
+env.PublishProtectedApi( 'PMIC_COMM', [    
+    '${PMIC_ROOT}/comm/src',
+    '${PMIC_ROOT}/comm/spmi_lite/src',  
+    ])
+
+env.PublishProtectedApi( 'PMIC_DRIVERS', [    
+    '${PMIC_ROOT}/drivers/pwr/src',
+    '${PMIC_ROOT}/drivers/smps/src',
+    '${PMIC_ROOT}/drivers/bob/src',
+    '${PMIC_ROOT}/drivers/ldo/src',
+    '${PMIC_ROOT}/drivers/clk/src',
+    '${PMIC_ROOT}/drivers/pstm/src',
+   ])
+      
+env.PublishProtectedApi( 'PMIC_DEVICES', [    
+    '${PMIC_ROOT}/pmic_devices/common/src',
+    ])
+
+env.PublishProtectedApi( 'PMIC_FRAMEWORK', [    
+    '${PMIC_ROOT}/framework/inc',
+    '${PMIC_ROOT}/framework/src',
+    ])
+    
+env.PublishProtectedApi( 'PMIC_VRM', [    
+    '${PMIC_ROOT}/vrm/inc',
+    '${PMIC_ROOT}/vrm/src',
+    ])
+
+env.PublishProtectedApi( 'PMIC_PRM', [    
+    '${PMIC_ROOT}/prm/src',
+    '${PMIC_ROOT}/prm/inc',
+    ])
+
+env.PublishProtectedApi( 'PMIC_RPMH', [ 
+    '${PMIC_ROOT}/rpmh/inc',
+    '${PMIC_ROOT}/rpmh/src',
+    ])
+
+env.PublishProtectedApi( 'PMIC_UTILS', [
+    '${PMIC_ROOT}/utils/src'
+    ])
+    
+if env['CHIPSET'] in ['sdm845']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/sdm845_pm8998_pmi8998/inc',
+    '${PMIC_ROOT}/target/sdm845_pm8998_pmi8998/src',
+    ])  
+elif env['CHIPSET'] in ['sdm670']:    
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/sdm670_pm660_pm660l/inc',
+    '${PMIC_ROOT}/target/sdm670_pm660_pm660l/src',
+    ])  
+elif env['CHIPSET'] in ['sm6150']:    
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/sm6150_pm6150_pm6150l/inc',
+    '${PMIC_ROOT}/target/sm6150_pm6150_pm6150l/src',
+    ])	
+elif env['CHIPSET'] in ['TalosAU']:    
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/TalosAU_pm6150_pm6150l/inc',
+    '${PMIC_ROOT}/target/TalosAU_pm6150_pm6150l/src',
+    ])  
+elif env['CHIPSET'] in ['sdm855', 'sdm1000', 'sdm855au']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/sdm855_pm855_pm855l/inc',
+    '${PMIC_ROOT}/target/sdm855_pm855_pm855l/src',
+    ])
+elif env['CHIPSET'] in ['sm8250']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/sm8250_pm8250_pm8250l/inc',
+    '${PMIC_ROOT}/target/sm8250_pm8250_pm8250l/src',
+    ])
+elif env['CHIPSET'] in ['Saipan']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/Saipan_pmSaipan_pmSaipanl/inc',
+    '${PMIC_ROOT}/target/Saipan_pmSaipan_pmSaipanl/src',
+    ])  	
+elif env['CHIPSET'] in ['sdx24']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/sdx24_pmx24/inc',
+    '${PMIC_ROOT}/target/sdx24_pmx24/src',
+    ])
+elif env['CHIPSET'] in ['sdx55']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/sdx55_pmx55/inc',
+    '${PMIC_ROOT}/target/sdx55_pmx55/src',
+    ])  
+elif env['CHIPSET'] in ['sm7150']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/sm7150_pm7150_pm7150l/inc',
+    '${PMIC_ROOT}/target/sm7150_pm7150_pm7150l/src',
+    ])   
+elif env['CHIPSET'] in ['sm8350']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/lahaina_pmlahainaB_pmlahainaC/inc',
+    '${PMIC_ROOT}/target/lahaina_pmlahainaB_pmlahainaC/src',
+    ])
+elif env['CHIPSET'] in ['makena']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/makena_pmmakenaB_pmmakenaC/inc',
+    '${PMIC_ROOT}/target/makena_pmmakenaB_pmmakenaC/src',
+    ])
+elif env['CHIPSET'] in ['bitra']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/bitra_pmbitra_pmbitral/inc',
+    '${PMIC_ROOT}/target/bitra_pmbitra_pmbitral/src',
+    ]) 
+elif env['CHIPSET'] in ['cedros']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/cedros_pmcedrosB_pmcedrosC/inc',
+    '${PMIC_ROOT}/target/cedros_pmcedrosB_pmcedrosC/src',
+    ])
+elif env['CHIPSET'] in ['kodiak']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/kodiak_pmkodiakB_pmkodiakC/inc',
+    '${PMIC_ROOT}/target/kodiak_pmkodiakB_pmkodiakC/src',
+    ])
+elif env['CHIPSET'] in ['Olympic']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/Olympic_pmx65/inc',
+    '${PMIC_ROOT}/target/Olympic_pmx65/src',
+    ])  
+elif env['CHIPSET'] in ['makenaau']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/makenaau_pmmakenaauB_pmmakenaauC/inc',
+    '${PMIC_ROOT}/target/makenaau_pmmakenaauB_pmmakenaauC/src',
+    ])
+elif env['CHIPSET'] in ['fillmore']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/fillmore_pmfillmoreB_pmfillmoreC/inc',
+    '${PMIC_ROOT}/target/fillmore_pmfillmoreB_pmfillmoreC/src',
+    ]) 
+elif env['CHIPSET'] in ['kailua']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/kailua/inc',
+    '${PMIC_ROOT}/target/kailua/src',
+    ])
+elif env['CHIPSET'] in ['lanai']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [
+    '${PMIC_ROOT}/target/lanai/inc',
+    '${PMIC_ROOT}/target/lanai/src',
+    ])
+elif env['CHIPSET'] in ['hamoa']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/hamoa/inc',
+    '${PMIC_ROOT}/target/hamoa/src',
+    ])
+elif env['CHIPSET'] in ['pinnacle']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [
+    '${PMIC_ROOT}/target/pinnacle/inc',
+    '${PMIC_ROOT}/target/pinnacle/src',
+    ])
+elif env['CHIPSET'] in ['kuno']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [
+    '${PMIC_ROOT}/target/kuno/inc',
+    '${PMIC_ROOT}/target/kuno/src',
+    ])
+elif env['CHIPSET'] in ['aurora']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/aurora_pmauroraB_pmauroraC/inc',
+    '${PMIC_ROOT}/target/aurora_pmauroraB_pmauroraC/src',
+    ])
+elif env['CHIPSET'] in ['lassen']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/lassen_pmlassenB_pmlassenC/inc',
+    '${PMIC_ROOT}/target/lassen_pmlassenB_pmlassenC/src',
+    ])
+elif env['CHIPSET'] in ['netrani']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/netrani_pmnetraniB_pmnetraniC/inc',
+    '${PMIC_ROOT}/target/netrani_pmnetraniB_pmnetraniC/src',
+    ])
+elif env['CHIPSET'] in ['kapiti']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/kapiti/inc',
+    '${PMIC_ROOT}/target/kapiti/src',
+    ])
+elif env['CHIPSET_PMIC'] in ['waipio']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/waipio_pmwaipioB_pmwaipioC/inc',
+    '${PMIC_ROOT}/target/waipio_pmwaipioB_pmwaipioC/src',
+    ]) 
+
+elif env['CHIPSET_PMIC'] in ['palima']:
+    env.PublishProtectedApi( 'PMIC_TARGET', [    
+    '${PMIC_ROOT}/target/palima_pmpalimaB_pmpalimaC/inc',
+    '${PMIC_ROOT}/target/palima_pmpalimaB_pmpalimaC/src',
+    ])
+
+env.RequirePublicApi([
+    'UNPA',
+    'KERNEL',
+    'POWER',
+    'DEBUGTRACE',
+    'SERVICES',
+    'SYSTEMDRIVERS',
+    'PMIC',
+    'AOP_SETTINGS',
+    'PMIC_SETTINGS'
+    ])
+           
+env.RequireRestrictedApi([
+    'PMIC',
+    'POWER',
+    'KERNEL',
+    ])
+           
+env.RequireProtectedApi([
+    'PMIC',
+    ])
+
+#-------------------------------------------------------------------------------
+# Continue loading sub-units
+#-------------------------------------------------------------------------------
+    
+env.LoadSoftwareUnits( ) 
+

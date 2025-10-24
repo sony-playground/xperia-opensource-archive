@@ -1,0 +1,144 @@
+# Copyright (c) 2022 Qualcomm Technologies, Inc.
+# 3rd party file marking retained below for attribution purposes:
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,ufs.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm UFS DT
+
+maintainers:
+  - rajinegi <rajinegi@qti.qualcomm.com>
+
+description: |
+   The Qualcomm compatible node...
+   Links to data required for functioning of UFS driver
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,ufs
+ 
+  reg:
+    minItems: 1
+    maxItems: 2
+    description: Base address of the UFS registers , change as needed (in accordance with IPCAT).
+
+  EnableLogging:
+    maxItems: 1
+    description: Set 1 if you want to print extra log statements, change as needed.
+    
+  FUA_Value:
+    maxItems: 1
+    description: FUA values
+
+  LinkStartupRetryCount:
+    maxItems: 1
+    description: Retry Count for Link Startup
+
+  BatteryThresholdMv:
+    maxItems: 1
+    description: BAttery Threshold in Mv
+    
+  timeout_values:
+     type: object
+            
+     
+     properties:
+        fDeviceInitTimeoutUs:
+          description: Device Initialization Timeout
+            
+        UTRDPollTimeoutUs:
+          description: UTRD Poll Time out
+     
+     required:
+       - fDeviceInitTimeoutUs
+       - UTRDPollTimeoutUs
+
+  init_speed_params:
+     type: object
+            
+     
+     properties:
+        EnableHighSpeed:
+          description: Put 1 if you want to enable High speed
+            
+        NumGears:
+          description: Number of gears
+        
+        NumLanes:
+          description: Number of Lanes
+            
+        Rate:
+          description: Rate value
+ 
+     required:
+       - EnableHighSpeed
+       - NumGears
+       - NumLanes
+       - Rate
+  
+  perf_speed_params:
+     type: object
+            
+     
+     properties:
+        EnableHighSpeed:
+          description: Put 1 if you want to enable High speed
+            
+        NumGears:
+          description: Number of gears
+        
+        NumLanes:
+          description: Number of Lanes
+            
+        Rate:
+          description: Rate value
+
+     required:
+       - EnableHighSpeed
+       - NumGears
+       - NumLanes
+       - Rate           
+            
+required:
+  - compatible
+  - reg
+  - EnableLogging
+  - FUA_Value
+  - LinkStartupRetryCount
+  - BatteryThresholdMv
+  - timeout_values
+  - init_speed_params
+  - perf_speed_params
+
+additionalProperties: false
+
+examples:
+-  |
+      ufs: ufs0@1D80000 {
+         compatible = "qcom,ufs";
+         reg = <0x01D80000 0x00007000>;
+         EnableLogging = /bits/ 8 <0>; 
+         FUA_Value = /bits/ 8 <0>;
+         LinkStartupRetryCount = /bits/ 8 <5>;
+         BatteryThresholdMv = <3600>;
+         timeout_values {
+            fDeviceInitTimeoutUs = <2500000>;
+            UTRDPollTimeoutUs = <30000000>;
+            };
+         init_speed_params {
+            EnableHighSpeed = /bits/ 8 <1>;
+            NumGears = /bits/ 8 <5>;
+            NumLanes = /bits/ 8 <2>;
+            Rate = /bits/ 8 <1>;
+            };
+         perf_speed_params {
+            EnableHighSpeed = /bits/ 8 <1>;
+            NumGears = /bits/ 8 <5>;
+            NumLanes = /bits/ 8 <2>;
+            Rate = /bits/ 8 <1>;
+            };
+      };

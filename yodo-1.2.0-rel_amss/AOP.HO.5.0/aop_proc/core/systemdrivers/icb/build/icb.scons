@@ -1,0 +1,123 @@
+#===============================================================================
+#
+#                             Edit History
+#
+# $Header: //components/rel/aop.ho/5.0/aop_proc/core/systemdrivers/icb/build/icb.scons#10 $
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+# 2019/05/07   sds     Add support for stubs
+# 2016/09/21   sds     Initial Creation
+#
+#===============================================================================
+#                 Copyright (c) 2016-2019 by Qualcomm Technologies, Inc.
+#                              All Rights Reserved.
+#           Proprietary and Confidential - Qualcomm Technologies, Inc/GTDR
+#===============================================================================
+Import('env')
+env = env.Clone()
+
+#-------------------------------------------------------------------------------
+# Python library imports
+#-------------------------------------------------------------------------------
+import os, glob
+
+#-------------------------------------------------------------------------------
+# Source PATH
+#-------------------------------------------------------------------------------
+BUILDPATH = '..'
+env.VariantDir('${BUILDPATH}', BUILDPATH, duplicate=0)
+SRCPATH = os.path.join( BUILDPATH, 'src' )
+
+#855au for now compiles with 855 config
+if env['MSM_ID'] == '855au': 
+  env['MSM_ID'] = '855'
+  env['CHIPSET'] = 'sdm855'
+
+#-------------------------------------------------------------------------------
+# Internal depends within CoreBSP
+#-------------------------------------------------------------------------------
+CBSP_APIS = [
+  'HAL',
+  'POWER',
+  'SYSTEMDRIVERS',
+  'MPROC',
+  'DDR_MGR',
+   # needs to be last also contains wrong comdef.h
+  'KERNEL',
+]
+
+env.RequirePublicApi(CBSP_APIS)
+env.RequireRestrictedApi(CBSP_APIS)
+
+#-------------------------------------------------------------------------------
+# Stubs detection
+#-------------------------------------------------------------------------------
+if not env.PathExists('${BUILD_ROOT}/core/systemdrivers/icb/cfg/${MSM_ID}'):
+  env['MSM_ID'] = 'stubs'
+
+#-------------------------------------------------------------------------------
+# Private depends within ICB
+#-------------------------------------------------------------------------------
+env.PublishPrivateApi('ICB_API', [
+    os.path.join(SRCPATH, 'common'),
+    os.path.join(SRCPATH, '${MSM_ID}'),
+    ])
+
+#-------------------------------------------------------------------------------
+# Compiler options
+#-------------------------------------------------------------------------------
+env.Append(CCFLAGS = '${ARMCC_STDC99_CMD}')
+
+if env['MSM_ID'] == 'kodiak':
+   env.Append(CPPDEFINES = 'KODIAK_RUMI_STUBS')
+
+if env['MSM_ID'] == 'kailua':
+   env.Append(CPPDEFINES = 'KAILUA_RUMI_STUBS')
+   
+if env['MSM_ID'] == 'kapiti':
+   env.Append(CPPDEFINES = 'KAPITI_RUMI_STUBS')
+
+if env['MSM_ID'] == 'lanai':
+   env.Append(CPPDEFINES = 'LANAI_RUMI_STUBS')
+   env.Append(CPPDEFINES = 'RISCV_TARGET')
+
+if env['MSM_ID'] == 'pinnacle':
+   env.Append(CPPDEFINES = 'PINNACLE_RUMI_STUBS')
+   
+if env['MSM_ID'] == 'kuno':
+   env.Append(CPPDEFINES = 'KUNO_RUMI_STUBS')
+
+#-------------------------------------------------------------------------------
+# Settings files for R-init builder
+#-------------------------------------------------------------------------------
+if 'USES_RINIT_PARSER' in env and env['MSM_ID'] != 'stubs':
+    env.AddRinitInfo('CORE_AOP', 
+      {'files' : '${BUILD_ROOT}/core/systemdrivers/icb/cfg/${MSM_ID}'})
+
+#-------------------------------------------------------------------------------
+# Sources
+#-------------------------------------------------------------------------------
+# Add common code
+icb_src = glob.glob( os.path.join(SRCPATH, 'common', '*.c') )
+
+#-------------------------------------------------------------------------------
+# Target sources
+#-------------------------------------------------------------------------------
+icb_src.extend( glob.glob( os.path.join(SRCPATH, env['MSM_ID'], '*.c') ) )
+
+#-------------------------------------------------------------------------------
+# Images
+#-------------------------------------------------------------------------------
+# Prepend build path
+icb_src = ['${BUILDPATH}' + filename[2:] for filename in icb_src]
+
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/icb', icb_src)
+
+#-------------------------------------------------------------------------------
+# ICB SDI
+#-------------------------------------------------------------------------------
+if env['MSM_ID'] in ['waipio','fillmore','aurora','lassen','netrani']:
+  icb_sdi_src = ['${BUILDPATH}/src/${MSM_ID}/icb_sdi_target.c']
+
+  # Add sources to compile
+  env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/icb_sdi', icb_sdi_src)

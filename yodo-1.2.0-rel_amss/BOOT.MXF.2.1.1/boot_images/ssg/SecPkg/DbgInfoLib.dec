@@ -1,0 +1,21 @@
+#/* ====================================================================
+# * Copyright (c) 2021 Qualcomm Technologies, Inc.
+# * All Rights Reserved.
+# * Confidential and Proprietary - Qualcomm Technologies, Inc.
+# * ====================================================================
+#*/
+
+
+#/**
+# *  @file DbgInfoLib.dec
+# *  @brief Build Packaging format for DbgInfoLib. Packages headers used by external libs
+# */
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = DbgInfoLib
+  PACKAGE_GUID                   = 132dc3c7-7603-46e2-b30e-316c601d8e40
+  PACKAGE_VERSION                = 0.1
+
+[Includes.common]
+  SecPkg/Library/dbginfolib/api

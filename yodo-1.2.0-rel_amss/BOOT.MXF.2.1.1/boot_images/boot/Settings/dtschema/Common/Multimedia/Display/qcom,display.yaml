@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,display.yaml#
+$schema: http://devicetree.org/meta-schemas/base.yaml#
+
+title: Qualcomm Display DT
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   The Qualcomm compatible node...
+   Links to any data sheet or HW specific details
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,display
+ 
+  reg:
+    maxItems: 1
+    items:
+      - description: core registers
+    
+  label:
+    const: disp_rdump_region
+
+required:
+  - compatible
+  - reg
+  - label
+  
+additionalProperties: false
+
+examples:
+  - |
+    disp_rdump_memory: disp_rdump_region@f100000{
+        compatible = "qcom,display";
+        reg = <0xf100000 0x100000>;
+        label = "disp_rdump_region";
+    };

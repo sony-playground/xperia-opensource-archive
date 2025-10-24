@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<driver name="AxiCfg">
+
+<!--
+FILE:         icbcfg_arb.xml
+DESCRIPTION:  This file contains the DAL XML properties for the ICB driver.
+
+                       Edit History
+$Header: $
+$DateTime: $
+$Author: $
+$Change: $ 
+
+when         who     what, where, why
+==============================================================================
+2021/08/13   sds     Created for Kailua
+
+  Copyright (c) 2021 Qualcomm Technologies, Inc. All rights reserved.
+-->
+
+   <device name="/icb/arb">
+   <global_def>
+     <var_seq name="HWIOStructIncFile" type="DALPROP_DATA_TYPE_STRUCT_INC_FILE">
+       ./../ICB/core/ul_data.c
+     </var_seq> 
+   </global_def>
+      <props name="icb_info" type="DALPROP_ATTR_TYPE_STRUCT_PTR">
+      icb_info
+      </props>
+   </device>
+</driver>

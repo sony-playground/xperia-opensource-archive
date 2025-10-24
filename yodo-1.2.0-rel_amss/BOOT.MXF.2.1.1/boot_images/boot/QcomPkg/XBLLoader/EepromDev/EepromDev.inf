@@ -1,0 +1,39 @@
+#/** @file EepromDev.inf
+#
+#  EepromDev
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 05/12/20   ck      Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = EepromDevLib
+  FILE_GUID                      = 54A5F035-F855-4868-8935-D6FFDFAA8729
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = EepromDevLib
+
+[Sources.common]
+  boot_eeprom_dev.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+
+[LibraryClasses]
+  ConfigContextLib
+  MuslLib

@@ -1,0 +1,57 @@
+#include "pm_defines.h"
+
+&access{
+  none = <>;
+  ssc = <>;
+  secpro = <>;
+  invalid = <>;
+  
+  aop = <
+      /*BUSID SLAVEID PERIPH OPERATION */
+      //BUSID_0 0 0x01 APPEND            /* example to add*/
+      //BUSID_0 0 0x06 REMOVE            /* example to remove*/
+      //BUSID_0 0 0x07 APPEND_WITH_IRQ   /* example to add with irq ownership*/  
+      >;
+  
+  adsp = <
+      /*BUSID SLAVEID PERIPH OPERATION */  
+      //PM_BUSID_0 1 0x89 APPEND_WITH_IRQ
+      >;
+  
+  apps = <
+      /*BUSID SLAVEID PERIPH OPERATION */  
+      //PM_BUSID_0 1 0x89 REMOVE            /* example to remove*/
+      PM_BUSID_0 0 0xB8 APPEND_WITH_IRQ /* PMK8550 GPIO_01 ASSIGN3_THERM */
+      PM_BUSID_0 0 0xB9 APPEND_WITH_IRQ /* PMK8550 GPIO_02 ASSIGN4_THERM */
+      PM_BUSID_0 0 0xBC APPEND_WITH_IRQ /* PMK8550 GPIO_05 QTM_E_THERM */
+      PM_BUSID_0 1 0x89 APPEND_WITH_IRQ /* PM8550  GPIO_02 QTM_N_THERM */
+      PM_BUSID_0 1 0x8E APPEND_WITH_IRQ /* PM8550  GPIO_07 NC/SP_ARI_PWR_ALARM */
+      PM_BUSID_0 7 0x88 APPEND_WITH_IRQ /* PM8550B GPIO_1  SPK_THERM */
+      PM_BUSID_0 7 0x89 APPEND_WITH_IRQ /* PM8550B GPIO_2  NC/DEBUG_PMIC_PKD_N */
+      PM_BUSID_0 7 0x8A APPEND_WITH_IRQ /* PM8550B GPIO_3  NC/USB_LD_SW_EN */
+      PM_BUSID_0 7 0x8B APPEND_WITH_IRQ /* PM8550B GPIO_4  WLC_TXPWR_EN */
+      PM_BUSID_0 7 0x8C APPEND_WITH_IRQ /* PM8550B GPIO_5  LCD_ID */
+      PM_BUSID_0 7 0x8D APPEND_WITH_IRQ /* PM8550B GPIO_6  RF_ID*/
+      PM_BUSID_0 7 0x8E APPEND_WITH_IRQ /* PM8550B GPIO_7  SNAPSHOT_N*/
+      PM_BUSID_0 7 0x8F APPEND_WITH_IRQ /* PM8550B GPIO_8  FOCUS_N*/
+      PM_BUSID_0 7 0x90 APPEND_WITH_IRQ /* PM8550B GPIO_9  NC*/
+      PM_BUSID_0 7 0x91 APPEND_WITH_IRQ /* PM8550B GPIO_10 ASSIGN1_THERM*/
+      PM_BUSID_0 7 0x93 APPEND_WITH_IRQ /* PM8550B GPIO_12 PA_THERM2*/
+    >;
+  
+  tz = <
+      /*BUSID SLAVEID PERIPH OPERATION */  
+     >;
+  
+  mss = <
+      /*BUSID SLAVEID PERIPH OPERATION */  
+     >;
+
+  uefi = <
+      /*BUSID SLAVEID PERIPH OPERATION */  
+      PM_BUSID_0 1 0x15 APPEND /* PM8550 VDDGEN_COINCELL_EN_CTL */
+     >; 
+
+};
+
+

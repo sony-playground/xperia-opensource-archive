@@ -1,0 +1,12 @@
+HWConfig DEFINITIONS EXPLICIT TAGS ::= BEGIN
+  HWConfig ::= SEQUENCE {
+    version INTEGER (1..MAX),
+    isprototype BOOLEAN,
+    imeilist IMEILIST,
+    devicekey DK
+  }
+
+  IMEILIST ::= SEQUENCE SIZE (1..2) OF IMEI
+  IMEI ::= UTF8String (SIZE(14))
+  DK ::= OCTET STRING (SIZE(16))
+END

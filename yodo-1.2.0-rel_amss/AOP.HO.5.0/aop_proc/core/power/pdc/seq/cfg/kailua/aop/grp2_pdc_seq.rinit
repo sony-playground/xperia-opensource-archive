@@ -1,0 +1,92 @@
+#===========================================================================
+#                               grp2_pdc.rinit
+#
+#  DESCRIPTION:
+#    This file contains init values for GRP2 PDC (WLAN PDC)
+# 
+#    Settings are obtained from TCS contents sheet maintained by 
+#    Architecture team alongwith collaboration from SW and HW teams.
+#
+#  Copyright (c) 2021 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+#--------------------------------------------------------------------------
+# Common vars
+#--------------------------------------------------------------------------
+vars:
+
+module: { name = RPMH_PDC_GRP2_GRP2_PDC_SEQ_MEM, group = PDC_SEQ}
+
+regs:
+ SEQ_MEM = [
+#WLAN_PWR_UP:
+  0xe285a2a1,  #0x000: 0xa1   SET1      pdc_mode_control
+               #0x001: 0xa2   SET1      soc_sleep_req
+               #0x002: 0x85   SET0      wfi_profiling_unit_3
+               #0x003: 0xe2   WAIT1     soc_sleep_unlock
+  0x7673e3a3,  #0x004: 0xa3   SET1      awsm_aopwa_soc_sleep_req
+               #0x005: 0xe3   WAIT1     awsm_aopwa_soc_sleep_unlock
+               #0x006: 0x73   BEQR      swb0_wake_slp_set=1           WAKE_SET
+               #0x007: 0x76   BEQR      swb1_wl_wake_slp_set=1        WL_WAKE_SET
+  0x8aaa8382,  #0x008: 0x82   SET0      soc_sleep_req
+               #0x009: 0x83   SET0      awsm_aopwa_soc_sleep_req
+               #0x00a: 0xaa   SET1      addl_seq_pwr_ctrl_0_clr_sw_ctrl_pos_edge_detect_intr
+               #0x00b: 0x8a   SET0      addl_seq_pwr_ctrl_0_clr_sw_ctrl_pos_edge_detect_intr
+  0x85a2e0a5,  #0x00c: 0xa5   SET1      wfi_profiling_unit_3
+               #0x00d: 0xe0   WAIT1     sequence_resume
+               #0x00e: 0xa2   SET1      soc_sleep_req
+               #0x00f: 0x85   SET0      wfi_profiling_unit_3
+  0x70e3a3e2,  #0x010: 0xe2   WAIT1     soc_sleep_unlock
+               #0x011: 0xa3   SET1      awsm_aopwa_soc_sleep_req
+               #0x012: 0xe3   WAIT1     awsm_aopwa_soc_sleep_unlock
+               #0x013: 0x70   BEQR      swb0_wake_slp_set=1           SLEEP_TCS
+  0xab838275,  #0x014: 0x75   BEQR      swb1_wl_wake_slp_set=1        WL_SLEEP_TCS
+               #0x015: 0x82   SET0      soc_sleep_req
+               #0x016: 0x83   SET0      awsm_aopwa_soc_sleep_req
+               #0x017: 0xab   SET1      addl_seq_pwr_ctrl_1_clr_sw_ctrl_neg_edge_detect_intr
+  0xffbf208b,  #0x018: 0x8b   SET0      addl_seq_pwr_ctrl_1_clr_sw_ctrl_neg_edge_detect_intr
+               #0x019: 0x20   RETURN
+#SLEEP_TCS:
+               #0x01a: 0xbf   SET1      seq_tcs_0_start
+               #0x01b: 0xff   WAIT1     tcs_0_seq_cmp
+  0x9efebe9f,  #0x01c: 0x9f   SET0      seq_tcs_0_start
+               #0x01d: 0xbe   SET1      seq_tcs_1_start
+               #0x01e: 0xfe   WAIT1     tcs_1_seq_cmp
+               #0x01f: 0x9e   SET0      seq_tcs_1_start
+  0x209dfdbd,  #0x020: 0xbd   SET1      seq_tcs_2_start
+               #0x021: 0xfd   WAIT1     tcs_2_seq_cmp
+               #0x022: 0x9d   SET0      seq_tcs_2_start
+               #0x023: 0x20   RETURN
+#WL_SLEEP_TCS:
+  0x209cfcbc,  #0x024: 0xbc   SET1      seq_tcs_3_start
+               #0x025: 0xfc   WAIT1     tcs_3_seq_cmp
+               #0x026: 0x9c   SET0      seq_tcs_3_start
+               #0x027: 0x20   RETURN
+#WL_WAKE_SET:
+  0x209afaba,  #0x028: 0xba   SET1      seq_tcs_5_start
+               #0x029: 0xfa   WAIT1     tcs_5_seq_cmp
+               #0x02a: 0x9a   SET0      seq_tcs_5_start
+               #0x02b: 0x20   RETURN
+#WAKE_SET:
+  0xb798f8b8,  #0x02c: 0xb8   SET1      seq_tcs_7_start
+               #0x02d: 0xf8   WAIT1     tcs_7_seq_cmp
+               #0x02e: 0x98   SET0      seq_tcs_7_start
+               #0x02f: 0xb7   SET1      seq_tcs_8_start
+  0xf6b697f7,  #0x030: 0xf7   WAIT1     tcs_8_seq_cmp
+               #0x031: 0x97   SET0      seq_tcs_8_start
+               #0x032: 0xb6   SET1      seq_tcs_9_start
+               #0x033: 0xf6   WAIT1     tcs_9_seq_cmp
+  0x00002096   #0x034: 0x96   SET0      seq_tcs_9_start
+               #0x035: 0x20   RETURN
+               #0x036: 0x00
+               #0x037: 0x00
+]
+
+GRP2_SEQ_CFG_BR_ADDR = [
+    0x1a,
+    0x24,
+    0x28,
+    0x2c
+]

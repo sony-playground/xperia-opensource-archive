@@ -1,0 +1,33 @@
+## @file
+#  XnWrapperLib.inf
+#  Copyright (c) 2021 Qualcomm Technologies, Inc. All Rights Reserved.
+#  Portions Copyright (c) 2018 Microsoft Corporation. All rights reserved
+#  Library related to DEP support
+#
+#  Must be linked anonymously to BDS.
+#
+##
+
+[Defines]
+  INF_VERSION       = 0x00010017
+  BASE_NAME         = XnWrapperLib
+  FILE_GUID         = 6069F759-546B-47CC-8F42-C9280F330E34
+  VERSION_STRING    = 1.0
+  MODULE_TYPE       = DXE_DRIVER
+  LIBRARY_CLASS     = XnWrapperLib | DXE_DRIVER
+  CONSTRUCTOR       = XnWrapperConstructor
+
+[LibraryClasses]
+  DxeServicesTableLib
+  UefiBootServicesTableLib
+  DebugLib
+  PerformanceLib
+
+[Packages]
+  MdePkg/MdePkg.dec
+
+[Sources]
+  XnWrapperLib.c
+
+[Guids]
+  gEfiEventReadyToBootGuid

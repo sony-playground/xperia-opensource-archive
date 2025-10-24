@@ -1,0 +1,51 @@
+#/** @file IPCCTargetLib.inf
+#
+#  Qualcomm IPCC Library
+#
+#  Copyright (c) 2022 Qualcomm Technologies, Inc.
+#  All rights reserved.
+#  Confidential and Proprietary - Qualcomm Technologies, Inc.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 03/15/21   cpaulo  Initial revision for Kailua
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = IPCCTargetLib
+  FILE_GUID                      = 9637A8DC-D32E-444F-9E63-7402E6C585FE
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = IPCCTargetLib
+
+[Sources.common]
+  IPCCBSP.c
+  ../../../../Library/IPCCLib/api/IPCC_Info.h
+  ../../../../Library/IPCCLib/inc/IPCC_Internal.h
+  ../../../../Library/IPCCLib/inc/IPCC_Tx.h
+  ../../../../Library/IPCCLib/inc/IPCC_Log.h
+  ../../../../Library/IPCCLib/inc/IPCC_Legacy.h
+  ../../../../Library/IPCCLib/inc/IPCC_OS.h
+  ../../../../Library/IPCCLib/inc/IPCC_Rx.h
+  ../../../../Library/IPCCLib/inc/IPCC_Image.h
+  ../../../../Library/IPCCLib/inc/IPCC_InfoInternal.h
+  ../../../../Library/IPCCLib/inc/IPCCHWIO.h
+
+[Packages]
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+
+[LibraryClasses]
+  IPCCLib
+

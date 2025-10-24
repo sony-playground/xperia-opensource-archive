@@ -1,0 +1,58 @@
+#/** @file UfsTargetUefiLib.inf
+#
+#  UFS Target Lib for XBL core
+#
+#  Copyright (c) 2017-2020, 2022 Qualcomm Technologies, Inc . All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#  $Header: $
+#  $DateTime: $
+#  $Author:  $
+#
+# when         who     what, where, why
+# ----------   ---     ----------------------------------------------------------
+# 2022-08-22   jt      Library/protocol additions for Quantum compilation
+# 2022-02-17   sa      Added UfsCommonLib to get commonlib header files.
+# 2020-09-10   jt      SMMU Update
+# 2018-11-29   jt      Add NpaApiLib
+# 2017-06-01   jt      Initial revision.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = UfsTargetUefiLib
+  FILE_GUID                      = 79BBD319-31E3-4219-8E0A-314F445E3E80   
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = UfsTargetUefiLib
+
+[Sources]
+  UfsCoreBspLib.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/XBLLoaderApi.dec  
+  ArmPkg/ArmPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/Library/UfsCommonLib/UfsCommonLib.dec
+
+[LibraryClasses]
+  DebugLib
+  ArmLib
+  NpaApiLib
+  UncachedMemoryAllocationLib
+  UefiCfgLib
+
+[Protocols]
+  gEfiPlatformInfoProtocolGuid
+  gEfiDtbExtnProtocolGuid
+  gEfiClockProtocolGuid
+
+

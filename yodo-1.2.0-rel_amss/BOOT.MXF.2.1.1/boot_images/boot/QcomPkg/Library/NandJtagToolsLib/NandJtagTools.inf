@@ -1,0 +1,78 @@
+#/** @file NandJtagToolsLib.inf
+#
+#  NAND Jtag Programmer INF
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 22/06/22   gml     Set log level to 3
+# 08/01/20   sa      Workaround for Rumi.
+# 06/20/20   sa      Relocated file.
+# 06/11/20   sa      Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NandJtagTools
+  FILE_GUID                      = 3cb0f525-8732-4fb8-8e6d-b118adb3a00a
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 1.0
+
+
+[Sources.common]
+  nand_dump.c
+  nand_wrapper.c
+  nand_utils.c
+  nand_param.c
+  nand_partition.c
+  nand_core.c
+  nand_entry.c
+  flash_log.c
+  nand_core_v2.c
+
+[Sources.ARM]
+  ModuleEntryPoint_ARM.S | GCC
+
+[Sources.AARCH64]
+  ModuleEntryPoint_AARCH64.S | GCC
+  ModuleEntryPoint_AARCH64.S | RVCT
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DBUILD_TOOL_CHAIN  -DNAND_PAGE_SIZE=4096  -DMAX_PAGE_SIZE=4096  -DFLASH_TOOLS_HEAP_SIZE=262144 -DBUILD_NAND -g -DFLASH_LOG_H="\"flash_log.h\"" -DFLASH_WATCHDOG_DISABLED -DNOISY -DTNOISY="3" -DBUILD_RUMI_SLOW_NAND
+  MSFT:*_*_*_CC_FLAGS = -DFEATURE_GPP
+  
+[BuildOptions.ARM]
+  GCC:*_*_*_CC_FLAGS = -DBUILD_TOOL_CHAIN  -DNAND_PAGE_SIZE=4096  -DMAX_PAGE_SIZE=4096  -DFLASH_TOOLS_HEAP_SIZE=262144 -DBUILD_NAND -g -DFLASH_LOG_H="\"flash_log.h\"" -DFLASH_WATCHDOG_DISABLED -DNOISY -DTNOISY="3" -DBUILD_RUMI_SLOW_NAND
+  MSFT:*_*_*_CC_FLAGS = -DFEATURE_GPP
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/XBLLoaderApi.dec  
+
+[LibraryClasses]
+  MuslLib
+  BaseLib
+  DebugLib
+  BaseMemoryLib
+  #BootMmuLib
+  BamLoaderLib
+  SmemLib
+  StackCanaryBaseLib
+  NandCommonLib
+  DALCommonLoaderLib
+  DTBExtnLib
+    
+  

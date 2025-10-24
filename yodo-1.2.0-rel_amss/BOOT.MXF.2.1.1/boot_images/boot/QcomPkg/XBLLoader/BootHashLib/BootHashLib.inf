@@ -1,0 +1,40 @@
+#/** @file BootHashLib.inf
+#
+#  Hash APIs for XBL
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who      what, where, why
+# --------   ---      ---------------------------------------------------------
+# 11/12/20   rama     added UCLib
+# 03/23/20   rama    Initial revision.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = BootHashLib
+  FILE_GUID                      = 6ED72391-4984-44C6-B5EB-A8A2EFCCAA78
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = BootHashLib
+
+[Sources.common]
+boot_hash.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  SecPkg/UCLib.dec
+
+[LibraryClasses]
+  ConfigContextLib

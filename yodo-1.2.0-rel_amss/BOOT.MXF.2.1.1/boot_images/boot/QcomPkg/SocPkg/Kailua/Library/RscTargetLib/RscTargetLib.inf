@@ -1,0 +1,62 @@
+#/** @file RscTargetLib.inf
+#
+#  INF for Rsc target library.
+#
+#  Copyright (c) 2020,2021 Qualcomm Technologies, Inc. All rights reserved.
+#
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RscLib
+  FILE_GUID                      = fd748f85-dd16-4a4e-9a70-dcb6edaccfaf
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = RscLib
+
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS = -DTARGET_UEFI
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS = -DTARGET_UEFI
+
+
+[Sources]
+  seq/common/rsc_internal.h
+ 
+
+[Sources.common]
+  seq/cfg/kailua/rsc_config.c
+  seq/cfg/kailua/rsc_target.c
+  seq/common/rsc.c
+  seq/common/rsc_internal.c
+  seq/common/rsc_internal.h
+  seq/hal/hwio/kailua/rsc_hal_hwio.h
+  seq/hal/inc/rsc_hal_bsp.h
+  seq/hal/inc/rsc_seq_hal.h
+  seq/hal/src/rsc_hal.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  QcomLib
+  BootConfigLib
+  ULogApiLib
+  CmdDbApiLib
+  BusyWaitLib
+  DALModEnvLib
+
+[Protocols]
+  gEfiChipInfoProtocolGuid
+  gEfiPlatformInfoProtocolGuid

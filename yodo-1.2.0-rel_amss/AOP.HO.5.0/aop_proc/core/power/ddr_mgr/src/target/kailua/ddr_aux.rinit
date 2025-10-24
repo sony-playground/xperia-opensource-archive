@@ -1,0 +1,946 @@
+# DDR_AUX Global config
+
+module : { name = RPMH_DDRAUX_DDR_AUX_SEQ_MEM, group = DDRAUX }
+vars:
+  # Sequence information to be placed in:
+  # aop_proc/core/power/ddr_mgr/src/target/Lahaina/ddr_aux.rinit
+  # DDR_AUX Sequence generated Fri Apr 17 12:05:13 2020
+  # This info must match ddr_mgmt_target.h
+  # Please use .../ddr_mgr/Scripts/generate_seq.pl to generate data.
+  ddr_aux_seq0 = [ ###16 bit sequencer
+  0x1c0e403b ,  #0x000: 0x403b   	DEBUG_PDC_RESTORE:           SET0   gcc_perf_state_override_for_collapse
+                #0x002: 0x1c0e   	                             CALL   SHRM_CLK_ON
+  0x701e501e ,  #0x004: 0x501e   	                             SET1   gcc_shub_change_req
+                #0x006: 0x701e   	                             WAIT1  gcc_shub_change_ack
+  0x4021401e ,  #0x008: 0x401e   	                             SET0   gcc_shub_change_req
+                #0x00a: 0x4021   	                             SET0   gcc_shub_disable_req
+  0x000e6024 ,  #0x00c: 0x6024   	                             WAIT0  gcc_shub_disable_ack
+                #0x00e: 0x000e   	                             DELI   5000032ns
+  0x4024500f ,  #0x010: 0x500f   	                             SET1   tcs15_debug_pdc_req
+                #0x012: 0x4024   	                             SET0   gcc_shub_power_collapse_req
+  0x50316027 ,  #0x014: 0x6027   	                             WAIT0  gcc_shub_power_collapse_ack
+                #0x016: 0x5031   	                             SET1   mi_pmu_qactive_shub_req
+  0x700f7031 ,  #0x018: 0x7031   	                             WAIT1  mi_pmu_qactive_shub_ack
+                #0x01a: 0x700f   	                             WAIT1  tcs15_debug_pdc_ack
+  0x1c25400f ,  #0x01c: 0x400f   	                             SET0   tcs15_debug_pdc_req
+                #0x01e: 0x1c25   	                             CALL   CALL_PATH_SEQ
+  0x703c503c ,  #0x020: 0x503c   	                             SET1   debug_pdc_seq_done
+                #0x022: 0x703c   	                             WAIT1  wait_ev_tied_0
+  0x50311000 ,  #0x024: 0x1000   	                             RETURN
+                #0x026: 0x5031   	SHUB_QACTIVE_LOCK:           SET1   mi_pmu_qactive_shub_req
+  0x10007831 ,  #0x028: 0x7831   	                             WAIT1  5200000ns           mi_pmu_qactive_shub_ack
+                #0x02a: 0x1000   	                             RETURN
+  0x10004031 ,  #0x02c: 0x4031   	SHUB_QACTIVE_UNLOCK:         SET0   mi_pmu_qactive_shub_req
+                #0x02e: 0x1000   	                             RETURN
+  0x781f501d ,  #0x030: 0x501d   	GCC_SHRM_FREQUENCY_SWITCH_NONOTIF: SET1   gcc_shrm_change_req
+                #0x032: 0x781f   	                             WAIT1  5200000ns           gcc_shrm_change_ack
+  0x5028401d ,  #0x034: 0x401d   	                             SET0   gcc_shrm_change_req
+                #0x036: 0x5028   	                             SET1   seq_shrm_cp_done
+  0x10004028 ,  #0x038: 0x4028   	                             SET0   seq_shrm_cp_done
+                #0x03a: 0x1000   	                             RETURN
+  0x781f501d ,  #0x03c: 0x501d   	GCC_SHRM_FREQUENCY_SWITCH:   SET1   gcc_shrm_change_req
+                #0x03e: 0x781f   	                             WAIT1  5200000ns           gcc_shrm_change_ack
+  0x5005401d ,  #0x040: 0x401d   	                             SET0   gcc_shrm_change_req
+                #0x042: 0x5005   	                             SET1   tcs5_shrm_freq_req
+  0x40057805 ,  #0x044: 0x7805   	                             WAIT1  5200000ns           tcs5_shrm_freq_ack
+                #0x046: 0x4005   	                             SET0   tcs5_shrm_freq_req
+  0x40285028 ,  #0x048: 0x5028   	                             SET1   seq_shrm_cp_done
+                #0x04a: 0x4028   	                             SET0   seq_shrm_cp_done
+  0x500d1000 ,  #0x04c: 0x1000   	                             RETURN
+                #0x04e: 0x500d   	SHRM_PRE_VOLTAGE_NOTIFICATION: SET1   tcs13_pre_vtg_notification_req
+  0x400d780d ,  #0x050: 0x780d   	                             WAIT1  5200000ns           tcs13_pre_vtg_notification_ack
+                #0x052: 0x400d   	                             SET0   tcs13_pre_vtg_notification_req
+  0x502f1000 ,  #0x054: 0x1000   	                             RETURN
+                #0x056: 0x502f   	AOP_WORKAROUND:              SET1   aop_int
+  0x402f783d ,  #0x058: 0x783d   	                             WAIT1  5200000ns           seq_wait_event_a
+                #0x05a: 0x402f   	                             SET0   aop_int
+  0x80011000 ,  #0x05c: 0x1000   	                             RETURN
+                #0x05e: 0x8001   	VOLTAGE_WORKAROUND:          MV     swwa_status         voltage_wa
+  0x10001c06 ,  #0x060: 0x1c06   	                             CALL   AOP_WORKAROUND
+                #0x062: 0x1000   	                             RETURN
+  0x1c068002 ,  #0x064: 0x8002   	FREQUENCY_PRE_WORKAROUND:    MV     swwa_status         pre_freq_wa
+                #0x066: 0x1c06   	                             CALL   AOP_WORKAROUND
+  0x80031000 ,  #0x068: 0x1000   	                             RETURN
+                #0x06a: 0x8003   	FREQUENCY_POST_WORKAROUND:   MV     swwa_status         post_freq_wa
+  0x10001c06 ,  #0x06c: 0x1c06   	                             CALL   AOP_WORKAROUND
+                #0x06e: 0x1000   	                             RETURN
+  0x3f843e07 ,  #0x070: 0x3e07   	VOTE_PRE_VOLTAGES:           BEQR   sw8_need_voltage_workaround=1 VOLTAGE_WORKAROUND
+                #0x072: 0x3f84   	                             BEQR   sw14=1              SHRM_PRE_VOLTAGE_NOTIFICATION
+  0x78365014 ,  #0x074: 0x5014   	                             SET1   voltage_tcs_a1_req
+                #0x076: 0x7836   	                             WAIT1  5200000ns           voltage_tcs_a1_sent
+  0x214b5015 ,  #0x078: 0x5015   	                             SET1   voltage_tcs_a2_req
+                #0x07a: 0x214b   	                             BEQ    restore=0           SKIP_VTG_TCS_C_IN_PRE
+  0x502b7837 ,  #0x07c: 0x7837   	                             WAIT1  5200000ns           voltage_tcs_a2_sent
+                #0x07e: 0x502b   	                             SET1   voltage_tcs_c1_req
+  0x402b7818 ,  #0x080: 0x7818   	                             WAIT1  5200000ns           voltage_tcs_c1_ack
+                #0x082: 0x402b   	                             SET0   voltage_tcs_c1_req
+  0x78157814 ,  #0x084: 0x7814   	SKIP_VTG_TCS_C_IN_PRE:       WAIT1  5200000ns           voltage_tcs_a1_ack
+                #0x086: 0x7815   	                             WAIT1  5200000ns           voltage_tcs_a2_ack
+  0x40154014 ,  #0x088: 0x4014   	                             SET0   voltage_tcs_a1_req
+                #0x08a: 0x4015   	                             SET0   voltage_tcs_a2_req
+  0x402c502c ,  #0x08c: 0x502c   	                             SET1   stats_timer_midpoint_a
+                #0x08e: 0x402c   	                             SET0   stats_timer_midpoint_a
+  0x10003fc5 ,  #0x090: 0x3fc5   	                             BEQR   goto_error_sequence=1 ERROR_SEQUENCE
+                #0x092: 0x1000   	                             RETURN
+  0x3f843e07 ,  #0x094: 0x3e07   	VOTE_POST_VOLTAGES:          BEQR   sw8_need_voltage_workaround=1 VOLTAGE_WORKAROUND
+                #0x096: 0x3f84   	                             BEQR   sw14=1              SHRM_PRE_VOLTAGE_NOTIFICATION
+  0x502b21cd ,  #0x098: 0x21cd   	                             BEQ    collapse=0          SKIP_VTG_TCS_C_IN_POST
+                #0x09a: 0x502b   	                             SET1   voltage_tcs_c1_req
+  0x402b7818 ,  #0x09c: 0x7818   	                             WAIT1  5200000ns           voltage_tcs_c1_ack
+                #0x09e: 0x402b   	                             SET0   voltage_tcs_c1_req
+  0x7817502a ,  #0x0a0: 0x502a   	SKIP_VTG_TCS_C_IN_POST:      SET1   voltage_tcs_b2_req
+                #0x0a2: 0x7817   	                             WAIT1  5200000ns           voltage_tcs_b2_ack
+  0x5029402a ,  #0x0a4: 0x402a   	                             SET0   voltage_tcs_b2_req
+                #0x0a6: 0x5029   	                             SET1   voltage_tcs_b1_req
+  0x40297816 ,  #0x0a8: 0x7816   	                             WAIT1  5200000ns           voltage_tcs_b1_ack
+                #0x0aa: 0x4029   	                             SET0   voltage_tcs_b1_req
+  0x40331000 ,  #0x0ac: 0x1000   	                             RETURN
+                #0x0ae: 0x4033   	SHRM_CLK_ON:                 SET0   ddraux_gcc_mipmu_clk_gate_req
+  0x50326833 ,  #0x0b0: 0x6833   	                             WAIT0  5200000ns           gcc_ddraux_mipmu_clk_gate_ack
+                #0x0b2: 0x5032   	                             SET1   ddraux_gcc_mipmu_clk_change_req
+  0x40327832 ,  #0x0b4: 0x7832   	                             WAIT1  5200000ns           gcc_ddraux_mipmu_clk_change_ack
+                #0x0b6: 0x4032   	                             SET0   ddraux_gcc_mipmu_clk_change_req
+  0x40201c03 ,  #0x0b8: 0x1c03   	                             CALL   GCC_SHRM_FREQUENCY_SWITCH_NONOTIF
+                #0x0ba: 0x4020   	                             SET0   gcc_shrm_disable_req
+  0x402e6825 ,  #0x0bc: 0x6825   	                             WAIT0  5200000ns           gcc_shrm_disable_ack
+                #0x0be: 0x402e   	                             SET0   gcc_dpcc_disable_req
+  0x40236829 ,  #0x0c0: 0x6829   	                             WAIT0  5200000ns           gcc_dpcc_disable_ack
+                #0x0c2: 0x4023   	                             SET0   gcc_shrm_power_collapse_req
+  0x10006828 ,  #0x0c4: 0x6828   	                             WAIT0  5200000ns           gcc_shrm_power_collapse_ack
+                #0x0c6: 0x1000   	                             RETURN
+  0x78285023 ,  #0x0c8: 0x5023   	SHRM_CLK_OFF:                SET1   gcc_shrm_power_collapse_req
+                #0x0ca: 0x7828   	                             WAIT1  5200000ns           gcc_shrm_power_collapse_ack
+  0x7829502e ,  #0x0cc: 0x502e   	                             SET1   gcc_dpcc_disable_req
+                #0x0ce: 0x7829   	                             WAIT1  5200000ns           gcc_dpcc_disable_ack
+  0x78255020 ,  #0x0d0: 0x5020   	                             SET1   gcc_shrm_disable_req
+                #0x0d2: 0x7825   	                             WAIT1  5200000ns           gcc_shrm_disable_ack
+  0x50321c03 ,  #0x0d4: 0x1c03   	                             CALL   GCC_SHRM_FREQUENCY_SWITCH_NONOTIF
+                #0x0d6: 0x5032   	                             SET1   ddraux_gcc_mipmu_clk_change_req
+  0x40327832 ,  #0x0d8: 0x7832   	                             WAIT1  5200000ns           gcc_ddraux_mipmu_clk_change_ack
+                #0x0da: 0x4032   	                             SET0   ddraux_gcc_mipmu_clk_change_req
+  0x78335033 ,  #0x0dc: 0x5033   	                             SET1   ddraux_gcc_mipmu_clk_gate_req
+                #0x0de: 0x7833   	                             WAIT1  5200000ns           gcc_ddraux_mipmu_clk_gate_ack
+  0x503e1000 ,  #0x0e0: 0x1000   	                             RETURN
+                #0x0e2: 0x503e   	ACA_TRIGGER:                 SET1   aca_disable_req
+  0x1000403e ,  #0x0e4: 0x403e   	                             SET0   aca_disable_req
+                #0x0e6: 0x1000   	                             RETURN
+  0x602a501a ,  #0x0e8: 0x501a   	COLLAPSE:                    SET1   collapse_status
+                #0x0ea: 0x602a   	                             WAIT0  curr_path_state_or_tie0
+  0x1c005030 ,  #0x0ec: 0x5030   	                             SET1   mi_pmu_qactive_mc_req
+                #0x0ee: 0x1c00   	                             CALL   SHUB_QACTIVE_LOCK
+  0x503b7830 ,  #0x0f0: 0x7830   	                             WAIT1  5200000ns           mi_pmu_qactive_mc_ack
+                #0x0f2: 0x503b   	                             SET1   gcc_perf_state_override_for_collapse
+  0x683f503e ,  #0x0f4: 0x503e   	                             SET1   aca_disable_req
+                #0x0f6: 0x683f   	                             WAIT0  5200000ns           aca_fsm_state
+  0x78035003 ,  #0x0f8: 0x5003   	                             SET1   tcs3_llc_powerstate_req
+                #0x0fa: 0x7803   	                             WAIT1  5200000ns           tcs3_llc_powerstate_ack
+  0x50044003 ,  #0x0fc: 0x4003   	                             SET0   tcs3_llc_powerstate_req
+                #0x0fe: 0x5004   	                             SET1   tcs4_pasr_req
+  0x40047804 ,  #0x100: 0x7804   	                             WAIT1  5200000ns           tcs4_pasr_ack
+                #0x102: 0x4004   	                             SET0   tcs4_pasr_req
+  0x50245002 ,  #0x104: 0x5002   	                             SET1   tcs2_ddr_powerstate_req
+                #0x106: 0x5024   	                             SET1   gcc_shub_power_collapse_req
+  0x78271c01 ,  #0x108: 0x1c01   	                             CALL   SHUB_QACTIVE_UNLOCK
+                #0x10a: 0x7827   	                             WAIT1  5200000ns           gcc_shub_power_collapse_ack
+  0x40027802 ,  #0x10c: 0x7802   	                             WAIT1  5200000ns           tcs2_ddr_powerstate_ack
+                #0x10e: 0x4002   	                             SET0   tcs2_ddr_powerstate_req
+  0x781e501e ,  #0x110: 0x501e   	                             SET1   gcc_shub_change_req
+                #0x112: 0x781e   	                             WAIT1  5200000ns           gcc_shub_change_ack
+  0x5021401e ,  #0x114: 0x401e   	                             SET0   gcc_shub_change_req
+                #0x116: 0x5021   	                             SET1   gcc_shub_disable_req
+  0x3fc57824 ,  #0x118: 0x7824   	                             WAIT1  5200000ns           gcc_shub_disable_ack
+                #0x11a: 0x3fc5   	                             BEQR   goto_error_sequence=1 ERROR_SEQUENCE
+  0x80051c0f ,  #0x11c: 0x1c0f   	                             CALL   SHRM_CLK_OFF
+                #0x11e: 0x8005   	                             MV     swwa_status         collapse_wa
+  0x1c0c1c06 ,  #0x120: 0x1c06   	                             CALL   AOP_WORKAROUND
+                #0x122: 0x1c0c   	                             CALL   VOTE_POST_VOLTAGES
+  0x40265026 ,  #0x124: 0x5026   	                             SET1   seq_mc_cp_done
+                #0x126: 0x4026   	                             SET0   seq_mc_cp_done
+  0x40275027 ,  #0x128: 0x5027   	                             SET1   seq_shub_cp_done
+                #0x12a: 0x4027   	                             SET0   seq_shub_cp_done
+  0x1000401a ,  #0x12c: 0x401a   	                             SET0   collapse_status
+                #0x12e: 0x1000   	                             RETURN
+  0x403b5019 ,  #0x130: 0x5019   	NORMAL_RESTORE:              SET1   normal_restore_status
+                #0x132: 0x403b   	                             SET0   gcc_perf_state_override_for_collapse
+  0x1c0e1c0a ,  #0x134: 0x1c0a   	                             CALL   VOTE_PRE_VOLTAGES
+                #0x136: 0x1c0e   	                             CALL   SHRM_CLK_ON
+  0x501e3e88 ,  #0x138: 0x3e88   	                             BEQR   sw10_need_pre_frequency_workaround=1 FREQUENCY_PRE_WORKAROUND
+                #0x13a: 0x501e   	                             SET1   gcc_shub_change_req
+  0x401e781e ,  #0x13c: 0x781e   	                             WAIT1  5200000ns           gcc_shub_change_ack
+                #0x13e: 0x401e   	                             SET0   gcc_shub_change_req
+  0x68244021 ,  #0x140: 0x4021   	                             SET0   gcc_shub_disable_req
+                #0x142: 0x6824   	                             WAIT0  5200000ns           gcc_shub_disable_ack
+  0x40245002 ,  #0x144: 0x5002   	                             SET1   tcs2_ddr_powerstate_req
+                #0x146: 0x4024   	                             SET0   gcc_shub_power_collapse_req
+  0x1c006827 ,  #0x148: 0x6827   	                             WAIT0  5200000ns           gcc_shub_power_collapse_ack
+                #0x14a: 0x1c00   	                             CALL   SHUB_QACTIVE_LOCK
+  0x78024030 ,  #0x14c: 0x4030   	                             SET0   mi_pmu_qactive_mc_req
+                #0x14e: 0x7802   	                             WAIT1  5200000ns           tcs2_ddr_powerstate_ack
+  0x50034002 ,  #0x150: 0x4002   	                             SET0   tcs2_ddr_powerstate_req
+                #0x152: 0x5003   	                             SET1   tcs3_llc_powerstate_req
+  0x40037803 ,  #0x154: 0x7803   	                             WAIT1  5200000ns           tcs3_llc_powerstate_ack
+                #0x156: 0x4003   	                             SET0   tcs3_llc_powerstate_req
+  0x402d502d ,  #0x158: 0x502d   	                             SET1   stats_timer_midpoint_b
+                #0x15a: 0x402d   	                             SET0   stats_timer_midpoint_b
+  0x1c10403e ,  #0x15c: 0x403e   	                             SET0   aca_disable_req
+                #0x15e: 0x1c10   	                             CALL   ACA_TRIGGER
+  0x3fc53ec9 ,  #0x160: 0x3ec9   	                             BEQR   sw11_need_post_frequency_workaround=1 FREQUENCY_POST_WORKAROUND
+                #0x162: 0x3fc5   	                             BEQR   goto_error_sequence=1 ERROR_SEQUENCE
+  0x40275027 ,  #0x164: 0x5027   	                             SET1   seq_shub_cp_done
+                #0x166: 0x4027   	                             SET0   seq_shub_cp_done
+  0x40265026 ,  #0x168: 0x5026   	                             SET1   seq_mc_cp_done
+                #0x16a: 0x4026   	                             SET0   seq_mc_cp_done
+  0x80067835 ,  #0x16c: 0x7835   	                             WAIT1  5200000ns           path_state_requested
+                #0x16e: 0x8006   	                             MV     swwa_status         restore_wa
+  0x40191c06 ,  #0x170: 0x1c06   	                             CALL   AOP_WORKAROUND
+                #0x172: 0x4019   	                             SET0   normal_restore_status
+  0x50371000 ,  #0x174: 0x1000   	                             RETURN
+                #0x176: 0x5037   	GCC_INIT:                    SET1   init_path_seq
+  0x40371c25 ,  #0x178: 0x1c25   	                             CALL   CALL_PATH_SEQ
+                #0x17a: 0x4037   	                             SET0   init_path_seq
+  0x1c0c1c0a ,  #0x17c: 0x1c0a   	                             CALL   VOTE_PRE_VOLTAGES
+                #0x17e: 0x1c0c   	                             CALL   VOTE_POST_VOLTAGES
+  0x1c001c02 ,  #0x180: 0x1c02   	                             CALL   GCC_SHRM_FREQUENCY_SWITCH
+                #0x182: 0x1c00   	                             CALL   SHUB_QACTIVE_LOCK
+  0x781e501e ,  #0x184: 0x501e   	                             SET1   gcc_shub_change_req
+                #0x186: 0x781e   	                             WAIT1  5200000ns           gcc_shub_change_ack
+  0x5027401e ,  #0x188: 0x401e   	                             SET0   gcc_shub_change_req
+                #0x18a: 0x5027   	                             SET1   seq_shub_cp_done
+  0x50264027 ,  #0x18c: 0x4027   	                             SET0   seq_shub_cp_done
+                #0x18e: 0x5026   	                             SET1   seq_mc_cp_done
+  0x10004026 ,  #0x190: 0x4026   	                             SET0   seq_mc_cp_done
+                #0x192: 0x1000   	                             RETURN
+  0x1c005016 ,  #0x194: 0x5016   	SHUB_FREQ_CHANGE:            SET1   shub_freq_change_status
+                #0x196: 0x1c00   	                             CALL   SHUB_QACTIVE_LOCK
+  0x1c0a2d14 ,  #0x198: 0x2d14   	                             BEQ    sw4_or_mc_dn_shub_change=1 SHUB_FREQ_START
+                #0x19a: 0x1c0a   	                             CALL   VOTE_PRE_VOLTAGES
+  0x50063e88 ,  #0x19c: 0x3e88   	                             BEQR   sw10_need_pre_frequency_workaround=1 FREQUENCY_PRE_WORKAROUND
+                #0x19e: 0x5006   	SHUB_FREQ_START:             SET1   tcs6_shub_prework_req
+  0x40067806 ,  #0x1a0: 0x7806   	                             WAIT1  5200000ns           tcs6_shub_prework_ack
+                #0x1a2: 0x4006   	                             SET0   tcs6_shub_prework_req
+  0x781e501e ,  #0x1a4: 0x501e   	                             SET1   gcc_shub_change_req
+                #0x1a6: 0x781e   	                             WAIT1  5200000ns           gcc_shub_change_ack
+  0x5007401e ,  #0x1a8: 0x401e   	                             SET0   gcc_shub_change_req
+                #0x1aa: 0x5007   	                             SET1   tcs7_shub_postwork_req
+  0x40077807 ,  #0x1ac: 0x7807   	                             WAIT1  5200000ns           tcs7_shub_postwork_ack
+                #0x1ae: 0x4007   	                             SET0   tcs7_shub_postwork_req
+  0x402d502d ,  #0x1b0: 0x502d   	                             SET1   stats_timer_midpoint_b
+                #0x1b2: 0x402d   	                             SET0   stats_timer_midpoint_b
+  0x1c0c3ec9 ,  #0x1b4: 0x3ec9   	                             BEQR   sw11_need_post_frequency_workaround=1 FREQUENCY_POST_WORKAROUND
+                #0x1b6: 0x1c0c   	                             CALL   VOTE_POST_VOLTAGES
+  0x50273fc5 ,  #0x1b8: 0x3fc5   	                             BEQR   goto_error_sequence=1 ERROR_SEQUENCE
+                #0x1ba: 0x5027   	                             SET1   seq_shub_cp_done
+  0x40164027 ,  #0x1bc: 0x4027   	                             SET0   seq_shub_cp_done
+                #0x1be: 0x4016   	                             SET0   shub_freq_change_status
+  0x501f1000 ,  #0x1c0: 0x1000   	                             RETURN
+                #0x1c2: 0x501f   	SET_MC_SHUB_BIT:             SET1   mc_dn_shub_change_bit
+  0x50171000 ,  #0x1c4: 0x1000   	                             RETURN
+                #0x1c6: 0x5017   	MC_FREQ_CHANGE:              SET1   mc_freq_change_status
+  0x1c003895 ,  #0x1c8: 0x3895   	                             BEQR   shub_change=1       SET_MC_SHUB_BIT
+                #0x1ca: 0x1c00   	                             CALL   SHUB_QACTIVE_LOCK
+  0x1c0a5008 ,  #0x1cc: 0x5008   	                             SET1   tcs8_prep_prework_req
+                #0x1ce: 0x1c0a   	                             CALL   VOTE_PRE_VOLTAGES
+  0x78083e88 ,  #0x1d0: 0x3e88   	                             BEQR   sw10_need_pre_frequency_workaround=1 FREQUENCY_PRE_WORKAROUND
+                #0x1d2: 0x7808   	                             WAIT1  5200000ns           tcs8_prep_prework_ack
+  0x38c24008 ,  #0x1d4: 0x4008   	                             SET0   tcs8_prep_prework_req
+                #0x1d6: 0x38c2   	                             BEQR   shrm_up=1           GCC_SHRM_FREQUENCY_SWITCH
+  0x50093cd0 ,  #0x1d8: 0x3cd0   	                             BEQR   sw3_or_mc_dn=1      ACA_TRIGGER
+                #0x1da: 0x5009   	                             SET1   tcs9_mc_prework_req
+  0x40097809 ,  #0x1dc: 0x7809   	                             WAIT1  5200000ns           tcs9_mc_prework_ack
+                #0x1de: 0x4009   	                             SET0   tcs9_mc_prework_req
+  0x780a500a ,  #0x1e0: 0x500a   	                             SET1   tcs10_mc_change_req
+                #0x1e2: 0x780a   	                             WAIT1  5200000ns           tcs10_mc_change_ack
+  0x502d400a ,  #0x1e4: 0x400a   	                             SET0   tcs10_mc_change_req
+                #0x1e6: 0x502d   	                             SET1   stats_timer_midpoint_b
+  0x3902402d ,  #0x1e8: 0x402d   	                             SET0   stats_timer_midpoint_b
+                #0x1ea: 0x3902   	                             BEQR   shrm_dn=1           GCC_SHRM_FREQUENCY_SWITCH
+  0x2d173c90 ,  #0x1ec: 0x3c90   	                             BEQR   sw2_or_mc_up=1      ACA_TRIGGER
+                #0x1ee: 0x2d17   	                             BEQ    sw4_or_mc_dn_shub_change=1 MC_FREQ_DONE
+  0x1c0c3ec9 ,  #0x1f0: 0x3ec9   	                             BEQR   sw11_need_post_frequency_workaround=1 FREQUENCY_POST_WORKAROUND
+                #0x1f2: 0x1c0c   	                             CALL   VOTE_POST_VOLTAGES
+  0x50263fc5 ,  #0x1f4: 0x3fc5   	MC_FREQ_DONE:                BEQR   goto_error_sequence=1 ERROR_SEQUENCE
+                #0x1f6: 0x5026   	                             SET1   seq_mc_cp_done
+  0x40174026 ,  #0x1f8: 0x4026   	                             SET0   seq_mc_cp_done
+                #0x1fa: 0x4017   	                             SET0   mc_freq_change_status
+  0x50181000 ,  #0x1fc: 0x1000   	                             RETURN
+                #0x1fe: 0x5018   	P_FREQ_CHANGE_UP:            SET1   p_freq_change_up_status
+  0x50081c00 ,  #0x200: 0x1c00   	                             CALL   SHUB_QACTIVE_LOCK
+                #0x202: 0x5008   	                             SET1   tcs8_prep_prework_req
+  0x3e881c0a ,  #0x204: 0x1c0a   	                             CALL   VOTE_PRE_VOLTAGES
+                #0x206: 0x3e88   	                             BEQR   sw10_need_pre_frequency_workaround=1 FREQUENCY_PRE_WORKAROUND
+  0x40087808 ,  #0x208: 0x7808   	                             WAIT1  5200000ns           tcs8_prep_prework_ack
+                #0x20a: 0x4008   	                             SET0   tcs8_prep_prework_req
+  0x500638c2 ,  #0x20c: 0x38c2   	                             BEQR   shrm_up=1           GCC_SHRM_FREQUENCY_SWITCH
+                #0x20e: 0x5006   	                             SET1   tcs6_shub_prework_req
+  0x40067806 ,  #0x210: 0x7806   	                             WAIT1  5200000ns           tcs6_shub_prework_ack
+                #0x212: 0x4006   	                             SET0   tcs6_shub_prework_req
+  0x781e501e ,  #0x214: 0x501e   	                             SET1   gcc_shub_change_req
+                #0x216: 0x781e   	                             WAIT1  5200000ns           gcc_shub_change_ack
+  0x5007401e ,  #0x218: 0x401e   	                             SET0   gcc_shub_change_req
+                #0x21a: 0x5007   	                             SET1   tcs7_shub_postwork_req
+  0x40077807 ,  #0x21c: 0x7807   	                             WAIT1  5200000ns           tcs7_shub_postwork_ack
+                #0x21e: 0x4007   	                             SET0   tcs7_shub_postwork_req
+  0x40275027 ,  #0x220: 0x5027   	                             SET1   seq_shub_cp_done
+                #0x222: 0x4027   	                             SET0   seq_shub_cp_done
+  0x78095009 ,  #0x224: 0x5009   	                             SET1   tcs9_mc_prework_req
+                #0x226: 0x7809   	                             WAIT1  5200000ns           tcs9_mc_prework_ack
+  0x500a4009 ,  #0x228: 0x4009   	                             SET0   tcs9_mc_prework_req
+                #0x22a: 0x500a   	                             SET1   tcs10_mc_change_req
+  0x400a780a ,  #0x22c: 0x780a   	                             WAIT1  5200000ns           tcs10_mc_change_ack
+                #0x22e: 0x400a   	                             SET0   tcs10_mc_change_req
+  0x402d502d ,  #0x230: 0x502d   	                             SET1   stats_timer_midpoint_b
+                #0x232: 0x402d   	                             SET0   stats_timer_midpoint_b
+  0x39023ec9 ,  #0x234: 0x3ec9   	                             BEQR   sw11_need_post_frequency_workaround=1 FREQUENCY_POST_WORKAROUND
+                #0x236: 0x3902   	                             BEQR   shrm_dn=1           GCC_SHRM_FREQUENCY_SWITCH
+  0x1c101c0c ,  #0x238: 0x1c0c   	                             CALL   VOTE_POST_VOLTAGES
+                #0x23a: 0x1c10   	                             CALL   ACA_TRIGGER
+  0x50263fc5 ,  #0x23c: 0x3fc5   	                             BEQR   goto_error_sequence=1 ERROR_SEQUENCE
+                #0x23e: 0x5026   	                             SET1   seq_mc_cp_done
+  0x40184026 ,  #0x240: 0x4026   	                             SET0   seq_mc_cp_done
+                #0x242: 0x4018   	                             SET0   p_freq_change_up_status
+  0x501b1000 ,  #0x244: 0x1000   	                             RETURN
+                #0x246: 0x501b   	LLC_FLUSH:                   SET1   llc_flush_status
+  0x1c00501f ,  #0x248: 0x501f   	                             SET1   flush_executed_bit
+                #0x24a: 0x1c00   	                             CALL   SHUB_QACTIVE_LOCK
+  0x502c2a9a ,  #0x24c: 0x2a9a   	                             BEQ    ddr_bw_requested=1  SKIP_FLUSH
+                #0x24e: 0x502c   	                             SET1   stats_timer_midpoint_a
+  0x5000402c ,  #0x250: 0x402c   	                             SET0   stats_timer_midpoint_a
+                #0x252: 0x5000   	                             SET1   tcs0_flush_req
+  0x3a9b782f ,  #0x254: 0x782f   	                             WAIT1  5200000ns           tcs0_flush_ack_or_ddr_bw_requested
+                #0x256: 0x3a9b   	                             BEQR   ddr_bw_requested=1  FLUSH_ABORT
+  0x401b4000 ,  #0x258: 0x4000   	                             SET0   tcs0_flush_req
+                #0x25a: 0x401b   	SKIP_FLUSH:                  SET0   llc_flush_status
+  0x1000401c ,  #0x25c: 0x401c   	                             SET0   flush_abort_status
+                #0x25e: 0x1000   	                             RETURN
+  0x501c401b ,  #0x260: 0x401b   	FLUSH_ABORT:                 SET0   llc_flush_status
+                #0x262: 0x501c   	                             SET1   flush_abort_status
+  0x78015001 ,  #0x264: 0x5001   	                             SET1   tcs1_flush_abort_req
+                #0x266: 0x7801   	                             WAIT1  5200000ns           tcs1_flush_abort_ack
+  0x502d4001 ,  #0x268: 0x4001   	                             SET0   tcs1_flush_abort_req
+                #0x26a: 0x502d   	                             SET1   stats_timer_midpoint_b
+  0x7800402d ,  #0x26c: 0x402d   	                             SET0   stats_timer_midpoint_b
+                #0x26e: 0x7800   	                             WAIT1  5200000ns           tcs0_flush_ack
+  0x000b1000 ,  #0x270: 0x1000   	                             RETURN
+                #0x272: 0x000b   	ERROR_SEQUENCE:              DELI   31200ns
+  0x10002fc5 ,  #0x274: 0x2fc5   	                             BEQ    goto_error_sequence=1 ERROR_SEQUENCE
+                #0x276: 0x1000   	                             RETURN
+  0x23dd1c1f ,  #0x278: 0x1c1f   	DDR_AUX_FSM:                 CALL   CALCULATE_STATE
+                #0x27a: 0x23dd   	                             BEQ    need_change=0       FSM_IDLE
+  0x181c1c21 ,  #0x27c: 0x1c21   	                             CALL   SEQ_START
+                #0x27e: 0x181c   	                             JMP    DDR_AUX_FSM
+  0x80003de5 ,  #0x280: 0x3de5   	FSM_IDLE:                    BEQR   sw7_or_need_normal_path=1 CALL_PATH_SEQ
+                #0x282: 0x8000   	                             MV     swwa_status         wa_done
+  0x502f265e ,  #0x284: 0x265e   	                             BEQ    sw9_or_is_curr_cp_pc_freq_and_ddr_bw_removed_live=0 FSM_END
+                #0x286: 0x502f   	                             SET1   aop_int
+  0x1000402f ,  #0x288: 0x402f   	                             SET0   aop_int
+                #0x28a: 0x1000   	FSM_END:                     RETURN
+  0x18262820 ,  #0x28c: 0x2820   	CALCULATE_STATE:             BEQ    cplock_req_pend=1   BCM_CPLOCK
+                #0x28e: 0x1826   	                             JMP    CALCULATE
+  0x783b5038 ,  #0x290: 0x5038   	BCM_CPLOCK:                  SET1   o_ddraux_bcm_cplock_req
+                #0x292: 0x783b   	                             WAIT1  5200000ns           i_bcm_ddraux_cplock_ack
+  0x40395039 ,  #0x294: 0x5039   	CALCULATE:                   SET1   seq_cal_start
+                #0x296: 0x4039   	                             SET0   seq_cal_start
+  0x25274038 ,  #0x298: 0x4038   	                             SET0   o_ddraux_bcm_cplock_req
+                #0x29a: 0x2527   	                             BEQ    flush_was_executed=0 CALCULATE_DONE
+  0x22a7401f ,  #0x29c: 0x401f   	                             SET0   flush_executed_bit
+                #0x29e: 0x22a7   	                             BEQ    ddr_bw_requested=0  CALCULATE_DONE
+  0x181f0008 ,  #0x2a0: 0x0008   	                             DELI   15028ns
+                #0x2a2: 0x181f   	                             JMP    CALCULATE_STATE
+  0x28621000 ,  #0x2a4: 0x1000   	CALCULATE_DONE:              RETURN
+                #0x2a6: 0x2862   	SEQ_START:                   BEQ    sw_seq_req=1        SW_SEQ
+  0x3da52a59 ,  #0x2a8: 0x2a59   	                             BEQ    need_flush=1        LLC_FLUSH
+                #0x2aa: 0x3da5   	                             BEQR   sw6_or_need_special_path=1 CALL_PATH_SEQ
+  0x295229d1 ,  #0x2ac: 0x29d1   	                             BEQ    collapse=1          COLLAPSE
+                #0x2ae: 0x2952   	                             BEQ    restore=1           NORMAL_RESTORE
+  0x401f2b98 ,  #0x2b0: 0x2b98   	                             BEQ    p_change_up=1       P_FREQ_CHANGE_UP
+                #0x2b2: 0x401f   	                             SET0   mc_dn_shub_change_bit
+  0x3da53ad6 ,  #0x2b4: 0x3ad6   	                             BEQR   mc_change=1         MC_FREQ_CHANGE
+                #0x2b6: 0x3da5   	                             BEQR   sw6_or_need_special_path=1 CALL_PATH_SEQ
+  0x401f3893 ,  #0x2b8: 0x3893   	                             BEQR   shub_change=1       SHUB_FREQ_CHANGE
+                #0x2ba: 0x401f   	                             SET0   mc_dn_shub_change_bit
+  0x503a1000 ,  #0x2bc: 0x1000   	                             RETURN
+                #0x2be: 0x503a   	SW_SEQ:                      SET1   sw_seq_status
+  0x403f503f ,  #0x2c0: 0x503f   	                             SET1   sw_seq_req_clear
+                #0x2c2: 0x403f   	                             SET0   sw_seq_req_clear
+  0x50102723 ,  #0x2c4: 0x2723   	                             BEQ    sw12_send_tcs16=0   NO_TCS16
+                #0x2c6: 0x5010   	                             SET1   tcs16_sw_tcs_req
+  0x27647810 ,  #0x2c8: 0x7810   	                             WAIT1  5200000ns           tcs16_sw_tcs_ack
+                #0x2ca: 0x2764   	NO_TCS16:                    BEQ    sw13_send_tcs17=0   NO_TCS17
+  0x78115011 ,  #0x2cc: 0x5011   	                             SET1   tcs17_sw_tcs_req
+                #0x2ce: 0x7811   	                             WAIT1  5200000ns           tcs17_sw_tcs_ack
+  0x1c068004 ,  #0x2d0: 0x8004   	NO_TCS17:                    MV     swwa_status         sw_seq_wa
+                #0x2d2: 0x1c06   	                             CALL   AOP_WORKAROUND
+  0x40114010 ,  #0x2d4: 0x4010   	                             SET0   tcs16_sw_tcs_req
+                #0x2d6: 0x4011   	                             SET0   tcs17_sw_tcs_req
+  0x1000403a ,  #0x2d8: 0x403a   	                             SET0   sw_seq_status
+                #0x2da: 0x1000   	                             RETURN
+  0x1c005035 ,  #0x2dc: 0x5035   	CALL_PATH_SEQ:               SET1   call_path_seq_status
+                #0x2de: 0x1c00   	                             CALL   SHUB_QACTIVE_LOCK
+  0x78345034 ,  #0x2e0: 0x5034   	                             SET1   path_sequencer_req
+                #0x2e2: 0x7834   	                             WAIT1  5200000ns           path_sequencer_done
+  0x2fc54034 ,  #0x2e4: 0x4034   	                             SET0   path_sequencer_req
+                #0x2e6: 0x2fc5   	                             BEQ    goto_error_sequence=1 ERROR_SEQUENCE
+  0x10004035    #0x2e8: 0x4035   	                             SET0   call_path_seq_status
+                #0x2ea: 0x1000   	                             RETURN
+]
+# branch offsets within sequence memory 
+SHUB_QACTIVE_LOCK              = 	0x26
+SHUB_QACTIVE_UNLOCK            = 	0x2c
+GCC_SHRM_FREQUENCY_SWITCH      = 	0x3c
+GCC_SHRM_FREQUENCY_SWITCH_NONOTIF = 	0x30
+SHRM_PRE_VOLTAGE_NOTIFICATION  = 	0x4e
+ERROR_SEQUENCE                 = 	0x272
+AOP_WORKAROUND                 = 	0x56
+VOLTAGE_WORKAROUND             = 	0x5e
+FREQUENCY_PRE_WORKAROUND       = 	0x64
+FREQUENCY_POST_WORKAROUND      = 	0x6a
+VOTE_PRE_VOLTAGES              = 	0x70
+SKIP_VTG_TCS_C_IN_PRE          = 	0x84
+VOTE_POST_VOLTAGES             = 	0x94
+SKIP_VTG_TCS_C_IN_POST         = 	0xa0
+SHRM_CLK_ON                    = 	0xae
+SHRM_CLK_OFF                   = 	0xc8
+ACA_TRIGGER                    = 	0xe2
+COLLAPSE                       = 	0xe8
+NORMAL_RESTORE                 = 	0x130
+SHUB_FREQ_CHANGE               = 	0x194
+SHUB_FREQ_START                = 	0x19e
+SET_MC_SHUB_BIT                = 	0x1c2
+MC_FREQ_CHANGE                 = 	0x1c6
+MC_FREQ_DONE                   = 	0x1f4
+P_FREQ_CHANGE_UP               = 	0x1fe
+LLC_FLUSH                      = 	0x246
+SKIP_FLUSH                     = 	0x25a
+FLUSH_ABORT                    = 	0x260
+DDR_AUX_FSM                    = 	0x278
+FSM_IDLE                       = 	0x280
+FSM_END                        = 	0x28a
+CALCULATE_STATE                = 	0x28c
+BCM_CPLOCK                     = 	0x290
+SEQ_START                      = 	0x2a6
+SW_SEQ                         = 	0x2be
+NO_TCS16                       = 	0x2ca
+NO_TCS17                       = 	0x2d0
+CALL_PATH_SEQ                  = 	0x2dc
+CALCULATE                      = 	0x294
+CALCULATE_DONE                 = 	0x2a4
+
+seq0_br_address = [
+    SHUB_QACTIVE_LOCK,
+    SHUB_QACTIVE_UNLOCK,
+    GCC_SHRM_FREQUENCY_SWITCH,
+    GCC_SHRM_FREQUENCY_SWITCH_NONOTIF,
+    SHRM_PRE_VOLTAGE_NOTIFICATION,
+    ERROR_SEQUENCE,
+    AOP_WORKAROUND,
+    VOLTAGE_WORKAROUND,
+    FREQUENCY_PRE_WORKAROUND,
+    FREQUENCY_POST_WORKAROUND,
+    VOTE_PRE_VOLTAGES,
+    SKIP_VTG_TCS_C_IN_PRE,
+    VOTE_POST_VOLTAGES,
+    SKIP_VTG_TCS_C_IN_POST,
+    SHRM_CLK_ON,
+    SHRM_CLK_OFF,
+    ACA_TRIGGER,
+    COLLAPSE,
+    NORMAL_RESTORE,
+    SHUB_FREQ_CHANGE,
+    SHUB_FREQ_START,
+    SET_MC_SHUB_BIT,
+    MC_FREQ_CHANGE,
+    MC_FREQ_DONE,
+    P_FREQ_CHANGE_UP,
+    LLC_FLUSH,
+    SKIP_FLUSH,
+    FLUSH_ABORT,
+    DDR_AUX_FSM,
+    FSM_IDLE,
+    FSM_END,
+    CALCULATE_STATE,
+    BCM_CPLOCK,
+    SEQ_START,
+    SW_SEQ,
+    NO_TCS16,
+    NO_TCS17,
+    CALL_PATH_SEQ,
+	CALCULATE,
+	CALCULATE_DONE,
+]
+
+ddr_aux_seq1 = [ ###16 bit sequencer
+
+  0x214f2a50 ,  #0x000: 0x2a50   	PATH_SWITCH:                 BEQ    init_path_seq=1     INIT_SEQ
+                #0x002: 0x214f   	                             BEQ    island_llc_en=0     SKIP_ALL
+  0x28822a01 ,  #0x004: 0x2a01   	                             BEQ    debugpdc_ddraux_seq_ovrd=1 SWITCH_NORMAL
+                #0x006: 0x2882   	                             BEQ    bcm_lpinoc_pend=1   SWITCH_LPINOC
+  0x290128c0 ,  #0x008: 0x28c0   	                             BEQ    need_special_path=1 SWITCH_SPECIAL
+                #0x00a: 0x2901   	                             BEQ    need_normal_path=1  SWITCH_NORMAL
+  0x60245023 ,  #0x00c: 0x5023   	SKIP_ALL:                    SET1   path_switch_seq_done
+                #0x00e: 0x6024   	                             WAIT0  path_sequencer_req
+  0x3c154023 ,  #0x010: 0x4023   	                             SET0   path_switch_seq_done
+                #0x012: 0x3c15   	                             BEQR   br_ev_sw_0=1        AOP_WORKAROUND
+  0x80011000 ,  #0x014: 0x1000   	                             RETURN
+                #0x016: 0x8001   	SWITCH_SPECIAL:              MV     seq1_mv_status      special_seq_status
+  0x318b7822 ,  #0x018: 0x7822   	                             WAIT1  5200000ns           lpinoc_cp_stable
+                #0x01a: 0x318b   	                             BEQR   lpinoc_curr_cp_zero=0 LPINOC_STALL
+  0x40265026 ,  #0x01c: 0x5026   	                             SET1   stats_timer_midpoint_a
+                #0x01e: 0x4026   	                             SET0   stats_timer_midpoint_a
+  0x500e318d ,  #0x020: 0x318d   	                             BEQR   lpinoc_curr_cp_zero=0 LPINOC_SWITCH_SPECIAL
+                #0x022: 0x500e   	                             SET1   tcs14_lb_powerstate_req
+  0x400e7823 ,  #0x024: 0x7823   	                             WAIT1  5200000ns           tcs14_lb_powerstate_ack
+                #0x026: 0x400e   	                             SET0   tcs14_lb_powerstate_req
+  0x50071c05 ,  #0x028: 0x1c05   	                             CALL   LB_GDSC_ON
+                #0x02a: 0x5007   	                             SET1   lb_gdsc_override_sel
+  0x500b3986 ,  #0x02c: 0x3986   	                             BEQR   lpinoc_curr_cp_zero=1 LB_GDSC_OFF
+                #0x02e: 0x500b   	                             SET1   cx_lb_clk_dis_req
+  0x500d780b ,  #0x030: 0x780b   	                             WAIT1  5200000ns           cx_lb_clk_dis_ack
+                #0x032: 0x500d   	                             SET1   cx_lb_clamp
+  0x5010500f ,  #0x034: 0x500f   	                             SET1   lb_cpr_bypass
+                #0x036: 0x5010   	                             SET1   lb_path_sel
+  0x39893188 ,  #0x038: 0x3188   	                             BEQR   lpinoc_curr_cp_zero=0 LLCC_APM_TO_LPI
+                #0x03a: 0x3989   	                             BEQR   lpinoc_curr_cp_zero=1 LLCC_APM_TO_OFF
+  0x40275027 ,  #0x03c: 0x5027   	                             SET1   stats_timer_midpoint_b
+                #0x03e: 0x4027   	                             SET0   stats_timer_midpoint_b
+  0x318c3193 ,  #0x040: 0x3193   	                             BEQR   lpinoc_curr_cp_zero=0 LPICX_UNCLAMP_CLK_EN
+                #0x042: 0x318c   	                             BEQR   lpinoc_curr_cp_zero=0 LPINOC_UNSTALL
+  0x50223fd4 ,  #0x044: 0x3fd4   	                             BEQR   goto_error_sequence=1 ERROR_SEQUENCE
+                #0x046: 0x5022   	                             SET1   special_path_switch_done
+  0x50234022 ,  #0x048: 0x4022   	                             SET0   special_path_switch_done
+                #0x04a: 0x5023   	                             SET1   path_switch_seq_done
+  0x40236024 ,  #0x04c: 0x6024   	                             WAIT0  path_sequencer_req
+                #0x04e: 0x4023   	                             SET0   path_switch_seq_done
+  0x10008000 ,  #0x050: 0x8000   	                             MV     seq1_mv_status      seq_done
+                #0x052: 0x1000   	                             RETURN
+  0x78228002 ,  #0x054: 0x8002   	SWITCH_NORMAL:               MV     seq1_mv_status      normal_seq_status
+                #0x056: 0x7822   	                             WAIT1  5200000ns           lpinoc_cp_stable
+  0x5026318b ,  #0x058: 0x318b   	                             BEQR   lpinoc_curr_cp_zero=0 LPINOC_STALL
+                #0x05a: 0x5026   	                             SET1   stats_timer_midpoint_a
+  0x318e4026 ,  #0x05c: 0x4026   	                             SET0   stats_timer_midpoint_a
+                #0x05e: 0x318e   	                             BEQR   lpinoc_curr_cp_zero=0 LPINOC_SWITCH_NORMAL
+  0x39863185 ,  #0x060: 0x3185   	                             BEQR   lpinoc_curr_cp_zero=0 LB_GDSC_ON
+                #0x062: 0x3986   	                             BEQR   lpinoc_curr_cp_zero=1 LB_GDSC_OFF
+  0x1c073192 ,  #0x064: 0x3192   	                             BEQR   lpinoc_curr_cp_zero=0 LPICX_CLK_DIS_CLAMP
+                #0x066: 0x1c07   	                             CALL   LLCC_APM_TO_SOC
+  0x40275027 ,  #0x068: 0x5027   	                             SET1   stats_timer_midpoint_b
+                #0x06a: 0x4027   	                             SET0   stats_timer_midpoint_b
+  0x400f4010 ,  #0x06c: 0x4010   	                             SET0   lb_path_sel
+                #0x06e: 0x400f   	                             SET0   lb_cpr_bypass
+  0x400b400d ,  #0x070: 0x400d   	                             SET0   cx_lb_clamp
+                #0x072: 0x400b   	                             SET0   cx_lb_clk_dis_req
+  0x1c05680b ,  #0x074: 0x680b   	                             WAIT0  5200000ns           cx_lb_clk_dis_ack
+                #0x076: 0x1c05   	                             CALL   LB_GDSC_ON
+  0x2a164007 ,  #0x078: 0x4007   	                             SET0   lb_gdsc_override_sel
+                #0x07a: 0x2a16   	                             BEQ    debugpdc_ddraux_seq_ovrd=1 SKIP_LB_RESTORE
+  0x7823500e ,  #0x07c: 0x500e   	                             SET1   tcs14_lb_powerstate_req
+                #0x07e: 0x7823   	                             WAIT1  5200000ns           tcs14_lb_powerstate_ack
+  0x318c400e ,  #0x080: 0x400e   	                             SET0   tcs14_lb_powerstate_req
+                #0x082: 0x318c   	SKIP_LB_RESTORE:             BEQR   lpinoc_curr_cp_zero=0 LPINOC_UNSTALL
+  0x50213fd4 ,  #0x084: 0x3fd4   	                             BEQR   goto_error_sequence=1 ERROR_SEQUENCE
+                #0x086: 0x5021   	                             SET1   normal_path_switch_done
+  0x50234021 ,  #0x088: 0x4021   	                             SET0   normal_path_switch_done
+                #0x08a: 0x5023   	                             SET1   path_switch_seq_done
+  0x40236024 ,  #0x08c: 0x6024   	                             WAIT0  path_sequencer_req
+                #0x08e: 0x4023   	                             SET0   path_switch_seq_done
+  0x10008000 ,  #0x090: 0x8000   	                             MV     seq1_mv_status      seq_done
+                #0x092: 0x1000   	                             RETURN
+  0x40255025 ,  #0x094: 0x5025   	SWITCH_LPINOC:               SET1   lpinoc_cp_zero_capture_en
+                #0x096: 0x4025   	                             SET0   lpinoc_cp_zero_capture_en
+  0x30043803 ,  #0x098: 0x3803   	                             BEQR   lpinoc_dest_cp_zero=1 LPINOC_OFF
+                #0x09a: 0x3004   	                             BEQR   lpinoc_dest_cp_zero=0 LPINOC_ON
+  0x80041000 ,  #0x09c: 0x1000   	                             RETURN
+                #0x09e: 0x8004   	LPINOC_OFF:                  MV     seq1_mv_status      lpinoc_off_seq_status
+  0x68205020 ,  #0x0a0: 0x5020   	                             SET1   bcm_lpinoc_ack
+                #0x0a2: 0x6820   	                             WAIT0  5200000ns           bcm_lpinoc_req
+  0x78214020 ,  #0x0a4: 0x4020   	                             SET0   bcm_lpinoc_ack
+                #0x0a6: 0x7821   	                             WAIT1  5200000ns           bcm_lpinoc_post_req
+  0x40265026 ,  #0x0a8: 0x5026   	                             SET1   stats_timer_midpoint_a
+                #0x0aa: 0x4026   	                             SET0   stats_timer_midpoint_a
+  0x31c931d2 ,  #0x0ac: 0x31d2   	                             BEQR   curr_path_state=0   LPICX_CLK_DIS_CLAMP
+                #0x0ae: 0x31c9   	                             BEQR   curr_path_state=0   LLCC_APM_TO_OFF
+  0x40275027 ,  #0x0b0: 0x5027   	                             SET1   stats_timer_midpoint_b
+                #0x0b2: 0x4027   	                             SET0   stats_timer_midpoint_b
+  0x68215024 ,  #0x0b4: 0x5024   	                             SET1   bcm_lpinoc_post_ack
+                #0x0b6: 0x6821   	                             WAIT0  5200000ns           bcm_lpinoc_post_req
+  0x3fd44024 ,  #0x0b8: 0x4024   	                             SET0   bcm_lpinoc_post_ack
+                #0x0ba: 0x3fd4   	                             BEQR   goto_error_sequence=1 ERROR_SEQUENCE
+  0x10008000 ,  #0x0bc: 0x8000   	                             MV     seq1_mv_status      seq_done
+                #0x0be: 0x1000   	                             RETURN
+  0x31c88003 ,  #0x0c0: 0x8003   	LPINOC_ON:                   MV     seq1_mv_status      lpinoc_on_seq_status
+                #0x0c2: 0x31c8   	                             BEQR   curr_path_state=0   LLCC_APM_TO_LPI
+  0x502031d3 ,  #0x0c4: 0x31d3   	                             BEQR   curr_path_state=0   LPICX_UNCLAMP_CLK_EN
+                #0x0c6: 0x5020   	                             SET1   bcm_lpinoc_ack
+  0x50266820 ,  #0x0c8: 0x6820   	                             WAIT0  5200000ns           bcm_lpinoc_req
+                #0x0ca: 0x5026   	                             SET1   stats_timer_midpoint_a
+  0x40204026 ,  #0x0cc: 0x4026   	                             SET0   stats_timer_midpoint_a
+                #0x0ce: 0x4020   	                             SET0   bcm_lpinoc_ack
+  0x50277821 ,  #0x0d0: 0x7821   	                             WAIT1  5200000ns           bcm_lpinoc_post_req
+                #0x0d2: 0x5027   	                             SET1   stats_timer_midpoint_b
+  0x1c0b4027 ,  #0x0d4: 0x4027   	                             SET0   stats_timer_midpoint_b
+                #0x0d6: 0x1c0b   	                             CALL   LPINOC_STALL
+  0x39ce31cd ,  #0x0d8: 0x31cd   	                             BEQR   curr_path_state=0   LPINOC_SWITCH_SPECIAL
+                #0x0da: 0x39ce   	                             BEQR   curr_path_state=1   LPINOC_SWITCH_NORMAL
+  0x50241c0c ,  #0x0dc: 0x1c0c   	                             CALL   LPINOC_UNSTALL
+                #0x0de: 0x5024   	                             SET1   bcm_lpinoc_post_ack
+  0x40246821 ,  #0x0e0: 0x6821   	                             WAIT0  5200000ns           bcm_lpinoc_post_req
+                #0x0e2: 0x4024   	                             SET0   bcm_lpinoc_post_ack
+  0x80003fd4 ,  #0x0e4: 0x3fd4   	                             BEQR   goto_error_sequence=1 ERROR_SEQUENCE
+                #0x0e6: 0x8000   	                             MV     seq1_mv_status      seq_done
+  0x40061000 ,  #0x0e8: 0x1000   	                             RETURN
+                #0x0ea: 0x4006   	LB_GDSC_ON:                  SET0   lb_gdsc_pwr_gate_req
+  0x10006806 ,  #0x0ec: 0x6806   	                             WAIT0  5200000ns           lb_gdsc_pwr_gate_ack
+                #0x0ee: 0x1000   	                             RETURN
+  0x78065006 ,  #0x0f0: 0x5006   	LB_GDSC_OFF:                 SET1   lb_gdsc_pwr_gate_req
+                #0x0f2: 0x7806   	                             WAIT1  5200000ns           lb_gdsc_pwr_gate_ack
+  0x1c111000 ,  #0x0f4: 0x1000   	                             RETURN
+                #0x0f6: 0x1c11   	LLCC_APM_TO_SOC:             CALL   LLCC_APM_CLK_ON
+  0x50094008 ,  #0x0f8: 0x4008   	                             SET0   llcccx_apm_tile_act_br0
+                #0x0fa: 0x5009   	                             SET1   llcccx_apm_tile_act_br1
+  0x50014000 ,  #0x0fc: 0x4000   	                             SET0   llccmx_apm_tile_act_br0
+                #0x0fe: 0x5001   	                             SET1   llccmx_apm_tile_act_br1
+  0x10001c0a ,  #0x100: 0x1c0a   	                             CALL   LLCC_APM_SWITCH
+                #0x102: 0x1000   	                             RETURN
+  0x50081c11 ,  #0x104: 0x1c11   	LLCC_APM_TO_LPI:             CALL   LLCC_APM_CLK_ON
+                #0x106: 0x5008   	                             SET1   llcccx_apm_tile_act_br0
+  0x50004009 ,  #0x108: 0x4009   	                             SET0   llcccx_apm_tile_act_br1
+                #0x10a: 0x5000   	                             SET1   llccmx_apm_tile_act_br0
+  0x1c0a4001 ,  #0x10c: 0x4001   	                             SET0   llccmx_apm_tile_act_br1
+                #0x10e: 0x1c0a   	                             CALL   LLCC_APM_SWITCH
+  0x1c111000 ,  #0x110: 0x1000   	                             RETURN
+                #0x112: 0x1c11   	LLCC_APM_TO_OFF:             CALL   LLCC_APM_CLK_ON
+  0x40094008 ,  #0x114: 0x4008   	                             SET0   llcccx_apm_tile_act_br0
+                #0x116: 0x4009   	                             SET0   llcccx_apm_tile_act_br1
+  0x50014000 ,  #0x118: 0x4000   	                             SET0   llccmx_apm_tile_act_br0
+                #0x11a: 0x5001   	                             SET1   llccmx_apm_tile_act_br1
+  0x10001c0a ,  #0x11c: 0x1c0a   	                             CALL   LLCC_APM_SWITCH
+                #0x11e: 0x1000   	                             RETURN
+  0x680d5011 ,  #0x120: 0x5011   	LLCC_APM_CLK_ON:             SET1   llcc_lb_pwr_mux_ctrl_clk_en
+                #0x122: 0x680d   	                             WAIT0  5200000ns           llcc_lb_pwr_mux_ctrl_clk_ack
+  0x500a1000 ,  #0x124: 0x1000   	                             RETURN
+                #0x126: 0x500a   	LLCC_APM_SWITCH:             SET1   llcccx_apm_switch
+  0x780a400a ,  #0x128: 0x400a   	                             SET0   llcccx_apm_switch
+                #0x12a: 0x780a   	                             WAIT1  5200000ns           llcccx_apm_tile_trans_done
+  0x40025002 ,  #0x12c: 0x5002   	                             SET1   llccmx_apm_switch
+                #0x12e: 0x4002   	                             SET0   llccmx_apm_switch
+  0x40117802 ,  #0x130: 0x7802   	                             WAIT1  5200000ns           llccmx_apm_tile_trans_done
+                #0x132: 0x4011   	                             SET0   llcc_lb_pwr_mux_ctrl_clk_en
+  0x50031000 ,  #0x134: 0x1000   	                             RETURN
+                #0x136: 0x5003   	LPINOC_STALL:                SET1   lpinoc_stall_req
+  0x40031000 ,  #0x138: 0x1000   	                             RETURN
+                #0x13a: 0x4003   	LPINOC_UNSTALL:              SET0   lpinoc_stall_req
+  0x500c1000 ,  #0x13c: 0x1000   	                             RETURN
+                #0x13e: 0x500c   	LPICX_CLK_DIS_CLAMP:         SET1   lpicx_lb_clk_dis_req
+  0x5005780c ,  #0x140: 0x780c   	                             WAIT1  5200000ns           lpicx_lb_clk_dis_ack
+                #0x142: 0x5005   	                             SET1   lpicx_lb_clamp
+  0x40051000 ,  #0x144: 0x1000   	                             RETURN
+                #0x146: 0x4005   	LPICX_UNCLAMP_CLK_EN:        SET0   lpicx_lb_clamp
+  0x680c400c ,  #0x148: 0x400c   	                             SET0   lpicx_lb_clk_dis_req
+                #0x14a: 0x680c   	                             WAIT0  5200000ns           lpicx_lb_clk_dis_ack
+  0x50041000 ,  #0x14c: 0x1000   	                             RETURN
+                #0x14e: 0x5004   	LPINOC_SWITCH_SPECIAL:       SET1   lpinoc_switch_req
+  0x10007804 ,  #0x150: 0x7804   	                             WAIT1  5200000ns           lpinoc_switch_ack
+                #0x152: 0x1000   	                             RETURN
+  0x68044004 ,  #0x154: 0x4004   	LPINOC_SWITCH_NORMAL:        SET0   lpinoc_switch_req
+                #0x156: 0x6804   	                             WAIT0  5200000ns           lpinoc_switch_ack
+  0x502f1000 ,  #0x158: 0x1000   	                             RETURN
+                #0x15a: 0x502f   	AOP_WORKAROUND:              SET1   aop_int
+  0x402f7830 ,  #0x15c: 0x7830   	                             WAIT1  5200000ns           waitsel_sw_0
+                #0x15e: 0x402f   	                             SET0   aop_int
+  0x80061000 ,  #0x160: 0x1000   	                             RETURN
+                #0x162: 0x8006   	INIT_SEQ:                    MV     seq1_mv_status      init_seq_status
+  0x5005500c ,  #0x164: 0x500c   	                             SET1   lpicx_lb_clk_dis_req
+                #0x166: 0x5005   	                             SET1   lpicx_lb_clamp
+  0x50235028 ,  #0x168: 0x5028   	                             SET1   release_forcing_default_hi
+                #0x16a: 0x5023   	                             SET1   path_switch_seq_done
+  0x40236024 ,  #0x16c: 0x6024   	                             WAIT0  path_sequencer_req
+                #0x16e: 0x4023   	                             SET0   path_switch_seq_done
+  0x10008000 ,  #0x170: 0x8000   	                             MV     seq1_mv_status      seq_done
+                #0x172: 0x1000   	                             RETURN
+  0x2fd4000b ,  #0x174: 0x000b   	ERROR_SEQUENCE:              DELI   31200ns
+                #0x176: 0x2fd4   	                             BEQ    goto_error_sequence=1 ERROR_SEQUENCE
+  0x00001000 ,  #0x178: 0x1000   	                             RETURN
+                #0x17a: 0x0000
+  0x09307125 , #sha id for identification
+  0x1a22845d   #hash id for identification
+
+]
+
+# branch offsets within sequence memory 
+SWITCH_SPECIAL                 = 	0x16
+SWITCH_NORMAL                  = 	0x54
+SWITCH_LPINOC                  = 	0x94
+LPINOC_OFF                     = 	0x9e
+LPINOC_ON                      = 	0xc0
+LB_GDSC_ON                     = 	0xea
+LB_GDSC_OFF                    = 	0xf0
+LLCC_APM_TO_SOC                = 	0xf6
+LLCC_APM_TO_LPI                = 	0x104
+LLCC_APM_TO_OFF                = 	0x112
+LLCC_APM_SWITCH                = 	0x126
+LPINOC_STALL                   = 	0x136
+LPINOC_UNSTALL                 = 	0x13a
+LPINOC_SWITCH_SPECIAL          = 	0x14e
+LPINOC_SWITCH_NORMAL           = 	0x154
+SKIP_ALL                       = 	0xc
+INIT_SEQ                       = 	0x162
+LLCC_APM_CLK_ON                = 	0x120
+LPICX_CLK_DIS_CLAMP            = 	0x13e
+LPICX_UNCLAMP_CLK_EN           = 	0x146
+ERROR_SEQUENCE                 = 	0x174
+AOP_WORKAROUND                 = 	0x15a
+SKIP_LB_RESTORE                = 	0x82
+
+seq1_br_address = [
+    SWITCH_SPECIAL,
+    SWITCH_NORMAL,
+    SWITCH_LPINOC,
+    LPINOC_OFF,
+    LPINOC_ON,
+    LB_GDSC_ON,
+    LB_GDSC_OFF,
+    LLCC_APM_TO_SOC,
+    LLCC_APM_TO_LPI,
+    LLCC_APM_TO_OFF,
+    LLCC_APM_SWITCH,
+    LPINOC_STALL,
+    LPINOC_UNSTALL,
+    LPINOC_SWITCH_SPECIAL,
+    LPINOC_SWITCH_NORMAL,
+    SKIP_ALL,
+    INIT_SEQ,
+    LLCC_APM_CLK_ON,
+    LPICX_CLK_DIS_CLAMP,
+    LPICX_UNCLAMP_CLK_EN,
+    ERROR_SEQUENCE,
+    AOP_WORKAROUND,
+    SKIP_LB_RESTORE
+]
+# End of Generated .rinit data.
+
+regs:
+ SEQ0_MEMq = ddr_aux_seq0
+ SEQ0_BRANCH_ADDRq = seq0_br_address
+
+ SEQ1_MEMq = ddr_aux_seq1
+ SEQ1_BRANCH_ADDRq = seq1_br_address
+
+ #SEQ_BRANCH_EVENT = 0x00 # Programmed by AOP - initialize to all 0's
+ SEQ_GCC_CLKPLAN = 0x0   # Programmed by AOP - initialize to all 0's
+ SEQn_CFG = 0x0
+ #SEQ_VCD_SEL = 0x0
+ SEQn_PWR_CTRL_OVRD_BIT_31_TO_0_MASK  = 0x0
+ SEQn_PWR_CTRL_OVRD_BIT_63_TO_32_MASK = 0x0
+ SEQn_PWR_CTRL_OVRD_BIT_31_TO_0_VAL   = 0x0
+ SEQn_PWR_CTRL_OVRD_BIT_63_TO_32_VAL  = 0x0
+
+ SEQn_WAIT_EVENT_BIT_31_TO_0_OVRD_MASK  = 0x00000000
+ SEQn_WAIT_EVENT_BIT_31_TO_0_OVRD_VAL   = 0x00000000
+
+ # Override PMU_SHUB
+ SEQn_WAIT_EVENT_BIT_63_TO_32_OVRD_MASK = 0x00000000
+ SEQn_WAIT_EVENT_BIT_63_TO_32_OVRD_VAL  = 0x00000000
+
+ SEQn_BRANCH_EVENT_OVRD_MASK = 0x0
+ SEQn_BRANCH_EVENT_OVRD_VAL = 0x0
+
+
+module : { name = RPMH_DDRAUX_DDR_AUX_TCS_CFG, group = DDRAUX }
+vars:
+  default_config = 0x00
+  default_cmd = 0x00
+  
+  flush_cmd = 0xB400000 #RSI_REQ 2/REQ
+                        #RSI_RR 1/RR
+                        #RSI_LAST 1/LAST
+                        #RSI_OPCODE 8/FLUSH
+                        #RSI_ID 0/RESVD 
+
+  flush_abort_cmd = 0xB480000 #RSI_REQ 2/REQ
+                              #RSI_RR 1/RR
+                              #RSI_LAST 1/LAST
+                              #RSI_OPCODE 9/FLUSH ABORT
+                              #RSI_ID 0/RESVD
+
+  ddrps_req = 0xB300000 #RSI_REQ 2/REQ
+                        #RSI_RR 1/RR
+                        #RSI_LAST 1/LAST
+                        #RSI_OPCODE 6/POWERSTATE
+                        #RSI_ID 0/DDRSS
+
+  llcps_req = 0xB320000 #RSI_REQ 2/REQ
+                        #RSI_RR 1/RR
+                        #RSI_LAST 1/LAST
+                        #RSI_OPCODE 6/POWERSTATE
+                        #RSI_ID 1/LLC
+
+  pasr_hw_cmd = 0xB600000  #RSI_REQ 2/REQ
+                           #RSI_RR 1/RR
+                           #RSI_LAST 1/LAST
+                           #RSI_OPCODE 12/PASR
+                           #RSI_ID 0/RESVD
+
+  shrm_freq_cmd = 0xB680000 #RSI_REQ 2/REQ
+                            #RSI_RR 1/RR
+                            #RSI_LAST 1/LAST
+                            #RSI_OPCODE 13/SHRM_FREQ
+                            #RSI_ID 0/RESVD
+  shub_pre_cmd = 0xB000000 #RSI_REQ 2/REQ
+                           #RSI_RR 1/RR
+                           #RSI_LAST 1/LAST
+                           #RSI_OPCODE 0/CLOCK_PREWORK
+                           #RSI_ID 0/SHUB
+
+  shub_post_cmd = 0xB100000 #RSI_REQ 2/REQ
+                            #RSI_RR 1/RR
+                            #RSI_LAST 1/LAST
+                            #RSI_OPCODE 2/CLOCK_POST
+                            #RSI_ID 0/SHUB
+
+  mc_prep_cmd = 0x9710000 #RSI_REQ 2/REQ
+                          #RSI_RR 0/FF
+                          #RSI_LAST 1/LAST
+                          #RSI_OPCODE 14/MC_SWITCH_PREP
+                          #RSI_ID 1/MC 
+
+  mc_pre_cmd = 0xB010000 #RSI_REQ 2/REQ
+                         #RSI_RR 1/RR
+                         #RSI_LAST 1/LAST
+                         #RSI_OPCODE 0/CLOCK_PREWORK
+                         #RSI_ID 1/MC
+
+  mc_work_cmd = 0xB090000   #RSI_REQ 2/REQ
+                            #RSI_RR 1/RR
+                            #RSI_LAST 1/LAST
+                            #RSI_OPCODE 1/CLOCK_WORK
+                            #RSI_ID 1/MC
+  alc_cmd = 0xB580000  #RSI_REQ 2/REQ
+                       #RSI_RR 1/RR
+                       #RSI_LAST 1/LAST
+                       #RSI_OPCODE 11/ALC
+                       #RSI_ID 0/RESVD      
+
+  acv_cmd = 0xB500000  #RSI_REQ 2/REQ
+                       #RSI_RR 1/RR
+                       #RSI_LAST 1/LAST
+                       #RSI_OPCODE 10/ACV
+                       #RSI_ID 0/RESVD
+
+  debug_pdc_cmd = 0xB780000 #RSI_REQ 2/REQ
+                            #RSI_RR 1/RR
+                            #RSI_LAST 1/LAST
+                            #RSI_OPCODE 15/DEBUG_PDC
+                            #RSI_ID 0/RESVD
+
+  llcc_lb_cmd = 0xB310000
+
+regs:
+  #all sequence triggered
+  RSI_TCSm_AMC_MODE = [0]
+  VTG_TCSm_AMC_MODE = 0x00
+  
+  #response data from ARC/VRM
+  VTG_TCS_RESP_BACK = 0x00000000
+  
+  DDRAUX_DRV_ID_FOR_VTG_VOTE = 20   # DDR_AUX DRV
+
+  RSI_TCSm_CMDt[0, 0] = flush_cmd
+  RSI_TCSm_CFG[0] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  RSI_TCSm_CMDt[1, 0] = flush_abort_cmd
+  RSI_TCSm_CFG[1] = {.CMD_EN = 1, .CMD_WAIT = 0 } #FnF
+
+  RSI_TCSm_CMDt[2, 0] = ddrps_req
+  RSI_TCSm_CFG[2] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  RSI_TCSm_CMDt[3, 0] = llcps_req
+  RSI_TCSm_CFG[3] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  RSI_TCSm_CMDt[4, 0] = pasr_hw_cmd
+  RSI_TCSm_CFG[4] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  RSI_TCSm_CMDt[5, 0] = shrm_freq_cmd
+  RSI_TCSm_CFG[5] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  RSI_TCSm_CMDt[6, 0] = shub_pre_cmd
+  RSI_TCSm_CFG[6] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  RSI_TCSm_CMDt[7, 0] = shub_post_cmd
+  RSI_TCSm_CFG[7] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  RSI_TCSm_CMDt[8, 0] = mc_prep_cmd
+  RSI_TCSm_CFG[8] = {.CMD_EN = 1, .CMD_WAIT = 0 } #FnF
+
+  RSI_TCSm_CMDt[9, 0] = mc_pre_cmd
+  RSI_TCSm_CFG[9] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  RSI_TCSm_CMDt[10, 0] = mc_work_cmd
+  RSI_TCSm_CFG[10] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  RSI_TCSm_CMDt[11, 0] = alc_cmd
+  RSI_TCSm_CFG[11] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  RSI_TCSm_CMDt[12, 0] = acv_cmd
+  RSI_TCSm_CFG[12] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  #RSI_TCSm_CMDt[13] = default_cmd #spare
+
+  RSI_TCSm_CMDt[14] = llcc_lb_cmd
+  RSI_TCSm_CFG[14] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  RSI_TCSm_CMDt[15, 0] = debug_pdc_cmd
+  RSI_TCSm_CFG[15] = {.CMD_EN = 1, .CMD_WAIT = 1 }
+
+  #RSI_TCSm_CMDt[16] = default_cmd #TODO: SW driven (GPR, GPW)??
+  #RSI_TCSm_CMDt[17] = default_cmd #TODO: SW driven PASR
+  #RSI_TCSm_CMDt[18] = default_cmd #SWWR resvd
+  #RSI_TCSm_CMDt[19] = default_cmd #SWWR resvd
+
+module : { name = RPMH_DDRAUX_DDR_AUX, group = DDRAUX, last = true }
+
+regs:
+  AOP_INTR_MASK = 0x29    # Seq 0 Done
+                          # Seq Power Control
+                          # Sub sequence timeout
+
+  SEQn_TIMEOUT_CTRL = {.THRESHOLD = 0x17700, .ENABLE = 0x1}
+# RSIn_TIMEOUT = {
+#   .THRESHOLD = 0xFFFFF, # Max timeout threshold.
+#   .ENABLE    = 0x0      # RSI Timeout disabled.
+# }
+
+  # ACA config
+  #Here is the HW client mapping table. 
+  #0	APSS                        0001      
+  #1	                           <unused>
+  #2	DPU                         0004
+  #3	Video                       0008
+  #4	Camera                      0010
+  #5	Modem                       0020
+  #6	GPU                         0040
+  #7	NPU                         0080
+  #8	Turing Q6                   0100
+  #9	PCIe-1L                     0200
+  #10	PCIe-2L                     0400
+  #11	Modem                       0800
+  #12	TME                         1000
+  #13	LPASS                       2000
+  #14	SSC                         4000
+  #15	GCC_CATC_client_fal10_veto  8000
+  ACA_AGG_CFG = {            # 
+    .SW_CLIENT_EN = 0xFFFF,  # Enable all SW clients (DRVs)
+    .HW_CLIENT_EN = 0xFFFD,  # Enable HW clients with FAL10 veto signals
+  } 
+
+  ACA_AGG_CFG_SHAPE_CLIENTsc = 0xFFFFFFF9 # Enabled ACA clients minus shaping clients (only DPU)
+  ACA_INFRA_IN_USE_CFG       = 0x1F       # Enable SHUB and MC for Infrastructure in use
+  ACA_FAL10_CMD              = 0xb58000c  # (2)  << 26 | // RSI_REQ
+                                          # (1)  << 25 | // Response reqd
+                                          # (1)  << 24 | // Last cmd
+                                          # (11) << 19 | // opcode = RSI_OPCODE_FAL_ALC
+                                          # (0)  << 16 | // res_id = RSI_RESOURCE_DDRSS
+                                          # (12)       | // data
+
+  # Enable DDR_AUX
+  DDR_AUX_HW_ENABLE = 0x01
+
+  # Init SW_ALC_CMD and enable ACA in the .c as the former is dependent on boot CP

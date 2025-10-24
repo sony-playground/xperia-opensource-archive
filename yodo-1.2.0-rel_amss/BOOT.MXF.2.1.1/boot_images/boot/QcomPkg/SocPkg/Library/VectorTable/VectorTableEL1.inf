@@ -1,0 +1,36 @@
+#/** @file EL1VectorTable.inf
+#
+#  Vector Table for EL1
+#  
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who      what, where, why
+# --------   ---      ---------------------------------------------------------
+# 11/03/20   yps	  Initial revision.
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = VectorTable
+  FILE_GUID                      = 3FE8A7CC-DF4C-4699-AD4C-80D1351CAB1C
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = VectorTable
+
+[Sources.ARM]
+  SDX/boot_vector_table.S
+
+[Sources.AARCH64]
+  vector_table_el1.S
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec

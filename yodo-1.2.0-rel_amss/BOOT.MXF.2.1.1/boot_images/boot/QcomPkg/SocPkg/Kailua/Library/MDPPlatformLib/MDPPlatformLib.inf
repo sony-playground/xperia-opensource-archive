@@ -1,0 +1,71 @@
+#/** @file MDPPlatformLib.inf
+#
+#  MDP PLatform library
+#
+#  Copyright (c) 2021 Qualcomm Technologies, Inc.
+#  All Rights Reserved.
+#  Confidential and Proprietary - Qualcomm Technologies, Inc.
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = MDPPlatformLib
+  FILE_GUID                      = 508A8ECE-08E7-483D-B01A-7B924EE75FAF
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = MDPPlatformLib
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS =
+
+[BuildOptions.AARCH64]
+  GCC:*_*_*_CC_FLAGS =
+
+[Sources.common]
+  MDPPlatformLib.c
+  MDPPlatformLibPanelCommon.c
+  MDPPlatformLibPanelConfig.c
+
+[LibraryClasses]
+  DebugLib
+  NpaApiLib
+
+[LibraryClasses.USES_FEATURE_XBOOT]
+  XBootPanelLib
+
+[Protocols]
+ gEfiPlatformInfoProtocolGuid
+ gEfiChipInfoProtocolGuid
+ gQcomPmicWledProtocolGuid
+ gQcomPmicIbbProtocolGuid
+ gQcomPmicGpioProtocolGuid
+ gEfiTLMMProtocolGuid
+ gQcomI2CProtocolGuid
+ gQcomPmicLcdbProtocolGuid
+ gQcomPmicAbProtocolGuid
+ gQcomPmicVersionProtocolGuid
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+
+[Packages.USES_FEATURE_XBOOT]
+  SomcPkg/Platform/SomcSm8550Pkg/SomcSm8550Pkg.dec
+
+[FixedPcd]
+ gQcomTokenSpaceGuid.PcdDisplayForceSwRenderer
+ gQcomTokenSpaceGuid.PcdPrimaryFlags
+ gQcomTokenSpaceGuid.PcdExtDisplayType
+
+[Depex]
+ gEfiPlatformInfoProtocolGuid
+ AND gEfiChipInfoProtocolGuid
+ AND gQcomPmicWledProtocolGuid
+ AND gQcomPmicIbbProtocolGuid
+ AND gQcomPmicLabProtocolGuid
+ AND gQcomPmicMppProtocolGuid
+ AND gEfiTLMMProtocolGuid
+ AND gQcomI2CProtocolGuid
+

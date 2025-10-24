@@ -1,0 +1,79 @@
+;============================================================================
+; devprg_debug.cmm
+;
+; This script performs setup for debugging device programmer
+;
+; Copyright  2020 by Qualcomm Technologies, Incorporated.  All Rights Reserved.
+;
+;============================================================================
+;                        EDIT HISTORY FOR MODULE
+;
+; when       who     what, where, why
+; --------   ---     ------------------------------------------------------
+; 02/12/20   vk      Initial Revision 
+;============================================================================
+
+;---------------------------------------------------
+; Variables
+;---------------------------------------------------
+local &Target
+local &Variant
+local &Option
+local &Release
+local &Compiler
+local &DevprgPath
+local &DevPrgBin
+local &DevPrgBinOption
+
+;---------------------------------------------------
+ENTRY &Target &Variant &Release &Option
+;---------------------------------------------------
+
+winclear
+area.reset
+WINPOS 0% 50% 68% 50% 0. 0. W001
+Area.create MAIN
+Area.view MAIN
+Area.select MAIN
+
+do win.cmm
+
+y.reset
+sys.u
+d.s 0x1fd3000 1
+
+&Compiler="_CLANG140LINUX"
+
+if ("&Option"=="Lite")
+(
+  &DevprgPath="DevprogL"
+  &DevPrgBin="DevPrgL"
+  &DevPrgBinOption="L"
+)
+else
+(
+  &DevprgPath="DevprogD"
+  &DevPrgBin="DevPrgD"
+  &DevPrgBinOption="D"
+)
+
+data.load.elf ../../../Build/&Target&Variant/&DevprgPath/&Release&Compiler/AARCH64/QcomPkg/XBLDevPrg/&DevPrgBin/DEBUG/&DevPrgBin.dll /nocode /noclear /strippart "QcomPkg" /sourcepath "../../../boot/QcomPkg"
+
+b.d
+b.s sbl1_main_ctl
+b.s sbl1_cspx_sync
+b.s sbl_loop_here
+
+g
+
+cd ../../../boot/QcomPkg/SocPkg/Lahaina/
+&cwd=os.pwd()
+pwd
+print "&cwd"
+os.command cmd /c "pushd &cwd && fh_load.bat &Variant T &DevPrgBinOption S && timeout 5"
+
+
+
+
+
+

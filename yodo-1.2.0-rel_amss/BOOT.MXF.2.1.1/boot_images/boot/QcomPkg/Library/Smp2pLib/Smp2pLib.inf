@@ -1,0 +1,85 @@
+#/** @file Smp2pLib.inf
+#  
+#  Smp2p library for UEFI
+#  
+#  Copyright (c) 2022 Qualcomm Technologies, Inc.  All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 02/09/20   bm      Created Smp2p library for UEFI
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = Smp2pLib
+  FILE_GUID                      = f6bdec26-ea88-4f83-b7e4-2482f2fb1c70
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = Smp2pLib
+
+
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[BuildOptions]
+  RVCT:*_*_*_CC_FLAGS = -DFEATURE_CH_MIGRATION_FREE -DFEATURE_THREADLESS_ENV -DSMEM_ID_SMP2P_0=616 -DSMEM_ID_SMP2P_1=617 -DMPROC_BOOT_PROC
+  GCC:*_*_*_CC_FLAGS = -DFEATURE_CH_MIGRATION_FREE -DFEATURE_THREADLESS_ENV -DSMEM_ID_SMP2P_0=616 -DSMEM_ID_SMP2P_1=617 -DMPROC_BOOT_PROC -Wno-unused-but-set-variable
+  MSFT:*_*_*_CC_FLAGS = -DFEATURE_CH_MIGRATION_FREE -DFEATURE_THREADLESS_ENV -DSMEM_ID_SMP2P_0=616 -DSMEM_ID_SMP2P_1=617 -DMPROC_BOOT_PROC
+
+[BuildOptions.ARM]
+  RVCT:*_*_*_CC_FLAGS = -J Library/MuslLib/musl/include
+
+[Sources.common]
+  
+	smem/smem_target.c
+	smem/smem_target.h
+	smem/spinlock.h
+	smem/spinlock_stubs.c
+	smem/smem_list.c
+	smem/smem_list.h
+	src/smp2p.c
+	src/smp2p_internal.c
+	src/smp2p_dal.c
+	src/smp2p_dal_loopback.c
+	inc/smp2p_internal.h
+	inc/smp2p_os.h
+	inc/smp2p_os_common.h
+	inc/smp2p_qdi_driver.h
+	interface/smp2p_settings.h
+	config/smp2p_devcfg_uefi.c
+
+[LibraryClasses]
+  PcdLib
+  BaseLib
+  ArmLib
+  UefiBootServicesTableLib
+  UefiLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  DALModEnvLib
+  
+[Packages]
+  QcomPkg/QcomPkg.dec
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  Settings/DeviceTreeSettings.dec
+
+# This is required otherwise we get linker errors  
+[Protocols]
+  gEfiIpccProtocolGuid
+  gEfiSMEMProtocolGuid
+  gEfiDtbExtnProtocolGuid
+  
+[FixedPcd]
+  gQcomTokenSpaceGuid.PcdSmemInformation

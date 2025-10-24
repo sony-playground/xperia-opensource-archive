@@ -1,0 +1,114 @@
+#===========================================================================
+# PDC Sequencer build script
+#
+# Copyright (c) 2016-2019 by Qualcomm Technologies, Incorporated
+# All Rights Reserved
+# Qualcomm Proprietary/GTDR
+#===========================================================================
+
+Import('env')
+
+env = env.Clone()
+
+SRCPATH = '..'
+env.VariantDir('${BUILDPATH}', SRCPATH, duplicate=0)
+
+# Checking the presence for target specific config/header files else
+# compiling with stubs
+tgt_paths = [
+    '${BUILD_ROOT}/core/power/pdc/seq/hal/hwio/${MSM_ID}',
+    SRCPATH+'/cfg/${MSM_ID}/aop/pdc_seq_cfg.c',
+    SRCPATH+'/cfg/${MSM_ID}/aop/pdc_seq_target.c',
+]
+'''
+#todo: enable once external build pick correct config
+for apath in tgt_paths:
+    if not env.PathExists(apath):
+        env.PrintWarning('PDC_SEQ: Using stubs')
+        env['MSM_ID'] = 'stubs'
+        env.Append(CFLAGS = '-Wno-error')
+        break
+'''
+
+# APIs
+CBSP_API = [
+    'DAL',
+    'POWER',
+    'POWER_UTILS',
+    'SYSTEMDRIVERS',
+    'AOP_SETTINGS',
+    # Keep it last as contains incorrect version of comdef.h
+    'KERNEL'
+]
+
+env.RequirePublicApi(CBSP_API)
+env.RequireRestrictedApi(CBSP_API)
+env.RequireProtectedApi(CBSP_API)
+env.PublishPrivateApi('PDC_SEQ', [
+    '${BUILD_ROOT}/core/power/pdc/seq/inc',
+    '${BUILD_ROOT}/core/power/pdc/seq/hal/inc',
+    '${BUILD_ROOT}/core/power/pdc/seq/hal/hwio/${MSM_ID}',
+    '${BUILD_ROOT}/core/power/pdc/seq/common',
+])
+
+# Compilation options
+env.Append(CFLAGS = '${ARMCC_STDC99_CMD}')
+
+if env['MSM_ID'] in ['kailua']:
+   env.Append(CPPDEFINES = 'KAILUA_PDC_SEQ')
+   
+if env['MSM_ID'] in ['kapiti']:
+   env.Append(CPPDEFINES = 'KAPITI_PDC_SEQ')
+
+if env['MSM_ID'] in ['lanai']:
+   env.Append(CPPDEFINES = 'LANAI_PDC_SEQ')
+   env.Append(CPPDEFINES = 'LANAI_STUBS')
+
+if env['MSM_ID'] in ['pinnacle']:
+   env.Append(CPPDEFINES = 'PINNACLE_PDC_SEQ')
+   env.Append(CPPDEFINES = 'PINNACLE_STUBS')
+
+if env['MSM_ID'] in ['kuno']:
+   env.Append(CPPDEFINES = 'KUNO_PDC_SEQ')
+   env.Append(CPPDEFINES = 'KUNO_STUBS')
+   
+if env['MSM_ID'] in ['hamoa']:
+   env.Append(CPPDEFINES = 'HAMOA_PDC_SEQ')
+   env.Append(CPPDEFINES = 'HAMOA_STUBS')
+
+PDC_SEQ_ENV = 'aop'
+
+# Common source files
+PDC_SEQ_COMMON_SOURCES = [
+    '${BUILDPATH}/common/pdc_seq.c',
+    '${BUILDPATH}/common/pdc_seq_internal.c',
+    '${BUILDPATH}/hal/src/pdc_seq_hal.c',
+]
+
+# Target specific source files
+PDC_SEQ_TARGET_FILES = [
+      '${BUILDPATH}/cfg/${MSM_ID}/aop/pdc_seq_cfg.c',
+    ]
+
+PDC_SEQ_INIT_FILES = [
+  '${BUILDPATH}/common/pdc_seq_init.c',
+  '${BUILDPATH}/cfg/${MSM_ID}/aop/pdc_seq_target.c',
+  '${BUILDPATH}/env/' + PDC_SEQ_ENV + '/pdc_seq_env.c',
+]
+
+# All sources
+PDC_SEQ_SOURCES = PDC_SEQ_COMMON_SOURCES + PDC_SEQ_TARGET_FILES
+
+# Add sources to compile
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/pdc_seq', PDC_SEQ_SOURCES)
+
+env2 = env.Clone() #clone for init sources
+if env2['MSM_ID'] not in ['lanai']:
+  env2.Append(CCFLAGS    = ' -mlong-calls')
+env2.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/${MSM_ID}/pdc_seq_init', PDC_SEQ_INIT_FILES)
+
+# RINIT FILES
+if 'USES_RINIT_PARSER' in env:
+    rinit_files = '${BUILD_ROOT}/core/power/pdc/seq/cfg/${MSM_ID}/aop'
+    if env.PathExists(rinit_files):
+        env.AddRinitInfo('CORE_AOP', {'files' : rinit_files})

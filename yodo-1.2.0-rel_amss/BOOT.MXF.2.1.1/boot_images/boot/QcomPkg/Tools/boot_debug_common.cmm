@@ -1,0 +1,1269 @@
+;****************************************************************************
+;**         boot_debug_common.cmm
+;**
+;** This script performs setup for debugging SBL on secboot 3.0 Architecture.
+;**
+;** Copyright  2013-2022 by Qualcomm Technologies, Incorporated.  All Rights Reserved.
+;**
+;****************************************************************************
+;**
+;**                        EDIT HISTORY FOR MODULE
+;**
+;**
+;** when         who     what, where, why
+;** --------   ---     ------------------------------------------------------
+;** 08/10/22   ds      make sbl1_entry global to override and additional brkpt check
+;** 06/03/22   rhy     Removed SDX dialog box for QSaharaServer
+;** 02/24/22   ck      Added passing of Storage variable to RumiSetup in SetUpPBL
+;** 02/23/22   rhy     Added SDX support
+;** 02/19/21   rama    Ported changes for removing unused options
+;** 10/06/20   rama    Added rumi emulation version as argument
+;** 03/13/20   ck      Added ARM toolchain directories
+;** 08/29/18   msantos Added option to load sbl crash dumps
+;** 05/02/18   yps     Fix boot log collection issue
+;** 11/03/17   yps     Update CLANG80 supporting
+;** 08/15/17   yps     Fix boot log collection issue
+;** 05/01/17   ds      qsee_with_test.elf path update
+;** 04/12/17   kpa     update BootLogStart subroutine
+;** 04/12/17   kpa     update xblloader dll location
+;** 04/06/16   kpa     Update for sdm845
+;** 05/31/16   digant  cmm timeout updates
+;** 04/06/16   kpa     Update for 8998
+;** 08/18/15   elt     Added option to run through XBL with async. UART
+;** 06/24/15   as      Separate out boot timing numbers..
+;** 05/26/15   as      Add support for mode switch.
+;** 05/15/15   kpa     Increase wait time to consider ddr training time increase
+;** 05/14/15   kpa     Update SBL1Start and GoTillXblEnd api�s
+;** 04/21/15   as      Add support for build suffix.
+;** 04/21/15   ck      Modified for TZ with test
+;** 04/20/15   tw      Added option 5 to trigger into ddr test framework
+;** 04/10/15   ck      Updated default to look for dll and elf files
+;** 04/09/15   ck      Removed qfprom test intercom calls
+;** 03/04/15   kpa     Increase wait time before dumping logs to text files.
+;** 02/17/15   kpa     Updated for HoneyBadger family
+;** 03/25/14   ck      Updated for Bear family
+;** 10/31/13   jz      Updated to support command line usage, cleaned up
+;** 10/16/13   jz      Added option to enter download mode to facilitate RAM dump debug/test
+;** 08/07/13   jz      Ported from target's boot_debug to make it common
+
+;****************************************************************************
+
+;This .cmm script acts as a main routine for setting up boot debug.
+
+;****************************************************************************
+;  CMM script variables
+;****************************************************************************
+local &ELFfilename          ; Return value of GetELFfile function
+local &sbl1dir              ; Location of SBL1 ELF file
+local &xblramdumpdir        ; Location of XBL RamDump ELF file
+                            
+local &sbl1elf              ; SBL1 ELF file name
+local &xblramdumpelf        ; XBL Ram Dump ELF file name
+
+local &bootdloadcheck       ; api that checks dload cookie
+local &initial_mem_map_init
+local &xblramdumpentry      ; Entry point to ram dump image
+local &boot_ram_dump_to_raw_partition
+local &xblend               ; Last api called in XBL loader
+local &boot_error_handler   ;Error handler in boot
+local &xbl_sync_error       ; Sync error handler
+local &xbl_system_error     ; System error handler
+
+local &BootBuildPath   ; location of non-HLOS build path
+local &BuildOutDir     ; location of Build objects
+local &logging_path    ; location to save the boot log
+local &script_path     ; location of this debug script
+local &build_pkg        ; Build Id of binaries/ elf's being used
+local &build_image    ; Build Suffix of the target
+local &mode_switch     ; Aarch32 -> Aarch64 mode switch
+local &option          ; Option provided by the user without wanting to go through the script interactively 
+local &boot_path
+local &GetObjRetryFlag  
+
+local &YorN            ; Get answer from User
+local &remote          ; calling intercomm
+local &is_boot_test    ; option whether to dump log messages to jtag terminal.
+                       ; term view NOT shown while logging boot times. used only
+                       ; during boot_test.
+local &is_cmd_line  ; run script in command line mode, for automated tests.
+local &Choice  ; get user preferences.
+
+;External Script Files
+local &set_target_specific_data 
+local &set_target_specific_api 
+
+local &SystemUp
+local &SystemDown
+
+;Main Control function of each section of code and other important stop points
+global &sbl1_entry ; Main Control for SBL1
+;Time Variables
+local &time_pbl
+;Timeout variable
+local &brkpt_timeout
+
+local &variant
+
+global &NoClearBreakPoint
+global &CustomHaltAddress
+global &CustomCmm
+global &Success
+global &Failure
+local &Dloadmode
+local &boot_raw_ram_dump_magic_num
+local &boot_dload_enable_ramdump
+local &boot_dload_enable_minidump
+
+;============================================================================
+; Get the arguments passed to boot debug script.
+;============================================================================
+ENTRY &build_pkg &build_target &build_family &build_image &mode_switch &variant &Platform &option &Storage &DumpType &DumpStorage &RumiEmulation
+
+;============================================================================
+; Set up some defaults for some variables
+;============================================================================
+;set Directories
+&sbl1dir="QcomPkg/XBLLoader/XBLLoader/DEBUG"
+&xblramdumpdir="QcomPkg/XBLRamDump/XBLRamDump/DEBUG"
+
+;Scripts
+;&target_script_path
+&set_target_specific_data="boot_debug_target_data.cmm"
+&set_target_specific_api="boot_debug_target_api.cmm"
+&ddr_test_framework="boot_ddr_test.cmm"
+&boot_log_script="boot_log.cmm"
+
+;Important stop points
+&sbl1_entry="_ModuleEntryPoint"
+&boot_log_dump="boot_log_dump"
+&boot_debug_cookie_sbl1_ptr="boot_debug_cookie_ptr"
+
+&YorN="N"
+&is_boot_test=0
+&is_cmd_line=0  ; 0: user interactive 1: commandline/auto mode
+&brkpt_timeout=60.
+&Failure=0
+&Success=1
+&NoClearBreakPoint="FALSE"
+&boot_raw_ram_dump_magic_num=0x2
+&boot_dload_enable_edl=0x1
+&boot_dload_enable_ramdump=0x10
+&boot_dload_enable_minidump=0x20
+&Dloadmode=&boot_dload_enable_ramdump
+&DloadEDL=&boot_dload_enable_edl
+&bootdloadcheck="boot_dload_entry"
+&initial_mem_map_init="xbl_populate_initial_mem_map"
+&xblend="boot_log_forever_loop_check"
+&boot_error_handler="boot_error_handler"
+&xbl_sync_error="sbl1_cspx_sync" 
+&xbl_system_error="sbl1_cspx_serror" 
+
+
+;============================================================================
+; Set up the display window
+;============================================================================
+gosub CleanUpExit
+winclear
+area.RESET 
+gosub SetupMainWindow
+
+;============================================================================
+; Set up paths
+;============================================================================
+  if "&option"!=""&&"&option"!="default"
+  (
+    &is_cmd_line=1
+  )
+
+  &script_path=os.pwd()    
+  ;Derive build path relative to script path
+  cd ../..
+  &BootBuildPath=os.pwd()
+
+  cd &script_path
+
+  ; Determine the object files path. Populate &BuildOutDir
+  &GetObjRetryFlag="N"
+
+  gosub GetObjFilesPath Loader  
+  ;Update absolute directory paths
+  &sbl1dir="&BuildOutDir"+"/"+"&sbl1dir"+"/"
+
+  &target_script_path="&script_path"+"/../"+"&build_pkg"+"Pkg/"+"&build_target"+"/Tools"
+  &set_target_specific_data="&target_script_path/"+"&set_target_specific_data"
+  &set_target_specific_api="&target_script_path/"+"&set_target_specific_api"
+  &boot_log_script="&script_path/"+"&boot_log_script"
+
+  if &is_cmd_line==0  
+  (
+    print " Boot_debug.cmm dependencies: "
+    ; Check if target scripts exist
+    IF File.exist("&set_target_specific_data")
+    (
+      print " &set_target_specific_data found"
+    )
+    else
+    (
+      print " Enter path for boot_debug_target_data.cmm"
+      enter &set_target_specific_data
+    )
+    IF File.exist("&set_target_specific_api")
+    (
+      print " &set_target_specific_api found"
+    )
+    else
+    (
+      print " Enter path for boot_debug_target_api.cmm"
+      enter &set_target_specific_api
+    )
+    IF File.exist("&boot_log_script")
+    (
+      print " &boot_log_script found"
+    )
+    else
+    (
+      print " Enter path for boot_log.cmm"
+      enter &boot_log_script
+    )  
+  )
+  
+  ;================================================================================
+  ; Set Target Specific Subroutines. Cmm does not allow to "include" another cmm 
+  ; with api defines instead invoke the subroutine name along with the script defining it.
+  ;================================================================================
+  &SystemUp="do &set_target_specific_api SystemUp &target_script_path"
+  &SystemDown="do &set_target_specific_api SystemDown &target_script_path"
+
+  ;get absolute path for ddr test script
+  &ddr_test_framework="&script_path"+"/"+"&ddr_test_framework"
+    
+  if &is_cmd_line==1
+  (
+    ; Update sbl names for command line usage
+    &sbl1elf="&sbl1dir"+"XBLLoader.dll"
+    &xblramdumpelf="&xblramdumpdir"+"XBLRamDump.dll"
+  )
+
+  if &is_cmd_line==0
+  (
+    print
+    print "Please enter platform type: 1 for RUMI, 2 for LIQUID/FLUID/CDP/MTP : "
+    enter &Choice
+    if "&Choice"=="1"
+    (
+      &Platform="RUMI"
+      &brkpt_timeout=120.
+      if "&RumiEmulation"==""
+      (
+        print "Please enter RUMI Emulation version: 'E1','E2.5',.."
+        print "Press enter to use default supported emulation version"
+        enter &RumiEmulation
+      )
+    )
+    if "&Choice"=="2"
+    (
+      &Platform="SIL"
+    )
+    print
+    print
+  )
+  else
+  (
+    &Choice="&Platform"
+  )  
+  
+  print
+  print
+  
+;============================================================================
+; Present user with main menu for debugging boot.  Manual selection is done.
+;============================================================================  
+
+do &set_target_specific_data
+
+MainMenu: 
+  print
+  print   
+  print "----------------------------------------------------------------"
+  print "|                                                              |"
+  print "|               Boot Debugger                                  |"
+  print "|     On targets with XBL architecture                         |"
+  print "|    Copyright (c) 2016-2020 by Qualcomm Technologies, Inc.    |"
+  print "|                                                              |"
+  print "----------------------------------------------------------------"
+  print
+  print
+  
+  if &is_cmd_line==0
+  (
+    print "  0: Exit"
+    print "  1: Debug SBL1"
+    print "  2: Load XBL Loader image symbols"
+    print "  3: Load XBL Ramdump image symbols"
+    print "  4: Load XBL Ramdump"
+    print "  5: Run custom CMM and halt"
+    print "  6: Force Ramdump Collection"
+    print "  7: Force EDL"
+    print "  8: Collect Coredump"
+    print "  9: Load Coredump"
+    if OS.FILE("&ddr_test_framework")
+    (     
+      print "  10: DDR Test Framework"
+    )
+    print 
+    print " Please make a choice: "
+  
+    area.select MAIN
+    enter &Choice
+  )
+  else
+  (
+    &Choice="&option"
+  )
+  
+  gosub CleanUpExit
+  if (("&Choice"!="2")&&("&Choice"!="3"))
+  ( 
+    &SystemDown
+  )  
+
+  if "&Choice"=="0"
+  (  
+    print "...exiting Boot Debugger"
+    enddo true()
+  )
+   
+  if "&Choice"=="1"
+  (  
+    gosub SBL1Start
+    enddo true()
+  )
+  
+  if "&Choice"=="2"
+  (
+    gosub LoadXblLoaderSymbols
+    enddo true()
+  )
+  
+  if "&Choice"=="3"
+  (
+    gosub LoadXblRamdumpSymbols
+    enddo true()
+  )
+  if "&Choice"=="4"
+  (
+    gosub LoadSymbols SBL1 load no
+    cd &script_path
+    if "&build_family"=="SDX"
+    (
+      ;Running on simulator
+      SYSTEM.RESET
+      PRINT "Initializing CortexA7"
+      SYSTEM.CPU &cpu
+      SYSTEM.UP
+      do load_boot_crash_dump.cmm
+      end
+    )
+    else
+    (
+      ;Running on simulator
+      SYSTEM.RESET
+      PRINT "Initializing ARMV9-A"
+      ;remove below line once armv9 is available in sim
+      &cpu="CortexA77"
+      SYSTEM.CPU &cpu
+      SYSTEM.UP
+      do load_boot_crash_dump_64.cmm
+    )
+    enddo true()
+  )
+  if "&Choice"=="5"
+  (
+    gosub RunCustomCmmAndHalt
+    enddo true()
+  )  
+  if "&Choice"=="6"
+  (
+    gosub Dump
+    enddo true()
+  )
+  if "&Choice"=="7"
+  (
+    gosub ForceEDL
+    enddo true()
+  )
+  
+  if "&Choice"=="8" 
+  (  
+    gosub LoadXblLoaderSymbols
+    gosub Collect_coredump
+    enddo true()
+  )
+
+  if "&Choice"=="9" 
+  (  
+    gosub Load_Coredump
+    enddo true()
+  )
+  
+  if "&Choice"=="10"
+  (
+    gosub SBL1Start
+    do &ddr_test_framework
+    enddo true()
+  )
+
+  if &is_cmd_line==0
+  (
+    gosub SetupMainWindow
+    goto MainMenu
+  )
+  else
+  (
+    goto EndOfScript  
+  )
+
+  
+;=====================================================
+; These are the various sub-routines as used by the script above
+;=====================================================
+ 
+;=====================================================
+;This Subroutine loads boot rom for RUMI
+;===================================================== 
+SetUpPBL:
+  local &script
+  global &TargetPresil
+  if "&Platform"=="RUMI"
+  (
+    print " This option shall setup the debug windows "
+    print " and allow to run custom debug script "
+    print
+    ;print " Enter Presilicon Boot Init script: "
+    &TargetPresil=os.pwd();
+    &TargetPresil="&TargetPresil"+"/../"+"&build_pkg"+"Pkg"+"/&build_target"+"/Tools/PreSil/"
+    &script="&TargetPresil"+"rumi_setup.cmm"
+    ;enter &script
+
+    ;If RumiEmulation is null/empty set to "default" as Storage is optional too and
+    ;null/empty variables are not passed by practice
+    if "&RumiEmulation"==""
+    (
+      &RumiEmulation="default"
+    )
+
+    cd.do &script &Variant &RumiEmulation &Storage
+  )
+  
+  winclear
+  area.reset
+  gosub SetupMainWindow  
+  gosub SetupDebugWindows yes
+  
+  return
+  
+;=====================================================
+;This Subroutine initializes intercom ports
+;===================================================== 
+IntercomInit:
+  if !intercom.ping(&APPS_CORE0_T32)
+  (
+    PRINT "APPS T32 Session: Inactive"
+    PRINT "Please start the T32 session on Apps Proc"
+    &APPS_CORE0_T32="FAIL"
+  )
+  return
+
+;Clear the download mode cookie
+ClearDloadCookie:
+  data.set &boot_dload_boot_misc_detect_addr %LONG 0x0
+  return
+
+;Set the download mode cookie
+SetDloadCookie:
+  D.S A:&boot_dload_boot_misc_detect_addr %LE %LONG &Dloadmode
+  return
+  
+;=====================================================
+; This Subroutine sets up apps for debug it will also 
+; init intercom if it hasn't been inited yet
+;=====================================================   
+AppsDebugInit:
+  
+  &SystemDown
+  
+  cd &script_path
+  WAIT 1s
+  &SystemUp
+  
+  if "&Platform"!="RUMI"
+  (
+    sys.u
+  )
+
+  b
+  map.bo
+  if "&NoClearBreakpPoint"=="FALSE"
+  (
+    b.d
+  )
+  y.reset
+  symbol.reset
+  
+  cd &script_path
+
+  gosub LoadSymbols SBL1 load yes
+  
+  return
+
+
+;=====================================================
+;This Subroutine checks if the given breakpoint is hit
+;within the timeout
+;=====================================================
+Brkpt_check:
+  ENTRY &breakpoint
+  &type=symbol.type(&breakpoint)
+  &timeout=&brkpt_timeout
+  WHILE &timeout>0
+  (
+    if !STATE.RUN()
+    (
+      if (&type!=0)
+      (
+        if (Register(pc)==Address.offset(&breakpoint))
+          return &Success
+      )
+      else if (Register(pc)==&breakpoint)
+        return &Success
+      else
+      (
+        print " FAIL: Please clear breakpoints and try again."
+        RETURN &Failure
+      )
+    )
+    WAIT 1.s
+    &timeout=&timeout-1
+  )
+  RETURN &Failure
+
+;=====================================================
+;This Subroutine loads the required SBL1 symbols and 
+;then executes till the beginning of SBL1
+;=====================================================
+SBL1Start:
+
+  gosub AppsDebugInit 
+
+  ;clear the cookie
+  gosub ClearDloadCookie
+  
+  if "&Platform"=="RUMI"
+  (
+    GOSUB Brkpt_check &sbl1_entry
+    ENTRY &result
+    if &result==&Success
+    (
+      goto breakpoint_done
+    )
+  )
+
+  b.s &sbl1_entry
+  g
+
+  GOSUB Brkpt_check &sbl1_entry
+  ENTRY &result
+  if &result!=&Success
+  (
+    print " FAIL: Start of XBL Loader not reached"
+    return &Failure
+  )
+  
+breakpoint_done:
+  b.d &sbl1_entry
+  gosub SetUpSysPath yes
+  gosub SetupDebugWindows yes
+  print "Stopped at start of XBL Loader"
+  print
+  
+  return &Success
+
+
+;=====================================================
+;This Subroutine runs the custom cmm and halt at
+;given breakpoint
+;=====================================================  
+RunCustomCmmAndHalt:
+
+  gosub AppsDebugInit
+  
+  if "&CustomCmm"==""
+  (
+    dialog.file *."cmm"
+    entry &CustomCmm
+  )
+  
+  if "&CustomCmm"!=""
+  (
+    cd.do &CustomCmm
+  )
+  
+  if "&CustomHaltAddress"==""
+  (
+    Area.reset
+    Area.create Address
+    Area.view Address
+    Area.select Address
+    WAIT 1.s
+    print "Please enter the Address/Symbol: "
+    enter &CustomHaltAddress
+  )
+  
+  if "&CustomHaltAddress"!=""
+  (
+    b.s &CustomHaltAddress
+    g
+  )
+
+  GOSUB Brkpt_check &CustomHaltAddress
+  ENTRY &result
+  &CustomCmm=""
+  &CustomHaltAddress=""
+  if &result!=&Success
+  (
+    print " FAIL: Failed to reach given address"
+    return &Failure
+  )
+  print "Stopped at the given address"
+  
+  return &Success
+  
+  
+;=====================================================
+;This Subroutine provides options to collect
+;ramdump/minidump to rawpartition,sdcard,flashless
+;=====================================================  
+Dump:
+
+  &xblramdumpentry="\\XBLRamDump\Global\_ModuleEntryPoint"
+
+  if &is_cmd_line==0
+  (
+    print "Enter 1 for ramdump and 2 for minidump : "
+    enter &Choice
+    if &Choice!=1
+    &Dloadmode=&boot_dload_enable_minidump
+  )
+  
+  else
+  (
+    if "&DumpType"!="ramdump"
+        &Dloadmode=&boot_dload_enable_minidump
+  )
+  
+  
+  gosub AppsDebugInit
+  
+  b.s &bootdloadcheck
+  go
+  
+  GOSUB Brkpt_check &bootdloadcheck
+  ENTRY &result
+  if &result!=1
+  (
+    print " FAIL: &bootdloadcheck not reached"
+    return &Failure
+  )
+  ;set the download mode cookie after reset
+  gosub SetDloadCookie
+  V boot_mode_info_table.boot_mode = BOOT_MODE_RAMDUMP
+  
+  gosub LoadSymbols XBLRAMDUMP load no
+  
+  b.s &xblramdumpentry
+  g
+
+  GOSUB Brkpt_check &xblramdumpentry
+  ENTRY &result
+  if &result!=&Success
+  (
+    print " FAIL: &xblramdumpentry not reached"
+    return &Failure
+  )
+  
+  DIALOG.VIEW
+  (
+    POS 1. 1. 40. 2.
+    DEFBUTTON "RamDump Entry" "GOTO RamdumpEntry"
+    DEFBUTTON "Skip Display and collect dumps" "GOTO SkipDisplay"
+  )
+  STOP
+  
+RamdumpEntry:
+  b.s XBLRamDumpMain
+  g
+  d.l
+  return &Success
+
+SkipDisplay:
+  go symbol.exit(boot_check_display_allowed)
+  WAIT 1s
+  Register.Set X0 0
+  cont
+
+  
+  gosub SetUpSysPath yes
+  gosub SetupDebugWindows yes
+  
+  print "Stopped at entry to RamDump segment"
+  
+  print
+  
+    if "&build_family"=="SM"
+  (
+    if &is_cmd_line==0
+    (
+      DIALOG.VIEW
+      (
+        POS 1. 1. 40. 2.
+        HEADER "Dump Options"
+        DEFBUTTON "RawPartition" "GOTO RawPartition"
+        DEFBUTTON "SDCard" "GOTO SDCard"
+        DEFBUTTON "USB" "GOTO USB"
+      )
+      STOP
+    )
+    else
+    (
+      if "&DumpStorage"=="rawpartition"
+      (
+        gosub RawPartition
+        enddo
+      )
+
+      if "&DumpStorage"=="sdcard"
+      (
+        gosub SDCard
+        enddo
+      )
+
+      if "&DumpStorage"=="usb"
+      (
+        gosub USB
+        enddo
+      )
+    )
+  ) ; if "&build_family"=="SM"
+
+  g
+  return &Success
+
+;=====================================================
+;This Subroutine collects dump to Raw Partition
+;=====================================================  
+RawPartition:
+  if &is_cmd_line==0
+    DIALOG.End
+    Break.Set rd_raw_format_init /Program /CMD "V boot_shared_imem_cookie_ptr->uefi_ram_dump_magic = &boot_raw_ram_dump_magic_num" /RESUME
+    g
+    
+    return &Success
+    
+;=====================================================
+;This Subroutine collects dump to SD Card 
+;===================================================== 
+SDCard:
+  if &is_cmd_line==0
+    DIALOG.END
+  Break.Set rd_raw_format_init /Program /CMD "V boot_shared_imem_cookie_ptr->uefi_ram_dump_magic = 0" /RESUME
+  b.s rd_hfat_format_init
+  g
+  WAIT 1s
+  go symbol.exit(boot_fs_boot_mount)
+  WAIT 1s
+  if (Register(x0))!=0
+  (
+    DIALOG.OK "No device/memory" "SDCard dump error"
+    return &Failure
+  )
+  else
+    g
+  return &Success
+
+;=====================================================
+;This Subroutine collects dump over USB
+;===================================================== 
+USB:
+  if &is_cmd_line==0
+    DIALOG.END
+  Break.Set rd_raw_format_init /Program /CMD "V boot_shared_imem_cookie_ptr->uefi_ram_dump_magic = 0" /RESUME
+  V sdcard_dump_enabled = 0
+  g
+  return &Success
+
+
+;=====================================================
+;This Subroutine forces PBL to EDL mode
+;=====================================================  
+ForceEDL:
+  sys.u
+  D.S A:&boot_dload_boot_misc_detect_addr %LE %LONG &DloadEDL
+  g
+  return &Success
+
+
+;============================================================================
+; Collect Coredump
+;============================================================================
+Collect_Coredump:
+  ;Set the dump location.  Use command line &Storage variable as that can be passed in
+  if "&Storage"==""
+  (
+    print "Please enter the location to save the coredump:"
+    enter &Storage
+    print
+    print
+  )
+	
+  CD &Storage
+
+  sys.m.a
+  
+  print "Saving General purpouse registers DUMP contents to register.cmm ..."	
+  store reg.cmm hex register
+  wait 2.s
+	
+  ON ERROR Cont
+	
+  ;Boot IMEM DUMP
+  print "Saving Boot IMEM DUMP contents to BOOT_IMEM.BIN ..."
+  Data.SAVE.Binary BOOT_IMEM.BIN AZ:&boot_imem_base_addr++&boot_imem_size
+  wait 2.s
+	
+  ;Calculate the DDR size
+  &ddr_size=0x00000000
+  if v.value("ddr_init_done")==1
+  (
+    if Var.VALUE(ddr_system_size.ddr_cs0[0])!=0x0
+    (
+      &ddr_size=Var.VALUE(ddr_system_size.ddr_cs0[0])
+    )
+    if Var.VALUE(ddr_system_size.ddr_cs1[0])!=0x0
+    (
+      &ddr_size=&ddr_size+Var.VALUE(ddr_system_size.ddr_cs1[0])
+    )		
+     
+    &ddr_size=((&ddr_size<<20.)-1)
+
+    print "Saving DDR DUMP contents to DDRCS0.BIN ..."
+    Data.SAVE.Binary DDRCS0.BIN AZ:&ddr_base_addr++&ddr_size
+  )
+  else
+  (
+    print "DDR Not Initialized, DDR DUMP cannot be collected!"
+    print "  press any key to return"
+    return &Success
+  )	
+
+  return &Success
+
+
+;============================================================================
+; Load Coredump to simulator
+;============================================================================
+Load_Coredump:
+  ;Running on simulator
+  SYSTEM.RESET
+  PRINT "Initializing CortexA7"
+  SYSTEM.CPU &cpu
+  SYSTEM.UP
+	
+  ;Get the crash dump location.   Use command line &Storage variable as that can be passed in
+  if "&Storage"==""
+  (
+    print "Please enter the location of the coredump:"
+    enter &Storage
+    print
+    print
+  )
+
+  ;Loading DDRCS0 binary
+  &ddr_binary_path="&Storage"+"/DDRCS0.BIN"	
+  if OS.FILE("&ddr_binary_path")
+  (
+    print "Loading DDRCS0 binary"	
+    D.LOAD.B &ddr_binary_path AZ:&ddr_base_addr++os.file.size(&ddr_binary_path) /noclear
+  )
+
+  ;Loading Boot IMEM binary
+  &boot_imem_binary_path="&Storage"+"/BOOT_IMEM.BIN"	
+  print "Loading Boot IMEM binary"
+  D.LOAD.B &boot_imem_binary_path AZ:&boot_imem_base_addr++&boot_imem_size /noclear
+	
+  ;Load the register Dump
+  print "Loading Register Dump"
+  CD &Storage
+  do reg.cmm
+	
+  gosub SetupDebugWindows	
+  return &Success
+
+
+;===========================================================
+;This Subroutine loads only the required XBL Loader symbols 
+;===========================================================  
+LoadXblLoaderSymbols:
+  gosub LoadSymbols SBL1 load no  
+  print "XBL Loader Symbols loaded. Please manually setup needed debug windows"
+  if &is_cmd_line==0
+  (
+    print "Press enter to continue "
+    enter &Choice
+  )
+  return &Success
+  
+;============================================================
+;This Subroutine loads the required XBL Ramdump symbols. It 
+;also loads loader symbols since ramdump image uses some
+; api's from loader. 
+;============================================================
+LoadXblRamdumpSymbols:
+  gosub LoadSymbols XBLRAMDUMP load no
+  print "XBL Ramdump Symbols loaded. Please manually setup needed debug windows"
+  print "Press enter to continue "
+  enter &Choice
+  
+  return &Success
+  
+  
+;****************************************************************************
+; Load or remove the boot loader symbols
+;****************************************************************************
+LoadSymbols:
+  local &cwd
+  local &boot_directory
+  ENTRY &bltype &loadordelete &remote
+
+  if ("&loadordelete"=="load")
+  (
+    if "&bltype"=="SBL1"
+    (
+      &cwd=os.pwd()
+      if os.dir("&sbl1dir")
+      (
+        ChDir "&sbl1dir"
+      )
+    
+      if "&sbl1elf"==""
+      (
+        gosub GetELFfile XBLLOADER dll
+      )
+      else
+      (
+        &ELFfilename="&sbl1elf"
+      )
+    )
+
+    if "&bltype"=="XBLRAMDUMP"
+    (
+      ; Not all targets have a ramdump image
+      ; So construct ramdump dir and elf here, right before it is used
+      gosub GetObjFilesPath RamDump
+      &xblramdumpdir="&BuildOutDir"+"/"+"&xblramdumpdir"+"/"
+      &xblramdumpelf="&xblramdumpdir"+"XBLRamDump.dll"
+    
+      &cwd=os.pwd()
+      if os.dir("&xblramdumpdir")
+      (
+        ChDir "&xblramdumpdir"
+      )
+
+      if "&xblramdumpelf"==""
+      (
+        gosub GetELFfile XBLRAMDUMP dll
+      )
+      else
+      (
+        &ELFfilename="&xblramdumpelf"
+      )
+    )
+
+    print "Elf File: &ELFfilename"
+    print
+    if ("&bltype"=="SBL1")||("&bltype"=="XBLRAMDUMP")
+    (
+	  ; explicitly need to update sourcepath
+      data.load.elf &ELFfilename /nocode /noclear /strippart "QcomPkg" /sourcepath "&BootBuildPath/QcomPkg/"
+    )
+  )
+  else
+  (
+    symbol.delete
+  )
+return ; LoadSymbols
+
+;****************************************************************************
+; Select an ELF file from the dialog window
+;****************************************************************************
+GetELFfile:
+  ENTRY &imagetype &file_suffix
+  print "Select &imagetype image file in browser"
+  local &filename
+  dialog.file *."&file_suffix"
+  entry &filename
+  if "&filename"==""
+  (
+    print "Failed to select file. Exiting..."
+    return
+  )
+  &ELFfilename="&filename"
+  print "Elf File: &ELFfilename"
+return ; GetELFfile
+
+
+;***************************************************************************
+; Setup access to boot source directories
+;***************************************************************************
+SetUpSysPath:
+  y.spath --
+  print "Adding paths...."
+  y.spath.srd "&BootBuildPath/QcomPkg/"+"&build_pkg"+"Pkg/Library/XBLLoaderLib"
+  y.spath.srd "&BootBuildPath/QcomPkg/"+"&build_pkg"+"Pkg/Library/XBLRamDumpLib"
+  y.spath.srd "&BootBuildPath/QcomPkg/XBLLoader"
+  y.spath.srd "&BootBuildPath/QcomPkg/XBLRamDump"
+  y.spath.srd "&BootBuildPath/QcomPkg/"+"&build_pkg"+"Pkg/Library/DDRTargetLib"
+  y.spath.srd "&BuildOutDir/"+"QcomPkg/"+"&build_pkg"+"Pkg/Library/XBLLoaderLib" 
+  y.spath.srd "&BuildOutDir/"+"QcomPkg/"+"&build_pkg"+"Pkg/Library/XBLRamDumpLib"   
+  
+return ; SetUpSysPath
+
+
+;****************************************************************************
+; Setup and display the windows to debug the processor
+;****************************************************************************
+SetupDebugWindows:
+  
+  TOOLBAR ON
+  STATUSBAR ON
+
+  WINPOS 0.0 0.0 68% 65% 12. 1. W000
+  DATA.list
+ 
+  WINPOS 68% 0. 32% 50% 0. 0. W002
+  register /spotlight
+ 
+  setup.var %open.on %hex %symbol
+
+  WINPOS  68% 50% 32% 48% 0. 0. W003
+  Var.Frame
+  
+  return ; SetupDebugWindows
+
+;****************************************************************************
+; Setup main window
+;****************************************************************************
+SetupMainWindow:
+  WINPOS 0% 50% 68% 50% 0. 0. W001
+  Area.create MAIN
+  Area.view MAIN
+  Area.select MAIN
+  return ;SetupMainWindow
+  
+;=====================================================
+; Function to clean up just before exit
+;=====================================================
+CleanUpExit:
+  ;--------------------------------------------------------
+  ; ok we're finished completely, clean up for exit
+  ;--------------------------------------------------------
+  b.delete /all
+  gosub LoadSymbols "" delete
+  return ; CleanupExit
+
+;==============================================================================
+;
+;  Determine the debug objects/elf path from where we need to load symbols from.
+;  First match will be taken which folder is present.
+;
+;==============================================================================
+GetObjFilesPath:
+  local &Build_Id_Specific
+  entry &build_image
+
+  &Build_Id_Specific="&build_pkg"
+
+  if "&build_image"=="None"
+  (
+   &Build_Id_Specific="&build_target"+"&variant"+"/Loader"
+  )
+  else
+  (
+   &Build_Id_Specific="&build_target"+"&variant"+"/"+"&build_image"
+  )
+  ; Add the folders list in the order of preference
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG100LINUX/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+  
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG100LINUX/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG100WIN/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG100WIN/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG100LINUX/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+  
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG100LINUX/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG100WIN/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG100WIN/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG120LINUX/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+  
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG120LINUX/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG120WIN/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG120WIN/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG120LINUX/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+  
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG120LINUX/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG120WIN/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG120WIN/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG140LINUX/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+  
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG140LINUX/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG140WIN/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG140WIN/AARCH64"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG140LINUX/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+  
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG140LINUX/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/DEBUG_CLANG140WIN/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )  
+
+  &BuildOutDir="&BootBuildPath/../Build/"+"&Build_Id_Specific"+"/RELEASE_CLANG140WIN/ARM"
+  if (os.dir("&BuildOutDir"))
+  (
+    return
+  )
+
+  if ((&is_cmd_line!=0)||("&GetObjRetryFlag"=="Y"))
+  (
+    print %String %ERROR "Unable to find valid build folder !"
+  )
+  else
+  (
+    print " Enter valid XBL Build for Debug Symbols : "
+    enter &BootBuildPath
+    &BootBuildPath="&BootBuildPath/boot_images/boot"
+    &GetObjRetryFlag="Y"
+    goto GetObjFilesPath
+  )  
+
+  END
+  
+EndOfScript:
+  ENTRY &result
+  if &result!=&Success
+  (
+    enddo false()
+  )
+  enddo true()

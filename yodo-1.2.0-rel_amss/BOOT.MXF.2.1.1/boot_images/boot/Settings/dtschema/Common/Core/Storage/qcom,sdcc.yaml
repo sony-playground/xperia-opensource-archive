@@ -1,0 +1,121 @@
+# Copyright (c) 2022 Qualcomm Technologies, Inc.
+# 3rd party file marking retained below for attribution purposes:
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,sdcc.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm SDCC DT
+
+maintainers:
+  - rajinegi <rajinegi@qti.qualcomm.com>
+
+description: |
+   The Qualcomm compatible node...
+   Links to data required for functioning on eMMC and SD card driver
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,sdcc
+ 
+  reg:
+    minItems: 1
+    maxItems: 2
+    description: Base address of the SDHC registers , change as needed (in accordance with IPCAT).
+
+  EnableLogging:
+    maxItems: 1
+    description: Set 1 if you want to print extra log statements, change as needed.
+    
+  DriveStrength:
+    minItems: 1
+    maxItems: 2
+    description: drive strengths as per IPCAT, change as needed.
+
+  MaxSpeedMode:
+    maxItems: 1
+    description: Put the speed you want the device to RUN at, change as needed.
+    
+  HsrSettings:
+     type: object
+            
+     
+     properties:
+        DLLConfig:
+          description: DLL settings to be obtained from VI
+            
+        DLLConfig2:
+          description: DLL settings to be obtained from VI
+              
+        DLLConfig3:
+          description: DLL settings to be obtained from VI
+          
+        DLLTestCtrl:
+          description: DLL settings to be obtained from VI
+            
+        DDRConfig:
+          description: DLL settings to be obtained from VI
+          
+        DLLUserCtrl:
+          description: DLL settings to be obtained from VI
+            
+     
+     patternProperties:
+      "HS[4^2]00 ^ SDR50 ^ SDR104":
+       type: object
+
+            
+     required:
+       - DLLConfig
+       - DLLConfig2
+       - DDRConfig
+       - DLLConfig3
+       - DLLTestCtrl
+       - DLLUserCtrl
+    
+            
+            
+required:
+  - compatible
+  - reg
+  - EnableLogging
+  - DriveStrength
+  - MaxSpeedMode
+  - HsrSettings
+
+additionalProperties: false
+
+examples:
+-  |
+   sdcc: sdc1@8804000 {
+        compatible = "qcom,sdcc";
+        reg = <0x8804000 0x00001000>;
+
+        EnableLogging = /bits/ 8 <0>; 
+
+        DriveStrength = <0x1FE4>;
+        
+
+        MaxSpeedMode = /bits/ 8 <5>; 
+
+       HsrSettings {
+       
+                 DLLConfig    =  <0x7442C>;
+                 DLLConfig2   =  <0x5400>;
+                 DLLConfig3   =  <0x08>;
+                 DLLTestCtrl  =  <0x1800000>; 
+                 DDRConfig    =  <0x80040868>; 
+                 DLLUserCtrl  =  <0x090106C0>;    
+
+            SDR104 {
+                DLLConfig2 = <0x87C00>;
+            };
+
+            SDR50 {
+                DLLConfig2 = <0x5400>;
+            };
+       };
+    };

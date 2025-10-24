@@ -1,0 +1,7 @@
+&soc {
+  disp_rdump_memory: disp_rdump_region@E3940000 {
+    compatible = "qcom,display";
+    reg   = <0xE3940000 0x02B00000>;
+    label = "disp_rdump_region";
+  };
+};

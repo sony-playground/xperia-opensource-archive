@@ -1,0 +1,64 @@
+#/** @file XBLLoaderApi.dec
+#  
+#  XBL Loader headers declaration file.
+#  
+#  Copyright (c) 2014-2015, 2017, 2020-2022 Qualcomm Technologies, Inc. All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+# 01/21/22   ck      Added Include/api/data includes
+# 09/20/21   ck      Removed ARM/AARCH64 includes
+# 01/20/21   rama    Added Include/api/systemdebug/eud
+# 03/18/20   ck      Renamed MSM folder to SM
+# 03/09/20   ck      Added SDX and MSM XBLLoaderLib include directories
+# 05/23/17   vk      Add XBLLoader/Include
+# 02/19/15   ck      Removed power directory from include api list
+# 09/24/14   ck      Added power directory to include api list
+# 09/23/14   ck      Added seccfg directory to include api list
+# 09/03/14   ck      Added secimgauth directory to include api list
+# 07/18/14   kedara  Initial revision
+#
+#==============================================================================
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = XBLLoaderApi
+  PACKAGE_GUID                   = 976A624F-45C0-D533-99E7-F1926F1D8DE3
+  PACKAGE_VERSION                = 0.1
+
+
+[Includes.common]
+  Include
+  Include/api/boot
+  Include/api/data/dma
+  Include/api/data/ipa
+  Include/api/systemdrivers
+  Include/api/pmic/pm
+  Include/api/securemsm/secboot
+  Include/api/securemsm/seccfg
+  Include/api/securemsm/secimgauth
+  Include/api/securemsm
+  Include/api/storage
+  Include/api/systemdebug
+  Include/api/systemdebug/eud
+  Include/api/dal
+  Include/api/services
+  Include/api/debugtools
+  Include/api/hwengines
+  Include/api/pcie
+  Include/api/mproc
+  Include/api/kernel/libstd
+  Include/api/kernel/devcfg
+  Include/XBLLoader
+  Include/Protocol/prot_inc
+  XBLLoader/Include
+  XBLRamDump
+  XBLLoader
+  SocPkg/Library/XBLLoaderLib

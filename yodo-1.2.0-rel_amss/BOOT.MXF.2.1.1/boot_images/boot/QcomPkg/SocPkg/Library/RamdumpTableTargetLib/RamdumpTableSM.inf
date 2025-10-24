@@ -1,0 +1,46 @@
+#/** @file RamdumpTableSM.inf
+#
+#  SM Ramdump Table Lib.
+#
+#  Copyright (c) 2020-2021 Qualcomm Technologies, Inc . All rights reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 08/18/20   rhy     Initial creation
+#==============================================================================
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RamdumpTableTarget
+  FILE_GUID                      = 511F3DDE-0781-4D4A-BA20-84DDAD6E2E8F
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = RamdumpTableTarget
+
+[Sources]
+  ramdump_table_target.c
+  SM/ramdump_table_target_sm.c
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Werror -DBOOT_LOADER -DBOOT_WATCHDOG_DISABLED
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  SecPkg/SecLib.dec
+  QcomPkg/Library/MinidumpLib/MinidumpLib.dec
+
+[LibraryClasses]
+  BaseLib
+  PcdLib
+  DebugLib
+

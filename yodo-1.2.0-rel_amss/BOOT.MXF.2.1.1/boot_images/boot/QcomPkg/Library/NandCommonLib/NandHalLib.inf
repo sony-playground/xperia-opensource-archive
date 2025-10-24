@@ -1,0 +1,64 @@
+#/** @file NandHalLib.inf
+#  
+#  Nand HAL Library UEFI INF file
+#  
+#  Copyright (c) 2017, 2019-2020, 2022 Qualcomm Technologies, Inc. All Rights Reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when         who     what, where, why
+# ----------   ---     ---------------------------------------------------------
+# 2022-07-21   gk      Workaround for Rumi.(BuildOptions)
+# 2020-06-08   sa      Removed unsupported compiler flags.
+# 2019-02-03   sa      Moved the file to support target specific changes.
+# 2017-03-03   eo      Initial version.
+#
+#==============================================================================
+
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = NandHalLib
+  FILE_GUID                      = 471DD703-97A2-4870-B891-27FAE2B01578 
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = NandHalLib 
+
+[Sources.common]
+  NandHalLib/flash_hal_common.c
+  NandHalLib/flash_hal_main.c
+  NandHalLib/flash_hal_nand_main.c
+  NandHalLib/flash_hal_properties.c
+
+[Sources.Arm]
+  ../../../Library/NandCommonLib/NandHalLib/flash_hal_util_asm.asm | RVCT
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -DENABLE_FLASH_BAM
+  MSFT:*_*_*_CC_FLAGS =
+  RVCT:*_*_*_CC_FLAGS = --diag_error=warning
+  
+
+ 
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec  
+
+[LibraryClasses]
+  BaseLib
+  DebugLib
+  BaseMemoryLib
+  QpicLib
+  TimerLib
+  PcdLib
+
+[Pcd.common]
+
+  

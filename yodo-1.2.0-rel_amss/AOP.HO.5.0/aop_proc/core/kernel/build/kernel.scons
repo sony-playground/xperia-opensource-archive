@@ -1,0 +1,82 @@
+#===============================================================================
+#
+# Kernel Libs
+#
+# GENERAL DESCRIPTION
+#    build script
+#
+# Copyright (c) 2009-2009 by Qualcomm Technologies, Incorporated.
+# All Rights Reserved.
+# QUALCOMM Proprietary/GTDR
+#
+#-------------------------------------------------------------------------------
+#
+#  $Header: //components/rel/aop.ho/5.0/aop_proc/core/kernel/build/kernel.scons#7 $
+#  $DateTime: 2022/07/07 10:27:25 $
+#  $Author: pwbldsvc $
+#  $Change: 38309825 $
+#                      EDIT HISTORY FOR FILE
+#
+#  This section contains comments describing changes made to the module.
+#  Notice that changes are listed in reverse chronological order.
+#
+# when       who     what, where, why
+# --------   ---     ---------------------------------------------------------
+#
+#===============================================================================
+Import('env')
+
+#-------------------------------------------------------------------------------
+# Load sub scripts
+#-------------------------------------------------------------------------------
+if env['MSM_ID'] == '8250':
+   env.Append(CPPDEFINES = 'SM8250_TARGET_CONFIG')
+   #env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+elif env['MSM_ID'] == '8350':
+   env.Append(CPPDEFINES = 'SM8350_TARGET_CONFIG')
+elif env['MSM_ID'] in ['makena','makenaau']:
+   env.Append(CPPDEFINES = 'MAKENA_TARGET_CONFIG')
+elif env['MSM_ID'] == 'kodiak':
+   env.Append(CPPDEFINES = 'KODIAK_TARGET_CONFIG')
+elif env['MSM_ID'] == '55':
+   env.Append(CPPDEFINES = 'SDX55_TARGET_CONFIG')
+elif env['MSM_ID'] == 'Saipan':
+   env.Append(CPPDEFINES = 'Saipan_TARGET_CONFIG')
+elif env['MSM_ID'] == 'bitra':
+   env.Append(CPPDEFINES = 'bitra_TARGET_CONFIG')
+elif env['MSM_ID'] == 'waipio':
+  env.Append(CPPDEFINES = 'waipio_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+elif env['MSM_ID'] == 'kailua':
+  env.Append(CPPDEFINES = 'KAILUA_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+elif env['MSM_ID'] == 'fillmore':
+  env.Append(CPPDEFINES = 'FILLMORE_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+elif env['MSM_ID'] == 'aurora':
+  env.Append(CPPDEFINES = 'AURORA_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+elif env['MSM_ID'] == 'lassen':
+  env.Append(CPPDEFINES = 'LASSEN_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+elif env['MSM_ID'] == 'netrani':
+  env.Append(CPPDEFINES = 'NETRANI_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+elif env['MSM_ID'] == 'lanai':
+  env.Append(CPPDEFINES = 'LANAI_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+  env.Append(CPPDEFINES = 'RISCV_TARGET')
+elif env['MSM_ID'] == 'kapiti':
+  env.Append(CPPDEFINES = 'KAPITI_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+elif env['MSM_ID'] == 'hamoa':
+  env.Append(CPPDEFINES = 'HAMOA_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+elif env['MSM_ID'] == 'pinnacle':
+  env.Append(CPPDEFINES = 'PINNACLE_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+elif env['MSM_ID'] == 'kuno':
+  env.Append(CPPDEFINES = 'KUNO_TARGET_CONFIG')
+  env.Append(CPPDEFINES = 'WILL_TRIGGER_DBG_PDC_ON_RAMDUMP')
+ 
+env.LoadSoftwareUnits()

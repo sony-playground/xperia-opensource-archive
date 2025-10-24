@@ -1,0 +1,46 @@
+#/** @file  QcomSdkPkgRelease.inf
+#
+#  Pack out of SDK 
+#
+#  Copyright (c) 2021 Qualcomm Technologies, Incorporated.
+#  All rights reserved.
+#  Qualcomm Technologies, Confidential and Proprietary.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+#
+#==============================================================================
+
+[Sources.arm]
+
+[Sources.AARCH64]
+  
+[UserExtensions.PackIt.PackOut]
+  ./BaseTools_SDK
+  ./SamplePkg
+  ./qua*
+  ./QcomSdkPkg/Include/Protocol/EFIQu*
+  ./QcomSdkPkg/Include/Protocol/QuestApi.h
+  ./QcomSdkPkg/Application
+  ./QcomSdkPkg/build_tools
+  ./QcomSdkPkg/Include/Library
+  ./QcomSdkPkg/Library
+  ./QcomSdkPkg/Tools
+  ./QcomSdkPkg/QcomSdkPkg.dsc
+  ./QcomSdkPkg/QcomSdkPkg.fdf
+  ./QcomSdkPkg/README
+  ./Bin
+  ./Build
+  ./edk2_setup
+  
+[UserExtensions.PackIt.PackIn]
+
+
+
+
+

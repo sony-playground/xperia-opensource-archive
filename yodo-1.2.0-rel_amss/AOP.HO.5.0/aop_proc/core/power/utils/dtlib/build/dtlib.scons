@@ -1,0 +1,55 @@
+#===============================================================================
+# DTLIB build script
+#
+# Copyright (c) 2016 QUALCOMM Technologies Incorporated.
+# All Rights Reserved.
+# QUALCOMM Technologies Proprietary/GTDR
+#===============================================================================
+
+#Import os, sys
+Import('env')
+env = env.Clone()
+
+# Source PATH
+DTLIB_ROOT = "${BUILD_ROOT}/core/power/utils/dtlib"
+DTLIB_SRCPATH = DTLIB_ROOT + '/src'
+env.VariantDir( '${BUILDPATH}', DTLIB_SRCPATH, duplicate=0 )
+
+# Dependencies
+DTLIB_API = [
+    'POWER',
+    'PWR_UTILS',
+    'SYSTEMDRIVERS',
+    'KERNEL',
+]
+
+env.RequirePublicApi(DTLIB_API)
+env.RequireRestrictedApi(DTLIB_API)
+env.RequireProtectedApi(DTLIB_API)
+
+env.Append(CFLAGS = '${ARMCC_STDC99_CMD}')
+
+# env.PublishProtectedApi('DTLIB', ['${BUILD_ROOT}/core/power/utils/dtlib/inc'])
+
+# Sources
+DTLIB_SRCFILES = [
+    '${BUILD_ROOT}/core/power/utils/dtlib/src/DTBExtnLib.c',
+    '${BUILD_ROOT}/core/power/utils/dtlib/src/fdtlib/fdt.c',
+    '${BUILD_ROOT}/core/power/utils/dtlib/src/fdtlib/fdt_empty_tree.c',
+    '${BUILD_ROOT}/core/power/utils/dtlib/src/fdtlib/fdt_ro.c',
+    '${BUILD_ROOT}/core/power/utils/dtlib/src/fdtlib/fdt_strerror.c',
+    '${BUILD_ROOT}/core/power/utils/dtlib/src/fdtlib/fdt_sw.c',
+    '${BUILD_ROOT}/core/power/utils/dtlib/src/fdtlib/fdt_wip.c',
+]
+
+DTLIB_INITFILES = [
+    '${BUILD_ROOT}/core/power/utils/dtlib/src/init/fdt_rw.c',
+]
+
+# Add sources to compile
+env.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/dtlib', DTLIB_SRCFILES)
+
+# Add init sources separately
+env2 = env.Clone()
+env2.Append(CCFLAGS = ' -mlong-calls')
+env2.AddBinaryLibrary(['CORE_AOP'], '${BUILDPATH}/dtlib/src/init', DTLIB_INITFILES)

@@ -1,0 +1,6 @@
+{
+ "checkingfolder" : [
+                      "$CHECKINGROOT/boot/QcomPkg/Drivers/EnvDxe",
+                      "$CHECKINGROOT/boot/QcomPkg/XBLCore"
+                    ]
+}

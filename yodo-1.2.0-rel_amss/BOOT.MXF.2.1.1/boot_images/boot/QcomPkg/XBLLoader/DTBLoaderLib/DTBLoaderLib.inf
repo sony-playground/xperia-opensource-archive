@@ -1,0 +1,38 @@
+#/** @file DTBLoaderLib.inf
+#  
+#  
+#  Copyright (c) 2022 Qualcomm Technologies, Inc.
+#  All rights reserved.
+#  Qualcomm Confidential and Proprietary
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 05/04/22   tmt     Create Library initially
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DTBLoaderLib
+  FILE_GUID                      = a396f5e9-a22a-4fd2-aca7-cc240bc54a6f
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = DTBLoaderLib
+
+[Sources]
+  dtb_loader.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+
+[LibraryClasses]
+  MuslLib

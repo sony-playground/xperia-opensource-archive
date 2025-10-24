@@ -1,0 +1,101 @@
+# Copyright (c) 2022 Qualcomm Technologies, Inc.
+# 3rd party file marking retained below for attribution purposes:
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,smem.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: file for MPROC SMEM
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+  new yaml file in ../MPROC/SMEM
+
+properties:
+  compatible:
+    enum: 
+      - qcom,aurora-smem
+      - qcom,halliday-smem
+      - qcom,hamoa-smem
+      - qcom,kailua-smem
+      - qcom,kuno-smem
+      - qcom,lassen-smem
+      - qcom,pinnacles-smem
+  
+  smem-vers:
+    description: smem-vers
+
+  smem-toc-vers:
+    description: smem-toc-vers
+
+  smem-max-items:
+    description: smem-max-items
+  
+  smem-partitions:
+    type: object
+    description: smem-partitions
+
+    patternProperties:
+      "^part-[0-9]+$":
+        type: object
+        description: parts
+
+        properties:
+          size:
+            description: size
+          
+          flags:
+            description: flags
+
+          host0:
+            description: host0
+
+          host1:
+            description: host1
+
+          size-cacheline:
+            description: size-cacheline
+          
+          exclusion-sizes:
+            description: exclusion-sizes
+            $ref: /schemas/types.yaml#/definitions/uint32-array
+    
+        required:
+          - size
+          - flags
+          - host0
+          - host1
+          - size-cacheline
+          - exclusion-sizes
+
+required:
+  - compatible
+  - smem-vers
+  - smem-toc-vers
+  - smem-max-items
+  - smem-partitions
+
+
+additionalProperties: false
+
+examples:
+  - |
+    smem: smem {
+        compatible = "qcom,kailua-smem";
+        smem-vers = <0x000c0000>;
+        smem-toc-vers = <0x00000001>;
+        smem-max-items = <0x284>;
+        smem-partitions {
+          part-01 {
+              size = <0x60000>; /*Apps<->Sensors partition merged to Apps<->ADSP.*/
+              flags = <( ( 0x00000001 ) | ( 0x00000002 ) )>;
+              host0 = <7>;
+              host1 = <1>;
+              size-cacheline = <0x20>;
+              exclusion-sizes = <0 0 0 0>;
+            };
+       };
+    };

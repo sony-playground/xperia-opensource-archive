@@ -1,1 +1,0 @@
-../../../opensource/touch-drivers/touch_driver_board.mk

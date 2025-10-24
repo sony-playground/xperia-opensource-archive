@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,ddr_target_dt.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm DDR Target DT
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   The Qualcomm compatible node...
+   Links to any data sheet or HW specific details
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,ddr_target_dt
+ 
+  ddr_trng_always_en:
+    maxItems: 1
+    description: this flag if set to '1' will force DDR training on each boot
+
+  extnd_term_log_flag:
+    maxItems: 1
+    description: this flag if set to '1' will force additional DDR training logs
+    
+  ddr_tr_led_flag:
+    maxItems: 1
+    description: this flag if set to '1' will blink the green LED when DDR training is happening
+
+  ddr_boot_freq:
+    maxItems: 1
+    description: if non zero and valid frequency, boot frequency will be set to this or nearest frequency
+    
+required:
+  - compatible
+  - ddr_trng_always_en
+  - ddr_boot_freq
+
+additionalProperties: false
+
+examples:
+  - |
+    ddr_target_dt {
+      compatible = "qcom,ddr_target_dt";
+      ddr_trng_always_en = <0>;
+      extnd_term_log_flag = <0>;
+      ddr_tr_led_flag = <0>;
+      ddr_boot_freq = <2093000>;
+    };

@@ -1,0 +1,72 @@
+#/** @file DevPrgDST.inf
+#
+#  DevPrg Image DDR
+#
+#  Copyright 2022 Sony Corporation.
+#  All rights, including trade secret rights, reserved.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when        who  what, where, why
+# ----------  ---  ---------------------------------------------------------
+# 2020-11-23  wek  Removed XBLLoader dependencies
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = DevPrgDST
+  FILE_GUID                      = 375cffad-59d1-4213-8a30-6dde167ddf07
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 1.0
+
+[Sources.AARCH64]
+  devprg_entry.c
+  ModuleEntryPoint.S
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Werror -DUSE_GNU_LD -DUSE_LOADER_UTILS -DFEATURE_BOOT_LOGGER_RAM -DFEATURE_BOOT_LOGGER_TIMER -DFEATURE_BOOT_LOGGER_JTAG -DFEATURE_BOOT_LOGGER_UART -DBOOT_MEMORY_DEBUG_64BIT -Wno-unused-but-set-variable
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomPkg/LoaderFramework/ConfigContext/ConfigContext.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/SocPkg/Library/BootPblSharedDataLib/BootPblSharedDataLib.dec
+  QcomPkg/SocPkg/Library/XBLLoaderArchLib/XBLLoaderArchLibPkg.dec
+  QcomPkg/XBLLoader/SmcLib/SmcLib.dec
+  QcomSdkPkg/SdkLoader.dec
+  QcomPkg/SocPkg/Library/BootPblSharedDataLib/BootPblSharedDataLib.dec
+  SecPkg/UCLib.dec
+
+[LibraryClasses]
+  ConfigContextLib
+  StackCanaryBaseLib
+  BootResetLib
+  BootUtilLib
+  DALCommonLoaderLib
+  ExtDriversNonSecureLib
+  LoggerLib
+  MemoryMgrLib
+  RamdumpheapLib
+  XBLLoaderArchLib
+  ClockTargetLib
+  BootMemMapLib
+  CpuInitLib
+  ErrorHandlerLib
+  VectorTable
+  ImageVersionLib
+  DloadDumpLib
+  AdcLoaderLib
+  DevPrgLib
+  LoggerUartLib
+  XBLConfigLib
+  ChipInfoTargetLib

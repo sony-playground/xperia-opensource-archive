@@ -1,0 +1,40 @@
+#/** @file UCLibNull.inf
+#  
+#  
+#   Copyright (c) 2021-2022 Qualcomm Technologies, Inc.  All Rights
+#   Reserved. Qualcomm Technologies Proprietary and Confidential.
+#  
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 07/12/2022 krd     Removed packin/packout to support CRM generation 
+# 09/28/2021 ck      Initial version 
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = UCLib
+  FILE_GUID                      = 57f54124-adec-4dd0-9d54-b98317937756
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = UCLib
+  
+          
+[Sources]
+  uclib_null.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  SecPkg/UCLib.dec
+  

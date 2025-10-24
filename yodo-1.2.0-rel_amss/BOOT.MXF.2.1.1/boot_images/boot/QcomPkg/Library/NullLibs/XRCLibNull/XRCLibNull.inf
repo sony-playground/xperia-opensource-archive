@@ -1,0 +1,57 @@
+#/** @file XRCLib.inf
+#  
+#  XRC library for Ramdump
+#  
+#   Copyright  2021-2022 Qualcomm Technologies, Inc. All Rights Reserved.
+#   Qualcomm Technologies, Inc. Confidential and Proprietary.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = XRCLib
+  FILE_GUID                      = 8DA5D982-AF0C-48F1-BDCF-3D69E2EAC373
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = XRCLib
+
+
+#
+#  VALID_ARCHITECTURES           = ARM
+#
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -DCUST_H=\"boot_target.h\"
+
+[BuildOptions.ARM]
+  RVCT:*_*_*_CC_FLAGS = -J Library/MuslLib/musl/include
+
+[Sources.common]
+  xrc_ramdump.c
+  
+[Packages]
+  QcomPkg/QcomPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/Library/XBLLoaderLib/XBLLoaderLibPkg.dec
+  QcomPkg/LoaderFramework/LoaderFrameworkApi.dec
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  
+[LibraryClasses]
+  #SlvcomLib
+  #SPILib
+  #TlmmLib
+  #BusyWaitLib
+  #TimerLib
+  

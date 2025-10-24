@@ -1,0 +1,95 @@
+#===========================================================================
+#                               grp0_pdc.rinit
+#
+#  DESCRIPTION:
+#    This file contains init values for GRP0 PDC.
+#    (Common: apps,spss, gpu, sde, cdsp, tme, mss, cam)
+#
+#    Settings are obtained from TCS contents sheet maintained by 
+#    Architecture team alongwith collaboration from SW and HW teams.
+#
+#  Copyright (c) 2021 QUALCOMM Technologies, Inc. (QTI). All Rights Reserved.
+#  QUALCOMM Proprietary.  Export of this technology or software is regulated
+#  by the U.S. Government. Diversion contrary to U.S. law prohibited.
+#===========================================================================
+
+#--------------------------------------------------------------------------
+# Common vars
+#--------------------------------------------------------------------------
+vars:
+
+module: { name = RPMH_PDC_GRP0_GRP0_PDC_SEQ_MEM, group = PDC_SEQ}
+
+regs:
+  SEQ_MEM = [
+#FIXEDSTARTPT:
+  0x50017001,  #0x000: 0x7001   WAIT1     rx_fifo_empty
+               #0x002: 0x5001   SET1      pdc_mode_control
+  0x50002940,  #0x004: 0x2940   BEQ       swb5_no_wakeup_timer=1        SKIPTMRMATCH
+               #0x006: 0x5000   SET1      timer_match_valid
+#SKIPTMRMATCH:
+  0x28462805,  #0x008: 0x2805   BEQ       swb0_sleep_tcs0=1             SLEEPTCS0
+               #0x00a: 0x2846   BEQ       swb1_sleep_tcs1=1             SLEEPTCS1
+  0x50042887,  #0x00c: 0x2887   BEQ       swb2_sleep_tcs2=1             SLEEPTCS2
+#SLEEPTRIGCONT:
+               #0x00e: 0x5004   SET1      dbg_resource_rel_req
+  0x50022901,  #0x010: 0x2901   BEQ       swb4_no_aoss_sleep=1          SKIPAOSSSLPVOTE
+               #0x012: 0x5002   SET1      soc_sleep_req
+  0x50055003,  #0x014: 0x5003   SET1      awsm_aopwa_soc_sleep_req
+#SKIPAOSSSLPVOTE:
+               #0x016: 0x5005   SET1      wfi_profiling_unit_3
+  0x40027000,  #0x018: 0x7000   WAIT1     sequence_resume
+               #0x01a: 0x4002   SET0      soc_sleep_req
+  0x29024005,  #0x01c: 0x4005   SET0      wfi_profiling_unit_3
+               #0x01e: 0x2902   BEQ       swb4_no_aoss_sleep=1          SKIPAOSSSLPVOTEUP
+  0x40037002,  #0x020: 0x7002   WAIT1     soc_sleep_unlock
+               #0x022: 0x4003   SET0      awsm_aopwa_soc_sleep_req
+  0x40047003,  #0x024: 0x7003   WAIT1     awsm_aopwa_soc_sleep_unlock
+#SKIPAOSSSLPVOTEUP:
+               #0x026: 0x4004   SET0      dbg_resource_rel_req
+  0x701a501a,  #0x028: 0x501a   SET1      seq_tcs_5_start
+               #0x02a: 0x701a   WAIT1     tcs_5_seq_cmp
+  0x40002943,  #0x02c: 0x2943   BEQ       swb5_no_wakeup_timer=1        SKIPTMRUNMATCH
+               #0x02e: 0x4000   SET0      timer_match_valid
+#SKIPTMRUNMATCH:
+  0x3c094001,  #0x030: 0x4001   SET0      pdc_mode_control
+               #0x032: 0x3c09   BEQR      cgrp0_br_ev_wakeup_irq_to_aop=1WAKEUP_AOPIRQ
+  0x50072944,  #0x034: 0x2944   BEQ       swb5_no_wakeup_timer=1        SKIPWAKEHS
+               #0x036: 0x5007   SET1      wakeup_req
+  0x70074007,  #0x038: 0x4007   SET0      wakeup_req
+               #0x03a: 0x7007   WAIT1     wakeup_ack
+#SKIPWAKEHS:
+  0x501f1000,  #0x03c: 0x1000   RETURN
+#SLEEPTCS0:
+               #0x03e: 0x501f   SET1      seq_tcs_0_start
+  0x401f701f,  #0x040: 0x701f   WAIT1     tcs_0_seq_cmp
+               #0x042: 0x401f   SET0      seq_tcs_0_start
+  0x501e1808,  #0x044: 0x1808   JMP       SLEEPTRIGCONT
+#SLEEPTCS1:
+               #0x046: 0x501e   SET1      seq_tcs_1_start
+  0x401e701e,  #0x048: 0x701e   WAIT1     tcs_1_seq_cmp
+               #0x04a: 0x401e   SET0      seq_tcs_1_start
+  0x501d1808,  #0x04c: 0x1808   JMP       SLEEPTRIGCONT
+#SLEEPTCS2:
+               #0x04e: 0x501d   SET1      seq_tcs_2_start
+  0x401d701d,  #0x050: 0x701d   WAIT1     tcs_2_seq_cmp
+               #0x052: 0x401d   SET0      seq_tcs_2_start
+  0x50091808,  #0x054: 0x1808   JMP       SLEEPTRIGCONT
+#WAKEUP_AOPIRQ:
+               #0x056: 0x5009   SET1      pdc_aop_irq_1
+  0x10007009   #0x058: 0x7009   WAIT1     aop_pdc_irq_1
+               #0x05a: 0x1000   RETURN
+]
+
+ GRP0_SEQ_CFG_BR_ADDR = [
+    0x8,
+    0x16,
+    0x26,
+    0x30,
+    0x3c,
+    0x3e,
+    0x46,
+    0x4e,
+    0xe,
+    0x56
+ ]

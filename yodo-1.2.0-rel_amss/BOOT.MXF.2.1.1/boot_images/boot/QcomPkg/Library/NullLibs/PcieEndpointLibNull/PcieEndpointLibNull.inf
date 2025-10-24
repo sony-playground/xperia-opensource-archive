@@ -1,0 +1,31 @@
+#/**
+# @file PcieEndpointLibNull.inf
+#
+# Copyright (c) 2022 Qualcomm Technologies, Inc.
+# All Rights Reserved.
+# Confidential and Proprietary - Qualcomm Technologies, Inc.
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = PcieEndpointLib
+  FILE_GUID                      = A444DAE6-41ED-F794-6154-6E8A3CA9B675
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = PcieEndpointLib
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Werror -DPCIE_BOOT -DPCIE_BOOT_ENABLED -DPCIE_OSAL_MSG_LEVEL=MSG_LOW -DPCIE_CORE_TARGETSPEED=PCIE_CORE_TARGETSPEED_GEN4 -DPCIE_ERROR_FATAL_DUMP_TYPE=PCIE_PARTIAL_DUMP
+
+[Sources.common]
+  PcieEndpointLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/SocPkg/Library/PcieEndpointLib/PcieEndpointLibPkg.dec
+
+[LibraryClasses]
+

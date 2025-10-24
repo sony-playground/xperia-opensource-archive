@@ -1,0 +1,140 @@
+#/** @file XBLLoader.inf
+#
+#  XBL Loader
+#  
+#  Copyright (c) 2014-2022 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 07/18/22   ck      Added MhiDeviceLib
+# 06/10/22   batta   Added BootSlvcomLib and BootXRCLib
+# 06/27/22   krd     Added 32-bit ARM support
+# 05/24/22   rama    Added WhitelistLib
+# 03/10/22   rama    Added seclib.dec
+# 01/18/22   rama    Removed CryptoLib and CryptoRDILib
+# 10/25/21   rama    Added BlacklistLib
+# 12/01/20   yps     Added LoggerUartLib
+# 11/12/20   rama    Added UCLib
+# 08/18/20   rama    added BootPblSharedDataLib
+# 06/29/20   rama    Added SecLib.dec
+# 05/10/20   ds      move to edk2 arm mmu/cache lib
+# 04/21/20   rama    Added XBLLoaderArchLib
+# 03/20/20   rama    Removed boot_extern_qusb_interface.c
+# 03/18/20   rama    Added BootResetLib and RamInit
+# 04/26/17   vk      Make image type  USER_DEFINED
+# 07/01/14   ck      Fixed issue with BuildOptions.AARCH64 linker flags
+# 06/20/14   kedara  Added 64 bit compilation options for llvm.
+# 05/07/14   kedara  Added XBLCommonLib, scatter loader src
+# 04/29/14   kedara  Added XBLLoaderLib and DDRTargetLibs
+# 03/10/14   niting  Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = XBLRamDump
+  FILE_GUID                      = 9e6252fc-69ba-476e-ad3e-a5535daab6e4
+  MODULE_TYPE                    = USER_DEFINED
+  VERSION_STRING                 = 1.0
+
+[Sources.common]
+  XBLRamDump.c
+  boot_dload_debug.c
+  boot_extern_efs_interface.c
+  boot_ramdump_wrapper_apis.c
+  rd_format_raw.c
+  rd_format_hfat.c
+  rd_format_sahara.c
+  ../XBLLoader/boot_gpt_partition_id.c
+  boot_ramdump.c
+  boot_ramdump_target.c
+
+[Sources.AARCH64]
+  ModuleEntryPoint.S 
+
+[Sources.ARM] 
+  ModuleEntryPoint_arm.S
+
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -O0 -fno-inline -Werror -Wno-unused-but-set-variable -DFEATURE_SAHARA_BOOT -DSAHARA_MAX_PACKET_SIZE_IN_BYTES=0x400 -DSAHARA_MAX_MEMORY_DATA_SIZE_IN_BYTES=0x1000 -DSAHARA_PACKET_LOG_LENGTH=0x64 -DUSE_GNU_LD -DUSE_LOADER_UTILS -DFEATURE_BOOT_LOGGER_RAM -DFEATURE_BOOT_LOGGER_TIMER -DFEATURE_BOOT_LOGGER_JTAG -DFEATURE_BOOT_LOGGER_UART -DBOOT_MEMORY_DEBUG_64BIT
+  
+[Packages]
+  ArmPkg/ArmPkg.dec
+  MdePkg/MdePkg.dec
+  QcomPkg/QcomPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomPkg/Library/MuslLib/MuslLib.dec
+  QcomPkg/LoaderFramework/ConfigContext/ConfigContext.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec 
+  QcomPkg/XBLLoader/RamInit/RamInit.dec
+  QcomPkg/SocPkg/Library/BootPblSharedDataLib/BootPblSharedDataLib.dec
+  QcomPkg/SocPkg/Library/XBLLoaderArchLib/XBLLoaderArchLibPkg.dec
+  QcomPkg/XBLLoader/SmcLib/SmcLib.dec
+  QcomSdkPkg/SdkLoader.dec
+  SecPkg/UCLib.dec
+  QcomPkg/Library/MinidumpLib/MinidumpLib.dec
+  SecPkg/DbgInfoLib.dec
+  SecPkg/SecLib.dec
+
+[LibraryClasses]
+  BaseLib
+  ConfigContextLib
+  XBLRamDumpLib
+  IpaTargetLib
+  MhiDeviceLib
+  MuslLib
+  SmcLib
+  HFATLib
+  QusbLib
+  ROMFSLib
+  SPMILib
+  BootDisplayLib
+  StackCanaryBaseLib
+  #I2CLib
+  BootResetLib
+  RamInit
+  BootHashLib
+  BootUtilLib
+  DALCommonLoaderLib
+  SmemLib
+  XBLConfigLib
+  ExtDriversNonSecureLib
+  LoggerLib
+  MemoryMgrLib
+  MediaInterfaceLib
+  RamdumpheapLib
+  XBLLoaderArchLib
+  ClockTargetLib
+  BootMemMapLib
+  CpuInitLib
+  ErrorHandlerLib
+  VectorTable
+  ImageVersionLib
+  DloadDumpLib
+  AdcLoaderLib
+  LoggerUartLib
+  QusbTargetLib
+  QusbDciCommonLib
+  BlockDevLib
+  HfatDevLib
+  RamdumpTableLib
+  SaharaCommandHandlerLib
+  FlashlessSaharaLib
+  SaharaDispatchTableLib
+  SaharaStatusMapLib
+  DTBExtnLib
+  DbgInfoLib
+  BlacklistLib
+  WhitelistLib
+  SlvcomLib
+  XRCLib
+  BootSlvcomLib
+  BootXRCLib

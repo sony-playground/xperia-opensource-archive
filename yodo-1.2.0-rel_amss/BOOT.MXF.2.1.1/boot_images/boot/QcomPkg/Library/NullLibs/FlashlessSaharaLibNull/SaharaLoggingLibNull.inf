@@ -1,0 +1,38 @@
+#/** @file SaharaLoggingLibNull.inf
+#
+#  SaharaLoggingLibNull
+#  
+#  Copyright (c) 2022 Qualcomm Technologies, Inc.  All Rights Reserved.
+#  Qualcomm Technologies Proprietary and Confidential.
+#
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 02/11/22   rama    Initial Revision
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SaharaLogging
+  FILE_GUID                      = 7F1CE00B-3B8A-4748-ABAD-041BBD34A0A1
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = SaharaLogging
+
+[Sources.common]
+  SaharaLoggingLibNull.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QcomPkg/XBLLoader/ExtDrivers/ExtDrivers.dec
+  QcomPkg/XBLLoaderApi.dec
+  QcomSdkPkg/SdkLoader.dec
+
+[LibraryClasses]
+  ConfigContextLib

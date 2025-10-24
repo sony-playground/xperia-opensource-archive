@@ -1,0 +1,32 @@
+#/** @file RMBLib.inf
+#  
+#  Component description file for RNG Lib module
+#  
+#   Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights
+#   Reserved. Qualcomm Technologies Proprietary and Confidential.
+#  
+#**/
+
+#==============================================================================
+#                              EDIT HISTORY
+#
+#
+# when       who     what, where, why
+# --------   ---     ----------------------------------------------------------
+# 07/05/20   dp      RMB Driver initial version
+#
+#==============================================================================
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = RMBLib
+  FILE_GUID                      = 932b0084-489b-4954-a2bc-8b9bde60e2ed
+  MODULE_TYPE                    = BASE
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = RMBLib
+
+[Binaries.Arm]
+   PE32|RMBLib.lib
+
+[Binaries.AARCH64]
+   PE32|RMBLib.lib

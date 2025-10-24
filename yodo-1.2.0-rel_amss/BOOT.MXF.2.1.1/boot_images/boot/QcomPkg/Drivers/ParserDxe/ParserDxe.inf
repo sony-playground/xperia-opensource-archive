@@ -1,0 +1,41 @@
+#/*===============================================================================
+#  Copyright (c) 2020 Qualcomm Technologies, Inc.  All Rights Reserved.
+#
+#  FILE:         ParserDxe.inf
+#  DESCRIPTION:
+#
+#  REVISION HISTORY
+#  when       who         what, where, why
+#  --------   ---         --------------------------------------------------------
+#  05/05/20   yw         initial version
+#
+#================================================================================*/
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = ParserDxe
+  FILE_GUID                      = 4a568b8a-4d9d-4984-9c75-cee33698e451
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = ParserDxeEntry
+  
+[Sources.common]
+  ParserDxe.c
+  
+[Packages]
+  QcomPkg/QcomPkg.dec
+  MdePkg/MdePkg.dec
+  EmbeddedPkg/EmbeddedPkg.dec
+  ArmPkg/ArmPkg.dec
+  QcomSdkPkg/QcomSdkPkg.dec
+  
+[LibraryClasses]
+  UefiDriverEntryPoint
+  ParserLib
+  KernelLib
+
+[Protocols]
+  gEfiParserProtocolGuid
+  
+[Depex]
+  TRUE

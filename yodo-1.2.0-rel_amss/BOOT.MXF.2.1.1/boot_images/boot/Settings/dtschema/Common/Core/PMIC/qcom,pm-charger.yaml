@@ -1,0 +1,394 @@
+# SPDX-License-Identifier: (BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/.../qcom,pm-charger.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm PM CHARGER
+
+maintainers:
+  - PoC <PoC@qti.qualcomm.com>
+
+description: |
+   Qualcomm charger PMIC configurations read like different battey thresholds etc...
+
+properties:
+# A dictionary of DT properties for this binding schema
+
+  compatible:
+    const: qcom,pm-charger
+  
+  parallel-charger:
+    description: parallel-charger enable
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+    
+  charger-pmic-index:
+    description: charger-pmic-index
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  loader-dbc-threshold:
+    description: loader-dbc-threshold value
+    $ref: /schemas/types.yaml#/definitions/uint32
+
+  skip-loader-dbc:
+    description: skip-loader-dbc enable
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+
+  core-dbc-threshold:
+    description: core-dbc-threshold
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  skip-core-dbc:
+    description: skip-core-dbc
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+
+  uv-oc-1s-threshold:
+    description: uv-oc-1s-threshold
+    $ref: /schemas/types.yaml#/definitions/uint32
+  
+  uv-oc-2s-threshold:
+    description: uv-oc-2s-threshold
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  apply-ichg-fs:
+    description: apply-ichg-fs
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+      
+  ichg-fs:
+    description: ichg-fs
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  batt-2s-option:
+    description: batt-2s-option
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  too-hot-afp-threshold:
+    description: too-hot-afp-threshold
+    $ref: /schemas/types.yaml#/definitions/uint32
+      
+  apply-too-hot-afp:
+    description: apply-too-hot-afp
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+    
+  too-cold-afp-threshold:
+    description: too-cold-afp-threshold
+    $ref: /schemas/types.yaml#/definitions/uint32
+      
+      
+  apply-too-cold-afp:
+    description: apply-too-cold-afp
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+      
+  apply-boot-wo-batt:
+    description: apply-boot-wo-batt
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+    
+  boot-wo-batt:
+    description: boot-wo-batt
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+      
+  icl-boot-wo-batt:
+    description: icl-boot-wo-batt
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  apply-float-voltage:
+    description: apply-float-voltage
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+  
+  float-voltage-mv:
+    description: float-voltage-mv
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  apply-pre-charge-current:
+    description: apply-pre-charge-current
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+      
+  pre-charge-ma:
+    description: pre-charge-ma
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  apply-fast-charge-current:
+    description:  apply-fast-charge-current
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+    
+  fast-charge-ma:
+    description:  fast-charge-ma
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  apply-icl:
+    description:  apply-icl
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+    
+  icl-ma:
+    description:  icl-ma
+    $ref: /schemas/types.yaml#/definitions/uint32
+      
+  apply-float-charger-icl:
+    description:  apply-float-charger-icl
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+  
+  float-charger-icl-ma:
+    description:  float-charger-icl-ma
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  apply-vsysmin:
+    description:  apply-vsysmin
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+        
+  vsysmin:
+    description:  vsysmin
+    $ref: /schemas/types.yaml#/definitions/uint32
+    
+  usb-suspend:
+    description:  usb-suspend
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+    
+  wls-usb-prior-swap:
+    description:  wls-usb-prior-swap
+    $ref: /schemas/types.yaml#/definitions/uint32
+    enum:
+      - 0
+      - 1
+    
+  batt-detect-src:
+    description:  batt-detect-src
+    $ref: /schemas/types.yaml#/definitions/uint32
+    enum:
+      - 0
+      - 1
+      
+  max-dbg-board-id:
+    description:  max-dbg-board-id
+    $ref: /schemas/types.yaml#/definitions/uint32
+      
+  min-dbg-board-id:
+    description:  min-dbg-board-id
+    $ref: /schemas/types.yaml#/definitions/uint32
+      
+  detect-jig-by-therm:
+    description:  detect-jig-by-therm
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+      
+  max-therm:
+    description:  max-therm
+    $ref: /schemas/types.yaml#/definitions/uint32
+      
+  min-therm:
+    description:  min-therm
+    $ref: /schemas/types.yaml#/definitions/uint32
+      
+  jig-icl-ma:
+    description:  jig-icl-ma
+    $ref: /schemas/types.yaml#/definitions/uint32
+
+  ignore-temp-in-dbc:
+    description:  ignore-temp-in-dbc
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+
+  batt-therm-pull-up:
+    description:  batt-therm-pull-up
+    $ref: /schemas/types.yaml#/definitions/uint32     
+      
+  ibat-via-ext-sense:
+    description:  ibat-via-ext-sense
+    $ref: /schemas/types.yaml#/definitions/uint8
+    enum:
+      - 0
+      - 1
+      
+  ext-rsns-adc-scale:
+    description:  ext-rsns-adc-scale
+    $ref: /schemas/types.yaml#/definitions/uint32    
+      
+  vbat-thd-rtc-pon:
+    description:  vbat-thd-rtc-pon
+    $ref: /schemas/types.yaml#/definitions/uint32
+      
+  vsys-min-recover-mv:
+    description:  vsys-min-recover-mv
+    $ref: /schemas/types.yaml#/definitions/uint32
+ 
+  vflt-recover-mv:
+    description:  vflt-recover-mv
+    $ref: /schemas/types.yaml#/definitions/uint32
+      
+required:
+  - compatible
+  - parallel-charger
+  - charger-pmic-index
+  - loader-dbc-threshold
+  - skip-loader-dbc
+  - core-dbc-threshold
+  - skip-core-dbc
+  - uv-oc-1s-threshold
+  - uv-oc-2s-threshold
+  - apply-ichg-fs
+  - ichg-fs
+  - batt-2s-option
+  - too-hot-afp-threshold
+  - apply-too-hot-afp
+  - too-cold-afp-threshold
+  - apply-too-cold-afp
+  - apply-boot-wo-batt
+  - boot-wo-batt
+  - icl-boot-wo-batt
+  - apply-float-voltage
+  - float-voltage-mv
+  - apply-pre-charge-current
+  - pre-charge-ma
+  - apply-fast-charge-current
+  - fast-charge-ma
+  - apply-icl
+  - icl-ma
+  - apply-float-charger-icl
+  - float-charger-icl-ma
+  - apply-vsysmin
+  - vsysmin
+  - usb-suspend
+  - wls-usb-prior-swap
+  - batt-detect-src
+  - max-dbg-board-id
+  - min-dbg-board-id
+  - detect-jig-by-therm
+  - max-therm
+  - min-therm
+  - jig-icl-ma
+  - ignore-temp-in-dbc
+  - batt-therm-pull-up
+  - ibat-via-ext-sense
+  - ext-rsns-adc-scale
+  - vbat-thd-rtc-pon
+  - vsys-min-recover-mv
+  - vflt-recover-mv
+
+
+additionalProperties: false
+
+examples:
+  - |
+    charger {
+      compatible = "qcom,pm-charger";
+      
+      parallel-charger = /bits/ 8 <(1)>;
+      charger-pmic-index = <7>;
+
+      loader-dbc-threshold = <3000>;
+      skip-loader-dbc = /bits/ 8 <(0)>;
+
+      core-dbc-threshold = <3300>;
+      skip-core-dbc = /bits/ 8 <(0)>;
+
+      uv-oc-1s-threshold = <2050>;
+      uv-oc-2s-threshold = <3000>;
+
+      apply-ichg-fs = /bits/ 8 <(1)>;
+    
+      ichg-fs = <0>;
+
+      batt-2s-option = <1>; 
+
+      too-hot-afp-threshold = <155>;
+      apply-too-hot-afp = /bits/ 8 <(1)>;
+
+      too-cold-afp-threshold = <(-55)>;
+      apply-too-cold-afp = /bits/ 8 <(1)>;
+
+      apply-boot-wo-batt = /bits/ 8 <(1)>;
+      boot-wo-batt =/bits/ 8 <(1)>;
+      icl-boot-wo-batt = <3000>;
+    
+      apply-float-voltage = /bits/ 8 <(0)>;
+      float-voltage-mv = <4350>;
+
+      apply-pre-charge-current = /bits/ 8 <(0)>;
+      pre-charge-ma = <200>;
+
+      apply-fast-charge-current = /bits/ 8 <(0)>;
+      fast-charge-ma = <1000>;
+
+      apply-icl = /bits/ 8 <(0)>;
+      icl-ma = <3000>;
+    
+      apply-float-charger-icl = /bits/ 8 <(0)>;
+      float-charger-icl-ma = <1000>;
+
+      apply-vsysmin = /bits/ 8 <(0)>;
+      vsysmin = <3200>;
+ 
+      usb-suspend = /bits/ 8 <(0)>;
+
+      wls-usb-prior-swap = /bits/ 8 <(0)>;
+      batt-detect-src = /bits/ 8 <(0)>;
+
+      max-dbg-board-id = <11000>;
+      min-dbg-board-id = <3000>;
+
+      detect-jig-by-therm = /bits/ 8 <(0)>;
+      max-therm = <780>;
+      min-therm = <80>;
+      jig-icl-ma = <1500>;
+
+      ignore-temp-in-dbc = /bits/ 8 <(0)>;
+
+      batt-therm-pull-up = <1>;
+
+      ibat-via-ext-sense = /bits/ 8 <(0)>;
+
+      ext-rsns-adc-scale = <0>;
+
+      vbat-thd-rtc-pon = <3600>;
+
+      vsys-min-recover-mv = <4600>;
+      vflt-recover-mv = <4500>;
+    };

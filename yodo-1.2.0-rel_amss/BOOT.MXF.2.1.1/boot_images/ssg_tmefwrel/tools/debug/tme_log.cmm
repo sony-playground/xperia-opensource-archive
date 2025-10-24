@@ -1,0 +1,329 @@
+// =============================================================================
+// * Copyright (c) 2020-2022 Qualcomm Technologies Incorporated.
+// * All Rights Reserved.
+// * Qualcomm Confidential and Proprietary
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+//
+// @filename: tme_log.cmm
+// @brief This file will capture memory region of TME LOG, and parse that into
+//        a folder.
+// -----------------------------------------------------------------------------
+
+ENTRY &CHIPSET &LOG_BUFFER_TYPE  &TME_LOG_DICT_PATH &PYTHON_LOG_PARSER &TMP_DIR
+
+var.NEWLOCAL char[20][20] \SUPPORTED_CHIPSETS
+var.assign \SUPPORTED_CHIPSETS[0] = ("waipio")
+var.assign \SUPPORTED_CHIPSETS[1] = ("fillmore")
+var.assign \SUPPORTED_CHIPSETS[2] = ("kailua")
+var.assign \SUPPORTED_CHIPSETS[3] = ("aurora")
+var.assign \SUPPORTED_CHIPSETS[4] = ("netrani")
+var.assign \SUPPORTED_CHIPSETS[5] = ("lanai")
+var.assign \SUPPORTED_CHIPSETS[6] = ("kuno")
+var.assign \SUPPORTED_CHIPSETS[7] = ("hamoa")
+var.assign \SUPPORTED_CHIPSETS[8] = ("halliday")
+var.assign \SUPPORTED_CHIPSETS[9] = ("clarence")
+var.assign \SUPPORTED_CHIPSETS[10] = ("pinnacles")
+var.assign \SUPPORTED_CHIPSETS[11] = ("lassen")
+
+var.NEWLOCAL char[10][10] \WAIPIO_FAMILY
+var.assign \WAIPIO_FAMILY[0] = ("waipio")
+var.assign \WAIPIO_FAMILY[1] = ("fillmore")
+var.assign \WAIPIO_FAMILY[2] = ("aurora")
+var.assign \WAIPIO_FAMILY[3] = ("netrani")
+var.assign \WAIPIO_FAMILY[4] = ("clarence")
+
+var.NEWLOCAL char[20][20] \KAILUA_FAMILY
+var.assign \KAILUA_FAMILY[0] = ("kailua")
+var.assign \KAILUA_FAMILY[1] = ("lassen")
+var.assign \KAILUA_FAMILY[2] = ("hamoa")
+var.assign \KAILUA_FAMILY[3] = ("halliday")
+var.assign \KAILUA_FAMILY[4] = ("kapiti")
+var.assign \KAILUA_FAMILY[5] = ("pinnacles")
+
+var.NEWLOCAL char[10][10] \LANAI_FAMILY
+var.assign \LANAI_FAMILY[0] = ("lanai")
+var.assign \LANAI_FAMILY[1] = ("kuno")
+
+IF ("&CHIPSET"=="")
+(
+  GOSUB SHOW_HELP_MSG
+  ENDDO
+)
+
+&CHIPSET = STRing.LoWeR("&CHIPSET")
+; Check if chipset is supported or not
+LOCAL &CHIPSET_FAMILY
+GOSUB CHECK_CHIPSET &CHIPSET
+RETURNVALUES &CHIPSET_FAMILY
+
+
+
+; Set the TME FW root folder
+LOCAL &TME_ROOT &PYTHON_LOG_PARSER
+&pwd=os.pwd()
+&TME_ROOT="&pwd/../.."
+
+// Default LOG_BUFFER_TYPE is tme
+IF "&LOG_BUFFER_TYPE"==""
+(
+  &LOG_BUFFER_TYPE="tme"
+)
+
+IF "&TME_LOG_DICT_PATH"==""
+(
+  ; Good thing that t32 script is not case sensitive for directory names
+  IF FILE.EXIST("&TME_ROOT/release/&CHIPSET/TMELogDictionary.txt")
+  (
+    &TME_LOG_DICT_PATH="&TME_ROOT/release/&CHIPSET/TMELogDictionary.txt"
+  )
+  ELSE
+  (
+    &TME_LOG_DICT_PATH="&TME_ROOT/release/TMELogDictionary.txt"
+  )
+)
+
+IF "&PYTHON_LOG_PARSER"==""
+(
+  &PYTHON_LOG_PARSER="&TME_ROOT/tools/tme_log_parser.py"
+)
+
+IF "&TMP_DIR"=="--help"||"&TMP_DIR"=="-h"||"&TMP_DIR"=="/h"
+(
+  GOSUB SHOW_HELP_MSG
+  ENDDO
+)
+
+IF "&TMP_DIR"==""
+(
+  &TMP_DIR=OS.ENV(TEMP)
+)
+
+LOCAL &errorMessage &logBufferAddress &logBufferSize &pwd &rawLogFile &parsedLogFile &timeStamp &logBufferAddressRAM &logBufferSizeRAM
+
+; Default TME internal log buffer location/size
+&logBufferAddress=0x401800
+; Log buffer size set to cover the entire TME log region of DDR
+; Even much more than log region is captured, parsing script will deal with getting only log info.
+&logBufferSize=0x4000
+
+LOCAL &logBufferAddress_t &logBufferSize_t
+GOSUB GET_INTERNAL_TME_LOG_INFO
+RETURNVALUES &logBufferAddress_t &logBufferSize_t
+
+IF ((&logBufferAddress_t!=0)&&(&logBufferSize_t!=0))
+(
+  &logBufferAddress=&logBufferAddress_t
+  &logBufferSize=&logBufferSize_t
+)
+
+GOSUB GET_DDR_TME_LOG_INFO &CHIPSET
+RETURNVALUES &logBufferAddressRAM &logBufferSizeRAM
+
+&timeStamp=DATE.UnixTime()
+&rawLogFile="&TMP_DIR/TMELog_RAW_&timeStamp"
+&parsedLogFile="&TMP_DIR/TMELog_PARSED_&timeStamp"
+
+AREA.CREATE TME_LOG_AREA 400. 100.
+AREA.view TME_LOG_AREA
+AREA.Select TME_LOG_AREA
+
+PRINT %String "=============================================================================================================="
+PRINT %String "  TEMP Dir = &TMP_DIR"
+PRINT %String "  TME ROOT = &TME_ROOT"
+PRINT %String "--------------------------------------------------------------------------------------------------------------"
+
+IF "&LOG_BUFFER_TYPE"=="tme"
+(
+  PRINT %String %WARNING " Saving Log Buffer from &logBufferAddress  (&logBufferSize) in TME Memory "
+)
+
+IF "&LOG_BUFFER_TYPE"=="ddr"
+(
+  PRINT %String %WARNING " Saving Log Buffer from &logBufferAddressRAM  (&logBufferSizeRAM) in Crashdump(DDR) "
+)
+
+PRINT %String "--------------------------------------------------------------------------------------------------------------"
+
+PRINT %String "&rawLogFile"
+PRINT %String "&parsedLogFile"
+
+IF "&LOG_BUFFER_TYPE"=="tme"
+(
+  DATA.SAVE.BINARY "&rawLogFile" &logBufferAddress++(&logBufferSize-0x1)
+)
+
+IF "&LOG_BUFFER_TYPE"=="ddr"
+(
+  DATA.SAVE.BINARY "&rawLogFile" &logBufferAddressRAM++(&logBufferSizeRAM-0x1)
+)
+
+if OS.FILE(&rawLogFile)==FALSE()
+(
+  PRINT %String %ERROR "!  &rawLogFile not found   !"
+  ENDDO
+)
+
+;check if python script exists
+if  OS.FILE(&PYTHON_LOG_PARSER)==TRUE()
+(
+  cd &TMP_DIR
+  os.hidden python &PYTHON_LOG_PARSER --input &rawLogFile --output &parsedLogFile --dict &TME_LOG_DICT_PATH
+  cd &pwd
+)
+else
+(
+  PRINT %String %ERROR "!  &PYTHON_LOG_PARSER not found   !"
+  ENDDO
+)
+LOCAL &errorfile
+&errorfile="&tmpDir/Error.txt"
+if OS.FILE(&errorfile)==TRUE()
+  (
+    OPEN #1  &errorfile /Read
+    WHILE FILE.EOF(1)==FALSE()
+    (
+       READ #1 %LINE &line
+       PRINT %String "&line"
+    )
+    PRINT %String "&errorfile"
+  )
+
+
+;check if python script ran successfully, and generated the output file
+if  OS.FILE(&parsedLogFile)==FALSE()
+(
+  PRINT %String %ERROR "!  &parsedLogFile not found   !"
+  ENDDO
+)
+
+; open a window and dump output there.
+LOCAL &line
+AREA.Create TME_LOG_AREA_DUMP 200. 1000.
+AREA.view TME_LOG_AREA_DUMP
+
+OPEN #1 &parsedLogFile /Read
+WHILE FILE.EOF(1)==FALSE()
+(
+  READ #1 %LINE &line
+  PRINT %String "&line"
+)
+
+;End of script
+ENDDO
+
+SHOW_HELP_MSG:
+(
+  AREA.Create TME_LOG_AREA_HELP 200. 20.
+  AREA.view TME_LOG_AREA_HELP
+  AREA.Select TME_LOG_AREA_HELP
+  PRINT "Usage:   cd.do <tme_build_root>\tools\debug\tme_log.cmm <CHIPSET> <address_type:tme|soc> <full path to log dictionary> <full path to python log parser> <optional tmp_dir>"
+  PRINT
+  PRINT "         If CHIPSET is not provided waipio is used."
+  PRINT "         If address_type is not provided tme is used."
+  PRINT "         If log dictionary is not provided '../../release/TME_LOG_DICT_PATH.txt' is used."
+  PRINT "         If python log parser is not provided '../../tools/tme_log_parser.py' is used."
+  PRINT "         If tmp_dir is not provided the OS temp dir is used."
+  PRINT
+
+  ENDDO
+)
+
+CHECK_CHIPSET:
+  ENTRY &CHIPSET
+  PRIVATE &index &IS_CHIPSET_SUPPORTED &CHIPSET_FAMILY
+
+  &IS_CHIPSET_SUPPORTED="false"
+  &index=0
+  WHILE &index<var.sizeof(\SUPPORTED_CHIPSETS[0])
+  (    
+    var.if \SUPPORTED_CHIPSETS[&index]=="&CHIPSET"
+  	(
+	  &IS_CHIPSET_SUPPORTED="true"
+  	)    
+	  &index=&index+1
+  )  
+  IF ("&IS_CHIPSET_SUPPORTED"=="false")
+  (
+    PRINT %COLOR.RED "= &CHIPSET is not yet supported... Please create a CR to TMESS."
+    PRINT %COLOR.RED "  Supported chipsets are: " var.string(\SUPPORTED_CHIPSETS)
+	  ENDDO
+  )
+  
+  &index=0
+  WHILE &index<var.sizeof(\WAIPIO_FAMILY[0])
+  (    
+    var.if \WAIPIO_FAMILY[&index]=="&CHIPSET"
+    (
+      &CHIPSET_FAMILY="waipio"
+	  )    
+    &index=&index+1
+  )
+  IF ("&CHIPSET_FAMILY"!="waipio")
+  (
+  	&index=0
+  	WHILE &index<var.sizeof(\KAILUA_FAMILY[0])
+  	(    
+        var.if \KAILUA_FAMILY[&index]=="&CHIPSET"
+  	  (
+  	    &CHIPSET_FAMILY="kailua"
+  	  )    
+  	  &index=&index+1
+  	)    
+  )
+RETURN "&CHIPSET_FAMILY"
+
+GET_DDR_TME_LOG_INFO:
+  ENTRY &CHIPSET
+  PRIVATE &logBufferSizeRAM &logBufferAddressRAM
+  ; Default TME LOG buffer size in DDR
+  &logBufferSizeRAM=0x4000
+
+  &logBufferAddressRAM=0x0
+  IF ("&CHIPSET"=="waipio"||"&CHIPSET"=="fillmore"||"&CHIPSET"=="aurora"||"&CHIPSET"=="netrani"||"&CHIPSET"=="clarence"||"&CHIPSET"=="lassen")
+  (
+    &logBufferAddressRAM=0x808E0000
+  )
+  IF ("&CHIPSET"=="kailua"||"&CHIPSET"=="hamoa"||"&CHIPSET"=="halliday"||"&CHIPSET"=="kapiti"||"&CHIPSET"=="lanai")
+  (
+    &logBufferAddressRAM=0x81CE0000
+  )
+  IF ("&CHIPSET"=="pinnacles")
+  (
+    &logBufferAddressRAM=0x87F71000
+  )
+  IF ("&CHIPSET"=="kuno")
+  (
+    &logBufferAddressRAM=0x86B80000
+  )
+
+RETURN "&logBufferAddressRAM" "&logBufferSizeRAM"
+
+GET_INTERNAL_TME_LOG_INFO:
+  PRIVATE &logBufferAddress &logBufferSize 
+  &logBufferAddress=0
+  &logBufferSize=0
+
+  ; 1. Simulation environment can use TME_LOG_START_ADDRESS from dump cmm
+  IF var.EXIST(\TME_LOG_START_ADDRESS)
+  (
+    &logBufferAddress=var.value(\TME_LOG_START_ADDRESS)
+    &logBufferSize=var.value(\TME_LOG_SIZE)
+  )
+  ELSE
+  (
+  ; 2. We need to check variables that hold tme log buffer information
+    IF sYmbol.EXIST(\\firmware\TmeFwMain\tmeLogAddr)
+    (
+      &logBufferAddress=data.long(\\firmware\TmeFwMain\tmeLogAddr) ; it can be still zero
+      &logBufferSize=data.long(\\firmware\TmeFwMain\tmeLogSize)    ; it can be still zero
+    )
+    IF (sYmbol.EXIST(tmeLogAddr)&&(&logBufferAddress==0)&&(&logBufferSize==0))
+    (
+      &logBufferAddress=data.long(tmeLogAddr) 
+      &logBufferSize=data.long(tmeLogSize) 
+    )
+  )
+
+RETURN "&logBufferAddress" "&logBufferSize"
