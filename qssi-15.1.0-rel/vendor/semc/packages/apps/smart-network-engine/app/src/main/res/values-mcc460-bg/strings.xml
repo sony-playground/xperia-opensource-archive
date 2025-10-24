@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Слаб сигнал на WLAN връзката</string>
+    <string name="wifi_auto_network_switch_setting_msg">Автоматично превключване към предпочитана мрежа, когато и WLAN мрежата и мобилната мрежа са налични.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Винаги можете да отидете в предпочитанията за WLAN и да промените настройката по-късно.</string>
+    <string name="smart_network_settings_msg">Когато за дадена WLAN мрежа се установи, че връзката е с лошо качество, вместо нея ще се използва мобилна мрежа. Когато опцията е изключена, WLAN връзката ще е с приоритет.</string>
+    <string name="smart_network_settings_supplement">Тази функция няма да засегне приложенията, които ограничават свързванията само към WLAN или само към мобилна мрежа</string>
+    <string name="smart_network_settings_desc">Като използва технологията за дълбоко обучение на Sony, „Интелигентно свързване“ винаги осигурява най-добрата мрежова връзка, като автоматично превключва между 4G/5G и WLAN в зависимост от качеството на мрежата.</string>
+    <string name="smart_network_settings_connected_switch_title">Ползване на моб. мрежа при лошо кач-во на WLAN</string>
+    <string name="smart_network_settings_connected_switch_desc">Предвиждане на мрежовите условия чрез анализиране на данни за WLAN сигнал. Ако се очаква лошо качество на WLAN мрежата, автоматично ще се превключи към мобилна мрежа. WLAN връзката ще бъде приоритизирана за използване в домашна мрежа.</string>
+    <string name="smart_network_settings_entry_switch_title">Без автом. свързване с WLAN мрежи с лошо кач-во</string>
+    <string name="smart_network_settings_entry_switch_desc">Спиране на автоматично свързване, когато се очаква по-ниско качество на WLAN. Това може да помогне за предотвратяване на автоматично превключване на устройството ви към публични WLAN мрежи с по-ниско качество.</string>
+    <string name="smart_network_notification_entry_title">Открита е WLAN мрежа с лошо качество</string>
+    <string name="smart_network_notification_entry_text">„Интелигентно свързване“ предвижда, че %1$s е с лошо качество и затова временно предотвратява автоматичното свързване към тази WLAN мрежа.</string>
+    <string name="smart_network_notification_channel_entry_title">Без автом. свързване с WLAN мрежи с лошо кач-во</string>
+</resources>

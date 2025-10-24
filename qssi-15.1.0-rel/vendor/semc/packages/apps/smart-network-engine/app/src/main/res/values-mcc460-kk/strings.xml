@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Нашар WLAN байланысы анықталды</string>
+    <string name="wifi_auto_network_switch_setting_msg">WLAN желісі де, мобильді желі де қол жетімді кезде таңдаулы желіге автоматты түрде ауысу.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Орнату параметрлерін кейін өзгерту үшін үнемі WLAN параметрлеріне өте аласыз.</string>
+    <string name="smart_network_settings_msg">WLAN network желісінде өте төмен байланыс сапасы анықталғанда, орнына мобильді желі пайдаланылады. Өшірілгенде, WLAN байланысына басымдық беріледі.</string>
+    <string name="smart_network_settings_supplement">Бұл мүмкіндік тек WLAN желісіне не тек ұялы желіге қосылымдарды шектейтін қолданбаларға әсер етпейді.</string>
+    <string name="smart_network_settings_desc">Sony-дің терең үйрену технологиясын пайдалана отырып, Smart connectivity қызметі желі сапасына қарай 4G/5G және WLAN желісі арасында автоматты түрде ауысу арқылы әрқашан ең жақсы желі байланысын қамтамасыз етеді.</string>
+    <string name="smart_network_settings_connected_switch_title">WLAN сап. нашар болғанда моб.желіні қолданыңыз</string>
+    <string name="smart_network_settings_connected_switch_desc">WLAN желісінің сигнал деректерін талдау арқылы желі күйлерін болжаңыз. Егер нашар сападағы WLAN желісі күтілсе, ол автоматты түрде мобильді желіге ауысады. Үй желісін пайдаланған кезде WLAN байланысына басымдық беріледі.</string>
+    <string name="smart_network_settings_entry_switch_title">Нашар сап. WLAN жел.-не авт. қос. болдырмау</string>
+    <string name="smart_network_settings_entry_switch_desc">Нашар WLAN сапасы күтілген кезде автоматты түрде қосылуды тоқтатыңыз. Бұл құрылғыңыздың автоматты түрде төменірек сападағы қоғамдық WLAN желісіне ауысуын болдырмауға көмектеседі.</string>
+    <string name="smart_network_notification_entry_title">Нашар сападағы WLAN желісі анықталды</string>
+    <string name="smart_network_notification_entry_text">Зерделі байланыс мүмкіндігі %1$s шамасының нашар сапада екенін болжады және осы WLAN желісіне автоматты түрде қосылуға уақытша тыйым салды.</string>
+    <string name="smart_network_notification_channel_entry_title">Нашар сап. WLAN жел.-не авт. қос. тыйым салу</string>
+</resources>

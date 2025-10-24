@@ -1,0 +1,91 @@
+From 9fedf786fb6437b4f526e3b982c5dcf80dd33ef4 Mon Sep 17 00:00:00 2001
+From: Daichi Ueura <daichi.ueura@sony.com>
+Date: Fri, 7 Oct 2022 10:22:29 +0900
+Subject: [PATCH 1/2] [DO NOT SUBMIT] Patch from RDC
+
+Draft PR: https://github.com/nnabla/nnabla/pull/997
+---
+ build-tools/make/build.mk             | 2 +-
+ docker/development/Dockerfile.android | 9 +++++----
+ src/nbla_utils/CMakeLists.txt         | 3 ++-
+ 3 files changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/build-tools/make/build.mk b/build-tools/make/build.mk
+index ec3e8254..3ebaf30e 100644
+--- a/build-tools/make/build.mk
++++ b/build-tools/make/build.mk
+@@ -97,7 +97,7 @@ nnabla-cpplib-android:
+ 	@cd $(BUILD_DIRECTORY_CPPLIB_ANDROID) \
+ 	&& cmake \
+ 	    -DANDROID_ABI=$(EABI) \
+-	    -DANDROID_STL=c++_static \
++	    -DANDROID_STL=c++_shared \
+ 	    -DANDROID_TOOLCHAIN=clang \
+ 	    -DBUILD_CPP_UTILS=ON \
+ 	    -DBUILD_PYTHON_PACKAGE=OFF \
+diff --git a/docker/development/Dockerfile.android b/docker/development/Dockerfile.android
+index 73bc293f..c95dc302 100644
+--- a/docker/development/Dockerfile.android
++++ b/docker/development/Dockerfile.android
+@@ -14,7 +14,7 @@
+ 
+ # for nnabla>=1.5.0
+ 
+-FROM ubuntu:16.04
++FROM ubuntu:18.04
+ 
+ ARG PIP_INS_OPTS
+ ARG PYTHONWARNINGS
+@@ -27,7 +27,7 @@ RUN eval ${APT_OPTS} \
+         bzip2 \
+         ca-certificates \
+         ccache \
+-        clang-format-3.8 \
++        clang-format \
+         curl \
+         g++ \
+         git \
+@@ -130,8 +130,9 @@ RUN cd /tmp \
+               -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+               -Dprotobuf_BUILD_TESTS=OFF \
+               -DCMAKE_INSTALL_PREFIX=$TOOLCHAIN_INSTALL_DIR \
+-              -DANDROID_STL=c++_static \
++              -DANDROID_STL=c++_shared \
+               -DANDROID_ABI=$EABI \
++              -DBUILD_SHARED_LIBS=ON \
+               ../cmake \
+     && $TOOLCHAIN_INSTALL_DIR/bin/make \
+     && $TOOLCHAIN_INSTALL_DIR/bin/make install
+@@ -151,7 +152,7 @@ RUN cd /tmp \
+        -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+        -DCMAKE_INSTALL_PREFIX=$TOOLCHAIN_INSTALL_DIR \
+        -DENABLE_TEST=OFF \
+-       -DANDROID_STL=c++_static \
++       -DANDROID_STL=c++_shared \
+        -DANDROID_ABI=$EABI . \
+     && sed -i "/#define HAVE_STATFS 1/a#define HAVE_STATVFS 1" config.h \
+     && sed -i "/#include \"passphrase.h\"/a#ifdef ANDROID\nint wctomb(char *s, wchar_t wc) { return wcrtomb(s,wc,NULL); }\nint mbtowc(wchar_t *pwc, const char *s, size_t n) { return mbrtowc(pwc, s, n, NULL); }\n#endif" tar/util.c \
+diff --git a/src/nbla_utils/CMakeLists.txt b/src/nbla_utils/CMakeLists.txt
+index 53324586..1777c8f6 100644
+--- a/src/nbla_utils/CMakeLists.txt
++++ b/src/nbla_utils/CMakeLists.txt
+@@ -104,7 +104,7 @@ else()
+     add_library(Protobuf STATIC IMPORTED)
+     set_target_properties(Protobuf 
+                           PROPERTIES IMPORTED_LOCATION 
+-                          /usr/local/android/arm64/lib/libprotobuf.a)
++                          /usr/local/android/arm64/lib/libprotobuf.so)
+     
+     add_library(LibArchive STATIC IMPORTED)
+     set_target_properties(LibArchive 
+@@ -147,6 +147,7 @@ else()
+       Protobuf
+       LibArchive
+       ${ZLIB_LIBRARIES}
++      log
+       )
+   else()
+     target_link_libraries(${LIB_NAME}
+-- 
+2.37.1
+

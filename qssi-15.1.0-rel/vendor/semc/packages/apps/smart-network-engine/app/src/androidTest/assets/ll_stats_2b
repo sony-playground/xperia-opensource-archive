@@ -1,0 +1,45 @@
+
+===LL_STATS_IFACE: num_peers: 1===
+ac_type: 2, contention_time: min-16 max-8298 avg-33, contention num samples: 282
+===LL_STATS_RADIO: number of radios: 2===
+Radio: 0, tx: 41, rx: 99
+
+Num channels: 24
+freq: 5180, on: 114, ccabusy: 3
+freq: 5200, on: 110, ccabusy: 1
+freq: 5240, on: 110, ccabusy: 0
+freq: 5260, on: 111, ccabusy: 0
+freq: 5280, on: 110, ccabusy: 0
+freq: 5300, on: 110, ccabusy: 0
+freq: 5320, on: 110, ccabusy: 0
+freq: 5500, on: 116, ccabusy: 0
+freq: 5520, on: 110, ccabusy: 0
+freq: 5540, on: 110, ccabusy: 0
+freq: 5560, on: 110, ccabusy: 0
+freq: 5580, on: 110, ccabusy: 0
+freq: 5600, on: 110, ccabusy: 0
+freq: 5620, on: 110, ccabusy: 0
+freq: 5640, on: 110, ccabusy: 0
+freq: 5660, on: 110, ccabusy: 0
+freq: 5680, on: 110, ccabusy: 0
+freq: 5700, on: 110, ccabusy: 0
+freq: 5745, on: 114, ccabusy: 0
+freq: 5765, on: 110, ccabusy: 0
+freq: 5785, on: 110, ccabusy: 0
+freq: 5805, on: 110, ccabusy: 0
+freq: 5825, on: 133, ccabusy: 0
+freq: 5220, on: 150, ccabusy: 0
+Radio: 1, tx: 92, rx: 221
+
+Num channels: 11
+freq: 2417, on: 81, ccabusy: 4
+freq: 2422, on: 81, ccabusy: 5
+freq: 2427, on: 81, ccabusy: 13
+freq: 2432, on: 85, ccabusy: 15
+freq: 2437, on: 81, ccabusy: 7
+freq: 2442, on: 81, ccabusy: 3
+freq: 2447, on: 81, ccabusy: 46
+freq: 2452, on: 81, ccabusy: 37
+freq: 2462, on: 1854, ccabusy: 37
+freq: 2412, on: 116, ccabusy: 21
+freq: 2457, on: 1731, ccabusy: 701

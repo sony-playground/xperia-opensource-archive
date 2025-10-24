@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">S-a detectat o conexiune WLAN slabă</string>
+    <string name="wifi_auto_network_switch_setting_msg">Comutaţi automat la o reţea preferată atunci când sunt disponibile atât reţeaua WLAN, cât şi reţeaua mobilă.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Puteţi să accesaţi Preferinţe WLAN pentru a schimba ulterior configuraţia.</string>
+    <string name="smart_network_settings_msg">Dacă se detectează că o reţea WLAN are o conexiune de calitate slabă, se va utiliza reţeaua de telefonie mobilă. Dacă această funcţie este dezactivată, se va acorda prioritate conexiunii WLAN.</string>
+    <string name="smart_network_settings_supplement">Această funcție nu va afecta aplicațiile care limitează conexiunile doar la WLAN sau doar la rețele de telefonie mobilă</string>
+    <string name="smart_network_settings_desc">Datorită tehnologiei de învățare aprofundată a Sony, suportul de conectare inteligent furnizează întotdeauna cea mai bună conexiune la rețea prin comutarea automată între 4G/5G și WLAN în funcție de calitatea rețelei.</string>
+    <string name="smart_network_settings_connected_switch_title">Utilizare rețea mobilă când calitatea WLAN este slabă</string>
+    <string name="smart_network_settings_connected_switch_desc">Se preconizează condițiile de rețea prin analiza datelor semnalului WLAN. Dacă este așteptată o calitate WLAN slabă, se va comuta automat la o rețea de telefonie mobilă. Conexiunea WLAN va fi prioritizată pentru utilizarea rețelei de reședință.</string>
+    <string name="smart_network_settings_entry_switch_title">Prevenire conexiune auto. la rețele WLAN slabe</string>
+    <string name="smart_network_settings_entry_switch_desc">Oprire conexiune automată când se așteaptă o calitate WLAN slabă. Aceasta poate împiedica dispozitivul să comute automat la WLAN public de calitate inferioară.</string>
+    <string name="smart_network_notification_entry_title">S-a detectat o rețea WLAN slabă</string>
+    <string name="smart_network_notification_entry_text">Suportul de conectare inteligent a prezis că %1$s are calitate slab și a prevenit temporar conectarea automată la această rețea WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Prevenirea conexiunii auto. la rețele WLAN slabe</string>
+</resources>

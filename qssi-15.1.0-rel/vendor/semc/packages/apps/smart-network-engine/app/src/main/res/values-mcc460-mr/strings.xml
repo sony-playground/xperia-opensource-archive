@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">कमजोर WLAN जोडणी आढळली</string>
+    <string name="wifi_auto_network_switch_setting_msg">WLAN नेटवर्क आणि मोबाईल नेटवर्क हे दोन्ही उपलब्ध असताना पसंतीच्या नेटवर्कवर स्वयंचलितपणे स्विच करतो।</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">नंतर सेटअप बदलण्यासाठी आपण नेहमी WLAN प्राधान्यांवर जाऊ शकता.</string>
+    <string name="smart_network_settings_msg">WLAN नेटवर्कमध्ये जोडणीची गुणवत्ता कमजोर असल्याचे आढळले तर त्याऐवजी मोबाइल नेटवर्क वापरले जाईल. बंद केलेले असताना, WLAN जोडणीला प्राधान्य दिले जाईल.</string>
+    <string name="smart_network_settings_supplement">हे वैशिष्ट्य केवळ WLAN किंवा केवळ मोबाईल नेटवर्क जोडण्यांवर मर्यादित करणाऱ्या अनुप्रयोगांवर परिणाम करत नाही</string>
+    <string name="smart_network_settings_desc">Sonyचे सखोल शिक्षण तंत्रज्ञान वापरून, नेटवर्क गुणवत्तेनुसार आपसूकपणे 4G/5G आणि WLAN मध्ये स्विच करून स्मार्ट संबद्धता नेहमीच सर्वोत्तम नेटवर्क जोडणी प्रदान करते.</string>
+    <string name="smart_network_settings_connected_switch_title">WLAN चा दर्जा कमजोर असेल तेव्हा मोबाइल नेटवर्क वापरा</string>
+    <string name="smart_network_settings_connected_switch_desc">WLAN सिग्नल डेटाचे विश्लेषण करून नेटवर्क स्थितींचे भाकित करा. WLAN नेटवर्कचा दर्जा कमजोर असेल असे अपेक्षित असल्यास, हे आपसूकपणे मोबाइल नेटवर्कला स्विच होईल. होम नेटवर्क वापरासाठी, WLAN जोडणीला प्राधान्य दिले जाईल.</string>
+    <string name="smart_network_settings_entry_switch_title">कमजोर दर्जाच्या WLAN नेटवर्कची स्वयं जोडणी रोखा</string>
+    <string name="smart_network_settings_entry_switch_desc">WLAN चा कमजोर दर्जा अपेक्षित असेल, तेव्हा स्वयं जोडणी थांबवा. यामुळे आपला स्मार्टफोन कमी गुणवत्तेच्या सार्वजनिक WLAN ला कनेक्ट करण्यापासून प्रतिबंध करण्यास मदत होऊ शकते.</string>
+    <string name="smart_network_notification_entry_title">कमजोर दर्जाचे WLAN नेटवर्क आढळले</string>
+    <string name="smart_network_notification_entry_text">स्मार्ट संबद्धतेने अनुमानित केले आहे की %1$s कमजोर दर्जाचे आहे आणि या WLAN नेटवर्कला स्वयंचलित जोडणी तात्पुरती रोखली आहे.</string>
+    <string name="smart_network_notification_channel_entry_title">कमजोर दर्जाच्या WLAN नेटवर्कची स्वयं जोडणी रोखणे</string>
+</resources>

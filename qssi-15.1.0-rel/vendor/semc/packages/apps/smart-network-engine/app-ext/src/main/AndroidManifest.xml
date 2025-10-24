@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2020, 2022, 2023, 2024 Sony Corporation
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.sonymobile.smartnetworkengine.ext">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+    <uses-permission android:name="android.permission.READ_PRECISE_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.SET_ACTIVITY_WATCHER"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="com.sonymobile.smartnetworkengine.permission.BIND_PERSISTENT_SERVICE"/>
+
+    <!-- Allows to bind to ExtService in SmartNetworkEngineExt application. -->
+    <permission android:name="com.sonymobile.smartnetworkengine.ext.permission.BIND_EXT_SERVICE"
+                android:protectionLevel="signature"/>
+
+    <application
+        android:name=".SneeApplication"
+        android:allowBackup="false"
+        android:label="@string/snee_app_name_txt"
+        tools:ignore="MissingApplicationIcon,GoogleAppIndexingWarning">
+
+        <uses-library android:name="com.sonyericsson.idd"/>
+
+        <service
+            android:name=".ExtService"
+            android:exported="true"
+            android:permission="com.sonymobile.smartnetworkengine.ext.permission.BIND_EXT_SERVICE"/>
+
+    </application>
+
+</manifest>

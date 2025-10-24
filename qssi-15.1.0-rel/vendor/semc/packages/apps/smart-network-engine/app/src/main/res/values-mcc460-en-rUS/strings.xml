@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="wifi_auto_network_switch_setting_msg">Automatically switch to a preferred network when both WLAN network and mobile network are available.</string>
+    <string name="smart_network_settings_msg">When a WLAN network is detected to have poor connection quality, mobile network will be used instead. When turned off, WLAN connection will be prioritized.</string>
+    <string name="smart_network_settings_connected_switch_desc">Predict network conditions by analyzing WLAN signal data. If poor WLAN network quality is expected, this will automatically switch to a mobile network. WLAN connection will be prioritized for home network use.</string>
+</resources>

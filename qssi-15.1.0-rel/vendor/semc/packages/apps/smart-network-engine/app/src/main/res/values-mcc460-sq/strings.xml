@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Është zbuluar një lidhje e dobët WLAN</string>
+    <string name="wifi_auto_network_switch_setting_msg">Kaloni automatikisht te një rrjet i preferuar kur rrjeti WLAN dhe rrjeti celular janë të dy të disponueshëm.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Mund të shkoni gjithmonë te preferencat e WLAN për ta ndryshuar konfigurimin më vonë.</string>
+    <string name="smart_network_settings_msg">Kur zbulohet se një rrjet WLAN ka një cilësi të dobët të lidhjes, në vend të tij do të përdoret rrjeti celular. Kur tipari është i çaktivizuar, lidhja WLAN do të ketë përparësi.</string>
+    <string name="smart_network_settings_supplement">Ky tipar nuk do të ketë ndikim tek aplikacionet që kufizojnë lidhjet vetëm me WLAN ose vetëm me rrjetin celular</string>
+    <string name="smart_network_settings_desc">Duke përdorur teknologjinë e të mësuarit të thellë të Sony, Lidhshmëria inteligjente siguron gjithmonë lidhjen më të mirë të rrjetit duke e ndërruar atë mes 4G/5G dhe WLAN në varësi të cilësisë së rrjetit.</string>
+    <string name="smart_network_settings_connected_switch_title">Përdorni rrjetin celular kur cilësia e WLAN është e dobët</string>
+    <string name="smart_network_settings_connected_switch_desc">Parashikoni kushtet e rrjetit duke analizuar të dhënat e sinjalit të WLAN. Nëse pritet një cilësi e dobët e rrjetit WLAN, kjo do të kalojë automatikisht te një rrjet celular. Lidhja WLAN do të ketë përparësi për përdorimin e rrjetit të shtëpisë.</string>
+    <string name="smart_network_settings_entry_switch_title">Parandaloni lidhjen auto. me WLAN me cilësi të dobët</string>
+    <string name="smart_network_settings_entry_switch_desc">Ndaloni lidhjen automatike kur pritet një cilësi e dobët e WLAN. Kjo mund të ndihmojë për të parandaluar që telefoni juaj inteligjent të mos kalojë automatikisht te një rrjet publik WLAN me cilësi më të ulët.</string>
+    <string name="smart_network_notification_entry_title">U zbulua një rrjet WLAN me cilësi të dobët</string>
+    <string name="smart_network_notification_entry_text">Lidhshmëria inteligjente ka parashikuar se %1$s ka cilësi të dobët dhe ka parandaluar përkohësisht lidhjen automatike me këtë rrjet WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Po parandalohet lidhja auto. me WLAN me cilësi të dobët</string>
+</resources>

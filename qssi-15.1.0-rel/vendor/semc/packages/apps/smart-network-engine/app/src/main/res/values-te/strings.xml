@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">బలహీన Wi-Fi కనెక్షన్ గుర్తించబడింది</string>
+    <string name="notification_text">మొబైల్ నెట్‌వర్క్‌ను ఉపయోగించడం ద్వారా మీ నెట్‌వర్క్‌ను స్థిరంగా ఉంచడానికి స్వీయ నెట్‌వర్క్ స్విచ్‌ని ఎనేబుల్ చేయడానికి ట్యాప్ చేయండి</string>
+    <string name="notification_action_settings">సెట్టింగులకు వెళ్లు</string>
+    <string name="notification_action_no_thanks">వద్దు ధన్యవాదా.</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">సేవని ఉపయోగించండి</string>
+    <string name="wifi_auto_network_switch_setting_msg">Wi-Fi నెట్‌వర్క్ మరియు మొబైల్ నెట్‌వర్క్‌లు రెండూ అందుబాటులో ఉన్నప్పుడు స్వయంచాలకంగా ప్రాధాన్య నెట్‌వర్క్‌కు మారుతుంది.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">మీరు తర్వాత సెటప్‌ని మార్చడానికి ఎల్లప్పుడూ Wi-Fi ప్రాధాన్యతలకు వెళ్లవచ్చు.</string>
+    <string name="wifi_auto_network_switch_notification_channel">చిట్కాలు</string>
+    <string name="wifi_auto_network_switch_setting">స్వయంచాలక నెట్‌వర్క్ మార్పిడి</string>
+    <string name="settings_on">ఆన్</string>
+    <string name="settings_off">ఆపివేయి</string>
+    <string name="smart_network_settings_title">స్మార్ట్ కనెక్టివిటీ</string>
+    <string name="smart_network_settings_switch_txt">ఉత్తమ కనెక్టివిటీ ఉపయోగిం.</string>
+    <string name="smart_network_settings_msg">Wi-Fi నెట్‌వర్క్ బలహీనంగా ఉన్నట్లు గుర్తించినప్పుడు, బదులుగా మొబైల్ నెట్‌వర్క్‌‌ను ఉపయోగించబడుతుంది. ఆప్ అయినప్పుడు, Wi-Fi కనెక్షన్‌కు ప్రాధాన్యత ఇవ్వబడుతుంది.</string>
+    <string name="smart_network_settings_supplement">ఈ ఫీచర్ Wi-Fi మాత్రమే లేదా మొబైల్ నెట్‌వర్క్ మాత్రమేకు పరిమిత కనెక్షన్‌లను కలిగి ఉన్న అప్లికేషన్‍‌లను ప్రభావితం చేయదు</string>
+    <string name="sne_app_name_txt">స్మార్ట్ కనెక్టివిటీ</string>
+    <string name="smart_network_settings_desc">Sony యొక్క సమగ్ర లెర్నింగ్ సాంకేతికతను ఉపయోగించి, స్మార్ట్ కనెక్టివిటీ ఎల్లప్పుడూ నెట్‌వర్క్ నాణ్యత ఆధారంగా 4G/5G మరియు Wi-Fiల మధ్య స్వయంచాలకంగా మారడం ద్వారా ఉత్తమ నెట్‌వర్క్ కనెక్షన్‌ను అందిస్తుంది.</string>
+    <string name="smart_network_settings_connected_switch_title">Wi-Fi నాణ్యత పేలవ. మొబైల్ నెట్‌. ఉపయోగించు</string>
+    <string name="smart_network_settings_connected_switch_desc">Wi-Fi సిగ్నల్ డేటాను విశ్లేషించడం ద్వారా నెట్‌వర్క్ పరిస్థితులను అంచనా వేస్తుంది Wi-Fi నెట్‌వర్క్ నాణ్యత పేలవంగా ఉంటుందని ఊహించినట్లయితే, ఇది స్వయంచాలకంగా మొబైల్ నెట్‌వర్క్‌కు మారుతుంది. హోమ్ నెట్‌వర్క్ వినియోగం కోసం Wi-Fi కనెక్షన్‌కు ప్రాధాన్యత ఇవ్వబడుతుంది.</string>
+    <string name="smart_network_settings_entry_switch_title">పేలవ నాణ్యతా Wi-Fi నెట్‌. స్వీయ కనె. నివారించు</string>
+    <string name="smart_network_settings_entry_switch_desc">పేలవమైన Wi-Fi నాణ్యత అంచనా వేసినప్పుడు స్వీయ కనెక్షన్‌ను ఆపివేస్తుంది. ఇది మీ స్మార్ట్‌ఫోన్ స్వయంచాలకంగా తక్కువ నాణ్యత పబ్లిక్ Wi-Fiకు మారకుండా నివారించడంలో సహాయపడుతుంది.</string>
+    <string name="smart_network_settings_desc_summary">స్వయంచాలకంగా ఉత్తమ నెట్‌వర్క్‌ను ఎంచుకుంటుంది</string>
+    <string name="smart_network_notification_entry_title">పేలవమైన నాణ్యతా Wi-Fi నెట్‌వర్క్ గుర్తించబడింది</string>
+    <string name="smart_network_notification_entry_text">%1$s నాణ్యత పేలవంగా ఉంటుందని స్మార్ట్ కనెక్టివిటీ ఊహించింది మరియు ఈ Wi-Fi నెట్‌వర్క్‌కు స్వయంచాలక కనెక్షన్‌ను తాత్కాలికంగా నివారించింది.</string>
+    <string name="smart_network_notification_channel_entry_title">పేలవమైన Wi-Fi నెట్‌వర్క్‌కు స్వీయ కనెక్షన్ నివారిస్తోంది</string>
+    <string name="smart_network_notification_entry_button">సెట్టింగ్‌లకు వెళ్లండి</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">ఏదేమైనా కొనసాగించు</string>
+    <string name="smart_network_toast_connecting">%1$sకు కనెక్ట్ చేస్తోంది</string>
+</resources>

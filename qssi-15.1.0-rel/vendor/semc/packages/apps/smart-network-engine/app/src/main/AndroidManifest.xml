@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2022 Sony Corporation
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.sonymobile.smartnetworkengine">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Only for ConnectivityDiagnosticsCallback API (Don't use for other purposes) -->
+    <uses-permission android:name="android.permission.MAINLINE_NETWORK_STACK"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!-- Bypass location setting and permissions for Wi-Fi APIs -->
+    <uses-permission android:name="android.permission.RADIO_SCAN_WITHOUT_LOCATION"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_PRECISE_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_WIFI_CREDENTIAL"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WIFI_UPDATE_USABILITY_STATS_SCORE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="com.sonyericsson.permission.IDD"/>
+    <uses-permission android:name="com.sonymobile.permission.SECURE_DATA_MANAGER"/>
+    <uses-permission android:name="com.sonymobile.permission.SNE_WIFI_SCAN"/>
+    <uses-permission android:name="com.sonymobile.smartnetworkengine.ext.permission.BIND_EXT_SERVICE"/>
+
+    <!-- Allows to bind to the event service in smart network engine application. -->
+    <permission android:name="com.sonymobile.smartnetworkengine.permission.BIND_EVENT_SERVICE"
+                android:protectionLevel="normal"/>
+
+    <!-- Allows to bind to the debug service in smart network engine application. -->
+    <permission android:name="com.sonymobile.smartnetworkengine.permission.BIND_DEBUG_SERVICE"
+                android:protectionLevel="signature"/>
+
+    <!-- Allows to bind to SnePersistentService in smart network engine application. -->
+    <permission android:name="com.sonymobile.smartnetworkengine.permission.BIND_PERSISTENT_SERVICE"
+                android:protectionLevel="signature"/>
+
+    <application
+        android:name=".SneApplication"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_launcher_settings"
+        android:label="@string/sne_app_name_txt"
+        android:persistent="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <uses-library android:name="com.sonyericsson.idd"/>
+        <uses-library android:name="com.sonymobile.securedatamanager"/>
+        <uses-library android:name="com.sonymobile.devicesecurity"/>
+
+        <receiver
+            android:name=".BootReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".ui.NotificationEventReceiver"
+            android:exported="false"/>
+
+        <service
+            android:name=".CoreService"
+            android:exported="false"/>
+
+        <service
+            android:name=".SnePersistentService"
+            android:exported="true"
+            android:permission="com.sonymobile.smartnetworkengine.permission.BIND_PERSISTENT_SERVICE"/>
+
+        <service
+            android:name=".connected.logger.LoggerService"
+            android:exported="false"/>
+
+        <service
+            android:name=".event.EventApiService"
+            android:exported="true"
+            android:permission="com.sonymobile.smartnetworkengine.permission.BIND_EVENT_SERVICE">
+            <intent-filter>
+                <action android:name="com.sonymobile.smartnetworkengine.intent.action.ISneEventManager"/>
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:exported="true"
+            android:label="@string/smart_network_settings_title"
+            android:taskAffinity=".ui.SettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.settings.MANUFACTURER_APPLICATION_SETTING"/>
+            </intent-filter>
+            <!-- Tell Settings app which category it belongs to -->
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.wireless"/>
+            <meta-data
+                android:name="com.android.settings.summary_uri"
+                android:value="content://com.sonymobile.smartnetworkengine.SettingsSummaryContentProvider/summary"/>
+            <meta-data
+                android:name="com.android.settings.order"
+                android:value="100"/>
+        </activity>
+
+        <!-- Content provider to settings summary -->
+        <provider
+            android:name=".ui.provider.SettingsSummaryContentProvider"
+            android:authorities="com.sonymobile.smartnetworkengine.SettingsSummaryContentProvider"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider"/>
+
+        <!-- Content provider to settings search -->
+        <provider
+            android:name=".ui.provider.SettingsSearchIndexablesProvider"
+            android:authorities="com.sonymobile.smartnetworkengine.SettingsSearchIndexablesProvider"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:permission="android.permission.READ_SEARCH_INDEXABLES">
+            <intent-filter>
+                <action android:name="android.content.action.SEARCH_INDEXABLES_PROVIDER"/>
+            </intent-filter>
+        </provider>
+
+        <!-- Debug components from here -->
+        <service
+            android:name=".debug.DebugApiService"
+            android:exported="false"
+            android:permission="com.sonymobile.smartnetworkengine.permission.BIND_DEBUG_SERVICE">
+            <intent-filter>
+                <action android:name="com.sonymobile.smartnetworkengine.intent.action.ISneDebugManager"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".debug.DebugViewService"
+            android:exported="false"/>
+
+        <receiver
+            android:name=".debug.SecretCodeReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SECRET_CODE"/>
+                <data android:host="76278638" android:scheme="android_secret_code"/>
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".debug.SecretMenuActivity"
+            android:exported="false"
+            android:label="@string/smartnet_secretmenu_title"
+            android:resizeableActivity="false"
+            android:screenOrientation="portrait"
+            android:taskAffinity=".debug.SecretMenuActivity"/>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Zayıf WLAN bağlantısı algılandı</string>
+    <string name="wifi_auto_network_switch_setting_msg">Hem WLAN ağı hem de mobil ağ mevcut olduğunda otomatik olarak tercih edilen ağa geç.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Ayarları daha sonra değiştirmek için dilediğiniz zaman WLAN tercihlerine gidebilirsiniz.</string>
+    <string name="smart_network_settings_msg">Bir WLAN ağının zayıf bağlantı kalitesine sahip olduğu algılandığında bunun yerine mobil ağ kullanılır. Bu seçenek kapatıldığında WLAN bağlantısına öncelik verilir.</string>
+    <string name="smart_network_settings_supplement">Bu özellik, yalnızca WLAN veya yalnızca mobil ağ bağlantılarını sınırlayan uygulamaları etkilemez</string>
+    <string name="smart_network_settings_desc">Sony\'nin derin öğrenme teknolojisini kullanan Akıllı bağlantı, ağ kalitesine göre 4G/5G ile WLAN arasında otomatik olarak geçiş yaparak her zaman en iyi ağ bağlantısını sunar.</string>
+    <string name="smart_network_settings_connected_switch_title">WLAN kalitesi düşük olduğunda mobil ağı kullan</string>
+    <string name="smart_network_settings_connected_switch_desc">WLAN sinyali verilerini analiz ederek ağ koşullarını tahmin eder. WLAN ağı kalitesinin düşük olması beklendiğinde, otomatik olarak bir mobil ağa geçiş yapacaktır. Ev ağı kullanımı için WLAN bağlantısına öncelik verilecektir.</string>
+    <string name="smart_network_settings_entry_switch_title">Düşük kaliteli WLAN ağlarına otomatik bağlanmayı engelle</string>
+    <string name="smart_network_settings_entry_switch_desc">WLAN kalitesinin düşük olması beklendiğinde otomatik bağlantıyı durdurur. Cihazınızın düşük kaliteli ortak WLAN ağlarına otomatik olarak geçiş yapmasını engelleyebilir.</string>
+    <string name="smart_network_notification_entry_title">Düşük kaliteli WLAN ağı algılandı</string>
+    <string name="smart_network_notification_entry_text">Akıllı bağlantı, %1$s ağının bağlantı kalitesinin düşük olduğunu öngördü ve bu WLAN ağına otomatik bağlanmayı geçici olarak engelledi.</string>
+    <string name="smart_network_notification_channel_entry_title">Düşük kaliteli WLAN ağına otomatik bağlanmayı engelle</string>
+</resources>

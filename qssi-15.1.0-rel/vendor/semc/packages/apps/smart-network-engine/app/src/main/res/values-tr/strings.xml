@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Zayıf Wi-Fi bağlantısı algılandı</string>
+    <string name="notification_text">Mobil ağı kullanarak ağınızı sabit hale getirmek için otomatik ağ geçişini etkinleştirmek üzere dokunun</string>
+    <string name="notification_action_settings">Ayarlar\'a git</string>
+    <string name="notification_action_no_thanks">Hayır, teşekkürler</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Hizmeti kulan</string>
+    <string name="wifi_auto_network_switch_setting_msg">Hem Wi-Fi ağı hem de mobil ağ mevcut olduğunda otomatik olarak tercih edilen ağa geç.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Ayarları daha sonra değiştirmek için dilediğiniz zaman Wi-Fi tercihlerine gidebilirsiniz.</string>
+    <string name="wifi_auto_network_switch_notification_channel">İpuçları</string>
+    <string name="wifi_auto_network_switch_setting">Otomatik ağ geçişi</string>
+    <string name="settings_on">Açık</string>
+    <string name="settings_off">Kapalı</string>
+    <string name="smart_network_settings_title">Akıllı bağlantı</string>
+    <string name="smart_network_settings_switch_txt">Akıllı bağlantıyı kullan</string>
+    <string name="smart_network_settings_msg">Bir Wi-Fi ağının zayıf bağlantı kalitesine sahip olduğu algılandığında bunun yerine mobil ağ kullanılır. Bu seçenek kapatıldığında Wi-Fi bağlantısına öncelik verilir.</string>
+    <string name="smart_network_settings_supplement">Bu özellik, yalnızca Wi-Fi veya yalnızca mobil ağ bağlantılarını sınırlayan uygulamaları etkilemez</string>
+    <string name="sne_app_name_txt">Akıllı bağlantı</string>
+    <string name="smart_network_settings_desc">Sony\'nin derin öğrenme teknolojisini kullanan Akıllı bağlantı, ağ kalitesine göre 4G/5G ile Wi-Fi arasında otomatik olarak geçiş yaparak her zaman en iyi ağ bağlantısını sunar.</string>
+    <string name="smart_network_settings_connected_switch_title">Wi-Fi kalitesi düşük olduğunda mobil ağı kullan</string>
+    <string name="smart_network_settings_connected_switch_desc">Wi-Fi sinyali verilerini analiz ederek ağ koşullarını tahmin eder. Wi-Fi ağı kalitesinin düşük olması beklendiğinde, otomatik olarak bir mobil ağa geçiş yapacaktır. Ev ağı kullanımı için Wi-Fi bağlantısına öncelik verilecektir.</string>
+    <string name="smart_network_settings_entry_switch_title">Düşük kaliteli Wi-Fi ağlarına otomatik bağlanmayı engelle</string>
+    <string name="smart_network_settings_entry_switch_desc">Wi-Fi kalitesinin düşük olması beklendiğinde otomatik bağlantıyı durdurur. Cihazınızın düşük kaliteli ortak Wi-Fi ağlarına otomatik olarak geçiş yapmasını engelleyebilir.</string>
+    <string name="smart_network_settings_desc_summary">En iyi ağı otomatik olarak seç</string>
+    <string name="smart_network_notification_entry_title">Düşük kaliteli Wi-Fi ağı algılandı</string>
+    <string name="smart_network_notification_entry_text">Akıllı bağlantı, %1$s ağının bağlantı kalitesinin düşük olduğunu öngördü ve bu Wi-Fi ağına otomatik bağlanmayı geçici olarak engelledi.</string>
+    <string name="smart_network_notification_channel_entry_title">Düşük kaliteli Wi-Fi ağına otomatik bağlanmayı engelle</string>
+    <string name="smart_network_notification_entry_button">AYARLAR\'A GIDIN</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">YİNE DE BAĞLAN</string>
+    <string name="smart_network_toast_connecting">%1$s ağına bağlanılıyor</string>
+</resources>

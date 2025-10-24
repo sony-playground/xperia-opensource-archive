@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">कमजोर Wi-Fi कनेक्‍शन मिला</string>
+    <string name="notification_text">मोबाइल नेटवर्क का उपयोग करके अपने नेटवर्क को स्थिर बनाने के लिए स्वचालित नेटवर्क अदल-बदल सक्षम करने के लिए टैप करें</string>
+    <string name="notification_action_settings">सेटिंग पर जाएँ</string>
+    <string name="notification_action_no_thanks">नहीं धन्यवाद</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">सेवा इस्तेमाल करें</string>
+    <string name="wifi_auto_network_switch_setting_msg">जब दोनों Wi-Fi नेटवर्क और मोबाइल नेटवर्क उपलब्ध हों, तो पसंदीदा नेटवर्क में स्वतः अदल-बदल करें।</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">आप बाद में सेटअप को बदलने के लिए हमेशा Wi-Fi से जुड़ी पसंद पर जा सकते हैं।</string>
+    <string name="wifi_auto_network_switch_notification_channel">सुझाव</string>
+    <string name="wifi_auto_network_switch_setting">स्वचालित नेटवर्क अदल-बदल</string>
+    <string name="settings_on">चालू</string>
+    <string name="settings_off">बंद करें</string>
+    <string name="smart_network_settings_title">स्मार्ट कनेक्टिविटी</string>
+    <string name="smart_network_settings_switch_txt">स्मार्ट कनेक्टिविटी का उपयोग करें</string>
+    <string name="smart_network_settings_msg">Wi-Fi नेटवर्क पर खराब कनेक्शन गुणवत्ता का पता लगने के बाद, इसके बजाए मोबाइल नेटवर्क का उपयोग होगा। बंद होने की स्थिति में Wi-Fi कनेक्शन को प्राथमिकता दी जाएगी।</string>
+    <string name="smart_network_settings_supplement">यह सुविधा उन एप्लिकेशन को प्रभावित नहीं करेगी जो केवल Wi-Fi या केवल मोबाइल नेटवर्क तक कनेक्शन को सीमित करते हैं</string>
+    <string name="sne_app_name_txt">स्मार्ट कनेक्टिविटी</string>
+    <string name="smart_network_settings_desc">Sony की गहरी शिक्षण तकनीक का उपयोग करके, स्मार्ट कनेक्टिविटी हमेशा नेटवर्क की गुणवत्ता के आधार पर 4G/5G और Wi-Fi के बीच स्वचालित रूप से स्विच करके सबसे बढ़िया नेटवर्क संपर्क देता है.</string>
+    <string name="smart_network_settings_connected_switch_title">Wi-Fi की गुणवत्ता खराब होने पर मोबाइल नेटवर्क का उपयोग करें.</string>
+    <string name="smart_network_settings_connected_switch_desc">Wi-Fi सिग्नल डेटा का विश्लेषण करके नेटवर्क स्थितियों का अनुमान लगाएं. अगर खराब Wi-Fi नेटवर्क गुणवत्ता की उम्मीद दिखती है, तो यह स्वचालित रूप से मोबाइल नेटवर्क पर स्विच हो जाएगा. होम नेटवर्क उपयोग के लिए Wi-Fi कनेक्शन की प्राथमिकता दी जाएगी.</string>
+    <string name="smart_network_settings_entry_switch_title">खराब गुणवत्ता वाले Wi-Fi नेटवर्क के लिए स्वतः कनेक्शन को रोकें</string>
+    <string name="smart_network_settings_entry_switch_desc">खराब Wi-Fi गुणवत्ता की उम्मीद होने पर, स्वतः कनेक्शन को बंद करें. इससे अधिक खराब सार्वजनिक Wi-Fi पर स्वचालित रूप से स्विच होने आपके स्मार्टफोन को रोकने में सहायता मिल सकती है.</string>
+    <string name="smart_network_settings_desc_summary">सबसे अच्छा नेटवर्क स्वचालित रूप से चुनें</string>
+    <string name="smart_network_notification_entry_title">खराब गुणवत्ता वाले Wi-Fi नेटवर्क का पता चला</string>
+    <string name="smart_network_notification_entry_text">स्मार्ट कनेक्टिविटी में यह अनुमान लगाया गया है कि %1$s की गुणवत्ता खराब है, और इस Wi-Fi नेटवर्क के लिए स्वतः कनेक्शन को अस्थायी रूप से रोका गया है</string>
+    <string name="smart_network_notification_channel_entry_title">खराब गुणवत्ता वाले Wi-Fi नेटवर्क से स्वतः कनेक्शन को रोका जा रहा है</string>
+    <string name="smart_network_notification_entry_button">सेटिंग पर जाएं</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">फिर भी कनेक्ट करें</string>
+    <string name="smart_network_toast_connecting">%1$s से कनेक्ट कर रहा है</string>
+</resources>

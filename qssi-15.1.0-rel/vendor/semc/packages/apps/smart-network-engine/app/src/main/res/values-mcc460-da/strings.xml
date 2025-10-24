@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Der er registreret en dårlig WLAN-forbindelse</string>
+    <string name="wifi_auto_network_switch_setting_msg">Skift automatisk til et foretrukket netværk, når der både er et tilgængeligt WLAN-netværk og mobilnetværk.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Du kan altid gå til WLAN-præferencer for at ændre opsætningen senere.</string>
+    <string name="smart_network_settings_msg">Når der registreres et WLAN-netværk med dårlig forbindelseskvalitet, bruges mobilnetværket i stedet. Når det slås fra, prioriteres WLAN-forbindelse.</string>
+    <string name="smart_network_settings_supplement">Denne funktion påvirker ikke apps, der begrænser forbindelser til WLAN alene eller mobilnetværk alene</string>
+    <string name="smart_network_settings_desc">Med Sonys dybe læringsteknologi giver Smart-forbindelse altid den bedste netværksforbindelse ved automatisk at skifte mellem 4G/5G og WLAN alt efter netværkskvaliteten.</string>
+    <string name="smart_network_settings_connected_switch_title">Brug mobilnetværk, når WLAN-kvalitet er dårlig</string>
+    <string name="smart_network_settings_connected_switch_desc">Forudse netværksforhold ved at analysere data for WLAN-signal. Hvis der forventes dårlig WLAN-netværkskvalitet, skifter denne funktion automatisk til et mobilnetværk. WLAN-forbindelse prioriteres ved brug af hjemmenetværk.</string>
+    <string name="smart_network_settings_entry_switch_title">Undgå autoforbindelse til WLAN-netværk af dårlig kvalitet</string>
+    <string name="smart_network_settings_entry_switch_desc">Stop automatisk forbindelse, når der forventes dårlig WLAN-kvalitet. Dette kan hjælpe med til at forhindre, at din enhed automatisk skifter til et offentligt WLAN-netværk af lavere kvalitet.</string>
+    <string name="smart_network_notification_entry_title">WLAN-netværk af dårlig kvalitet fundet</string>
+    <string name="smart_network_notification_entry_text">Smart-forbindelse har forudset, at %1$s er af dårlig kvalitet, og har forhindret autoforbindelse til dette WLAN-netværk midlertidigt.</string>
+    <string name="smart_network_notification_channel_entry_title">Undgå autoforbindelse til WLAN-netværk af dårlig kvalitet</string>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Schlechte WLAN-Verbindung erkannt</string>
+    <string name="notification_text">Tippen, um den automatischen Netzwerkwechsel zu aktivieren und Ihr Netzwerk mithilfe des Mobilfunknetzes zu stabilisieren</string>
+    <string name="notification_action_settings">Zu Einstellungen</string>
+    <string name="notification_action_no_thanks">Nein, danke</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Dienst aktivieren</string>
+    <string name="wifi_auto_network_switch_setting_msg">Wechselt automatisch zum bevorzugten Netzwerk, wenn sowohl ein WLAN-Netzwerk und ein Mobilfunknetz verfügbar sind.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Sie können jederzeit die WLAN-Einstellungen aufrufen, um das Setup zu ändern.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Tipps</string>
+    <string name="wifi_auto_network_switch_setting">Automatischer Netzwerkwechsel</string>
+    <string name="settings_on">An</string>
+    <string name="settings_off">Aus</string>
+    <string name="smart_network_settings_title">Smart-Verbindung</string>
+    <string name="smart_network_settings_switch_txt">Smart-Verbindung nutzen</string>
+    <string name="smart_network_settings_msg">Wenn ein WLAN-Netzwerk eine schlechte Verbindungsqualität aufweist, wird stattdessen ein Mobilfunknetz verwendet. Ist die Funktion ausgeschaltet ist, wird die WLAN-Verbindung priorisiert.</string>
+    <string name="smart_network_settings_supplement">Diese Funktion hat keinen Einfluss auf Anwendungen, die Verbindungen nur auf WLAN oder nur auf das Mobilfunknetz beschränken</string>
+    <string name="sne_app_name_txt">Smart-Verbindung</string>
+    <string name="smart_network_settings_desc">Mit der Deep Learning-Technologie von Sony garantiert die Smart-Verbindung immer die bestmögliche Netzwerkverbindung durch netzwerkqualitätsabhängiges, automatisches Wechseln zwischen 4G/5G und WLAN.</string>
+    <string name="smart_network_settings_connected_switch_title">Mobilf.-netz b. schlechter WLAN-Qual. verw.</string>
+    <string name="smart_network_settings_connected_switch_desc">Prognostiziert Netzwerkbedingungen durch Analyse der WLAN-Signaldaten. Falls eine schlechte WLAN-Netzwerkqualität erwartet wird, wird dadurch automatisch zu einem Mobilfunknetz gewechselt. Für die Nutzung zu Hause wird die WLAN-Verbindung priorisiert.</string>
+    <string name="smart_network_settings_entry_switch_title">Autom. Verb. m. schwachen WLAN-Netzen vermeiden</string>
+    <string name="smart_network_settings_entry_switch_desc">Automatische Verbindung stoppen, wenn eine schlechte WLAN-Qualität erwartet wird. Dadurch kann verhindert werden, dass Ihr Gerät automatisch zu einem öffentlichen WLAN mit geringer Qualität wechselt.</string>
+    <string name="smart_network_settings_desc_summary">Automatisch bestes Netzwerk auswählen</string>
+    <string name="smart_network_notification_entry_title">Schlechte Qualität des WLAN-Netzwerks erkannt</string>
+    <string name="smart_network_notification_entry_text">Die Smart-Verbindung hat prognostiziert, dass %1$s eine schlechte Qualität aufweist, und hat vorübergehend die automatische Verbindung mit diesem WLAN-Netz verhindert.</string>
+    <string name="smart_network_notification_channel_entry_title">Autom. Verb. m. schwachem WLAN-Netz vermeiden</string>
+    <string name="smart_network_notification_entry_button">WEITER ZU „EINSTELLUNGEN“</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">VERBINDEN</string>
+    <string name="smart_network_toast_connecting">Verbinden mit %1$s</string>
+</resources>

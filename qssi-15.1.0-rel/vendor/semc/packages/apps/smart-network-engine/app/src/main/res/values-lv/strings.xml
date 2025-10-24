@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Noteikts vājš Wi-Fi savienojums</string>
+    <string name="notification_text">Piesitiet, lai iespējotu automātisko tīkla slēdzi, lai padarītu tīklu stabilu, izmantojot mobilo tīklu</string>
+    <string name="notification_action_settings">Uz iestatījumiem</string>
+    <string name="notification_action_no_thanks">Nē, paldies</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Izmantot pakalpojumu</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automātiski pārslēdziet uz izvēlēto tīklu, ja ir pieejams gan Wi-Fi, gan mobilais tīkls.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Jūs vienmēr varat pāriet uz Wi-Fi preferencēm, lai vēlāk mainītu iestatījumus.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Padomi</string>
+    <string name="wifi_auto_network_switch_setting">Automātiska tīkla pārslēgšana</string>
+    <string name="settings_on">Ieslēgta</string>
+    <string name="settings_off">Izslēgta</string>
+    <string name="smart_network_settings_title">Viedie savienojumi</string>
+    <string name="smart_network_settings_switch_txt">Lietot viedos savien.</string>
+    <string name="smart_network_settings_msg">Kad tiek konstatēts, ka Wi-Fi tīklam ir slikta savienojuma kvalitāte, tā vietā tiek izmantots mobilo sakaru tīkls. Šo opciju izslēdzot, Wi-Fi savienojumam tiks noteikta prioritāte.</string>
+    <string name="smart_network_settings_supplement">Šī funkcija neietekmēs lietotnes, kas ierobežo savienojumus tikai ar Wi-Fi vai mobilo tīklu</string>
+    <string name="sne_app_name_txt">Viedie savienojumi</string>
+    <string name="smart_network_settings_desc">Izmantojot Sony padziļinātās mācīšanās tehnoloģiju, viedā savienojamība vienmēr nodrošina labāko tīkla savienojumu, automātiski pārslēdzoties starp 4G/5G un Wi-Fi atkarībā no tīkla kvalitātes.</string>
+    <string name="smart_network_settings_connected_switch_title">Izm. mob. tīklu, ja Wi-Fi kvalitāte ir zema</string>
+    <string name="smart_network_settings_connected_switch_desc">Prognozējiet tīkla apstākļus, analizējot Wi-Fi signāla datus. Ja ir paredzama zema Wi-Fi tīkla kvalitāte, tiks automātiski ieslēgts mobilais tīkls. Wi-Fi savienojumam būs prioritāte mājas tīkla lietošanā.</string>
+    <string name="smart_network_settings_entry_switch_title">Nepieļaujiet autom. savien. vājas darbības Wi-Fi tīkliem</string>
+    <string name="smart_network_settings_entry_switch_desc">Apturiet automātisko savienojuma izveidi, ja ir paredzama zema Wi-Fi kvalitāte. Tas var palīdzēt novērst ierīces automātisku pārslēgšanos uz zemākas kvalitātes publisko Wi-Fi tīklu.</string>
+    <string name="smart_network_settings_desc_summary">Automātiski atlasīt labāko tīklu</string>
+    <string name="smart_network_notification_entry_title">Noteikts vājš Wi-Fi savienojums</string>
+    <string name="smart_network_notification_entry_text">Viedās savienojamības funkcija konstatē, ka %1$s ir zema kvalitāte, īslaicīgi nepieļaujot automātisku savienojumu ar šo Wi-Fi tīklu.</string>
+    <string name="smart_network_notification_channel_entry_title">Nepieļauj autom. sav. ar vāja savien. Wi-Fi tīklu</string>
+    <string name="smart_network_notification_entry_button">ATVĒRT IESTATĪJUMUS</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">IZVEIDOT SAVIENOJ.</string>
+    <string name="smart_network_toast_connecting">Savienošana ar ierīci %1$s</string>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Phát hiện kết nối WLAN yếu</string>
+    <string name="wifi_auto_network_switch_setting_msg">Tự động chuyển sang một mạng ưa thích khi cả mạng WLAN và mạng di động đều khả dụng.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Bạn lúc nào cũng có thể truy cập vào các tùy chọn WLAN để thay đổi cài đặt.</string>
+    <string name="smart_network_settings_msg">Khi phát hiện thấy mạng WLAN có chất lượng kết nối kém, thiết bị sẽ chuyển sang dùng mạng di động. Khi tính năng này tắt, kết nối WLAN sẽ được ưu tiên.</string>
+    <string name="smart_network_settings_supplement">Tính năng này sẽ không ảnh hưởng đến các ứng dụng chỉ cho phép kết nối với WLAN hoặc mạng di động</string>
+    <string name="smart_network_settings_desc">Sử dụng công nghệ học sâu của Sony, Kết nối thông minh luôn cung cấp kết nối mạng tốt nhất bằng cách tự động chuyển đổi giữa 4G/5G và WLAN tùy thuộc vào chất lượng mạng.</string>
+    <string name="smart_network_settings_connected_switch_title">Sử dụng mạng di động khi chất lượng WLAN kém</string>
+    <string name="smart_network_settings_connected_switch_desc">Dự đoán điều kiện mạng bằng cách phân tích dữ liệu tín hiệu WLAN. Nếu dự kiến chất lượng mạng WLAN kém, mạng này sẽ tự động chuyển sang mạng di động. Kết nối WLAN sẽ được ưu tiên khi sử dụng mạng chủ.</string>
+    <string name="smart_network_settings_entry_switch_title">Ngăn tự động kết nối với các mạng WLAN chất lượng kém</string>
+    <string name="smart_network_settings_entry_switch_desc">Dừng tự động kết nối khi dự kiến chất lượng WLAN kém. Cài đặt này có thể giúp ngăn thiết bị tự động chuyển sang mạng WLAN công cộng có chất lượng thấp hơn.</string>
+    <string name="smart_network_notification_entry_title">Đã phát hiện thấy mạng WLAN chất lượng kém</string>
+    <string name="smart_network_notification_entry_text">Kết nối thông minh đã dự đoán rằng %1$s có chất lượng kém và tạm thời ngăn kết nối tự động với mạng WLAN này.</string>
+    <string name="smart_network_notification_channel_entry_title">Ngăn tự động kết nối với mạng WLAN chất lượng kém</string>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Zaznana je šibka povezava Wi-Fi</string>
+    <string name="notification_text">Tapnite, če želite omogočiti stikalo za samodejno omrežje, da bo vaše omrežje stabilno ob uporabili mobilnega omrežja</string>
+    <string name="notification_action_settings">Odpri »Nastavitve«</string>
+    <string name="notification_action_no_thanks">Ne, hvala</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Uporaba storitve</string>
+    <string name="wifi_auto_network_switch_setting_msg">Samodejno preklopite na želeno omrežje, kadar sta na voljo omrežje Wi-Fi in mobilno omrežje.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Nastavitev lahko spremenite kadar koli pozneje tako, da odprete nastavitve za Wi-Fi.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Nasveti</string>
+    <string name="wifi_auto_network_switch_setting">Samodejni preklop na omrežje</string>
+    <string name="settings_on">Vklopljeno</string>
+    <string name="settings_off">Izklopljeno</string>
+    <string name="smart_network_settings_title">Pametna povezljivost</string>
+    <string name="smart_network_settings_switch_txt">Uporabi pametno povez.</string>
+    <string name="smart_network_settings_msg">Ko naprava zazna slabo kakovost povezave z omrežjem Wi-Fi, bo uporabila mobilno omrežje. Če je ta funkcija izklopljena, ima prednost povezava Wi-Fi.</string>
+    <string name="smart_network_settings_supplement">Ta funkcija ne vpliva na aplikacije, ki omejujejo povezave samo na omrežje Wi-Fi ali mobilno omrežje.</string>
+    <string name="sne_app_name_txt">Pametna povezljivost</string>
+    <string name="smart_network_settings_desc">Pametna povezljivost uporablja Sonyjevo tehnologijo globokega učenja in zagotavlja najboljšo omrežno povezavo s samodejnim preklapljanjem med omrežji 4G/5G in omrežjem Wi-Fi glede na kakovost omrežne povezave.</string>
+    <string name="smart_network_settings_connected_switch_title">Uporabi mobilno omrežje ob slabi kakovosti Wi-Fi</string>
+    <string name="smart_network_settings_connected_switch_desc">Predvidi stanje omrežja z analizo podatkov o signalu povezave Wi-Fi. Če je pričakovana slaba kakovost povezave Wi-Fi, samodejno preklopi na mobilno omrežje. Pri uporabi v domačem omrežju bo imela prednost povezava Wi-Fi.</string>
+    <string name="smart_network_settings_entry_switch_title">Prepreči samodejno povezovanje s slabim Wi-Fi</string>
+    <string name="smart_network_settings_entry_switch_desc">Ustavi samodejno povezovanje ob pričakovani slabi kakovosti povezave Wi-Fi. Tako lahko napravi pomagate preprečiti samodejni preklop na javno omrežje Wi-Fi slabše kakovosti.</string>
+    <string name="smart_network_settings_desc_summary">Samodejna izbira najboljšega omrežja</string>
+    <string name="smart_network_notification_entry_title">Zaznano omrežje Wi-Fi slabe kakovosti</string>
+    <string name="smart_network_notification_entry_text">Pametna povezljivost je predvidela, da je kakovost omrežja %1$s slaba, zato je začasno preprečila povezovanje s tem omrežjem Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Preprečevanje samodejnega povezovanja s slabim Wi-Fi</string>
+    <string name="smart_network_notification_entry_button">ODPRITE NASTAVITVE</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">POVEŽI</string>
+    <string name="smart_network_toast_connecting">Vzpostavljanje povezave z omrežjem %1$s</string>
+</resources>

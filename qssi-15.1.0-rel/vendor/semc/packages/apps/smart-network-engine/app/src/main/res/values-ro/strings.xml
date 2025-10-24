@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">S-a detectat o conexiune Wi-Fi slabă</string>
+    <string name="notification_text">Atingeţi pentru a activa funcţia de comutare automată a reţelei, astfel încât să beneficiaţi de o conexiune stabilă prin utilizarea reţelei mobile</string>
+    <string name="notification_action_settings">Mergeţi la Setări</string>
+    <string name="notification_action_no_thanks">Nu, mulţumesc</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Utilizați serviciul</string>
+    <string name="wifi_auto_network_switch_setting_msg">Comutaţi automat la o reţea preferată atunci când sunt disponibile atât reţeaua Wi-Fi, cât şi reţeaua mobilă.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Puteţi să accesaţi Preferinţe Wi-Fi pentru a schimba ulterior configuraţia.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Sfaturi</string>
+    <string name="wifi_auto_network_switch_setting">Comutare automată reţea</string>
+    <string name="settings_on">Activat</string>
+    <string name="settings_off">Dezactivat</string>
+    <string name="smart_network_settings_title">Suport conectare inteligent</string>
+    <string name="smart_network_settings_switch_txt">Utilizaţi Suport conec. intelig.</string>
+    <string name="smart_network_settings_msg">Dacă se detectează că o reţea Wi-Fi are o conexiune de calitate slabă, se va utiliza reţeaua de telefonie mobilă. Dacă această funcţie este dezactivată, se va acorda prioritate conexiunii Wi-Fi.</string>
+    <string name="smart_network_settings_supplement">Această funcție nu va afecta aplicațiile care limitează conexiunile doar la Wi-Fi sau doar la rețele de telefonie mobilă</string>
+    <string name="sne_app_name_txt">Suport conectare inteligent</string>
+    <string name="smart_network_settings_desc">Datorită tehnologiei de învățare aprofundată a Sony, suportul de conectare inteligent furnizează întotdeauna cea mai bună conexiune la rețea prin comutarea automată între 4G/5G și Wi-Fi în funcție de calitatea rețelei.</string>
+    <string name="smart_network_settings_connected_switch_title">Utilizare rețea mobilă când calitatea Wi-Fi este slabă</string>
+    <string name="smart_network_settings_connected_switch_desc">Se preconizează condițiile de rețea prin analiza datelor semnalului Wi-Fi. Dacă este așteptată o calitate Wi-Fi slabă, se va comuta automat la o rețea de telefonie mobilă. Conexiunea Wi-Fi va fi prioritizată pentru utilizarea rețelei de reședință.</string>
+    <string name="smart_network_settings_entry_switch_title">Prevenire conexiune auto. la rețele Wi-Fi slabe</string>
+    <string name="smart_network_settings_entry_switch_desc">Oprire conexiune automată când se așteaptă o calitate Wi-Fi slabă. Aceasta poate împiedica dispozitivul să comute automat la Wi-Fi public de calitate inferioară.</string>
+    <string name="smart_network_settings_desc_summary">Selectați automat cea mai bună rețea</string>
+    <string name="smart_network_notification_entry_title">S-a detectat o rețea Wi-Fi slabă</string>
+    <string name="smart_network_notification_entry_text">Suportul de conectare inteligent a prezis că %1$s are calitate slab și a prevenit temporar conectarea automată la această rețea Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Prevenirea conexiunii auto. la rețele Wi-Fi slabe</string>
+    <string name="smart_network_notification_entry_button">MERGEȚI LA SETĂRI</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">CONECTARE ORICUM</string>
+    <string name="smart_network_toast_connecting">Se conectează la %1$s</string>
+</resources>

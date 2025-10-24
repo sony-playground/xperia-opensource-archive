@@ -1,0 +1,24 @@
+# For ActivityManager.getService()
++android.app.ActivityManager*
+
+# For IActivityManager.register/unregisterProcessObserver()
++android.app.IActivityManager*
+
+# Used by CellularLogger.java
++android.app.IProcessObserver*
+
+# For Context.startServiceAsUser()
++android.content.Context*
+
+# Used by CellularDataCollector.java
++android.telephony.AccessNetworkConstants*
++android.telephony.CellSignalStrengthLte*
++android.telephony.NetworkRegistrationInfo*
++android.telephony.ServiceState*
+
+# For StateMachine related classes used by CellularLogger.java
++android.telephony.TelephonyManager*
++android.telephony.PhysicalChannelConfig*
++com.android.internal.util.IState*
++com.android.internal.util.State*
++com.android.internal.util.StateMachine*

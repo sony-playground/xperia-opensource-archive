@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Sambungan Wi-Fi lemah dikesan</string>
+    <string name="notification_text">Ketik untuk mendayakan pertukaran rangkaian Auto bagi menjadikan rangkaian anda stabil menggunakan rangkaian mudah alih</string>
+    <string name="notification_action_settings">Pergi ke Tetapan</string>
+    <string name="notification_action_no_thanks">Tidak, trima kasih</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Gunakan perkhidmatan</string>
+    <string name="wifi_auto_network_switch_setting_msg">Tukar ke rangkaian pilihan secara automatik apabila kedua-dua rangkaian Wi-Fi dan rangkaian mudah alih tersedia.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Anda boleh sentiasa pergi ke pilihan Wi-Fi untuk mengubah penyediaan kemudian.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Petua</string>
+    <string name="wifi_auto_network_switch_setting">Pertukaran rangkaian auto</string>
+    <string name="settings_on">Dihidupkan</string>
+    <string name="settings_off">Dimatikan</string>
+    <string name="smart_network_settings_title">Ketersambungan pintar</string>
+    <string name="smart_network_settings_switch_txt">Gunakn Ktrsambungn pintar</string>
+    <string name="smart_network_settings_msg">Rangkaian mudah alih akan digunakan apabila rangkaian Wi-Fi dikesan mempunyai kualiti sambungan yang teruk. Apabila dimatikan, sambungan Wi-Fi akan diutamakan.</string>
+    <string name="smart_network_settings_supplement">Ciri ini tidak akan menjejaskan aplikasi yang mengehadkan sambungan ke Wi-Fi sahaja atau rangkaian mudah alih sahaja</string>
+    <string name="sne_app_name_txt">Ketersambungan pintar</string>
+    <string name="smart_network_settings_desc">Dengan menggunakan teknologi pembelajaran mendalam, Ketersambungan pintar selalu menyediakan sambungan rangkaian terbaik dengan bertukar antara 4G/5G dan Wi-Fi bergantung kepada mutu rangkaian.</string>
+    <string name="smart_network_settings_connected_switch_title">Guna rangkaian mudah alih jika mutu Wi-Fi lmh</string>
+    <string name="smart_network_settings_connected_switch_desc">Ramalkan keadaan rangkaian dengan membuat analisis data isyarat Wi-Fi. Jika mutu rangkaian Wi-Fi dijangkakan lemah, ini akan bertukar ke rangkaian mudah alih secara automatik. Sambungan Wi-Fi akan diutamakan untuk penggunaan rangkaian rumah.</string>
+    <string name="smart_network_settings_entry_switch_title">Cegah smbungn automtik ke rngkaian Wi-Fi mutu lmh</string>
+    <string name="smart_network_settings_entry_switch_desc">Hentikan sambungan automatik apabila mutu Wi-Fi lemah dijangkakan. Tindakan ini boleh membantu mencegah peranti anda daripada bertukar ke Wi-Fi awam bermutu lemah.</string>
+    <string name="smart_network_settings_desc_summary">Memilih rangkaian yang terbaik secara automatik</string>
+    <string name="smart_network_notification_entry_title">Rangkaian Wi-Fi berkualiti lemah dikesan</string>
+    <string name="smart_network_notification_entry_text">Ketersambungan pintar meramalkan %1$s bermutu rendah, dan menghalang sambungan automatik secara sementara kepada rangkaian Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Cegah smbungn automtik ke rngkaian Wi-Fi mutu lmh</string>
+    <string name="smart_network_notification_entry_button">PERGI KE TETAPAN</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">SAMBUNGKAN JUGA</string>
+    <string name="smart_network_toast_connecting">Menyambung ke %1$s</string>
+</resources>

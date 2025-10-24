@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2021, 2022 Sony Corporation
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Indicates that the FL system is enabled (all features that utilizes FL system are enabled) -->
+    <bool name="config_fl_system_enabled">true</bool>
+    <!--
+       The default FL system test client configuration file name
+       If PROP_FLS_TEST_CLIENT_CONFIG_FILE is specified, this config value will be ignored.
+    -->
+    <string name="config_fl_system_test_client_config_file"></string>
+    <!--
+       The default FL system server environment
+       If PROP_FLS_SERVER_ENV is specified, this config value will be ignored.
+    -->
+    <string name="config_fl_system_server_env">prod</string>
+</resources>

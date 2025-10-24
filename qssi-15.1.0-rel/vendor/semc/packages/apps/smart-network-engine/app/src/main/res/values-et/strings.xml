@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Tuvastatud halb Wi-Fi-ühendus</string>
+    <string name="notification_text">Koputage automaatse võrgulüliti lubamiseks, et muuta võrk stabiilsemaks mobiilvõrku kasutades</string>
+    <string name="notification_action_settings">Vali Seaded</string>
+    <string name="notification_action_no_thanks">Tänan, ei</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Kasuta teenust</string>
+    <string name="wifi_auto_network_switch_setting_msg">Kui Wi-Fi- ja mobiilivõrk on mõlemad saadaval, lülita automaatselt eelistatud võrgule.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Saate alati hiljem seadistust Wi-Fi eelistustes muuta.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Näpunäited</string>
+    <string name="wifi_auto_network_switch_setting">Automaatne võrgulüliti</string>
+    <string name="settings_on">Sees</string>
+    <string name="settings_off">Väljas</string>
+    <string name="smart_network_settings_title">Nutikas ühenduvus</string>
+    <string name="smart_network_settings_switch_txt">Nutika ühenduse kasutamine</string>
+    <string name="smart_network_settings_msg">Kui Wi-Fi võrgul tuvastatakse halb ühenduse kvaliteet, kasutatakse mobiilivõrku selle asemel. Wi-Fi võrk on prioriteetsem, kui see funktsioon on välja lülitatud.</string>
+    <string name="smart_network_settings_supplement">See funktsioon ei mõjuta rakendusi, mis piiravad ainult Wi-Fi või ainult mobiilsidevõrgu ühendusi</string>
+    <string name="sne_app_name_txt">Nutikas ühenduvus</string>
+    <string name="smart_network_settings_desc">Kasutades Sony süvaõppetehnoloogiat, pakub nutikas Smart-ühenduvus alati parimat võrguühendust, lülitudes automaatselt 4G/5G ja Wi-Fi vahel sõltuvalt võrgu kvaliteedist.</string>
+    <string name="smart_network_settings_connected_switch_title">Mobiilsidevõrgu kasutamine, kui Wi-Fi kvaliteet on halb</string>
+    <string name="smart_network_settings_connected_switch_desc">Ennustab võrgutingimusi, analüüsides Wi-Fi-signaali andmeid. Kui eeldatakse, et Wi-Fi-võrgu kvaliteet on halb, lülitub see automaatselt mobiilsidevõrku. Koduvõrgu kasutamisel eelistatakse Wi-Fi-ühendust.</string>
+    <string name="smart_network_settings_entry_switch_title">Kehvade Wi-Fi-võrkudega mitte-autom ühenduse loom</string>
+    <string name="smart_network_settings_entry_switch_desc">Peatab automaatselt ühenduse, kui oodata on halba Wi-Fi-kvaliteeti. See võimaldab vältida seadmel automaatselt madalama kvaliteediga avalikule Wi-Fi-ühendusele üleminekut.</string>
+    <string name="smart_network_settings_desc_summary">Automaatselt parima võrgu valimine</string>
+    <string name="smart_network_notification_entry_title">Tuvastatud halb Wi-Fi-võrk</string>
+    <string name="smart_network_notification_entry_text">Nutikas ühenduvus on ennustanud, et %1$s on halva kvaliteediga, ja takistas ajutiselt selle WiFi-võrguga automaatset ühendust.</string>
+    <string name="smart_network_notification_channel_entry_title">Kehva Wi-Fi-ga mitte-autom ühenduse loomine</string>
+    <string name="smart_network_notification_entry_button">VALI SEADED</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">ÜHENDA IKKAGI</string>
+    <string name="smart_network_toast_connecting">Seadmega %1$s ühenduse loomine</string>
+</resources>

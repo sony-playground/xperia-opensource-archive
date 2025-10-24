@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Noteikts vājš WLAN savienojums</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automātiski pārslēdziet uz izvēlēto tīklu, ja ir pieejams gan WLAN, gan mobilais tīkls.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Jūs vienmēr varat pāriet uz WLAN preferencēm, lai vēlāk mainītu iestatījumus.</string>
+    <string name="smart_network_settings_msg">Kad tiek konstatēts, ka WLAN tīklam ir slikta savienojuma kvalitāte, tā vietā tiek izmantots mobilo sakaru tīkls. Šo opciju izslēdzot, WLAN savienojumam tiks noteikta prioritāte.</string>
+    <string name="smart_network_settings_supplement">Šī funkcija neietekmēs lietotnes, kas ierobežo savienojumus tikai ar WLAN vai mobilo tīklu</string>
+    <string name="smart_network_settings_desc">Izmantojot Sony padziļinātās mācīšanās tehnoloģiju, viedā savienojamība vienmēr nodrošina labāko tīkla savienojumu, automātiski pārslēdzoties starp 4G/5G un WLAN atkarībā no tīkla kvalitātes.</string>
+    <string name="smart_network_settings_connected_switch_title">Izm. mob. tīklu, ja WLAN kvalitāte ir zema</string>
+    <string name="smart_network_settings_connected_switch_desc">Prognozējiet tīkla apstākļus, analizējot WLAN signāla datus. Ja ir paredzama zema WLAN tīkla kvalitāte, tiks automātiski ieslēgts mobilais tīkls. WLAN savienojumam būs prioritāte mājas tīkla lietošanā.</string>
+    <string name="smart_network_settings_entry_switch_title">Nepieļaujiet autom. savien. vājas darbības WLAN tīkliem</string>
+    <string name="smart_network_settings_entry_switch_desc">Apturiet automātisko savienojuma izveidi, ja ir paredzama zema WLAN kvalitāte. Tas var palīdzēt novērst ierīces automātisku pārslēgšanos uz zemākas kvalitātes publisko WLAN tīklu.</string>
+    <string name="smart_network_notification_entry_title">Noteikts vājš WLAN savienojums</string>
+    <string name="smart_network_notification_entry_text">Viedās savienojamības funkcija konstatē, ka %1$s ir zema kvalitāte, īslaicīgi nepieļaujot automātisku savienojumu ar šo WLAN tīklu.</string>
+    <string name="smart_network_notification_channel_entry_title">Nepieļauj autom. sav. ar vāja savien. WLAN tīklu</string>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">S\'ha detectat conn. Wi-Fi amb poca cob.</string>
+    <string name="notification_text">Puntegeu per habilitar Canvi de xarxa automàtic per aconseguir que la vostra xarxa sigui estable utilitzant la xarxa mòbil</string>
+    <string name="notification_action_settings">Vés a Paràmetres</string>
+    <string name="notification_action_no_thanks">No, gràcies</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Utilitza el servei</string>
+    <string name="wifi_auto_network_switch_setting_msg">Canvia de forma automàtica a una xarxa preferida quan la xarxa Wi-Fi i la xarxa mòbil estan disponibles.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Sempre podeu anar a les preferències de la Wi-Fi per canviar la configuració més tard.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Suggeriments</string>
+    <string name="wifi_auto_network_switch_setting">Canvi de xarxa automàtic</string>
+    <string name="settings_on">Activat</string>
+    <string name="settings_off">Desactivat</string>
+    <string name="smart_network_settings_title">Connectivitat intel·ligent</string>
+    <string name="smart_network_settings_switch_txt">Utilitza Connectiv. intel·ligent</string>
+    <string name="smart_network_settings_msg">Si es detecta que una xarxa Wi-Fi té poca cobertura, s\'utilitzarà una xarxa mòbil. Quan es desactivi, es prioritzarà la connexió Wi-Fi.</string>
+    <string name="smart_network_settings_supplement">Aquesta característica no afectarà les aplicacions que limiten les connexions a només Wi-Fi o només xarxa mòbil</string>
+    <string name="sne_app_name_txt">Connectivitat intel·ligent</string>
+    <string name="smart_network_settings_desc">Mitjançant la tecnologia d\'aprenentatge profund de Sony, la Connectivitat intel·ligent sempre proporciona la millor connexió de xarxa, ja que canvia automàticament entre 4G/5G i Wi-Fi en funció de la qualitat de la xarxa.</string>
+    <string name="smart_network_settings_connected_switch_title">Utilitzar una xarxa mòbil si la qualitat del Wi-Fi és deficient</string>
+    <string name="smart_network_settings_connected_switch_desc">Analitza les dades del senyal Wi-Fi per predir l\'estat de la xarxa. Si s\'espera una qualitat de xarxa Wi-Fi deficient, es canviarà automàticament a una xarxa mòbil. Per a l\'ús domèstic de la xarxa, tindrà prioritat la connexió Wi-Fi.</string>
+    <string name="smart_network_settings_entry_switch_title">Impedir connexió auto a xarxes Wi-Fi deficients</string>
+    <string name="smart_network_settings_entry_switch_desc">Atura automàticament la connexió quan s\'espera una qualitat Wi-Fi deficient. Això pot ajudar a evitar que el telèfon intel·ligent canviï automàticament a una Wi-Fi pública de menys qualitat.</string>
+    <string name="smart_network_settings_desc_summary">Seleccionar automàticament la millor xarxa</string>
+    <string name="smart_network_notification_entry_title">S\'ha detectat una xarxa Wi-Fi de qualitat deficient</string>
+    <string name="smart_network_notification_entry_text">La connectivitat intel·ligent ha pronosticat que la qualitat de %1$s és deficient i ha impedit temporalment la connexió automàtica a aquesta xarxa Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Impedir conn. auto a xarxes Wi-Fi deficients</string>
+    <string name="smart_network_notification_entry_button">ANAR A CONFIG.</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">CONNEC. IGUALMENT</string>
+    <string name="smart_network_toast_connecting">S\'està connectant a %1$s</string>
+</resources>

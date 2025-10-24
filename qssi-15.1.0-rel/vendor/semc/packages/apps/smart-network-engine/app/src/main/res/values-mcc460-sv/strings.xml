@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">En dålig WLAN-anslutning har upptäckts</string>
+    <string name="wifi_auto_network_switch_setting_msg">Växla automatiskt till det prioriterade nätverket när både WLAN-nätverk och mobilnät är tillgängliga.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Du kan alltid gå till Inställningar för WLAN och ändra konfigurationen senare.</string>
+    <string name="smart_network_settings_msg">När det upptäcks att ett WLAN-nätverk har dålig anslutningskvalitet används mobilnätet istället. När funktionen inaktiveras prioriteras WLAN-anslutning.</string>
+    <string name="smart_network_settings_supplement">Funktionen påverkar inte appar som begränsar anslutningar till endast WLAN eller endast mobilnät</string>
+    <string name="smart_network_settings_desc">Med Sonys teknik för djupinlärning kan Smart anslutning alltid ge bästa nätverksanslutning genom att automatiskt växla mellan 4G/5G och WLAN beroende på nätverkskvalitet.</string>
+    <string name="smart_network_settings_connected_switch_title">Använd mobilnätet om WLAN-kvaliteten är dålig</string>
+    <string name="smart_network_settings_connected_switch_desc">Förutsäg nätverksförhållanden genom att analysera WLAN-signaldata. Om det förväntas dålig WLAN-nätverkskvalitet kan det automatiskt växla till mobilnätverk. WLAN-anslutning prioriteras vid hemnätsanslutning.</string>
+    <string name="smart_network_settings_entry_switch_title">Hindra autoanslutning till WLAN-nätverk med dålig kvalitet</string>
+    <string name="smart_network_settings_entry_switch_desc">Stoppa automatisk anslutning om det förväntas dålig kvalitet för WLAN. Det kan hjälpa till att förhindra att din enhet automatiskt växlar till öppna WLAN-nätverk som har dålig kvalitet.</string>
+    <string name="smart_network_notification_entry_title">WLAN-nätverk med dålig kvalitet upptäckt</string>
+    <string name="smart_network_notification_entry_text">Smart anslutning ser att %1$s har dålig kvalitet och hindrade tillfälligt autoanslutning till detta WLAN-nätverk.</string>
+    <string name="smart_network_notification_channel_entry_title">Hindra autoanslutning till WLAN-nätverk med dålig kvalitet</string>
+</resources>

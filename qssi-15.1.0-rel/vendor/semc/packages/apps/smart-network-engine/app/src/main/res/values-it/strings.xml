@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Connessione Wi-Fi debole rilevata</string>
+    <string name="notification_text">Sfiora per abilitare Passaggio automatico rete per rendere la rete stabile tramite rete mobile</string>
+    <string name="notification_action_settings">Vai a Impostazioni</string>
+    <string name="notification_action_no_thanks">No, grazie</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Utilizza servizio</string>
+    <string name="wifi_auto_network_switch_setting_msg">Passa automaticamente alla rete preferita quando sono disponibili una rete Wi-Fi e una rete mobile.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Puoi sempre modificare la configurazione più avanti da Preferenze Wi-Fi.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Suggerimenti</string>
+    <string name="wifi_auto_network_switch_setting">Passaggio automatico rete</string>
+    <string name="settings_on">Attivo</string>
+    <string name="settings_off">Disattivato</string>
+    <string name="smart_network_settings_title">Assistenza di rete</string>
+    <string name="smart_network_settings_switch_txt">Usa Assistenza di rete</string>
+    <string name="smart_network_settings_msg">Se viene rilevata una rete Wi-Fi con una connessione debole, verrà utilizzata la rete mobile al suo posto. Se disabilitata, la connessione Wi-Fi avrà la priorità.</string>
+    <string name="smart_network_settings_supplement">Questa funzione non influirà sulle applicazioni che limitano le connessioni solo al Wi-Fi o solo alla rete mobile</string>
+    <string name="sne_app_name_txt">Assistenza di rete</string>
+    <string name="smart_network_settings_desc">Basata sulla tecnologia Deep Learning di Sony, Assistenza di rete fornisce sempre la connessione di rete più efficiente alternando automaticamente tra le reti 4G/5G e Wi-Fi, a seconda della qualità della rete.</string>
+    <string name="smart_network_settings_connected_switch_title">Usa rete mobile quando la qualità del Wi-Fi è scarsa</string>
+    <string name="smart_network_settings_connected_switch_desc">Prevede le condizioni della rete analizzando i dati del segnale Wi-Fi. Se si prevede che la qualità del segnale della rete Wi-Fi sarà scarsa, si passerà automaticamente a una rete mobile. La connessione Wi-Fi avrà la priorità per l\'uso della rete domestica.</string>
+    <string name="smart_network_settings_entry_switch_title">Impedisci conn. autom. a reti Wi-Fi con qual. scarsa</string>
+    <string name="smart_network_settings_entry_switch_desc">Interrompi connessione automatica quando si prevede una qualità scarsa del segnale Wi-Fi. Questa impostazione consente di impedire al dispositivo di passare automaticamente ad una rete Wi-Fi pubblica con segnale di qualità inferiore.</string>
+    <string name="smart_network_settings_desc_summary">Seleziona automaticamente rete migliore</string>
+    <string name="smart_network_notification_entry_title">Rete Wi-Fi con qualità scarsa rilevata</string>
+    <string name="smart_network_notification_entry_text">Assistenza di rete ha previsto che la qualità del segnale di %1$s è scarsa e ha temporaneamente impedito la connessione automatica a questa rete Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Impedisci conn. aut. a rete Wi-Fi con qualità scarsa</string>
+    <string name="smart_network_notification_entry_button">VAI A IMPOSTAZIONI</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">CONNETTI COMUNQUE</string>
+    <string name="smart_network_toast_connecting">Connessione a %1$s</string>
+</resources>

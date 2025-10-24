@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">May mahinang koneksyon ng Wi-Fi</string>
+    <string name="notification_text">I-tap para i-enable ang Auto network switch para gawing matatag ang network mo sa pamamagitan ng paggamit ng mobile network</string>
+    <string name="notification_action_settings">Mga Setting</string>
+    <string name="notification_action_no_thanks">Hindi, salamat</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Gumamit ng serbisyo</string>
+    <string name="wifi_auto_network_switch_setting_msg">Awtomatikong lumipat sa mas gustong network kapag parehong may Wi-Fi at mobile network.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Makakapunta ka sa kagustuhan sa Wi-Fi anumang oras para baguhin ang setup sa ibang oras.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Mga Tip</string>
+    <string name="wifi_auto_network_switch_setting">Awtomatikong lumipat ng network</string>
+    <string name="settings_on">Naka-on</string>
+    <string name="settings_off">Naka-off</string>
+    <string name="smart_network_settings_title">Smart connectivity</string>
+    <string name="smart_network_settings_switch_txt">Smart connectivity</string>
+    <string name="smart_network_settings_msg">Kapag naka-detect ang isang Wi-Fi network ng mahinang kalidad ng koneksyon, gagamitin ang mobile network sa halip. Kapag naka-off ito, bibigyang priyoridad ang Wi-Fi connection.</string>
+    <string name="smart_network_settings_supplement">Hindi maapektuhan ng feature na ito ang mga application na naglilimita sa mga koneksiyon sa Wi-Fi lang o sa mobile network lang</string>
+    <string name="sne_app_name_txt">Smart connectivity</string>
+    <string name="smart_network_settings_desc">Gamit ang deep learning technology ng Sony, laging naibibigay ng Smart connectivity ang pinakamahusay na koneksiyon sa network sa pamamagitan ng awtomatikong paglilipat sa pagitan ng 4G/5G at Wi-Fi depende sa kalidad ng network.</string>
+    <string name="smart_network_settings_connected_switch_title">Gamitin ang mobile network kapag mahina ang Wi-Fi</string>
+    <string name="smart_network_settings_connected_switch_desc">Hulaan ang mga kondisyon ng network sa pamamagitan ng pag-analisa sa signal data ng Wi-Fi. Kapag inaasahan ang mahinang kalidad ng Wi-Fi network, awtomatiko itong lilipat sa isang mobile network. Uunahin ang koneksiyon sa Wi-Fi para sa paggamit sa tahanan.</string>
+    <string name="smart_network_settings_entry_switch_title">Pigilan ang pag-auto connect sa mahihinang Wi-Fi</string>
+    <string name="smart_network_settings_entry_switch_desc">Ihinto ang awtomatikong pagkonekta kapag inaasahan na mahina ang kalidad ng Wi-Fi. Makatutulong ito sa pagpigil sa telepono mo na awtomatikong lumipat sa mas mahinang kalidad na pampublikong Wi-Fi.</string>
+    <string name="smart_network_settings_desc_summary">Awtmatikong piliin ang pinakamahusay na network</string>
+    <string name="smart_network_notification_entry_title">Nadetekta ang mahinang kalidad ng Wi-Fi network</string>
+    <string name="smart_network_notification_entry_text">Hinuha ng Smart connectivity na mahina ang kalidad ng %1$s, at pansamantalang pinigilan ang awtomatikong pagkonekta sa Wi-Fi network na ito.</string>
+    <string name="smart_network_notification_channel_entry_title">Pinipigilan ang awto konek sa mahinang Wi-Fi network</string>
+    <string name="smart_network_notification_entry_button">PUNTA SA SETTING</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">KUMONEKTA PA RIN</string>
+    <string name="smart_network_toast_connecting">Kumukonekta sa %1$s</string>
+</resources>

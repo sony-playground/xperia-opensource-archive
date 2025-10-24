@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Слабкий сигнал Wi-Fi</string>
+    <string name="notification_text">Торкніться, щоб увімкнути функцію автопереключення мережі й забезпечити стабільне підключення через мобільну мережу</string>
+    <string name="notification_action_settings">До установок</string>
+    <string name="notification_action_no_thanks">Ні, дякую</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Використовувати сервіс</string>
+    <string name="wifi_auto_network_switch_setting_msg">Автоматичне переключення на основну мережу, коли доступні обидві мережі (Wi-Fi і мобільна).</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Ви завжди можете змінити це налаштування в параметрах Wi-Fi.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Поради</string>
+    <string name="wifi_auto_network_switch_setting">Автопереключення мережі</string>
+    <string name="settings_on">Увімкнуто</string>
+    <string name="settings_off">Вимкнено</string>
+    <string name="smart_network_settings_title">Інтелект. підключення</string>
+    <string name="smart_network_settings_switch_txt">Викор. Інтел. підключення</string>
+    <string name="smart_network_settings_msg">У разі погіршення якості підключення до мережі Wi-Fi, замість неї використовуватиметься мобільна мережа. Якщо вимкнути цю функцію, перевагу матиме з’єднання Wi-Fi.</string>
+    <string name="smart_network_settings_supplement">Ця функція не впливає на програми, які обмежують підключення лише до мережі Wi-Fi або лише до мобільної мережі</string>
+    <string name="sne_app_name_txt">Інтелект. підключення</string>
+    <string name="smart_network_settings_desc">Завдяки технології глибокого навчання Sony Інтелектуальне підключення завжди забезпечує найкраще з’єднання з мережею, автоматично перемикаючись між 4G/5G та Wi-Fi залежно від якості мережі.</string>
+    <string name="smart_network_settings_connected_switch_title">Використов. моб. мережу в разі поганої якості Wi-Fi</string>
+    <string name="smart_network_settings_connected_switch_desc">Прогнозувати стан мережі через аналіз даних сигналу Wi-Fi. Якщо очікується погана якість сигналу Wi-Fi, відбудеться автоматичне перемикання на мобільну мережу. У разі використання домашньої мережі перевагу матиме підключення Wi-Fi.</string>
+    <string name="smart_network_settings_entry_switch_title">Запобігати автопідключ. до Wi-Fi поганої якості</string>
+    <string name="smart_network_settings_entry_switch_desc">Зупиняти автоматичне підключення, якщо очікується погана якість Wi-Fi. Це може допомогти запобігти автоматичному перемиканню пристрою на загальнодоступні мережі Wi-Fi низької якості.</string>
+    <string name="smart_network_settings_desc_summary">Автоматичний вибір найкращої мережі</string>
+    <string name="smart_network_notification_entry_title">Виявлено мережу Wi-Fi з поганим сигналом</string>
+    <string name="smart_network_notification_entry_text">Інтелектуальне підключення спрогнозувало, що %1$s має погану якість і тимчасово заборонило автоматичне підключення до цієї мережі Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Запобіг. автопідкл. до мережі Wi-Fi поганої якості</string>
+    <string name="smart_network_notification_entry_button">ПЕР. ДО НАЛАШТУВАНЬ</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">ПІДКЛЮЧИТИСЯ</string>
+    <string name="smart_network_toast_connecting">Підключення до %1$s</string>
+</resources>

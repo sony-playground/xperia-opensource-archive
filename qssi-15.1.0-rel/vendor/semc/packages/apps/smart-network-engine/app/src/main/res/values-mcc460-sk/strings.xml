@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Bolo zistené slabé WLAN pripojenie</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automaticky prepne na želanú sieť, keď sú k dispozícii obidve siete – WLAN aj mobilná sieť.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Nastavenie môžete neskôr zmeniť v predvoľbách WLAN.</string>
+    <string name="smart_network_settings_msg">Keď sa zistí slabá kvalita pripojenia siete WLAN, použije sa mobilná sieť. Po vypnutí tejto funkcie sa uprednostní pripojenie WLAN.</string>
+    <string name="smart_network_settings_supplement">Táto funkcia nemá vplyv na aplikácie, ktoré obmedzujú pripojenie len na sieť WLAN alebo len na mobilnú sieť</string>
+    <string name="smart_network_settings_desc">Inteligentné prepínanie sietí využíva technológiu hĺbkového učenia spoločnosti Sony a vždy poskytuje najlepšie pripojenie k sieti automatickým prepínaním medzi sieťami 4G/5G a WLAN v závislosti od kvality siete.</string>
+    <string name="smart_network_settings_connected_switch_title">Použiť mobilnú sieť, ak je kvalita siete WLAN zlá</string>
+    <string name="smart_network_settings_connected_switch_desc">Predpovedá podmienky siete analyzovaním údajov o signáli siete WLAN. Ak sa očakáva zlá kvalita siete WLAN, táto položka sa automaticky prepne na mobilnú sieť. Ak sa používa domáca sieť, uprednostní sa pripojenie pomocou siete WLAN.</string>
+    <string name="smart_network_settings_entry_switch_title">Zabrániť automatickému pripojeniu k slabým WLAN</string>
+    <string name="smart_network_settings_entry_switch_desc">Zastaví automatické pripojenie, ak sa očakáva zlá kvalita siete WLAN. To môže zabrániť automatickému prepnutiu vášho zariadenia na verejnú sieť WLAN s nižšou kvalitou.</string>
+    <string name="smart_network_notification_entry_title">Bola zistená slabá kvalita siete WLAN</string>
+    <string name="smart_network_notification_entry_text">Inteligentné prepínanie sietí predpovedalo, že %1$s má slabú kvalitu a dočasne zabránilo automatickému pripojeniu k tejto sieti WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Zabránenie automatickému pripojeniu k slabej sieti WLAN</string>
+</resources>

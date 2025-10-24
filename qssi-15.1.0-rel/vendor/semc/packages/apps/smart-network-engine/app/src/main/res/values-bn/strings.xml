@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">দুর্বল Wi-Fi সংযোগ সনাক্ত করা হয়েছে</string>
+    <string name="notification_text">মোবাইল নেটওয়ার্ক ব্যবহার এর দ্বারা আপনার নেটওয়ার্ক স্থিতিশীল করতে অটো নেটওয়ার্ক সুইচ সক্ষম করতে আলতো চাপুন</string>
+    <string name="notification_action_settings">সেটিং-এ যান</string>
+    <string name="notification_action_no_thanks">না ধন্যবাদ</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">পরিষেবা ব্যবহার করুন</string>
+    <string name="wifi_auto_network_switch_setting_msg">যখন Wi-Fi নেটওয়ার্ক ও মোবাইল নেটওয়ার্ক উভয়ই উপলভ্য থাকে তখন স্বয়ংক্রিয়ভাবে একটি পছন্দের নেটওয়ার্কে পাল্টান।</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">আপনি পরবর্তীতে সেটআপ পরিবর্তন করতে সর্বদা Wi-Fi অভিরুচি নির্বাচনের অগ্রাধিকারে যেতে পারেন।</string>
+    <string name="wifi_auto_network_switch_notification_channel">টিপস</string>
+    <string name="wifi_auto_network_switch_setting">স্বয়ং নেটওয়ার্কে পাল্টান</string>
+    <string name="settings_on">চালু</string>
+    <string name="settings_off">বন্ধ</string>
+    <string name="smart_network_settings_title">স্মার্ট সংযুক্তি</string>
+    <string name="smart_network_settings_switch_txt">স্মার্ট সংযোগ ব্যবহার করুন</string>
+    <string name="smart_network_settings_msg">যখন কোনও Wi-Fi নেটওয়ার্কে খারাপ গুণমানের সংযোগ শনাক্ত হবে, তখন এর পরিবর্তে মোবাইল নেটওয়ার্ক ব্যবহৃত হবে। আপনি যখন বন্ধ করবেন, তখন Wi-Fi সংযোগ অগ্রাধিকার পাবে।</string>
+    <string name="smart_network_settings_supplement">এই বৈশিষ্ট্যটি এমন অ্যাপ্লিকেশনগুলিকে প্রভাবিত করবে না যা শুধুমাত্র Wi-Fi সংযোগ বা মোবাইল নেটওয়ার্কগুলির ক্ষেত্রে সীমাবদ্ধ</string>
+    <string name="sne_app_name_txt">স্মার্ট সংযুক্তি</string>
+    <string name="smart_network_settings_desc">Sony-র গভীর শিক্ষার প্রযুক্তি ব্যবহার করে, স্মার্ট সংযুক্তি নেটওয়ার্কের গুণমানের ওপর নির্ভর করে 4G/5G এবং Wi-Fi এর মধ্যে স্বয়ংক্রিয়ভাবে পাল্টিয়ে সবসময় সবথেকে ভালো নেটওয়ার্ক সংযোগ প্রদান করে।</string>
+    <string name="smart_network_settings_connected_switch_title">Wi-Fi দুর্বল হলে মোবাইল নেটওয়ার্ক ব্যবহার করে।</string>
+    <string name="smart_network_settings_connected_switch_desc">Wi-Fi সিগনাল ডেটা বিশ্লেষণ করে নেটওয়ার্কের অবস্থাগুলি অনুমান করে। খারাপ মানের Wi-Fi নেটওয়ার্ক প্রত্যাশিত হলে, এটি স্বয়ংক্রিয়ভাবে একটি মোবাইল নেটওয়ার্কে পাল্টাবে। হোম নেটওয়ার্ক ব্যবহারের জন্য Wi-Fi সংযোগগুলিকে অগ্রাধিকার দেওয়া হবে।</string>
+    <string name="smart_network_settings_entry_switch_title">দুর্বল Wi-Fi নেটওয়ার্কগুলির সঙ্গে স্বতঃ সংযোগ আটকান।</string>
+    <string name="smart_network_settings_entry_switch_desc">খারাপ মানের Wi-Fi নেটওয়ার্ক প্রত্যাশিত হলে স্বতঃ সংযোগ বন্ধ করুন। এটি আপনার স্মার্টফোনকে স্বয়ংক্রিয়ভাবে তুলনামূলক নিম্ন মানের সর্বজনীন Wi-Fi তে পাল্টানো আটকাতে সাহায্য করতে পারে।</string>
+    <string name="smart_network_settings_desc_summary">স্বয়ংক্রিয়ভাবে সেরা নেটওয়ার্ক নির্বাচন করুন</string>
+    <string name="smart_network_notification_entry_title">দুর্বল Wi-Fi নেটওয়ার্ক সনাক্ত করা হয়েছে</string>
+    <string name="smart_network_notification_entry_text">স্মার্ট সংযুক্তি অনুমান করেছে যে %1$s হল দুর্বল মানের, এবং সাময়িকভাবে এই Wi-Fi নেটওয়ার্কের সাথে স্বতঃসংযোগে বাঁধা দিচ্ছে।</string>
+    <string name="smart_network_notification_channel_entry_title">দুর্বল Wi-Fi নেটওয়ার্কগুলির সঙ্গে স্বতঃ সংযোগে বাঁধা দিচ্ছে</string>
+    <string name="smart_network_notification_entry_button">সেটিং-এ যান</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">যেকোনো ভাবে যুক্ত করুন</string>
+    <string name="smart_network_toast_connecting">%1$s এর সঙ্গে সংযোগ হচ্ছে</string>
+</resources>

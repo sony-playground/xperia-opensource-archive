@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Wykryto słabe połączenie Wi-Fi</string>
+    <string name="notification_text">Stuknij, aby włączyć Automatyczne przełączanie sieci, które zwiększy stabilność połączenia dzięki sieci komórkowej</string>
+    <string name="notification_action_settings">Idź do Ustawień</string>
+    <string name="notification_action_no_thanks">Nie, dziękuję</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Użyj usługi</string>
+    <string name="wifi_auto_network_switch_setting_msg">Powoduje automatyczne przełączanie na preferowaną sieć, kiedy jest dostępna zarówno sieć Wi-Fi, jak i komórkowa.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Konfigurację można zawsze zmienić później w Ustawieniach Wi-Fi.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Wskazówki</string>
+    <string name="wifi_auto_network_switch_setting">Automatyczne przełączanie sieci</string>
+    <string name="settings_on">Włączone</string>
+    <string name="settings_off">Wyłączone</string>
+    <string name="smart_network_settings_title">Łączność inteligentna</string>
+    <string name="smart_network_settings_switch_txt">Użyj Łączności inteligentnej</string>
+    <string name="smart_network_settings_msg">W przypadku wykrycia niskiej jakości połączenia z siecią Wi-Fi zostanie użyta sieć komórkowa. Po wyłączeniu priorytet będzie mieć połączenie Wi-Fi.</string>
+    <string name="smart_network_settings_supplement">Uwaga: ta funkcja nie dotyczy aplikacji ograniczających połączenia do sieci Wi-Fi lub sieci komórkowej.</string>
+    <string name="sne_app_name_txt">Łączność inteligentna</string>
+    <string name="smart_network_settings_desc">Użycie technologii zaawansowanego zapamiętywania, opracowanej przez firmę Sony, zapewnia zawsze najlepsze połączenie sieciowe w trybie łączności inteligentnej dzięki automatycznemu przełączaniu sieci 4G/5G i Wi-Fi, zależnie od jakości sieci.</string>
+    <string name="smart_network_settings_connected_switch_title">Użyj sieci komórkowej przy niskiej jakości sieci Wi-Fi</string>
+    <string name="smart_network_settings_connected_switch_desc">Warunki sieciowe są przewidywane na podstawie analizy danych sygnału Wi-Fi. Jeżeli można oczekiwać niskiej jakości sieci Wi-Fi, nastąpi automatyczne przełączenie do sieci komórkowej. Połączenie Wi-Fi będzie miało wyższy priorytet w przypadku sieci domowej.</string>
+    <string name="smart_network_settings_entry_switch_title">Zapobiegaj łączeniu z Wi-Fi o niskiej jakości</string>
+    <string name="smart_network_settings_entry_switch_desc">Automatyczne łączenie jest blokowane, gdy przewidywana jest niska jakość sieci Wi-Fi. Zapobiega to automatycznemu przełączaniu urządzenia do publicznych sieci Wi-Fi o niższej jakości.</string>
+    <string name="smart_network_settings_desc_summary">Automatycznie wybierz najlepszą sieć</string>
+    <string name="smart_network_notification_entry_title">Wykryto niską jakość sieci Wi-Fi</string>
+    <string name="smart_network_notification_entry_text">Funkcja łączności inteligentnej wykryła niską jakość sieci %1$s i tymczasowo zablokowała automatyczne połączenie z tą siecią Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Zapobiegaj łączeniu z Wi-Fi o niskiej jakości</string>
+    <string name="smart_network_notification_entry_button">USTAWIENIA</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">POŁĄCZ MIMO TO</string>
+    <string name="smart_network_toast_connecting">Łączenie z siecią %1$s</string>
+</resources>

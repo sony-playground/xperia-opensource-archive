@@ -1,0 +1,12 @@
+#CFLAG=-fPIC -std=c++11
+CFLAG=-fPIC -std=c++11 -DLOCAL
+INCLUDE_PATH_FOR_NLOHMANN=-I.
+
+all: tensor_example
+
+tensor_example: $(wildcard tensor/*.cc) $(wildcard tensor/*.h)
+	$(CXX) $(CFLAG) -o tensor_example tensor/tensor_example.cc tensor/tensor_shape.cc tensor/tensor.cc tensor/tensor_map.cc tensor/data_metadata.cc tensor/data_deserializer.cc tensor/data_serializer.cc $(INCLUDE_PATH_FOR_NLOHMANN)
+
+clean:
+	rm -f tensor_example
+

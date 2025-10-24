@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">മോശം Wi-Fi കണക്ഷൻ കണ്ടെത്തി</string>
+    <string name="notification_text">മൊബൈൽ നെറ്റ്‌വർക്ക് ഉപയോഗിച്ച് നിങ്ങളുടെ നെറ്റ്‌വർക്ക് സുസ്ഥിരമാക്കുന്നതിനായി സ്വയമേയുള്ള നെറ്റ്‌വർക്ക് സ്വിച്ച് പ്രവർത്തനസജ്ജമാക്കാൻ ടാപ് ചെയ്യുക</string>
+    <string name="notification_action_settings">ക്രമീക. പോകൂ</string>
+    <string name="notification_action_no_thanks">വേണ്ട, നന്ദി</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">സേവനം ഉപയോഗിക്കുക</string>
+    <string name="wifi_auto_network_switch_setting_msg">Wi-Fi, മൊബൈൽ നെറ്റ്‌വർക്കുകൾ ലഭ്യമാകുമ്പോൾ ഇഷ്ടമുള്ള നെറ്റ്‌വർക്കിലേക്ക് സ്വയമേവ മാറുക.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">ക്രമീകരണം പിന്നീട് മാറ്റാൻ, നിങ്ങൾക്ക് എപ്പോഴും Wi-Fi മുൻഗണനകളിലേക്ക് പോകാവുന്നതാണ്.</string>
+    <string name="wifi_auto_network_switch_notification_channel">നുറുങ്ങുവിവരങ്ങള്‍</string>
+    <string name="wifi_auto_network_switch_setting">സ്വയ. നെ. സ്വിച്ച്</string>
+    <string name="settings_on">ഓണ്‍</string>
+    <string name="settings_off">ഓഫ്</string>
+    <string name="smart_network_settings_title">സ്‌മാർട്ട് കണക്‌ടിവിറ്റി</string>
+    <string name="smart_network_settings_switch_txt">സ്‌മാർട്ട് കണക്‌ടി. ഉപ.</string>
+    <string name="smart_network_settings_msg">ഒരു Wi-Fi നെറ്റ്‌വർക്കിന്റെ കണക്ഷൻ നിലവാരം മോശമാണെന്ന് കണ്ടെത്തുമ്പോൾ, പകരമായി മൊബൈൽ നെറ്റ്‌വർക്ക് ഉപയോഗിക്കും. ഓഫ് ചെയ്തിരിക്കുമ്പോൾ Wi-Fi കണക്ഷന് മുൻഗണന നൽകും.</string>
+    <string name="smart_network_settings_supplement">Wi-Fi മാത്രമായോ മൊബൈൽ നെറ്റ്‌വർക്ക് മാത്രമായോ കണക്ഷനുകൾ പരിമിതപ്പെടുന്ന ആപ്ലിക്കേഷനുകളെ ഈ സവിശേഷത ബാധിക്കില്ല</string>
+    <string name="sne_app_name_txt">സ്‌മാർട്ട് കണക്‌ടിവിറ്റി</string>
+    <string name="smart_network_settings_desc">നെറ്റ്‌വർക്ക് നിലവാരത്തെ ആശ്രയിച്ച് 4G/5G, Wi-Fi എന്നിവയ്‌ക്കിടയിൽ സ്വയമേവ മാറുന്നതിലൂടെ, സ്‌മാർട്ട് കണക്ടിവിറ്റി Sony-യുടെ ഡീപ്പ് ലേണിംഗ് സാങ്കേതികവിദ്യ ഉപയോഗിച്ച് എപ്പോഴും മികച്ച നെറ്റ്‌വർക്ക് കണക്ഷൻ നൽകുന്നു.</string>
+    <string name="smart_network_settings_connected_switch_title">Wi-Fi നിലവാരം മോശമാ. മൊ. നെ.‌വർക്ക് ഉപ.</string>
+    <string name="smart_network_settings_connected_switch_desc">Wi-Fi സിഗ്‌നൽ ഡാറ്റ വിശകലനം ചെയ്യുന്നതിലൂടെ നെ.വർക്ക് അവസ്ഥകൾ പ്രവചിക്കുക. മോശമായ Wi-Fi നെ.വർക്ക് നിലവാരമാണ് പ്രതീക്ഷിക്കുന്നതെങ്കിൽ, ഇത് സ്വയമേവ ഒരു മൊബൈൽ നെ.വർക്കിലേക്ക് മാറും. ഹോം നെ.വർക്ക് ഉപയോഗത്തിന് Wi-Fi കണക്ഷന് മുൻഗണന നൽകും.</string>
+    <string name="smart_network_settings_entry_switch_title">മോശം നില. Wi-Fi നെ.വർ. സ്വയമേയുള്ള കണ. തട.</string>
+    <string name="smart_network_settings_entry_switch_desc">മോശമായ Wi-Fi നിലവാരം പ്രതീക്ഷിക്കുമ്പോൾ സ്വയമേയുള്ള കണക്ഷൻ നിർത്തുക. നിങ്ങളുടെ സ്‌മാർട്ട്ഫോൺ നിലവാരം കുറഞ്ഞ പൊതു Wi-Fi യിലേക്ക് സ്വയമേവ മാറുന്നത് തടയാൻ ഇത് സഹായിച്ചേക്കാം.</string>
+    <string name="smart_network_settings_desc_summary">മികച്ച നെറ്റ്‌വർക്ക് സ്വയമേവ തിരഞ്ഞെടുക്കുക</string>
+    <string name="smart_network_notification_entry_title">മോശം നില. Wi-Fi നെ.വർ. കണ്ടെത്തി</string>
+    <string name="smart_network_notification_entry_text">%1$s എന്നതിന്റെ നിലവാരം മോശമാണെന്ന് സ്‌മാർട്ട് കണക്ടിവിറ്റി പ്രവചിച്ചിരിക്കുന്നതിനാൽ ഈ Wi-Fi നെറ്റ്‌വർക്കിലേക്കുള്ള സ്വയമേയുള്ള കണക്ഷൻ താൽക്കാലികമായി തടഞ്ഞിരിക്കുന്നു.</string>
+    <string name="smart_network_notification_channel_entry_title">മോശം നില. Wi-Fi നെ.വർ. സ്വയ. കണ. തടഞ്ഞി.</string>
+    <string name="smart_network_notification_entry_button">ക്രമീക. പോകുക</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">എന്തായാലും കണക്റ്റ് ചെയ്യുക</string>
+    <string name="smart_network_toast_connecting">%1$s-ലേക്ക് കണക്റ്റ് ചെയ്യുന്നു</string>
+</resources>

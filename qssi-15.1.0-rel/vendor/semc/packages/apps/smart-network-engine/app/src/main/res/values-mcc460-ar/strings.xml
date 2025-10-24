@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">اُكتشف اتصال WLAN ضعيف</string>
+    <string name="wifi_auto_network_switch_setting_msg">التحويل تلقائيًا إلى أي شبكة مفضلة عند توفر كل من شبكة WLAN وشبكة النقال.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">يمكنك دائمًا الانتقال إلى تفضيلات WLAN لتغيير الإعداد لاحقًا.</string>
+    <string name="smart_network_settings_msg">عند اكتشاف شبكة WLAN​ ذات جودة اتصال منخفضة، سيتم استخدام شبكة الهاتف المحمول بدلًا من ذلك. وعند إيقاف تشغيل هذه الميزة، سيتم تحديد الأولوية لاستخدام اتصال WLAN.</string>
+    <string name="smart_network_settings_supplement">لن تؤثر هذه الميزة على التطبيقات التي تقصر الاتصالات على شبكة WLAN فقط أو شبكات الهاتف المحمول فقط</string>
+    <string name="smart_network_settings_desc">بفضل تقنية التعلم العميق من Sony، تقدم إمكانية الاتصال الذكية أفضل اتصال بالشبكة دائمًا من خلال التبديل تلقائيًا بين 4G/5G وWLAN تبعًا لجودة الشبكة.</string>
+    <string name="smart_network_settings_connected_switch_title">استخدام شبكة النقال في حالة كانت جودة شبكة WLAN سيئة</string>
+    <string name="smart_network_settings_connected_switch_desc">توقع ظروف الشبكة عن طريق تحليل بيانات إشارة WLAN. إذا كان من المتوقع أن تكون جودة شبكة WLAN سيئة، فسيؤدي هذا إلى التبديل تلقائيًا لشبكة النقال. تكون الأولوية لاتصال WLAN لاستخدام شبكة المنزل.</string>
+    <string name="smart_network_settings_entry_switch_title">منع الاتصال التلقائي بشبكات WLAN سيئة الجودة</string>
+    <string name="smart_network_settings_entry_switch_desc">إيقاف الاتصال التلقائي في حالة توقع جودة سيئة لشبكة WLAN. يمكن أن يمنع هذا جهازك من التبديل تلقائيًا لشبكة WLAN عامة أقل جودة.</string>
+    <string name="smart_network_notification_entry_title">اُكتشفت شبكة WLAN سيئة الجودة</string>
+    <string name="smart_network_notification_entry_text">توقعت إمكانية الاتصال الذكية أن %1$s ذات جودة سيئة، ومنعت مؤقتًا الاتصال التلقائي بشبكة WLAN هذه.</string>
+    <string name="smart_network_notification_channel_entry_title">منع الاتصال التلقائي بشبكة WLAN سيئة الجودة</string>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Zjištěno slabé připojení k WLAN</string>
+    <string name="wifi_auto_network_switch_setting_msg">Je-li k dispozici síť WLAN i mobilní síť, automaticky přepnout na upřednostňovanou síť.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Nastavení můžete později kdykoli změnit v předvolbách WLAN.</string>
+    <string name="smart_network_settings_msg">Pokud má síť WLAN špatnou kvalitu signálu, použije se místo ní mobilní síť. Pokud je funkce vypnutá, bude upřednostněno WLAN připojení.</string>
+    <string name="smart_network_settings_supplement">Tato funkce neovlivní aplikace, které omezují připojení pouze na WLAN nebo pouze na mobilní síť</string>
+    <string name="smart_network_settings_desc">S využitím technologie hlubokého učení Sony poskytuje Chytrá konektivita vždy nejlepší síťové připojení tím, že automaticky přepíná mezi pásmy 4G/5G a WLAN v závislosti na kvalita sítě.</string>
+    <string name="smart_network_settings_connected_switch_title">Použít mobilní síť, když je kvalita WLAN špatná</string>
+    <string name="smart_network_settings_connected_switch_desc">Předpovídá síťové podmínky analyzováním dat signálu WLAN. Pokud se očekává špatná kvalita sítě WLAN, tato možnost automaticky přepne na mobilní síť. Připojení WLAN bude upřednostňováno pro používání domácí sítě.</string>
+    <string name="smart_network_settings_entry_switch_title">Zabránit autom. připojení k nekvalitním sítím WLAN</string>
+    <string name="smart_network_settings_entry_switch_desc">Zastaví automatické připojení, když je očekávána špatná kvalita sítě WLAN. Tato možnost může zabránit automatickému přepínání zařízení na veřejnou síť WLAN nižší kvality.</string>
+    <string name="smart_network_notification_entry_title">Byla zjištěna nekvalitní síť WLAN</string>
+    <string name="smart_network_notification_entry_text">Chytrá konektivita předpověděla, že %1$s je nekvalitní a dočasně zabránila automatickému připojení k této síti WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Blokování autom. připojení k nekvalitní síti WLAN</string>
+</resources>

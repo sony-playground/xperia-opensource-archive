@@ -1,0 +1,60 @@
+# Copyright 2018, 2019, 2022 Sony Corporation
+
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE           := libarchivennabla
+LOCAL_MODULE_CLASS     := SHARED_LIBRARIES
+LOCAL_MODULE_SUFFIX    := .so
+LOCAL_MODULE_TAGS      := optional
+LOCAL_SRC_FILES        := lib/$(TARGET_ARCH_ABI)/libarchive.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE           := libprotobufnnabla
+LOCAL_MODULE_CLASS     := SHARED_LIBRARIES
+LOCAL_MODULE_SUFFIX    := .so
+LOCAL_MODULE_TAGS      := optional
+LOCAL_SRC_FILES        := lib/$(TARGET_ARCH_ABI)/libprotobuf.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+# Nnabla Utils
+# ============================================================
+include $(CLEAR_VARS)
+LOCAL_MODULE           := libnnabla_utils
+LOCAL_MODULE_CLASS     := SHARED_LIBRARIES
+LOCAL_MODULE_SUFFIX    := .so
+LOCAL_MODULE_TAGS      := optional
+LOCAL_SRC_FILES        := lib/$(TARGET_ARCH_ABI)/libnnabla_utils.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+# Nnabla Core
+# ============================================================
+include $(CLEAR_VARS)
+LOCAL_MODULE           := libnnabla
+LOCAL_MODULE_CLASS     := SHARED_LIBRARIES
+LOCAL_MODULE_SUFFIX    := .so
+LOCAL_MODULE_TAGS      := optional
+LOCAL_SRC_FILES        := lib/$(TARGET_ARCH_ABI)/libnnabla.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+# Native JNI
+# ============================================================
+include $(CLEAR_VARS)
+LOCAL_MODULE           := libsmartnet_jni
+LOCAL_MODULE_TAGS      := optional
+LOCAL_SRC_FILES        := ./SmartNetNeuralNetworksJni.cpp
+LOCAL_SHARED_LIBRARIES := libnnabla_utils libnnabla
+LOCAL_CPPFLAGS         := -std=c++11 -fexceptions -Wno-sign-compare
+LOCAL_PRELINK_MODULE   := false
+LOCAL_LDLIBS           := \
+                          -lz \
+                          -llog
+LOCAL_C_INCLUDES       := $(LOCAL_PATH) \
+                          $(LOCAL_PATH)/include \
+                          $(LOCAL_PATH)/include/nbla \
+                          $(LOCAL_PATH)/include/nbla_utils
+include $(BUILD_SHARED_LIBRARY)
+
+# Include Android.mk for FL system
+include $(LOCAL_PATH)/Android.fl.mk

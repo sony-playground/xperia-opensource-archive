@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Poor WLAN connection detected</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automatically switch to a preferred network when both WLAN network and mobile network are available.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">You can always go to WLAN preferences to change the setup later.</string>
+    <string name="smart_network_settings_msg">When a WLAN network is detected to have poor connection quality, mobile network will be used instead. When turned off, WLAN connection will be prioritized.</string>
+    <string name="smart_network_settings_supplement">This feature won\'t affect applications that limit connections to WLAN only or mobile network only</string>
+    <string name="smart_network_settings_desc">Using Sony\'s deep learning technology, Smart connectivity always provides the best network connection by automatically switching between 4G/5G and WLAN depending on the network quality.</string>
+    <string name="smart_network_settings_connected_switch_title">Use mobile network when WLAN quality is poor</string>
+    <string name="smart_network_settings_connected_switch_desc">Predict network conditions by analyzing WLAN signal data. If poor WLAN network quality is expected, this will automatically switch to a mobile network. WLAN connection will be prioritized for home network use.</string>
+    <string name="smart_network_settings_entry_switch_title">Prevent auto connection to poor quality WLAN networks</string>
+    <string name="smart_network_settings_entry_switch_desc">Stop auto connection when poor WLAN quality is expected. This can help prevent your device from automatically switching to lower quality public WLAN.</string>
+    <string name="smart_network_notification_entry_title">Poor quality WLAN network detected</string>
+    <string name="smart_network_notification_entry_text">Smart connectivity has predicted that %1$s is of poor quality, and temporarily prevented automatic connection to this WLAN network.</string>
+    <string name="smart_network_notification_channel_entry_title">Preventing auto connection to poor quality WLAN network</string>
+</resources>

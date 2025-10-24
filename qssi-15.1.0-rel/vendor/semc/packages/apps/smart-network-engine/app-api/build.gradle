@@ -1,0 +1,25 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+    }
+
+    compileOptions {
+        // TODO: Use Java 11 from T OSV(Java 11 seems to be not supported on S platform build)
+        targetCompatibility JavaVersion.VERSION_1_9
+        sourceCompatibility JavaVersion.VERSION_1_9
+    }
+}
+
+/*
+ Dependency versions are defined in the top level build.gradle file. This helps keeping track of
+ all versions in a single place. This improves readability and helps managing project complexity.
+ */
+dependencies {
+    compileOnly "androidx.annotation:annotation:${rootProject.ext.supportLibraryVersion}"
+    implementation "com.google.protobuf:protobuf-java:${rootProject.ext.protobufJavaVersion}"
+}

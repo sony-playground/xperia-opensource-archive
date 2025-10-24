@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Слабкий сигнал WLAN</string>
+    <string name="wifi_auto_network_switch_setting_msg">Автоматичне переключення на основну мережу, коли доступні обидві мережі (WLAN і мобільна).</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Ви завжди можете змінити це налаштування в параметрах WLAN.</string>
+    <string name="smart_network_settings_msg">У разі погіршення якості підключення до мережі WLAN, замість неї використовуватиметься мобільна мережа. Якщо вимкнути цю функцію, перевагу матиме з’єднання WLAN.</string>
+    <string name="smart_network_settings_supplement">Ця функція не впливає на програми, які обмежують підключення лише до мережі WLAN або лише до мобільної мережі</string>
+    <string name="smart_network_settings_desc">Завдяки технології глибокого навчання Sony Інтелектуальне підключення завжди забезпечує найкраще з’єднання з мережею, автоматично перемикаючись між 4G/5G та WLAN залежно від якості мережі.</string>
+    <string name="smart_network_settings_connected_switch_title">Використов. моб. мережу в разі поганої якості WLAN</string>
+    <string name="smart_network_settings_connected_switch_desc">Прогнозувати стан мережі через аналіз даних сигналу WLAN. Якщо очікується погана якість сигналу WLAN, відбудеться автоматичне перемикання на мобільну мережу. У разі використання домашньої мережі перевагу матиме підключення WLAN.</string>
+    <string name="smart_network_settings_entry_switch_title">Запобігати автопідключ. до WLAN поганої якості</string>
+    <string name="smart_network_settings_entry_switch_desc">Зупиняти автоматичне підключення, якщо очікується погана якість WLAN. Це може допомогти запобігти автоматичному перемиканню пристрою на загальнодоступні мережі WLAN низької якості.</string>
+    <string name="smart_network_notification_entry_title">Виявлено мережу WLAN з поганим сигналом</string>
+    <string name="smart_network_notification_entry_text">Інтелектуальне підключення спрогнозувало, що %1$s має погану якість і тимчасово заборонило автоматичне підключення до цієї мережі WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Запобіг. автопідкл. до мережі WLAN поганої якості</string>
+</resources>

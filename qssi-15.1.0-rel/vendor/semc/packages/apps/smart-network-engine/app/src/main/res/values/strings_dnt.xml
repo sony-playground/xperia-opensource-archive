@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2018 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources>
+    <string name="prediction_notice">Smart Network Engine switched network from WiFi to Cellular.</string>
+    <!-- SecretMenu Activity -->
+    <string name="smartnet_secretmenu_title" translatable="false">SmartNetworkLogger SecretMenu</string>
+    <string name="debug_view_status" translatable="false">Debug View Type</string>
+</resources>

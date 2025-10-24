@@ -1,0 +1,7 @@
+2
+src/test/resources/input/graph.nntxt
+src/test/resources/input/graph.nntxt
+src/test/resources/input/cluster1.protobuf
+src/test/resources/input/cluster2.protobuf
+src/test/resources/input/HLCR_Param.dat
+src/test/resources/old/ClusterMap.dat

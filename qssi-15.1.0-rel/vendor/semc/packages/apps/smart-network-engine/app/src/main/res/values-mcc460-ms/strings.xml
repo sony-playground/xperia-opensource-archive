@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Sambungan WLAN lemah dikesan</string>
+    <string name="wifi_auto_network_switch_setting_msg">Tukar ke rangkaian pilihan secara automatik apabila kedua-dua rangkaian WLAN dan rangkaian mudah alih tersedia.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Anda boleh sentiasa pergi ke pilihan WLAN untuk mengubah penyediaan kemudian.</string>
+    <string name="smart_network_settings_msg">Rangkaian mudah alih akan digunakan apabila rangkaian WLAN dikesan mempunyai kualiti sambungan yang teruk. Apabila dimatikan, sambungan WLAN akan diutamakan.</string>
+    <string name="smart_network_settings_supplement">Ciri ini tidak akan menjejaskan aplikasi yang mengehadkan sambungan ke WLAN sahaja atau rangkaian mudah alih sahaja</string>
+    <string name="smart_network_settings_desc">Dengan menggunakan teknologi pembelajaran mendalam, Ketersambungan pintar selalu menyediakan sambungan rangkaian terbaik dengan bertukar antara 4G/5G dan WLAN bergantung kepada mutu rangkaian.</string>
+    <string name="smart_network_settings_connected_switch_title">Guna rangkaian mudah alih jika mutu WLAN lmh</string>
+    <string name="smart_network_settings_connected_switch_desc">Ramalkan keadaan rangkaian dengan membuat analisis data isyarat WLAN. Jika mutu rangkaian WLAN dijangkakan lemah, ini akan bertukar ke rangkaian mudah alih secara automatik. Sambungan WLAN akan diutamakan untuk penggunaan rangkaian rumah.</string>
+    <string name="smart_network_settings_entry_switch_title">Cegah smbungn automtik ke rngkaian WLAN mutu lmh</string>
+    <string name="smart_network_settings_entry_switch_desc">Hentikan sambungan automatik apabila mutu WLAN lemah dijangkakan. Tindakan ini boleh membantu mencegah peranti anda daripada bertukar ke WLAN awam bermutu lemah.</string>
+    <string name="smart_network_notification_entry_title">Rangkaian WLAN berkualiti lemah dikesan</string>
+    <string name="smart_network_notification_entry_text">Ketersambungan pintar meramalkan %1$s bermutu rendah, dan menghalang sambungan automatik secara sementara kepada rangkaian WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Cegah smbungn automtik ke rngkaian WLAN mutu lmh</string>
+</resources>

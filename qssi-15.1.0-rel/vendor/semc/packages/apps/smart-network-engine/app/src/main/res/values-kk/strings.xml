@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Нашар Wi-Fi байланысы анықталды</string>
+    <string name="notification_text">Мобильді желімен желіні тұрақтандыру мақсатында Желіні авто ауыстыруды қосу үшін түртіңіз</string>
+    <string name="notification_action_settings">Параметр-ге өту</string>
+    <string name="notification_action_no_thanks">Жоқ, рахмет</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Қызметті пайдалану</string>
+    <string name="wifi_auto_network_switch_setting_msg">Wi-Fi желісі де, мобильді желі де қол жетімді кезде таңдаулы желіге автоматты түрде ауысу.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Орнату параметрлерін кейін өзгерту үшін үнемі Wi-Fi параметрлеріне өте аласыз.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Кеңестер</string>
+    <string name="wifi_auto_network_switch_setting">Желіні авто ауыстыру</string>
+    <string name="settings_on">Қосулы</string>
+    <string name="settings_off">Өшірулі</string>
+    <string name="smart_network_settings_title">Зерделі байл. мүмк.</string>
+    <string name="smart_network_settings_switch_txt">Смарт байланыс. пайдал.</string>
+    <string name="smart_network_settings_msg">Wi-Fi network желісінде өте төмен байланыс сапасы анықталғанда, орнына мобильді желі пайдаланылады. Өшірілгенде, Wi-Fi байланысына басымдық беріледі.</string>
+    <string name="smart_network_settings_supplement">Бұл мүмкіндік тек Wi-Fi желісіне не тек ұялы желіге қосылымдарды шектейтін қолданбаларға әсер етпейді.</string>
+    <string name="sne_app_name_txt">Зерделі байл. мүмк.</string>
+    <string name="smart_network_settings_desc">Sony-дің терең үйрену технологиясын пайдалана отырып, Smart connectivity қызметі желі сапасына қарай 4G/5G және Wi-Fi желісі арасында автоматты түрде ауысу арқылы әрқашан ең жақсы желі байланысын қамтамасыз етеді.</string>
+    <string name="smart_network_settings_connected_switch_title">Wi-Fi сап. нашар болғанда моб.желіні қолданыңыз</string>
+    <string name="smart_network_settings_connected_switch_desc">Wi-Fi желісінің сигнал деректерін талдау арқылы желі күйлерін болжаңыз. Егер нашар сападағы Wi-Fi желісі күтілсе, ол автоматты түрде мобильді желіге ауысады. Үй желісін пайдаланған кезде Wi-Fi байланысына басымдық беріледі.</string>
+    <string name="smart_network_settings_entry_switch_title">Нашар сап. Wi-Fi жел.-не авт. қос. болдырмау</string>
+    <string name="smart_network_settings_entry_switch_desc">Нашар Wi-Fi сапасы күтілген кезде автоматты түрде қосылуды тоқтатыңыз. Бұл құрылғыңыздың автоматты түрде төменірек сападағы қоғамдық Wi-Fi желісіне ауысуын болдырмауға көмектеседі.</string>
+    <string name="smart_network_settings_desc_summary">Автоматты түрде ең жақсы желіні таңдайды</string>
+    <string name="smart_network_notification_entry_title">Нашар сападағы Wi-Fi желісі анықталды</string>
+    <string name="smart_network_notification_entry_text">Зерделі байланыс мүмкіндігі %1$s шамасының нашар сапада екенін болжады және осы Wi-Fi желісіне автоматты түрде қосылуға уақытша тыйым салды.</string>
+    <string name="smart_network_notification_channel_entry_title">Нашар сап. Wi-Fi жел.-не авт. қос. тыйым салу</string>
+    <string name="smart_network_notification_entry_button">ПАРАМЕТРЛЕРГЕ ӨТУ</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">БӘРІБІР ҚОСУ</string>
+    <string name="smart_network_toast_connecting">%1$s желісіне қосылу</string>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">ಕಳಪೆ Wi-Fi ಸಂಪರ್ಕ ಪತ್ತೆಹಚ್ಚಲಾಗಿದೆ</string>
+    <string name="notification_text">ಮೊಬೈಲ್ ನೆಟ್‌ವರ್ಕ್ ಬಳಸುವ ಮೂಲಕ ನಿಮ್ಮ ನೆಟ್‌ವರ್ಕ್ ಸ್ಥಿರವಾಗಿಸುವುದಕ್ಕಾಗಿ ಸ್ವಯಂ ನೆಟ್‌ವರ್ಕ್ ಸ್ವಿಚ್ ಸಕ್ರಿಯಗೊಳಿಸಲು ತಟ್ಟಿರಿ</string>
+    <string name="notification_action_settings">ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ</string>
+    <string name="notification_action_no_thanks">ಇಲ್ಲ ಧನ್ಯವಾದ</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">ಸೇವೆಯನ್ನು ಬಳಸಿ</string>
+    <string name="wifi_auto_network_switch_setting_msg">Wi-Fi ನೆಟ್‌ವರ್ಕ್ ಮತ್ತು ಮೊಬೈಲ್ ನೆಟ್‌ವರ್ಕ್‌ಗಳೆರಡೂ ಲಭ್ಯವಿರುವಾಗ ಆದ್ಯತೆಯ ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಬದಲಾಗಿ.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">ನಂತರದಲ್ಲಿ ಸೆಟಪ್ ಬದಲಾಯಿಸಲು ನೀವು ಸದಾ Wi-Fi ಆದ್ಯತೆಗಳಿಗೆ ಹೋಗಬಹುದು.</string>
+    <string name="wifi_auto_network_switch_notification_channel">ಸುಳಿವುಗಳು</string>
+    <string name="wifi_auto_network_switch_setting">ಸ್ವಯಂಚಾಲಿತ ನೆಟ್‌ವರ್ಕ್ ಬದಲಾವಣೆ</string>
+    <string name="settings_on">ಆನ್</string>
+    <string name="settings_off">ಆಫ್</string>
+    <string name="smart_network_settings_title">ಸ್ಮಾರ್ಟ್ ಸಂಪರ್ಕತೆ</string>
+    <string name="smart_network_settings_switch_txt">ಸ್ಮಾರ್ಟ್ ಸಂಪರ್ಕತೆ ಬಳಸಿ</string>
+    <string name="smart_network_settings_msg">Wi-Fi ನೆಟ್‌ವರ್ಕ್ ಕಳಪೆ ಸಂಪರ್ಕ ಗುಣಮಟ್ಟವನ್ನು ಹೊಂದಿದೆ ಎಂಬುದಾಗಿ ಪತ್ತೆಹಚ್ಚಿದಾಗ, ಮೊಬೈಲ್ ನೆಟ್‌ವರ್ಕ್ ಅನ್ನು ಬದಲಿಗೆ ಬಳಸಲಾಗುತ್ತದೆ. ಆಫ್ ಮಾಡಿದಾಗ, Wi-Fi ಸಂಪರ್ಕಕ್ಕೆ ಆದ್ಯತೆ ನೀಡಲಾಗುತ್ತದೆ.</string>
+    <string name="smart_network_settings_supplement">Wi-Fi ಮಾತ್ರ ಅಥವಾ ಮೊಬೈಲ್ ನೆಟ್‌ವರ್ಕ್ ಮಾತ್ರಕ್ಕೆ ಸಂಪರ್ಕಗಳನ್ನು ಮಿತಿಗೊಳಿಸುವ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗೆ ಈ ವೈಶಿಷ್ಟ್ಯ ಪರಿಣಾಮ ಬೀರುವುದಿಲ್ಲ.</string>
+    <string name="sne_app_name_txt">ಸ್ಮಾರ್ಟ್ ಸಂಪರ್ಕತೆ</string>
+    <string name="smart_network_settings_desc">Sony ಯ ಡೀಪ್ ಲರ್ನಿಂಗ್ ತಂತ್ರಜ್ಞಾನವನ್ನು ಬಳಸಿಕೊಂಡು, ನೆಟ್‌ವರ್ಕ್ ಗುಣಮಟ್ಟವನ್ನು ಅವಲಂಬಿಸಿ 4G/5G ಮತ್ತು Wi-Fi ನಡುವೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಬದಲಾಯಿಸುವ ಮೂಲಕ ಸ್ಮಾರ್ಟ್ ಕನೆಕ್ಟಿವಿಟಿಯು ಯಾವಾಗಲೂ ಉತ್ತಮ ನೆಟ್‌ವರ್ಕ್ ಸಂಪರ್ಕವನ್ನು ಒದಗಿಸುತ್ತದೆ.</string>
+    <string name="smart_network_settings_connected_switch_title">Wi-Fi ಕಳಪೆಯಾದಾಗ ಮೊಬೈಲ್ ನೆಟ್‍ವರ್ಕ್ ಬಳಸಿ</string>
+    <string name="smart_network_settings_connected_switch_desc">Wi-Fi ಸಿಗ್ನಲ್ ಡೇಟಾ ವಿಶ್ಲೇಷಣೆ ಮಾಡುವ ಮೂಲಕ ನೆಟ್‌ವರ್ಕ್ ಪರಿಸ್ಥಿತಿಗಳನ್ನು ಊಹಿಸಿ. ಕಳಪೆ Wi-Fi ನೆಟ್‌ವರ್ಕ್‌ ಗುಣಮಟ್ಟದ ನಿರೀಕ್ಷೆಯಿದ್ದರೆ, ಇದು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಮೊಬೈಲ್ ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಬದಲಾಗುತ್ತದೆ. ಮನೆ ನೆಟ್‌ವರ್ಕ್ ಬಳಕೆಗಾಗಿ Wi-Fi ಸಂಪರ್ಕವನ್ನು ಆದ್ಯತೆಯಾಗಿಸಲಾಗುತ್ತದೆ.</string>
+    <string name="smart_network_settings_entry_switch_title">ಕಳಪೆ ಗುಣಮಟ್ಟದ Wi-Fi ಗೆ ಸ್ವಯಂ ಸಂಪರ್ಕ ತಡೆಗಟ್ಟಿರಿ</string>
+    <string name="smart_network_settings_entry_switch_desc">ಕಳಪೆ Wi-Fi ಗುಣಮಟ್ಟವನ್ನು ನಿರೀಕ್ಷಿಸಿದಾಗ ಸ್ವಯಂ ಸಂಪರ್ಕವನ್ನು ನಿಲ್ಲಿಸಿ. ನಿಮ್ಮ ಸ್ಮಾರ್ಟ್‌ಫೋನ್ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕಡಿಮೆ ಗುಣಮಟ್ಟದ ಸಾರ್ವಜನಿಕ Wi-Fi ಗೆ ಬದಲಾಗುವುದನ್ನು ತಡೆಯಲು ಇದು ಸಹಾಯ ಮಾಡಬಹುದು.</string>
+    <string name="smart_network_settings_desc_summary">ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅತ್ಯುತ್ತಮ ನೆಟ್‌ವರ್ಕ್ ಆಯ್ಕೆಮಾಡಿ</string>
+    <string name="smart_network_notification_entry_title">ಕಳಪೆ ಗುಣಮಟ್ಟದ Wi-Fi ನೆಟ್‌ವರ್ಕ್ ಪತ್ತೆಯಾಗಿದೆ</string>
+    <string name="smart_network_notification_entry_text">%1$s ಕಳಪೆ ಗುಣಮಟ್ಟದ್ದಾಗಿದೆ ಎಂದು ಸ್ಮಾರ್ಟ್ ಸಂಪರ್ಕತೆ ಮುನ್ಸೂಚನೆ ನೀಡಿದೆ ಮತ್ತು ಈ Wi-Fi ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಸ್ವಯಂಚಾಲಿತ ಸಂಪರ್ಕವನ್ನು ತಾತ್ಕಾಲಿಕವಾಗಿ ತಡೆದಿದೆ.</string>
+    <string name="smart_network_notification_channel_entry_title">ಸ್ವಯಂ ಸಂಪರ್ಕ ತಡೆಗಟ್ಟುವುದು</string>
+    <string name="smart_network_notification_entry_button">ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಗೆ ಹೋಗಿ</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">ಹೇಗಾದರೂ ಕನೆಕ್ಟ್ ಮಾಡಿ</string>
+    <string name="smart_network_toast_connecting">%1$s ಗೆ ಕನೆಕ್ಟ್ ಮಾಡುತ್ತಿದೆ</string>
+</resources>

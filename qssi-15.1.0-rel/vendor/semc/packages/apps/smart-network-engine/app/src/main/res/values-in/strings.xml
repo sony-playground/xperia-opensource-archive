@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Sambungan Wi-Fi terdeteksi buruk</string>
+    <string name="notification_text">Ketuk untuk mengaktifkan Beralih jaringan otomatis untuk menstabilkan jaringan Anda dengan menggunakan jaringan seluler</string>
+    <string name="notification_action_settings">Buka Pengaturan</string>
+    <string name="notification_action_no_thanks">Tidak, terima ksh</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Gunakan layanan</string>
+    <string name="wifi_auto_network_switch_setting_msg">Secara otomatis beralih ke jaringan pilihan ketika jaringan Wi-Fi dan jaringan seluler tersedia.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Anda juga dapat membuka preferensi Wi-Fi untuk mengubah konfigurasi ini nanti</string>
+    <string name="wifi_auto_network_switch_notification_channel">Tips</string>
+    <string name="wifi_auto_network_switch_setting">Otomatis beralih jaringan</string>
+    <string name="settings_on">Aktif</string>
+    <string name="settings_off">Nonaktif</string>
+    <string name="smart_network_settings_title">Konektivitas pintar</string>
+    <string name="smart_network_settings_switch_txt">Gunakan konektivitas Pintar</string>
+    <string name="smart_network_settings_msg">Ketika kualitas sambungan jaringan Wi-Fi yang terdeteksi buruk, jaringan seluler akan digunakan sebagai gantinya. Ketika dimatikan, sambungan Wi-Fi akan diprioritaskan.</string>
+    <string name="smart_network_settings_supplement">Fitur ini tidak akan memengaruhi aplikasi yang membatasi koneksi hanya untuk Wi-Fi atau jaringan seluler saja</string>
+    <string name="sne_app_name_txt">Konektivitas pintar</string>
+    <string name="smart_network_settings_desc">Menggunakan teknologi pembelajaran mendalam Sony, Konektivitas pintar selalu menyediakan sambungan jaringan terbaik dengan secara otomatis mengalihkan antara 4G/5G dan Wi-Fi bergantung pada kualitas jaringan.</string>
+    <string name="smart_network_settings_connected_switch_title">Gunakan jaringan seluler jika kualitas Wi-Fi buruk</string>
+    <string name="smart_network_settings_connected_switch_desc">Perkirakan kondisi jaringan dengan menganalisis data sinyal Wi-Fi. Jika kualitas jaringan Wi-Fi diperkirakan, ini akan secara otomatis mengalihkan ke jaringan seluler. Koneksi Wi-Fi akan diprioritaskan untuk penggunaan jaringan sendiri.</string>
+    <string name="smart_network_settings_entry_switch_title">Mencegah koneksi otomatis ke jaringan Wi-Fi buruk</string>
+    <string name="smart_network_settings_entry_switch_desc">Hentikan koneksi otomatis saat kualitas Wi-Fi yang buruk diperkirakan. Hal ini dapat mencegah smartphone Anda mengalihkan otomatis ke Wi-Fi publik yang berkualitas lebih rendah.</string>
+    <string name="smart_network_settings_desc_summary">Secara otomatis memilih jaringan terbaik</string>
+    <string name="smart_network_notification_entry_title">Jaringan Wi-Fi kualitas buruk terdeteksi</string>
+    <string name="smart_network_notification_entry_text">Konektivitas pintar telah memprediksi bahwa %1$s adalah koneksi buruk, dan sementara mencegah koneksi otomatis ke jaringan Wi-Fi ini.</string>
+    <string name="smart_network_notification_channel_entry_title">Mencegah koneksi otomatis ke jaringan Wi-Fi buruk</string>
+    <string name="smart_network_notification_entry_button">MASUK KE SETELAN</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">LANJUTKAN SAJA</string>
+    <string name="smart_network_toast_connecting">Menyambung ke %1$s</string>
+</resources>

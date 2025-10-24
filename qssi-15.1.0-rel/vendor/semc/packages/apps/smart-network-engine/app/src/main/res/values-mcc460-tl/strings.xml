@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">May mahinang koneksyon ng WLAN</string>
+    <string name="wifi_auto_network_switch_setting_msg">Awtomatikong lumipat sa mas gustong network kapag parehong may WLAN at mobile network.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Makakapunta ka sa kagustuhan sa WLAN anumang oras para baguhin ang setup sa ibang oras.</string>
+    <string name="smart_network_settings_msg">Kapag naka-detect ang isang WLAN network ng mahinang kalidad ng koneksyon, gagamitin ang mobile network sa halip. Kapag naka-off ito, bibigyang priyoridad ang WLAN connection.</string>
+    <string name="smart_network_settings_supplement">Hindi maapektuhan ng feature na ito ang mga application na naglilimita sa mga koneksiyon sa WLAN lang o sa mobile network lang</string>
+    <string name="smart_network_settings_desc">Gamit ang deep learning technology ng Sony, laging naibibigay ng Smart connectivity ang pinakamahusay na koneksiyon sa network sa pamamagitan ng awtomatikong paglilipat sa pagitan ng 4G/5G at WLAN depende sa kalidad ng network.</string>
+    <string name="smart_network_settings_connected_switch_title">Gamitin ang mobile network kapag mahina ang WLAN</string>
+    <string name="smart_network_settings_connected_switch_desc">Hulaan ang mga kondisyon ng network sa pamamagitan ng pag-analisa sa signal data ng WLAN. Kapag inaasahan ang mahinang kalidad ng WLAN network, awtomatiko itong lilipat sa isang mobile network. Uunahin ang koneksiyon sa WLAN para sa paggamit sa tahanan.</string>
+    <string name="smart_network_settings_entry_switch_title">Pigilan ang pag-auto connect sa mahihinang WLAN</string>
+    <string name="smart_network_settings_entry_switch_desc">Ihinto ang awtomatikong pagkonekta kapag inaasahan na mahina ang kalidad ng WLAN. Makatutulong ito sa pagpigil sa telepono mo na awtomatikong lumipat sa mas mahinang kalidad na pampublikong WLAN.</string>
+    <string name="smart_network_notification_entry_title">Nadetekta ang mahinang kalidad ng WLAN network</string>
+    <string name="smart_network_notification_entry_text">Hinuha ng Smart connectivity na mahina ang kalidad ng %1$s, at pansamantalang pinigilan ang awtomatikong pagkonekta sa WLAN network na ito.</string>
+    <string name="smart_network_notification_channel_entry_title">Pinipigilan ang awto konek sa mahinang WLAN network</string>
+</resources>

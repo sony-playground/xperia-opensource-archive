@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">பலவீன. Wi-Fi இணைப்பு கண்டறிய.</string>
+    <string name="notification_text">மொபைல் நெட்வொர்க்கைப் பயன்படுத்தி உங்கள் நெட்வொர்க்கை நிலையானதாக்குவதற்கு தானியங்கு நெட்வொர்க் மாற்றத்தைச் செயல்படுத்த, தட்டவும்</string>
+    <string name="notification_action_settings">அமைப்பு. செல்</string>
+    <string name="notification_action_no_thanks">வேண்டாம்</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">சேவையை. பயன்படுத்து</string>
+    <string name="wifi_auto_network_switch_setting_msg">Wi-Fi பிணையம் மற்றும் மொபைல் பிணையம் இரண்டுமே கிடைக்கும்போது ஒரு விருப்பமான பிணையத்திற்கு தானியங்காக இடமாறுகிறது.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">அமைவை பின்னர் மாற்ற, Wi-Fi விருப்பத்தேர்வுகளுக்கு எப்போது வேண்டுமானாலும் செல்லலாம்.</string>
+    <string name="wifi_auto_network_switch_notification_channel">குறிப்புகள்</string>
+    <string name="wifi_auto_network_switch_setting">தானிய. பிணைய இடமாற்றம்</string>
+    <string name="settings_on">இயக்கு</string>
+    <string name="settings_off">அணை</string>
+    <string name="smart_network_settings_title">ஸ்மார்ட் இணைப்புநிலை</string>
+    <string name="smart_network_settings_switch_txt">ஸ்மார். இணைப். பயன்.</string>
+    <string name="smart_network_settings_msg">பலவீனமான இணைப்புத் தரமுள்ள ஒரு Wi-Fi நெட்வொர்க் கண்டறியப்படும்போது அதற்குப் பதிலாக மொபைல் நெட்வொர்க் பயன்படுத்தப்படும். இது முடக்கப்பட்டிருந்தால் Wi-Fi இணைப்புக்கு முன்னுரிமை அளிக்கப்படும்.</string>
+    <string name="smart_network_settings_supplement">இந்த அம்சம், Wi-Fi மட்டும் அல்லது கைபேசி வலையமைப்பு மட்டும் என இணைப்புகள் வரம்பிடப்பட்ட பயன்பாடுகளைப் பாதிக்காது.</string>
+    <string name="sne_app_name_txt">ஸ்மார்ட் இணைப்புநிலை</string>
+    <string name="smart_network_settings_desc">Sony-இன் ஆழ்ந்த கற்றல் தொழில்நுட்பத்தைப் பயன்படுத்தி, நெட்வொர்க் தரத்தைப் பொறுத்து 4G/5G மற்றும் Wi-Fi-க்கு இடையில் தானாக மாறுவதன் மூலம் ஸ்மார்ட் இணைப்புநிலை எப்போதும் சிறந்த நெட்வொர்க் இணைப்பை வழங்குகிறது.</string>
+    <string name="smart_network_settings_connected_switch_title">Wi-Fi மெதுவானால் கைபேசி வலை.</string>
+    <string name="smart_network_settings_connected_switch_desc">Wi-Fi சிக்னல் தரவை பகுப்பாய்வு செய்து நெட்வொர்க் நிலைமைகளை கணிக்கவும். மெதுவான Wi-Fi நெட்வொர்க் தரம் இருந்தால், தானாகவே கைபேசி வலையமைப்பிற்கு மாறும். சேவை அளிக்கும் பிணையத்தில் Wi-Fi இணைப்புக்கு முன்னுரிமை அளிக்கப்படும்.</string>
+    <string name="smart_network_settings_entry_switch_title">மெது Wi-Fi உடன் தானே இணைப்பதை தடு</string>
+    <string name="smart_network_settings_entry_switch_desc">மெதுவான Wi-Fi தரம் எதிர்பார்க்கப்படும் போது தானாக இணைப்பை நிறுத்தவும். இது உங்கள் ஸ்மார்ட்போன் தானாகவே குறைந்த தரம் கொண்ட பொது Wi-Fi-க்கு மாறுவதைத் தடுக்க உதவும்.</string>
+    <string name="smart_network_settings_desc_summary">சிறந்த பிணையத்தைத் தானாகவே தேர்ந்தெடுக்கவும்</string>
+    <string name="smart_network_notification_entry_title">மெது Wi-Fi பிணையம் உள்ளது</string>
+    <string name="smart_network_notification_entry_text">ஸ்மார்ட் இணைப்புநிலை அம்சம் %1$s-ஐ மெதுவானதாகக் கணித்துள்ளது, மேலும் இந்த Wi-Fi பிணையத்துடனான தானியங்கி இணைப்பைத் தற்காலிகமாகத் தடுக்கிறது.</string>
+    <string name="smart_network_notification_channel_entry_title">மெது Wi-Fi உடன் தானே இணை. தடு.</string>
+    <string name="smart_network_notification_entry_button">அமைப்புகள் செல்</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">இணைக்கவும்</string>
+    <string name="smart_network_toast_connecting">%1$s-க்கு இணைக்கிறது</string>
+</resources>

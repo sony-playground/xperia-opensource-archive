@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Otkrivena je loša Wi-Fi veza</string>
+    <string name="notification_text">Dodirnite da biste omogućili Automatsku promenu mreže i stabilizovali mrežu koristeći mobilnu mrežu</string>
+    <string name="notification_action_settings">Idite na Podešavanja</string>
+    <string name="notification_action_no_thanks">Ne, hvala</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Koristi uslugu</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automatsko prebacivanje na željenu mrežu kada su dostupne Wi-Fi mreža i mobilna mreža.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Uvek možete da odete u podešavanja Wi-Fi-ja da biste kasnije promenili podešavanje.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Saveti</string>
+    <string name="wifi_auto_network_switch_setting">Automatsko prebacivanje mreže</string>
+    <string name="settings_on">Uključeno</string>
+    <string name="settings_off">Isključeno</string>
+    <string name="smart_network_settings_title">Pametno povezivanje</string>
+    <string name="smart_network_settings_switch_txt">Koristi Pametno povezivanje</string>
+    <string name="smart_network_settings_msg">Kada se otkrije da Wi-Fi mreža ima slab kvalitet veze, koristiće se mobilna mreža umesto nje. Kada se ovo isključi, Wi-Fi veza će imati prioritet.</string>
+    <string name="smart_network_settings_supplement">Ova funkcija ne utiče na aplikacije koje ograničavaju veze samo na Wi-Fi ili mobilnu mrežu</string>
+    <string name="sne_app_name_txt">Pametno povezivanje</string>
+    <string name="smart_network_settings_desc">Koristeći tehnologiju za dubinsko učenje Sony, Pametno povezivanje uvek obezbeđuje najbolju mogućnost povezivanja na mreži tako što se automatski prebacuje između mreža 4G/5G i Wi-Fi u zavisnosti od kvaliteta mreže.</string>
+    <string name="smart_network_settings_connected_switch_title">Koris. mob. mrežu kada je kvalitet mreže Wi-Fi slab</string>
+    <string name="smart_network_settings_connected_switch_desc">Predvidite uslove mreže tako što ćete analizirati podatke Wi-Fi signala. Ako se očekuje slab kvalitet Wi-Fi mreže, ovim podešavanjem će doći do automatskog prebacivanja na mobilnu mrežu. Wi-Fi veza će imati prioritet za korišćenje mreže u kući.</string>
+    <string name="smart_network_settings_entry_switch_title">Sprečite auto. povez. na Wi-Fi mreže slabog kvaliteta</string>
+    <string name="smart_network_settings_entry_switch_desc">Zaustavite automatsko povezivanje kada se očekuje slab kvalitet Wi-Fi mreže. Ovo može da spreči da se vaš pametni telefon automatski poveže na javne Wi-Fi mreže slabijeg kvaliteta.</string>
+    <string name="smart_network_settings_desc_summary">Automatski izaberite najbolju mrežu</string>
+    <string name="smart_network_notification_entry_title">Otkrivena mreža Wi-Fi slabog kvaliteta</string>
+    <string name="smart_network_notification_entry_text">Pametno povezivanje je predvidelo da je %1$s slabog kvaliteta i privremeno onemogućio automatsko povezivanje na ovu mrežu Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Sprečavanje auto. povez. na Wi-Fi mreže slabog kvaliteta</string>
+    <string name="smart_network_notification_entry_button">IDITE NA PODEŠ.</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">IPAK POVEŽITE</string>
+    <string name="smart_network_toast_connecting">Povezivanje sa uređajem %1$s</string>
+</resources>

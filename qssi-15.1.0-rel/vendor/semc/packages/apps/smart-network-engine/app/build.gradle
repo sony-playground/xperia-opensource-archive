@@ -1,0 +1,115 @@
+apply plugin: 'com.android.application'
+apply plugin: 'sonyfindbugs'
+apply plugin: 'sonycheckstyle'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        testInstrumentationRunner "com.sonymobile.smartnetworkengine.TestRunner"
+        /* Native: Uncomment this block if you want to build native module.
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++11"
+                arguments "-DANDROID_STL=c++_shared"
+            }
+        }
+        ndk {
+            abiFilters "arm64-v8a"
+        }
+        */
+    }
+
+    /* Native: Uncomment this block if you want to build native module.
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    */
+    // Native: Comment out the next line if you want to build native module.
+    sourceSets.main.jni.srcDirs = []
+    // Add prebuilt libraries to apk
+    sourceSets.main.jniLibs.srcDirs = ['src/main/libs']
+
+    // Uncomment the next line if you want to run the FL library tests on device
+    //FLLIBTEST:sourceSets.androidTest.java.srcDirs += ['src/test/java']
+
+    compileOptions {
+        // TODO: Use Java 11 from T OSV(Java 11 seems to be not supported on S platform build)
+        targetCompatibility JavaVersion.VERSION_1_9
+        sourceCompatibility JavaVersion.VERSION_1_9
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("${rootProject.buildDir}/somc-1.0.keystore")
+            storePassword "android"
+            keyAlias "platform"
+            keyPassword "android"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true // To make the app debuggable under unit testing
+            signingConfig signingConfigs.release
+        }
+    }
+
+    lintOptions {
+        disable 'MissingTranslation', 'MissingDefaultResource', 'BlockedPrivateApi'
+    }
+}
+
+checkstyle {
+    ignoreFailures = true
+    showViolations = false
+}
+
+findbugs {
+    ignoreFailures = true
+}
+
+// cf. https://goo.gl/ZHGqgt (stackoverflow.com)
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        def stub = fileTree(dir: 'libs/compile-only', include: ['STUB_framework@*.jar'])
+        if (stub.files.size() != 1) throw new GradleException('Unable to identify framework stub jar: ' + stub.files)
+        classpath = files(stub.files.first(), classpath)
+    }
+}
+
+tasks.preBuild.dependsOn pushDownJdkDependency
+tasks.preBuild.dependsOn downloadKeystore
+
+/*
+ Dependency versions are defined in the top level build.gradle file. This helps keeping track of
+ all versions in a single place. This improves readability and helps managing project complexity.
+ */
+dependencies {
+    compileOnly fileTree(dir: 'libs/compile-only', include: ['*.jar'])
+    compileOnly "androidx.annotation:annotation:${rootProject.ext.supportLibraryVersion}"
+    implementation project(':app-api')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:support-compat:${rootProject.ext.supportCompatVersion}"
+    implementation "com.google.protobuf:protobuf-java:${rootProject.ext.protobufJavaVersion}"
+    implementation "commons-io:commons-io:${rootProject.ext.commonsIoVersion}"
+    implementation "com.squareup.okhttp3:okhttp:${rootProject.ext.okhttpVersion}"
+    implementation "com.squareup.okhttp3:okhttp-tls:${rootProject.ext.okhttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.okhttpVersion}"
+    implementation "com.google.code.gson:gson:${rootProject.ext.gsonVersion}"
+    implementation "com.google.guava:guava:${rootProject.ext.guavaVersion}"
+    implementation "androidx.room:room-runtime:${rootProject.ext.roomVersion}"
+    implementation "androidx.core:core:${rootProject.ext.supportCoreVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${rootProject.ext.jacksonVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.ext.androidTestRunnerVersion}"
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.androidTestExtJunitVersion}"
+    androidTestImplementation "org.mockito:mockito-android:${rootProject.ext.mockitoVersion}"
+    annotationProcessor "androidx.room:room-compiler:${rootProject.ext.roomVersion}"
+}

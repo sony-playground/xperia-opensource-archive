@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+
+archivesBaseName = 'SmartNetworkEngineExt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        if (project.ext.has("systemTest")) {
+            // System tests (run command: "./gradlew cAT -PsystemTest")
+            testInstrumentationRunnerArgument "package", "com.sonymobile.smartnetworkengine.ext.system_tests"
+        } else {
+            // Unit tests
+            testInstrumentationRunnerArgument "notPackage", "com.sonymobile.smartnetworkengine.ext.system_tests"
+        }
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("${rootProject.buildDir}/somc-1.0.keystore")
+            storePassword "android"
+            keyAlias "platform"
+            keyPassword "android"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.flags'
+        }
+        debug {
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard.flags'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        if (variant.buildType.name.equals("release")) {
+            variant.outputs.all {
+                outputFileName = "${archivesBaseName}.apk"
+            }
+        }
+    }
+}
+
+// cf. https://goo.gl/ZHGqgt (stackoverflow.com)
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        def stub = fileTree(dir: 'libs/compile-only', include: ['STUB_framework@*.jar'])
+        if (stub.files.size() != 1) throw new GradleException('Unable to identify framework stub jar: ' + stub.files)
+        options.compilerArgs.add '-Xbootclasspath/p:' + stub.files.first()
+    }
+}
+
+tasks.preBuild.dependsOn pushDownJdkDependency
+tasks.preBuild.dependsOn downloadKeystore
+
+/*
+ Dependency versions are defined in the top level build.gradle file. This helps keeping track of
+ all versions in a single place. This improves readability and helps managing project complexity.
+ */
+dependencies {
+    compileOnly fileTree(dir: 'libs/compile-only', include: ['*.jar'])
+    compileOnly "androidx.annotation:annotation:${rootProject.ext.supportLibraryVersion}"
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation "androidx.preference:preference:${rootProject.ext.androidPreferenceVersion}"
+    implementation "com.google.protobuf:protobuf-java:${rootProject.ext.protobufJavaVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.ext.androidTestRunnerVersion}"
+    androidTestImplementation "androidx.test.ext:junit:${rootProject.ext.androidTestExtJunitVersion}"
+    androidTestImplementation "org.mockito:mockito-android:${rootProject.ext.mockitoVersion}"
+}

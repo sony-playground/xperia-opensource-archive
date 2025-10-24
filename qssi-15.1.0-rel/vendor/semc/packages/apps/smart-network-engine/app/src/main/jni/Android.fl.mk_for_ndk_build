@@ -1,0 +1,61 @@
+# Copyright 2022 Sony Corporation
+
+LOCAL_PATH := $(call my-dir)
+
+# FL NNHLCRNative
+# ============================================================
+include $(CLEAR_VARS)
+LOCAL_MODULE           := libNNHLCRNative
+LOCAL_MODULE_TAGS      := optional
+LOCAL_SRC_FILES        := ./fl/com_sony_fl_jni_NNHLCRNativeJNI.cpp \
+    $(wildcard ./fl/NNHLCR/*.cpp) \
+    ./fl/tensor/data_deserializer.cc \
+    ./fl/tensor/data_metadata.cc \
+    ./fl/tensor/data_serializer.cc \
+    ./fl/tensor/tensor.cc \
+    ./fl/tensor/tensor_map.cc \
+    ./fl/tensor/tensor_shape.cc
+LOCAL_SHARED_LIBRARIES := libnnabla_utils libnnabla
+LOCAL_CPPFLAGS         := -std=c++11 -fexceptions -Wno-sign-compare
+LOCAL_PRELINK_MODULE   := false
+LOCAL_LDLIBS           := \
+                          -lz \
+                          -llog
+LOCAL_C_INCLUDES       := $(LOCAL_PATH) \
+                          $(LOCAL_PATH)/include \
+                          $(LOCAL_PATH)/include/nbla \
+                          $(LOCAL_PATH)/include/nbla_utils \
+                          $(LOCAL_PATH)/fl \
+                          $(LOCAL_PATH)/fl/nlohmann
+include $(BUILD_SHARED_LIBRARY)
+
+# FL LinearHLCRNative
+# ============================================================
+include $(CLEAR_VARS)
+LOCAL_MODULE           := libLinearHLCRNative
+LOCAL_MODULE_TAGS      := optional
+LOCAL_SRC_FILES        := ./fl/com_sony_fl_jni_LinearHLCRNativeJNI.cpp \
+    ./fl/tensor/data_deserializer.cc \
+    ./fl/tensor/data_metadata.cc \
+    ./fl/tensor/data_serializer.cc \
+    ./fl/tensor/tensor.cc \
+    ./fl/tensor/tensor_map.cc \
+    ./fl/tensor/tensor_shape.cc \
+    ./fl/LinearHLCR/LinearHLCR_JNIF.cpp \
+    ./fl/LinearHLCR/LinearHLCR.cpp \
+    ./fl/LinearHLCR/LinearRegression.cpp \
+    ./fl/LinearHLCR/MatrixAndVector.cpp \
+    ./fl/LinearHLCR/NormalDistribution.cpp \
+    ./fl/evaluation/evaluation.cpp
+LOCAL_CPPFLAGS         := -std=c++11 -fexceptions -Wno-sign-compare
+LOCAL_PRELINK_MODULE   := false
+LOCAL_LDLIBS           := \
+                          -lz \
+                          -llog
+LOCAL_C_INCLUDES       := $(LOCAL_PATH) \
+                          $(LOCAL_PATH)/include \
+                          $(LOCAL_PATH)/include/nbla \
+                          $(LOCAL_PATH)/include/nbla_utils \
+                          $(LOCAL_PATH)/fl \
+                          $(LOCAL_PATH)/fl/nlohmann
+include $(BUILD_SHARED_LIBRARY)

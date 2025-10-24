@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Bolo zistené slabé Wi-Fi pripojenie</string>
+    <string name="notification_text">Ak chcete stabilnejšie pripojenie cez mobilnú sieť, zapnite nastavenie Automatické prepnutie siete</string>
+    <string name="notification_action_settings">Nastavenia</string>
+    <string name="notification_action_no_thanks">Nie, ďakujem</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Používať funkciu</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automaticky prepne na želanú sieť, keď sú k dispozícii obidve siete – Wi-Fi aj mobilná sieť.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Nastavenie môžete neskôr zmeniť v predvoľbách Wi-Fi.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Tipy</string>
+    <string name="wifi_auto_network_switch_setting">Automatické prepnutie siete</string>
+    <string name="settings_on">Zapnutý</string>
+    <string name="settings_off">Vypnuté</string>
+    <string name="smart_network_settings_title">Inteligentné prepínanie sietí</string>
+    <string name="smart_network_settings_switch_txt">Inteligentné prepínanie sietí</string>
+    <string name="smart_network_settings_msg">Keď sa zistí slabá kvalita pripojenia siete Wi-Fi, použije sa mobilná sieť. Po vypnutí tejto funkcie sa uprednostní pripojenie Wi-Fi.</string>
+    <string name="smart_network_settings_supplement">Táto funkcia nemá vplyv na aplikácie, ktoré obmedzujú pripojenie len na sieť Wi-Fi alebo len na mobilnú sieť</string>
+    <string name="sne_app_name_txt">Inteligentné prepínanie sietí</string>
+    <string name="smart_network_settings_desc">Inteligentné prepínanie sietí využíva technológiu hĺbkového učenia spoločnosti Sony a vždy poskytuje najlepšie pripojenie k sieti automatickým prepínaním medzi sieťami 4G/5G a Wi-Fi v závislosti od kvality siete.</string>
+    <string name="smart_network_settings_connected_switch_title">Použiť mobilnú sieť, ak je kvalita siete Wi-Fi zlá</string>
+    <string name="smart_network_settings_connected_switch_desc">Predpovedá podmienky siete analyzovaním údajov o signáli siete Wi-Fi. Ak sa očakáva zlá kvalita siete Wi-Fi, táto položka sa automaticky prepne na mobilnú sieť. Ak sa používa domáca sieť, uprednostní sa pripojenie pomocou siete Wi-Fi.</string>
+    <string name="smart_network_settings_entry_switch_title">Zabrániť automatickému pripojeniu k slabým Wi-Fi</string>
+    <string name="smart_network_settings_entry_switch_desc">Zastaví automatické pripojenie, ak sa očakáva zlá kvalita siete Wi-Fi. To môže zabrániť automatickému prepnutiu vášho zariadenia na verejnú sieť Wi-Fi s nižšou kvalitou.</string>
+    <string name="smart_network_settings_desc_summary">Automaticky vybrať najlepšiu sieť</string>
+    <string name="smart_network_notification_entry_title">Bola zistená slabá kvalita siete Wi-Fi</string>
+    <string name="smart_network_notification_entry_text">Inteligentné prepínanie sietí predpovedalo, že %1$s má slabú kvalitu a dočasne zabránilo automatickému pripojeniu k tejto sieti Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Zabránenie automatickému pripojeniu k slabej sieti Wi-Fi</string>
+    <string name="smart_network_notification_entry_button">NASTAVENIA</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">PRIPOJIŤ</string>
+    <string name="smart_network_toast_connecting">Pripájanie k sieti %1$s</string>
+</resources>

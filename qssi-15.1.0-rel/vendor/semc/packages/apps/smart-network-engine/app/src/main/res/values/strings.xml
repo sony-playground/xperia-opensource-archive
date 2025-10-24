@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Notification title. Tells the user that Wi-Fi connection is weak. -->
+    <string name="notification_title" xliff:restype="x-GENERIC/NOTIFICATION/TITLE/ICON">Poor Wi-Fi connection detected</string>
+    <!-- Notification text. Prompts the user to enable Auto network switch setting in Wi-Fi settings. Please follow termbase for "Auto network switch" translation. -->
+    <string name="notification_text" xliff:restype="x-GENERIC/NOTIFICATION/SUBTITLE/EXPANDED">Tap to enable Auto network switch to make your network stable by using mobile network</string>
+    <!-- Notification action button. Tapping this will open Wi-Fi settings. -->
+    <string name="notification_action_settings" xliff:restype="x-GENERIC/NOTIFICATION/2ACTIONS">Go to Settings</string>
+    <!-- Text in a notification where the user chooses not to proceed with a tip suggestion -->
+    <string name="notification_action_no_thanks" xliff:restype="x-GENERIC/NOTIFICATION/2ACTIONS">No thanks</string>
+
+    <!-- Added the following strings on 2018-11-01.-->
+    <skip />
+    <!-- Text shown next to the On/Off switch. The user can turn on/off the feature by sliding the switch. Please follow termbase for "Auto network switch" translation. -->
+    <string name="wifi_auto_network_switch_setting_switch_txt" xliff:restype="x-GENERIC/LIST/TITLE/SWITCH/ICON">Use service</string>
+    <!-- Explanatory text under the setting title "Auto network switch" (wifi_auto_network_switch_setting). -->
+    <string name="wifi_auto_network_switch_setting_msg" xliff:restype="x-UNLIMITED">Automatically switch to a preferred network when both Wi-Fi network and mobile network are available.</string>
+    <!-- Text on the dialog to inform the user that he/she can change the setting in Wi-Fi preferences later. Full stop is intentional. Reference labels (In Android_P) wifi_configure_settings_preference_title - Wi‑Fi preferences -->
+    <string name="wifi_auto_network_switch_setting_msg_later" xliff:restype="x-UNLIMITED">You can always go to Wi-Fi preferences to change the setup later.</string>
+    <!-- One of the notification category names. -->
+    <string name="wifi_auto_network_switch_notification_channel" xliff:restype="x-GENERIC/LIST/TITLE/SWITCH/ICON">Tips</string>
+
+    <!-- Added the following strings on 2018-11-14.-->
+    <skip />
+    <!-- Setting title in Advanced Wi-Fi settings -->
+    <string name="wifi_auto_network_switch_setting" xliff:restype="x-GENERIC/APPBAR/TITLE">Auto network switch</string>
+
+    <!-- Added the following strings on 2019-06-02.-->
+    <skip />
+    <!-- Used to indicate if the feature is on. -->
+    <string name="settings_on" xliff:restype="x-GENERIC/LIST/SUBTITLE">On</string>
+    <!-- Used to indicate if the feature is off. -->
+    <string name="settings_off" xliff:restype="x-GENERIC/LIST/SUBTITLE">Off</string>
+    <!-- Title of a setting. Please refer to TermBase for the translation of Network assist. Refer to the reference material for the translation of "Network assist". -->
+    <string name="smart_network_settings_title" xliff:restype="x-GENERIC/APPBAR/TITLE">Smart connectivity</string>
+    <!-- Text shown next to the On/Off switch. The user can turn on/off the service by sliding the switch. -->
+    <string name="smart_network_settings_switch_txt" xliff:restype="x-GENERIC/LIST/TITLE/SWITCH/ICON">Use Smart connectivity</string>
+    <!-- Explanation of the feature called Network assist. When this feature is turned on, it will automatically choose the best available network when the user is in a location where he could use both a Wi-Fi and a mobile network. -->
+    <string name="smart_network_settings_msg" xliff:restype="x-UNLIMITED">When a Wi-Fi network is detected to have poor connection quality, mobile network will be used instead. When turned off, Wi-Fi connection will be prioritized.</string>
+    <!--CHANGES: Remove "Note:" and edit your language where necessary. Additional information about smart_network_settings_msg. This informs the user that Smart connectivity doesn't work for applications that restrict connections to only one of either connection types (Wi-Fi only or mobile network only). || Reference strings info: "Wi-Fi": see #TB (term "Wi-Fi®")-->
+    <string name="smart_network_settings_supplement" xliff:restype="x-UNLIMITED">This feature won\'t affect applications that limit connections to Wi-Fi only or mobile network only</string>
+
+    <!-- Added the following strings on 2020-07-21.-->
+    <skip />
+    <!-- Application name. This can be translated. Using this app when a Wi-Fi network is detected to have poor connection quality, mobile network will be used instead. When turned off, Wi-Fi connection will be prioritized. -->
+    <string name="sne_app_name_txt" xliff:restype="x-GENERIC/NOTIFICATION/TITLE">Smart connectivity</string>
+
+    <!-- Added the following strings on 2020-11-11.-->
+    <!-- Text to explain how the Smart connectivity function works in the Smart connectivity setting screen. || Reference strings info: "Wi-Fi": see #TB (term "Wi-Fi®") -->
+    <string name="smart_network_settings_desc" xliff:restype="x-UNLIMITED">Using Sony\'s deep learning technology, Smart connectivity always provides the best network connection by automatically switching between 4G/5G and Wi-Fi depending on the network quality.</string>
+    <!--Title of setting for automatic switching from Wi-Fi network to mobile network in places where Wi-Fi connection quality is not good. || Reference strings info: "Wi-Fi": see #TB (term "Wi-Fi®")-->
+    <string name="smart_network_settings_connected_switch_title" xliff:restype="x-GENERIC/LIST/TITLE/SWITCH/ICON">Use mobile network when Wi-Fi quality is poor</string>
+    <!--Description of a setting for automatic switching from Wi-Fi network to mobile network in places where Wi-Fi connection quality is not good. This text follows ID#smart_network_settings_connected_switch_title. || Reference string info: "Wi-Fi": must use ID#smart_network_settings_connected_switch_title (in the same round)-->
+    <string name="smart_network_settings_connected_switch_desc" xliff:restype="x-GENERIC/LIST/SUBTITLE">Predict network conditions by analyzing Wi-Fi signal data. If poor Wi-Fi network quality is expected, this will automatically switch to a mobile network. Wi-Fi connection will be prioritized for home network use.</string>
+    <!--Title of a setting to stop automatic switching to Wi-Fi networks if the Wi-Fi network condition is not good. || Reference strings info: "Wi-Fi": see #TB (term "Wi-Fi®")-->
+    <string name="smart_network_settings_entry_switch_title" xliff:restype="x-GENERIC/LIST/TITLE/SWITCH/ICON">Prevent auto connection to poor quality Wi-Fi networks</string>
+    <!--Description of a setting to stop automatic switching to Wi-Fi networks if the Wi-Fi network condition is not good. || Reference strings info: "Wi-Fi": see #TB (term "Wi-Fi®")-->
+    <string name="smart_network_settings_entry_switch_desc" xliff:restype="x-GENERIC/LIST/SUBTITLE">Stop auto connection when poor Wi-Fi quality is expected. This can help prevent your device from automatically switching to lower quality public Wi-Fi.</string>
+    <!--Text to explain what the Smart connectivity function does in the setting list.-->
+    <string name="smart_network_settings_desc_summary" xliff:restype="x-GENERIC/LIST/SUBTITLE">Automatically select best network</string>
+
+    <!-- Added the following strings on 2020-12-22.-->
+    <string name="smart_network_notification_entry_title" xliff:restype="x-GENERIC/NOTIFICATION/TITLE">Poor quality Wi-Fi network detected</string>
+    <string name="smart_network_notification_entry_text" xliff:restype="x-GENERIC/NOTIFICATION/SUBTITLE/EXPANDED">Smart connectivity has predicted that %1$s is of poor quality, and temporarily prevented automatic connection to this Wi-Fi network.</string>
+    <string name="smart_network_notification_channel_entry_title" xliff:restype="x-GENERIC/LIST/TITLE/SWITCH/ICON">Preventing auto connection to poor quality Wi-Fi network</string>
+    <string name="smart_network_notification_entry_button" xliff:restype="x-GENERIC/NOTIFICATION/1ACTION">GO TO SETTINGS</string>
+
+    <!-- Added the following strings on 2021-02-05.-->
+    <!--Button name in a notification. The user can tap this to decide to connect to a network even though Smart connectivity has detected it as a low quality network. Align the translation of "CONNECT" with "connection" in the reference. You can omit the word "ANYWAY" if the translation in your language is too long. || Reference string info: "CONNECT": see ID#smart_network_notification_entry_text-->
+    <string name="smart_network_notification_entry_button_connect_anyway" xliff:restype="x-GENERIC/NOTIFICATION/2ACTIONS">CONNECT ANYWAY</string>
+    <!--Toast text which will be shown if the user selects the "CONNECT ANYWAY" button to connect to a network that Smart connectivity has detected as a low quality network. Align translation of "Connecting" with "connection" in the reference. The variable will be replaced with a network name. || Reference string info: "Connecting": see ID#smart_network_notification_entry_text-->
+    <string name="smart_network_toast_connecting" xliff:restype="x-GENERIC/TOAST/TEXT">Connecting to %1$s</string>
+</resources>

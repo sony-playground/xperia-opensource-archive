@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">偵測到訊號微弱的WLAN連接</string>
+    <string name="wifi_auto_network_switch_setting_msg">在WLAN網絡和流動網絡可用時會自動切換到首選的網絡。</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">您隨時可進入WLAN偏好設定更改設定。</string>
+    <string name="smart_network_settings_msg">如偵測到WLAN網絡連線品質欠佳，將改為使用流動網絡。關閉時，則會優先使用WLAN連接。</string>
+    <string name="smart_network_settings_supplement">此功能不會影響僅限連接至WLAN或流動網絡的應用程式。</string>
+    <string name="smart_network_settings_desc">[智能連接]使用索尼的深度學習技術，因應網絡品質在4G/5G及WLAN之間自動切換，時刻呈獻品質最佳的網絡連接。</string>
+    <string name="smart_network_settings_connected_switch_title">當WLAN品質欠佳時使用流動網絡</string>
+    <string name="smart_network_settings_connected_switch_desc">透過分析WLAN信號數據來預測網絡狀態。若預測WLAN網絡品質欠佳，這將自動切換至流動網絡。WLAN連接將優先供主網絡使用。</string>
+    <string name="smart_network_settings_entry_switch_title">防止自動連接至品質欠佳的WLAN網絡</string>
+    <string name="smart_network_settings_entry_switch_desc">當預測WLAN品質欠佳時停止自動連接。這有助防止您的裝置自動切換至品質較差的公共WLAN。</string>
+    <string name="smart_network_notification_entry_title">偵測到品質欠佳的WLAN網絡</string>
+    <string name="smart_network_notification_entry_text">[智能連接]預測到%1$s品質欠佳，並已暫時防止自動連接至此WLAN網絡。</string>
+    <string name="smart_network_notification_channel_entry_title">正在防止自動連接至品質欠佳的WLAN網絡</string>
+</resources>

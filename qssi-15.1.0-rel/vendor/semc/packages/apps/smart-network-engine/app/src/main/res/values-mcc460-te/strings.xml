@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">బలహీన WLAN కనెక్షన్ గుర్తించబడింది</string>
+    <string name="wifi_auto_network_switch_setting_msg">WLAN నెట్‌వర్క్ మరియు మొబైల్ నెట్‌వర్క్‌లు రెండూ అందుబాటులో ఉన్నప్పుడు స్వయంచాలకంగా ప్రాధాన్య నెట్‌వర్క్‌కు మారుతుంది.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">మీరు తర్వాత సెటప్‌ని మార్చడానికి ఎల్లప్పుడూ WLAN ప్రాధాన్యతలకు వెళ్లవచ్చు.</string>
+    <string name="smart_network_settings_msg">WLAN నెట్‌వర్క్ బలహీనంగా ఉన్నట్లు గుర్తించినప్పుడు, బదులుగా మొబైల్ నెట్‌వర్క్‌‌ను ఉపయోగించబడుతుంది. ఆప్ అయినప్పుడు, WLAN కనెక్షన్‌కు ప్రాధాన్యత ఇవ్వబడుతుంది.</string>
+    <string name="smart_network_settings_supplement">ఈ ఫీచర్ WLAN మాత్రమే లేదా మొబైల్ నెట్‌వర్క్ మాత్రమేకు పరిమిత కనెక్షన్‌లను కలిగి ఉన్న అప్లికేషన్‍‌లను ప్రభావితం చేయదు</string>
+    <string name="smart_network_settings_desc">Sony యొక్క సమగ్ర లెర్నింగ్ సాంకేతికతను ఉపయోగించి, స్మార్ట్ కనెక్టివిటీ ఎల్లప్పుడూ నెట్‌వర్క్ నాణ్యత ఆధారంగా 4G/5G మరియు WLANల మధ్య స్వయంచాలకంగా మారడం ద్వారా ఉత్తమ నెట్‌వర్క్ కనెక్షన్‌ను అందిస్తుంది.</string>
+    <string name="smart_network_settings_connected_switch_title">WLAN నాణ్యత పేలవ. మొబైల్ నెట్‌. ఉపయోగించు</string>
+    <string name="smart_network_settings_connected_switch_desc">WLAN సిగ్నల్ డేటాను విశ్లేషించడం ద్వారా నెట్‌వర్క్ పరిస్థితులను అంచనా వేస్తుంది WLAN నెట్‌వర్క్ నాణ్యత పేలవంగా ఉంటుందని ఊహించినట్లయితే, ఇది స్వయంచాలకంగా మొబైల్ నెట్‌వర్క్‌కు మారుతుంది. హోమ్ నెట్‌వర్క్ వినియోగం కోసం WLAN కనెక్షన్‌కు ప్రాధాన్యత ఇవ్వబడుతుంది.</string>
+    <string name="smart_network_settings_entry_switch_title">పేలవ నాణ్యతా WLAN నెట్‌. స్వీయ కనె. నివారించు</string>
+    <string name="smart_network_settings_entry_switch_desc">పేలవమైన WLAN నాణ్యత అంచనా వేసినప్పుడు స్వీయ కనెక్షన్‌ను ఆపివేస్తుంది. ఇది మీ స్మార్ట్‌ఫోన్ స్వయంచాలకంగా తక్కువ నాణ్యత పబ్లిక్ WLANకు మారకుండా నివారించడంలో సహాయపడుతుంది.</string>
+    <string name="smart_network_notification_entry_title">పేలవమైన నాణ్యతా WLAN నెట్‌వర్క్ గుర్తించబడింది</string>
+    <string name="smart_network_notification_entry_text">%1$s నాణ్యత పేలవంగా ఉంటుందని స్మార్ట్ కనెక్టివిటీ ఊహించింది మరియు ఈ WLAN నెట్‌వర్క్‌కు స్వయంచాలక కనెక్షన్‌ను తాత్కాలికంగా నివారించింది.</string>
+    <string name="smart_network_notification_channel_entry_title">పేలవమైన WLAN నెట్‌వర్క్‌కు స్వీయ కనెక్షన్ నివారిస్తోంది</string>
+</resources>

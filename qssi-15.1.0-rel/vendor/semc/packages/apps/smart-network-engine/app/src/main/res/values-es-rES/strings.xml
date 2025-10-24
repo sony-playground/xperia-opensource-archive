@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Conexión Wi-Fi débil detectada</string>
+    <string name="notification_text">Puntear para habilitar el cambio de red automático y hacer estable su red con el uso de la red móvil</string>
+    <string name="notification_action_settings">Ir a Ajustes</string>
+    <string name="notification_action_no_thanks">No, gracias</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Utilizar el servicio</string>
+    <string name="wifi_auto_network_switch_setting_msg">Cambie automáticamente a una red preferida cuando tanto la red Wi-Fi como la red móvil estén disponibles.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Siempre puede ir a Preferencias de Wi-Fi para cambiar la configuración más tarde.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Consejos</string>
+    <string name="wifi_auto_network_switch_setting">Cambio de red automático</string>
+    <string name="settings_on">Activado</string>
+    <string name="settings_off">Desactivado</string>
+    <string name="smart_network_settings_title">Conectividad inteligente</string>
+    <string name="smart_network_settings_switch_txt">Usar Conectividad intelig.</string>
+    <string name="smart_network_settings_msg">Si se detecta que la conexión de una red Wi-Fi es de mala calidad, se usará la red móvil. Si esta opción está desactivada, se priorizará la conexión Wi-Fi.</string>
+    <string name="smart_network_settings_supplement">Esta característica no afecta a las aplicaciones que limitan las conexiones solo a Wi-Fi o solo a red móvil</string>
+    <string name="sne_app_name_txt">Conectividad inteligente</string>
+    <string name="smart_network_settings_desc">Mediante la tecnología de aprendizaje profundo de Sony, la conectividad inteligente siempre proporciona la mejor conexión de red al cambiar automáticamente entre 4G/5G y Wi-Fi en función de la calidad de la red.</string>
+    <string name="smart_network_settings_connected_switch_title">Usar red móvil cuando la calidad de Wi-Fi es mala</string>
+    <string name="smart_network_settings_connected_switch_desc">Analiza los datos de la señal Wi-Fi para predecir las condiciones de red. Si se espera que la calidad de la red Wi-Fi sea mala, se cambiará automáticamente a una red móvil. La conexión Wi-Fi tendrá prioridad al usar la red doméstica.</string>
+    <string name="smart_network_settings_entry_switch_title">Evitar conexión automática a redes Wi-Fi de mala calidad</string>
+    <string name="smart_network_settings_entry_switch_desc">Detiene la conexión automática si se espera que la calidad de Wi-Fi sea mala. Ayuda a evitar que su dispositivo cambie automáticamente a una Wi-Fi pública de peor calidad.</string>
+    <string name="smart_network_settings_desc_summary">Seleccionar automáticamente la mejor red</string>
+    <string name="smart_network_notification_entry_title">Se detectó una red Wi-Fi de mala calidad</string>
+    <string name="smart_network_notification_entry_text">Conectividad inteligente detectó que %1$s es de mala calidad y evitó temporalmente conectarse a dicha red Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Evitar conexión automática a redes Wi-Fi de mala calidad</string>
+    <string name="smart_network_notification_entry_button">IR A AJUSTES</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">CONECTAR</string>
+    <string name="smart_network_toast_connecting">Conectando a %1$s</string>
+</resources>

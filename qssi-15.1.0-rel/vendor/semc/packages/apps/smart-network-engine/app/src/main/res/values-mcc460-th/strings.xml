@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">ตรวจจับการเชื่อมต่อ WLAN ที่อ่อน</string>
+    <string name="wifi_auto_network_switch_setting_msg">สลับเป็นเครือข่ายที่ต้องการโดยอัตโนมัติเมื่อมีทั้งเครือข่าย WLAN และเครือข่ายโทรศัพท์เคลื่อนที่</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">คุณสามารถไปที่ค่ากำหนด WLAN เพื่อเปลี่ยนการตั้งค่าในภายหลังได้ทุกเมื่อ</string>
+    <string name="smart_network_settings_msg">เมื่อตรวจพบว่าเครือข่าย WLAN มีคุณภาพการเชื่อมต่อต่ำ จะเปิดใช้งานเครือข่ายโทรศัพท์เคลื่อนที่แทน หากปิดอยู่ จะเปิดใช้การเชื่อมต่อ WLAN ก่อน</string>
+    <string name="smart_network_settings_supplement">คุณสมบัตินี้จะไม่ส่งผลกับแอปพลิเคชันที่การเชื่อมต่อจำกัดแค่ WLAN เท่านั้นหรือเครือข่ายโทรศัพท์เคลื่อนที่เท่านั้น</string>
+    <string name="smart_network_settings_desc">เมื่อใช้เทคโนโลยีการเรียนรู้เชิงลึกของ Sony ระบบเชื่อมต่ออัจฉริยะจะนำเสนอการเชื่อมต่อเครือข่ายที่ดีที่สุดเสมอด้วยการสลับระหว่าง 4G/5G และ WLAN โดยขึ้นอยู่กับคุณภาพของเครือข่าย</string>
+    <string name="smart_network_settings_connected_switch_title">ใช้เครือข่ายโทรศัพท์เคลื่อนที่เมื่อคุณภาพ WLAN ไม่ดี</string>
+    <string name="smart_network_settings_connected_switch_desc">คาดเดาสภาวะเครือข่ายด้วยการวิเคราะห์ข้อมูลสัญญาณ WLAN หากมีการคาดการณ์ว่าคุณภาพเครือข่าย WLAN ไม่ดี ระบบจะสลับเป็นเครือข่ายโทรศัพท์เคลื่อนที่โดยอัตโนมัติ การเชื่อมต่อ WLAN จะมีความสำคัญเป็นอันดับแรกสำหรับการใช้เครือข่ายในพื้นที่</string>
+    <string name="smart_network_settings_entry_switch_title">ป้องกันการเชื่อมต่อกับเครือข่าย WLAN คุณภาพไม่ดีโดยอัตโนมัติ</string>
+    <string name="smart_network_settings_entry_switch_desc">หยุดการเชื่อมต่ออัตโนมัติเมื่อคาดการณ์ว่าคุณภาพ WLAN ไม่ดี การทำเช่นนี้ช่วยป้องกันไม่ให้อุปกรณ์ของคุณสลับไปยัง WLAN สาธารณะที่คุณภาพต่ำกว่าโดยอัตโนมัติ</string>
+    <string name="smart_network_notification_entry_title">ตรวจพบเครือข่าย WLAN คุณภาพไม่ดี</string>
+    <string name="smart_network_notification_entry_text">ระบบเชื่อมต่ออัจฉริยะได้คาดเดาว่า %1$s คุณภาพไม่ดี และได้ป้องกันการเชื่อมต่อกับเครือข่าย WLAN นี้โดยอัตโนมัติไว้ชั่วคราว</string>
+    <string name="smart_network_notification_channel_entry_title">ป้องกันการเชื่อมต่อกับเครือข่าย WLAN คุณภาพไม่ดีโดยอัตโนมัติ</string>
+</resources>

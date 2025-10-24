@@ -1,0 +1,4 @@
+These patches need to be applied to Nnabla in order to build Nnabla libraries
+which have proper dependency to C++ runtime libraries - libc++_shared.so
+
+Tested on commit 6b77e5dc897c0b0747da9a456325fd050ccf660d (tag: v1.25.0)

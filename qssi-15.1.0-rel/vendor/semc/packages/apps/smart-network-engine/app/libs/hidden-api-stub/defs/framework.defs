@@ -1,0 +1,42 @@
+## Include class list for:
+##  out/target/product/qssi/obj/semcpkgtoimg_staging/imgdata/
+##   - system/framework/framework.jar
+##  prebuilts/module_sdk/
+##   - Wifi/current/sdk_library/system/framework-wifi-stubs.jar
+
+# For Hidden API (incl. System API)
++android.content.Context*
++android.net.wifi.WifiConfiguration*
++android.net.wifi.WifiConnectedSessionInfo*
++android.net.wifi.WifiInfo*
++android.net.wifi.WifiManager*
++android.net.wifi.WifiScanner*
++android.net.wifi.WifiUsabilityStatsEntry*
++android.os.HandlerExecutor*
++android.os.HidlSupport*
++android.os.HwBinder*
++android.os.HwBlob*
++android.os.HwParcel*
++android.os.IHwBinder*
++android.os.IHwBinder.DeathRecipient*
++android.os.IHwInterface*
++android.os.IServiceCallback*
++android.os.RemoteException*
++android.os.ServiceManager*
++android.os.ServiceSpecificException*
++android.os.SystemProperties*
++android.provider.SearchIndexablesContract*
++android.provider.SearchIndexablesProvider*
++android.provider.Settings$Global*
++android.telephony.NetworkRegistrationInfo*
++android.telephony.ServiceState*
++android.telephony.TelephonyManager*
+
+# Utility classes
++com.android.internal.util.IState*
++com.android.internal.util.State*
++com.android.internal.util.StateMachine*
++com.android.internal.util.MessageUtils*
+
+# To suppress 'warning: unknown enum constant SystemApi$Client.MODULE_LIBRARIES'
++android.annotation.SystemApi$Client*

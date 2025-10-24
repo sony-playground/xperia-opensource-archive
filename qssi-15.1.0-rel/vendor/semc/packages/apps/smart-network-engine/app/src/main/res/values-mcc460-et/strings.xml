@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Tuvastatud halb WLAN-ühendus</string>
+    <string name="wifi_auto_network_switch_setting_msg">Kui WLAN- ja mobiilivõrk on mõlemad saadaval, lülita automaatselt eelistatud võrgule.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Saate alati hiljem seadistust WLAN eelistustes muuta.</string>
+    <string name="smart_network_settings_msg">Kui WLAN võrgul tuvastatakse halb ühenduse kvaliteet, kasutatakse mobiilivõrku selle asemel. WLAN võrk on prioriteetsem, kui see funktsioon on välja lülitatud.</string>
+    <string name="smart_network_settings_supplement">See funktsioon ei mõjuta rakendusi, mis piiravad ainult WLAN või ainult mobiilsidevõrgu ühendusi</string>
+    <string name="smart_network_settings_desc">Kasutades Sony süvaõppetehnoloogiat, pakub nutikas Smart-ühenduvus alati parimat võrguühendust, lülitudes automaatselt 4G/5G ja WLAN vahel sõltuvalt võrgu kvaliteedist.</string>
+    <string name="smart_network_settings_connected_switch_title">Mobiilsidevõrgu kasutamine, kui WLAN kvaliteet on halb</string>
+    <string name="smart_network_settings_connected_switch_desc">Ennustab võrgutingimusi, analüüsides WLAN-signaali andmeid. Kui eeldatakse, et WLAN-võrgu kvaliteet on halb, lülitub see automaatselt mobiilsidevõrku. Koduvõrgu kasutamisel eelistatakse WLAN-ühendust.</string>
+    <string name="smart_network_settings_entry_switch_title">Kehvade WLAN-võrkudega mitte-autom ühenduse loom</string>
+    <string name="smart_network_settings_entry_switch_desc">Peatab automaatselt ühenduse, kui oodata on halba WLAN-kvaliteeti. See võimaldab vältida seadmel automaatselt madalama kvaliteediga avalikule WLAN-ühendusele üleminekut.</string>
+    <string name="smart_network_notification_entry_title">Tuvastatud halb WLAN-võrk</string>
+    <string name="smart_network_notification_entry_text">Nutikas ühenduvus on ennustanud, et %1$s on halva kvaliteediga, ja takistas ajutiselt selle WLAN-võrguga automaatset ühendust.</string>
+    <string name="smart_network_notification_channel_entry_title">Kehva WLAN-ga mitte-autom ühenduse loomine</string>
+</resources>

@@ -1,0 +1,5 @@
+## Include class list for:
+##  out/soong/.intermediates/
+##   - frameworks/base/framework/android_common/turbine-combined/framework.jar
+
++com.sonymobile.snewifiscan.*

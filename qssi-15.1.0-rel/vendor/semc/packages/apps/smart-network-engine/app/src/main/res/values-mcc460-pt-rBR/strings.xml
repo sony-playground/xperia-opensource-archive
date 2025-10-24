@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Conexão WLAN fraca detectada</string>
+    <string name="wifi_auto_network_switch_setting_msg">Altera automaticamente para uma rede preferida quando tanto a rede WLAN quanto a rede móvel estiverem disponíveis.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Você sempre pode acessar as preferências de WLAN para alterar a configuração mais tarde.</string>
+    <string name="smart_network_settings_msg">Quando uma rede WLAN com má qualidade de conexão for detectada, a rede móvel será usada no lugar dela. Quando a rede móvel for desligada, a conexão WLAN será priorizada.</string>
+    <string name="smart_network_settings_supplement">Nota: este recurso não afetará aplicativos que limitam conexões para somente WLAN ou somente rede móvel</string>
+    <string name="smart_network_settings_desc">Usando a tecnologia de aprendizado profundo da Sony, a conectividade inteligente sempre fornece a melhor conexão de rede, alternando automaticamente entre 4G/5G e WLAN, dependendo da qualidade da rede.</string>
+    <string name="smart_network_settings_connected_switch_title">Use a rede móvel quando a qualidade do WLAN for ruim</string>
+    <string name="smart_network_settings_connected_switch_desc">Preveja as condições da rede analisando os dados do sinal WLAN. Se houver expectativa de baixa qualidade da rede WLAN, ela mudará automaticamente para uma rede móvel. A conexão WLAN será priorizada para o uso da rede doméstica.</string>
+    <string name="smart_network_settings_entry_switch_title">Impedir conexão auto com WLAN ruim</string>
+    <string name="smart_network_settings_entry_switch_desc">Pare a conexão automática quando houver expectativa de baixa qualidade do WLAN. Isso pode ajudar a evitar que seu dispositivo mude automaticamente para um WLAN público de qualidade inferior.</string>
+    <string name="smart_network_notification_entry_title">Rede WLAN ruim detectada</string>
+    <string name="smart_network_notification_entry_text">A conectividade inteligente previu que %1$s é ruim e impediu temporariamente a conexão automática a esta rede WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Impedindo conexão auto com WLAN ruim</string>
+</resources>

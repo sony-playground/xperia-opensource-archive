@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">检测到信号较差的WLAN连接</string>
+    <string name="wifi_auto_network_switch_setting_msg">当WLAN网络和移动网络均可用时自动切换到首选网络。</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">您可以随时转到WLAN偏好设置，以便稍后更改设置。</string>
+    <string name="smart_network_settings_msg">当检测到WLAN网络的连接质量较差时，将改用移动网络。关闭时，将优先使用WLAN连接。</string>
+    <string name="smart_network_settings_supplement">此功能不会影响仅限WLAN或仅限移动网络连接的应用程序</string>
+    <string name="smart_network_settings_desc">使用Sony的深度学习技术，智能连接能够根据网络质量自动切换4G/5G和WLAN，因此能够始终提供最佳的网络连接。</string>
+    <string name="smart_network_settings_connected_switch_title">在WLAN质量较差时使用移动网络</string>
+    <string name="smart_network_settings_connected_switch_desc">通过分析WLAN信号数据来预测网络情况。当预计WLAN网络质量较差时，将自动切换到移动网络。使用本地网络时，将优先使用WLAN连接。</string>
+    <string name="smart_network_settings_entry_switch_title">防止自动连接到质量较差的WLAN网络</string>
+    <string name="smart_network_settings_entry_switch_desc">在预计 WLAN 质量较差时，停止自动连接。这样有助于防止设备自动切换到质量较差的公共 WLAN。</string>
+    <string name="smart_network_notification_entry_title">检测到WLAN网络质量较差</string>
+    <string name="smart_network_notification_entry_text">智能连接功能预测到%1$s质量较差，因此临时阻止了自动连接到此WLAN网络。</string>
+    <string name="smart_network_notification_channel_entry_title">防止自动连接到质量较差的WLAN网络</string>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Havaittiin huono Wi-Fi-yhteys</string>
+    <string name="notification_text">Jos haluat käyttää vakaampaa mobiiliverkkoyhteyttä, ota automaattinen verkon vaihtaminen käyttöön napauttamalla</string>
+    <string name="notification_action_settings">Siirry asetuksiin</string>
+    <string name="notification_action_no_thanks">Ei kiitos</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Käytä palvelua</string>
+    <string name="wifi_auto_network_switch_setting_msg">Vaihda ensisijaiseen verkkoon automaattisesti, kun käytettävissä on sekä matkapuhelinverkko että Wi-Fi-verkko.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Voit muokata asetuksia myöhemmin Wi-Fi-asetuksissa.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Vihjeitä</string>
+    <string name="wifi_auto_network_switch_setting">Automaattinen verkon vaihtaminen</string>
+    <string name="settings_on">Käytössä</string>
+    <string name="settings_off">Pois päältä</string>
+    <string name="smart_network_settings_title">Älykäs yhteydenvalinta</string>
+    <string name="smart_network_settings_switch_txt">Käytä äly-yhteysvalintaa</string>
+    <string name="smart_network_settings_msg">Kun Wi-Fi-verkon yhteyden laatu on heikko, käytetään sen sijasta mobiiliverkkoa. Kun tämä ei ole käytössä, Wi-Fi-verkko priorisoidaan.</string>
+    <string name="smart_network_settings_supplement">Tämä toiminto ei vaikuta sovelluksiin, jotka rajoittavat yhteydet vain Wi-Fi- tai mobiiliverkkoyhteyksiin</string>
+    <string name="sne_app_name_txt">Älykäs yhteydenvalinta</string>
+    <string name="smart_network_settings_desc">Sonyn syväoppimistekniikan ansiosta Älykäs yhteydenvalinta tarjoaa aina parhaan verkkoyhteyden vaihtamalla automaattisesti 4G/5G-yhteyden ja Wi-Fi-yhteyden välillä verkon laadun perusteella.</string>
+    <string name="smart_network_settings_connected_switch_title">Käytä mobiiliverkkoa, kun Wi-Fi-yhteyden laatu on heikko</string>
+    <string name="smart_network_settings_connected_switch_desc">Ennusta verkon tila analysoimalla Wi-Fi-signaalin tietoja. Jos Wi-Fi-verkon laadun odotetaan olevan heikko, mobiiliverkko vaihdetaan käyttöön automaattisesti. Wi-Fi-yhteys on ensisijalla kotiverkkokäytössä.</string>
+    <string name="smart_network_settings_entry_switch_title">Estä autom. yhdistäminen heikkoon Wi-Fi-verkkoon</string>
+    <string name="smart_network_settings_entry_switch_desc">Lopeta automaattinen yhdistäminen, kun heikko Wi-Fi-yhteys on odotettavissa. Tämä estää laitettasi yhdistämästä automaattisesti heikkolaatuiseen julkiseen Wi-Fi-verkkoon.</string>
+    <string name="smart_network_settings_desc_summary">Valitse paras verkko automaattisesti</string>
+    <string name="smart_network_notification_entry_title">Heikkolaatuinen Wi-Fi-verkko havaittu</string>
+    <string name="smart_network_notification_entry_text">Älykäs yhteydenvalinta on ennustanut, että %1$s on heikkolaatuinen, ja estänyt automaattisen yhdistämisen kyseiseen Wi-Fi-verkkoon.</string>
+    <string name="smart_network_notification_channel_entry_title">Estää autom. yhdistämisen heikkoon Wi-Fi-verkkoon</string>
+    <string name="smart_network_notification_entry_button">SIIRRY ASETUKSIIN</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">YHDISTÄ SILTI</string>
+    <string name="smart_network_toast_connecting">Yhdistetään verkkoon %1$s</string>
+</resources>

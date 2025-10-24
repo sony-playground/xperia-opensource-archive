@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Низкая скорость подключения к WLAN</string>
+    <string name="wifi_auto_network_switch_setting_msg">Автоматическое переключение на предпочтительную сеть, если доступна мобильная сеть и WLAN.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Изменить настройку можно в любое время в разделе \"Настройки WLAN\".</string>
+    <string name="smart_network_settings_msg">При обнаружении плохого качества подключения к сети WLAN будет использоваться подключение по мобильной сети. Если функция отключена, предпочтение отдается подключению по WLAN.</string>
+    <string name="smart_network_settings_supplement">Данная функция не влияет на приложения, в которых предусмотрено подключение только к WLAN или к мобильной сети</string>
+    <string name="smart_network_settings_desc">С технологией Deep Learning от Sony \"Умное\" подключение всегда обеспечивает лучшее сетевое подключение, автоматически переключаясь между 4G/5G и WLAN в зависимости от качества сети.</string>
+    <string name="smart_network_settings_connected_switch_title">Исп. моб. сеть при плохом качестве WLAN</string>
+    <string name="smart_network_settings_connected_switch_desc">Прогноз условий сети путем анализа данных сигнала WLAN. Если ожидается плохое качество сети WLAN, будет автоматически включаться мобильная сеть. Для домашней сети предпочтение отдается подключению по WLAN.</string>
+    <string name="smart_network_settings_entry_switch_title">Огранич. автоподкл. к WLAN с плохим качеством</string>
+    <string name="smart_network_settings_entry_switch_desc">Остановить автоподключение, если ожидается плохое качество WLAN. Это поможет избежать автопереключения устройства на открытую сеть WLAN плохого качества.</string>
+    <string name="smart_network_notification_entry_title">Обнаружена сеть WLAN с плохим качеством</string>
+    <string name="smart_network_notification_entry_text">Функция \"Умное подключение\" предсказала, что у сети %1$s будет плохое качество, и временно ограничила автоматическое подключение к этой сети WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Огранич. автоподкл. к сети WLAN с плохим качеством</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2018 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_activated="true">
+        <color android:color="?android:attr/colorAccent"/>
+    </item>
+    <item android:state_activated="false">
+        <color android:color="@color/switch_bar_background"/>
+    </item>
+</selector>

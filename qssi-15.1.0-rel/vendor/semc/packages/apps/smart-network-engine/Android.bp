@@ -1,0 +1,108 @@
+// Copyright 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Sony Corporation
+package {
+    default_visibility: [":__subpackages__"],
+    default_applicable_licenses: ["vendor_semc_smart_network_engine_license"],
+}
+
+license {
+    name: "vendor_semc_smart_network_engine_license",
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-Apache-2.0",
+    ],
+    license_text: [
+        "NOTICE",
+    ],
+}
+
+android_app {
+    name: "SmartNetworkEngine",
+    manifest: "app/src/main/AndroidManifest.xml",
+    certificate: "platform",
+    privileged: true,
+    platform_apis: true,
+    system_ext_specific: true,
+    compile_multilib: "64",
+    use_embedded_native_libs: true,
+
+    srcs: [
+        "app/src/main/java/**/*.java",
+        "app-api/src/main/java/**/*.java",
+        "app-api/src/main/aidl/**/I*.aidl",
+    ],
+
+    aidl: {
+        local_include_dirs: [
+            "app-api/src/main/aidl"
+        ],
+    },
+    resource_dirs: [
+        "app/src/main/res",
+    ],
+    asset_dirs: [
+        "app/src/main/assets",
+        "app/src/main/assets-debug-cert",
+    ],
+    libs: [
+        "com.sonyericsson.idd",
+        "com.sonymobile.securedatamanager_impl",
+    ],
+    uses_libs: [
+        "com.sonyericsson.idd_impl",
+        "com.sonymobile.securedatamanager_impl",
+        "com.sonymobile.devicesecurity_impl",
+    ],
+    static_libs: [
+        "services.net",
+        "android.hidl.manager-V1.2-java",
+        "android.hardware.wifi.supplicant-V1.0-java",
+        "android.hardware.wifi.supplicant-V1.1-java",
+        "android.hardware.wifi.supplicant-V1.3-java",
+        "android.hardware.wifi.supplicant-V1.4-java",
+        "android.hardware.wifi.supplicant-V1-java",
+        "guava",
+        "sne-commons-io",
+        "sne-okhttp",
+        "sne-okhttp-tls",
+        "sne-okio",
+        "sne-logging-interceptor",
+        "sne-gson",
+        "sne-jackson-annotations",
+        "sne-jackson-core",
+        "sne-jackson-databind",
+        "com.google.protobuf-2.3.0",
+        "androidx.annotation_annotation",
+        "androidx.fragment_fragment",
+        "androidx.collection_collection",
+        "androidx.core_core",
+        "androidx.room_room-runtime",
+    ],
+    plugins: [
+        "androidx.room_room-compiler-plugin",
+    ],
+    jni_libs: [
+        "libarchive-nnabla",
+        "libprotobuf-nnabla",
+        "libc++_shared-nnabla",
+        "libnnabla",
+        "libnnabla_utils",
+        "libsmartnet_jni-prebuilt",
+        "libLinearHLCRNative-prebuilt",
+        "libNNHLCRNative-prebuilt",
+    ],
+    required: [
+        "com.sonymobile.smartnetworkengine.xml",
+    ],
+    optimize: {
+        proguard_flags_files: [
+            "proguard.cfg",
+        ],
+    },
+}
+
+prebuilt_etc {
+    name: "com.sonymobile.smartnetworkengine.xml",
+    system_ext_specific: true,
+    src: "com.sonymobile.smartnetworkengine.xml",
+    relative_install_path: "permissions",
+}

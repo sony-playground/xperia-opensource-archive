@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Aptiktas prastas „WLAN“ ryšys</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automatiškai perjungti į pageidaujamą tinklą, kai pasiekiami ir „WLAN“, ir mobiliojo ryšio tinklai.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Bet kada galite apsilankyti „WLAN“ nuostatose ir pakeisti sąranką vėliau.</string>
+    <string name="smart_network_settings_msg">Nustačius, kad ryšio su „WLAN“ tinklu kokybė yra prasta, bus prisijungta prie mobiliojo ryšio tinklo. Kai funkcija išjungta, pirmenybė bus teikiama „WLAN“ ryšiui.</string>
+    <string name="smart_network_settings_supplement">Ši funkcija nepaveiks programų, kurios riboja ryšį su tik su „WLAN“ arba tik su mobiliojo ryšio tinklu.</string>
+    <string name="smart_network_settings_desc">Naudodama „Sony“ giliojo mokymosi technologiją, išmaniojo ryšio funkcija visada užtikrina geriausią tinklo ryšį automatiškai perjungdama 4G / 5G ir „WLAN“, atsižvelgiant į tinklo kokybę.</string>
+    <string name="smart_network_settings_connected_switch_title">Kai „WLAN“ kokybė prasta, naudokite mobilųjį tinklą</string>
+    <string name="smart_network_settings_connected_switch_desc">Numatykite tinklo sąlygas analizuodami „WLAN“ signalo duomenis. Jei tikėtina prasta „WLAN“ tinklo kokybė, automatiškai persijungiama į mobiliojo ryšio tinklą. Naudojant vietinį tinklą, pirmenybė bus teikiama „WLAN“ ryšiui.</string>
+    <string name="smart_network_settings_entry_switch_title">Neleisti aut. prisij. prie prast. kok. „WLAN“</string>
+    <string name="smart_network_settings_entry_switch_desc">Kai tikėtina prasta „WLAN“ kokybė, automatinį prisijungimą sustabdykite. Tai gali padėti neleisti jūsų įrenginiui automatiškai persijungti į žemesnės kokybės viešąjį „WLAN“.</string>
+    <string name="smart_network_notification_entry_title">Aptiktas prastos kokybės „WLAN“ tinklas</string>
+    <string name="smart_network_notification_entry_text">Išmaniojo ryšio funkcija numatė, kad %1$s yra prastos kokybės, ir laikinai neleido automatiškai prisijungti prie šio „WLAN“ tinklo.</string>
+    <string name="smart_network_notification_channel_entry_title">Neleidžiama aut. prisij. prie prast. kok. „WLAN“</string>
+</resources>

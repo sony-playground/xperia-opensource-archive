@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Se detectó una conexión de WLAN deficiente</string>
+    <string name="wifi_auto_network_switch_setting_msg">Cambiar automáticamente a la red preferida cuando haya una red WLAN y una red móvil disponible.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Siempre puede ir a las preferencias de WLAN para cambiar la configuración más tarde.</string>
+    <string name="smart_network_settings_msg">Cuando se detecta que una red WLAN tiene una calidad de conexión deficiente, se usará en cambio la red móvil. Cuando la apaga, se dará prioridad a la conexión WLAN.</string>
+    <string name="smart_network_settings_supplement">Esta función no afectará a las aplicaciones que limiten las conexiones a solamente WLAN o solamente red móvil</string>
+    <string name="smart_network_settings_desc">Al utilizar la tecnología de aprendizaje profundo de Sony, la Conectividad inteligente siempre proporciona la mejor conexión de red al cambiar automáticamente entre 4G/5G y WLAN según la calidad de la red.</string>
+    <string name="smart_network_settings_connected_switch_title">Utilizar red móvil cuando la calidad WLAN es deficiente</string>
+    <string name="smart_network_settings_connected_switch_desc">Anticipar las condiciones de la red mediante el análisis de los datos de la señal WLAN. Si se espera una calidad deficiente de la red WLAN, se cambiará automáticamente a la red móvil. Se priorizará la conexión WLAN para uso en la red del hogar.</string>
+    <string name="smart_network_settings_entry_switch_title">Prevenir conexión auto. a redes WLAN deficientes.</string>
+    <string name="smart_network_settings_entry_switch_desc">Detener la conexión automática cuando se espera una calidad deficiente de la red WLAN. Esto puede ayudar a prevenir que su dispositivo se cambie automáticamente a una red WLAN pública de menor calidad.</string>
+    <string name="smart_network_notification_entry_title">Se detectó una red WLAN deficiente</string>
+    <string name="smart_network_notification_entry_text">Conectividad inteligente detectó que %1$s es deficiente e impidió temporalmente conectarse a dicha red WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Prevenir conexión auto. a redes WLAN deficientes</string>
+</resources>

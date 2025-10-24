@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Lélegt Wi-Fi-samband greindist</string>
+    <string name="notification_text">Pikkaðu til að virkja sjálfvrika skiptingu á netkerfum til að gera netkerfi þitt stöðugt með notkun á farsímanetkerfi</string>
+    <string name="notification_action_settings">Fara í Stillingar</string>
+    <string name="notification_action_no_thanks">Nei, takk</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Nota þjónustu</string>
+    <string name="wifi_auto_network_switch_setting_msg">Skipta sjálfkrafa yfir í forgangskerfi þegar bæði Wi-Fi net og farsímanet eru tiltæk.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Þú getur alltaf farið í Wi-Fi stillingar til að breyta uppsetningunni síðar.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Ábendingar</string>
+    <string name="wifi_auto_network_switch_setting">Sjálfvirk netkerfaskipti</string>
+    <string name="settings_on">Kveikt</string>
+    <string name="settings_off">Slökkt</string>
+    <string name="smart_network_settings_title">Snjalltenging</string>
+    <string name="smart_network_settings_switch_txt">Nota snjalltengingu</string>
+    <string name="smart_network_settings_msg">Þegar lítil gæði greinast á Wi-Fi-netkerfi er hægt að nota farsímakerfi. Þegar slökkt er á því hefur Wi-Fi-tengingin forgang.</string>
+    <string name="smart_network_settings_supplement">Þessi valkostur hefur ekki áhrif á forrit sem takmarka tengingarvið Wi-Fi eingöngu eða farsímanet eingöngu</string>
+    <string name="sne_app_name_txt">Snjalltenging</string>
+    <string name="smart_network_settings_desc">Með því að nota djúpnámstækni Sony getur Snjalltenging alltaf boðið upp á bestu nettenginguna með því að skipta á milli 4G/5G og Wi-Fi eftir gæðum nettengingarinnar.</string>
+    <string name="smart_network_settings_connected_switch_title">Nota farsímakerfi þegar Wi-Fi gæði eru slæm</string>
+    <string name="smart_network_settings_connected_switch_desc">Spá fyrir um ástand á netkerfi með því að greina Wi-Fi sendingargögn. Ef búist er við slæmum Wi-Fi gæðum skiptir þetta sjálfkrafa yfir í farsímakerfi. Wi-Fi tenging hefur forgang fyrir notkun á heimakerfi.</string>
+    <string name="smart_network_settings_entry_switch_title">Stöðva tengingu við Wi-Fi netkerfi með slæm gæði</string>
+    <string name="smart_network_settings_entry_switch_desc">Stöðva sjálfvirka tengingu þegar búist er við slæmum Wi-Fi gæðum. Þetta getur hjálpað að koma í veg fyrir að snjallsíminn þinn skipti sjálfkrafa yfir í almennt Wi-Fi með lélegri gæði.</string>
+    <string name="smart_network_settings_desc_summary">Velja sjálfkrafa besta netkerfið</string>
+    <string name="smart_network_notification_entry_title">Wi-Fi netkerfi með slæm gæði greindist</string>
+    <string name="smart_network_notification_entry_text">Snjalltenging hefur greint að %1$s er með slæm gæði og kom tímabundið í veg fyrir sjálfvirka tengingu við þetta Wi-Fi netkerfi.</string>
+    <string name="smart_network_notification_channel_entry_title">Stöðvar tengingu við Wi-Fi netkerfi með slæm gæði</string>
+    <string name="smart_network_notification_entry_button">FARA Í STILLINGAR</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">TENGJAST SAMT</string>
+    <string name="smart_network_toast_connecting">Tengist %1$s</string>
+</resources>

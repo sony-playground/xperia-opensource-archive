@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Otkrivena je slaba WLAN veza</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automatski se prebacite na željenu mrežu kada su dostupne i WLAN i mobilna mreža.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Uvijek možete kasnije otići u postavke za WLAN kako biste promijenili postavljanje.</string>
+    <string name="smart_network_settings_msg">Kad se utvrdi da WLAN mreža ima slab kvalitet veze, umjesto nje će se koristiti mobilna mreža. Kad je funkcija isključena, WLAN vezi će biti dat prioritet.</string>
+    <string name="smart_network_settings_supplement">Ova funkcija neće uticati na aplikacije koje ograničavaju veze samo na WLAN ili samo na mobilnu mrežu</string>
+    <string name="smart_network_settings_desc">Koristeći tehnologiju dubinskog učenja kompanije Sony, Pametna povezivost uvijek omogućuje najbolju mrežnu vezu automatskim prebacivanjem između 4G/5G i WLAN mreža, u zavisnosti od kvaliteta mreže.</string>
+    <string name="smart_network_settings_connected_switch_title">Kad je kvalitet WLAN mreže loš, koristite mobilnu mrežu</string>
+    <string name="smart_network_settings_connected_switch_desc">Predvidite mrežne uslove analizom podataka WLAN signala. Ako se očekuje loš kvalitet WLAN mreže, automatski se prelazi na mobilnu mrežu. WLAN vezi se daje prioritet kod korištenja kućne mreže.</string>
+    <string name="smart_network_settings_entry_switch_title">Spreč. auto. povez. s WLAN-jem lošeg kvaliteta</string>
+    <string name="smart_network_settings_entry_switch_desc">Zaustavite automatsko povezivanje kad se očekuje loš kvalitet WLAN mreže. To može spriječiti da se pametni telefon automatski prebaci na javni WLAN lošijeg kvaliteta.</string>
+    <string name="smart_network_notification_entry_title">Otkrivena je WLAN mreža lošeg kvaliteta</string>
+    <string name="smart_network_notification_entry_text">Pametna povezivost je predvidjela da je %1$s lošeg kvaliteta i privremeno spriječila automatsko povezivanje s ovom WLAN mrežom.</string>
+    <string name="smart_network_notification_channel_entry_title">Sprečavanje auto. povez. s WLAN-jem lošeg kvaliteta</string>
+</resources>

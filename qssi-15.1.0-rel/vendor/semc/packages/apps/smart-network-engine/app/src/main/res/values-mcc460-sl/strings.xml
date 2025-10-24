@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Zaznana je šibka povezava WLAN</string>
+    <string name="wifi_auto_network_switch_setting_msg">Samodejno preklopite na želeno omrežje, kadar sta na voljo omrežje WLAN in mobilno omrežje.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Nastavitev lahko spremenite kadar koli pozneje tako, da odprete nastavitve za WLAN.</string>
+    <string name="smart_network_settings_msg">Ko naprava zazna slabo kakovost povezave z omrežjem WLAN, bo uporabila mobilno omrežje. Če je ta funkcija izklopljena, ima prednost povezava WLAN.</string>
+    <string name="smart_network_settings_supplement">Ta funkcija ne vpliva na aplikacije, ki omejujejo povezave samo na omrežje WLAN ali mobilno omrežje.</string>
+    <string name="smart_network_settings_desc">Pametna povezljivost uporablja Sonyjevo tehnologijo globokega učenja in zagotavlja najboljšo omrežno povezavo s samodejnim preklapljanjem med omrežji 4G/5G in omrežjem WLAN glede na kakovost omrežne povezave.</string>
+    <string name="smart_network_settings_connected_switch_title">Uporabi mobilno omrežje ob slabi kakovosti WLAN</string>
+    <string name="smart_network_settings_connected_switch_desc">Predvidi stanje omrežja z analizo podatkov o signalu povezave WLAN. Če je pričakovana slaba kakovost povezave WLAN, samodejno preklopi na mobilno omrežje. Pri uporabi v domačem omrežju bo imela prednost povezava WLAN.</string>
+    <string name="smart_network_settings_entry_switch_title">Prepreči samodejno povezovanje s slabim WLAN</string>
+    <string name="smart_network_settings_entry_switch_desc">Ustavi samodejno povezovanje ob pričakovani slabi kakovosti povezave WLAN. Tako lahko napravi pomagate preprečiti samodejni preklop na javno omrežje WLAN slabše kakovosti.</string>
+    <string name="smart_network_notification_entry_title">Zaznano omrežje WLAN slabe kakovosti</string>
+    <string name="smart_network_notification_entry_text">Pametna povezljivost je predvidela, da je kakovost omrežja %1$s slaba, zato je začasno preprečila povezovanje s tem omrežjem WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Preprečevanje samodejnega povezovanja s slabim WLAN</string>
+</resources>

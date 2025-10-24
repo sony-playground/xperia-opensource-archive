@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Gyenge WLAN-kapcsolat észlelve</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automatikus váltás előnyben részesített hálózatra, amikor WLAN és mobilhálózat is rendelkezésre áll.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">A beállításokat később bármikor módosíthatja a WLAN-beállítások között.</string>
+    <string name="smart_network_settings_msg">Amikor egy WLAN-hálózatról a rendszer megállapítja, hogy gyenge a kapcsolat minősége, helyette mobilhálózatot fog használni. Amikor kikapcsolja, a WLAN-kapcsolat élvez elsőbbséget.</string>
+    <string name="smart_network_settings_supplement">Ez a funkció nem érinti azokat az alkalmazásokat, amelyek csak WLAN-re vagy mobilhálózatra korlátozzák a kapcsolatokat</string>
+    <string name="smart_network_settings_desc">A Sony mélytanulási technológiáját használva az Intelligens kapcsolat mindig a legjobb hálózati kapcsolatot biztosítja, ha a hálózat minőségétől függően automatikusan vált a 4G/5G és a WLAN között.</string>
+    <string name="smart_network_settings_connected_switch_title">Mobilhálózat használata, ha a WLAN minősége gyenge</string>
+    <string name="smart_network_settings_connected_switch_desc">Hálózati körülmények becslése a WLAN-jeladatok elemzésével. Ha gyenge a WLAN-hálózat minősége, automatikusan átvált mobilhálózatra. Otthoni hálózati használatra a WLAN-kapcsolat lesz az elsődleges.</string>
+    <string name="smart_network_settings_entry_switch_title">Automatikus kapcs. letiltása gyenge WLAN-hálózatnál</string>
+    <string name="smart_network_settings_entry_switch_desc">Automatikus csatlakozás leállítása, ha a WLAN minősége gyengének tűnik. Ez meggátolja, hogy a készüléke automatikusan átváltson egy gyengébb minőségű, nyilvános WLAN-kapcsolatra.</string>
+    <string name="smart_network_notification_entry_title">Gyenge WLAN-hálózat észlelhető</string>
+    <string name="smart_network_notification_entry_text">Az intelligens kapcsolódási funkció értékelése szerint a(z) %1$s minősége gyenge, ezért ideiglenesen letiltotta az automatikus kapcsolódást ehhez a WLAN-hálózathoz.</string>
+    <string name="smart_network_notification_channel_entry_title">Automatikus kapcsolódás letiltása gyenge WLAN-nél</string>
+</resources>

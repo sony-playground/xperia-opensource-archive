@@ -1,0 +1,14 @@
+syntax = "proto2";
+
+package com.sony.fl.pb;
+
+option optimize_for = LITE_RUNTIME;
+
+message PBEvaluationMetrix {
+    optional double auc = 1;
+    repeated double thresholds = 2;
+    repeated int32 TP = 3;
+    repeated int32 TN = 4;
+    repeated int32 FP = 5;
+    repeated int32 FN = 6;
+}

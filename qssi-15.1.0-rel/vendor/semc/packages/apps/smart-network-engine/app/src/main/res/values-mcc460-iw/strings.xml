@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">זוהה חיבור WLAN חלש</string>
+    <string name="wifi_auto_network_switch_setting_msg">החלף באופן אוטומטי לרשת מועדפת כאשר זמינות גם רשת WLAN וגם רשת סלולרית.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">תוכל תמיד לעבור אל העדפות WLAN כדי לשנות את ההגדרה במועד מאוחר יותר.</string>
+    <string name="smart_network_settings_msg">כאשר התכונה \'מסייע הרשת\' מזהה שאיכות החיבור לרשת ה-WLAN ירודה, ייעשה שימוש ברשת סלולרית במקום זאת. כאשר תכונה זו כבויה, תינתן עדיפות לחיבור WLAN.</string>
+    <string name="smart_network_settings_supplement">תכונה זו אינה משפיעה על יישומים שמגבילים חיבורים ל-WLAN בלבד או לרשת סלולרית בלבד</string>
+    <string name="smart_network_settings_desc">באמצעות טכנולוגיית הלמידה העמוקה של Sony, קישוריות חכמה תמיד מספקת את חיבור הרשת הטוב ביותר על ידי מעבר אוטומטי בין 4G/5G לבין WLAN בהתאם לאיכות הרשת.</string>
+    <string name="smart_network_settings_connected_switch_title">השתמש ברשת סלולרית כאשר איכות ה-WLAN ירודה</string>
+    <string name="smart_network_settings_connected_switch_desc">תוכל לחזות את תנאי הרשת באמצעות ניתוח נתוני אות WLAN. אם יש צפי לאיכות רשת WLAN ירודה, יתבצע מעבר אוטומטי לרשת סלולרית. חיבור WLAN יקבל עדיפות על-פני שימוש ברשת הבית.</string>
+    <string name="smart_network_settings_entry_switch_title">מנע חיבור אוטומטי אל רשתות WLAN בעלות איכות ירודה</string>
+    <string name="smart_network_settings_entry_switch_desc">עצור חיבור אוטומטי כאשר יש צפי לאיכות WLAN ירודה. הדבר יכול למנוע מעבר אוטומטי של הסמארטפון ל-WLAN ציבורי בעל איכות ירודה.</string>
+    <string name="smart_network_notification_entry_title">זוהתה איכות רשת WLAN ירודה</string>
+    <string name="smart_network_notification_entry_text">קישוריות חכמה חזתה שהרשת %1$s באיכות ירודה, ומנעה חיבור אוטומטי אל רשת ה-WLAN הזאת באופן זמני.</string>
+    <string name="smart_network_notification_channel_entry_title">מנע חיבור אוטומטי אל רשת WLAN בעלת איכות ירודה</string>
+</resources>

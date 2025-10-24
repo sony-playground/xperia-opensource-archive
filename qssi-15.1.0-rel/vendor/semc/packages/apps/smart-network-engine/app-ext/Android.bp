@@ -1,0 +1,67 @@
+// Copyright 2020, 2022, 2024 Sony Corporation
+
+android_library_import {
+    name: "sne-api",
+    aars: [
+        "libs/sne-api.aar",
+    ],
+}
+
+android_app {
+    name: "SmartNetworkEngineExt",
+    manifest: "src/main/AndroidManifest.xml",
+    certificate: "platform",
+    privileged: true,
+    platform_apis: true,
+    system_ext_specific: true,
+
+    srcs: [
+        "src/main/java/**/*.java",
+    ],
+    resource_dirs: [
+        "src/main/res",
+    ],
+    libs: [
+        "com.sonyericsson.idd",
+    ],
+    uses_libs: [
+        "com.sonyericsson.idd_impl",
+    ],
+    static_libs: [
+        "com.google.protobuf-2.3.0",
+        "androidx.annotation_annotation",
+        "androidx.preference_preference",
+        "sne-api",
+    ],
+    required: [
+        "com.sonymobile.smartnetworkengine.ext.xml",
+    ],
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+}
+
+// Add permission file for this application to "/system_ext/etc/permissions/"
+prebuilt_etc {
+    name: "com.sonymobile.smartnetworkengine.ext.xml",
+    owner: "somc",
+    system_ext_specific: true,
+    src: "com.sonymobile.smartnetworkengine.ext.xml",
+    relative_install_path: "permissions",
+}
+
+package {
+    default_visibility: [":__subpackages__"],
+    default_applicable_licenses: ["vendor_semc_smart_network_engine_ext_license"],
+}
+
+license {
+    name: "vendor_semc_smart_network_engine_ext_license",
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-Apache-2.0",
+    ],
+    license_text: [
+        "NOTICE",
+    ],
+}

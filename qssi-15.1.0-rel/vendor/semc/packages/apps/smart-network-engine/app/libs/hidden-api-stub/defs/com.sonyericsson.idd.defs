@@ -1,0 +1,5 @@
+## Include class list for:
+##  out/soong/.intermediates/
+##   - vendor/semc/frameworks/base/api/private/ungoverned/com.sonyericsson.idd/com.sonyericsson.idd/android_common/turbine-combined/com.sonyericsson.idd.jar
+
++com.sonyericsson.idd.api.Idd*

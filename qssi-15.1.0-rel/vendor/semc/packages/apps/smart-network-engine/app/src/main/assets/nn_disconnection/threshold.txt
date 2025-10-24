@@ -1,0 +1,2 @@
+default=0.85
+move_ratio=0.823

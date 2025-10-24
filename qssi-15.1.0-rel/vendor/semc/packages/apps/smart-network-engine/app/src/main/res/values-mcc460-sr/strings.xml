@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Otkrivena je loša WLAN veza</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automatsko prebacivanje na željenu mrežu kada su dostupne WLAN mreža i mobilna mreža.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Uvek možete da odete u podešavanja WLAN-ja da biste kasnije promenili podešavanje.</string>
+    <string name="smart_network_settings_msg">Kada se otkrije da WLAN mreža ima slab kvalitet veze, koristiće se mobilna mreža umesto nje. Kada se ovo isključi, WLAN veza će imati prioritet.</string>
+    <string name="smart_network_settings_supplement">Ova funkcija ne utiče na aplikacije koje ograničavaju veze samo na WLAN ili mobilnu mrežu</string>
+    <string name="smart_network_settings_desc">Koristeći tehnologiju za dubinsko učenje Sony, Pametno povezivanje uvek obezbeđuje najbolju mogućnost povezivanja na mreži tako što se automatski prebacuje između mreža 4G/5G i WLAN u zavisnosti od kvaliteta mreže.</string>
+    <string name="smart_network_settings_connected_switch_title">Koris. mob. mrežu kada je kvalitet mreže WLAN slab</string>
+    <string name="smart_network_settings_connected_switch_desc">Predvidite uslove mreže tako što ćete analizirati podatke WLAN signala. Ako se očekuje slab kvalitet WLAN mreže, ovim podešavanjem će doći do automatskog prebacivanja na mobilnu mrežu. WLAN veza će imati prioritet za korišćenje mreže u kući.</string>
+    <string name="smart_network_settings_entry_switch_title">Sprečite auto. povez. na WLAN mreže slabog kvaliteta</string>
+    <string name="smart_network_settings_entry_switch_desc">Zaustavite automatsko povezivanje kada se očekuje slab kvalitet WLAN mreže. Ovo može da spreči da se vaš pametni telefon automatski poveže na javne WLAN mreže slabijeg kvaliteta.</string>
+    <string name="smart_network_notification_entry_title">Otkrivena mreža WLAN slabog kvaliteta</string>
+    <string name="smart_network_notification_entry_text">Pametno povezivanje je predvidelo da je %1$s slabog kvaliteta i privremeno onemogućio automatsko povezivanje na ovu mrežu WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Sprečavanje auto. povez. na WLAN mreže slabog kvaliteta</string>
+</resources>

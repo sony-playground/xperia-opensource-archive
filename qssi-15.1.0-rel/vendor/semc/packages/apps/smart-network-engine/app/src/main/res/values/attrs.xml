@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2018 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources>
+    <attr name="switchBarBackgroundColor" format="color" />
+    <attr name="switchBarMarginStart" format="dimension" />
+    <attr name="switchBarMarginEnd" format="dimension" />
+</resources>

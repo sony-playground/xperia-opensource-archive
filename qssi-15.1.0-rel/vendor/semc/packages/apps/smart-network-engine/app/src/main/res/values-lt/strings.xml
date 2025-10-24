@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Aptiktas prastas „Wi-Fi“ ryšys</string>
+    <string name="notification_text">Bakstelėkite, kad suaktyvintumėte automatinį tinklo perjungimą ir jūsų tinklas būtų stabilus naudojant mobilųjį tinklą</string>
+    <string name="notification_action_settings">Eiti į „Nustatymus“</string>
+    <string name="notification_action_no_thanks">Ačiū, ne</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Naudoti paslaugą</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automatiškai perjungti į pageidaujamą tinklą, kai pasiekiami ir „Wi-Fi“, ir mobiliojo ryšio tinklai.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Bet kada galite apsilankyti „Wi-Fi“ nuostatose ir pakeisti sąranką vėliau.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Patarimai</string>
+    <string name="wifi_auto_network_switch_setting">Automatinis tinklo perjungimas</string>
+    <string name="settings_on">Įjungta</string>
+    <string name="settings_off">Išjungta</string>
+    <string name="smart_network_settings_title">Išmanusis ryšys</string>
+    <string name="smart_network_settings_switch_txt">Naudoti išman. jungiamumą</string>
+    <string name="smart_network_settings_msg">Nustačius, kad ryšio su „Wi-Fi“ tinklu kokybė yra prasta, bus prisijungta prie mobiliojo ryšio tinklo. Kai funkcija išjungta, pirmenybė bus teikiama „Wi-Fi“ ryšiui.</string>
+    <string name="smart_network_settings_supplement">Ši funkcija nepaveiks programų, kurios riboja ryšį su tik su „Wi-Fi“ arba tik su mobiliojo ryšio tinklu.</string>
+    <string name="sne_app_name_txt">Išmanusis ryšys</string>
+    <string name="smart_network_settings_desc">Naudodama „Sony“ giliojo mokymosi technologiją, išmaniojo ryšio funkcija visada užtikrina geriausią tinklo ryšį automatiškai perjungdama 4G / 5G ir „Wi-Fi“, atsižvelgiant į tinklo kokybę.</string>
+    <string name="smart_network_settings_connected_switch_title">Kai „Wi-Fi“ kokybė prasta, naudokite mobilųjį tinklą</string>
+    <string name="smart_network_settings_connected_switch_desc">Numatykite tinklo sąlygas analizuodami „Wi-Fi“ signalo duomenis. Jei tikėtina prasta „Wi-Fi“ tinklo kokybė, automatiškai persijungiama į mobiliojo ryšio tinklą. Naudojant vietinį tinklą, pirmenybė bus teikiama „Wi-Fi“ ryšiui.</string>
+    <string name="smart_network_settings_entry_switch_title">Neleisti aut. prisij. prie prast. kok. „Wi-Fi“</string>
+    <string name="smart_network_settings_entry_switch_desc">Kai tikėtina prasta „Wi-Fi“ kokybė, automatinį prisijungimą sustabdykite. Tai gali padėti neleisti jūsų įrenginiui automatiškai persijungti į žemesnės kokybės viešąjį „Wi-Fi“.</string>
+    <string name="smart_network_settings_desc_summary">Automatiškai pasirinkti geriausią tinklą</string>
+    <string name="smart_network_notification_entry_title">Aptiktas prastos kokybės „Wi-Fi“ tinklas</string>
+    <string name="smart_network_notification_entry_text">Išmaniojo ryšio funkcija numatė, kad %1$s yra prastos kokybės, ir laikinai neleido automatiškai prisijungti prie šio „Wi-Fi“ tinklo.</string>
+    <string name="smart_network_notification_channel_entry_title">Neleidžiama aut. prisij. prie prast. kok. „Wi-Fi“</string>
+    <string name="smart_network_notification_entry_button">EITI Į NUSTATYMUS</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">VIS TIEK JUNGTIS</string>
+    <string name="smart_network_toast_connecting">Jungiamasi prie „%1$s“</string>
+</resources>

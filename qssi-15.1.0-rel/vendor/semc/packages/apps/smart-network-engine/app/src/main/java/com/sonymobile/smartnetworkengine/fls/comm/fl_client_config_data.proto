@@ -1,0 +1,117 @@
+/*
+ * Copyright 2022 Sony Corporation
+ */
+
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+option java_package = "com.sonymobile.smartnetworkengine.fls.comm";
+option java_outer_classname = "FLClientConfigData";
+
+import "TaskInfo.proto";
+
+/**
+ * Client configuration root from server
+ *
+ * @param client_configs list of client configurations cf. {@link ClientConfig}
+ */
+message ClientConfigRoot {
+    repeated ClientConfig client_configs = 1;
+};
+
+/**
+ * Client configuration for target device
+ *
+ * @param configuration_name explanatory name of configuration
+ * @param target_device cf. {@link TargetDevice}
+ * @param general_configuration cf. {@link GeneralConfiguration}
+ * @param appid_specific_configs cf. {@link AppidSpecificConfig}
+ * @param fl_tasks cf. {@link FLTask}
+ */
+message ClientConfig {
+    optional string configuration_name = 1;
+    optional TargetDevice target_device = 2;
+    optional GeneralConfiguration general_configuration = 3;
+    repeated AppidSpecificConfig appid_specific_configs = 4;
+    repeated FLTask fl_tasks = 5;
+};
+
+/**
+ * Target device on which client configuration is applied to
+ *
+ * @param sw_label_regex regex to match against software label - e.g. 61.0.A.0.540
+ * @param device_type enum to specify device is live, test, or both
+ * @param device_ids list of id to specify unique device
+ * @param device_ratio device ratio to apply client config to - e.g. for system verification purpose
+ */
+message TargetDevice {
+
+    enum DeviceType {
+      LIVE = 0;
+      TEST = 1;
+      LIVE_AND_TEST = 2;
+    };
+    optional string sw_label_regex = 1;
+    optional DeviceType device_type = 2;
+    repeated string device_ids = 3;
+    optional int32 device_ratio = 4;
+};
+
+/**
+ * General configuration
+ *
+ * @param operation_mode enum to specify whether FL system is enabled(default) or not
+ * @param client_polling_frequency_mins interval(mins) after which client polling should occur
+ * @param uploadable_period_hours uploadable period in hours since train/evaluation task is received
+ */
+message GeneralConfiguration {
+
+    enum OperationMode {
+        NORMAL = 1;
+        SERVER_ACCESS_ONLY = 2;
+        ENTIRE_FEATURE_KILLED = 3;
+    };
+    optional OperationMode operation_mode = 1;
+    optional int64 client_polling_frequency_mins = 2;
+    optional int32 uploadable_period_hours = 3;
+};
+
+/**
+ * Application id specific configuration
+ *
+ * @param app_id id to specify FL use case
+ * @param inference_threshold threshold to determine whether inference result is positive or not
+ * @param training_data_collection_ratio ratio to collect training data
+ * @param max_num_of_training_session max number of training session stored in client
+ * @param max_num_of_training_session_per_bssid max number of training session per bssid
+ * @param max_period_days_of_training_session max period(days) of training session stored in client
+ * @param data_count_threshold threshold to determine whether data count is sufficient or not
+ * @param periodic_calibration_frequency_days interval(days) of periodic calibration
+ * @param positive_label_threshold threshold to determine whether label of data is positive or not
+ * @param positive_rate_threshold threshold to determine ratio of data with positive label
+ * @param inference_enabled flag to show whether inference is enabled or disabled
+ */
+message AppidSpecificConfig {
+    optional string app_id = 1;
+    optional float inference_threshold = 2;
+    optional int32 training_data_collection_ratio = 3;
+    optional int32 max_num_of_training_session = 4;
+    optional int32 max_num_of_training_session_per_bssid = 5;
+    optional int32 max_period_days_of_training_session = 6;
+    optional int32 data_count_threshold = 7;
+    optional int32 periodic_calibration_frequency_days = 8;
+    optional float positive_label_threshold = 9;
+    optional float positive_rate_threshold = 10;
+    optional bool inference_enabled = 11;
+};
+
+/**
+ * FL task information
+ *
+ * @param task_info FL task specific info
+ * @param task_data_file file to be downloaded and used with task_info which includes model data etc.
+ */
+message FLTask {
+    optional com.sony.fl.pb.PBTaskInfo task_info = 1;
+    optional string task_data_file = 2;
+};

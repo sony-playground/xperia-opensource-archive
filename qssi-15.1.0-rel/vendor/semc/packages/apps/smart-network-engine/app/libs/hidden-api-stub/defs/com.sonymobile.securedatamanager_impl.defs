@@ -1,0 +1,5 @@
+## Include class list for:
+##  out/soong/.intermediates/
+##   - vendor/semc/system/core/libasb-qssi/securedata_manager/com.sonymobile.securedatamanager_impl/android_common/turbine-combined/com.sonymobile.securedatamanager_impl.jar
+
++com.sonymobile.securedatamanager.SecureDataManager*

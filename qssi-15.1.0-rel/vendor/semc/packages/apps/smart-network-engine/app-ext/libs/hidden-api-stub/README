@@ -1,0 +1,13 @@
+* How to create stub jar - tested on Android T environment
+
+1. Prepare defs file if necessary (e.g. framework.defs under 'defs' directory)
+2. Copy target jar file from build tree (file location is written in defs file)
+3. Extract dex file from the jar with unzip tool
+4. Convert dex to jar with dex2jar tool
+     E.g. $ dex2jar/dex-tools-2.1/d2j-dex2jar.sh classes.dex
+5. Combine all jar files if there are multiple dex files in one jar
+6. Run './make-api-stub-jar.sh <jar> <defs>'
+7. 'stub.jar' is now generated. Rename and move it to 'compile-only' directory
+
+More information is available at:
+https://confluence.ajdc.sony.co.jp/display/SNE/Dev+-+Update+Hidden+API+stub

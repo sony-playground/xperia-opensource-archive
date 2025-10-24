@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2018 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources>
+    <color name="notification_color">#03A9F4</color>
+    <color name="switch_bar_background">#FF80868B</color>
+    <color name="switchbar_switch_track_tint">#BFFFFFFF</color>
+    <color name="switchbar_switch_thumb_tint">#FFFFFF</color>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Gyenge Wi-Fi-kapcsolat észlelve</string>
+    <string name="notification_text">Koppintson az Automatikus hálózatváltás engedélyezéséhez, hogy mobilhálózatot használva stabil hálózatot biztosítson</string>
+    <string name="notification_action_settings">Ugrás a Beállításokra</string>
+    <string name="notification_action_no_thanks">Nem, köszönöm</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Szolgáltatás használata</string>
+    <string name="wifi_auto_network_switch_setting_msg">Automatikus váltás előnyben részesített hálózatra, amikor Wi-Fi és mobilhálózat is rendelkezésre áll.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">A beállításokat később bármikor módosíthatja a Wi-Fi-beállítások között.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Tippek</string>
+    <string name="wifi_auto_network_switch_setting">Automatikus hálózatváltás</string>
+    <string name="settings_on">Bekapcsolva</string>
+    <string name="settings_off">Kikapcsolva</string>
+    <string name="smart_network_settings_title">Intelligens kapcsolódás</string>
+    <string name="smart_network_settings_switch_txt">Intelligens kapcs. haszn.</string>
+    <string name="smart_network_settings_msg">Amikor egy Wi-Fi-hálózatról a rendszer megállapítja, hogy gyenge a kapcsolat minősége, helyette mobilhálózatot fog használni. Amikor kikapcsolja, a Wi-Fi-kapcsolat élvez elsőbbséget.</string>
+    <string name="smart_network_settings_supplement">Ez a funkció nem érinti azokat az alkalmazásokat, amelyek csak Wi-Fi-re vagy mobilhálózatra korlátozzák a kapcsolatokat</string>
+    <string name="sne_app_name_txt">Intelligens kapcsolódás</string>
+    <string name="smart_network_settings_desc">A Sony mélytanulási technológiáját használva az Intelligens kapcsolat mindig a legjobb hálózati kapcsolatot biztosítja, ha a hálózat minőségétől függően automatikusan vált a 4G/5G és a Wi-Fi között.</string>
+    <string name="smart_network_settings_connected_switch_title">Mobilhálózat használata, ha a Wi-Fi minősége gyenge</string>
+    <string name="smart_network_settings_connected_switch_desc">Hálózati körülmények becslése a Wi-Fi-jeladatok elemzésével. Ha gyenge a Wi-Fi-hálózat minősége, automatikusan átvált mobilhálózatra. Otthoni hálózati használatra a Wi-Fi-kapcsolat lesz az elsődleges.</string>
+    <string name="smart_network_settings_entry_switch_title">Automatikus kapcs. letiltása gyenge Wi-Fi-hálózatnál</string>
+    <string name="smart_network_settings_entry_switch_desc">Automatikus csatlakozás leállítása, ha a Wi-Fi minősége gyengének tűnik. Ez meggátolja, hogy a készüléke automatikusan átváltson egy gyengébb minőségű, nyilvános Wi-Fi-kapcsolatra.</string>
+    <string name="smart_network_settings_desc_summary">Legjobb hálózat automatikus kiválasztása</string>
+    <string name="smart_network_notification_entry_title">Gyenge Wi-Fi-hálózat észlelhető</string>
+    <string name="smart_network_notification_entry_text">Az intelligens kapcsolódási funkció értékelése szerint a(z) %1$s minősége gyenge, ezért ideiglenesen letiltotta az automatikus kapcsolódást ehhez a Wi-Fi-hálózathoz.</string>
+    <string name="smart_network_notification_channel_entry_title">Automatikus kapcsolódás letiltása gyenge Wi-Fi-nél</string>
+    <string name="smart_network_notification_entry_button">UGRÁS A BEÁLLÍTÁSOKRA</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">CSATLAKOZÁS</string>
+    <string name="smart_network_toast_connecting">Csatlakoztatás ehhez: %1$s</string>
+</resources>

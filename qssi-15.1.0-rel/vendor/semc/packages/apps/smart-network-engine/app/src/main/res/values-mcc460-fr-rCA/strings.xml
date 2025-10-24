@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Mauvaise connexion WLAN détectée</string>
+    <string name="wifi_auto_network_switch_setting_msg">Pour passer automatiquement à un réseau préféré lorsque le réseau WLAN et le réseau mobile sont tous les deux disponibles.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Vous pouvez toujours accéder aux préférences WLAN pour modifier la configuration ultérieurement.</string>
+    <string name="smart_network_settings_msg">Lorsque la qualité de la connexion à un réseau WLAN est mauvaise, le réseau mobile est utilisé à la place. Lorsque cette option est désactivée, la connexion WLAN est prioritaire.</string>
+    <string name="smart_network_settings_supplement">Cette fonction n’affectera pas les applications limitant les connexions au WLAN uniquement ou au réseau mobile uniquement</string>
+    <string name="smart_network_settings_desc">Grâce à la technologie d\'apprentissage profond de Sony, la Connectivité intelligente offre en tout temps la meilleure connexion réseau possible en choisissant automatiquement le 4G/5G ou le WLAN en fonction de la qualité du réseau.</string>
+    <string name="smart_network_settings_connected_switch_title">Utiliser le réseau mobile lorsque le WLAN est faible</string>
+    <string name="smart_network_settings_connected_switch_desc">Prédit l\'état du réseau en analysant les données du signal WLAN. Si une faible qualité du réseau WLAN est prévue, le réseau mobile sera automatiquement choisi. La connexion WLAN sera priorisée pour l\'utilisation à la maison.</string>
+    <string name="smart_network_settings_entry_switch_title">Empêcher la connexion automatique à un WLAN faible</string>
+    <string name="smart_network_settings_entry_switch_desc">Empêche la connexion automatique si une faible qualité du réseau WLAN est prévue. Empêche que votre téléphone intelligent choisisse automatiquement un réseau WLAN public de faible qualité.</string>
+    <string name="smart_network_notification_entry_title">Mauvaise qualité du signal WLAN détectée</string>
+    <string name="smart_network_notification_entry_text">Connectivité intelligente a estimé que %1$s est de mauvaise qualité et empêche temporairement la connexion automatique à ce réseau WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Empêchement de connexion auto à un WLAN faible</string>
+</resources>

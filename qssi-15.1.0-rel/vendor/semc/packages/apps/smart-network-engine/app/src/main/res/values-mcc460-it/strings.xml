@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Connessione WLAN debole rilevata</string>
+    <string name="wifi_auto_network_switch_setting_msg">Passa automaticamente alla rete preferita quando sono disponibili una rete WLAN e una rete mobile.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Puoi sempre modificare la configurazione più avanti da Preferenze WLAN.</string>
+    <string name="smart_network_settings_msg">Se viene rilevata una rete WLAN con una connessione debole, verrà utilizzata la rete mobile al suo posto. Se disabilitata, la connessione WLAN avrà la priorità.</string>
+    <string name="smart_network_settings_supplement">Questa funzione non influirà sulle applicazioni che limitano le connessioni solo al WLAN o solo alla rete mobile</string>
+    <string name="smart_network_settings_desc">Basata sulla tecnologia Deep Learning di Sony, Assistenza di rete fornisce sempre la connessione di rete più efficiente alternando automaticamente tra le reti 4G/5G e WLAN, a seconda della qualità della rete.</string>
+    <string name="smart_network_settings_connected_switch_title">Usa rete mobile quando la qualità del WLAN è scarsa</string>
+    <string name="smart_network_settings_connected_switch_desc">Prevede le condizioni della rete analizzando i dati del segnale WLAN. Se si prevede che la qualità del segnale della rete WLAN sarà scarsa, si passerà automaticamente a una rete mobile. La connessione WLAN avrà la priorità per l\'uso della rete domestica.</string>
+    <string name="smart_network_settings_entry_switch_title">Impedisci conn. autom. a reti WLAN con qual. scarsa</string>
+    <string name="smart_network_settings_entry_switch_desc">Interrompi connessione automatica quando si prevede una qualità scarsa del segnale WLAN. Questa impostazione consente di impedire al dispositivo di passare automaticamente ad una rete WLAN pubblica con segnale di qualità inferiore.</string>
+    <string name="smart_network_notification_entry_title">Rete WLAN con qualità scarsa rilevata</string>
+    <string name="smart_network_notification_entry_text">Assistenza di rete ha previsto che la qualità del segnale di %1$s è scarsa e ha temporaneamente impedito la connessione automatica a questa rete WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Impedisci conn. aut. a rete WLAN con qualità scarsa</string>
+</resources>

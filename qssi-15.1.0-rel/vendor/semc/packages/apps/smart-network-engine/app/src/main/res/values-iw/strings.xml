@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">זוהה חיבור Wi-Fi חלש</string>
+    <string name="notification_text">הקש כדי לאפשר \'החלפה אוטומטית של רשת\' כדי להפוך את הרשת שלך לזמינה באמצעות רשת סלולרית</string>
+    <string name="notification_action_settings">עבור אל הגדרות</string>
+    <string name="notification_action_no_thanks">לא, תודה</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">שימוש בשירות</string>
+    <string name="wifi_auto_network_switch_setting_msg">החלף באופן אוטומטי לרשת מועדפת כאשר זמינות גם רשת Wi-Fi וגם רשת סלולרית.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">תוכל תמיד לעבור אל העדפות Wi-Fi כדי לשנות את ההגדרה במועד מאוחר יותר.</string>
+    <string name="wifi_auto_network_switch_notification_channel">עצות</string>
+    <string name="wifi_auto_network_switch_setting">החלפת רשתות באופן אוטומטי</string>
+    <string name="settings_on">מופעל</string>
+    <string name="settings_off">כבוי</string>
+    <string name="smart_network_settings_title">קישוריות חכמה</string>
+    <string name="smart_network_settings_switch_txt">השתמש בקישוריות חכמה</string>
+    <string name="smart_network_settings_msg">כאשר התכונה \'מסייע הרשת\' מזהה שאיכות החיבור לרשת ה-Wi-Fi ירודה, ייעשה שימוש ברשת סלולרית במקום זאת. כאשר תכונה זו כבויה, תינתן עדיפות לחיבור Wi-Fi.</string>
+    <string name="smart_network_settings_supplement">תכונה זו אינה משפיעה על יישומים שמגבילים חיבורים ל-Wi-Fi בלבד או לרשת סלולרית בלבד</string>
+    <string name="sne_app_name_txt">קישוריות חכמה</string>
+    <string name="smart_network_settings_desc">באמצעות טכנולוגיית הלמידה העמוקה של Sony, קישוריות חכמה תמיד מספקת את חיבור הרשת הטוב ביותר על ידי מעבר אוטומטי בין 4G/5G לבין Wi-Fi בהתאם לאיכות הרשת.</string>
+    <string name="smart_network_settings_connected_switch_title">השתמש ברשת סלולרית כאשר איכות ה-Wi-Fi ירודה</string>
+    <string name="smart_network_settings_connected_switch_desc">תוכל לחזות את תנאי הרשת באמצעות ניתוח נתוני אות Wi-Fi. אם יש צפי לאיכות רשת Wi-Fi ירודה, יתבצע מעבר אוטומטי לרשת סלולרית. חיבור Wi-Fi יקבל עדיפות על-פני שימוש ברשת הבית.</string>
+    <string name="smart_network_settings_entry_switch_title">מנע חיבור אוטומטי אל רשתות Wi-Fi בעלות איכות ירודה</string>
+    <string name="smart_network_settings_entry_switch_desc">עצור חיבור אוטומטי כאשר יש צפי לאיכות Wi-Fi ירודה. הדבר יכול למנוע מעבר אוטומטי של הסמארטפון ל-Wi-Fi ציבורי בעל איכות ירודה.</string>
+    <string name="smart_network_settings_desc_summary">בחר את הרשת הטובה ביותר באופן אוטומטי</string>
+    <string name="smart_network_notification_entry_title">זוהתה איכות רשת Wi-Fi ירודה</string>
+    <string name="smart_network_notification_entry_text">קישוריות חכמה חזתה שהרשת %1$s באיכות ירודה, ומנעה חיבור אוטומטי אל רשת ה-Wi-Fi הזאת באופן זמני.</string>
+    <string name="smart_network_notification_channel_entry_title">מנע חיבור אוטומטי אל רשת Wi-Fi בעלת איכות ירודה</string>
+    <string name="smart_network_notification_entry_button">עבור אל הגדרות</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">התחבר בכל זאת</string>
+    <string name="smart_network_toast_connecting">מתחבר אל %1$s</string>
+</resources>

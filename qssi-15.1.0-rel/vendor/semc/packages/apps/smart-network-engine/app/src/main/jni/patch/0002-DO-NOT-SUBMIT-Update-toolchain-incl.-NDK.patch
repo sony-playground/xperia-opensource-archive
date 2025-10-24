@@ -1,0 +1,147 @@
+From f1e4e9612359459f9019a9a3c51cb0ae6dd56b94 Mon Sep 17 00:00:00 2001
+From: Daichi Ueura <daichi.ueura@sony.com>
+Date: Fri, 7 Oct 2022 10:23:21 +0900
+Subject: [PATCH 2/2] [DO NOT SUBMIT] Update toolchain incl. NDK
+
+Probablly using android-ndk-r25b is the solution to resolve the issue:
+unnecessary libstdc++.so dependency exists like below
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc++_shared.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libdl.so]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so]
+ 0x000000000000000e (SONAME)             Library soname: [libnnabla.so]
+---
+ build-tools/make/build-with-docker.mk |  4 ++--
+ build-tools/make/build.mk             |  1 +
+ build-tools/make/options.mk           |  2 +-
+ doc/requirements.txt                  |  4 ----
+ docker/development/Dockerfile.android | 19 ++++++++++++-------
+ 5 files changed, 16 insertions(+), 14 deletions(-)
+
+diff --git a/build-tools/make/build-with-docker.mk b/build-tools/make/build-with-docker.mk
+index 74f357a3..b5f2f01e 100644
+--- a/build-tools/make/build-with-docker.mk
++++ b/build-tools/make/build-with-docker.mk
+@@ -48,7 +48,7 @@ docker_image_auto_format:
+ .PHONY: docker_image_doc
+ docker_image_doc:
+ 	if ! docker image inspect $(DOCKER_IMAGE_DOC) >/dev/null 2>/dev/null; then \
+-		docker pull ubuntu:16.04 && \
++		docker pull ubuntu:18.04 && \
+ 		( cd $(NNABLA_DIRECTORY) && docker build $(DOCKER_BUILD_ARGS) -t $(DOCKER_IMAGE_DOC) -f docker/development/Dockerfile.document . ) \
+ 	fi
+ 
+@@ -83,7 +83,7 @@ DOCKER_IMAGE_BUILD_ANDROID ?= $(DOCKER_IMAGE_NAME_BASE)-build-android-$(ANDROID_
+ .PHONY: docker_image_build_android
+ docker_image_build_android:
+ 	if ! docker image inspect $(DOCKER_IMAGE_BUILD_ANDROID) >/dev/null 2>/dev/null; then \
+-		docker pull ubuntu:16.04 && \
++		docker pull ubuntu:18.04 && \
+ 		(cd $(NNABLA_DIRECTORY) && docker build $(DOCKER_BUILD_ARGS) -t $(DOCKER_IMAGE_BUILD_ANDROID) \
+ 			--build-arg ANDROID_PLATFORM=$(ANDROID_PLATFORM) \
+ 			--build-arg ANDROID_ARCHITECTURE=$(ANDROID_ARCHITECTURE) \
+diff --git a/build-tools/make/build.mk b/build-tools/make/build.mk
+index 3ebaf30e..7743dcd6 100644
+--- a/build-tools/make/build.mk
++++ b/build-tools/make/build.mk
+@@ -114,6 +114,7 @@ nnabla-cpplib-android:
+ 	@rm -rf $(BUILD_DIRECTORY_CPPLIB_ANDROID)/build_$(PLATFORM)_$(ARCHITECTURE)
+ 	@mkdir -p $(BUILD_DIRECTORY_CPPLIB_ANDROID)/build_$(PLATFORM)_$(ARCHITECTURE)/$(EABI)
+ 	@cp $(TOOLCHAIN_INSTALL_DIR)/lib/libarchive.so $(BUILD_DIRECTORY_CPPLIB_ANDROID)/build_$(PLATFORM)_$(ARCHITECTURE)/$(EABI)
++	@cp $(TOOLCHAIN_INSTALL_DIR)/lib/libprotobuf.so $(BUILD_DIRECTORY_CPPLIB_ANDROID)/build_$(PLATFORM)_$(ARCHITECTURE)/$(EABI)
+ 	@cp $(BUILD_DIRECTORY_CPPLIB_ANDROID)/lib/libnnabla.so $(BUILD_DIRECTORY_CPPLIB_ANDROID)/build_$(PLATFORM)_$(ARCHITECTURE)/$(EABI)
+ 	@cp $(BUILD_DIRECTORY_CPPLIB_ANDROID)/lib/libnnabla_utils.so $(BUILD_DIRECTORY_CPPLIB_ANDROID)/build_$(PLATFORM)_$(ARCHITECTURE)/$(EABI)
+ 
+diff --git a/build-tools/make/options.mk b/build-tools/make/options.mk
+index d437dc04..93ab3939 100644
+--- a/build-tools/make/options.mk
++++ b/build-tools/make/options.mk
+@@ -20,7 +20,7 @@ NNABLA_OPTIONS_INCLUDED = True
+ DOCKER_RUN_OPTS +=--rm
+ DOCKER_RUN_OPTS += -v $$(pwd):$$(pwd)
+ DOCKER_RUN_OPTS += -w $$(pwd)
+-DOCKER_RUN_OPTS += -u $$(id -u):$$(id -g)
++#DOCKER_RUN_OPTS += -u $$(id -u):$$(id -g)
+ DOCKER_RUN_OPTS += -e HOME=/tmp
+ DOCKER_RUN_OPTS += -e CMAKE_OPTS=$(CMAKE_OPTS)
+ DOCKER_RUN_OPTS += -e PIP_INS_OPTS="${PIP_INS_OPTS}"
+diff --git a/doc/requirements.txt b/doc/requirements.txt
+index 4a11ac69..a7fe7569 100644
+--- a/doc/requirements.txt
++++ b/doc/requirements.txt
+@@ -1,5 +1,4 @@
+ nnabla==1.25.0
+-Sphinx
+ sphinx-rtd-theme
+ sphinxcontrib-actdiag
+ sphinxcontrib-blockdiag
+@@ -7,7 +6,4 @@ sphinxcontrib-nwdiag
+ sphinxcontrib-plantuml
+ sphinxcontrib-seqdiag
+ sphinxcontrib-toc
+-breathe
+-pygments
+-recommonmark==0.4.0
+ funcparserlib==1.0.0a0
+diff --git a/docker/development/Dockerfile.android b/docker/development/Dockerfile.android
+index c95dc302..f6f9fcf8 100644
+--- a/docker/development/Dockerfile.android
++++ b/docker/development/Dockerfile.android
+@@ -39,9 +39,13 @@ RUN eval ${APT_OPTS} \
+         zip \
+         emacs \
+         python-pip \
++        python3.8 \
+     && cd / \
+     && rm -rf /tmp/*
+ 
++# TODO:
++RUN ln -s /usr/bin/python3.8 /usr/bin/python3
++
+ RUN pip install ${PIP_INS_OPTS} setuptools
+ RUN pip install ${PIP_INS_OPTS} --upgrade pip
+ RUN pip install ${PIP_INS_OPTS} six
+@@ -51,23 +55,24 @@ RUN pip install ${PIP_INS_OPTS} Mako
+ ENV BUILD_DIR /usr/local/src
+ 
+ ##### Install CMAKE #####
+-ENV CMAKE_URL https://cmake.org/files/v3.11/cmake-3.11.3.tar.gz
++ENV CMAKE_URL https://cmake.org/files/v3.22/cmake-3.22.1.tar.gz
+ RUN cd ${BUILD_DIR} && curl ${CURL_OPTS} -O ${CMAKE_URL} \
+   && tar zxvf cmake*.tar.gz \
+   && rm cmake*.tar.gz \
+   && cd cmake* \
+-  && ./bootstrap \
++  && ./bootstrap -- -DCMAKE_USE_OPENSSL=OFF \
+   && make \
+   && make install
+ 
+ 
+ ##### Download and Install Android NDK #####
+-ENV NDK_NAME android-ndk-r16b
+-ENV NDK_URL https://dl.google.com/android/repository/${NDK_NAME}-linux-x86_64.zip
++
++ENV NDK_NAME android-ndk-r25b
++ENV NDK_URL https://dl.google.com/android/repository/${NDK_NAME}-linux.zip
+ RUN cd ${BUILD_DIR} \
+   && curl ${CURL_OPTS} -O ${NDK_URL} \
+-  && unzip ${NDK_NAME}-linux-x86_64.zip \
+-  && rm -f ${NDK_NAME}-linux-x86_64.zip \
++  && unzip ${NDK_NAME}-linux.zip \
++  && rm -f ${NDK_NAME}-linux.zip \
+   && mv ${NDK_NAME} android-ndk
+ ENV NDK_PATH ${BUILD_DIR}/android-ndk
+ 
+@@ -113,7 +118,7 @@ ENV GCXX ${CMAKE_SYSTEM_NAME}-c++
+ ENV SYSROOT ${NDK_PATH}/platforms/${PLATFORM}/arch-${ARCHITECTURE}
+ 
+ 
+-RUN sh $NDK_PATH/build/tools/make-standalone-toolchain.sh --platform=$PLATFORM --arch=$ARCHITECTURE --install-dir=$TOOLCHAIN_INSTALL_DIR
++RUN $NDK_PATH/build/tools/make_standalone_toolchain.py --arch $ARCHITECTURE --api 33 --stl libc++ --install-dir $TOOLCHAIN_INSTALL_DIR
+ ENV CC ${GCC}
+ ENV CXX ${GCXX}
+ ENV PATH ${TOOLCHAIN_INSTALL_DIR}/bin:${PATH}
+-- 
+2.37.1
+

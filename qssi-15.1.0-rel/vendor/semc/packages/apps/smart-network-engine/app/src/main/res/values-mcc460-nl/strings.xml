@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Slechte WLAN-verbinding gedetecteerd</string>
+    <string name="wifi_auto_network_switch_setting_msg">Schakel automatisch naar het gewenste netwerk wanneer het WLAN-netwerk en het mobiele netwerk beide beschikbaar zijn.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">U kunt de instellingen altijd later veranderen via de WLAN-voorkeuren.</string>
+    <string name="smart_network_settings_msg">Als wordt gedetecteerd dat de verbindingskwaliteit van een WLAN-netwerk slecht is, wordt in plaats daarvan een mobiel netwerk gebruikt. Als dit is uitgeschakeld, heeft WLAN-verbinding prioriteit.</string>
+    <string name="smart_network_settings_supplement">Deze functie heeft geen invloed op applicaties die verbindingen beperken tot alleen WLAN of alleen mobiel netwerk</string>
+    <string name="smart_network_settings_desc">Dankzij de Deep Learning-technologie van Sony biedt Slimme connectiviteit altijd de beste netwerkverbinding door automatisch te schakelen tussen 4G/5G en WLAN afhankelijk van de netwerkkwaliteit.</string>
+    <string name="smart_network_settings_connected_switch_title">Mobiel netwerk gebruiken bij slechte WLAN-kwaliteit</string>
+    <string name="smart_network_settings_connected_switch_desc">Netwerkomstandigheden voorspellen door WLAN-signaalgegevens te analyseren. Als een slechte WLAN-netwerkkwaliteit wordt verwacht, wordt automatisch overgeschakeld naar een mobiel netwerk. WLAN-verbinding heeft prioriteit voor gebruik in thuisnetwerk.</string>
+    <string name="smart_network_settings_entry_switch_title">Automatische verbinding met slechte WLAN vermijden</string>
+    <string name="smart_network_settings_entry_switch_desc">Automatische verbinding stoppen wanneer slechte WLAN-kwaliteit wordt verwacht. Dit kan voorkomen dat uw apparaat automatisch overschakelt naar een openbaar WLAN-netwerk van lagere kwaliteit.</string>
+    <string name="smart_network_notification_entry_title">WLAN-netwerk met slechte kwaliteit gedetecteerd</string>
+    <string name="smart_network_notification_entry_text">Slimme connectiviteit heeft voorspelt dat %1$s een slechte kwaliteit heeft en heeft automatische verbinding met dit WLAN-netwerk tijdelijk vermeden.</string>
+    <string name="smart_network_notification_channel_entry_title">Automatische verbinding met slechte WLAN vermijden</string>
+</resources>

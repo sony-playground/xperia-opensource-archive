@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">اتصال ضعیف Wi-Fi تشخصیص داده شد</string>
+    <string name="notification_text">برای فعال کردن کلید شبکه «خودکار» ضربه بزنید تا با استفاده از شبکه تلفن همراه بتوانید شبکه اینترنت باثباتی را ایجاد کنید</string>
+    <string name="notification_action_settings">رفتن به تنظیمات</string>
+    <string name="notification_action_no_thanks">خیر متشکرم</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">استفاده از سرویس</string>
+    <string name="wifi_auto_network_switch_setting_msg">جابه‌جایی خودکار به شبکه ترجیحی در شرایطی که هم شبکه Wi-Fi و همه شبکه تلفن همراه در دسترس است.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">همیشه می‌توانید برای تغییر نحوه راه‌اندازی در آینده، به تنظیمات برگزیده Wi-Fi بروید.</string>
+    <string name="wifi_auto_network_switch_notification_channel">نکته ها</string>
+    <string name="wifi_auto_network_switch_setting">تغییر خودکار شبکه</string>
+    <string name="settings_on">روشن</string>
+    <string name="settings_off">خاموش</string>
+    <string name="smart_network_settings_title">قابلیت اتصال هوشمند</string>
+    <string name="smart_network_settings_switch_txt">استفاده از قابلیت اتصال هوشمند</string>
+    <string name="smart_network_settings_msg">وقتی شناسایی شود که شبکه Wi-Fi کیفیت اتصال ضعیفی دارد، به‌جای آن از شبکه تلفن همراه استفاده می‌شود. وقتی شبکه تلفن همراه خاموش باشد، اتصال Wi-Fi در اولویت قرار خواهد گرفت.</string>
+    <string name="smart_network_settings_supplement">این قابلیت روی برنامه‌هایی که اتصال را فقط به Wi-Fi یا فقط به شبکه تلفن همراه محدود می‌کنند، تأثیر نمی‌گذارد</string>
+    <string name="sne_app_name_txt">قابلیت اتصال هوشمند</string>
+    <string name="smart_network_settings_desc">با استفاده از فناوری یادگیری عمیق Sony، بسته به کیفیت شبکه، اتصال هوشمند از طریق جابه‌جایی خودکار بین 4G/5G و Wi-Fi بهترین اتصال شبکه را برای شما فراهم می‌کند.</string>
+    <string name="smart_network_settings_connected_switch_title">استفاده از شبکه تلفن همراه در صورت ضعیف بودن کیفیت Wi-Fi</string>
+    <string name="smart_network_settings_connected_switch_desc">از طریق تجزیه و تحلیل داده‌های مربوط به سیگنال Wi-Fi، شرایط شبکه را پیش‌بینی کنید. چنانچه کیفیت شبکه Wi-Fi ضعیف ارزیابی شود، به‌طور خودکار به شبکه تلفن همراه تغییر وضعیت خواهد یافت. برای استفاده از شبکه خانگی، اتصال Wi-Fi در اولویت قرار خواهد گرفت.</string>
+    <string name="smart_network_settings_entry_switch_title">از اتصال خودکار به شبکه‌های Wi-Fi بی کیفیت جلوگیری می‌شود</string>
+    <string name="smart_network_settings_entry_switch_desc">زمانی که کیفیت شبکه Wi-Fi ضعیف ارزیابی می‌شود، از اتصال خودکار به آن جلوگیری می‌شود. این قابلیت می‌تواند مانع از جابه‌جایی خودکار تلفن هوشمند شما به شبکه Wi-Fi عمومی یا دارای کیفیت پایین شود.</string>
+    <string name="smart_network_settings_desc_summary">‏ باکیفیت‌ترین شبکه موجود به‌صورت خودکار انتخاب می‌شود</string>
+    <string name="smart_network_notification_entry_title">اتصال بی کیفیت شبکه Wi-Fi تشخیص داده شد</string>
+    <string name="smart_network_notification_entry_text">پیش‌بینی قابلیت اتصال هوشمند این بوده است که %1$s دارای کیفیت ضعیف است، به همین خاطر به‌طور موقت از اتصال خودکار به این شبکه Wi-Fi بی کیفیت جلوگیری کرده است.</string>
+    <string name="smart_network_notification_channel_entry_title">از اتصال خودکار به شبکه Wi-Fi بی کیفیت جلوگیری می‌شود</string>
+    <string name="smart_network_notification_entry_button">رفتن به «تنظیمات»</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">در هر صورت متصل شود</string>
+    <string name="smart_network_toast_connecting">در حال اتصال به %1$s</string>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Phát hiện kết nối Wi-Fi yếu</string>
+    <string name="notification_text">Nhấn để kích hoạt tính năng Tự động chuyển đổi mạng để ổn định mạng bằng cách sử dụng mạng di động</string>
+    <string name="notification_action_settings">Đi tới Cài đặt</string>
+    <string name="notification_action_no_thanks">Không, cám ơn</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Sử dụng dịch vụ</string>
+    <string name="wifi_auto_network_switch_setting_msg">Tự động chuyển sang một mạng ưa thích khi cả mạng Wi-Fi và mạng di động đều khả dụng.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Bạn lúc nào cũng có thể truy cập vào các tùy chọn Wi-Fi để thay đổi cài đặt.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Mẹo</string>
+    <string name="wifi_auto_network_switch_setting">Tự động chuyển đổi mạng</string>
+    <string name="settings_on">Bật</string>
+    <string name="settings_off">Tắt</string>
+    <string name="smart_network_settings_title">Kết nối thông minh</string>
+    <string name="smart_network_settings_switch_txt">Sử dụng Kết nối thông minh</string>
+    <string name="smart_network_settings_msg">Khi phát hiện thấy mạng Wi-Fi có chất lượng kết nối kém, thiết bị sẽ chuyển sang dùng mạng di động. Khi tính năng này tắt, kết nối Wi-Fi sẽ được ưu tiên.</string>
+    <string name="smart_network_settings_supplement">Tính năng này sẽ không ảnh hưởng đến các ứng dụng chỉ cho phép kết nối với Wi-Fi hoặc mạng di động</string>
+    <string name="sne_app_name_txt">Kết nối thông minh</string>
+    <string name="smart_network_settings_desc">Sử dụng công nghệ học sâu của Sony, Kết nối thông minh luôn cung cấp kết nối mạng tốt nhất bằng cách tự động chuyển đổi giữa 4G/5G và Wi-Fi tùy thuộc vào chất lượng mạng.</string>
+    <string name="smart_network_settings_connected_switch_title">Sử dụng mạng di động khi chất lượng Wi-Fi kém</string>
+    <string name="smart_network_settings_connected_switch_desc">Dự đoán điều kiện mạng bằng cách phân tích dữ liệu tín hiệu Wi-Fi. Nếu dự kiến chất lượng mạng Wi-Fi kém, mạng này sẽ tự động chuyển sang mạng di động. Kết nối Wi-Fi sẽ được ưu tiên khi sử dụng mạng chủ.</string>
+    <string name="smart_network_settings_entry_switch_title">Ngăn tự động kết nối với các mạng Wi-Fi chất lượng kém</string>
+    <string name="smart_network_settings_entry_switch_desc">Dừng tự động kết nối khi dự kiến chất lượng Wi-Fi kém. Cài đặt này có thể giúp ngăn thiết bị tự động chuyển sang mạng Wi-Fi công cộng có chất lượng thấp hơn.</string>
+    <string name="smart_network_settings_desc_summary">Tự động chọn mạng tốt nhất</string>
+    <string name="smart_network_notification_entry_title">Đã phát hiện thấy mạng Wi-Fi chất lượng kém</string>
+    <string name="smart_network_notification_entry_text">Kết nối thông minh đã dự đoán rằng %1$s có chất lượng kém và tạm thời ngăn kết nối tự động với mạng Wi-Fi này.</string>
+    <string name="smart_network_notification_channel_entry_title">Ngăn tự động kết nối với mạng Wi-Fi chất lượng kém</string>
+    <string name="smart_network_notification_entry_button">ĐI TỚI PHẦN CÀI ĐẶT</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">VẪN KẾT NỐI</string>
+    <string name="smart_network_toast_connecting">Kết nối với %1$s</string>
+</resources>

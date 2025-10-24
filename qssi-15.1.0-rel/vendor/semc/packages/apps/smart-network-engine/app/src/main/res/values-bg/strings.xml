@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Слаб сигнал на Wi-Fi връзката</string>
+    <string name="notification_text">Натиснете за активиране на функцията \"Автом. превключване на мрежа\", за да направите своята мрежа стабилна чрез използване на мобилна мрежа</string>
+    <string name="notification_action_settings">Към \"Настройки\"</string>
+    <string name="notification_action_no_thanks">Не, благодаря</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Използване на услугата</string>
+    <string name="wifi_auto_network_switch_setting_msg">Автоматично превключване към предпочитана мрежа, когато и Wi-Fi мрежата и мобилната мрежа са налични.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Винаги можете да отидете в предпочитанията за Wi-Fi и да промените настройката по-късно.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Съвети</string>
+    <string name="wifi_auto_network_switch_setting">Автом. превключване на мрежа</string>
+    <string name="settings_on">Включена</string>
+    <string name="settings_off">Изключена</string>
+    <string name="smart_network_settings_title">Интелигентно свързване</string>
+    <string name="smart_network_settings_switch_txt">Използв. \"Инт. свързване\"</string>
+    <string name="smart_network_settings_msg">Когато за дадена Wi-Fi мрежа се установи, че връзката е с лошо качество, вместо нея ще се използва мобилна мрежа. Когато опцията е изключена, Wi-Fi връзката ще е с приоритет.</string>
+    <string name="smart_network_settings_supplement">Тази функция няма да засегне приложенията, които ограничават свързванията само към Wi-Fi или само към мобилна мрежа</string>
+    <string name="sne_app_name_txt">Интелигентно свързване</string>
+    <string name="smart_network_settings_desc">Като използва технологията за дълбоко обучение на Sony, „Интелигентно свързване“ винаги осигурява най-добрата мрежова връзка, като автоматично превключва между 4G/5G и Wi-Fi в зависимост от качеството на мрежата.</string>
+    <string name="smart_network_settings_connected_switch_title">Ползване на моб. мрежа при лошо кач-во на Wi-Fi</string>
+    <string name="smart_network_settings_connected_switch_desc">Предвиждане на мрежовите условия чрез анализиране на данни за Wi-Fi сигнал. Ако се очаква лошо качество на Wi-Fi мрежата, автоматично ще се превключи към мобилна мрежа. Wi-Fi връзката ще бъде приоритизирана за използване в домашна мрежа.</string>
+    <string name="smart_network_settings_entry_switch_title">Без автом. свързване с Wi-Fi мрежи с лошо кач-во</string>
+    <string name="smart_network_settings_entry_switch_desc">Спиране на автоматично свързване, когато се очаква по-ниско качество на Wi-Fi. Това може да помогне за предотвратяване на автоматично превключване на устройството ви към публични Wi-Fi мрежи с по-ниско качество.</string>
+    <string name="smart_network_settings_desc_summary">Автоматичен избор на най-добрата мрежа</string>
+    <string name="smart_network_notification_entry_title">Открита е Wi-Fi мрежа с лошо качество</string>
+    <string name="smart_network_notification_entry_text">„Интелигентно свързване“ предвижда, че %1$s е с лошо качество и затова временно предотвратява автоматичното свързване към тази Wi-Fi мрежа.</string>
+    <string name="smart_network_notification_channel_entry_title">Без автом. свързване с Wi-Fi мрежи с лошо кач-во</string>
+    <string name="smart_network_notification_entry_button">КЪМ „НАСТРОЙКИ“</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">СВЪРЗВАНЕ</string>
+    <string name="smart_network_toast_connecting">Свързване с %1$s</string>
+</resources>

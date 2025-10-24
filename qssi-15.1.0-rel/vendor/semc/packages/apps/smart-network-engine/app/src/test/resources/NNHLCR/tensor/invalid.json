@@ -1,0 +1,25 @@
+{
+  "invalid001": "invalid",
+  "invalid002": {
+    "value": [ 7 ]
+  },
+  "invalid003": {
+    "shape": [ 1 ]
+  },
+  "invalid004": {
+    "shapeX": [ 1 ],
+    "valueX": [ 1.234567 ]
+  },
+  "invalid004": {
+    "shape": [ 1 ],
+    "value": [ ]
+  },
+  "invalid005": {
+    "shape": [ 3 ],
+    "value": [ "A", 1, 1.1 ]
+  },
+  "invalid006": {
+    "shape": [ 2 ],
+    "value": [ true, false ]
+  }
+}

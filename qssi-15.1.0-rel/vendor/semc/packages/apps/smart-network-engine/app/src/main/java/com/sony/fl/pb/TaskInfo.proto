@@ -1,0 +1,75 @@
+syntax = "proto2";
+
+package com.sony.fl.pb;
+
+option optimize_for = LITE_RUNTIME;
+
+import "LinearHLCR.proto";
+import "NNHLCR.proto";
+
+enum TaskType {
+    UnknownTaskType = 0;
+    Train = 1;
+    Evaluation = 2;
+    Deploy = 3;
+    Delete = 4;
+    Stop = 5;
+}
+
+enum ModelType {
+    UnknownModelType = 0;
+    LinerHLCR = 1;
+    NNHLCR = 2;
+}
+
+message PBTaskInfo {
+    optional string FLLib_Version = 1;
+    optional string task_ID = 2;
+    optional string FL_ID = 3;
+    optional TaskType task_type = 4;
+    optional PBTrainInfo train_info = 5; 
+    optional PBEvaluationInfo evaluation_info = 6; // instead of oneof
+    optional PBDeployInfo deploy_info = 7;  // instead of oneof
+    optional PBDeleteInfo delete_info = 8;  // instead of oneof
+    optional PBStopInfo stop_info = 9;  // instead of oneof
+    optional string appID = 99;
+}
+
+message PBTrainInfo {
+    optional ModelType model_type = 1; // should be match model_type in ModelInfo
+    optional PBLinearHLCRGlobalModel linearHLCR_global_model = 2;  // instead of oneof
+    optional PBNNHLCRModel NNHLCR_model = 3;  // instead of oneof
+    optional PBLinearHLCRTrainInfo linearHLCR_train_info = 4;  // instead of oneof
+    optional PBNNHLCRTrainInfo NNHLCR_train_info = 5;  // instead of oneof
+    optional PBDataInfo data_info = 6;
+}
+
+message PBEvaluationInfo {
+    optional ModelType model_type = 1; // should be match model_type in ModelInfo
+    optional PBLinearHLCRGlobalModel linearHLCR_global_model = 2;  // instead of oneof
+    optional PBNNHLCRModel NNHLCR_model = 3;  // instead of oneof
+    optional PBDataInfo data_info = 4;
+}
+
+message PBDeployInfo {
+    optional ModelType model_type = 1; // should be match model_type in ModelInfo
+    optional PBLinearHLCRGlobalModel linearHLCR_global_model = 2;  // instead of oneof
+    optional PBNNHLCRModel NNHLCR_model = 3;  // instead of oneof
+    optional string app_ID = 4;
+    optional PBDataInfo data_info = 5;
+}
+
+message PBDeleteInfo {
+    // out of scope in FY21
+}
+
+message PBStopInfo {
+    optional string app_ID = 1;
+}
+
+message PBDataInfo {
+    optional string preprocess_params_file_name = 1;
+}
+
+
+

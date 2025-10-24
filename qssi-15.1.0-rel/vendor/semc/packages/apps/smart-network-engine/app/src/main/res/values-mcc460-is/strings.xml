@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Lélegt WLAN-samband greindist</string>
+    <string name="wifi_auto_network_switch_setting_msg">Skipta sjálfkrafa yfir í forgangskerfi þegar bæði WLAN net og farsímanet eru tiltæk.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Þú getur alltaf farið í WLAN stillingar til að breyta uppsetningunni síðar.</string>
+    <string name="smart_network_settings_msg">Þegar lítil gæði greinast á WLAN-netkerfi er hægt að nota farsímakerfi. Þegar slökkt er á því hefur WLAN-tengingin forgang.</string>
+    <string name="smart_network_settings_supplement">Þessi valkostur hefur ekki áhrif á forrit sem takmarka tengingarvið WLAN eingöngu eða farsímanet eingöngu</string>
+    <string name="smart_network_settings_desc">Með því að nota djúpnámstækni Sony getur Snjalltenging alltaf boðið upp á bestu nettenginguna með því að skipta á milli 4G/5G og WLAN eftir gæðum nettengingarinnar.</string>
+    <string name="smart_network_settings_connected_switch_title">Nota farsímakerfi þegar WLAN gæði eru slæm</string>
+    <string name="smart_network_settings_connected_switch_desc">Spá fyrir um ástand á netkerfi með því að greina WLAN sendingargögn. Ef búist er við slæmum WLAN gæðum skiptir þetta sjálfkrafa yfir í farsímakerfi. WLAN tenging hefur forgang fyrir notkun á heimakerfi.</string>
+    <string name="smart_network_settings_entry_switch_title">Stöðva tengingu við WLAN netkerfi með slæm gæði</string>
+    <string name="smart_network_settings_entry_switch_desc">Stöðva sjálfvirka tengingu þegar búist er við slæmum WLAN gæðum. Þetta getur hjálpað að koma í veg fyrir að snjallsíminn þinn skipti sjálfkrafa yfir í almennt WLAN með lélegri gæði.</string>
+    <string name="smart_network_notification_entry_title">WLAN netkerfi með slæm gæði greindist</string>
+    <string name="smart_network_notification_entry_text">Snjalltenging hefur greint að %1$s er með slæm gæði og kom tímabundið í veg fyrir sjálfvirka tengingu við þetta WLAN netkerfi.</string>
+    <string name="smart_network_notification_channel_entry_title">Stöðvar tengingu við WLAN netkerfi með slæm gæði</string>
+</resources>

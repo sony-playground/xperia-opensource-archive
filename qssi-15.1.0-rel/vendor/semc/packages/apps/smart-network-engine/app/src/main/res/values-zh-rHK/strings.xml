@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">偵測到訊號微弱的Wi-Fi連接</string>
+    <string name="notification_text">輕按以啟用[自動切換網絡]，透過使用流動網絡確保您擁有穩定的網絡</string>
+    <string name="notification_action_settings">進入設定</string>
+    <string name="notification_action_no_thanks">不用了，謝謝</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">使用服務</string>
+    <string name="wifi_auto_network_switch_setting_msg">在Wi-Fi網絡和流動網絡可用時會自動切換到首選的網絡。</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">您隨時可進入Wi-Fi偏好設定更改設定。</string>
+    <string name="wifi_auto_network_switch_notification_channel">貼士</string>
+    <string name="wifi_auto_network_switch_setting">自動切換網絡</string>
+    <string name="settings_on">開啟</string>
+    <string name="settings_off">關閉</string>
+    <string name="smart_network_settings_title">智能連接</string>
+    <string name="smart_network_settings_switch_txt">使用智能連接</string>
+    <string name="smart_network_settings_msg">如偵測到Wi-Fi網絡連線品質欠佳，將改為使用流動網絡。關閉時，則會優先使用Wi-Fi連接。</string>
+    <string name="smart_network_settings_supplement">此功能不會影響僅限連接至Wi-Fi或流動網絡的應用程式。</string>
+    <string name="sne_app_name_txt">智能連接</string>
+    <string name="smart_network_settings_desc">[智能連接]使用索尼的深度學習技術，因應網絡品質在4G/5G及Wi-Fi之間自動切換，時刻呈獻品質最佳的網絡連接。</string>
+    <string name="smart_network_settings_connected_switch_title">當Wi-Fi品質欠佳時使用流動網絡</string>
+    <string name="smart_network_settings_connected_switch_desc">透過分析Wi-Fi信號數據來預測網絡狀態。若預測Wi-Fi網絡品質欠佳，這將自動切換至流動網絡。Wi-Fi連接將優先供主網絡使用。</string>
+    <string name="smart_network_settings_entry_switch_title">防止自動連接至品質欠佳的Wi-Fi網絡</string>
+    <string name="smart_network_settings_entry_switch_desc">當預測Wi-Fi品質欠佳時停止自動連接。這有助防止您的裝置自動切換至品質較差的公共Wi-Fi。</string>
+    <string name="smart_network_settings_desc_summary">自動選擇最佳網絡</string>
+    <string name="smart_network_notification_entry_title">偵測到品質欠佳的Wi-Fi網絡</string>
+    <string name="smart_network_notification_entry_text">[智能連接]預測到%1$s品質欠佳，並已暫時防止自動連接至此Wi-Fi網絡。</string>
+    <string name="smart_network_notification_channel_entry_title">正在防止自動連接至品質欠佳的Wi-Fi網絡</string>
+    <string name="smart_network_notification_entry_button">進入[設定]</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">仍要連接</string>
+    <string name="smart_network_toast_connecting">正在連接至%1$s</string>
+</resources>

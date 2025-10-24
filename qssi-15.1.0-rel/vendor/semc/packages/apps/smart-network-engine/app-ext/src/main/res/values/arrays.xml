@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2021 Sony Corporation
+-->
+<resources>
+    <string-array name="package_names">
+        <!-- YouTube:  https://play.google.com/store/apps/details?id=com.google.android.youtube -->
+        <item>com.google.android.youtube</item>
+        <!-- TikTok:   https://play.google.com/store/apps/details?id=com.ss.android.ugc.trill -->
+        <item>com.ss.android.ugc.trill</item>
+        <!-- TikTok:   https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically -->
+        <item>com.zhiliaoapp.musically</item>
+        <!-- Netflix:  https://play.google.com/store/apps/details?id=com.netflix.mediaclient -->
+        <item>com.netflix.mediaclient</item>
+        <!-- iQIYI:    https://play.google.com/store/apps/details?id=com.iqiyi.i18n -->
+        <item>com.iqiyi.i18n</item>
+        <!-- WeTV:     https://play.google.com/store/apps/details?id=com.tencent.qqlivei18n -->
+        <item>com.tencent.qqlivei18n</item>
+        <!-- Youku:    https://play.google.com/store/apps/details?id=com.youku.phone -->
+        <item>com.youku.phone</item>
+        <!-- MangoTV:  https://play.google.com/store/apps/details?id=com.hunantv.imgo.activity.inter -->
+        <item>com.hunantv.imgo.activity.inter</item>
+        <!-- bilibili: https://app.bilibili.com -->
+        <item>tv.danmaku.bili</item>
+        <item>tv.danmaku.bilibilihd</item>
+        <item>com.bilibili.app.blue</item>
+    </string-array>
+</resources>

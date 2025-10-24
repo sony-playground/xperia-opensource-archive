@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Mauvaise connexion WLAN détectée</string>
+    <string name="wifi_auto_network_switch_setting_msg">Active automatiquement le réseau préféré lorsque le réseau WLAN et le réseau mobile sont disponibles.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Vous pouvez toujours modifier la configuration plus tard via les préférences WLAN.</string>
+    <string name="smart_network_settings_msg">Lorsque la qualité du réseau WLAN est insuffisante, le réseau mobile prend le relais. Lorsque cette option est désactivée, la connexion WLAN est privilégiée.</string>
+    <string name="smart_network_settings_supplement">Cette fonction n\'a aucune incidence sur les applications limitant les connexions au seul réseau WLAN ou au réseau mobile</string>
+    <string name="smart_network_settings_desc">Grâce à la technologie d\'apprentissage profond de Sony, la connectivité intelligente fournit toujours la meilleure connexion réseau en passant automatiquement du réseau 4G/5G au WLAN et vice versa en fonction de la qualité du réseau.</string>
+    <string name="smart_network_settings_connected_switch_title">Utiliser le réseau mobile en cas de WLAN instable</string>
+    <string name="smart_network_settings_connected_switch_desc">Prédire les conditions réseau en analysant les données du signal WLAN. En cas de mauvaise qualité du réseau WLAN, cette fonction permettra de passer automatiquement au réseau mobile. La connexion au WLAN sera privilégiée en cas d\'utilisation du réseau domestique.</string>
+    <string name="smart_network_settings_entry_switch_title">Empêcher la connexion auto à un WLAN instable</string>
+    <string name="smart_network_settings_entry_switch_desc">Arrêter la connexion automatique en cas de mauvaise qualité du WLAN. Cette fonction permet d\'éviter que votre appareil se connecte automatiquement à un réseau WLAN public de qualité moindre.</string>
+    <string name="smart_network_notification_entry_title">Réseau WLAN de mauvaise qualité détecté</string>
+    <string name="smart_network_notification_entry_text">La connexion intelligente a détecté que %1$s est de mauvaise qualité, et a temporairement suspendu la connexion automatique à ce réseau WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Empêcher la connexion auto à un WLAN instable</string>
+</resources>

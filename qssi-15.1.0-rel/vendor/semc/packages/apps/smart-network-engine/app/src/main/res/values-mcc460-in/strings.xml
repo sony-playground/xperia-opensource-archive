@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Sambungan WLAN terdeteksi buruk</string>
+    <string name="wifi_auto_network_switch_setting_msg">Secara otomatis beralih ke jaringan pilihan ketika jaringan WLAN dan jaringan seluler tersedia.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Anda juga dapat membuka preferensi WLAN untuk mengubah konfigurasi ini nanti</string>
+    <string name="smart_network_settings_msg">Ketika kualitas sambungan jaringan WLAN yang terdeteksi buruk, jaringan seluler akan digunakan sebagai gantinya. Ketika dimatikan, sambungan WLAN akan diprioritaskan.</string>
+    <string name="smart_network_settings_supplement">Fitur ini tidak akan memengaruhi aplikasi yang membatasi koneksi hanya untuk WLAN atau jaringan seluler saja</string>
+    <string name="smart_network_settings_desc">Menggunakan teknologi pembelajaran mendalam Sony, Konektivitas pintar selalu menyediakan sambungan jaringan terbaik dengan secara otomatis mengalihkan antara 4G/5G dan WLAN bergantung pada kualitas jaringan.</string>
+    <string name="smart_network_settings_connected_switch_title">Gunakan jaringan seluler jika kualitas WLAN buruk</string>
+    <string name="smart_network_settings_connected_switch_desc">Perkirakan kondisi jaringan dengan menganalisis data sinyal WLAN. Jika kualitas jaringan WLAN diperkirakan, ini akan secara otomatis mengalihkan ke jaringan seluler. Koneksi WLAN akan diprioritaskan untuk penggunaan jaringan sendiri.</string>
+    <string name="smart_network_settings_entry_switch_title">Mencegah koneksi otomatis ke jaringan WLAN buruk</string>
+    <string name="smart_network_settings_entry_switch_desc">Hentikan koneksi otomatis saat kualitas WLAN yang buruk diperkirakan. Hal ini dapat mencegah smartphone Anda mengalihkan otomatis ke WLAN publik yang berkualitas lebih rendah.</string>
+    <string name="smart_network_notification_entry_title">Jaringan WLAN kualitas buruk terdeteksi</string>
+    <string name="smart_network_notification_entry_text">Konektivitas pintar telah memprediksi bahwa %1$s adalah koneksi buruk, dan sementara mencegah koneksi otomatis ke jaringan WLAN ini.</string>
+    <string name="smart_network_notification_channel_entry_title">Mencegah koneksi otomatis ke jaringan WLAN buruk</string>
+</resources>

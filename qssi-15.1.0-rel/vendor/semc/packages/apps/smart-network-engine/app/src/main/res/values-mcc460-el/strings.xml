@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Ανιχνεύτηκε κακή σύνδεση WLAN</string>
+    <string name="wifi_auto_network_switch_setting_msg">Αυτόματη αλλαγή σε ένα προτιμώμενο δίκτυο όταν είναι διαθέσιμο το δίκτυο WLAN και το δίκτυο κινητής τηλεφωνίας.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Μπορείτε να μεταβείτε αργότερα στις Προτιμήσεις WLAN για να αλλάξετε τη ρύθμιση.</string>
+    <string name="smart_network_settings_msg">Εάν ανιχνευτεί ότι ένα δίκτυο WLAN έχει κακή ποιότητα σύνδεσης, θα χρησιμοποιείται το δίκτυο κινητής τηλεφωνίας. Εάν απενεργοποιηθεί, η σύνδεση WLAN θα έχει προτεραιότητα.</string>
+    <string name="smart_network_settings_supplement">Αυτή η λειτουργία δεν θα επηρεάσει εφαρμογές που περιορίζουν τις συνδέσεις μόνο σε WLAN ή μόνο σε δίκτυο κινητής τηλεφωνίας</string>
+    <string name="smart_network_settings_desc">Όταν χρησιμοποιείτε την τεχνολογία βαθιάς μάθησης της Sony, η λειτουργία Smart connectivity παρέχει πάντα την καλύτερη σύνδεση δικτύου πραγματοποιώντας αυτόματα εναλλαγή μεταξύ 4G/5G και WLAN ανάλογα με την ποιότητα του δικτύου.</string>
+    <string name="smart_network_settings_connected_switch_title">Δίκτυο κινητής αντί αδύναμου WLAN</string>
+    <string name="smart_network_settings_connected_switch_desc">Προβλέψτε τις συνθήκες δικτύου αναλύοντας δεδομένα σήματος WLAN. Αν αναμένεται δίκτυο WLAN κακής ποιότητας, θα πραγματοποιείται αυτόματα εναλλαγή σε δίκτυο κινητής τηλεφωνίας. Η σύνδεση WLAN θα έχει προτεραιότητα για χρήση σε οικιακό δίκτυο.</string>
+    <string name="smart_network_settings_entry_switch_title">Αποτροπή αυτόμ. σύνδεσης σε κακής ποιότητας WLAN</string>
+    <string name="smart_network_settings_entry_switch_desc">Διακόψτε την αυτόματη σύνδεση όταν αναμένεται κακή ποιότητα WLAN. Αυτό μπορεί να αποτρέψει την αυτόματη εναλλαγή της συσκευής σας σε δημόσιο WLAN χαμηλότερης ποιότητας.</string>
+    <string name="smart_network_notification_entry_title">Ανιχνεύτηκε σύνδεση WLAN κακής ποιότητας</string>
+    <string name="smart_network_notification_entry_text">Η έξυπνη συνδεσιμότητα προέβλεψε ότι το %1$s είναι κακής ποιότητας και απέτρεψε προσωρινά την αυτόματη σύνδεση σε αυτό το δίκτυο WLAN.</string>
+    <string name="smart_network_notification_channel_entry_title">Αποτροπή αυτόμ. σύνδεσης σε κακής ποιότητας WLAN</string>
+</resources>

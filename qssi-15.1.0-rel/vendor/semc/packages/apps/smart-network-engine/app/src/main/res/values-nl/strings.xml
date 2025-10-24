@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Slechte Wi-Fi-verbinding gedetecteerd</string>
+    <string name="notification_text">Tik om Automatische netwerkswitch in te schakelen om met een mobiel netwerk de netwerkverbinding stabieler te maken</string>
+    <string name="notification_action_settings">Naar Instellingen</string>
+    <string name="notification_action_no_thanks">Nee, bedankt</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Service gebruiken</string>
+    <string name="wifi_auto_network_switch_setting_msg">Schakel automatisch naar het gewenste netwerk wanneer het Wi-Fi-netwerk en het mobiele netwerk beide beschikbaar zijn.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">U kunt de instellingen altijd later veranderen via de Wifi-voorkeuren.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Tips</string>
+    <string name="wifi_auto_network_switch_setting">Automatische netwerkswitch</string>
+    <string name="settings_on">Aan</string>
+    <string name="settings_off">Uit</string>
+    <string name="smart_network_settings_title">Slimme connectiviteit</string>
+    <string name="smart_network_settings_switch_txt">Slimme connectiviteit</string>
+    <string name="smart_network_settings_msg">Als wordt gedetecteerd dat de verbindingskwaliteit van een Wi-Fi-netwerk slecht is, wordt in plaats daarvan een mobiel netwerk gebruikt. Als dit is uitgeschakeld, heeft Wi-Fi-verbinding prioriteit.</string>
+    <string name="smart_network_settings_supplement">Deze functie heeft geen invloed op applicaties die verbindingen beperken tot alleen Wi-Fi of alleen mobiel netwerk</string>
+    <string name="sne_app_name_txt">Slimme connectiviteit</string>
+    <string name="smart_network_settings_desc">Dankzij de Deep Learning-technologie van Sony biedt Slimme connectiviteit altijd de beste netwerkverbinding door automatisch te schakelen tussen 4G/5G en Wi-Fi afhankelijk van de netwerkkwaliteit.</string>
+    <string name="smart_network_settings_connected_switch_title">Mobiel netwerk gebruiken bij slechte Wi-Fi-kwaliteit</string>
+    <string name="smart_network_settings_connected_switch_desc">Netwerkomstandigheden voorspellen door Wi-Fi-signaalgegevens te analyseren. Als een slechte Wi-Fi-netwerkkwaliteit wordt verwacht, wordt automatisch overgeschakeld naar een mobiel netwerk. Wi-Fi-verbinding heeft prioriteit voor gebruik in thuisnetwerk.</string>
+    <string name="smart_network_settings_entry_switch_title">Automatische verbinding met slechte Wi-Fi vermijden</string>
+    <string name="smart_network_settings_entry_switch_desc">Automatische verbinding stoppen wanneer slechte Wi-Fi-kwaliteit wordt verwacht. Dit kan voorkomen dat uw apparaat automatisch overschakelt naar een openbaar Wi-Fi-netwerk van lagere kwaliteit.</string>
+    <string name="smart_network_settings_desc_summary">Automatisch het beste netwerk selecteren</string>
+    <string name="smart_network_notification_entry_title">Wi-Fi-netwerk met slechte kwaliteit gedetecteerd</string>
+    <string name="smart_network_notification_entry_text">Slimme connectiviteit heeft voorspelt dat %1$s een slechte kwaliteit heeft en heeft automatische verbinding met dit Wi-Fi-netwerk tijdelijk vermeden.</string>
+    <string name="smart_network_notification_channel_entry_title">Automatische verbinding met slechte Wi-Fi vermijden</string>
+    <string name="smart_network_notification_entry_button">NAAR INSTELLINGEN</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">TOCH VERBINDEN</string>
+    <string name="smart_network_toast_connecting">Verbinding maken met %1$s</string>
+</resources>

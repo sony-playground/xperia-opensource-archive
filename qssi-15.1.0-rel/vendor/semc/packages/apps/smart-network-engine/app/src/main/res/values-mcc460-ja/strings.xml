@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">WLAN接続環境が不安定です</string>
+    <string name="wifi_auto_network_switch_setting_msg">WLANネットワークとモバイルネットワークが両方利用可能なとき、最適なネットワークに自動的に接続します。</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">この設定は後からいつでもWLAN設定で変更できます。</string>
+    <string name="smart_network_settings_msg">WLANネットワークの接続が不安定なときは、モバイルネットワークを優先的に使用します。無効にするとWLANでの通信を優先します。</string>
+    <string name="smart_network_settings_supplement">通信環境をWLANのみ/モバイルネットワークのみに制限できるアプリケーションに対して、本機能は影響を与えません</string>
+    <string name="smart_network_settings_desc">ソニーのディープラーニング技術によって無線環境の変化を予測します。常に自動で4G/5GまたはWLANなど、最適な環境へ切り替えながら、快適な通信環境を保ちます。</string>
+    <string name="smart_network_settings_connected_switch_title">WLAN接続不良時にモバイルネットワークを使用する</string>
+    <string name="smart_network_settings_connected_switch_desc">WLANの電波を分析することで、今後の通信状況を予測します。もし通信品質の悪化が予測される場合は、モバイルネットワークを使用します。ホームネットワークではWLANを優先して使用します。</string>
+    <string name="smart_network_settings_entry_switch_title">低品質なWLANネットワークへの自動接続を停止する</string>
+    <string name="smart_network_settings_entry_switch_desc">接続しようとしているWLANネットワークの品質が悪い場合は自動接続を停止します。品質が悪い公衆WLANネットワークへの切り替えを防止することに役立ちます。</string>
+    <string name="smart_network_notification_entry_title">低品質なWLANネットワークの検出</string>
+    <string name="smart_network_notification_entry_text">スマートコネクティビティは%1$sが低品質であることを予測し、自動接続を一時的に停止しています。</string>
+    <string name="smart_network_notification_channel_entry_title">低品質なWLAN自動接続の停止</string>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Havaittiin huono WLAN-yhteys</string>
+    <string name="wifi_auto_network_switch_setting_msg">Vaihda ensisijaiseen verkkoon automaattisesti, kun käytettävissä on sekä matkapuhelinverkko että WLAN-verkko.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Voit muokata asetuksia myöhemmin WLAN-asetuksissa.</string>
+    <string name="smart_network_settings_msg">Kun WLAN-verkon yhteyden laatu on heikko, käytetään sen sijasta mobiiliverkkoa. Kun tämä ei ole käytössä, WLAN-verkko priorisoidaan.</string>
+    <string name="smart_network_settings_supplement">Tämä toiminto ei vaikuta sovelluksiin, jotka rajoittavat yhteydet vain WLAN- tai mobiiliverkkoyhteyksiin</string>
+    <string name="smart_network_settings_desc">Sonyn syväoppimistekniikan ansiosta Älykäs yhteydenvalinta tarjoaa aina parhaan verkkoyhteyden vaihtamalla automaattisesti 4G/5G-yhteyden ja WLAN-yhteyden välillä verkon laadun perusteella.</string>
+    <string name="smart_network_settings_connected_switch_title">Käytä mobiiliverkkoa, kun WLAN-yhteyden laatu on heikko</string>
+    <string name="smart_network_settings_connected_switch_desc">Ennusta verkon tila analysoimalla WLAN-signaalin tietoja. Jos WLAN-verkon laadun odotetaan olevan heikko, mobiiliverkko vaihdetaan käyttöön automaattisesti. WLAN-yhteys on ensisijalla kotiverkkokäytössä.</string>
+    <string name="smart_network_settings_entry_switch_title">Estä autom. yhdistäminen heikkoon WLAN-verkkoon</string>
+    <string name="smart_network_settings_entry_switch_desc">Lopeta automaattinen yhdistäminen, kun heikko WLAN-yhteys on odotettavissa. Tämä estää laitettasi yhdistämästä automaattisesti heikkolaatuiseen julkiseen WLAN-verkkoon.</string>
+    <string name="smart_network_notification_entry_title">Heikkolaatuinen WLAN-verkko havaittu</string>
+    <string name="smart_network_notification_entry_text">Älykäs yhteydenvalinta on ennustanut, että %1$s on heikkolaatuinen, ja estänyt automaattisen yhdistämisen kyseiseen WLAN-verkkoon.</string>
+    <string name="smart_network_notification_channel_entry_title">Estää autom. yhdistämisen heikkoon WLAN-verkkoon</string>
+</resources>

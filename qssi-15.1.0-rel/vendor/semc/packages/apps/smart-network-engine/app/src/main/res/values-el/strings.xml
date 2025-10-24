@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Ανιχνεύτηκε κακή σύνδεση Wi-Fi</string>
+    <string name="notification_text">Πατήστε για να ενεργοποιήσετε την Αυτόματη αλλαγή δικτύου για να σταθεροποιήσετε το δίκτυό σας χρησιμοποιώντας το δίκτυο κινητής τηλεφωνίας</string>
+    <string name="notification_action_settings">Μετ. στις Ρυθμίσ.</string>
+    <string name="notification_action_no_thanks">Όχι, ευχαριστώ</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Χρήση υπηρεσίας</string>
+    <string name="wifi_auto_network_switch_setting_msg">Αυτόματη αλλαγή σε ένα προτιμώμενο δίκτυο όταν είναι διαθέσιμο το δίκτυο Wi-Fi και το δίκτυο κινητής τηλεφωνίας.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Μπορείτε να μεταβείτε αργότερα στις Προτιμήσεις Wi-Fi για να αλλάξετε τη ρύθμιση.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Συμβουλές</string>
+    <string name="wifi_auto_network_switch_setting">Αυτόματη αλλαγή δικτύου</string>
+    <string name="settings_on">Ενεργό</string>
+    <string name="settings_off">Ανενεργό</string>
+    <string name="smart_network_settings_title">Έξυπνη συνδεσιμότητα</string>
+    <string name="smart_network_settings_switch_txt">Χρήση Έξυπνης συνδεσιμότ.</string>
+    <string name="smart_network_settings_msg">Εάν ανιχνευτεί ότι ένα δίκτυο Wi-Fi έχει κακή ποιότητα σύνδεσης, θα χρησιμοποιείται το δίκτυο κινητής τηλεφωνίας. Εάν απενεργοποιηθεί, η σύνδεση Wi-Fi θα έχει προτεραιότητα.</string>
+    <string name="smart_network_settings_supplement">Αυτή η λειτουργία δεν θα επηρεάσει εφαρμογές που περιορίζουν τις συνδέσεις μόνο σε Wi-Fi ή μόνο σε δίκτυο κινητής τηλεφωνίας</string>
+    <string name="sne_app_name_txt">Έξυπνη συνδεσιμότητα</string>
+    <string name="smart_network_settings_desc">Όταν χρησιμοποιείτε την τεχνολογία βαθιάς μάθησης της Sony, η λειτουργία Smart connectivity παρέχει πάντα την καλύτερη σύνδεση δικτύου πραγματοποιώντας αυτόματα εναλλαγή μεταξύ 4G/5G και Wi-Fi ανάλογα με την ποιότητα του δικτύου.</string>
+    <string name="smart_network_settings_connected_switch_title">Δίκτυο κινητής αντί αδύναμου Wi-Fi</string>
+    <string name="smart_network_settings_connected_switch_desc">Προβλέψτε τις συνθήκες δικτύου αναλύοντας δεδομένα σήματος Wi-Fi. Αν αναμένεται δίκτυο Wi-Fi κακής ποιότητας, θα πραγματοποιείται αυτόματα εναλλαγή σε δίκτυο κινητής τηλεφωνίας. Η σύνδεση Wi-Fi θα έχει προτεραιότητα για χρήση σε οικιακό δίκτυο.</string>
+    <string name="smart_network_settings_entry_switch_title">Αποτροπή αυτόμ. σύνδεσης σε κακής ποιότητας Wi-Fi</string>
+    <string name="smart_network_settings_entry_switch_desc">Διακόψτε την αυτόματη σύνδεση όταν αναμένεται κακή ποιότητα Wi-Fi. Αυτό μπορεί να αποτρέψει την αυτόματη εναλλαγή της συσκευής σας σε δημόσιο Wi-Fi χαμηλότερης ποιότητας.</string>
+    <string name="smart_network_settings_desc_summary">Αυτόματη επιλογή του βέλτιστου δικτύου</string>
+    <string name="smart_network_notification_entry_title">Ανιχνεύτηκε σύνδεση Wi-Fi κακής ποιότητας</string>
+    <string name="smart_network_notification_entry_text">Η έξυπνη συνδεσιμότητα προέβλεψε ότι το %1$s είναι κακής ποιότητας και απέτρεψε προσωρινά την αυτόματη σύνδεση σε αυτό το δίκτυο Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Αποτροπή αυτόμ. σύνδεσης σε κακής ποιότητας Wi-Fi</string>
+    <string name="smart_network_notification_entry_button">ΡΥΘΜΙΣΕΙΣ</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">ΣΥΝΔΕΣΗ</string>
+    <string name="smart_network_toast_connecting">Γίνεται σύνδεση με το %1$s</string>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Der er registreret en dårlig Wi-Fi-forbindelse</string>
+    <string name="notification_text">Tap for at aktivere Automatisk netværksskift for at gøre dit netværk stabilt ved hjælp af et mobilt netværk</string>
+    <string name="notification_action_settings">Gå til Indstillinger</string>
+    <string name="notification_action_no_thanks">Nej tak</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Brug tjenesten</string>
+    <string name="wifi_auto_network_switch_setting_msg">Skift automatisk til et foretrukket netværk, når der både er et tilgængeligt Wi-Fi-netværk og mobilnetværk.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Du kan altid gå til Wi-Fi-præferencer for at ændre opsætningen senere.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Tip</string>
+    <string name="wifi_auto_network_switch_setting">Automatisk netværksskift</string>
+    <string name="settings_on">Til</string>
+    <string name="settings_off">Fra</string>
+    <string name="smart_network_settings_title">Smart-forbindelse</string>
+    <string name="smart_network_settings_switch_txt">Brug Smart-forbindelse</string>
+    <string name="smart_network_settings_msg">Når der registreres et Wi-Fi-netværk med dårlig forbindelseskvalitet, bruges mobilnetværket i stedet. Når det slås fra, prioriteres Wi-Fi-forbindelse.</string>
+    <string name="smart_network_settings_supplement">Denne funktion påvirker ikke apps, der begrænser forbindelser til Wi-Fi alene eller mobilnetværk alene</string>
+    <string name="sne_app_name_txt">Smart-forbindelse</string>
+    <string name="smart_network_settings_desc">Med Sonys dybe læringsteknologi giver Smart-forbindelse altid den bedste netværksforbindelse ved automatisk at skifte mellem 4G/5G og Wi-Fi alt efter netværkskvaliteten.</string>
+    <string name="smart_network_settings_connected_switch_title">Brug mobilnetværk, når Wi-Fi-kvalitet er dårlig</string>
+    <string name="smart_network_settings_connected_switch_desc">Forudse netværksforhold ved at analysere data for Wi-Fi-signal. Hvis der forventes dårlig Wi-Fi-netværkskvalitet, skifter denne funktion automatisk til et mobilnetværk. Wi-Fi-forbindelse prioriteres ved brug af hjemmenetværk.</string>
+    <string name="smart_network_settings_entry_switch_title">Undgå autoforbindelse til Wi-Fi-netværk af dårlig kvalitet</string>
+    <string name="smart_network_settings_entry_switch_desc">Stop automatisk forbindelse, når der forventes dårlig Wi-Fi-kvalitet. Dette kan hjælpe med til at forhindre, at din enhed automatisk skifter til et offentligt Wi-Fi-netværk af lavere kvalitet.</string>
+    <string name="smart_network_settings_desc_summary">Vælg automatisk det bedste netværk</string>
+    <string name="smart_network_notification_entry_title">Wi-Fi-netværk af dårlig kvalitet fundet</string>
+    <string name="smart_network_notification_entry_text">Smart-forbindelse har forudset, at %1$s er af dårlig kvalitet, og har forhindret autoforbindelse til dette Wi-Fi-netværk midlertidigt.</string>
+    <string name="smart_network_notification_channel_entry_title">Undgå autoforbindelse til Wi-Fi-netværk af dårlig kvalitet</string>
+    <string name="smart_network_notification_entry_button">GÅ TIL INDSTILLINGER</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">TILSLUT ALLIGEVEL</string>
+    <string name="smart_network_toast_connecting">Opretter forbindelse til %1$s</string>
+</resources>

@@ -1,0 +1,225 @@
+java_import {
+    name: "sne-commons-io",
+    jars: [
+        "commons-io-2.11.0.jar",
+    ],
+}
+
+java_import {
+    name: "sne-okhttp",
+    jars: [
+        "okhttp-3.14.9.jar",
+    ],
+}
+
+java_import {
+    name: "sne-okhttp-tls",
+    jars: [
+        "okhttp-tls-3.14.9.jar",
+    ],
+}
+
+java_import {
+    name: "sne-okio",
+    jars: [
+        "okio-1.17.2.jar",
+    ],
+}
+
+java_import {
+    name: "sne-logging-interceptor",
+    jars: [
+        "logging-interceptor-3.14.9.jar",
+    ],
+}
+
+java_import {
+   name: "sne-gson",
+   jars: [
+       "gson-2.9.0.jar",
+   ],
+}
+
+java_import {
+    name: "sne-jackson-annotations",
+    jars: [
+        "jackson-annotations-2.13.4.jar",
+    ],
+}
+
+java_import {
+    name: "sne-jackson-core",
+    jars: [
+        "jackson-core-2.13.4.jar",
+    ],
+}
+
+java_import {
+    name: "sne-jackson-databind",
+    jars: [
+        "jackson-databind-2.13.4.2.jar",
+    ],
+}
+
+cc_prebuilt_library_shared {
+    name: "libarchive-nnabla",
+    stem: "libarchive",
+    system_ext_specific: true,
+    target: {
+        android_arm64: {
+            srcs: [
+                "arm64-v8a/libarchive.so",
+            ],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    shared_libs: [
+        "libz",
+    ],
+}
+
+cc_prebuilt_library_shared {
+    name: "libprotobuf-nnabla",
+    stem: "libprotobuf",
+    system_ext_specific: true,
+    target: {
+        android_arm64: {
+            srcs: [
+                "arm64-v8a/libprotobuf.so",
+            ],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    shared_libs: [
+        "libz",
+        "libc++_shared-nnabla",
+    ],
+}
+
+cc_prebuilt_library_shared {
+    name: "libc++_shared-nnabla",
+    stem: "libc++_shared",
+    system_ext_specific: true,
+    target: {
+        android_arm64: {
+            srcs: [
+                "arm64-v8a/libc++_shared.so",
+            ],
+        },
+    },
+    strip: {
+        none: true,
+    },
+}
+
+cc_prebuilt_library_shared {
+    name: "libnnabla_utils",
+    system_ext_specific: true,
+    target: {
+        android_arm64: {
+            srcs: [
+                "arm64-v8a/libnnabla_utils.so",
+            ],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    shared_libs: [
+        "liblog",
+        "libz",
+        "libc++_shared-nnabla",
+        "libnnabla",
+        "libprotobuf-nnabla",
+        "libarchive-nnabla",
+    ],
+}
+
+cc_prebuilt_library_shared {
+    name: "libnnabla",
+    system_ext_specific: true,
+    target: {
+        android_arm64: {
+            srcs: [
+                "arm64-v8a/libnnabla.so",
+            ],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    shared_libs: [
+        "libc++_shared-nnabla",
+    ],
+}
+
+cc_prebuilt_library_shared {
+    name: "libsmartnet_jni-prebuilt",
+    stem: "libsmartnet_jni",
+    system_ext_specific: true,
+    multilib: {
+        lib64: {
+            srcs: [
+                "arm64-v8a/libsmartnet_jni.so",
+            ],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    shared_libs: [
+        "libz",
+        "liblog",
+        "libc++_shared-nnabla",
+        "libnnabla",
+        "libnnabla_utils",
+    ],
+}
+
+cc_prebuilt_library_shared {
+    name: "libNNHLCRNative-prebuilt",
+    stem: "libNNHLCRNative",
+    system_ext_specific: true,
+    multilib: {
+        lib64: {
+            srcs: [
+                "arm64-v8a/libNNHLCRNative.so",
+            ],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    shared_libs: [
+        "libz",
+        "liblog",
+        "libc++_shared-nnabla",
+        "libnnabla_utils",
+        "libnnabla",
+    ],
+}
+
+cc_prebuilt_library_shared {
+    name: "libLinearHLCRNative-prebuilt",
+    stem: "libLinearHLCRNative",
+    system_ext_specific: true,
+    multilib: {
+        lib64: {
+            srcs: [
+                "arm64-v8a/libLinearHLCRNative.so",
+            ],
+        },
+    },
+    strip: {
+        none: true,
+    },
+    shared_libs: [
+        "libz",
+        "liblog",
+        "libc++_shared-nnabla",
+    ],
+}

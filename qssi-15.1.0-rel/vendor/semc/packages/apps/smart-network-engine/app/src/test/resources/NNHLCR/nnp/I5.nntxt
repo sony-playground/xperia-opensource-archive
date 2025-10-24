@@ -1,0 +1,622 @@
+network {
+  name: "training"
+  batch_size: 1
+  variable {
+    name: "@training/Constant_out"
+    type: "Buffer"
+    shape {
+      dim: 1
+      dim: 1
+      dim: 1
+      dim: 16
+    }
+  }
+  variable {
+    name: "@training/Constant_out_1"
+    type: "Buffer"
+    shape {
+      dim: 1
+      dim: 1
+      dim: 1
+      dim: 16
+    }
+  }
+  variable {
+    name: "x"
+    type: "Buffer"
+    shape {
+      dim: 30
+      dim: 1
+      dim: 18
+    }
+  }
+  variable {
+    name: "@training/LSTM_out"
+    type: "Buffer"
+    shape {
+      dim: 30
+      dim: 1
+      dim: 16
+    }
+  }
+  variable {
+    name: "@training/LSTM_out_1"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 1
+      dim: 1
+      dim: 16
+    }
+  }
+  variable {
+    name: "@training/LSTM_out_2"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 1
+      dim: 1
+      dim: 16
+    }
+  }
+  variable {
+    name: "@training/Arange_out"
+    type: "Buffer"
+    shape {
+      dim: 1
+    }
+  }
+  variable {
+    name: "@training/Reshape_out"
+    type: "Buffer"
+    shape {
+      dim: 1
+      dim: 1
+    }
+  }
+  variable {
+    name: "l"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 1
+    }
+  }
+  variable {
+    name: "@training/Concatenate_out"
+    type: "Buffer"
+    shape {
+      dim: 2
+      dim: 1
+    }
+  }
+  variable {
+    name: "@training/GatherNd_out"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 16
+    }
+  }
+  variable {
+    name: "@training/Affine_out"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 2
+    }
+  }
+  variable {
+    name: "y_pred"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 2
+    }
+  }
+  variable {
+    name: "y"
+    type: "Buffer"
+    shape {
+      dim: 30
+      dim: 1
+      dim: 1
+    }
+  }
+  variable {
+    name: "@training/Slice_out"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 1
+      dim: 1
+    }
+  }
+  variable {
+    name: "@training/Reshape_out_1"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 1
+    }
+  }
+  variable {
+    name: "@training/CategoricalCrossEntropy_out"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 1
+    }
+  }
+  variable {
+    name: "loss"
+    type: "Buffer"
+    shape {
+    }
+  }
+  variable {
+    name: "lstm/weight_l0"
+    type: "Parameter"
+    shape {
+      dim: 1
+      dim: 4
+      dim: 16
+      dim: 34
+    }
+  }
+  variable {
+    name: "lstm/bias"
+    type: "Parameter"
+    shape {
+      dim: 1
+      dim: 1
+      dim: 4
+      dim: 16
+    }
+  }
+  variable {
+    name: "affine/W"
+    type: "Parameter"
+    shape {
+      dim: 16
+      dim: 2
+    }
+  }
+  variable {
+    name: "affine/b"
+    type: "Parameter"
+    shape {
+      dim: 2
+    }
+  }
+  function {
+    name: "@training/Constant"
+    type: "Constant"
+    output: "@training/Constant_out"
+    constant_param {
+      shape {
+        dim: 1
+        dim: 1
+        dim: 1
+        dim: 16
+      }
+    }
+  }
+  function {
+    name: "@training/Constant_1"
+    type: "Constant"
+    output: "@training/Constant_out_1"
+    constant_param {
+      shape {
+        dim: 1
+        dim: 1
+        dim: 1
+        dim: 16
+      }
+    }
+  }
+  function {
+    name: "@training/LSTM"
+    type: "LSTM"
+    input: "x"
+    input: "@training/Constant_out"
+    input: "@training/Constant_out_1"
+    input: "lstm/weight_l0"
+    input: "lstm/bias"
+    output: "@training/LSTM_out"
+    output: "@training/LSTM_out_1"
+    output: "@training/LSTM_out_2"
+    lstm_param {
+      num_layers: 1
+      training: true
+    }
+  }
+  function {
+    name: "@training/Arange"
+    type: "Arange"
+    output: "@training/Arange_out"
+    arange_param {
+      stop: 1.0
+      step: 1.0
+    }
+  }
+  function {
+    name: "@training/Reshape"
+    type: "Reshape"
+    input: "@training/Arange_out"
+    output: "@training/Reshape_out"
+    reshape_param {
+      shape {
+        dim: 1
+        dim: 1
+      }
+      inplace: true
+    }
+  }
+  function {
+    name: "@training/Concatenate"
+    type: "Concatenate"
+    input: "l"
+    input: "@training/Reshape_out"
+    output: "@training/Concatenate_out"
+    concatenate_param {
+    }
+  }
+  function {
+    name: "@training/GatherNd"
+    type: "GatherNd"
+    input: "@training/LSTM_out"
+    input: "@training/Concatenate_out"
+    output: "@training/GatherNd_out"
+  }
+  function {
+    name: "@training/Affine"
+    type: "Affine"
+    input: "@training/GatherNd_out"
+    input: "affine/W"
+    input: "affine/b"
+    output: "@training/Affine_out"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "@training/Softmax"
+    type: "Softmax"
+    input: "@training/Affine_out"
+    output: "y_pred"
+    softmax_param {
+      axis: 1
+    }
+  }
+  function {
+    name: "@training/Slice"
+    type: "Slice"
+    input: "y"
+    output: "@training/Slice_out"
+    slice_param {
+      start: 0
+      start: 2147483647
+      start: 2147483647
+      stop: 1
+      stop: 2147483647
+      stop: 2147483647
+      step: 1
+      step: 2147483647
+      step: 2147483647
+    }
+  }
+  function {
+    name: "@training/Reshape_1"
+    type: "Reshape"
+    input: "@training/Slice_out"
+    output: "@training/Reshape_out_1"
+    reshape_param {
+      shape {
+        dim: -1
+        dim: 1
+      }
+      inplace: true
+    }
+  }
+  function {
+    name: "@training/CategoricalCrossEntropy"
+    type: "CategoricalCrossEntropy"
+    input: "y_pred"
+    input: "@training/Reshape_out_1"
+    output: "@training/CategoricalCrossEntropy_out"
+    categorical_cross_entropy_param {
+      axis: 1
+    }
+  }
+  function {
+    name: "@training/Mean"
+    type: "Mean"
+    input: "@training/CategoricalCrossEntropy_out"
+    output: "loss"
+    mean_param {
+      axes: 0
+      axes: 1
+    }
+  }
+}
+network {
+  name: "lstm"
+  batch_size: 64
+  variable {
+    name: "@lstm/Constant_out"
+    type: "Buffer"
+    shape {
+      dim: 1
+      dim: 1
+      dim: 64
+      dim: 16
+    }
+  }
+  variable {
+    name: "@lstm/Constant_out_1"
+    type: "Buffer"
+    shape {
+      dim: 1
+      dim: 1
+      dim: 64
+      dim: 16
+    }
+  }
+  variable {
+    name: "x"
+    type: "Buffer"
+    shape {
+      dim: 30
+      dim: 64
+      dim: 5
+    }
+  }
+  variable {
+    name: "@lstm/LSTM_out"
+    type: "Buffer"
+    shape {
+      dim: 30
+      dim: 64
+      dim: 16
+    }
+  }
+  variable {
+    name: "@lstm/LSTM_out_1"
+    type: "Buffer"
+    shape {
+      dim: 1
+      dim: 1
+      dim: 64
+      dim: 16
+    }
+  }
+  variable {
+    name: "@lstm/LSTM_out_2"
+    type: "Buffer"
+    shape {
+      dim: 1
+      dim: 1
+      dim: 64
+      dim: 16
+    }
+  }
+  variable {
+    name: "@lstm/Arange_out"
+    type: "Buffer"
+    shape {
+      dim: 64
+    }
+  }
+  variable {
+    name: "@lstm/Reshape_out"
+    type: "Buffer"
+    shape {
+      dim: 1
+      dim: 64
+    }
+  }
+  variable {
+    name: "l"
+    type: "Buffer"
+    shape {
+      dim: 1
+      dim: 64
+    }
+  }
+  variable {
+    name: "@lstm/Concatenate_out"
+    type: "Buffer"
+    shape {
+      dim: 2
+      dim: 64
+    }
+  }
+  variable {
+    name: "@lstm/GatherNd_out"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 16
+    }
+  }
+  variable {
+    name: "@lstm/Affine_out"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 2
+    }
+  }
+  variable {
+    name: "y_pred"
+    type: "Buffer"
+    shape {
+      dim: -1
+      dim: 2
+    }
+  }
+  variable {
+    name: "lstm/weight_l0"
+    type: "Parameter"
+    shape {
+      dim: 1
+      dim: 4
+      dim: 16
+      dim: 21
+    }
+  }
+  variable {
+    name: "lstm/bias"
+    type: "Parameter"
+    shape {
+      dim: 1
+      dim: 1
+      dim: 4
+      dim: 16
+    }
+  }
+  variable {
+    name: "affine/W"
+    type: "Parameter"
+    shape {
+      dim: 16
+      dim: 2
+    }
+  }
+  variable {
+    name: "affine/b"
+    type: "Parameter"
+    shape {
+      dim: 2
+    }
+  }
+  function {
+    name: "@lstm/Constant"
+    type: "Constant"
+    output: "@lstm/Constant_out"
+    constant_param {
+      shape {
+        dim: 1
+        dim: 1
+        dim: 64
+        dim: 16
+      }
+    }
+  }
+  function {
+    name: "@lstm/Constant_1"
+    type: "Constant"
+    output: "@lstm/Constant_out_1"
+    constant_param {
+      shape {
+        dim: 1
+        dim: 1
+        dim: 64
+        dim: 16
+      }
+    }
+  }
+  function {
+    name: "@lstm/LSTM"
+    type: "LSTM"
+    input: "x"
+    input: "@lstm/Constant_out"
+    input: "@lstm/Constant_out_1"
+    input: "lstm/weight_l0"
+    input: "lstm/bias"
+    output: "@lstm/LSTM_out"
+    output: "@lstm/LSTM_out_1"
+    output: "@lstm/LSTM_out_2"
+    lstm_param {
+      num_layers: 1
+      training: true
+    }
+  }
+  function {
+    name: "@lstm/Arange"
+    type: "Arange"
+    output: "@lstm/Arange_out"
+    arange_param {
+      stop: 64.0
+      step: 1.0
+    }
+  }
+  function {
+    name: "@lstm/Reshape"
+    type: "Reshape"
+    input: "@lstm/Arange_out"
+    output: "@lstm/Reshape_out"
+    reshape_param {
+      shape {
+        dim: 1
+        dim: 64
+      }
+      inplace: true
+    }
+  }
+  function {
+    name: "@lstm/Concatenate"
+    type: "Concatenate"
+    input: "l"
+    input: "@lstm/Reshape_out"
+    output: "@lstm/Concatenate_out"
+    concatenate_param {
+    }
+  }
+  function {
+    name: "@lstm/GatherNd"
+    type: "GatherNd"
+    input: "@lstm/LSTM_out"
+    input: "@lstm/Concatenate_out"
+    output: "@lstm/GatherNd_out"
+  }
+  function {
+    name: "@lstm/Affine"
+    type: "Affine"
+    input: "@lstm/GatherNd_out"
+    input: "affine/W"
+    input: "affine/b"
+    output: "@lstm/Affine_out"
+    affine_param {
+      base_axis: 1
+    }
+  }
+  function {
+    name: "@lstm/Softmax"
+    type: "Softmax"
+    input: "@lstm/Affine_out"
+    output: "y_pred"
+    softmax_param {
+      axis: 1
+    }
+  }
+}
+executor {
+  name: "runtime"
+  network_name: "lstm"
+  data_variable {
+    variable_name: "x"
+    data_name: "x"
+  }
+  data_variable {
+    variable_name: "l"
+    data_name: "l"
+  }
+  output_variable {
+    variable_name: "y_pred"
+    data_name: "y_pred"
+  }
+  parameter_variable {
+    variable_name: "lstm/weight_l0"
+  }
+  parameter_variable {
+    variable_name: "lstm/bias"
+  }
+  parameter_variable {
+    variable_name: "affine/W"
+  }
+  parameter_variable {
+    variable_name: "affine/b"
+  }
+}

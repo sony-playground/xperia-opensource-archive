@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="wifi_auto_network_switch_setting_msg">Automatically switch to a preferred network when both the Wi-Fi network and mobile network are available.</string>
+    <string name="smart_network_settings_msg">When a Wi-Fi network is detected to have poor connection quality, the mobile network will be used instead. When turned off, the Wi-Fi connection will be prioritised.</string>
+    <string name="smart_network_settings_connected_switch_desc">Predict network conditions by analysing Wi-Fi signal data. If poor Wi-Fi network quality is expected, this will automatically switch to a mobile network. Wi-Fi connection will be prioritised for home network use.</string>
+</resources>

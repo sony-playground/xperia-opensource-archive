@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Detetada ligação Wi-Fi fraca</string>
+    <string name="notification_text">Toque para ativar o Interruptor de rede automática para tornar a rede estável ao utilizar a rede móvel</string>
+    <string name="notification_action_settings">Aceder a Definições</string>
+    <string name="notification_action_no_thanks">Não, obrigado</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Utilizar o serviço</string>
+    <string name="wifi_auto_network_switch_setting_msg">Mude automaticamente para uma rede preferencial se a rede Wi-Fi e a rede móvel estiverem ambas disponíveis.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Pode sempre aceder às preferências do Wi-Fi para alterar a configuração posteriormente.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Sugestões</string>
+    <string name="wifi_auto_network_switch_setting">Interruptor de rede automática</string>
+    <string name="settings_on">Ligado</string>
+    <string name="settings_off">Desligado</string>
+    <string name="smart_network_settings_title">Conectividade inteligente</string>
+    <string name="smart_network_settings_switch_txt">Utilizar Conectiv. inteligente</string>
+    <string name="smart_network_settings_msg">Se se detetar que a qualidade de ligação de uma rede Wi-Fi é fraca, será utilizada a rede móvel. Quando desligada, a rede Wi-Fi terá prioridade.</string>
+    <string name="smart_network_settings_supplement">Esta funcionalidade não irá afetar as aplicações que limitam as ligações a apenas Wi-Fi ou apenas rede móvel</string>
+    <string name="sne_app_name_txt">Conectividade inteligente</string>
+    <string name="smart_network_settings_desc">Ao utilizar a tecnologia de aprendizagem profunda da Sony, a Conectividade inteligente oferece a melhor ligação de rede ao alternar automaticamente entre 4G/5G e Wi-Fi consoante a qualidade da rede.</string>
+    <string name="smart_network_settings_connected_switch_title">Utilizar a rede móvel quando a qualidade do Wi-Fi é fraca</string>
+    <string name="smart_network_settings_connected_switch_desc">Preveja as condições da rede ao analisar os dados do sinal de Wi-Fi. Se for esperada uma qualidade de rede Wi-Fi fraca, será selecionada automaticamente uma rede móvel. A ligação Wi-Fi terá prioridade quando a rede doméstica for utilizada.</string>
+    <string name="smart_network_settings_entry_switch_title">Impedir ligação auto a redes Wi-Fi com qualidade fraca</string>
+    <string name="smart_network_settings_entry_switch_desc">Pare a ligação automática quando for esperada uma qualidade de Wi-Fi fraca. Pode ajudar a impedir que o seu dispositivo mude automaticamente para uma rede Wi-Fi pública de qualidade inferior.</string>
+    <string name="smart_network_settings_desc_summary">Seleção automática da melhor rede</string>
+    <string name="smart_network_notification_entry_title">Detetada rede Wi-Fi com qualidade fraca</string>
+    <string name="smart_network_notification_entry_text">A conectividade inteligente previu que %1$s tem uma qualidade fraca e impediu temporariamente a ligação automática a esta rede Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Impedir ligação auto a rede Wi-Fi com qualidade fraca</string>
+    <string name="smart_network_notification_entry_button">ACEDA A DEFINIÇÕES</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">LIGAR MESMO ASSIM</string>
+    <string name="smart_network_toast_connecting">A ligar a %1$s</string>
+</resources>

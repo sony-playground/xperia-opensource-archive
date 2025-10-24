@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Mauvaise connexion Wi-Fi détectée</string>
+    <string name="notification_text">Tapez sur l\'écran pour activer l\'alternance automatique de réseau afin de rendre votre réseau stable grâce à l\'utilisation du réseau mobile.</string>
+    <string name="notification_action_settings">Accéder à Paramètres</string>
+    <string name="notification_action_no_thanks">Non, merci</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Utiliser le service</string>
+    <string name="wifi_auto_network_switch_setting_msg">Pour passer automatiquement à un réseau préféré lorsque le réseau Wi-Fi et le réseau mobile sont tous les deux disponibles.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Vous pouvez toujours accéder aux préférences Wi-Fi pour modifier la configuration ultérieurement.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Astuces</string>
+    <string name="wifi_auto_network_switch_setting">Alternance automatique de réseau</string>
+    <string name="settings_on">Activer</string>
+    <string name="settings_off">Désactiver</string>
+    <string name="smart_network_settings_title">Connectivité intelligente</string>
+    <string name="smart_network_settings_switch_txt">Utiliser la connectivité intell.</string>
+    <string name="smart_network_settings_msg">Lorsque la qualité de la connexion à un réseau Wi-Fi est mauvaise, le réseau mobile est utilisé à la place. Lorsque cette option est désactivée, la connexion Wi-Fi est prioritaire.</string>
+    <string name="smart_network_settings_supplement">Cette fonction n’affectera pas les applications limitant les connexions au Wi-Fi uniquement ou au réseau mobile uniquement</string>
+    <string name="sne_app_name_txt">Connectivité intelligente</string>
+    <string name="smart_network_settings_desc">Grâce à la technologie d\'apprentissage profond de Sony, la Connectivité intelligente offre en tout temps la meilleure connexion réseau possible en choisissant automatiquement le 4G/5G ou le Wi-Fi en fonction de la qualité du réseau.</string>
+    <string name="smart_network_settings_connected_switch_title">Utiliser le réseau mobile lorsque le Wi-Fi est faible</string>
+    <string name="smart_network_settings_connected_switch_desc">Prédit l\'état du réseau en analysant les données du signal Wi-Fi. Si une faible qualité du réseau Wi-Fi est prévue, le réseau mobile sera automatiquement choisi. La connexion Wi-Fi sera priorisée pour l\'utilisation à la maison.</string>
+    <string name="smart_network_settings_entry_switch_title">Empêcher la connexion automatique à un Wi-Fi faible</string>
+    <string name="smart_network_settings_entry_switch_desc">Empêche la connexion automatique si une faible qualité du réseau Wi-Fi est prévue. Empêche que votre téléphone intelligent choisisse automatiquement un réseau Wi-Fi public de faible qualité.</string>
+    <string name="smart_network_settings_desc_summary">Sélectionne automatiquement le meilleur réseau</string>
+    <string name="smart_network_notification_entry_title">Mauvaise qualité du signal Wi-Fi détectée</string>
+    <string name="smart_network_notification_entry_text">Connectivité intelligente a estimé que %1$s est de mauvaise qualité et empêche temporairement la connexion automatique à ce réseau Wi-Fi.</string>
+    <string name="smart_network_notification_channel_entry_title">Empêchement de connexion auto à un Wi-Fi faible</string>
+    <string name="smart_network_notification_entry_button">ALLER À PARAMÈTRES</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">CONNECTER</string>
+    <string name="smart_network_toast_connecting">Connexion à %1$s</string>
+</resources>

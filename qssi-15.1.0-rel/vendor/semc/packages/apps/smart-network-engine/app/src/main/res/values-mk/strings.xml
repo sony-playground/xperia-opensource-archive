@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2017 Sony Mobile Communications Inc.
+   All rights, including trade secret rights, reserved.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">Откриена е слаба Wi-Fi конекција</string>
+    <string name="notification_text">Допрете за да се вклучи опцијата Автоматско префрлање мрежа за да ја направите мрежата стабилна со помош на мобилната мрежа</string>
+    <string name="notification_action_settings">Оди во поставки</string>
+    <string name="notification_action_no_thanks">Не, благодарам</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Користи ја услугата</string>
+    <string name="wifi_auto_network_switch_setting_msg">Автоматско префрлање на претпочитаната мрежа кога се достапни и Wi-Fi и мобилната мрежа.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Секогаш може да појдете во поставките за Wi-Fi за да ги промените подоцна.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Совети</string>
+    <string name="wifi_auto_network_switch_setting">Автоматско префрлање мрежа</string>
+    <string name="settings_on">Вклучен</string>
+    <string name="settings_off">Исклучен</string>
+    <string name="smart_network_settings_title">Паметна врска</string>
+    <string name="smart_network_settings_switch_txt">Користи паметна врска</string>
+    <string name="smart_network_settings_msg">Кога ќе откриеме дека Wi-Fi мрежата има слаб квалитет на конекцијата, ќе ја користиме мобилната мрежа наместо тоа. Кога ќе ја исклучите функцијата, Wi-Fi конекцијата ќе има приоритет.</string>
+    <string name="smart_network_settings_supplement">Оваа функција нема да влијае врз апликациите што ја ограничуваат конекцијата само на Wi-Fi или само на мобилната мрежа</string>
+    <string name="sne_app_name_txt">Паметна врска</string>
+    <string name="smart_network_settings_desc">Користејќи ја технологијата на длабоко учење на Sony, паметната врска секогаш обезбедува најдобра мрежна конекција со автоматско префрлување помеѓу 4G/5G и Wi-Fi во зависност од квалитетот на мрежата.</string>
+    <string name="smart_network_settings_connected_switch_title">Користете мобилна мрежа кога Wi-Fi е слабо</string>
+    <string name="smart_network_settings_connected_switch_desc">Предвидете ги условите на мрежата со анализа на податоците за сигналот на Wi-Fi. Ако се очекува слаб квалитет на Wi-Fi мрежата, тоа автоматски ќе се префрли на мобилна мрежа. Wi-Fi конекцијата ќе има приоритет за употреба во домашната мрежа.</string>
+    <string name="smart_network_settings_entry_switch_title">Спречи авто. поврзување со слаби Wi-Fi мрежи</string>
+    <string name="smart_network_settings_entry_switch_desc">Стопирај автоматско поврзување кога се очекува слаб квалитет на Wi-Fi. Ова може да помогне да се спречи вашиот паметен телефон автоматски да се префрли на јавен Wi-Fi со понизок квалитет.</string>
+    <string name="smart_network_settings_desc_summary">Автоматски изберете најдобра мрежа</string>
+    <string name="smart_network_notification_entry_title">Откриена е Wi-Fi мрежа со слаб квалитет</string>
+    <string name="smart_network_notification_entry_text">Паметната врска предвиде дека %1$s е со слаб квалитет и привремено спречи автоматско поврзување со оваа Wi-Fi мрежа.</string>
+    <string name="smart_network_notification_channel_entry_title">Спреч. на авто. поврз. со слаба Wi-Fi мрежа</string>
+    <string name="smart_network_notification_entry_button">ОДИ ВО ПОСТАВКИ</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">СЕПАК ПОВРЗИ СЕ</string>
+    <string name="smart_network_toast_connecting">Поврзување со %1$s</string>
+</resources>

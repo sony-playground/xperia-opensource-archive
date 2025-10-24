@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2017, 2023 Sony Corporation
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="notification_title">En dålig Wi-Fi-anslutning har upptäckts</string>
+    <string name="notification_text">Tryck för att aktivera Växla nätverk automatiskt och göra nätverket stabilt med hjälp av mobilnätet</string>
+    <string name="notification_action_settings">Gå till Inställningar</string>
+    <string name="notification_action_no_thanks">Nej tack</string>
+    <string name="wifi_auto_network_switch_setting_switch_txt">Använd tjänsten</string>
+    <string name="wifi_auto_network_switch_setting_msg">Växla automatiskt till det prioriterade nätverket när både Wi-Fi-nätverk och mobilnät är tillgängliga.</string>
+    <string name="wifi_auto_network_switch_setting_msg_later">Du kan alltid gå till Inställningar för Wi-Fi och ändra konfigurationen senare.</string>
+    <string name="wifi_auto_network_switch_notification_channel">Tips</string>
+    <string name="wifi_auto_network_switch_setting">Växla nätverk automatiskt</string>
+    <string name="settings_on">På</string>
+    <string name="settings_off">Av</string>
+    <string name="smart_network_settings_title">Smart anslutning</string>
+    <string name="smart_network_settings_switch_txt">Använd Smart anslutning</string>
+    <string name="smart_network_settings_msg">När det upptäcks att ett Wi-Fi-nätverk har dålig anslutningskvalitet används mobilnätet istället. När funktionen inaktiveras prioriteras Wi-Fi-anslutning.</string>
+    <string name="smart_network_settings_supplement">Funktionen påverkar inte appar som begränsar anslutningar till endast Wi-Fi eller endast mobilnät</string>
+    <string name="sne_app_name_txt">Smart anslutning</string>
+    <string name="smart_network_settings_desc">Med Sonys teknik för djupinlärning kan Smart anslutning alltid ge bästa nätverksanslutning genom att automatiskt växla mellan 4G/5G och Wi-Fi beroende på nätverkskvalitet.</string>
+    <string name="smart_network_settings_connected_switch_title">Använd mobilnätet om Wi-Fi-kvaliteten är dålig</string>
+    <string name="smart_network_settings_connected_switch_desc">Förutsäg nätverksförhållanden genom att analysera Wi-Fi-signaldata. Om det förväntas dålig Wi-Fi-nätverkskvalitet kan det automatiskt växla till mobilnätverk. Wi-Fi-anslutning prioriteras vid hemnätsanslutning.</string>
+    <string name="smart_network_settings_entry_switch_title">Hindra autoanslutning till Wi-Fi-nätverk med dålig kvalitet</string>
+    <string name="smart_network_settings_entry_switch_desc">Stoppa automatisk anslutning om det förväntas dålig kvalitet för Wi-Fi. Det kan hjälpa till att förhindra att din enhet automatiskt växlar till öppna Wi-Fi-nätverk som har dålig kvalitet.</string>
+    <string name="smart_network_settings_desc_summary">Välj automatiskt bästa nätverk</string>
+    <string name="smart_network_notification_entry_title">Wi-Fi-nätverk med dålig kvalitet upptäckt</string>
+    <string name="smart_network_notification_entry_text">Smart anslutning ser att %1$s har dålig kvalitet och hindrade tillfälligt autoanslutning till detta Wi-Fi-nätverk.</string>
+    <string name="smart_network_notification_channel_entry_title">Hindra autoanslutning till Wi-Fi-nätverk med dålig kvalitet</string>
+    <string name="smart_network_notification_entry_button">INSTÄLLNINGAR</string>
+    <string name="smart_network_notification_entry_button_connect_anyway">ANSLUT ÄNDÅ</string>
+    <string name="smart_network_toast_connecting">Ansluter till %1$s</string>
+</resources>

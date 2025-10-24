@@ -1,0 +1,26 @@
+syntax = "proto2";
+
+package com.sony.fl.pb;
+
+option optimize_for = LITE_RUNTIME;
+
+import "LinearHLCR.proto";
+import "NNHLCR.proto";
+
+message PBTaskResult {
+    optional string FLLib_Version = 1;
+    optional string task_ID = 2;
+    optional string FL_ID = 3;
+    optional PBTrainResult train_result = 4; // instead of oneof
+    optional PBEvaluationResult evaluation_result = 5; //instead of oneof
+}
+
+message PBTrainResult {
+    optional PBLinearHLCRLocalModel linearHLCR_local_model = 1; // instead of oneof
+    optional PBNNHLCRModel NNHLCR_model = 2; // instead of oneof
+    optional string validation_metrix_file_name = 3;
+}
+
+message PBEvaluationResult {
+    optional string evaluation_result_file_name = 1;
+}

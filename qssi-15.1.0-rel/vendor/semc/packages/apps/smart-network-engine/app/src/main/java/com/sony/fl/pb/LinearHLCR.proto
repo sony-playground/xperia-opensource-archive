@@ -1,0 +1,19 @@
+syntax = "proto2";
+
+package com.sony.fl.pb;
+
+option optimize_for = LITE_RUNTIME;
+
+message PBLinearHLCRGlobalModel {
+    optional string HLCR_params_file_name = 1;
+    repeated string Linear_Regression_file_names = 2;
+}
+
+message PBLinearHLCRLocalModel {
+    optional string HLCR_params_file_name = 1;
+    repeated string Linear_Regression_file_names = 2;
+}
+
+message PBLinearHLCRTrainInfo {
+    optional string hyperparams_file_name = 1;
+}
